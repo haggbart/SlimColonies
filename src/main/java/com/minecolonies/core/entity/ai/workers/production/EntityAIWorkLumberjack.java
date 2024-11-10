@@ -844,9 +844,9 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
                 world.playSound(null,
                   this.worker.blockPosition(),
                   soundType.getPlaceSound(),
-                  SoundSource.BLOCKS,
-                  soundType.getVolume(),
-                  soundType.getPitch());
+                  SoundSource.BLOCKS, 
+                  (soundType.getVolume() + 1.0F) * 0.5F,
+                  soundType.getPitch() * 0.8F);
             }
 
             worker.swing(worker.getUsedItemHand());

@@ -218,8 +218,20 @@ public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B ex
                   .getStatisticsManager()
                   .increment(BLOCKS_PLACED, structureAI.getWorker().getCitizenColonyHandler().getColony().getDay());
             }
-
-            structureAI.getWorker().queueSound(state.getSoundType().getPlaceSound(), worldPos, 10, 0);
+            
+            BlockState blockStateForSound;
+            if (state.getBlock() == com.ldtteam.structurize.blocks.ModBlocks.blockSolidSubstitution.get()) 
+            {
+                // If the builder is placing a substitution block, use the sound of the substituted block
+                // fancyPlacement() could be checked here, but is always true for this Handler.
+                blockStateForSound = structureAI.getSolidSubstitution(pos);
+            }
+            else 
+            {
+                // If the block is not a substitution block, use the sound of the block itself
+                blockStateForSound = state;
+            }
+            structureAI.getWorker().queueSound(blockStateForSound.getSoundType().getPlaceSound(), worldPos, 10, 0, (blockStateForSound.getSoundType().getVolume() + 1.0F) * 0.5F, blockStateForSound.getSoundType().getPitch() * 0.8F);
         }
 
         if (state.getBlock() == ModBlocks.blockWayPoint)
