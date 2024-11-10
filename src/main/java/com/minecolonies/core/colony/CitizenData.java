@@ -18,6 +18,7 @@ import com.minecolonies.api.entity.citizen.AbstractCivilianEntity;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.Skill;
 import com.minecolonies.api.entity.citizen.VisibleCitizenStatus;
+import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenSkillHandler;
 import com.minecolonies.api.inventory.InventoryCitizen;
 import com.minecolonies.api.quests.IQuestDeliveryObjective;
@@ -33,6 +34,7 @@ import com.minecolonies.core.colony.interactionhandling.QuestDialogueInteraction
 import com.minecolonies.core.colony.interactionhandling.ServerCitizenInteraction;
 import com.minecolonies.core.colony.interactionhandling.StandardInteraction;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
+import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenFoodHandler;
 import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenHappinessHandler;
 import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenMournHandler;
 import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenSkillHandler;
@@ -219,6 +221,11 @@ public class CitizenData implements ICitizenData
     private final CitizenSkillHandler citizenSkillHandler;
 
     /**
+     * The citizen skill handler.
+     */
+    private final ICitizenFoodHandler citizenFoodHandler;
+
+    /**
      * The citizen chat options on the server side.
      */
     protected final Map<Component, IInteractionResponseHandler> citizenChatOptions = new HashMap<>();
@@ -342,6 +349,7 @@ public class CitizenData implements ICitizenData
         this.citizenHappinessHandler = new CitizenHappinessHandler(this);
         this.citizenMournHandler = new CitizenMournHandler(this);
         this.citizenSkillHandler = new CitizenSkillHandler();
+        this.citizenFoodHandler = new CitizenFoodHandler(this);
     }
 
     @Override
@@ -1162,6 +1170,12 @@ public class CitizenData implements ICitizenData
     }
 
     @Override
+    public ICitizenFoodHandler getCitizenFoodHandler()
+    {
+        return citizenFoodHandler;
+    }
+
+    @Override
     public void scheduleRestart(final ServerPlayer player)
     {
         originPlayerRestart = player;
@@ -1243,6 +1257,7 @@ public class CitizenData implements ICitizenData
 
         citizenHappinessHandler.write(nbtTagCompound, true);
         citizenMournHandler.write(nbtTagCompound);
+        citizenFoodHandler.write(nbtTagCompound);
 
         inventory.write(nbtTagCompound);
         nbtTagCompound.putInt(TAG_HELD_ITEM_SLOT, inventory.getHeldItemSlot(InteractionHand.MAIN_HAND));
@@ -1315,7 +1330,6 @@ public class CitizenData implements ICitizenData
         {
             nbtTagCompound.putUUID(TAG_TEXTURE_UUID, textureUUID);
         }
-
         return nbtTagCompound;
     }
 
@@ -1408,6 +1422,7 @@ public class CitizenData implements ICitizenData
 
         this.citizenHappinessHandler.read(nbtTagCompound, true);
         this.citizenMournHandler.read(nbtTagCompound);
+        this.citizenFoodHandler.read(nbtTagCompound);
 
         if (nbtTagCompound.contains(TAG_LEVEL_MAP) && !nbtTagCompound.contains(TAG_NEW_SKILLS))
         {
@@ -2006,5 +2021,11 @@ public class CitizenData implements ICitizenData
         }
 
         return null;
+    }
+
+    @Override
+    public double getDiseaseModifier()
+    {
+        return citizenFoodHandler.getDiseaseModifier(getJob() == null ? 1 : getJob().getDiseaseModifier());
     }
 }

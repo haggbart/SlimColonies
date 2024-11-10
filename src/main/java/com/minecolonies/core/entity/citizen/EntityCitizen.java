@@ -614,6 +614,10 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             playSound(SoundEvents.GENERIC_EAT, 1.5f, (float) SoundUtils.getRandomPitch(getRandom()));
             // Position needs to be centered on citizen, Eat AI wrong too?
             Network.getNetwork().sendToTrackingEntity(new ItemParticleEffectMessage(usedStack, getX(), getY(), getZ(), getXRot(), getYRot(), getEyeHeight()), this);
+            if (citizenData != null)
+            {
+                citizenData.getCitizenFoodHandler().addLastEaten(usedStack.getItem());
+            }
             ItemStackUtils.consumeFood(usedStack, this, player.getInventory());
         }
 
