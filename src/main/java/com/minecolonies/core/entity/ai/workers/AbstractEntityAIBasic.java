@@ -780,7 +780,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
             return true;
         }
         final BlockPos standingPos = ownBuilding.getStandingPosition();
-        int range = 1;
+        int range = 2;
         if (standingPos.equals(ownBuilding.getPosition()))
         {
             range = 3;
