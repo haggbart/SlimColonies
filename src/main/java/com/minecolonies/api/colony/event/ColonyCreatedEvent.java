@@ -1,4 +1,4 @@
-package com.minecolonies.api.eventbus.events.colony;
+package com.minecolonies.api.colony.event;
 
 import com.minecolonies.api.colony.IColony;
 import org.jetbrains.annotations.NotNull;
@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Colony created event.
  */
-public final class ColonyCreatedEvent extends AbstractColonyEvent
+public class ColonyCreatedEvent extends AbstractColonyEvent
 {
     /**
      * Constructs a colony created event.

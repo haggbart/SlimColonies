@@ -1,29 +1,29 @@
-package com.minecolonies.api.eventbus.events.colony.citizens;
+package com.minecolonies.api.colony.citizens.event;
 
 import com.minecolonies.api.colony.ICitizenData;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.damagesource.DamageSource;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Event for when a citizen was removed from the colony.
  */
-public final class CitizenRemovedEvent extends AbstractCitizenEvent
+public class CitizenRemovedEvent extends AbstractCitizenEvent
 {
     /**
      * The damage source that caused a citizen to die.
      */
-    private final @NotNull Entity.RemovalReason reason;
+    private final @NotNull DamageSource source;
 
     /**
      * Citizen removed event.
      *
      * @param citizen the citizen related to the event.
-     * @param reason  the reason the citizen was removed.
+     * @param source  the way the citizen went out of the colony.
      */
-    public CitizenRemovedEvent(final @NotNull ICitizenData citizen, final @NotNull Entity.RemovalReason reason)
+    public CitizenRemovedEvent(final @NotNull ICitizenData citizen, final @NotNull DamageSource source)
     {
         super(citizen);
-        this.reason = reason;
+        this.source = source;
     }
 
     /**
@@ -32,8 +32,8 @@ public final class CitizenRemovedEvent extends AbstractCitizenEvent
      * @return the damage source.
      */
     @NotNull
-    public Entity.RemovalReason getRemovalReason()
+    public DamageSource getDamageSource()
     {
-        return reason;
+        return source;
     }
 }

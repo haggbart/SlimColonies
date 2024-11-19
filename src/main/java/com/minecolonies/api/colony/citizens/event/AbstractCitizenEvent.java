@@ -1,8 +1,8 @@
-package com.minecolonies.api.eventbus.events.colony.citizens;
+package com.minecolonies.api.colony.citizens.event;
 
 import com.minecolonies.api.colony.ICitizen;
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.eventbus.events.colony.AbstractColonyEvent;
+import com.minecolonies.api.colony.event.AbstractColonyEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**

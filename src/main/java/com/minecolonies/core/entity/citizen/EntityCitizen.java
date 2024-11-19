@@ -1,10 +1,10 @@
 package com.minecolonies.core.entity.citizen;
 
-import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.blocks.AbstractBlockHut;
 import com.minecolonies.api.colony.*;
 import com.minecolonies.api.colony.buildings.IGuardBuilding;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
+import com.minecolonies.api.colony.citizens.event.CitizenRemovedEvent;
 import com.minecolonies.api.colony.jobs.IJob;
 import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.api.colony.permissions.IPermissions;
@@ -28,8 +28,6 @@ import com.minecolonies.api.entity.citizen.citizenhandlers.*;
 import com.minecolonies.api.entity.citizen.happiness.ExpirationBasedHappinessModifier;
 import com.minecolonies.api.entity.citizen.happiness.StaticHappinessSupplier;
 import com.minecolonies.api.entity.pathfinding.proxy.IWalkToProxy;
-import com.minecolonies.api.eventbus.MinecoloniesEventTypes;
-import com.minecolonies.api.eventbus.events.colony.citizens.CitizenRemovedEvent;
 import com.minecolonies.api.inventory.InventoryCitizen;
 import com.minecolonies.api.inventory.container.ContainerCitizenInventory;
 import com.minecolonies.api.items.ModItems;
@@ -100,6 +98,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -1649,16 +1648,16 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
               Component.literal(damageSource.getLocalizedDeathMessage(this).getString()).getString().replaceFirst(this.getDisplayName().getString(), "Citizen");
             citizenColonyHandler.getColonyOrRegister().getEventDescriptionManager().addEventDescription(new CitizenDiedEvent(blockPosition(), citizenData.getName(), deathCause));
 
-            IMinecoloniesAPI.getInstance().getEventBus().post(MinecoloniesEventTypes.CITIZEN_DIED, new com.minecolonies.api.eventbus.events.colony.citizens.CitizenDiedEvent(citizenData, damageSource));
+            try
+            {
+                MinecraftForge.EVENT_BUS.post(new CitizenRemovedEvent(citizenData, damageSource));
+            }
+            catch (final Exception e)
+            {
+                Log.getLogger().error("Error during CitizenRemovedEvent", e);
+            }
         }
         super.die(damageSource);
-    }
-
-    @Override
-    public void remove(final @NotNull RemovalReason reason)
-    {
-        super.remove(reason);
-        IMinecoloniesAPI.getInstance().getEventBus().post(MinecoloniesEventTypes.CITIZEN_REMOVED, new CitizenRemovedEvent(citizenData, reason));
     }
 
     /**

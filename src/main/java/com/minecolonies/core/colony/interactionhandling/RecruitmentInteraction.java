@@ -6,14 +6,13 @@ import com.ldtteam.blockui.controls.ItemIcon;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.BOWindow;
 import com.ldtteam.blockui.views.Box;
-import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.colony.*;
+import com.minecolonies.api.colony.citizens.event.CitizenAddedEvent;
 import com.minecolonies.api.colony.interactionhandling.IChatPriority;
 import com.minecolonies.api.colony.interactionhandling.IInteractionResponseHandler;
 import com.minecolonies.api.colony.interactionhandling.ModInteractionResponseHandlers;
-import com.minecolonies.api.eventbus.MinecoloniesEventTypes;
-import com.minecolonies.api.eventbus.events.colony.citizens.CitizenAddedEvent;
 import com.minecolonies.api.util.InventoryUtils;
+import com.minecolonies.api.util.Log;
 import com.minecolonies.api.util.MessageUtils;
 import com.minecolonies.api.util.Tuple;
 import com.minecolonies.api.util.constant.Constants;
@@ -24,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 import java.util.Collections;
@@ -189,9 +189,14 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
                         MessageUtils.format(MESSAGE_RECRUITMENT_SUCCESS, data.getName()).sendTo(colony).forAllPlayers();
                     }
 
-                    IMinecoloniesAPI.getInstance()
-                      .getEventBus()
-                      .post(MinecoloniesEventTypes.CITIZEN_ADDED, new CitizenAddedEvent(newCitizen, CitizenAddedEvent.CitizenAddedSource.HIRED));
+                    try
+                    {
+                        MinecraftForge.EVENT_BUS.post(new CitizenAddedEvent(newCitizen, CitizenAddedEvent.Source.HIRED));
+                    }
+                    catch (final Exception e)
+                    {
+                        Log.getLogger().error("Error during CitizenAddedEvent", e);
+                    }
                 }
             }
             else
