@@ -1,13 +1,14 @@
-package com.minecolonies.api.colony.managers.events;
+package com.minecolonies.api.eventbus.events;
 
 import com.minecolonies.api.colony.IColonyManager;
-import net.minecraftforge.eventbus.api.Event;
+import com.minecolonies.api.eventbus.IModEvent;
+import com.minecolonies.api.eventbus.IModEventType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Colony manager unloaded event.
+ * Colony manager loaded event.
  */
-public class ColonyManagerUnloadedEvent extends Event
+public final class ColonyManagerLoadedEvent extends AbstractEvent
 {
     /**
      * The colony manager instance.
@@ -18,7 +19,7 @@ public class ColonyManagerUnloadedEvent extends Event
     /**
      * Event for colony manager loaded.
      */
-    public ColonyManagerUnloadedEvent(final @NotNull IColonyManager colonyManager)
+    public ColonyManagerLoadedEvent(final @NotNull IColonyManager colonyManager)
     {
         this.colonyManager = colonyManager;
     }
@@ -28,7 +29,8 @@ public class ColonyManagerUnloadedEvent extends Event
      *
      * @return the colony manager.
      */
-    public @NotNull IColonyManager getColonyManager()
+    @NotNull
+    public IColonyManager getColonyManager()
     {
         return colonyManager;
     }

@@ -20,10 +20,12 @@ import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.configuration.Configuration;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.crafting.registry.RecipeTypeEntry;
-import com.minecolonies.api.entity.mobs.registry.IMobAIRegistry;
 import com.minecolonies.api.entity.citizen.happiness.HappinessRegistry;
+import com.minecolonies.api.entity.mobs.registry.IMobAIRegistry;
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
+import com.minecolonies.api.eventbus.DefaultEventBus;
+import com.minecolonies.api.eventbus.EventBus;
 import com.minecolonies.api.quests.registries.QuestRegistries;
 import com.minecolonies.api.research.IGlobalResearchTree;
 import com.minecolonies.api.research.ModResearchCostTypes.ResearchCostType;
@@ -52,34 +54,36 @@ import static com.minecolonies.api.research.effects.ModResearchEffects.GLOBAL_EF
 
 public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
 {
-    private final  IColonyManager                                          colonyManager          = new ColonyManager();
-    private final  ICitizenDataManager                                     citizenDataManager     = new CitizenDataManager();
-    private final  IMobAIRegistry                                          mobAIRegistry          = new MobAIRegistry();
-    private final  IPathNavigateRegistry              pathNavigateRegistry   = new PathNavigateRegistry();
-    private        IForgeRegistry<EquipmentTypeEntry> equipmentTypeRegistry;
-    private        IForgeRegistry<BuildingEntry>      buildingRegistry;
-    private        IForgeRegistry<FieldRegistries.FieldEntry>              fieldRegistry;
-    private final  IBuildingDataManager                                    buildingDataManager    = new BuildingDataManager();
-    private final  IJobDataManager                                         jobDataManager         = new JobDataManager();
-    private final  IGuardTypeDataManager                                   guardTypeDataManager   = new com.minecolonies.core.colony.buildings.registry.GuardTypeDataManager();
-    private        IForgeRegistry<JobEntry>                                jobRegistry;
-    private        IForgeRegistry<GuardType>                               guardTypeRegistry;
-    private        IForgeRegistry<InteractionResponseHandlerEntry>         interactionHandlerRegistry;
-    private final  IInteractionResponseHandlerDataManager                  interactionDataManager = new InteractionResponseHandlerManager();
-    private        IForgeRegistry<ColonyEventTypeRegistryEntry>            colonyEventRegistry;
-    private        IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry> colonyEventDescriptionRegistry;
-    private static IGlobalResearchTree                                     globalResearchTree     = new GlobalResearchTree();
-    private        IForgeRegistry<ResearchRequirementEntry>                researchRequirementRegistry;
-    private        IForgeRegistry<ResearchEffectEntry>                     researchEffectRegistry;
-    private        IForgeRegistry<ResearchCostType>                        researchCostRegistry;
-    private        IForgeRegistry<RecipeTypeEntry>                         recipeTypeEntryRegistry;
-    private        IForgeRegistry<CraftingType>                            craftingTypeRegistry;
-    private        IForgeRegistry<QuestRegistries.ObjectiveEntry>          questObjectiveRegistry;
-    private        IForgeRegistry<QuestRegistries.RewardEntry>             questRewardRegistry;
-    private        IForgeRegistry<QuestRegistries.TriggerEntry>            questTriggerRegistry;
-    private        IForgeRegistry<QuestRegistries.DialogueAnswerEntry>     questDialogueAnswerRegistry;
-    private        IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> happinessFactorTypeRegistry;
-    private        IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> happinessFunctionRegistry;
+    private final IGlobalResearchTree                    globalResearchTree     = new GlobalResearchTree();
+    private final IColonyManager                         colonyManager          = new ColonyManager();
+    private final ICitizenDataManager                    citizenDataManager     = new CitizenDataManager();
+    private final IMobAIRegistry                         mobAIRegistry          = new MobAIRegistry();
+    private final IPathNavigateRegistry                  pathNavigateRegistry   = new PathNavigateRegistry();
+    private final IBuildingDataManager                   buildingDataManager    = new BuildingDataManager();
+    private final IJobDataManager                        jobDataManager         = new JobDataManager();
+    private final IGuardTypeDataManager                  guardTypeDataManager   = new com.minecolonies.core.colony.buildings.registry.GuardTypeDataManager();
+    private final IInteractionResponseHandlerDataManager interactionDataManager = new InteractionResponseHandlerManager();
+    private final EventBus                               modEventBus            = new DefaultEventBus();
+
+    private IForgeRegistry<EquipmentTypeEntry>                         equipmentTypeRegistry;
+    private IForgeRegistry<BuildingEntry>                              buildingRegistry;
+    private IForgeRegistry<FieldRegistries.FieldEntry>                 fieldRegistry;
+    private IForgeRegistry<JobEntry>                                   jobRegistry;
+    private IForgeRegistry<GuardType>                                  guardTypeRegistry;
+    private IForgeRegistry<InteractionResponseHandlerEntry>            interactionHandlerRegistry;
+    private IForgeRegistry<ColonyEventTypeRegistryEntry>               colonyEventRegistry;
+    private IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry>    colonyEventDescriptionRegistry;
+    private IForgeRegistry<ResearchRequirementEntry>                   researchRequirementRegistry;
+    private IForgeRegistry<ResearchEffectEntry>                        researchEffectRegistry;
+    private IForgeRegistry<ResearchCostType>                           researchCostRegistry;
+    private IForgeRegistry<RecipeTypeEntry>                            recipeTypeEntryRegistry;
+    private IForgeRegistry<CraftingType>                               craftingTypeRegistry;
+    private IForgeRegistry<QuestRegistries.ObjectiveEntry>             questObjectiveRegistry;
+    private IForgeRegistry<QuestRegistries.RewardEntry>                questRewardRegistry;
+    private IForgeRegistry<QuestRegistries.TriggerEntry>               questTriggerRegistry;
+    private IForgeRegistry<QuestRegistries.DialogueAnswerEntry>        questDialogueAnswerRegistry;
+    private IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> happinessFactorTypeRegistry;
+    private IForgeRegistry<HappinessRegistry.HappinessFunctionEntry>   happinessFunctionRegistry;
 
     @Override
     @NotNull
@@ -203,14 +207,74 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
     }
 
     @Override
+    public IForgeRegistry<ColonyEventTypeRegistryEntry> getColonyEventRegistry()
+    {
+        return colonyEventRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry> getColonyEventDescriptionRegistry()
+    {
+        return colonyEventDescriptionRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<RecipeTypeEntry> getRecipeTypeRegistry()
+    {
+        return recipeTypeEntryRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<CraftingType> getCraftingTypeRegistry()
+    {
+        return craftingTypeRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<QuestRegistries.RewardEntry> getQuestRewardRegistry()
+    {
+        return questRewardRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<QuestRegistries.ObjectiveEntry> getQuestObjectiveRegistry()
+    {
+        return questObjectiveRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<QuestRegistries.TriggerEntry> getQuestTriggerRegistry()
+    {
+        return questTriggerRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<QuestRegistries.DialogueAnswerEntry> getQuestDialogueAnswerRegistry()
+    {
+        return questDialogueAnswerRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> getHappinessTypeRegistry()
+    {
+        return happinessFactorTypeRegistry;
+    }
+
+    @Override
+    public IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> getHappinessFunctionRegistry()
+    {
+        return happinessFunctionRegistry;
+    }
+
+    @Override
     public void onRegistryNewRegistry(final NewRegistryEvent event)
     {
         event.create(new RegistryBuilder<EquipmentTypeEntry>()
-                        .setName(new ResourceLocation(Constants.MOD_ID, "equipmenttypes"))
-                        .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
-                        .disableSaving()
-                        .allowModification()
-                        .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> equipmentTypeRegistry = b);
+                       .setName(new ResourceLocation(Constants.MOD_ID, "equipmenttypes"))
+                       .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+                       .disableSaving()
+                       .allowModification()
+                       .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> equipmentTypeRegistry = b);
 
         event.create(new RegistryBuilder<BuildingEntry>()
                        .setName(new ResourceLocation(Constants.MOD_ID, "buildings"))
@@ -329,69 +393,15 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
     }
 
     @Override
-    public IForgeRegistry<ColonyEventTypeRegistryEntry> getColonyEventRegistry()
-    {
-        return colonyEventRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry> getColonyEventDescriptionRegistry()
-    {
-        return colonyEventDescriptionRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<RecipeTypeEntry> getRecipeTypeRegistry()
-    {
-        return recipeTypeEntryRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<CraftingType> getCraftingTypeRegistry()
-    {
-        return craftingTypeRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<QuestRegistries.RewardEntry> getQuestRewardRegistry()
-    {
-        return questRewardRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<QuestRegistries.ObjectiveEntry> getQuestObjectiveRegistry()
-    {
-        return questObjectiveRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<QuestRegistries.TriggerEntry> getQuestTriggerRegistry()
-    {
-        return questTriggerRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<QuestRegistries.DialogueAnswerEntry> getQuestDialogueAnswerRegistry()
-    {
-        return questDialogueAnswerRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> getHappinessTypeRegistry()
-    {
-        return happinessFactorTypeRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> getHappinessFunctionRegistry()
-    {
-        return happinessFunctionRegistry;
-    }
-
-    @Override
     public IForgeRegistry<EquipmentTypeEntry> getEquipmentTypeRegistry()
     {
         return equipmentTypeRegistry;
+    }
+
+    @Override
+    public EventBus getEventBus()
+    {
+        return modEventBus;
     }
 }
 

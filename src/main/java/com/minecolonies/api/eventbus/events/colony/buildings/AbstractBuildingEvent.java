@@ -1,7 +1,7 @@
-package com.minecolonies.api.colony.buildings.event;
+package com.minecolonies.api.eventbus.events.colony.buildings;
 
 import com.minecolonies.api.colony.buildings.IBuilding;
-import com.minecolonies.api.colony.event.AbstractColonyEvent;
+import com.minecolonies.api.eventbus.events.colony.AbstractColonyEvent;
 
 /**
  * Abstract event for building related things.
