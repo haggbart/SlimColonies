@@ -63,11 +63,11 @@ public class ServerConfiguration extends AbstractConfiguration
      *  ------------------- ######## Claim settings ######## ------------------- *
      *  --------------------------------------------------------------------------- */
 
-    public final ForgeConfigSpec.IntValue     maxColonySize;
-    public final ForgeConfigSpec.IntValue     minColonyDistance;
-    public final ForgeConfigSpec.IntValue     initialColonySize;
-    public final ForgeConfigSpec.IntValue     maxDistanceFromWorldSpawn;
-    public final ForgeConfigSpec.IntValue     minDistanceFromWorldSpawn;
+    public final ForgeConfigSpec.IntValue maxColonySize;
+    public final ForgeConfigSpec.IntValue minColonyDistance;
+    public final ForgeConfigSpec.IntValue initialColonySize;
+    public final ForgeConfigSpec.IntValue maxDistanceFromWorldSpawn;
+    public final ForgeConfigSpec.IntValue minDistanceFromWorldSpawn;
 
     /*  ------------------------------------------------------------------------- *
      *  ------------------- ######## Combat Settings ######## ------------------- *
@@ -96,7 +96,6 @@ public class ServerConfiguration extends AbstractConfiguration
      *  ------------------- ######## Compatibility Settings ######## ------------------- *
      *  -------------------------------------------------------------------------------- */
 
-    public final ForgeConfigSpec.ConfigValue<List<? extends String>> configListStudyItems;
     public final ForgeConfigSpec.ConfigValue<List<? extends String>> configListRecruitmentItems;
     public final ForgeConfigSpec.ConfigValue<List<? extends String>> diseases;
     public final ForgeConfigSpec.BooleanValue                        auditCraftingTags;
@@ -116,7 +115,6 @@ public class ServerConfiguration extends AbstractConfiguration
      *  --------------------------------------------------------------------------------- */
 
     public final ForgeConfigSpec.BooleanValue creativeResolve;
-
 
     /**
      * Builds server configuration.
@@ -192,11 +190,6 @@ public class ServerConfiguration extends AbstractConfiguration
         turnOffExplosionsInColonies = defineEnum(builder, "turnoffexplosionsincolonies", Explosions.DAMAGE_ENTITIES);
 
         swapToCategory(builder, "compatibility");
-
-        configListStudyItems = defineList(builder, "configliststudyitems",
-          Arrays.asList
-                  ("minecraft:paper;400;100", "minecraft:book;600;10"),
-          s -> s instanceof String);
 
         configListRecruitmentItems = defineList(builder, "configlistrecruitmentitems",
           Arrays.asList
