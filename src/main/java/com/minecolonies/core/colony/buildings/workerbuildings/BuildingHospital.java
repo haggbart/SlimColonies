@@ -3,11 +3,12 @@ package com.minecolonies.core.colony.buildings.workerbuildings;
 import com.google.common.collect.ImmutableList;
 import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
+import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.api.util.Disease;
 import com.minecolonies.api.util.constant.NbtTagConstants;
 import com.minecolonies.core.colony.buildings.AbstractBuilding;
+import com.minecolonies.core.datalistener.model.Disease;
+import com.minecolonies.core.datalistener.DiseasesListener;
 import com.minecolonies.core.entity.ai.workers.util.Patient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -196,35 +197,23 @@ public class BuildingHospital extends AbstractBuilding
     public Map<Predicate<ItemStack>, Tuple<Integer, Boolean>> getRequiredItemsAndAmount()
     {
         final Map<Predicate<ItemStack>, Tuple<Integer, Boolean>> map = super.getRequiredItemsAndAmount();
-        map.put(this::doesAnyPatientRequireStack, new Tuple<>(10, false));
+        map.put(BuildingHospital::isCureItem, new Tuple<>(10, false));
         return map;
     }
 
     /**
-     * Check if any patient requires this.
+     * Check if the given itemstack is a cure item.
      *
      * @param stack the stack to test.
      * @return true if so.
      */
-    private boolean doesAnyPatientRequireStack(final ItemStack stack)
+    private static boolean isCureItem(final ItemStack stack)
     {
-        for (final Patient patient : patients.values())
+        for (final Disease disease : DiseasesListener.getDiseases())
         {
-            final ICitizenData data = colony.getCitizenManager().getCivilian(patient.getId());
-            if (data != null && data.getEntity().isPresent() && data.getCitizenDiseaseHandler().isSick())
+            for (final ItemStorage cureItem : disease.cureItems())
             {
-                final String diseaseName = data.getCitizenDiseaseHandler().getDisease();
-                if (!diseaseName.isEmpty())
-                {
-                    final Disease disease = IColonyManager.getInstance().getCompatibilityManager().getDisease(diseaseName);
-                    for (final ItemStack cure : disease.getCure())
-                    {
-                        if (ItemStack.isSameItem(cure, stack))
-                        {
-                            return true;
-                        }
-                    }
-                }
+                return Disease.isCureItem(stack, cureItem);
             }
         }
         return false;
@@ -297,8 +286,7 @@ public class BuildingHospital extends AbstractBuilding
                     {
                         if (state.getValue(BedBlock.OCCUPIED))
                         {
-                            if (!citizen.isAsleep() || !citizen.getEntity().isPresent()
-                                  || citizen.getEntity().get().blockPosition().distSqr(entry.getKey()) > 2.0)
+                            if (!citizen.isAsleep() || citizen.getEntity().isEmpty() || citizen.getEntity().get().blockPosition().distSqr(entry.getKey()) > 2.0)
                             {
                                 setBedOccupation(entry.getKey(), false);
                                 bedMap.put(entry.getKey(), 0);
@@ -328,15 +316,9 @@ public class BuildingHospital extends AbstractBuilding
     @Override
     public boolean canEat(final ItemStack stack)
     {
-        for (final Disease disease : IColonyManager.getInstance().getCompatibilityManager().getDiseases())
+        if (isCureItem(stack))
         {
-            for (final ItemStack cure : disease.getCure())
-            {
-                if (ItemStack.isSameItem(cure, stack))
-                {
-                    return false;
-                }
-            }
+            return false;
         }
 
         return super.canEat(stack);

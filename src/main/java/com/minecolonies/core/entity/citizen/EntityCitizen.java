@@ -49,6 +49,7 @@ import com.minecolonies.core.colony.jobs.AbstractJobGuard;
 import com.minecolonies.core.colony.jobs.JobKnight;
 import com.minecolonies.core.colony.jobs.JobNetherWorker;
 import com.minecolonies.core.colony.jobs.JobRanger;
+import com.minecolonies.core.datalistener.DiseasesListener;
 import com.minecolonies.core.entity.ai.minimal.*;
 import com.minecolonies.core.entity.ai.workers.AbstractEntityAIBasic;
 import com.minecolonies.core.entity.ai.workers.CitizenAI;
@@ -487,13 +488,14 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
 
             if (!level.isClientSide())
             {
-                getCitizenData().getCitizenDiseaseHandler().setDisease(IColonyManager.getInstance().getCompatibilityManager().getRandomDisease());
-                playSound(SoundEvents.VILLAGER_HURT, 1.0f, (float) SoundUtils.getRandomPitch(getRandom()));
-                getCitizenData().markDirty(20);
+                if (getCitizenData().getCitizenDiseaseHandler().setDisease(DiseasesListener.getRandomDisease(getRandom()))) {
+                    playSound(SoundEvents.VILLAGER_HURT, 1.0f, (float) SoundUtils.getRandomPitch(getRandom()));
+                    getCitizenData().markDirty(20);
 
-                MessageUtils.format(MESSAGE_INTERACTION_POISON, this.getCitizenData().getName())
-                  .withPriority(MessagePriority.DANGER)
-                  .sendTo(player);
+                    MessageUtils.format(MESSAGE_INTERACTION_POISON, this.getCitizenData().getName())
+                            .withPriority(MessagePriority.DANGER)
+                            .sendTo(player);
+                }
             }
 
             interactionCooldown = 20 * 20;

@@ -71,7 +71,7 @@ public class InteractionValidatorInitializer
             citizen -> citizen.getColony() != null && citizen.getEntity().isPresent() && citizen.getCitizenDiseaseHandler().isSick()
                        && citizen.getColony().getBuildingManager().getBestBuilding(citizen.getEntity().get(), BuildingHospital.class) == null);
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(WAITING_FOR_CURE),
-            citizen -> citizen.getColony() != null && citizen.getEntity().isPresent() && !citizen.getCitizenDiseaseHandler().getDisease().isEmpty());
+          citizen -> citizen.getColony() != null && citizen.getEntity().isPresent() && citizen.getCitizenDiseaseHandler().getDisease() != null);
 
         InteractionValidatorRegistry.registerPosBasedPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_CHESTFULL),
           (citizen, pos) ->

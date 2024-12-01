@@ -1,7 +1,9 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
+import com.minecolonies.core.datalistener.model.Disease;
 import com.minecolonies.api.colony.ICitizenData;
 import net.minecraft.nbt.CompoundTag;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Citizen disease handler interface.
@@ -35,11 +37,12 @@ public interface ICitizenDiseaseHandler
     void read(final CompoundTag compound);
 
     /**
-     * get the disease identifier.
+     * Get the current disease, if any.
      *
-     * @return the disease identifier.
+     * @return the disease instance.
      */
-    String getDisease();
+    @Nullable
+    Disease getDisease();
 
     /**
      * Cure the citizen.
@@ -70,7 +73,9 @@ public interface ICitizenDiseaseHandler
 
     /**
      * Set a disease on the citizen.
+     *
      * @param disease to set.
+     * @return true if they actually became sick.
      */
-    void setDisease(String disease);
+    boolean setDisease(Disease disease);
 }

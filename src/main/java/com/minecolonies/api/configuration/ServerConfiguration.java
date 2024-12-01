@@ -97,7 +97,6 @@ public class ServerConfiguration extends AbstractConfiguration
      *  -------------------------------------------------------------------------------- */
 
     public final ForgeConfigSpec.ConfigValue<List<? extends String>> configListRecruitmentItems;
-    public final ForgeConfigSpec.ConfigValue<List<? extends String>> diseases;
     public final ForgeConfigSpec.BooleanValue                        auditCraftingTags;
     public final ForgeConfigSpec.BooleanValue                        debugInventories;
     public final ForgeConfigSpec.BooleanValue                        blueprintBuildMode;
@@ -206,12 +205,6 @@ public class ServerConfiguration extends AbstractConfiguration
                     "minecraft:sunflower;5",
                     "minecraft:honeycomb;6",
                     "minecraft:quartz;3"),
-          s -> s instanceof String);
-
-        diseases = defineList(builder, "diseases",
-          Arrays.asList("Influenza,100,minecraft:carrot,minecraft:potato",
-            "Measles,10,minecraft:dandelion,minecraft:kelp,minecraft:poppy",
-            "Smallpox,1,minecraft:honey_bottle,minecraft:golden_apple"),
           s -> s instanceof String);
 
         auditCraftingTags = defineBoolean(builder, "auditcraftingtags", false);

@@ -2734,5 +2734,9 @@
   "com.minecolonies.coremod.setting.minecolonies:milk_item": "Milk Item:",
   "com.minecolonies.core.menu.title": "Menu",
   "com.minecolonies.core.food_list.title": "Food Options",
-  "com.minecolonies.core.menu.warning": "Select the Food Citizens will eat at this Restaurant"
+  "com.minecolonies.core.menu.warning": "Select the Food Citizens will eat at this Restaurant",
+
+  "com.minecolonies.coremod.diseases.influenza": "Influenza",
+  "com.minecolonies.coremod.diseases.measles": "Measles",
+  "com.minecolonies.coremod.diseases.smallpox": "Smallpox"
 }
