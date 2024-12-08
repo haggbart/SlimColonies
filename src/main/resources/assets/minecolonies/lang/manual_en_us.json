@@ -1945,6 +1945,7 @@
   "com.minecolonies.coremod.gui.flag.base_layer": "Base",
   "com.minecolonies.coremod.gui.townhall.edit_flag": "Edit Colony Flag",
   "block.minecolonies.colony_banner": "Colony Flag Banner",
+  "com.minecolonies.coremod.item.colony_banner.tooltipempty": "Right click to copy pattern on the item",
   "com.minecolonies.coremod.gui.locate": "Locate",
   "com.minecolonies.coremod.locating": "Successfully located rack with respective item(s).",
 
