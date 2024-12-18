@@ -93,6 +93,7 @@ public final class ModSoundEvents
                 individualSounds.add(new Tuple<>(maleSoundEvent, femaleSoundEvent));
                 individualSounds.add(new Tuple<>(maleSoundEvent, femaleSoundEvent));
             }
+            map.put(event, individualSounds);
         }
         CITIZEN_SOUND_EVENTS.put("child", map);
 
