@@ -1149,7 +1149,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
             return afterDump();
         }
 
-        if (!walkToBuilding())
+        if (!walkToBuilding(building))
         {
             setDelay(WALK_DELAY);
             return INVENTORY_FULL;
