@@ -1508,6 +1508,12 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         }
     }
 
+    @Override
+    public float getAgeScale()
+    {
+        return this.isBaby() ? 0.62F : 1.0F;
+    }
+
     /**
      * Called when the mob's health reaches 0.
      *
