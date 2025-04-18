@@ -72,7 +72,7 @@ public final class ColonyUtils
                 {
                     if (blueprint == null)
                     {
-                        Log.getLogger().warn("Couldn't find structure with name: " + structurePack + " in: " + structurePath + ". Aborting loading procedure");
+                        errorHandler.accept("Couldn't find structure with name: " + structurePack + " in: " + structurePath + ". Aborting loading procedure");
                     }
                     else
                     {
@@ -90,7 +90,7 @@ public final class ColonyUtils
                 {
                     if (blueprint == null)
                     {
-                        Log.getLogger().warn("Couldn't find structure with name: " + structurePack + " in: " + structurePath + ". Aborting loading procedure");
+                        errorHandler.accept("Couldn't find structure with name: " + structurePack + " in: " + structurePath + ". Aborting loading procedure");
                     }
                     else
                     {
