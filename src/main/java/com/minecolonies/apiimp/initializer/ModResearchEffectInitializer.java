@@ -8,14 +8,14 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import static com.minecolonies.api.research.ModResearchEffects.*;
-import static com.minecolonies.apiimp.CommonMinecoloniesAPIImpl.REGISTRY_KEY_RESEARCH_EFFECT_TYPES;
 
 /**
  * Registry initializer for the {@link ModResearchEffects}.
  */
 public class ModResearchEffectInitializer
 {
-    public final static DeferredRegister<ResearchEffectEntry> DEFERRED_REGISTER = DeferredRegister.create(REGISTRY_KEY_RESEARCH_EFFECT_TYPES, Constants.MOD_ID);
+    public final static DeferredRegister<ResearchEffectEntry> DEFERRED_REGISTER =
+        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "researcheffecttypes"), Constants.MOD_ID);
     static
     {
         globalResearchEffect = create(GLOBAL_EFFECT_ID, GlobalResearchEffect::new);
@@ -32,7 +32,9 @@ public class ModResearchEffectInitializer
      * @param readFromNBT  function to read this item from json.
      * @return the finalized registry object.
      */
-    private static RegistryObject<ResearchEffectEntry> create(final ResourceLocation registryName, final ReadFromNBTFunction readFromNBT)
+    private static RegistryObject<ResearchEffectEntry> create(
+        final ResourceLocation registryName,
+        final ReadFromNBTFunction readFromNBT)
     {
         return DEFERRED_REGISTER.register(registryName.getPath(), () -> new ResearchEffectEntry(registryName, readFromNBT));
     }

@@ -1,7 +1,6 @@
 package com.minecolonies.core.event;
 
 import com.minecolonies.api.IMinecoloniesAPI;
-import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.research.IGlobalResearchTree;
 import com.minecolonies.core.MineColonies;
 import com.minecolonies.core.Network;
@@ -16,8 +15,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
@@ -54,7 +51,7 @@ public class DataPackSyncEventHandler
          */
         private static void discoverCompatLists(@NotNull final MinecraftServer server)
         {
-            loadFurnaceRecipes(server.getRecipeManager(), server.overworld());
+            FurnaceRecipes.getInstance().loadRecipes(server.getRecipeManager(), server.overworld());
             IMinecoloniesAPI.getInstance().getColonyManager().getCompatibilityManager().discover(server.getRecipeManager(), server.overworld());
             CustomRecipeManager.getInstance().resolveTemplates();
             CustomRecipeManager.getInstance().buildLootData(server.getLootData(), server.overworld());
@@ -153,22 +150,7 @@ public class DataPackSyncEventHandler
                 return;
             }
 
-            loadFurnaceRecipes(event.getRecipeManager(), Minecraft.getInstance().level);
-        }
-    }
-
-    /**
-     * Util function for loading the furnace recipes.
-     *
-     * @param manager the recipe manager instance.
-     * @param level   the level to load it on.
-     */
-    private static void loadFurnaceRecipes(final RecipeManager manager, final Level level)
-    {
-        final IFurnaceRecipes furnaceRecipes = IFurnaceRecipes.getFurnaceRecipes();
-        if (furnaceRecipes instanceof FurnaceRecipes recipes)
-        {
-            recipes.loadRecipes(manager, level);
+            FurnaceRecipes.getInstance().loadRecipes(event.getRecipeManager(), Minecraft.getInstance().level);
         }
     }
 }

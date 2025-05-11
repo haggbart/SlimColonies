@@ -3,11 +3,11 @@ package com.minecolonies.api;
 import com.minecolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
 import com.minecolonies.api.colony.ICitizenDataManager;
 import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries.BuildingExtensionEntry;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
 import com.minecolonies.api.colony.buildings.registry.IBuildingDataManager;
 import com.minecolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;
 import com.minecolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
+import com.minecolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries.BuildingExtensionEntry;
 import com.minecolonies.api.colony.guardtype.GuardType;
 import com.minecolonies.api.colony.guardtype.registry.IGuardTypeDataManager;
 import com.minecolonies.api.colony.interactionhandling.registry.IInteractionResponseHandlerDataManager;
@@ -18,70 +18,37 @@ import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.configuration.Configuration;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.crafting.registry.RecipeTypeEntry;
-import com.minecolonies.api.entity.citizen.happiness.HappinessRegistry;
 import com.minecolonies.api.entity.mobs.registry.IMobAIRegistry;
+import com.minecolonies.api.entity.citizen.happiness.HappinessRegistry;
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
 import com.minecolonies.api.eventbus.EventBus;
 import com.minecolonies.api.quests.registries.QuestRegistries;
 import com.minecolonies.api.research.IGlobalResearchTree;
-import com.minecolonies.api.research.ModResearchCosts;
+import com.minecolonies.api.research.ModResearchCosts.ResearchCostEntry;
 import com.minecolonies.api.research.ModResearchEffects;
 import com.minecolonies.api.research.ModResearchRequirements;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.NewRegistryEvent;
 
-/**
- * The API proxy returning the client or common API instance.
- */
 public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
 {
-    /**
-     * The singleton instance.
-     */
-    private static final MinecoloniesAPIProxy instance = new MinecoloniesAPIProxy();
+    private static final MinecoloniesAPIProxy ourInstance = new MinecoloniesAPIProxy();
 
-    /**
-     * The active API instance.
-     */
     private IMinecoloniesAPI apiInstance;
 
-    /**
-     * Get the API instance.
-     *
-     * @return the singleton instance.
-     */
     public static MinecoloniesAPIProxy getInstance()
     {
-        return instance;
+        return ourInstance;
     }
 
-    /**
-     * Set the correct API instance.
-     *
-     * @param apiInstance the new API instance.
-     */
+    private MinecoloniesAPIProxy()
+    {
+    }
+
     public void setApiInstance(final IMinecoloniesAPI apiInstance)
     {
         this.apiInstance = apiInstance;
-    }
-
-    @Override
-    public void onRegistryNewRegistry(final NewRegistryEvent event)
-    {
-        apiInstance.onRegistryNewRegistry(event);
-    }
-
-    @Override
-    public Configuration getConfig()
-    {
-        return apiInstance.getConfig();
-    }
-
-    @Override
-    public EventBus getEventBus()
-    {
-        return apiInstance.getEventBus();
     }
 
     @Override
@@ -91,45 +58,27 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
     }
 
     @Override
-    public IBuildingDataManager getBuildingDataManager()
-    {
-        return apiInstance.getBuildingDataManager();
-    }
-
-    @Override
     public ICitizenDataManager getCitizenDataManager()
     {
         return apiInstance.getCitizenDataManager();
     }
 
     @Override
-    public IJobDataManager getJobDataManager()
+    public IMobAIRegistry getMobAIRegistry()
     {
-        return apiInstance.getJobDataManager();
+        return apiInstance.getMobAIRegistry();
     }
 
     @Override
-    public IGuardTypeDataManager getGuardTypeDataManager()
+    public IPathNavigateRegistry getPathNavigateRegistry()
     {
-        return apiInstance.getGuardTypeDataManager();
+        return apiInstance.getPathNavigateRegistry();
     }
 
     @Override
-    public IInteractionResponseHandlerDataManager getInteractionResponseHandlerDataManager()
+    public IBuildingDataManager getBuildingDataManager()
     {
-        return apiInstance.getInteractionResponseHandlerDataManager();
-    }
-
-    @Override
-    public IForgeRegistry<ColonyEventTypeRegistryEntry> getColonyEventRegistry()
-    {
-        return apiInstance.getColonyEventRegistry();
-    }
-
-    @Override
-    public IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry> getColonyEventDescriptionRegistry()
-    {
-        return apiInstance.getColonyEventDescriptionRegistry();
+        return apiInstance.getBuildingDataManager();
     }
 
     @Override
@@ -145,15 +94,15 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
     }
 
     @Override
-    public IForgeRegistry<JobEntry> getJobRegistry()
+    public IJobDataManager getJobDataManager()
     {
-        return apiInstance.getJobRegistry();
+        return apiInstance.getJobDataManager();
     }
 
     @Override
-    public IForgeRegistry<GuardType> getGuardTypeRegistry()
+    public IForgeRegistry<JobEntry> getJobRegistry()
     {
-        return apiInstance.getGuardTypeRegistry();
+        return apiInstance.getJobRegistry();
     }
 
     @Override
@@ -163,16 +112,70 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
     }
 
     @Override
+    public IGuardTypeDataManager getGuardTypeDataManager()
+    {
+        return apiInstance.getGuardTypeDataManager();
+    }
+
+    @Override
+    public IForgeRegistry<GuardType> getGuardTypeRegistry()
+    {
+        return apiInstance.getGuardTypeRegistry();
+    }
+
+    @Override
+    public IModelTypeRegistry getModelTypeRegistry()
+    {
+        return apiInstance.getModelTypeRegistry();
+    }
+
+    @Override
+    public Configuration getConfig()
+    {
+        return apiInstance.getConfig();
+    }
+
+    @Override
+    public IFurnaceRecipes getFurnaceRecipes()
+    {
+        return apiInstance.getFurnaceRecipes();
+    }
+
+    @Override
+    public IInteractionResponseHandlerDataManager getInteractionResponseHandlerDataManager()
+    {
+        return apiInstance.getInteractionResponseHandlerDataManager();
+    }
+
+    @Override
+    public IGlobalResearchTree getGlobalResearchTree()
+    {
+        return apiInstance.getGlobalResearchTree();
+    }
+
+    @Override
     public IForgeRegistry<ModResearchRequirements.ResearchRequirementEntry> getResearchRequirementRegistry() {return apiInstance.getResearchRequirementRegistry();}
 
     @Override
-    public IForgeRegistry<ModResearchCosts.ResearchCostEntry> getResearchCostRegistry()
+    public IForgeRegistry<ModResearchEffects.ResearchEffectEntry> getResearchEffectRegistry() {return apiInstance.getResearchEffectRegistry();}
+
+    @Override
+    public IForgeRegistry<ResearchCostEntry> getResearchCostRegistry()
     {
         return apiInstance.getResearchCostRegistry();
     }
 
     @Override
-    public IForgeRegistry<ModResearchEffects.ResearchEffectEntry> getResearchEffectRegistry() {return apiInstance.getResearchEffectRegistry();}
+    public IForgeRegistry<ColonyEventTypeRegistryEntry> getColonyEventRegistry()
+    {
+        return apiInstance.getColonyEventRegistry();
+    }
+
+    @Override
+    public IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry> getColonyEventDescriptionRegistry()
+    {
+        return apiInstance.getColonyEventDescriptionRegistry();
+    }
 
     @Override
     public IForgeRegistry<RecipeTypeEntry> getRecipeTypeRegistry()
@@ -184,18 +187,6 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
     public IForgeRegistry<CraftingType> getCraftingTypeRegistry()
     {
         return apiInstance.getCraftingTypeRegistry();
-    }
-
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> getHappinessTypeRegistry()
-    {
-        return apiInstance.getHappinessTypeRegistry();
-    }
-
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> getHappinessFunctionRegistry()
-    {
-        return apiInstance.getHappinessFunctionRegistry();
     }
 
     @Override
@@ -223,38 +214,32 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
     }
 
     @Override
+    public IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> getHappinessTypeRegistry()
+    {
+        return apiInstance.getHappinessTypeRegistry();
+    }
+
+    @Override
+    public IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> getHappinessFunctionRegistry()
+    {
+        return apiInstance.getHappinessFunctionRegistry();
+    }
+
+    @Override
+    public void onRegistryNewRegistry(final NewRegistryEvent event)
+    {
+        apiInstance.onRegistryNewRegistry(event);
+    }
+
+    @Override
     public IForgeRegistry<EquipmentTypeEntry> getEquipmentTypeRegistry()
     {
         return apiInstance.getEquipmentTypeRegistry();
     }
 
     @Override
-    public IMobAIRegistry getMobAIRegistry()
+    public EventBus getEventBus()
     {
-        return apiInstance.getMobAIRegistry();
-    }
-
-    @Override
-    public IPathNavigateRegistry getPathNavigateRegistry()
-    {
-        return apiInstance.getPathNavigateRegistry();
-    }
-
-    @Override
-    public IModelTypeRegistry getModelTypeRegistry()
-    {
-        return apiInstance.getModelTypeRegistry();
-    }
-
-    @Override
-    public IGlobalResearchTree getGlobalResearchTree()
-    {
-        return apiInstance.getGlobalResearchTree();
-    }
-
-    @Override
-    public IFurnaceRecipes getFurnaceRecipes()
-    {
-        return apiInstance.getFurnaceRecipes();
+        return apiInstance.getEventBus();
     }
 }

@@ -5,7 +5,6 @@ import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
 import com.minecolonies.api.compatibility.ICompatibilityManager;
-import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.crafting.*;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.items.ModTags;
@@ -13,6 +12,7 @@ import com.minecolonies.api.util.ItemStackUtils;
 import com.minecolonies.core.colony.buildings.AbstractBuilding;
 import com.minecolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
 import com.minecolonies.core.colony.crafting.CustomRecipe;
+import com.minecolonies.core.util.FurnaceRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -117,7 +117,7 @@ public class BuildingSmeltery extends AbstractBuilding
             {
                 if (ItemStackUtils.IS_SMELTABLE.and(compatibility::isOre).and(s -> !s.is(ModTags.breakable_ore)).test(stack))
                 {
-                    final ItemStack output = IFurnaceRecipes.getFurnaceRecipes().getSmeltingResult(stack);
+                    final ItemStack output = FurnaceRecipes.getInstance().getSmeltingResult(stack);
                     recipes.add(createSmeltingRecipe(stack, output, Blocks.FURNACE));
                 }
             }

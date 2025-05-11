@@ -3,6 +3,7 @@ package com.minecolonies.api.compatibility;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.minecolonies.api.MinecoloniesAPIProxy;
 import com.minecolonies.api.colony.requestsystem.StandardFactoryController;
 import com.minecolonies.api.compatibility.dynamictrees.DynamicTreeCompat;
 import com.minecolonies.api.compatibility.resourcefulbees.ResourcefulBeesCompat;
@@ -483,7 +484,7 @@ public class CompatibilityManager implements ICompatibilityManager
     {
         if (isMineableOre(stack) || stack.is(ModTags.raw_ore) || stack.is(ModTags.breakable_ore))
         {
-            ItemStack smeltingResult = IFurnaceRecipes.getFurnaceRecipes().getSmeltingResult(stack);
+            ItemStack smeltingResult = MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack);
             return stack.is(ModTags.breakable_ore) || !smeltingResult.isEmpty();
         }
 
@@ -649,7 +650,7 @@ public class CompatibilityManager implements ICompatibilityManager
             {
                 oreBlocks.add(((BlockItem) stack.getItem()).getBlock());
             }
-            if (!IFurnaceRecipes.getFurnaceRecipes().getSmeltingResult(stack).isEmpty())
+            if (!MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack).isEmpty())
             {
                 smeltableOres.add(new ItemStorage(stack));
             }
