@@ -5,6 +5,7 @@ import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.compatibility.Compatibility;
+import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.happiness.ExpirationBasedHappinessModifier;
@@ -17,7 +18,6 @@ import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.items.ModTags;
 import com.minecolonies.core.items.ItemBowlFood;
 import com.minecolonies.core.util.AdvancementUtils;
-import com.minecolonies.core.util.FurnaceRecipes;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -153,12 +153,12 @@ public final class ItemStackUtils
     /**
      * Predicate describing things which work in the furnace.
      */
-    public static Predicate<ItemStack> IS_SMELTABLE = itemStack -> !ItemStackUtils.isEmpty(FurnaceRecipes.getInstance().getSmeltingResult(itemStack));
+    public static Predicate<ItemStack> IS_SMELTABLE = itemStack -> !ItemStackUtils.isEmpty(IFurnaceRecipes.getFurnaceRecipes().getSmeltingResult(itemStack));
 
     /**
      * Predicate describing cookables.
      */
-    public static Predicate<ItemStack> ISCOOKABLE = itemStack -> ItemStackUtils.ISFOOD.test(FurnaceRecipes.getInstance().getSmeltingResult(itemStack));
+    public static Predicate<ItemStack> ISCOOKABLE = itemStack -> ItemStackUtils.ISFOOD.test(IFurnaceRecipes.getFurnaceRecipes().getSmeltingResult(itemStack));
 
     /**
      * Predicate to check for compost items.

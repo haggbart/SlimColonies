@@ -11,14 +11,14 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import static com.minecolonies.api.research.ModResearchRequirements.*;
+import static com.minecolonies.apiimp.CommonMinecoloniesAPIImpl.REGISTRY_KEY_RESEARCH_REQUIREMENT_TYPES;
 
 /**
  * Registry initializer for the {@link ModResearchRequirements}.
  */
 public class ModResearchRequirementInitializer
 {
-    public final static DeferredRegister<ResearchRequirementEntry> DEFERRED_REGISTER =
-        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "researchrequirementtypes"), Constants.MOD_ID);
+    public final static DeferredRegister<ResearchRequirementEntry> DEFERRED_REGISTER = DeferredRegister.create(REGISTRY_KEY_RESEARCH_REQUIREMENT_TYPES, Constants.MOD_ID);
     static
     {
         buildingResearchRequirement = create(BUILDING_RESEARCH_REQ_ID, BuildingResearchRequirement::new, BuildingResearchRequirement::new);
