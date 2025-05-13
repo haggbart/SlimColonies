@@ -126,6 +126,11 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
     protected BlockPos workFrom;
 
     /**
+     * Previous Position where the Builders constructed from.
+     */
+    protected BlockPos prevBlockPosition;
+
+    /**
      * Block to mine.
      */
     protected BlockPos blockToMine;
@@ -373,7 +378,8 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
 
         final StructurePhasePlacementResult result;
         final StructurePlacer placer = structurePlacer.getA();
-        switch (structurePlacer.getB().getStage())
+        final BuildingStructureHandler.Stage currentStage = structurePlacer.getB().getStage();
+        switch (currentStage)
         {
             case BUILD_SOLID:
                 //structure
@@ -435,10 +441,6 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
             default:
                 result =
                   placer.executeStructureStep(world, null, progress, StructurePlacer.Operation.BLOCK_REMOVAL, () -> placer.getIterator().decrement(this::skipClearing), false);
-                if (result.getBlockResult().getResult() == BlockPlacementResult.Result.FINISHED)
-                {
-                    building.checkOrRequestBucket(building.getRequiredResources(), worker.getCitizenData());
-                }
                 break;
         }
 
@@ -447,6 +449,7 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
             Log.getLogger().error("Failed placement at: " + result.getBlockResult().getWorldPos().toShortString());
         }
 
+        final boolean firstIteration = building.getProgress() == null;
         if (result.getBlockResult().getResult() == BlockPlacementResult.Result.FINISHED)
         {
             building.nextStage();
@@ -457,6 +460,10 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
                 return COMPLETE_BUILD;
             }
             this.storeProgressPos(NULL_POS, structurePlacer.getB().getStage());
+            if (currentStage == CLEAR)
+            {
+                building.checkOrRequestBucket(building.getRequiredResources(), worker.getCitizenData());
+            }
         }
         else if (result.getBlockResult().getResult() == BlockPlacementResult.Result.LIMIT_REACHED)
         {
@@ -477,6 +484,10 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
             this.storeProgressPos(result.getIteratorPos(), structurePlacer.getB().getStage());
         }
 
+        if (firstIteration)
+        {
+            building.checkOrRequestBucket(building.getRequiredResources(), worker.getCitizenData());
+        }
 
         if (result.getBlockResult().getResult() == BlockPlacementResult.Result.MISSING_ITEMS)
         {
