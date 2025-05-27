@@ -4,9 +4,7 @@ import com.minecolonies.api.colony.buildingextensions.IBuildingExtension;
 import com.minecolonies.api.colony.buildings.modules.AbstractBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IPersistentModule;
-import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.core.util.CollectorUtils;
-import net.minecraft.core.BlockPos;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -14,10 +12,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
@@ -31,17 +27,18 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
      * NBT tag to store assign manually.
      */
     private static final String TAG_ASSIGN_MANUALLY = "assign";
+    private static final String TAG_CURRENT_EXTENSION = "currex";
 
     /**
      * A map of building extensions, along with their unix timestamp of when they can next be checked again.
      */
-    private final Map<BlockPos, Integer> checkedExtensions = new HashMap<>();
+    private final Map<IBuildingExtension.ExtensionId, Integer> checkedExtensions = new Object2IntOpenHashMap<>();
 
     /**
      * The building extension the citizen is currently working on.
      */
     @Nullable
-    private IBuildingExtension currentExtension;
+    private IBuildingExtension.ExtensionId currentExtensionId;
 
     /**
      * Building extensions should be assigned manually to the citizen.
@@ -52,11 +49,15 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
     public void deserializeNBT(final CompoundTag compound)
     {
         shouldAssignManually = compound.getBoolean(TAG_ASSIGN_MANUALLY);
-        final ListTag listTag = compound.getList(TAG_LIST, Tag.TAG_COMPOUND);
+        final ListTag listTag = compound.getList(TAG_BUILDING_EXTENSIONS, Tag.TAG_COMPOUND);
         for (int i = 0; i < listTag.size(); ++i)
         {
             final CompoundTag tag = listTag.getCompound(i);
-            checkedExtensions.put(BlockPosUtil.read(tag, TAG_POS), compound.getInt(TAG_DAY));
+            checkedExtensions.put(IBuildingExtension.ExtensionId.deserializeNBT(tag.getCompound(TAG_ID)), compound.getInt(TAG_DAY));
+        }
+        if (compound.contains(TAG_CURRENT_EXTENSION))
+        {
+            currentExtensionId = IBuildingExtension.ExtensionId.deserializeNBT(compound.getCompound(TAG_CURRENT_EXTENSION));
         }
     }
 
@@ -66,14 +67,18 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
         compound.putBoolean(TAG_ASSIGN_MANUALLY, shouldAssignManually);
 
         final ListTag listTag = new ListTag();
-        for (final Map.Entry<BlockPos, Integer> entry : checkedExtensions.entrySet())
+        for (final Map.Entry<IBuildingExtension.ExtensionId, Integer> entry : checkedExtensions.entrySet())
         {
             final CompoundTag listEntry = new CompoundTag();
-            BlockPosUtil.write(compound, TAG_POS, entry.getKey());
+            compound.put(TAG_ID, entry.getKey().serializeNBT());
             listEntry.putLong(TAG_DAY, entry.getValue());
             listTag.add(listEntry);
         }
         compound.put(TAG_LIST, listTag);
+        if (currentExtensionId != null)
+        {
+            compound.put(TAG_CURRENT_EXTENSION, currentExtensionId.serializeNBT());
+        }
     }
 
     @Override
@@ -105,7 +110,11 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
     @Nullable
     public IBuildingExtension getCurrentExtension()
     {
-        return currentExtension;
+        if (currentExtensionId == null)
+        {
+            return null;
+        }
+        return building.getColony().getBuildingManager().getMatchingBuildingExtension(currentExtensionId);
     }
 
     /**
@@ -118,39 +127,32 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
     @Nullable
     public IBuildingExtension getExtensionToWorkOn()
     {
+        final IBuildingExtension currentExtension = getCurrentExtension();
         if (currentExtension != null)
         {
             return currentExtension;
         }
 
-        IBuildingExtension lastUsedExtension = null;
-        int lastUsedExtensionDay = 0;
+        IBuildingExtension.ExtensionId lastUsedExtension = null;
+        int lastUsedExtensionDay = building.getColony().getDay();
 
         for (final IBuildingExtension extension : getOwnedExtensions())
         {
-            if (!checkedExtensions.containsKey(extension.getPosition()))
+            if (!checkedExtensions.containsKey(extension.getId()))
             {
-                currentExtension = extension;
+                currentExtensionId = extension.getId();
                 return extension;
             }
 
-            final int lastDay = checkedExtensions.get(extension.getPosition());
-            if (lastUsedExtension == null)
+            final int lastDay = checkedExtensions.get(extension.getId());
+            if (lastDay < lastUsedExtensionDay)
             {
-                if (lastDay < building.getColony().getDay())
-                {
-                    lastUsedExtension = extension;
-                    lastUsedExtensionDay = lastDay;
-                }
-            }
-            else if (lastUsedExtensionDay < lastDay)
-            {
-                lastUsedExtension = extension;
+                lastUsedExtension = extension.getId();
                 lastUsedExtensionDay = lastDay;
             }
         }
-        currentExtension = lastUsedExtension;
-        return lastUsedExtension;
+        currentExtensionId = lastUsedExtension;
+        return getCurrentExtension();
     }
 
     /**
@@ -276,7 +278,7 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
         extension.resetOwningBuilding();
         markDirty();
 
-        if (Objects.equals(currentExtension, extension))
+        if (currentExtensionId == extension.getId())
         {
             resetCurrentExtension();
         }
@@ -287,10 +289,10 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
      */
     public void resetCurrentExtension()
     {
-        if (currentExtension != null)
+        if (currentExtensionId != null)
         {
-            checkedExtensions.put(currentExtension.getPosition(), building.getColony().getDay());
+            checkedExtensions.put(currentExtensionId, building.getColony().getDay());
         }
-        currentExtension = null;
+        currentExtensionId = null;
     }
 }
