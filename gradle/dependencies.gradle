@@ -1,4 +1,3 @@
-
 configurations {
     library
     implementation.extendsFrom library
@@ -9,10 +8,6 @@ minecraft.runs.all {
         configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
     }
 }
-
-project.tasks.getByName("processResources", {task ->
-    task.duplicatesStrategy 'include'
-})
 
 repositories {
     maven {
