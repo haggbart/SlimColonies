@@ -13,6 +13,7 @@ import com.minecolonies.api.equipment.ModEquipmentTypes;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.InventoryUtils;
 import com.minecolonies.api.util.ItemStackUtils;
+import com.minecolonies.api.util.StatsUtil;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.core.colony.buildings.AbstractBuildingStructureBuilder;
 import com.minecolonies.core.colony.jobs.AbstractJobStructure;
@@ -204,6 +205,7 @@ public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B ex
 
             for (final ItemStack stack : list)
             {
+                StatsUtil.trackStat( structureAI.getWorker().getCitizenData().getWorkBuilding(), BLOCKS_PLACED,  1);
                 structureAI.reduceNeededResources(stack);
                 structureAI.getWorker()
                   .getCitizenColonyHandler()
