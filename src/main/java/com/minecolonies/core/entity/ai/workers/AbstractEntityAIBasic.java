@@ -628,7 +628,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
                 //Check if we either have the requested Items in our inventory or if they are in the building.
                 if (InventoryUtils.areAllItemsInItemHandlerList(firstDeliverableRequest.getDeliveries(), validHandlers))
                 {
-                    final List<ItemStack> niceToHave = itemsNiceToHave();
+                    final List<ItemStorage> niceToHave = itemsNiceToHave();
                     final List<ItemStack> contained = InventoryUtils.getContainedFromItemHandler(firstDeliverableRequest.getDeliveries(), worker.getItemHandlerCitizen());
 
                     InventoryUtils.moveItemStacksWithPossibleSwap(
@@ -637,7 +637,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
                       firstDeliverableRequest.getDeliveries(),
                       itemStack ->
                         contained.stream().anyMatch(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack)) ||
-                          niceToHave.stream().anyMatch(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack))
+                          niceToHave.stream().anyMatch(storage -> ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, storage.getItemStack()))
                     );
                     return NEEDS_ITEM;
                 }
@@ -1303,7 +1303,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
      * @return a list with items nice to have for the worker
      */
     @NotNull
-    protected List<ItemStack> itemsNiceToHave()
+    protected List<ItemStorage> itemsNiceToHave()
     {
         return new ArrayList<>();
     }
@@ -1686,6 +1686,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
         {
             return true;
         }
+
         final int updatedCount = count - invCount;
         final int updatedMinCount = Math.min(updatedCount, minCount);
 
