@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class TargetAI<T extends Mob & IThreatTableEntity> implements IStateAI
      */
     public boolean isEntityValidTarget(final LivingEntity target)
     {
-        if (target == user || target == null || !target.isAlive() || !isWithinPersecutionDistance(target))
+        if (target == user || target == null || !target.isAlive() || !isWithinPersecutionDistance(target) || target instanceof FakePlayer)
         {
             return false;
         }
