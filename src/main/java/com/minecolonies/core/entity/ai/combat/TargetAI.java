@@ -1,11 +1,11 @@
 package com.minecolonies.core.entity.ai.combat;
 
 import com.minecolonies.api.entity.ai.IStateAI;
-import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
-import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
 import com.minecolonies.api.entity.ai.combat.CombatAIStates;
 import com.minecolonies.api.entity.ai.combat.threat.IThreatTableEntity;
 import com.minecolonies.api.entity.ai.combat.threat.ThreatTableEntry;
+import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
+import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;

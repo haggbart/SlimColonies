@@ -268,7 +268,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
         }
         super.stop();
 
-        if (dest != null && !dest.equals(BlockPos.ZERO))
+        if (dest != null)
         {
             if (job.getStart().distSqr(dest) > 900 * 900)
             {
@@ -289,6 +289,8 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
 
                     ourEntity.moveTo(dest.getX(), dest.getY(), dest.getZ());
                 }
+
+                pauseTicks = 20 * 300;
                 return null;
             }
         }

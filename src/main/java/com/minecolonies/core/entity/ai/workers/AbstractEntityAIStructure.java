@@ -1011,7 +1011,7 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
      */
     protected boolean isThereAStructureToBuild()
     {
-        if (structurePlacer == null || !structurePlacer.getB().hasBluePrint())
+        if (structurePlacer == null || !structurePlacer.getB().hasBluePrint() || job.getWorkOrder() == null)
         {
             return false;
         }
