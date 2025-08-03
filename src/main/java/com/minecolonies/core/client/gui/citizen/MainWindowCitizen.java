@@ -41,11 +41,14 @@ public class MainWindowCitizen extends AbstractWindowCitizen
         this.citizen = citizen;
 
         final Image statusIcon = findPaneOfTypeByID(STATUS_ICON, Image.class);
-        statusIcon.setImage(citizen.getVisibleStatus().getIcon(), false);
-        PaneBuilders.tooltipBuilder()
-            .append(Component.translatable(citizen.getVisibleStatus().getTranslationKey()))
-            .hoverPane(statusIcon)
-            .build();
+        if (citizen.getVisibleStatus() != null)
+        {
+            statusIcon.setImage(citizen.getVisibleStatus().getIcon(), false);
+            PaneBuilders.tooltipBuilder()
+                .append(Component.translatable(citizen.getVisibleStatus().getTranslationKey()))
+                .hoverPane(statusIcon)
+                .build();
+        }
     }
 
     public ICitizenDataView getCitizen()
