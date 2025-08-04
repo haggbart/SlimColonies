@@ -159,7 +159,7 @@ public class WorkOrderBuilding extends AbstractWorkOrder
         //  - OR the WorkOrder is for the TownHall
         //  - OR the WorkOrder is not farther away than 100 blocks from any builder and not manually assigned
 
-        return canBuildIgnoringDistance(building, building.getPosition(), building.getBuildingLevel())
+        return building instanceof BuildingBuilder && canBuildIgnoringDistance(building, building.getPosition(), building.getBuildingLevel())
                  && (building.getPosition().distSqr(getLocation()) <= MAX_DISTANCE_SQ
                  || (isClaimed() && getClaimedBy().equals(building.getPosition())));
     }
