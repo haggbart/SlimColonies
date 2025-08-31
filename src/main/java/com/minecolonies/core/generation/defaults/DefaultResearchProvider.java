@@ -12,7 +12,12 @@ import com.minecolonies.api.util.constant.Constants;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.enchantment.Enchantments;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -108,6 +113,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(WORK_LONGER).setTranslatedName("Citizen Work Day +%sH").setLevels(new double[] {1, 2}));
         effects.add(new ResearchEffect(RESURRECT_CHANCE).setTranslatedName("Improve Resurrection Chance by +%3$s%%").setLevels(new double[] {0.01, 0.03}));
         effects.add(new ResearchEffect(GRAVE_DECAY_BONUS).setTranslatedName("Citizen Graves Take %s More Minutes to Decay").setLevels(new double[] {2, 5}));
+        effects.add(new ResearchEffect(LOOTING).setTranslatedName("Herders Gain Looting %s").setLevels(new double[] {1}));
 
         // Guard and Worker unlocks do not need a strength, but do have static ResourceLocations.
         effects.add(new ResearchEffect(ARCHER_USE_ARROWS).setTranslatedName("Archers Use Arrows For +2 Damage"));
@@ -1286,6 +1292,18 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                         .addItemCost(Items.SUGAR_CANE, 32)
                                         .addItemCost(Items.CACTUS, 32)
                                         .addEffect(PLANTATION_LARGE, 1)
+                                        .addToList(r);
+
+        final Research skilledButcher = new Research(new ResourceLocation(Constants.MOD_ID, "technology/skilledbutcher"), TECH).setParentResearch(biodegradable)
+                                        .setTranslatedName("Skilled Butcher")
+                                        .setTranslatedSubtitle("Measure twice, cut once!")
+                                        .setIcon(Items.BEEF)
+                                        .addBuildingRequirement(ModBuildings.ENCHANTER_ID, 2)
+                                        .addBuildingRequirement(ModBuildings.BLACKSMITH_ID, 2)
+                                        .addItemCost(Items.DIAMOND_AXE, 1)
+                                        .addItemCost(Items.ENCHANTED_BOOK, 1)
+                                        .addItemCost(Items.ANVIL, 1)
+                                        .addEffect(LOOTING, 1)
                                         .addToList(r);
 
         new Research(new ResourceLocation(Constants.MOD_ID, "technology/junglemaster"), TECH).setParentResearch(letItGrow)
