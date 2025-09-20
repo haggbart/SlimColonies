@@ -116,20 +116,8 @@
       }
     },
     {
-      "type": "minecolonies:happiness",
-      "details": {
-        "target": 0,
-        "qty": 2,
-        "days": 7
-      }
     },
     {
-      "type": "minecolonies:happiness",
-      "details": {
-        "target": 1,
-        "qty": 2,
-        "days": 7
-      }
     }
   ]
 }

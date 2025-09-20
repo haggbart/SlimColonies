@@ -10,7 +10,6 @@ import com.minecolonies.api.colony.interactionhandling.IInteractionResponseHandl
 import com.minecolonies.api.colony.jobs.IJobView;
 import com.minecolonies.api.colony.jobs.registry.IJobDataManager;
 import com.minecolonies.api.entity.citizen.VisibleCitizenStatus;
-import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenHappinessHandler;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenSkillHandler;
 import com.minecolonies.api.inventory.InventoryCitizen;
 import com.minecolonies.api.items.ModItems;
@@ -19,7 +18,6 @@ import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.api.util.constant.Suppression;
 import com.minecolonies.core.MineColonies;
 import com.minecolonies.core.colony.interactionhandling.ServerCitizenInteraction;
-import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenHappinessHandler;
 import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenSkillHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -90,10 +88,6 @@ public class CitizenDataView implements ICitizenDataView
      */
     private double saturation;
 
-    /**
-     * holds the current citizen happiness value
-     */
-    private double happiness;
 
     /**
      * The position of the guard.
@@ -130,10 +124,6 @@ public class CitizenDataView implements ICitizenDataView
      */
     private final CitizenSkillHandler citizenSkillHandler;
 
-    /**
-     * The citizen happiness handler.
-     */
-    private final CitizenHappinessHandler citizenHappinessHandler;
 
     /**
      * The citizens status icon
@@ -194,7 +184,6 @@ public class CitizenDataView implements ICitizenDataView
     {
         this.id = id;
         this.citizenSkillHandler = new CitizenSkillHandler();
-        this.citizenHappinessHandler = new CitizenHappinessHandler();
         this.colonyView = colonyView;
     }
 
@@ -293,11 +282,6 @@ public class CitizenDataView implements ICitizenDataView
         return colonyId;
     }
 
-    @Override
-    public double getHappiness()
-    {
-        return happiness;
-    }
 
     @Override
     public double getSaturation()
@@ -350,7 +334,7 @@ public class CitizenDataView implements ICitizenDataView
         workBuilding = buf.readBoolean() ? buf.readBlockPos() : null;
 
         saturation = buf.readDouble();
-        happiness = buf.readDouble();
+        buf.readDouble(); // Skip happiness value
 
         citizenSkillHandler.read(buf.readNbt());
 
@@ -379,7 +363,7 @@ public class CitizenDataView implements ICitizenDataView
         sortedInteractions = new ArrayList<>(citizenChatOptions.values());
         sortedInteractions.sort(Comparator.comparingInt(e -> -e.getPriority().getPriority()));
 
-        citizenHappinessHandler.read(buf.readNbt(), false);
+        buf.readNbt(); // Skip happiness handler data
 
         int statusindex = buf.readInt();
         statusIcon = statusindex >= 0 ? VisibleCitizenStatus.getForId(statusindex) : null;
@@ -529,11 +513,6 @@ public class CitizenDataView implements ICitizenDataView
         return citizenSkillHandler;
     }
 
-    @Override
-    public ICitizenHappinessHandler getHappinessHandler()
-    {
-        return citizenHappinessHandler;
-    }
 
     @Override
     public ResourceLocation getStatusIcon()

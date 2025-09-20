@@ -1,7 +1,6 @@
 package com.minecolonies.api.colony.managers.interfaces;
 
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.entity.citizen.happiness.IHappinessModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -158,7 +157,7 @@ public interface ICitizenManager extends IEntityManager
      *
      * @param modifier the modifier.
      */
-    void injectModifier(final IHappinessModifier modifier);
+    // Happiness system removed
 
     /**
      * Call this when citizens sleep

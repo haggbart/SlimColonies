@@ -183,7 +183,7 @@ public class QuestRegistries
     public static RegistryObject <RewardEntry> researchReward;
     public static RegistryObject <RewardEntry> raidReward;
     public static RegistryObject <RewardEntry> relationshipReward;
-    public static RegistryObject <RewardEntry> happinessReward;
+    // Happiness reward removed
     public static RegistryObject <RewardEntry> unlockQuestReward;
     public static RegistryObject <RewardEntry> questReputationReward;
 

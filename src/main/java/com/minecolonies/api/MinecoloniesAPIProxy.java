@@ -19,7 +19,7 @@ import com.minecolonies.api.configuration.Configuration;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.crafting.registry.RecipeTypeEntry;
 import com.minecolonies.api.entity.mobs.registry.IMobAIRegistry;
-import com.minecolonies.api.entity.citizen.happiness.HappinessRegistry;
+// Happiness imports removed
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
 import com.minecolonies.api.eventbus.EventBus;
@@ -213,17 +213,7 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
         return apiInstance.getQuestDialogueAnswerRegistry();
     }
 
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> getHappinessTypeRegistry()
-    {
-        return apiInstance.getHappinessTypeRegistry();
-    }
-
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> getHappinessFunctionRegistry()
-    {
-        return apiInstance.getHappinessFunctionRegistry();
-    }
+    // Happiness registry methods removed
 
     @Override
     public void onRegistryNewRegistry(final NewRegistryEvent event)

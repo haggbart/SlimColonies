@@ -131,12 +131,6 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
      */
     void setBedPos(BlockPos bedPos);
 
-    /**
-     * The Handler for the citizens happiness.
-     *
-     * @return the instance of the handler
-     */
-    ICitizenHappinessHandler getCitizenHappinessHandler();
 
     /**
      * The Handler for the citizens mourning.

@@ -1467,24 +1467,14 @@ public class Colony implements IColony
     }
 
     /**
-     * Getter for overall happiness.
+     * Getter for overall happiness (removed - returns default value).
      *
-     * @return the overall happiness.
+     * @return the default happiness value.
      */
     @Override
     public double getOverallHappiness()
     {
-        if (citizenManager.getCitizens().size() <= 0)
-        {
-            return 5.5;
-        }
-
-        double happinessSum = 0;
-        for (final ICitizenData citizen : citizenManager.getCitizens())
-        {
-            happinessSum += citizen.getCitizenHappinessHandler().getHappiness(citizen.getColony(), citizen);
-        }
-        return happinessSum / citizenManager.getCitizens().size();
+        return 10.0; // Default happiness value
     }
 
     /**

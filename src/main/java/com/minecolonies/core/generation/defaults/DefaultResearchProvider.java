@@ -90,7 +90,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(FLEEING_DAMAGE).setTranslatedName("Guards Take -%3$s%% Damage When Fleeing").setLevels(new double[] {0.2, 0.3, 0.4, 0.75}));
         effects.add(new ResearchEffect(FLEEING_SPEED).setTranslatedName("Fleeing Guards Gain Swiftness %2$s").setLevels(new double[] {1, 2, 3, 5}));
         effects.add(new ResearchEffect(GROWTH).setTranslatedName("Child Growth Rate +%3$s%%").setLevels(new double[] {0.05, 0.1, 0.25, 0.5, 1}));
-        effects.add(new ResearchEffect(HAPPINESS).setTranslatedName("Citizen Happiness +%3$s%%").setLevels(new double[] {0.05, 0.1, 0.15, 0.2, 0.5}));
+        // Happiness system removed
         effects.add(new ResearchEffect(SATLIMIT).setTranslatedName("Healing Saturation Min %s").setLevels(new double[] {-0.5, -1, -1.5, -2, -5}));
         effects.add(new ResearchEffect(HEALTH_BOOST).setTranslatedName("Citizen HP +%s").setLevels(new double[] {2, 4, 6, 8, 10, 20}));
         effects.add(new ResearchEffect(LEVELING).setTranslatedName("Citizen XP Growth +%3$s%%").setLevels(new double[] {0.05, 0.1, 0.25, 0.5, 1}));
@@ -496,7 +496,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                   .setIcon(new ResourceLocation("minecolonies:textures/icons/research/happy1.png"))
                                   .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 2)
                                   .addItemCost(Items.CAKE, 1)
-                                  .addEffect(HAPPINESS, 1)
+                                  // Happiness system removed
                                   .addToList(r);
         final Research festival = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/festival"), CIVIL).setParentResearch(circus)
                                     .setTranslatedName("Festival")
@@ -504,14 +504,14 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                     .setIcon(new ResourceLocation("minecolonies:textures/icons/research/happy2.png"))
                                     .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 3)
                                     .addItemCost(Items.CAKE, 9)
-                                    .addEffect(HAPPINESS, 2)
+                                    // Happiness system removed
                                     .addToList(r);
         final Research spectacle = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/spectacle"), CIVIL).setParentResearch(festival)
                                      .setTranslatedName("Spectacle")
                                      .setIcon(new ResourceLocation("minecolonies:textures/icons/research/happy3.png"))
                                      .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 4)
                                      .addItemCost(Items.CAKE, 18)
-                                     .addEffect(HAPPINESS, 3)
+                                     // Happiness system removed
                                      .addToList(r);
         final Research opera = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/opera"), CIVIL).setParentResearch(spectacle)
                                  .setTranslatedName("Opera")
@@ -519,14 +519,14 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                  .setIcon(new ResourceLocation("minecolonies:textures/icons/research/happy4.png"))
                                  .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 5)
                                  .addItemCost(Items.CAKE, 27)
-                                 .addEffect(HAPPINESS, 4)
+                                 // Happiness system removed
                                  .addToList(r);
         new Research(new ResourceLocation(Constants.MOD_ID, "civilian/theater"), CIVIL).setParentResearch(opera)
           .setTranslatedName("Theater")
           .setTranslatedSubtitle("Oh don't be so dramatic!")
           .setIcon(new ResourceLocation("minecolonies:textures/icons/research/happy5.png"))
           .addItemCost(Items.ENCHANTED_GOLDEN_APPLE, 16)
-          .addEffect(HAPPINESS, 5)
+          // Happiness system removed
           .addToList(r);
 
         final Research night_owl = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/nightowl"), CIVIL).setParentResearch(circus)

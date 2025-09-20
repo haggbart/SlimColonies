@@ -41,9 +41,7 @@ public abstract class AbstractWindowCitizen extends AbstractWindowRequestTree
         registerButton("inventoryIcon", () -> Network.getNetwork().sendToServer(new OpenInventoryMessage(colony, citizen.getName(), citizen.getEntityId())));
         PaneBuilders.tooltipBuilder().hoverPane(findPaneByID("inventoryIcon")).build().setText(Component.translatable("com.minecolonies.coremod.gui.citizen.inventory"));
 
-        registerButton("happinessTab", () -> new HappinessWindowCitizen(citizen).open());
-        registerButton("happinessIcon", () -> new HappinessWindowCitizen(citizen).open());
-        PaneBuilders.tooltipBuilder().hoverPane(findPaneByID("happinessIcon")).build().setText(Component.translatable("com.minecolonies.coremod.gui.citizen.happiness"));
+        // Happiness window removed
 
         registerButton("familyTab", () -> new FamilyWindowCitizen(citizen).open());
         registerButton("familyIcon", () -> new FamilyWindowCitizen(citizen).open());

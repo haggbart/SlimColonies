@@ -7,8 +7,6 @@ import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.compatibility.Compatibility;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
-import com.minecolonies.api.entity.citizen.happiness.ExpirationBasedHappinessModifier;
-import com.minecolonies.api.entity.citizen.happiness.StaticHappinessSupplier;
 import com.minecolonies.api.equipment.ModEquipmentTypes;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
 import com.minecolonies.api.items.CheckedNbtKey;
@@ -53,7 +51,6 @@ import java.util.stream.Collectors;
 
 import static com.minecolonies.api.items.ModTags.fungi;
 import static com.minecolonies.api.util.constant.Constants.*;
-import static com.minecolonies.api.util.constant.HappinessConstants.HADGREATFOOD;
 import static java.util.Map.entry;
 
 /**
@@ -951,10 +948,7 @@ public final class ItemStackUtils
             }
         }
 
-        if (foodStack.getItem() instanceof IMinecoloniesFoodItem foodItem && foodItem.getTier() >= 3)
-        {
-            citizen.getCitizenData().getCitizenHappinessHandler().addModifier(new ExpirationBasedHappinessModifier(HADGREATFOOD, 2.0, new StaticHappinessSupplier(2.0), 5));
-        }
+        // Happiness system removed - great food bonus no longer tracked
 
         IColony citizenColony = citizen.getCitizenColonyHandler().getColonyOrRegister();
         if (citizenColony != null)

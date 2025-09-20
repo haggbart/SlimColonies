@@ -3,7 +3,6 @@ package com.minecolonies.api.colony;
 import com.minecolonies.api.colony.interactionhandling.IInteractionResponseHandler;
 import com.minecolonies.api.colony.jobs.IJobView;
 import com.minecolonies.api.entity.citizen.VisibleCitizenStatus;
-import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenHappinessHandler;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenSkillHandler;
 import com.minecolonies.api.util.Tuple;
 import net.minecraft.core.BlockPos;
@@ -71,12 +70,6 @@ public interface ICitizenDataView extends ICitizen
      */
     int getColonyId();
 
-    /**
-     * Gets the current Happiness value for the citizen
-     *
-     * @return citizens current Happiness value
-     */
-    double getHappiness();
 
     /**
      * Get the last registered position of the citizen.
@@ -146,12 +139,6 @@ public interface ICitizenDataView extends ICitizen
      */
     ICitizenSkillHandler getCitizenSkillHandler();
 
-    /**
-     * The citizen happiness handler.
-     *
-     * @return the handler.
-     */
-    ICitizenHappinessHandler getHappinessHandler();
 
     /**
      * The texture to render for interactions

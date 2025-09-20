@@ -9,8 +9,7 @@ import com.minecolonies.api.colony.colonyEvents.IColonyEvent;
 import com.minecolonies.api.colony.colonyEvents.IColonyRaidEvent;
 import com.minecolonies.api.colony.managers.interfaces.IRaiderManager;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
-import com.minecolonies.api.entity.citizen.happiness.ExpirationBasedHappinessModifier;
-import com.minecolonies.api.entity.citizen.happiness.StaticHappinessSupplier;
+// Happiness imports removed
 import com.minecolonies.api.entity.mobs.AbstractEntityMinecoloniesRaider;
 import com.minecolonies.api.sounds.RaidSounds;
 import com.minecolonies.api.util.*;
@@ -64,7 +63,7 @@ import static com.minecolonies.api.util.constant.ColonyConstants.SMALL_HORDE_SIZ
 import static com.minecolonies.api.util.constant.ColonyManagerConstants.NO_COLONY_ID;
 import static com.minecolonies.api.util.constant.Constants.DEFAULT_BARBARIAN_DIFFICULTY;
 import static com.minecolonies.api.util.constant.Constants.TICKS_SECOND;
-import static com.minecolonies.api.util.constant.HappinessConstants.RAIDWITHOUTDEATH;
+// Happiness constants removed
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 import static com.minecolonies.api.util.constant.TranslationConstants.RAID_END;
 import static com.minecolonies.api.util.constant.TranslationConstants.RAID_END_MERCY;
@@ -1076,10 +1075,7 @@ public class RaidManager implements IRaiderManager
         PlayAudioMessage audio = new PlayAudioMessage(raidHistories.get(0).raiderAmount <= SMALL_HORDE_SIZE ? RaidSounds.VICTORY_EARLY : RaidSounds.VICTORY, SoundSource.HOSTILE);
         PlayAudioMessage.sendToAll(colony, false, true, audio);
 
-        if (colony.getRaiderManager().getLostCitizen() == 0)
-        {
-            colony.getCitizenManager().injectModifier(new ExpirationBasedHappinessModifier(RAIDWITHOUTDEATH, 1.0, new StaticHappinessSupplier(2.0), 3));
-        }
+        // Happiness system removed - raid victory bonus no longer tracked
     }
 
     /**
