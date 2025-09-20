@@ -53,7 +53,5 @@ logs/
 gradle/local.gradle
 gradle/local.configuration.gradle
 
-/src/main/resources/assets/minecolonies/lang/**
-!src/main/assets/minecolonies/lang/manual_en_us.json
 
 runs/
