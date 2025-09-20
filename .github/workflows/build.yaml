@@ -1,29 +1,46 @@
-name: Build and Pre-release
+name: Build and Test
 
 on:
-  merge_group:
+  push:
+    branches: [ master ]
   pull_request:
-    types:
-      - opened
-      - synchronize
-      - labeled
-      - unlabeled
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  statuses: write
-  packages: write
+    branches: [ master ]
 
 jobs:
   build:
-    uses: ldtteam/operapublicacreator/.github/workflows/gradle.build.yaml@main
-    with:
-      java: 17
-    secrets: inherit
-  pre-release:
-    uses: ldtteam/operapublicacreator/.github/workflows/gradle.prerelease.yaml@main
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && contains( github.event.pull_request.labels.*.name, 'Pre-release')
-    with:
-      java: 17
-    secrets: inherit
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Run tests
+      run: ./gradlew test
+
+    - name: Upload build artifacts
+      if: github.ref == 'refs/heads/master'
+      uses: actions/upload-artifact@v4
+      with:
+        name: slimcolonies-dev-build
+        path: build/libs/*.jar
