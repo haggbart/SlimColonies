@@ -113,15 +113,6 @@ public final class ModItemsInitializer
         ModItems.woodgate = new ItemGate(WOODEN_GATE, ModBlocks.blockWoodenGate, new Item.Properties());
 
         ModItems.flagBanner = new ItemColonyFlagBanner("colony_banner", new Item.Properties());
-        ModItems.pirateHelmet_1 = new ItemPirateGear("pirate_hat", ItemPirateGear.PIRATE_ARMOR_1, ArmorItem.Type.HELMET, new Item.Properties());
-        ModItems.pirateChest_1 = new ItemPirateGear("pirate_top", ItemPirateGear.PIRATE_ARMOR_1, ArmorItem.Type.CHESTPLATE, new Item.Properties());
-        ModItems.pirateLegs_1 = new ItemPirateGear("pirate_leggins", ItemPirateGear.PIRATE_ARMOR_1, ArmorItem.Type.LEGGINGS, new Item.Properties());
-        ModItems.pirateBoots_1 = new ItemPirateGear("pirate_boots", ItemPirateGear.PIRATE_ARMOR_1, ArmorItem.Type.BOOTS, new Item.Properties());
-
-        ModItems.pirateHelmet_2 = new ItemPirateGear("pirate_cap", ItemPirateGear.PIRATE_ARMOR_2, ArmorItem.Type.HELMET, new Item.Properties());
-        ModItems.pirateChest_2 = new ItemPirateGear("pirate_chest", ItemPirateGear.PIRATE_ARMOR_2, ArmorItem.Type.CHESTPLATE, new Item.Properties());
-        ModItems.pirateLegs_2 = new ItemPirateGear("pirate_legs", ItemPirateGear.PIRATE_ARMOR_2, ArmorItem.Type.LEGGINGS, new Item.Properties());
-        ModItems.pirateBoots_2 = new ItemPirateGear("pirate_shoes", ItemPirateGear.PIRATE_ARMOR_2, ArmorItem.Type.BOOTS, new Item.Properties());
 
         ModItems.plateArmorHelmet = new ItemPlateArmor("plate_armor_helmet", ItemPlateArmor.PLATE_ARMOR, ArmorItem.Type.HELMET, new Item.Properties());
         ModItems.plateArmorChest = new ItemPlateArmor("plate_armor_chest", ItemPlateArmor.PLATE_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Properties());
@@ -284,15 +275,6 @@ public final class ModItemsInitializer
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "adventure_token"), ModItems.adventureToken);
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_hat"), ModItems.pirateHelmet_1);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_top"), ModItems.pirateChest_1);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_leggins"), ModItems.pirateLegs_1);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_boots"), ModItems.pirateBoots_1);
-
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_cap"), ModItems.pirateHelmet_2);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_chest"), ModItems.pirateChest_2);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_legs"), ModItems.pirateLegs_2);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pirate_shoes"), ModItems.pirateBoots_2);
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "plate_armor_helmet"), ModItems.plateArmorHelmet);
         registry.register(new ResourceLocation(Constants.MOD_ID, "plate_armor_chest"), ModItems.plateArmorChest);

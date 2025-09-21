@@ -13,7 +13,7 @@
       "level": 1
     }
   ],
-  "icon": "minecolonies:pirate_shoes",
+  "icon": "minecraft:leather_boots",
   "parentResearch": "minecolonies:combat/avoidance",
   "requirements": [
     {

@@ -33,15 +33,6 @@ public final class ModItems
     public static Item compost;
     public static Item resourceScroll;
 
-    public static Item pirateHelmet_1;
-    public static Item pirateChest_1;
-    public static Item pirateLegs_1;
-    public static Item pirateBoots_1;
-
-    public static Item pirateHelmet_2;
-    public static Item pirateChest_2;
-    public static Item pirateLegs_2;
-    public static Item pirateBoots_2;
 
     public static Item plateArmorHelmet;
     public static Item plateArmorChest;

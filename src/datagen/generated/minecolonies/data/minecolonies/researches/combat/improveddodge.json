@@ -13,7 +13,7 @@
       "level": 2
     }
   ],
-  "icon": "minecolonies:pirate_boots",
+  "icon": "minecraft:iron_boots",
   "parentResearch": "minecolonies:combat/dodge",
   "requirements": [
     {
