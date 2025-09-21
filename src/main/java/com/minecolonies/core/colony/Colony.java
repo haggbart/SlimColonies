@@ -613,10 +613,6 @@ public class Colony implements IColony
             isDay = false;
             eventManager.onNightFall();
             raidManager.onNightFall();
-            if (!packageManager.getCloseSubscribers().isEmpty())
-            {
-                citizenManager.checkCitizensForHappiness();
-            }
 
             citizenManager.updateCitizenSleep(false);
             eventDescManager.computeNews();
@@ -1466,26 +1462,6 @@ public class Colony implements IColony
         this.markDirty();
     }
 
-    /**
-     * Getter for overall happiness.
-     *
-     * @return the overall happiness.
-     */
-    @Override
-    public double getOverallHappiness()
-    {
-        if (citizenManager.getCitizens().size() <= 0)
-        {
-            return 5.5;
-        }
-
-        double happinessSum = 0;
-        for (final ICitizenData citizen : citizenManager.getCitizens())
-        {
-            happinessSum += citizen.getCitizenHappinessHandler().getHappiness(citizen.getColony(), citizen);
-        }
-        return happinessSum / citizenManager.getCitizens().size();
-    }
 
     /**
      * Get all the waypoints of the colony.

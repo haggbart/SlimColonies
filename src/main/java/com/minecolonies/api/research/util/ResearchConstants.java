@@ -125,7 +125,7 @@ public final class ResearchConstants
     public static final ResourceLocation FARMING           = new ResourceLocation(Constants.MOD_ID, "effects/farmingmultiplier");
     public static final ResourceLocation FLEEING_DAMAGE    = new ResourceLocation(Constants.MOD_ID, "effects/fleeingdamagemultiplier");
     public static final ResourceLocation GROWTH            = new ResourceLocation(Constants.MOD_ID, "effects/growthmultiplier");
-    public static final ResourceLocation HAPPINESS         = new ResourceLocation(Constants.MOD_ID, "effects/happinessmultiplier");
+    // Happiness system removed
     public static final ResourceLocation LEVELING          = new ResourceLocation(Constants.MOD_ID, "effects/levelingmultiplier");
     public static final ResourceLocation MELEE_ARMOR       = new ResourceLocation(Constants.MOD_ID, "effects/meleearmormultiplier");
     public static final ResourceLocation MINIMUM_STOCK     = new ResourceLocation(Constants.MOD_ID, "effects/minimumstockmultiplier");

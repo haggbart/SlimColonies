@@ -89,7 +89,7 @@ public class CitizenSkillHandler implements ICitizenSkillHandler
             roleModelB = secondParent;
         }
 
-        final int levelCap = (int) colony.getOverallHappiness();
+        final int levelCap = 10; // Default level cap without happiness
         init(levelCap);
 
         final int bonusPoints = 25 + rand.nextInt(25);
@@ -155,7 +155,7 @@ public class CitizenSkillHandler implements ICitizenSkillHandler
             return false;
         }
 
-        final int levelCap = (int) citizen.getCitizenHappinessHandler().getHappiness(citizen.getColony(), citizen);
+        final int levelCap = 10; // Default level cap without happiness
         if (skillMap.get(Skill.Intelligence).level < levelCap * 9)
         {
             addXpToSkill(Skill.Intelligence, 10, citizen);

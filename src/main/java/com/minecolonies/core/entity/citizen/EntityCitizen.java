@@ -25,8 +25,6 @@ import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.Skill;
 import com.minecolonies.api.entity.citizen.VisibleCitizenStatus;
 import com.minecolonies.api.entity.citizen.citizenhandlers.*;
-import com.minecolonies.api.entity.citizen.happiness.ExpirationBasedHappinessModifier;
-import com.minecolonies.api.entity.citizen.happiness.StaticHappinessSupplier;
 import com.minecolonies.api.eventbus.events.colony.citizens.CitizenDiedModEvent;
 import com.minecolonies.api.eventbus.events.colony.citizens.CitizenRemovedModEvent;
 import com.minecolonies.api.inventory.InventoryCitizen;
@@ -36,7 +34,6 @@ import com.minecolonies.api.items.ModTags;
 import com.minecolonies.api.sounds.EventType;
 import com.minecolonies.api.util.*;
 import com.minecolonies.api.util.MessageUtils.MessagePriority;
-import com.minecolonies.api.util.constant.HappinessConstants;
 import com.minecolonies.api.util.constant.TranslationConstants;
 import com.minecolonies.api.util.constant.TypeConstants;
 import com.minecolonies.core.MineColonies;
@@ -118,7 +115,6 @@ import static com.minecolonies.api.research.util.ResearchConstants.*;
 import static com.minecolonies.api.util.ItemStackUtils.ISFOOD;
 import static com.minecolonies.api.util.constant.CitizenConstants.*;
 import static com.minecolonies.api.util.constant.Constants.*;
-import static com.minecolonies.api.util.constant.HappinessConstants.DAMAGE;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_CITIZEN;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_COLONY_ID;
 import static com.minecolonies.api.util.constant.StatisticsConstants.DEATH;
@@ -1410,10 +1406,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         if (!level.isClientSide)
         {
             CitizenItemUtils.updateArmorDamage(this, damageInc);
-            if (citizenData != null)
-            {
-                getCitizenData().getCitizenHappinessHandler().addModifier(new ExpirationBasedHappinessModifier(DAMAGE, 2.0, new StaticHappinessSupplier(0.0), 1));
-            }
+            // Happiness system removed - damage penalty no longer tracked
         }
 
         return true;
@@ -1540,12 +1533,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
 
             citizenExperienceHandler.dropExperience();
             this.remove(RemovalReason.KILLED);
-            if (!(citizenJobHandler.getColonyJob() instanceof AbstractJobGuard))
-            {
-                citizenColonyHandler.getColonyOrRegister()
-                  .getCitizenManager()
-                  .injectModifier(new ExpirationBasedHappinessModifier(HappinessConstants.DEATH, 3.0, new StaticHappinessSupplier(0.0), 3));
-            }
+            // Happiness system removed - death penalty no longer tracked
             triggerDeathAchievement(damageSource, citizenJobHandler.getColonyJob());
 
             if (!(citizenJobHandler.getColonyJob() instanceof AbstractJobGuard))

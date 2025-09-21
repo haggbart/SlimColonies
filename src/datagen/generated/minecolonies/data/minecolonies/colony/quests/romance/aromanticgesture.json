@@ -92,22 +92,6 @@
         "item": "minecraft:diamond",
         "qty": 1
       }
-    },
-    {
-      "type": "minecolonies:happiness",
-      "details": {
-        "days": 7,
-        "qty": 2,
-        "target": 0
-      }
-    },
-    {
-      "type": "minecolonies:happiness",
-      "details": {
-        "days": 7,
-        "qty": 2,
-        "target": 1
-      }
     }
   ],
   "triggers": [

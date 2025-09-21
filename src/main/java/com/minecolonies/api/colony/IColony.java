@@ -225,7 +225,6 @@ public interface IColony
         return tempWayPoints;
     }
 
-    double getOverallHappiness();
 
     Map<BlockPos, BlockState> getWayPoints();
 

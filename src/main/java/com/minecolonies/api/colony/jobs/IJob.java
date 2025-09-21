@@ -20,8 +20,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-import static com.minecolonies.api.util.constant.HappinessConstants.IDLE_AT_JOB_COMPLAINS_DAYS;
-import static com.minecolonies.api.util.constant.HappinessConstants.IDLE_AT_JOB_DEMANDS_DAYS;
 
 public interface IJob<AI extends ITickingStateAI> extends INBTSerializable<CompoundTag>
 {
@@ -258,11 +256,11 @@ public interface IJob<AI extends ITickingStateAI> extends INBTSerializable<Compo
     {
         if(isDemand)
         {
-            return IDLE_AT_JOB_DEMANDS_DAYS;
+            return 14; // Default idle days for demands
         }
         else
         {
-            return IDLE_AT_JOB_COMPLAINS_DAYS;
+            return 7; // Default idle days for complains
         }
     }
 

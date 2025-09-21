@@ -94,12 +94,6 @@
       }
     },
     {
-      "type": "minecolonies:happiness",
-      "details": {
-        "target": 0,
-        "qty": 1,
-        "days": 7
-      }
     }
   ]
 }

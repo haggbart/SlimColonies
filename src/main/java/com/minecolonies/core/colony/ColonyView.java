@@ -152,9 +152,9 @@ public final class ColonyView implements IColonyView
     private final Map<BlockPos, BlockState> wayPoints = new HashMap<>();
 
     /**
-     * The overall happiness of the colony.
+     * The overall happiness of the colony (removed - using default).
      */
-    private double overallHappiness = 5;
+    private double overallHappiness = 10;
 
     /**
      * The hours the colony is without contact with its players.
@@ -303,7 +303,7 @@ public final class ColonyView implements IColonyView
         {
             buf.writeBlockPos(block);
         }
-        buf.writeDouble(colony.getOverallHappiness());
+        buf.writeDouble(10.0); // Default happiness value
         buf.writeBoolean(colony.hasWarehouse());
 
         buf.writeInt(waypoints.size());
@@ -760,7 +760,7 @@ public final class ColonyView implements IColonyView
         {
             freePositions.add(buf.readBlockPos());
         }
-        this.overallHappiness = buf.readDouble();
+        buf.readDouble(); // Skip happiness value - using default
         this.hasColonyWarehouse = buf.readBoolean();
 
         final int wayPointListSize = buf.readInt();
@@ -1060,16 +1060,6 @@ public final class ColonyView implements IColonyView
         Network.getNetwork().sendToServer(new PermissionsMessage.RemovePlayer(this, player));
     }
 
-    /**
-     * Getter for the overall happiness.
-     *
-     * @return the happiness, a double.
-     */
-    @Override
-    public double getOverallHappiness()
-    {
-        return overallHappiness;
-    }
 
     @Override
     public BlockPos getCenter()

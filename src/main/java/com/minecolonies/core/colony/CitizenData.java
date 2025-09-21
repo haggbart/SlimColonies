@@ -205,10 +205,6 @@ public class CitizenData implements ICitizenData
      */
     private BlockPos lastPosition = new BlockPos(0, 0, 0);
 
-    /**
-     * The citizen happiness handler.
-     */
-    private final CitizenHappinessHandler citizenHappinessHandler;
 
     /**
      * The citizen happiness handler.
@@ -357,7 +353,6 @@ public class CitizenData implements ICitizenData
         this.id = id;
         this.colony = colony;
         inventory = new InventoryCitizen("Minecolonies Inventory", true, this);
-        this.citizenHappinessHandler = new CitizenHappinessHandler(this);
         this.citizenMournHandler = new CitizenMournHandler(this);
         this.citizenSkillHandler = new CitizenSkillHandler();
         this.citizenFoodHandler = new CitizenFoodHandler(this);
@@ -520,7 +515,7 @@ public class CitizenData implements ICitizenData
 
         saturation = MAX_SATURATION;
 
-        int levelCap = (int) colony.getOverallHappiness() * 2;
+        int levelCap = 10; // Default level cap without happiness
         if (colony.getCitizenManager().getCitizens().size() < IMinecoloniesAPI.getInstance().getConfig().getServer().initialCitizenAmount.get())
         {
             levelCap = Math.max(5, levelCap);
@@ -1044,7 +1039,7 @@ public class CitizenData implements ICitizenData
         }
 
         buf.writeDouble(getSaturation());
-        buf.writeDouble(citizenHappinessHandler.getHappiness(getColony(), this));
+        buf.writeDouble(10.0); // Default happiness value
 
         buf.writeNbt(citizenSkillHandler.write());
 
@@ -1072,9 +1067,9 @@ public class CitizenData implements ICitizenData
             buf.writeInt(0);
         }
 
-        final CompoundTag happinessCompound = new CompoundTag();
-        citizenHappinessHandler.write(happinessCompound, false);
-        buf.writeNbt(happinessCompound);
+        // Happiness system removed - write empty compound
+        final CompoundTag emptyCompound = new CompoundTag();
+        buf.writeNbt(emptyCompound);
 
         buf.writeInt(status != null ? status.getId() : -1);
 
@@ -1214,11 +1209,6 @@ public class CitizenData implements ICitizenData
         this.bedPos = bedPos;
     }
 
-    @Override
-    public CitizenHappinessHandler getCitizenHappinessHandler()
-    {
-        return citizenHappinessHandler;
-    }
 
     @Override
     public CitizenMournHandler getCitizenMournHandler()
@@ -1324,7 +1314,7 @@ public class CitizenData implements ICitizenData
             nbtTagCompound.put("job", jobCompound);
         }
 
-        citizenHappinessHandler.write(nbtTagCompound, true);
+        // Happiness system removed
         citizenMournHandler.write(nbtTagCompound);
         citizenFoodHandler.write(nbtTagCompound);
         citizenDiseaseHandler.write(nbtTagCompound);
@@ -1490,14 +1480,14 @@ public class CitizenData implements ICitizenData
             }
         }
 
-        this.citizenHappinessHandler.read(nbtTagCompound, true);
+        // Happiness system removed
         this.citizenMournHandler.read(nbtTagCompound);
         this.citizenFoodHandler.read(nbtTagCompound);
         citizenDiseaseHandler.read(nbtTagCompound);
 
         if (nbtTagCompound.contains(TAG_LEVEL_MAP) && !nbtTagCompound.contains(TAG_NEW_SKILLS))
         {
-            citizenSkillHandler.init((int) citizenHappinessHandler.getHappiness(getColony(), this));
+            citizenSkillHandler.init(10); // Default level cap without happiness
             final Map<String, Integer> levels = new HashMap<>();
             final ListTag levelTagList = nbtTagCompound.getList(TAG_LEVEL_MAP, Tag.TAG_COMPOUND);
             for (int i = 0; i < levelTagList.size(); ++i)

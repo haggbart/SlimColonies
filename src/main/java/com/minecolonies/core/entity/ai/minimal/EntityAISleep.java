@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.minecolonies.api.util.constant.CitizenConstants.RANGE_TO_BE_HOME;
-import static com.minecolonies.api.util.constant.HappinessConstants.SLEPTTONIGHT;
 import static com.minecolonies.core.entity.ai.minimal.EntityAISleep.SleepState.*;
 
 /**
@@ -209,7 +208,7 @@ public class EntityAISleep implements IStateAI
                     citizen.getCitizenData().setBedPos(BlockPos.ZERO);
                     usedBed = null;
                 }
-                citizen.getCitizenData().getCitizenHappinessHandler().resetModifier(SLEPTTONIGHT);
+                // Happiness system removed - sleep tracking no longer needed
             }
             else
             {

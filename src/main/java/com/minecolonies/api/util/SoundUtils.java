@@ -132,14 +132,8 @@ public final class SoundUtils
         }
         else if (v <= 0.2)
         {
-            if (citizen.getCitizenHappinessHandler().getHappiness(citizen.getColony(), citizen) < 5)
-            {
-                playSoundAtCitizenWith(worldIn, pos, EventType.UNHAPPY, citizen);
-            }
-            else
-            {
-                playSoundAtCitizenWith(worldIn, pos, EventType.HAPPY, citizen);
-            }
+            // Happiness system removed - always play happy sound
+            playSoundAtCitizenWith(worldIn, pos, EventType.HAPPY, citizen);
         }
         else if (v <= 0.3)
         {

@@ -1,7 +1,6 @@
 package com.minecolonies.api.colony.managers.interfaces;
 
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.entity.citizen.happiness.IHappinessModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -122,10 +121,6 @@ public interface ICitizenManager extends IEntityManager
      */
     void setPotentialMaxCitizens(final int newMaxCitizens);
 
-    /**
-     * Check for the citizen happiness and update the colony happiness with it.
-     */
-    void checkCitizensForHappiness();
 
     /**
      * Tick the citizen data of all active citizens.
@@ -158,7 +153,7 @@ public interface ICitizenManager extends IEntityManager
      *
      * @param modifier the modifier.
      */
-    void injectModifier(final IHappinessModifier modifier);
+    // Happiness system removed
 
     /**
      * Call this when citizens sleep

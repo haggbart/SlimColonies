@@ -22,7 +22,7 @@ import com.minecolonies.api.configuration.Configuration;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.crafting.registry.RecipeTypeEntry;
 import com.minecolonies.api.entity.mobs.registry.IMobAIRegistry;
-import com.minecolonies.api.entity.citizen.happiness.HappinessRegistry;
+// Happiness imports removed
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
 import com.minecolonies.api.eventbus.DefaultEventBus;
@@ -77,8 +77,7 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
     private        IForgeRegistry<QuestRegistries.RewardEntry>             questRewardRegistry;
     private        IForgeRegistry<QuestRegistries.TriggerEntry>            questTriggerRegistry;
     private        IForgeRegistry<QuestRegistries.DialogueAnswerEntry>     questDialogueAnswerRegistry;
-    private        IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> happinessFactorTypeRegistry;
-    private        IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> happinessFunctionRegistry;
+    // Happiness registries removed
 
     private EventBus eventBus = new DefaultEventBus();
 
@@ -312,17 +311,7 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
                        .disableSaving().allowModification()
                        .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> questDialogueAnswerRegistry = b);
 
-        event.create(new RegistryBuilder<HappinessRegistry.HappinessFactorTypeEntry>()
-                       .setName(new ResourceLocation(Constants.MOD_ID, "happinessfactortypes"))
-                       .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
-                       .disableSaving().allowModification()
-                       .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> happinessFactorTypeRegistry = b);
-
-        event.create(new RegistryBuilder<HappinessRegistry.HappinessFunctionEntry>()
-                       .setName(new ResourceLocation(Constants.MOD_ID, "happinessfunction"))
-                       .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
-                       .disableSaving().allowModification()
-                       .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> happinessFunctionRegistry = b);
+        // Happiness registries removed
     }
 
     @Override
@@ -373,17 +362,7 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
         return questDialogueAnswerRegistry;
     }
 
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFactorTypeEntry> getHappinessTypeRegistry()
-    {
-        return happinessFactorTypeRegistry;
-    }
-
-    @Override
-    public IForgeRegistry<HappinessRegistry.HappinessFunctionEntry> getHappinessFunctionRegistry()
-    {
-        return happinessFunctionRegistry;
-    }
+    // Happiness registry getters removed
 
     @Override
     public IForgeRegistry<EquipmentTypeEntry> getEquipmentTypeRegistry()

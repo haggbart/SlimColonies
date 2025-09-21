@@ -153,7 +153,6 @@ public class QuestRegistries
     public static ResourceLocation RESEARCH_REWARD_ID     = new ResourceLocation(Constants.MOD_ID, "research");
     public static ResourceLocation RAID_REWARD_ID         = new ResourceLocation(Constants.MOD_ID, "raid");
     public static ResourceLocation RELATIONSHIP_REWARD_ID = new ResourceLocation(Constants.MOD_ID, "relationship");
-    public static ResourceLocation HAPPINESS_REWARD_ID    = new ResourceLocation(Constants.MOD_ID, "happiness");
     public static ResourceLocation UNLOCK_QUEST_REWARD_ID     = new ResourceLocation(Constants.MOD_ID, "unlockquest");
     public static ResourceLocation QUEST_REPUTATION_REWARD_ID = new ResourceLocation(Constants.MOD_ID, "questreputation");
 
@@ -183,7 +182,7 @@ public class QuestRegistries
     public static RegistryObject <RewardEntry> researchReward;
     public static RegistryObject <RewardEntry> raidReward;
     public static RegistryObject <RewardEntry> relationshipReward;
-    public static RegistryObject <RewardEntry> happinessReward;
+    // Happiness reward removed
     public static RegistryObject <RewardEntry> unlockQuestReward;
     public static RegistryObject <RewardEntry> questReputationReward;
 

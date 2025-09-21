@@ -40,7 +40,7 @@ public interface ICitizenFoodHandler
     int checkLastEaten(Item item);
 
     /**
-     * Get the food happiness stats
+     * Get the food happiness stats (returns default values - happiness system removed)
      */
     CitizenFoodStats getFoodHappinessStats();
 
