@@ -71,14 +71,6 @@ public class EntityInitializer
                 .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
                 .sized(0.98F, 0.7F));
 
-
-            ModEntities.FIREARROW = build(registry, "firearrow",
-              EntityType.Builder.of(FireArrowEntity::new, MobCategory.MISC)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
-                .sized(0.5F, 0.5F)
-                .setShouldReceiveVelocityUpdates(true));
-
             ModEntities.MC_NORMAL_ARROW = build(registry, "mcnormalarrow",
               EntityType.Builder.of(CustomArrowEntity::new, MobCategory.MISC)
                 .setTrackingRange(ENTITY_TRACKING_RANGE)

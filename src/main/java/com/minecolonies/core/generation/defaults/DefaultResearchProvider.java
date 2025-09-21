@@ -839,7 +839,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                         .addToList(r);
         final Research woundingShot = new Research(new ResourceLocation(Constants.MOD_ID, "combat/woundingshot"), COMBAT).setParentResearch(piercingShot)
                                         .setTranslatedName("Wounding Shot")
-                                        .setIcon(ModItems.firearrow)
+                                        .setIcon(Items.SPECTRAL_ARROW)
                                         .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.BARRACKS_ID), 5)
                                         .addItemCost(Items.FLINT, 128)
                                         .addEffect(ARCHER_DAMAGE, 4)
@@ -924,7 +924,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         final Research rapidShot = new Research(new ResourceLocation(Constants.MOD_ID, "combat/rapidshot"), COMBAT).setParentResearch(multiShot)
                                      .setTranslatedName("Rapid Shot")
                                      .setTranslatedSubtitle("Please leave the bow with more than you brought in.")
-                                     .setIcon(ModItems.firearrow)
+                                     .setIcon(Items.SPECTRAL_ARROW)
                                      .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.ARCHERY_ID), 5)
                                      .addItemCost(Items.BOW, 18)
                                      .addEffect(DOUBLE_ARROWS, 3)

@@ -13,7 +13,7 @@
       "level": 4
     }
   ],
-  "icon": "minecolonies:firearrow",
+  "icon": "minecraft:spectral_arrow",
   "parentResearch": "minecolonies:combat/piercingshot",
   "requirements": [
     {

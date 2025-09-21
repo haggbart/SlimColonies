@@ -22,8 +22,6 @@ public final class ModItems
     public static Item ancientTome;
     public static Item scimitar;
     public static Item scepterLumberjack;
-    public static Item pharaoscepter;
-    public static Item firearrow;
     public static Item questLog;
     public static Item scepterBeekeeper;
     public static Item mistletoe;

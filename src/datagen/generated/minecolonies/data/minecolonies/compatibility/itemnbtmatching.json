@@ -1118,9 +1118,6 @@
     "item": "minecolonies:feta_cheese"
   },
   {
-    "item": "minecolonies:firearrow"
-  },
-  {
     "item": "minecolonies:fish_dinner"
   },
   {
@@ -1250,17 +1247,6 @@
   },
   {
     "item": "minecolonies:pepper_hummus"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:pharaoscepter"
   },
   {
     "item": "minecolonies:pierogi"

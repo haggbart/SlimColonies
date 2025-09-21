@@ -74,8 +74,6 @@ public final class ModItemsInitializer
         ModItems.clipboard = new ItemClipboard(new Item.Properties());
         ModItems.compost = new ItemCompost(new Item.Properties());
         ModItems.resourceScroll = new ItemResourceScroll(new Item.Properties());
-        ModItems.pharaoscepter = new ItemPharaoScepter(new Item.Properties());
-        ModItems.firearrow = new ItemFireArrow(new Item.Properties());
         ModItems.scepterBeekeeper = new ItemScepterBeekeeper(new Item.Properties());
         ModItems.mistletoe = new ItemMistletoe(new Item.Properties());
         ModItems.spear = new ItemSpear(new Item.Properties());
@@ -255,8 +253,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "resourcescroll"), ModItems.resourceScroll);
         registry.register(new ResourceLocation(Constants.MOD_ID, SCIMITAR_NAME), ModItems.scimitar);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "pharaoscepter"), ModItems.pharaoscepter);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "firearrow"), ModItems.firearrow);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
         registry.register(new ResourceLocation(Constants.MOD_ID, "mistletoe"), ModItems.mistletoe);
         registry.register(new ResourceLocation(Constants.MOD_ID, "spear"), ModItems.spear);

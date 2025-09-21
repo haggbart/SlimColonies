@@ -12,7 +12,6 @@ import com.minecolonies.core.client.model.*;
 import com.minecolonies.core.client.model.ScarecrowModel;
 import com.minecolonies.core.client.render.*;
 import com.minecolonies.core.client.render.mobs.RenderMercenary;
-import com.minecolonies.core.client.render.projectile.FireArrowRenderer;
 import com.minecolonies.core.client.render.projectile.RendererSpear;
 import com.minecolonies.core.client.render.worldevent.ColonyBlueprintRenderer;
 import net.minecraft.client.RecipeBookCategories;
@@ -237,7 +236,6 @@ public class ClientRegistryHandler
         event.registerEntityRenderer(ModEntities.CITIZEN, RenderBipedCitizen::new);
         event.registerEntityRenderer(ModEntities.VISITOR, RenderBipedCitizen::new);
         event.registerEntityRenderer(ModEntities.FISHHOOK, RenderFishHook::new);
-        event.registerEntityRenderer(ModEntities.FIREARROW, FireArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.SPEAR, RendererSpear::new);
 
         event.registerEntityRenderer(ModEntities.MC_NORMAL_ARROW, TippableArrowRenderer::new);
