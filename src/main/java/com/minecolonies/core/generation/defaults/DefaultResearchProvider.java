@@ -134,7 +134,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(USE_TOTEM).setTranslatedName("Undertaker gains the ability to use Totems of Undying to assist in Resurrection"));
         effects.add(new ResearchEffect(RECIPE_MODE).setTranslatedName("Add the option to select recipes based on Warehouse stock"));
         effects.add(new ResearchEffect(BUILDER_MODE).setTranslatedName("Add the option to select different build-modes for your builders"));
-        effects.add(new ResearchEffect(SOFT_SHOES).setTranslatedName("Farmers will no longer trample crops"));
         effects.add(new ResearchEffect(FISH_TREASURE).setTranslatedName("Fishers can find treasure outside the ocean"));
         effects.add(new ResearchEffect(NETHER_LOG).setTranslatedName("Adds expedition log to Nether Mine"));
         effects.add(new ResearchEffect(TELESCOPE).setTranslatedName("Farther rallying banner range"));
@@ -1372,15 +1371,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
           .addEffect(FARMING, 5)
           .addToList(r);
 
-        // Primary Research #2
-        final Research softShoes = new Research(new ResourceLocation(Constants.MOD_ID, "technology/softshoes"), TECH).setTranslatedName("Soft Shoes")
-        .setTranslatedSubtitle("Tiptoe through the tulips.")
-        .setSortOrder(2)
-        .setIcon(Items.LEATHER_BOOTS)
-        .addItemCost(Items.WHITE_WOOL, 16)
-        .addItemCost(Items.FEATHER, 16)
-        .addEffect(SOFT_SHOES, 1)
-        .addToList(r);
 
         // Primary Research #3
         final Research moreScrolls = new Research(new ResourceLocation(Constants.MOD_ID, "technology/morescrolls"), TECH).setTranslatedName("More Scrolls")

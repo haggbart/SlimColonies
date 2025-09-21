@@ -95,7 +95,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
 
-import static com.minecolonies.api.research.util.ResearchConstants.SOFT_SHOES;
 import static com.minecolonies.api.util.constant.ColonyManagerConstants.NO_COLONY_ID;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_COLONY_ID;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_EVENT_ID;
@@ -796,23 +795,6 @@ public class EventHandler
         }
     }
 
-    /**
-     * Gets called when farmland is trampled
-     *
-     * @param event the event to handle
-     */
-    @SubscribeEvent
-    public static void onCropTrample(BlockEvent.FarmlandTrampleEvent event)
-    {
-        if (!event.getLevel().isClientSide()
-              && event.getEntity() instanceof AbstractEntityCitizen
-              && ((AbstractEntityCitizen) event.getEntity()).getCitizenJobHandler().getColonyJob() instanceof JobFarmer
-              && ((AbstractEntityCitizen) event.getEntity()).getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(SOFT_SHOES) > 0
-        )
-        {
-            event.setCanceled(true);
-        }
-    }
 
     /**
      * Gets called when a Hoglin, Pig, Piglin, Villager, or ZombieVillager gets converted to something else.

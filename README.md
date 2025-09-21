@@ -14,9 +14,10 @@ For players who want the automation and assistance of colonies without the city 
 - [x] Simplified happiness system
 - [x] Removed unnecessary quests
 - [x] Removed raid system
+- [x] Removed disease system
+- [x] Removed trample prevention research (Soft Shoes)
 
 ### 📋 Planned Simplifications
-- [ ] Remove disease system
 - [ ] Simplify death/resurrection to basic respawning
 - [ ] Clean research tree of complex mechanics
 
