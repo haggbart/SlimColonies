@@ -135,7 +135,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
           InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(user.getInventoryCitizen(),
             ModEquipmentTypes.sword.get(),
             0,
-            user.getCitizenData().getWorkBuilding().getMaxEquipmentLevel());
+            Integer.MAX_VALUE);
 
         if (weaponSlot != -1)
         {

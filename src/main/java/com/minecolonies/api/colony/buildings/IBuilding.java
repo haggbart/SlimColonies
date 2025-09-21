@@ -33,16 +33,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static com.minecolonies.api.util.constant.EquipmentLevelConstants.BASIC_TOOL_LEVEL;
-import static com.minecolonies.api.util.constant.EquipmentLevelConstants.TOOL_LEVEL_MAXIMUM;
 import static com.minecolonies.api.util.constant.Suppression.GENERIC_WILDCARD;
 
 public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildingModule>, IRequestResolverProvider, IRequester, ISchematicProvider
 {
-    /**
-     * Minimal level to ask for wood tools. (WOOD_HUT_LEVEL + 1 == stone)
-     */
-    int WOOD_HUT_LEVEL = 0;
 
     /**
      * Getter for the custom name of a building.
@@ -431,23 +425,6 @@ public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildin
      */
     boolean isItemStackInRequest(@Nullable ItemStack stack);
 
-    /**
-     * Get the max equipment level useable by the worker.
-     *
-     * @return the integer.
-     */
-    default int getMaxEquipmentLevel()
-    {
-        if (getBuildingLevel() >= getMaxBuildingLevel())
-        {
-            return TOOL_LEVEL_MAXIMUM;
-        }
-        else if (getBuildingLevel() <= WOOD_HUT_LEVEL)
-        {
-            return BASIC_TOOL_LEVEL;
-        }
-        return getBuildingLevel() - WOOD_HUT_LEVEL;
-    }
 
     /**
      * Check if this building is sufficiently built to be able to assign workers.

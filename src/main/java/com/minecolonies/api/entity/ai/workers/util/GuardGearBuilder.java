@@ -20,6 +20,21 @@ public final class GuardGearBuilder
     }
 
     /**
+     * Build a list of armor for the guard.
+     *
+     * @return the new list.
+     */
+    public static List<GuardGear> buildGearForLevel()
+    {
+        final List<GuardGear> armorList = new ArrayList<>();
+        armorList.add(new GuardGear(ModEquipmentTypes.boots.get(), EquipmentSlot.FEET));
+        armorList.add(new GuardGear(ModEquipmentTypes.chestplate.get(), EquipmentSlot.CHEST));
+        armorList.add(new GuardGear(ModEquipmentTypes.helmet.get(), EquipmentSlot.HEAD));
+        armorList.add(new GuardGear(ModEquipmentTypes.leggings.get(), EquipmentSlot.LEGS));
+        return armorList;
+    }
+
+    /**
      * Build the gear for a certain armor level and level range.
      *
      * @param minArmorLevel      the min armor level.
@@ -28,17 +43,13 @@ public final class GuardGearBuilder
      * @param buildingLevelRange the building level range.
      * @return the list of items.
      */
+    @Deprecated
     public static List<GuardGear> buildGearForLevel(
       final int minArmorLevel,
       final int maxArmorLevel,
       final Tuple<Integer, Integer> levelRange,
       final Tuple<Integer, Integer> buildingLevelRange)
     {
-        final List<GuardGear> armorList = new ArrayList<>();
-        armorList.add(new GuardGear(ModEquipmentTypes.boots.get(), EquipmentSlot.FEET, minArmorLevel, maxArmorLevel, levelRange, buildingLevelRange));
-        armorList.add(new GuardGear(ModEquipmentTypes.chestplate.get(), EquipmentSlot.CHEST, minArmorLevel, maxArmorLevel, levelRange, buildingLevelRange));
-        armorList.add(new GuardGear(ModEquipmentTypes.helmet.get(), EquipmentSlot.HEAD, minArmorLevel, maxArmorLevel, levelRange, buildingLevelRange));
-        armorList.add(new GuardGear(ModEquipmentTypes.leggings.get(), EquipmentSlot.LEGS, minArmorLevel, maxArmorLevel, levelRange, buildingLevelRange));
-        return armorList;
+        return buildGearForLevel();
     }
 }

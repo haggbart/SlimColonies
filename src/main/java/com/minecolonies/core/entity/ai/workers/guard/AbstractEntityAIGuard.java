@@ -603,7 +603,7 @@ public abstract class AbstractEntityAIGuard<J extends AbstractJobGuard<J>, B ext
     {
         for (final EquipmentTypeEntry toolType : toolsNeeded)
         {
-            if (!InventoryUtils.hasItemHandlerEquipmentWithLevel(getInventory(), toolType, 0, buildingGuards.getMaxEquipmentLevel()))
+            if (!InventoryUtils.hasItemHandlerEquipmentWithLevel(getInventory(), toolType, 0, Integer.MAX_VALUE))
             {
                 return false;
             }

@@ -342,7 +342,7 @@ public class EntityAICombatTraining extends AbstractEntityAITraining<JobCombatTr
             return false;
         }
 
-        final int weaponSlot = InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(getInventory(), ModEquipmentTypes.sword.get(), 0, building.getMaxEquipmentLevel());
+        final int weaponSlot = InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(getInventory(), ModEquipmentTypes.sword.get(), 0, Integer.MAX_VALUE);
         if (weaponSlot != -1)
         {
             CitizenItemUtils.setHeldItem(worker, InteractionHand.MAIN_HAND, weaponSlot);

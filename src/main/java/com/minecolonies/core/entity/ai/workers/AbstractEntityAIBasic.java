@@ -71,7 +71,6 @@ import static com.minecolonies.api.colony.requestsystem.requestable.deliveryman.
 import static com.minecolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
 import static com.minecolonies.api.util.constant.CitizenConstants.*;
 import static com.minecolonies.api.util.constant.Constants.*;
-import static com.minecolonies.api.util.constant.EquipmentLevelConstants.TOOL_LEVEL_WOOD_OR_GOLD;
 import static com.minecolonies.api.util.constant.SchematicTagConstants.TAG_WORK;
 import static com.minecolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST;
 import static com.minecolonies.api.util.constant.TranslationConstants.WORKER_AI_EXCEPTION;
@@ -966,7 +965,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
      */
     public boolean checkForToolOrWeapon(@NotNull final EquipmentTypeEntry toolType)
     {
-        final boolean needTool = checkForToolOrWeapon(toolType, TOOL_LEVEL_WOOD_OR_GOLD);
+        final boolean needTool = checkForToolOrWeapon(toolType, 0);
         if (needTool)
         {
             worker.getCitizenData().setJobStatus(JobStatus.STUCK);
@@ -984,18 +983,18 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
           building.getOpenRequestsOfTypeFiltered(
             worker.getCitizenData(),
             TypeToken.of(Tool.class),
-            r -> r.getRequest().getEquipmentType().equals(toolType) && r.getRequest().getMinLevel() >= minimalLevel);
+            r -> r.getRequest().getEquipmentType().equals(toolType));
         final ImmutableList<IRequest<? extends Tool>> completedToolRequests =
           building.getCompletedRequestsOfTypeFiltered(
             worker.getCitizenData(),
             TypeToken.of(Tool.class),
-            r -> r.getRequest().getEquipmentType().equals(toolType) && r.getRequest().getMinLevel() >= minimalLevel);
+            r -> r.getRequest().getEquipmentType().equals(toolType));
 
         if (checkForNeededTool(toolType, minimalLevel))
         {
             if (openToolRequests.isEmpty() && completedToolRequests.isEmpty())
             {
-                final Tool request = new Tool(toolType, minimalLevel, building.getMaxEquipmentLevel() < minimalLevel ? minimalLevel : building.getMaxEquipmentLevel());
+                final Tool request = new Tool(toolType, 0, Integer.MAX_VALUE);
                 worker.getCitizenData().createRequest(request);
             }
             delay = 0;
@@ -1024,24 +1023,13 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
           building.getCompletedRequestsOfTypeFiltered(
             worker.getCitizenData(),
             TypeToken.of(Tool.class),
-            r -> r.getRequest().getEquipmentType().equals(toolType) && r.getRequest().getMinLevel() >= minLevel);
+            r -> r.getRequest().getEquipmentType().equals(toolType));
 
-        final List<IRequest<? extends Tool>> actualOpen = new ArrayList<>();
-        for (final IRequest<? extends Tool> req : openToolRequests)
-        {
-            if (req.getRequest().getMinLevel() < minLevel || req.getRequest().getMaxLevel() < maxLevel)
-            {
-                worker.getCitizenColonyHandler().getColonyOrRegister().getRequestManager().updateRequestState(req.getId(), RequestState.CANCELLED);
-            }
-            else
-            {
-                actualOpen.add(req);
-            }
-        }
+        final List<IRequest<? extends Tool>> actualOpen = new ArrayList<>(openToolRequests);
 
         if (actualOpen.isEmpty() && completedToolRequests.isEmpty())
         {
-            final Tool request = new Tool(toolType, minLevel, maxLevel);
+            final Tool request = new Tool(toolType, 0, Integer.MAX_VALUE);
             worker.getCitizenData().createRequestAsync(request);
         }
     }
@@ -1084,7 +1072,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
      */
     private boolean checkForNeededTool(@NotNull final EquipmentTypeEntry toolType, final int minimalLevel)
     {
-        final int maxToolLevel = worker.getCitizenColonyHandler().getWorkBuilding().getMaxEquipmentLevel();
+        final int maxToolLevel = Integer.MAX_VALUE;
         final InventoryCitizen inventory = worker.getInventoryCitizen();
         if (InventoryUtils.isEquipmentInItemHandler(inventory, toolType, minimalLevel, maxToolLevel))
         {
@@ -1106,7 +1094,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
     {
         if (building != null)
         {
-            final Predicate<ItemStack> toolPredicate = stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType, minimalLevel, building.getMaxEquipmentLevel());
+            final Predicate<ItemStack> toolPredicate = stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType, minimalLevel, Integer.MAX_VALUE);
             for (final BlockPos pos : building.getContainers())
             {
                 final BlockEntity entity = world.getBlockEntity(pos);
@@ -1129,7 +1117,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
                 }
                 else if (entity instanceof ChestBlockEntity)
                 {
-                    if (retrieveToolInTileEntity(building.getTileEntity(), toolType, minimalLevel, building.getMaxEquipmentLevel()))
+                    if (retrieveToolInTileEntity(building.getTileEntity(), toolType, minimalLevel, Integer.MAX_VALUE))
                     {
                         return true;
                     }
@@ -1371,7 +1359,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
     {
         final EquipmentTypeEntry toolType = WorkerUtil.getBestToolForBlock(target, target.getDestroySpeed(world, pos), building, world, pos);
         final int required = WorkerUtil.getCorrectHarvestLevelForBlock(target);
-        if (building.getMaxEquipmentLevel() < required && worker.getCitizenData() != null)
+        if (Integer.MAX_VALUE < required && worker.getCitizenData() != null)
         {
             worker.getCitizenData().triggerInteraction(new PosBasedInteraction(
               Component.translatable(RequestSystemTranslationConstants.REQUEST_SYSTEM_BUILDING_LEVEL_TOO_LOW,
@@ -1424,7 +1412,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
         int bestSlot = TOOL_NOT_FOUND;
         int bestLevel = Integer.MAX_VALUE;
         @NotNull final InventoryCitizen inventory = worker.getInventoryCitizen();
-        final int maxToolLevel = worker.getCitizenColonyHandler().getWorkBuilding().getMaxEquipmentLevel();
+        final int maxToolLevel = Integer.MAX_VALUE;
 
         for (int i = 0; i < worker.getInventoryCitizen().getSlots(); i++)
         {

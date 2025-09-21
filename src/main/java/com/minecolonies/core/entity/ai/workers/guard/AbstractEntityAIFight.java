@@ -125,7 +125,7 @@ public abstract class AbstractEntityAIFight<J extends AbstractJobGuard<J>, B ext
             InventoryFunctions.matchFirstInProviderWithSimpleAction(worker,
               stack -> !ItemStackUtils.isEmpty(stack)
                          && ItemStackUtils.doesItemServeAsWeapon(stack)
-                         && ItemStackUtils.hasEquipmentLevel(stack, tool, 0, building.getMaxEquipmentLevel()),
+                         && ItemStackUtils.hasEquipmentLevel(stack, tool, 0, Integer.MAX_VALUE),
               itemStack -> CitizenItemUtils.setMainHeldItem(worker, itemStack));
         }
 
@@ -148,10 +148,6 @@ public abstract class AbstractEntityAIFight<J extends AbstractJobGuard<J>, B ext
     {
         for (final GuardGear item : itemsNeeded.get(building.getBuildingLevelEquivalent() - 1))
         {
-            if (!(building.getBuildingLevelEquivalent() >= item.getMinBuildingLevelRequired() && building.getBuildingLevelEquivalent() <= item.getMaxBuildingLevelRequired()))
-            {
-                continue;
-            }
             if (item.getItemNeeded() == ModEquipmentTypes.shield.get()
                   && worker.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(SHIELD_USAGE) <= 0)
             {
@@ -187,7 +183,7 @@ public abstract class AbstractEntityAIFight<J extends AbstractJobGuard<J>, B ext
                   item.getType()))))
                 {
                     // create request
-                    checkForToolOrWeaponAsync(item.getItemNeeded(), item.getMinArmorLevel(), item.getMaxArmorLevel());
+                    checkForToolOrWeaponAsync(item.getItemNeeded(), 0, Integer.MAX_VALUE);
                 }
             }
             else
@@ -283,7 +279,6 @@ public abstract class AbstractEntityAIFight<J extends AbstractJobGuard<J>, B ext
             }
             if (item.getType().isArmor())
             {
-                if (building.getBuildingLevelEquivalent() >= item.getMinBuildingLevelRequired() && building.getBuildingLevelEquivalent() <= item.getMaxBuildingLevelRequired())
                 {
                     int slot = InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(worker.getInventoryCitizen(), item);
                     if (slot <= -1)
@@ -307,8 +302,7 @@ public abstract class AbstractEntityAIFight<J extends AbstractJobGuard<J>, B ext
             }
             else
             {
-                if (ItemStackUtils.isEmpty(worker.getItemBySlot(item.getType())) && building.getBuildingLevelEquivalent() >= item.getMinBuildingLevelRequired()
-                      && building.getBuildingLevelEquivalent() <= item.getMaxBuildingLevelRequired())
+                if (ItemStackUtils.isEmpty(worker.getItemBySlot(item.getType())))
                 {
                     equipment.add(item.getType());
                     int slot = InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(worker.getInventoryCitizen(), item);
