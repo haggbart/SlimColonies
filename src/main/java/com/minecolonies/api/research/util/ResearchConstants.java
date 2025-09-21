@@ -166,8 +166,6 @@ public final class ResearchConstants
     public static final ResourceLocation SOFT_SHOES        = new ResourceLocation(Constants.MOD_ID, "effects/softshoesunlock");
     public static final ResourceLocation FISH_TREASURE     = new ResourceLocation(Constants.MOD_ID, "effects/fishingtreasure");
     public static final ResourceLocation NETHER_LOG        = new ResourceLocation(Constants.MOD_ID, "effects/netherexpeditionlog");
-    public static final ResourceLocation MASKS             = new ResourceLocation(Constants.MOD_ID, "effects/masks");
-    public static final ResourceLocation VACCINES          = new ResourceLocation(Constants.MOD_ID, "effects/vaccines");
     public static final ResourceLocation TELESCOPE          = new ResourceLocation(Constants.MOD_ID, "effects/telescope");
     public static final ResourceLocation STANDARD          = new ResourceLocation(Constants.MOD_ID, "effects/standard");
     public static final ResourceLocation MORE_AIR          = new ResourceLocation(Constants.MOD_ID, "effects/air");

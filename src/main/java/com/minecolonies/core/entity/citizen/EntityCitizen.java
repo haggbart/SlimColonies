@@ -47,7 +47,6 @@ import com.minecolonies.core.colony.jobs.AbstractJobGuard;
 import com.minecolonies.core.colony.jobs.JobKnight;
 import com.minecolonies.core.colony.jobs.JobNetherWorker;
 import com.minecolonies.core.colony.jobs.JobRanger;
-import com.minecolonies.core.datalistener.DiseasesListener;
 import com.minecolonies.core.debug.DebugPlayerManager;
 import com.minecolonies.core.entity.ai.minimal.*;
 import com.minecolonies.core.entity.ai.workers.AbstractEntityAIBasic;
@@ -456,7 +455,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             return InteractionResult.PASS;
         }
 
-        final boolean isSick = (getCitizenData() != null && getCitizenData().getCitizenDiseaseHandler().isSick()) || (citizenDataView != null
+        final boolean isSick = (getCitizenData() != null && getCitizenData().getCitizenDiseaseHandler().isHurt()) || (citizenDataView != null
             && citizenDataView.getVisibleStatus() == VisibleCitizenStatus.SICK);
         if (usedStack.getItem() == Items.GOLDEN_APPLE && isSick)
         {
@@ -484,14 +483,14 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
 
             if (!level.isClientSide())
             {
-                if (getCitizenData().getCitizenDiseaseHandler().setDisease(DiseasesListener.getRandomDisease(getRandom()))) {
-                    playSound(SoundEvents.VILLAGER_HURT, 1.0f, (float) SoundUtils.getRandomPitch(getRandom()));
-                    getCitizenData().markDirty(20);
+                // Damage citizen with poisonous food
+                hurt(level.damageSources().source(DamageSourceKeys.DEFAULT, this), 2.0f);
+                playSound(SoundEvents.VILLAGER_HURT, 1.0f, (float) SoundUtils.getRandomPitch(getRandom()));
+                getCitizenData().markDirty(20);
 
-                    MessageUtils.format(MESSAGE_INTERACTION_POISON, this.getCitizenData().getName())
-                            .withPriority(MessagePriority.DANGER)
-                            .sendTo(player);
-                }
+                MessageUtils.format(MESSAGE_INTERACTION_POISON, this.getCitizenData().getName())
+                        .withPriority(MessagePriority.DANGER)
+                        .sendTo(player);
             }
 
             interactionCooldown = 20 * 20;
@@ -876,7 +875,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
      */
     private void checkHeal()
     {
-        if (getCitizenData() != null && getHealth() < (getCitizenData().getCitizenDiseaseHandler().isSick() ? getMaxHealth() / 3 : getMaxHealth()) && getLastHurtByMob() == null)
+        if (getCitizenData() != null && getHealth() < (getCitizenData().getCitizenDiseaseHandler().isHurt() ? getMaxHealth() / 3 : getMaxHealth()) && getLastHurtByMob() == null)
         {
             final double limitDecrease = getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(SATLIMIT);
             final double citizenSaturation = citizenData.getSaturation();
@@ -1492,10 +1491,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             super.doPush(entity);
         }
 
-        if (!level.isClientSide && getCitizenData() != null && entity instanceof AbstractEntityCitizen otherCitizen && otherCitizen.getCitizenData() != null)
-        {
-            getCitizenData().getCitizenDiseaseHandler().onCollission(otherCitizen.getCitizenData());
-        }
+        // Disease transmission on collision removed
     }
 
     @Override
