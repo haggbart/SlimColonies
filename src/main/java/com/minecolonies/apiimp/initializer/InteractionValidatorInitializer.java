@@ -343,7 +343,6 @@ public class InteractionValidatorInitializer
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_RAINING),
           citizen -> citizen.getEntity().isPresent() && citizen.getEntity().get().getCommandSenderWorld().isRaining()
-                       && !citizen.getColony().getRaiderManager().isRaided()
                        && !citizen.getCitizenMournHandler().isMourning());
 
 
@@ -351,8 +350,7 @@ public class InteractionValidatorInitializer
           citizen -> citizen.getEntity().isPresent() && citizen.isAsleep());
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING),
-          citizen -> citizen.getEntity().isPresent() && citizen.getCitizenMournHandler().isMourning()
-                     && !citizen.getColony().getRaiderManager().isRaided());
+          citizen -> citizen.getEntity().isPresent() && citizen.getCitizenMournHandler().isMourning());
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(CITIZEN_NOT_GUARD_NEAR_WORK),
           citizen -> citizen.getWorkBuilding() != null && !citizen.getWorkBuilding().isGuardBuildingNear());

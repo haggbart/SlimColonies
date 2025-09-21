@@ -64,10 +64,7 @@ public class CommandColonyInfo implements IMCColonyOfficerCommand
             ChatFormatting.GREEN)), true);
         context.getSource().sendSuccess(() -> Component.literal(String.format(LAST_CONTACT_TEXT, colony.getLastContactInHours())), true);
 
-        if (!colony.getRaiderManager().canHaveRaiderEvents())
-        {
-            context.getSource().sendSuccess(() -> Component.literal(CANNOT_BE_RAIDED), true);
-        }
+        context.getSource().sendSuccess(() -> Component.literal("Raids are disabled in SlimColonies"), true);
 
         return 1;
     }

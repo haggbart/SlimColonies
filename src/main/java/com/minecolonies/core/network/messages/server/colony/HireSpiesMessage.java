@@ -35,12 +35,6 @@ public class HireSpiesMessage extends AbstractColonyServerMessage
             return;
         }
 
-        if (InventoryUtils.getItemCountInItemHandler(new InvWrapper(player.getInventory()), stack -> stack.getItem() == Items.GOLD_INGOT) >= SPIES_GOLD_COST)
-        {
-            InventoryUtils.reduceStackInItemHandler(new InvWrapper(player.getInventory()), new ItemStack(Items.GOLD_INGOT), SPIES_GOLD_COST);
-            colony.getRaiderManager().setSpiesEnabled(true);
-            colony.markDirty();
-        }
     }
 
     @Override

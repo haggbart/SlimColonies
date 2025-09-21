@@ -221,8 +221,7 @@ public class CitizenAI implements IStateAI
         if (CompatibilityUtils.getWorldFromCitizen(citizen).isRaining() && !shouldWorkWhileRaining() && !WorldUtil.isNetherType(citizen.level))
         {
             citizen.setVisibleStatusIfNone(BAD_WEATHER);
-            if (!citizen.getCitizenData().getColony().getRaiderManager().isRaided()
-                  && !citizen.getCitizenData().getCitizenMournHandler().isMourning())
+            if (!citizen.getCitizenData().getCitizenMournHandler().isMourning())
             {
                 citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_RAINING), ChatPriority.HIDDEN));
             }

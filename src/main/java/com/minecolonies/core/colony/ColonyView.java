@@ -350,11 +350,7 @@ public final class ColonyView implements IColonyView
             buf.writeBoolean(false);
         }
 
-        buf.writeInt(colony.getRaiderManager().getLastSpawnPoints().size());
-        for (final BlockPos block : colony.getRaiderManager().getLastSpawnPoints())
-        {
-            buf.writeBlockPos(block);
-        }
+        buf.writeInt(0);
 
         buf.writeInt(colony.getTeamColonyColor().ordinal());
 
@@ -365,8 +361,8 @@ public final class ColonyView implements IColonyView
         buf.writeLong(colony.getMercenaryUseTime());
 
         buf.writeUtf(colony.getStructurePack());
-        buf.writeBoolean(colony.getRaiderManager().isRaided());
-        buf.writeBoolean(colony.getRaiderManager().areSpiesEnabled());
+        buf.writeBoolean(false);
+        buf.writeBoolean(false);
 
         if (hasNewSubscribers || colony.isTicketedChunksDirty())
         {
@@ -1397,11 +1393,6 @@ public final class ColonyView implements IColonyView
         return null;
     }
 
-    @Override
-    public IRaiderManager getRaiderManager()
-    {
-        return null;
-    }
 
     @Override
     public IEventManager getEventManager()

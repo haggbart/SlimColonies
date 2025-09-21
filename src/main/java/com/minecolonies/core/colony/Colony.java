@@ -149,10 +149,6 @@ public class Colony implements IColony
      */
     private final IVisitorManager visitorManager = new VisitorManager(this);
 
-    /**
-     * Raid manager of the colony (disabled).
-     */
-    private final IRaiderManager raidManager = new DisabledRaiderManager();
 
     /**
      * Event manager of the colony.
@@ -1553,11 +1549,6 @@ public class Colony implements IColony
      *
      * @return the barbManager.
      */
-    @Override
-    public IRaiderManager getRaiderManager()
-    {
-        return raidManager;
-    }
 
     @Override
     public IEventManager getEventManager()
