@@ -455,7 +455,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             return InteractionResult.PASS;
         }
 
-        final boolean isSick = (getCitizenData() != null && getCitizenData().getCitizenDiseaseHandler().isHurt()) || (citizenDataView != null
+        final boolean isSick = (getCitizenData() != null && getCitizenData().getCitizenInjuryHandler().isHurt()) || (citizenDataView != null
             && citizenDataView.getVisibleStatus() == VisibleCitizenStatus.SICK);
         if (usedStack.getItem() == Items.GOLDEN_APPLE && isSick)
         {
@@ -466,7 +466,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             {
                 if (getRandom().nextInt(3) == 0)
                 {
-                    getCitizenData().getCitizenDiseaseHandler().cure();
+                    getCitizenData().getCitizenInjuryHandler().cure();
                     playSound(SoundEvents.PLAYER_LEVELUP, 1.0f, (float) SoundUtils.getRandomPitch(getRandom()));
                     Network.getNetwork().sendToTrackingEntity(new VanillaParticleMessage(getX(), getY(), getZ(), ParticleTypes.HAPPY_VILLAGER), this);
                 }
@@ -875,7 +875,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
      */
     private void checkHeal()
     {
-        if (getCitizenData() != null && getHealth() < (getCitizenData().getCitizenDiseaseHandler().isHurt() ? getMaxHealth() / 3 : getMaxHealth()) && getLastHurtByMob() == null)
+        if (getCitizenData() != null && getHealth() < (getCitizenData().getCitizenInjuryHandler().isHurt() ? getMaxHealth() / 3 : getMaxHealth()) && getLastHurtByMob() == null)
         {
             final double limitDecrease = getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(SATLIMIT);
             final double citizenSaturation = citizenData.getSaturation();

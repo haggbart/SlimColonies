@@ -36,7 +36,7 @@ import static com.minecolonies.api.util.constant.CitizenConstants.*;
 import static com.minecolonies.api.util.constant.Constants.DEFAULT_SPEED;
 import static com.minecolonies.api.util.constant.TranslationConstants.*;
 import static com.minecolonies.core.entity.ai.minimal.EntityAIEatTask.RESTAURANT_LIMIT;
-import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseaseHandler.SEEK_DOCTOR_HEALTH;
+import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler.SEEK_DOCTOR_HEALTH;
 
 /**
  * High level AI for citizens, which switches between all the different AI states like sleeping,working,fleeing etc
@@ -68,7 +68,7 @@ public class CitizenAI implements IStateAI
         minimalAI.add(new EntityAICitizenAvoidEntity(citizen, Monster.class, (float) DISTANCE_OF_ENTITY_AVOID, LATER_RUN_SPEED_AVOID, INITIAL_RUN_SPEED_AVOID));
         minimalAI.add(new EntityAIEatTask(citizen));
         minimalAI.add(new EntityAICitizenWander(citizen, DEFAULT_SPEED));
-        minimalAI.add(new EntityAISickTask(citizen));
+        minimalAI.add(new EntityAIInjuredTask(citizen));
         minimalAI.add(new EntityAISleep(citizen));
         minimalAI.add(new EntityAIMournCitizen(citizen, DEFAULT_SPEED));
     }
@@ -137,7 +137,7 @@ public class CitizenAI implements IStateAI
             }
 
             // Sick
-            if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt() && guardJob.canAIBeInterrupted())
+            if (citizen.getCitizenData().getCitizenInjuryHandler().isHurt() && guardJob.canAIBeInterrupted())
             {
                 citizen.getCitizenData().setVisibleStatus(VisibleCitizenStatus.SICK);
                 return CitizenAIState.SICK;
@@ -147,7 +147,7 @@ public class CitizenAI implements IStateAI
         }
 
         // Sick at hospital
-        if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt() && citizen.getCitizenData().getCitizenDiseaseHandler().sleepsAtHospital())
+        if (citizen.getCitizenData().getCitizenInjuryHandler().isHurt() && citizen.getCitizenData().getCitizenInjuryHandler().sleepsAtHospital())
         {
             citizen.getCitizenData().setVisibleStatus(VisibleCitizenStatus.SICK);
             return CitizenAIState.SICK;
@@ -173,7 +173,7 @@ public class CitizenAI implements IStateAI
         {
             if (citizen.getCitizenSleepHandler().isAsleep())
             {
-                if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
+                if (citizen.getCitizenData().getCitizenInjuryHandler().isHurt())
                 {
                     final BlockPos bedPos = citizen.getCitizenSleepHandler().getBedLocation();
                     if (bedPos == null || bedPos.distSqr(citizen.blockPosition()) > 5)
@@ -189,7 +189,7 @@ public class CitizenAI implements IStateAI
         }
 
         // Sick
-        if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt() || citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
+        if (citizen.getCitizenData().getCitizenInjuryHandler().isHurt() || citizen.getCitizenData().getCitizenInjuryHandler().isHurt())
         {
             citizen.getCitizenData().setVisibleStatus(VisibleCitizenStatus.SICK);
             return CitizenAIState.SICK;
@@ -274,7 +274,7 @@ public class CitizenAI implements IStateAI
             return false;
         }
 
-        if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt() && citizen.getCitizenSleepHandler().isAsleep())
+        if (citizen.getCitizenData().getCitizenInjuryHandler().isHurt() && citizen.getCitizenSleepHandler().isAsleep())
         {
             return false;
         }

@@ -57,9 +57,7 @@ public final class StatisticsConstants
     // Cook
     public static final String FOOD_SERVED_DETAIL = "food_served_detail";
 
-    // Hospital
-    public static final String DISEASES_TREATED = "diseases_treated";
-    public static final String NUM_DISEASES_TREATED = "num_diseases_treated";
+    // Hospital (now tracks citizens healed from injuries)
 
     // Florist
     public static final String FLOWERS_PICKED = "flowers_picked";

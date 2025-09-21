@@ -146,7 +146,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
      */
     ICitizenSkillHandler getCitizenSkillHandler();
 
-    ICitizenDiseaseHandler getCitizenDiseaseHandler();
+    ICitizenInjuryHandler getCitizenInjuryHandler();
 
     /**
      * Schedule restart and cleanup.
@@ -435,11 +435,6 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
     @Nullable
     BlockPos getHomePosition();
 
-    /**
-     * Personal citizen disease modifier.
-     * @return the disease modifier.
-     */
-    double getDiseaseModifier();
 
     /**
      * The Handler for the citizens food.

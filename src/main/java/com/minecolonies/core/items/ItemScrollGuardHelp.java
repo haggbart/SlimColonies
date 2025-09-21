@@ -99,7 +99,7 @@ public class ItemScrollGuardHelp extends AbstractItemScroll
 
                 if (citizenData.getEntity().isPresent())
                 {
-                    if (citizenData.getCitizenDiseaseHandler().isHurt())
+                    if (citizenData.getCitizenInjuryHandler().isHurt())
                     {
                         continue;
                     }

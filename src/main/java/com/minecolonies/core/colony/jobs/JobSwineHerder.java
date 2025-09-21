@@ -50,11 +50,6 @@ public class JobSwineHerder extends AbstractJob<EntityAIWorkSwineHerder, JobSwin
         return ModModelTypes.PIG_FARMER_ID;
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        return 2;
-    }
 
     @Override
     public boolean onStackPickUp(@NotNull final ItemStack pickedUpStack)

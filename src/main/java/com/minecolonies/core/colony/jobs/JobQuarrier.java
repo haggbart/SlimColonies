@@ -52,11 +52,6 @@ public class JobQuarrier extends AbstractJobStructure<EntityAIQuarrier, JobQuarr
         return new EntityAIQuarrier(this);
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        return 2;
-    }
 
     /**
      * Finds the quarry our miner is assigned to

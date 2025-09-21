@@ -141,15 +141,6 @@ public class CitizenFoodHandler implements ICitizenFoodHandler
         compound.put(TAG_LAST_FOODS, lastEatenFoodsNBT);
     }
 
-    @Override
-    public double getDiseaseModifier(final double baseModifier)
-    {
-        if (lastEatenFoods.size() < FOOD_QUEUE_SIZE || baseModifier == 0)
-        {
-            return baseModifier;
-        }
-        return baseModifier * 0.5 * Math.min(2.5, 5.0/getFoodHappinessStats().diversity());
-    }
 
     @Override
     public ImmutableList<Item> getLastEatenFoods()

@@ -416,11 +416,6 @@ public abstract class AbstractJob<AI extends AbstractAISkeleton<J> & ITickingSta
         return true;
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        return 1;
-    }
 
     @Override
     public void onRemoval()

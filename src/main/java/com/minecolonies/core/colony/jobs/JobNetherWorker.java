@@ -116,15 +116,6 @@ public class JobNetherWorker extends AbstractJobCrafter<EntityAIWorkNether, JobN
         return ModModelTypes.NETHERWORKER_ID;
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        if(this.getCitizen().getEntity().isPresent() && this.getCitizen().getEntity().get().isInvisible())
-        {
-            return 0;
-        }
-        return super.getDiseaseModifier();
-    }
 
     @Override
     public int getIdleSeverity(boolean isDemand)

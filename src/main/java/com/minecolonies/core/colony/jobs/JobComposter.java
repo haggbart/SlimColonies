@@ -39,10 +39,4 @@ public class JobComposter extends AbstractJob<EntityAIWorkComposter, JobComposte
         return new EntityAIWorkComposter(this);
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        final int skill = getCitizen().getCitizenSkillHandler().getLevel(getCitizen().getWorkBuilding().getModule(BuildingModules.COMPOSTER_WORK).getPrimarySkill());
-        return (int) ((100 - skill)/25.0);
-    }
 }

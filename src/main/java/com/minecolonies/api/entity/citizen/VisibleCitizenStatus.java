@@ -34,7 +34,7 @@ public class VisibleCitizenStatus
     public final static VisibleCitizenStatus SLEEP       =
       new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/bed_icon.png"), MESSAGE_INFO_CITIZEN_STATUS_SLEEPING, true);
     public final static VisibleCitizenStatus SICK        =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/small_sick_icon.png"), MESSAGE_INFO_CITIZEN_STATUS_SICK, true);
+      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/small_sick_icon.png"), MESSAGE_INFO_CITIZEN_STATUS_INJURED, true);
     public final static VisibleCitizenStatus WORKING     =
       new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/working.png"), MESSAGE_INFO_CITIZEN_STATUS_WORKING);
 
