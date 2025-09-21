@@ -168,12 +168,6 @@ public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildin
      */
     void setCustomBuildingName(String name);
 
-    /**
-     * Check if the building should be gathered by the dman.
-     *
-     * @return true if so.
-     */
-    boolean canBeGathered();
 
     /**
      * Requests an upgrade for the current building.
@@ -217,17 +211,6 @@ public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildin
      */
     void onUpgradeComplete(int newLevel);
 
-    /**
-     * Whether this building has a guard building nearby
-     *
-     * @return true/false
-     */
-    boolean isGuardBuildingNear();
-
-    /**
-     * Requests recalculation of whether this building has a guard building nearby
-     */
-    void resetGuardBuildingNear();
 
     /**
      * Check if the worker requires a certain amount of that item and the alreadykept list contains it.

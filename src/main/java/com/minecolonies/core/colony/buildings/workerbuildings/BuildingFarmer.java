@@ -109,13 +109,6 @@ public class BuildingFarmer extends AbstractBuilding
         keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.axe.get(), TOOL_LEVEL_WOOD_OR_GOLD, getMaxEquipmentLevel()), new Tuple<>(1, true));
     }
 
-    @Override
-    public boolean canBeGathered()
-    {
-        // Normal crafters are only gatherable when they have a task, i.e. while producing stuff.
-        // BUT, the farmer both gathers and crafts things now, like the lumberjack
-        return true;
-    }
 
     /**
      * Override this method if you want to keep an amount of items in inventory. When the inventory is full, everything get's dumped into the building chest. But you can use this

@@ -764,19 +764,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         return false;
     }
 
-    @Override
-    public void guardBuildingChangedAt(final IBuilding guardBuilding, final int newLevel)
-    {
-        final int claimRadius = guardBuilding.getClaimRadius(Math.max(guardBuilding.getBuildingLevel(), newLevel));
-        final BoundingBox guardedRegion = BlockPosUtil.getChunkAlignedBB(guardBuilding.getPosition(), claimRadius);
-        for (final IBuilding building : getBuildings().values())
-        {
-            if (guardedRegion.isInside(building.getPosition()))
-            {
-                building.resetGuardBuildingNear();
-            }
-        }
-    }
 
     @Override
     public void setTownHall(@Nullable final ITownHall building)

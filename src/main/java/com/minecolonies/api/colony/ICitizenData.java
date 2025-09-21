@@ -253,10 +253,6 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
      */
     void applyResearchEffects();
 
-    /**
-     * Triggered when the citizen is going to sleep
-     */
-    void onGoSleep();
 
     /**
      * Sets the next position to respawn at

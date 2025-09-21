@@ -178,11 +178,6 @@ public class BuildingWareHouse extends AbstractBuilding implements IWareHouse
         markDirty();
     }
 
-    @Override
-    public boolean canBeGathered()
-    {
-        return false;
-    }
 
     /**
      * BuildWarehouse View.

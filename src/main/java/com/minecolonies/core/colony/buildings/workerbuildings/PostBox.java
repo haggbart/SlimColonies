@@ -61,11 +61,6 @@ public class PostBox extends AbstractBuilding implements IRSComponent
         return 0;
     }
 
-    @Override
-    public boolean canBeGathered()
-    {
-        return false;
-    }
 
     @Override
     public void onRequestedRequestCancelled(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)

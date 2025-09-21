@@ -69,14 +69,12 @@ public class BuildingGuardTower extends AbstractBuildingGuards
     public void onDestroyed()
     {
         super.onDestroyed();
-        colony.getBuildingManager().guardBuildingChangedAt(this, 0);
     }
 
     @Override
     public void onUpgradeComplete(final int newLevel)
     {
         super.onUpgradeComplete(newLevel);
-        colony.getBuildingManager().guardBuildingChangedAt(this, newLevel);
     }
 
     @Override

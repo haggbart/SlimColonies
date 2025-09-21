@@ -343,11 +343,6 @@ public class InteractionValidatorInitializer
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING),
           citizen -> citizen.getEntity().isPresent() && citizen.getCitizenMournHandler().isMourning());
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(CITIZEN_NOT_GUARD_NEAR_WORK),
-          citizen -> citizen.getWorkBuilding() != null && !citizen.getWorkBuilding().isGuardBuildingNear());
-
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(CITIZEN_NOT_GUARD_NEAR_HOME),
-          citizen -> citizen.getHomeBuilding() != null && !citizen.getHomeBuilding().isGuardBuildingNear());
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(QUARRY_MINER_NO_QUARRY),
           citizen -> citizen.getJob() instanceof JobQuarrier &&  ((JobQuarrier) citizen.getJob()).findQuarry() == null);

@@ -212,11 +212,6 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
         }
     }
 
-    @Override
-    public boolean canBeGathered()
-    {
-        return false;
-    }
 
     /**
      * ClientSide representation of the building.

@@ -166,7 +166,6 @@ public class CitizenAI implements IStateAI
 
             if (citizen.getCitizenSleepHandler().shouldGoSleep())
             {
-                citizen.getCitizenData().onGoSleep();
                 return CitizenAIState.SLEEP;
             }
         }

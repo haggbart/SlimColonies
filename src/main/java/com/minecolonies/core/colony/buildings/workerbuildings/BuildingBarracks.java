@@ -6,7 +6,6 @@ import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.api.util.InventoryUtils;
 import com.minecolonies.api.util.NBTUtils;
 import com.minecolonies.core.client.gui.huts.WindowBarracksBuilding;
 import com.minecolonies.core.colony.buildings.AbstractBuilding;
@@ -16,13 +15,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -31,6 +27,7 @@ import java.util.stream.Collectors;
 
 import static com.minecolonies.api.util.constant.Constants.STACKSIZE;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_POS;
+
 
 /**
  * Building class for the Barracks.
@@ -101,14 +98,12 @@ public class BuildingBarracks extends AbstractBuilding
             }
         }
         super.onDestroyed();
-        colony.getBuildingManager().guardBuildingChangedAt(this, 0);
     }
 
     @Override
     public void onUpgradeComplete(final int newLevel)
     {
         super.onUpgradeComplete(newLevel);
-        colony.getBuildingManager().guardBuildingChangedAt(this, newLevel);
     }
 
     @Override
@@ -130,16 +125,6 @@ public class BuildingBarracks extends AbstractBuilding
         }
     }
 
-    @Override
-    public void onColonyTick(@NotNull final IColony colony)
-    {
-        super.onColonyTick(colony);
-        if (colony.getWorld().isClientSide)
-        {
-            return;
-        }
-
-    }
 
     @Override
     public int getClaimRadius(final int newLevel)
@@ -149,15 +134,15 @@ public class BuildingBarracks extends AbstractBuilding
             return 0;
         }
 
-        // tower levels must all be 4+ to get increased radius of 3 
+        // tower levels must all be 4+ to get increased radius of 3
         int barracksClaimRadius = 3;
         for (final BlockPos pos : towers)
         {
             final IBuilding building = colony.getBuildingManager().getBuilding(pos);
             if (building != null)
             {
-                if (building.getBuildingLevel() < 4) 
-                { 
+                if (building.getBuildingLevel() < 4)
+                {
                     barracksClaimRadius = 2;
                     break;
                 }

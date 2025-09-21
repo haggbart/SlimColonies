@@ -133,15 +133,6 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
      */
     private String customName = "";
 
-    /**
-     * Whether a guard building is near
-     */
-    private boolean guardBuildingNear = false;
-
-    /**
-     * Whether we need to recheck if a guard building is near
-     */
-    private boolean recheckGuardBuildingNear = true;
 
     /**
      * Made to check if the building has to update the server/client.
@@ -782,16 +773,6 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
           });
     }
 
-    /**
-     * Check if the building should be gathered by the dman.
-     *
-     * @return true if so.
-     */
-    @Override
-    public boolean canBeGathered()
-    {
-        return true;
-    }
 
     /**
      * Requests an upgrade for the current building.
@@ -963,7 +944,6 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
         {
             ChunkDataHelper.claimBuildingChunks(colony, true, this.getID(), this.getClaimRadius(newLevel), getCorners());
         }
-        recheckGuardBuildingNear = true;
 
         ConstructionTapeHelper.removeConstructionTape(getCorners(), colony.getWorld());
         calculateCorners();
@@ -1027,22 +1007,6 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
         }
     }
 
-    @Override
-    public boolean isGuardBuildingNear()
-    {
-        if (recheckGuardBuildingNear)
-        {
-            guardBuildingNear = colony.getBuildingManager().hasGuardBuildingNear(this);
-            recheckGuardBuildingNear = false;
-        }
-        return guardBuildingNear;
-    }
-
-    @Override
-    public void resetGuardBuildingNear()
-    {
-        this.recheckGuardBuildingNear = true;
-    }
 
     //------------------------- Starting Required Tools/Item handling -------------------------//
 

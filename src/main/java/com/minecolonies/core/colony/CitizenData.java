@@ -35,9 +35,11 @@ import com.minecolonies.core.colony.buildings.modules.LivingBuildingModule;
 import com.minecolonies.core.colony.interactionhandling.QuestDeliveryInteraction;
 import com.minecolonies.core.colony.interactionhandling.QuestDialogueInteraction;
 import com.minecolonies.core.colony.interactionhandling.ServerCitizenInteraction;
-import com.minecolonies.core.colony.interactionhandling.StandardInteraction;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
-import com.minecolonies.core.entity.citizen.citizenhandlers.*;
+import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseaseHandler;
+import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenFoodHandler;
+import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenMournHandler;
+import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenSkillHandler;
 import com.minecolonies.core.network.messages.client.colony.ColonyViewCitizenViewMessage;
 import com.minecolonies.core.util.AttributeModifierUtils;
 import net.minecraft.core.BlockPos;
@@ -69,7 +71,7 @@ import static com.minecolonies.api.util.constant.Constants.TICKS_SECOND;
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_ID;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_NAME;
-import static com.minecolonies.api.util.constant.TranslationConstants.*;
+import static com.minecolonies.api.util.constant.TranslationConstants.MESSAGE_CITIZEN_RESTARTED;
 
 /**
  * Extra data for Citizens.
@@ -257,10 +259,6 @@ public class CitizenData implements ICitizenData
      */
     private final Random random = new Random();
 
-    /**
-     * Chance to complain for having no guard nearby
-     */
-    private static final int NO_GUARD_COMPLAIN_CHANCE = 10;
 
     /**
      * Consumed position to determine the next position to respawn at.
@@ -1838,29 +1836,6 @@ public class CitizenData implements ICitizenData
             {
                 ((EntityCitizen) citizen).setMaxAir(600);
             }
-        }
-    }
-
-    @Override
-    public void onGoSleep()
-    {
-        if (random.nextInt(NO_GUARD_COMPLAIN_CHANCE) != 0)
-        {
-            return;
-        }
-
-        if (job != null && job.getWorkBuilding() != null && !job.getWorkBuilding().isGuardBuildingNear() && !WorldUtil.isPeaceful(colony.getWorld()))
-        {
-            triggerInteraction(new StandardInteraction(Component.translatable(CITIZEN_NOT_GUARD_NEAR_WORK),
-                Component.translatable(CITIZEN_NOT_GUARD_NEAR_WORK),
-                ChatPriority.CHITCHAT));
-        }
-
-        if (homeBuilding != null && !homeBuilding.isGuardBuildingNear() && !WorldUtil.isPeaceful(colony.getWorld()))
-        {
-            triggerInteraction(new StandardInteraction(Component.translatable(CITIZEN_NOT_GUARD_NEAR_HOME),
-                Component.translatable(CITIZEN_NOT_GUARD_NEAR_HOME),
-                ChatPriority.CHITCHAT));
         }
     }
 

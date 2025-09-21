@@ -253,13 +253,6 @@ public interface IRegisteredStructureManager
      */
     boolean hasGuardBuildingNear(IBuilding building);
 
-    /**
-     * Event once a guard building changed at a certain level.
-     *
-     * @param guardBuilding the guard building.
-     * @param newLevel      the level of it.
-     */
-    void guardBuildingChangedAt(IBuilding guardBuilding, int newLevel);
 
     /**
      * Set the townhall building.
