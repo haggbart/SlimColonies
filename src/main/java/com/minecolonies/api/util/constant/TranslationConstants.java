@@ -748,7 +748,7 @@ public final class TranslationConstants
     @NonNls
     public static final String MESSAGE_INFO_CITIZEN_STATUS_SLEEPING = "com.minecolonies.gui.visiblestatus.sleep";
     @NonNls
-    public static final String MESSAGE_INFO_CITIZEN_STATUS_SICK     = "com.minecolonies.gui.visiblestatus.sick";
+    public static final String MESSAGE_INFO_CITIZEN_STATUS_INJURED  = "com.minecolonies.gui.visiblestatus.injured";
     @NonNls
     public static final String MESSAGE_INFO_CITIZEN_STATUS_WORKING  = "com.minecolonies.gui.visiblestatus.working";
 

@@ -1120,7 +1120,7 @@
     "com.minecolonies.gui.visiblestatus.mourn": "Mourning citizen death",
     "com.minecolonies.gui.visiblestatus.rain": "Bad weather",
     "com.minecolonies.gui.visiblestatus.sleep": "Sleeping zZZ",
-    "com.minecolonies.gui.visiblestatus.sick": "Injured",
+    "com.minecolonies.gui.visiblestatus.injured": "Injured",
     "com.minecolonies.gui.visiblestatus.working": "Working",
     "com.minecolonies.gui.visiblestatus.archer_combat": "Fighting",
     "com.minecolonies.gui.visiblestatus.archer_uni": "Shooting",
