@@ -22,8 +22,6 @@ public final class ModItems
     public static Item ancientTome;
     public static Item scimitar;
     public static Item scepterLumberjack;
-    public static Item pharaoscepter;
-    public static Item firearrow;
     public static Item questLog;
     public static Item scepterBeekeeper;
     public static Item mistletoe;
@@ -33,15 +31,6 @@ public final class ModItems
     public static Item compost;
     public static Item resourceScroll;
 
-    public static Item pirateHelmet_1;
-    public static Item pirateChest_1;
-    public static Item pirateLegs_1;
-    public static Item pirateBoots_1;
-
-    public static Item pirateHelmet_2;
-    public static Item pirateChest_2;
-    public static Item pirateLegs_2;
-    public static Item pirateBoots_2;
 
     public static Item plateArmorHelmet;
     public static Item plateArmorChest;

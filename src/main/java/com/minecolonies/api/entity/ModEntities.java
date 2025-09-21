@@ -25,8 +25,6 @@ public class ModEntities
 
     public static EntityType<MinecoloniesMinecart> MINECART;
 
-    public static EntityType<? extends AbstractArrow> FIREARROW;
-
     public static EntityType<? extends Arrow> MC_NORMAL_ARROW;
 
     public static EntityType<? extends ThrownPotion> DRUID_POTION;

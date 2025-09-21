@@ -90,18 +90,7 @@ public final class ModCreativeTabs
 
           output.accept(ModItems.ancientTome);
           output.accept(ModItems.scimitar);
-          output.accept(ModItems.pharaoscepter);
-          output.accept(ModItems.firearrow);
           output.accept(ModItems.spear);
-          output.accept(ModItems.pirateHelmet_1);
-          output.accept(ModItems.pirateChest_1);
-          output.accept(ModItems.pirateLegs_1);
-          output.accept(ModItems.pirateBoots_1);
-
-          output.accept(ModItems.pirateHelmet_2);
-          output.accept(ModItems.pirateChest_2);
-          output.accept(ModItems.pirateLegs_2);
-          output.accept(ModItems.pirateBoots_2);
 
           output.accept(ModItems.plateArmorHelmet);
           output.accept(ModItems.plateArmorChest);
