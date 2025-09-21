@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:heart_of_the_sea",
-      "quantity": 1
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/fishingtreasure",

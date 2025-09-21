@@ -10,7 +10,7 @@ import com.minecolonies.api.colony.buildings.registry.IBuildingRegistry;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.research.*;
-import com.minecolonies.api.research.IResearchCost;
+// Removed IResearchCost import - no longer needed
 import com.minecolonies.api.research.IResearchEffect;
 import com.minecolonies.api.research.util.ResearchState;
 import com.minecolonies.api.util.InventoryUtils;
@@ -81,10 +81,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
      */
     private final Text undoText = new Text();
 
-    /**
-     * The undo cost icons, if one is present.
-     */
-    private ItemIcon[] undoCostIcons = new ItemIcon[0];
+    // Research no longer uses undo cost icons
 
     /**
      * The current state of a research button's display status.
@@ -145,13 +142,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         {
             parent.removeChild(undoButton);
         }
-        for (ItemIcon icon : undoCostIcons)
-        {
-            if (parent.getChildren().contains(icon))
-            {
-                parent.removeChild(icon);
-            }
-        }
+        // Research no longer displays undo cost icons
         if (parent.getChildren().contains(undoText))
         {
             parent.removeChild(undoText);
@@ -647,20 +638,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                       .append(research.getResearchRequirements().get(txt).getDesc());
                 }
             }
-            for (final IResearchCost cost : research.getCostList())
-            {
-                hoverPaneBuilder.paragraphBreak()
-                  .append(Component.literal(" - "))
-                  .append(Component.translatable("com.minecolonies.coremod.research.limit.requirement", cost.getCount(), cost.getTranslatedName()));
-                if (research.hasEnoughResources(new InvWrapper(Minecraft.getInstance().player.getInventory())))
-                {
-                    hoverPaneBuilder.color(COLOR_TEXT_FULFILLED);
-                }
-                else
-                {
-                    hoverPaneBuilder.color(COLOR_TEXT_UNFULFILLED);
-                }
-            }
+            // Research no longer displays item costs in hover tooltip
             if (research.getDepth() > building.getBuildingLevel() && building.getBuildingLevel() != building.getBuildingMaxLevel() && branchType != ResearchBranchType.UNLOCKABLES)
             {
                 hoverPaneBuilder.paragraphBreak().append(Component.translatable("com.minecolonies.coremod.research.requirement.university.level", Math.min(research.getDepth(), this.building.getBuildingMaxLevel())));
@@ -775,24 +753,8 @@ public class WindowResearchTree extends AbstractWindowSkeleton
      */
     private void drawUndoCompleteButton(final Button parent)
     {
-        final List<ItemStorage> costList = IGlobalResearchTree.getInstance().getResearchResetCosts();
-        undoCostIcons = new ItemIcon[costList.size()];
+        // Research reset no longer requires item costs - skip cost validation and display
         final List<ItemStorage> missingItems = new ArrayList<>();
-        for (int i = 0; i < costList.size(); i++)
-        {
-            final ItemStorage is = costList.get(i);
-            undoCostIcons[i] = new ItemIcon();
-            if (InventoryUtils.getItemCountInItemHandler(new InvWrapper(Minecraft.getInstance().player.getInventory()),
-              stack -> !ItemStackUtils.isEmpty(stack) && ItemStack.isSameItem(stack, is.getItemStack())) < is.getAmount())
-            {
-                missingItems.add(is);
-            }
-            undoCostIcons[i].setItem(is.getItemStack());
-            undoCostIcons[i].setPosition(parent.getX() + NAME_LABEL_WIDTH + DEFAULT_COST_SIZE * i,
-              parent.getY() + TEXT_Y_OFFSET + (GRADIENT_HEIGHT - NAME_LABEL_HEIGHT) / 2);
-            undoCostIcons[i].setSize(DEFAULT_COST_SIZE, DEFAULT_COST_SIZE);
-            parent.getParent().addChild(undoCostIcons[0]);
-        }
         undoButton.setSize(BUTTON_LENGTH, BUTTON_HEIGHT);
         undoButton.setPosition(parent.getX(), parent.getY() + TEXT_Y_OFFSET + (GRADIENT_HEIGHT - NAME_LABEL_HEIGHT) / 2);
         final AbstractTextBuilder.TooltipBuilder undoTipBuilder = PaneBuilders.tooltipBuilder().hoverPane(undoButton)
@@ -846,7 +808,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
 
         final List<BuildingAlternatesResearchRequirement> alternateBuildingRequirements = new ArrayList<>();
         final List<BuildingResearchRequirement> buildingRequirements = new ArrayList<>();
-        final List<IResearchCost> itemRequirements = research.getCostList();
+        // Research no longer requires item costs - remove cost list
 
         research.getResearchRequirements().forEach(requirement -> {
             if (requirement instanceof BuildingAlternatesResearchRequirement alternateBuildingRequirement)
@@ -907,24 +869,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             storageXOffset += COST_OFFSET;
         }
 
-        storageXOffset = COST_OFFSET;
-        for (final IResearchCost cost : itemRequirements)
-        {
-            final RotatingItemIcon icon = new RotatingItemIcon();
-            icon.setPosition(offsetX + RESEARCH_WIDTH - storageXOffset - INITIAL_X_OFFSET, offsetY + NAME_LABEL_HEIGHT + TEXT_Y_OFFSET);
-            icon.setSize(DEFAULT_COST_SIZE, DEFAULT_COST_SIZE);
-            if (cost.getItems().size() == 0)
-            {
-                Log.getLogger().error("Found Empty list requirement for: " + research.getId() + ". Please report this to the developers.");
-                continue;
-            }
-            icon.setItems(cost.getItems().stream().map(ItemStack::new).map(stack -> {
-                stack.setCount(cost.getCount());
-                return stack;
-            }).toList());
-            view.addChild(icon);
-            storageXOffset += COST_OFFSET;
-        }
+        // Research no longer displays item costs - removed cost display loop
     }
 
     /**

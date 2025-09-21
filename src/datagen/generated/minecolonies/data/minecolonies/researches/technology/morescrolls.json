@@ -1,22 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:paper",
-      "quantity": 64
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecolonies:ancienttome",
-      "quantity": 1
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:lapis_lazuli",
-      "quantity": 64
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/morescrollsunlock",

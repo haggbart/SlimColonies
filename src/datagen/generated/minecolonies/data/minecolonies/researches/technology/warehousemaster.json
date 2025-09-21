@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecolonies:blockminecoloniesrack",
-      "quantity": 3
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/recipemodeunlock",

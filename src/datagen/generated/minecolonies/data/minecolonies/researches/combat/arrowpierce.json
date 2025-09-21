@@ -1,17 +1,5 @@
 {
   "branch": "minecolonies:combat",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:arrow",
-      "quantity": 64
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:redstone",
-      "quantity": 64
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/piercingarrowsunlock",

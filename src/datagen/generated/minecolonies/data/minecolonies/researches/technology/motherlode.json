@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_tag",
-      "quantity": 64,
-      "tag": "minecraft:diamond_ores"
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/moreoresmultiplier",

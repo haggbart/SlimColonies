@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:lava_bucket",
-      "quantity": 4
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/blockhutsmeltery",

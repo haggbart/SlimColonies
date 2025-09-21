@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:string",
-      "quantity": 16
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/blockhutfletcher",

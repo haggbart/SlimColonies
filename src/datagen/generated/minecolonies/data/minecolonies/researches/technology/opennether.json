@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:gilded_blackstone",
-      "quantity": 3
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/blockhutnetherworker",

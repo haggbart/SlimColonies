@@ -1,17 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:ender_eye",
-      "quantity": 16
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecolonies:ancienttome",
-      "quantity": 1
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/netherexpeditionlog",

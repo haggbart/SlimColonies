@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:combat",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:bow",
-      "quantity": 27
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/doublearrowsmultiplier",

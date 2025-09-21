@@ -167,31 +167,15 @@ public class GlobalResearch implements IGlobalResearch
     @Override
     public boolean hasEnoughResources(final IItemHandler inventory)
     {
-        if (costList.isEmpty())
-        {
-            return true;
-        }
-
-        for (final IResearchCost ingredient : costList)
-        {
-            int totalCount = 0;
-            for (final Item cost : ingredient.getItems())
-            {
-                final int count = InventoryUtils.getItemCountInItemHandler(inventory, stack -> stack.getItem().equals(cost));
-                totalCount += count;
-            }
-            if (totalCount < ingredient.getCount())
-            {
-                return false;
-            }
-        }
+        // Research no longer requires item costs - always return true
         return true;
     }
 
     @Override
     public List<IResearchCost> getCostList()
     {
-        return ImmutableList.copyOf(costList);
+        // Research no longer requires item costs - return empty list
+        return ImmutableList.of();
     }
 
     @Override
@@ -310,7 +294,7 @@ public class GlobalResearch implements IGlobalResearch
     @Override
     public void addCost(final IResearchCost cost)
     {
-        costList.add(cost);
+        // Research no longer requires item costs - ignore cost additions
     }
 
     public void addEffect(final IResearchEffect effect)
