@@ -940,7 +940,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
         }
         return InventoryFunctions.matchFirstInProviderWithAction(
           entity,
-          stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType, minLevel, maxLevel),
+          stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType),
           this::takeItemStackFromProvider
         );
     }
@@ -1094,7 +1094,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
     {
         if (building != null)
         {
-            final Predicate<ItemStack> toolPredicate = stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType, minimalLevel, Integer.MAX_VALUE);
+            final Predicate<ItemStack> toolPredicate = stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType);
             for (final BlockPos pos : building.getContainers())
             {
                 final BlockEntity entity = world.getBlockEntity(pos);

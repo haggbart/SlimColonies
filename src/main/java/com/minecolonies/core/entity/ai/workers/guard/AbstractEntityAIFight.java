@@ -125,7 +125,7 @@ public abstract class AbstractEntityAIFight<J extends AbstractJobGuard<J>, B ext
             InventoryFunctions.matchFirstInProviderWithSimpleAction(worker,
               stack -> !ItemStackUtils.isEmpty(stack)
                          && ItemStackUtils.doesItemServeAsWeapon(stack)
-                         && ItemStackUtils.hasEquipmentLevel(stack, tool, 0, Integer.MAX_VALUE),
+                         && ItemStackUtils.hasEquipmentLevel(stack, tool),
               itemStack -> CitizenItemUtils.setMainHeldItem(worker, itemStack));
         }
 

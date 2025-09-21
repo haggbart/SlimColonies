@@ -10,7 +10,6 @@ import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.equipment.ModEquipmentTypes;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
 import com.minecolonies.api.items.CheckedNbtKey;
-import com.minecolonies.api.items.IMinecoloniesFoodItem;
 import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.items.ModTags;
 import com.minecolonies.core.items.ItemBowlFood;
@@ -214,15 +213,13 @@ public final class ItemStackUtils
     }
 
     /**
-     * Verifies if there is equipment with an acceptable level in a worker's inventory.
+     * Verifies if there is equipment of the specified type.
      *
      * @param stack        the stack to test.
-     * @param equipmentType     the type of equipment needed
-     * @param minimalLevel the minimum level for the equipment to find.
-     * @param maximumLevel the maximum level for the equipment to find.
+     * @param equipmentType the type of equipment needed
      * @return true if equipment is acceptable
      */
-    public static boolean hasEquipmentLevel(@Nullable final ItemStack stack, final EquipmentTypeEntry equipmentType, final int minimalLevel, final int maximumLevel)
+    public static boolean hasEquipmentLevel(@Nullable final ItemStack stack, final EquipmentTypeEntry equipmentType)
     {
         if (isEmpty(stack))
         {
@@ -980,4 +977,3 @@ public final class ItemStackUtils
         }
     }
 }
-

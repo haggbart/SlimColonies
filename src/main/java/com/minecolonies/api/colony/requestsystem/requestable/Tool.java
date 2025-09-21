@@ -178,7 +178,7 @@ public class Tool implements IDeliverable
 
         try
         {
-            return ItemStackUtils.hasEquipmentLevel(stack, getEquipmentType(), getMinLevel(), getMaxLevel());
+            return ItemStackUtils.hasEquipmentLevel(stack, getEquipmentType());
         }
         catch (final Exception e)
         {

@@ -158,7 +158,7 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
      */
     private boolean checkIfShouldKeepEquipment(final EquipmentTypeEntry type, final ItemStack stack, final List<ItemStorage> localAlreadyKept)
     {
-        if (ItemStackUtils.hasEquipmentLevel(stack, type, 0, Integer.MAX_VALUE))
+        if (ItemStackUtils.hasEquipmentLevel(stack, type))
         {
             for (final ItemStorage storage : localAlreadyKept)
             {

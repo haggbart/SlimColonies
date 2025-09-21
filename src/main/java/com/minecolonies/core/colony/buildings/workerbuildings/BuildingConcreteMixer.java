@@ -58,7 +58,7 @@ public class BuildingConcreteMixer extends AbstractBuilding
     public BuildingConcreteMixer(final IColony c, final BlockPos l)
     {
         super(c, l);
-        keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.pickaxe.get(), 0, Integer.MAX_VALUE), new Tuple<>(1, true));
+        keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.pickaxe.get()), new Tuple<>(1, true));
     }
 
     @Override

@@ -1049,7 +1049,7 @@ public class InventoryUtils
       final int minimalLevel,
       final int maximumLevel)
     {
-        return hasItemInProvider(provider, (ItemStack stack) -> ItemStackUtils.hasEquipmentLevel(stack, equipmentType, minimalLevel, maximumLevel));
+        return hasItemInProvider(provider, (ItemStack stack) -> ItemStackUtils.hasEquipmentLevel(stack, equipmentType));
     }
 
     /**
@@ -1587,7 +1587,7 @@ public class InventoryUtils
       final int minimalLevel,
       final int maximumLevel)
     {
-        return hasItemInItemHandler(itemHandler, (ItemStack stack) -> ItemStackUtils.hasEquipmentLevel(stack, equipmentType, minimalLevel, maximumLevel));
+        return hasItemInItemHandler(itemHandler, (ItemStack stack) -> ItemStackUtils.hasEquipmentLevel(stack, equipmentType));
     }
 
     /**
@@ -1616,7 +1616,7 @@ public class InventoryUtils
       @NotNull final IItemHandler itemHandler, @NotNull final EquipmentTypeEntry equipmentType, final int minimalLevel,
       final int maximumLevel)
     {
-        return findFirstSlotInItemHandlerWith(itemHandler, (ItemStack stack) -> ItemStackUtils.hasEquipmentLevel(stack, equipmentType, minimalLevel, maximumLevel));
+        return findFirstSlotInItemHandlerWith(itemHandler, (ItemStack stack) -> ItemStackUtils.hasEquipmentLevel(stack, equipmentType));
     }
 
     /**
