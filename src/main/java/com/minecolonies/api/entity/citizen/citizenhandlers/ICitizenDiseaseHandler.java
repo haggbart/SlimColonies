@@ -29,13 +29,6 @@ public interface ICitizenDiseaseHandler
      */
     void read(final CompoundTag compound);
 
-    /**
-     * Get the current disease, if any (always null now).
-     *
-     * @return the disease instance.
-     */
-    @Nullable
-    Object getDisease();
 
     /**
      * Cure/treat the citizen.

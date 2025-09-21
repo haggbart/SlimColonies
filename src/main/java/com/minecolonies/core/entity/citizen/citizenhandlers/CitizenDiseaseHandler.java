@@ -5,7 +5,7 @@ import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenDiseaseHandle
 import com.minecolonies.core.colony.jobs.AbstractJobGuard;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import org.jetbrains.annotations.Nullable;
+
 import static com.minecolonies.api.util.constant.CitizenConstants.*;
 import static com.minecolonies.api.util.constant.StatisticsConstants.CITIZENS_HEALED;
 
@@ -91,13 +91,6 @@ public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
         this.immunityTicks = treatmentTag.getInt(TAG_IMMUNITY);
     }
 
-    @Override
-    @Nullable
-    public Object getDisease()
-    {
-        // Disease system removed - always return null
-        return null;
-    }
 
     @Override
     public void cure()

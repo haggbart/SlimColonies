@@ -34,8 +34,8 @@ import net.minecraft.world.level.block.state.properties.BedPart;
 import java.util.List;
 
 import static com.minecolonies.api.util.constant.GuardConstants.BASIC_VOLUME;
+import static com.minecolonies.api.util.constant.TranslationConstants.INJURED_NEED_TREATMENT;
 import static com.minecolonies.api.util.constant.TranslationConstants.NO_HOSPITAL;
-import static com.minecolonies.api.util.constant.TranslationConstants.WAITING_FOR_CURE;
 import static com.minecolonies.core.entity.ai.minimal.EntityAISickTask.DiseaseState.*;
 import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseaseHandler.SEEK_DOCTOR_HEALTH;
 
@@ -44,10 +44,6 @@ import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseas
  */
 public class EntityAISickTask implements IStateAI
 {
-    /**
-     * Min distance to hut before pathing to hospital.
-     */
-    private static final int MIN_DIST_TO_HUT = 5;
 
     /**
      * Min distance to hospital before trying to find a bed.
@@ -120,7 +116,7 @@ public class EntityAISickTask implements IStateAI
         this.citizen = citizen;
         this.citizenData = citizen.getCitizenData();
 
-        citizen.getCitizenAI().addTransition(new TickingTransition<>(CitizenAIState.SICK, this::isSick, () -> CHECK_FOR_CURE, 20));
+        citizen.getCitizenAI().addTransition(new TickingTransition<>(CitizenAIState.SICK, this::isHurt, () -> CHECK_FOR_CURE, 20));
         citizen.getCitizenAI().addTransition(new TickingTransition<>(CHECK_FOR_CURE, () -> true, this::checkForCure, 20));
         citizen.getCitizenAI().addTransition(new TickingTransition<>(WANDER, () -> true, this::wander, 200));
 
@@ -133,10 +129,9 @@ public class EntityAISickTask implements IStateAI
         citizen.getCitizenAI().addTransition(new TickingTransition<>(FIND_EMPTY_BED, () -> true, this::findEmptyBed, 20));
     }
 
-    private boolean isSick()
+    private boolean isHurt()
     {
-        if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt()
-            || citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
+        if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
         {
             reset();
             return true;
@@ -407,8 +402,8 @@ public class EntityAISickTask implements IStateAI
         }
         else if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
         {
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(WAITING_FOR_CURE),
-              Component.translatable(WAITING_FOR_CURE),
+            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(INJURED_NEED_TREATMENT),
+              Component.translatable(INJURED_NEED_TREATMENT),
               ChatPriority.BLOCKING));
         }
 
