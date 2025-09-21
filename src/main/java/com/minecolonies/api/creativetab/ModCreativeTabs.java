@@ -124,29 +124,6 @@ public final class ModCreativeTabs
           output.accept(ModItems.goldenBread);
           output.accept(ModItems.chorusBread);
 
-          safeAddSpawnEgg(output, ModEntities.CAMP_BARBARIAN);
-          safeAddSpawnEgg(output, ModEntities.CAMP_ARCHERBARBARIAN);
-          safeAddSpawnEgg(output, ModEntities.CAMP_CHIEFBARBARIAN);
-
-          safeAddSpawnEgg(output, ModEntities.CAMP_PIRATE);
-          safeAddSpawnEgg(output, ModEntities.CAMP_ARCHERPIRATE);
-          safeAddSpawnEgg(output, ModEntities.CAMP_CHIEFPIRATE);
-
-          safeAddSpawnEgg(output, ModEntities.CAMP_MUMMY);
-          safeAddSpawnEgg(output, ModEntities.CAMP_ARCHERMUMMY);
-          safeAddSpawnEgg(output, ModEntities.CAMP_PHARAO);
-
-          safeAddSpawnEgg(output, ModEntities.CAMP_SHIELDMAIDEN);
-          safeAddSpawnEgg(output, ModEntities.CAMP_NORSEMEN_ARCHER);
-          safeAddSpawnEgg(output, ModEntities.CAMP_NORSEMEN_CHIEF);
-
-          safeAddSpawnEgg(output, ModEntities.CAMP_AMAZON);
-          safeAddSpawnEgg(output, ModEntities.CAMP_AMAZONSPEARMAN);
-          safeAddSpawnEgg(output, ModEntities.CAMP_AMAZONCHIEF);
-
-          safeAddSpawnEgg(output, ModEntities.CAMP_DROWNED_PIRATE);
-          safeAddSpawnEgg(output, ModEntities.CAMP_DROWNED_ARCHERPIRATE);
-          safeAddSpawnEgg(output, ModEntities.CAMP_DROWNED_CHIEFPIRATE);
 
       }).build());
 

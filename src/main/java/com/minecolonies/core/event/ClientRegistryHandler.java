@@ -120,17 +120,7 @@ public class ClientRegistryHandler
 
     public static final ModelLayerLocation MERCENARY    = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "mercenary"), "mercenary");
 
-    public static final ModelLayerLocation MUMMY        = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "mummy"), "mummy");
-    public static final ModelLayerLocation ARCHER_MUMMY = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "archer_mummy"), "archer_mummy");
-    public static final ModelLayerLocation PHARAO       = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "pharao"), "pharao");
-
-    public static final ModelLayerLocation SHIELD_MAIDEN   = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "shield_maiden"), "shield_maiden");
-    public static final ModelLayerLocation NORSEMEN_ARCHER = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "norsemen_archer"), "norsemen_archer");
-    public static final ModelLayerLocation NORSEMEN_CHIEF  = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "norsemen_chief"), "norsemen_chief");
-
-    public static final ModelLayerLocation AMAZON       = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "amazon"), "amazon");
-    public static final ModelLayerLocation AMAZON_CHIEF = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "amazon_chief"), "amazon_chief");
-    public static final ModelLayerLocation AMAZON_SPEARMAN = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "amazon_spearman"), "amazon_spearman");
+    // All raider model layer locations removed for SlimColonies
 
     public static final ModelLayerLocation SCARECROW = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "scarecrow"), "scarecrow");
 

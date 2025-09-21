@@ -72,16 +72,6 @@ public class CommandColonyPrintStats implements IMCOPCommand
         context.getSource().sendSuccess(() -> literalAndRemember(String.format(LAST_CONTACT_TEXT, colony.getLastContactInHours())), false);
         context.getSource().sendSuccess(() -> literalAndRemember(IS_DELETABLE + !colony.canBeAutoDeleted()), false);
 
-        if (!colony.getRaiderManager().canHaveRaiderEvents())
-        {
-            context.getSource().sendSuccess(() -> literalAndRemember(CANNOT_BE_RAIDED), false);
-        }
-
-        final RaidManager.RaidHistory last = ((RaidManager) colony.getRaiderManager()).getLastRaid();
-        if (last != null)
-        {
-            context.getSource().sendSuccess(() -> literalAndRemember(last.toString()), false);
-        }
 
         if (!colony.getBuildingManager().getBuildings().isEmpty())
         {

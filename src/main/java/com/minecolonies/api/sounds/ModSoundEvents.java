@@ -103,8 +103,7 @@ public final class ModSoundEvents
         SOUND_EVENTS.register(SAW.getLocation().getPath(), () -> SAW);
 
 
-        SOUND_EVENTS.register(RaidSounds.DESERT_RAID.getLocation().getPath(), () -> RaidSounds.DESERT_RAID);
-        SOUND_EVENTS.register(RaidSounds.DESERT_RAID_WARNING.getLocation().getPath(), () -> RaidSounds.DESERT_RAID_WARNING);
+        // All raid sounds removed for SlimColonies
 
         SOUND_EVENTS.register(MercenarySounds.mercenaryAttack.getLocation().getPath(), () -> MercenarySounds.mercenaryAttack);
         SOUND_EVENTS.register(MercenarySounds.mercenaryCelebrate.getLocation().getPath(), () -> MercenarySounds.mercenaryCelebrate);

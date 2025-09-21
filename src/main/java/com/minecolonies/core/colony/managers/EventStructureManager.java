@@ -83,38 +83,8 @@ public class EventStructureManager implements IEventStructureManager
       final BlockPos targetSpawnPoint,
       final int eventID)
     {
-        if (eventManager.getEventByID(eventID) == null)
-        {
-            return false;
-        }
-
-        final Level world = colony.getWorld();
-
-        final int y = BlueprintTagUtils.getNumberOfGroundLevels(structure, 4) - 1;
-        final BlockPos spawnPos = targetSpawnPoint.below(y).above(structure.getPrimaryBlockOffset().getY());
-        final BlockPos zeroPos = spawnPos.subtract(structure.getPrimaryBlockOffset());
-        final BlockPos anchor = new BlockPos(zeroPos.getX() + structure.getSizeX() / 2, zeroPos.getY(), zeroPos.getZ() + structure.getSizeZ() / 2);
-
-        final Path outputPath = new File(".").toPath()
-          .resolve(BLUEPRINT_FOLDER)
-          .resolve(STRUCTURE_BACKUP_FOLDER)
-          .resolve(Integer.toString(colony.getID()))
-          .resolve(colony.getDimension().location().getNamespace() + colony.getDimension().location().getPath())
-                                  .resolve(anchor.toString() + ".blueprint");
-
-        final CompoundTag bp = BlueprintUtil.writeBlueprintToNBT(BlueprintUtil.createBlueprint(world, zeroPos, true,
-                structure.getSizeX(), structure.getSizeY(), structure.getSizeZ(), anchor.toString(), Optional.of(anchor)));
-
-        StructurePacks.storeBlueprint(STRUCTURE_BACKUP_FOLDER, bp, outputPath);
-
-        backupSchematics.put(anchor, eventID);
-
-        CreativeRaiderStructureHandler.loadAndPlaceStructure(world,
-          structure,
-          spawnPos,
-          true, colony.getID(), (IColonyRaidEvent) eventManager.getEventByID(eventID), null);
-
-        return true;
+        // Temporary structure spawning disabled - no raids in SlimColonies
+        return false;
     }
 
     @Override

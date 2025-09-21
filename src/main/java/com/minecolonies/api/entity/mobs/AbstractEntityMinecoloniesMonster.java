@@ -92,7 +92,7 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
         this.setPersistenceRequired();
         this.goalSelector = new CustomGoalSelector(this.goalSelector);
         this.targetSelector = new CustomGoalSelector(this.targetSelector);
-        this.xpReward = BARBARIAN_EXP_DROP;
+        this.xpReward = 5; // Default monster exp drop
         // Mob AI registry disabled for SlimColonies
     }
 
@@ -149,7 +149,7 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
     {
         super.playAmbientSound();
         final SoundEvent soundevent = this.getAmbientSound();
-        if (soundevent != null && level().random.nextInt(OUT_OF_ONE_HUNDRED) <= ONE)
+        if (soundevent != null && level().random.nextInt(100) <= 1)
         {
             this.playSound(soundevent, this.getSoundVolume(), this.getVoicePitch());
         }
@@ -237,7 +237,7 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
     {
         this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(baseDamage);
 
-        final double armor = difficulty * ARMOR;
+        final double armor = difficulty * 0.5; // Default armor multiplier
         this.getAttribute(Attributes.ARMOR).setBaseValue(armor);
 
         this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(baseHealth);
@@ -315,8 +315,8 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
                  .add(Attributes.ATTACK_DAMAGE)
                  .add(Attributes.MAX_HEALTH)
                  .add(Attributes.ARMOR)
-                 .add(Attributes.MOVEMENT_SPEED, MOVEMENT_SPEED)
-                 .add(Attributes.FOLLOW_RANGE, FOLLOW_RANGE * 2)
+                 .add(Attributes.MOVEMENT_SPEED, 0.23) // Default movement speed
+                 .add(Attributes.FOLLOW_RANGE, 32.0) // Default follow range
                  .add(Attributes.ATTACK_DAMAGE, Attributes.ATTACK_DAMAGE.getDefaultValue());
     }
 

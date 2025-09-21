@@ -156,7 +156,7 @@ public class PathfindingUtils
             }
         }
 
-        if (entity.isInWater() && !(entity instanceof AbstractDrownedEntityPirateRaider))
+        if (entity.isInWater())
         {
             while (!bs.getFluidState().isEmpty())
             {

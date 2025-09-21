@@ -13,7 +13,6 @@ public class ModEnchantInitializer
 {
     static
     {
-        ModEnchants.raiderDamage = ENCHANTMENTS.register("raider_damage_enchant", () -> new RaiderDamageEnchant(Enchantment.Rarity.VERY_RARE, new EquipmentSlot[] {EquipmentSlot.MAINHAND}));
     }
     /**
      * Init this.
