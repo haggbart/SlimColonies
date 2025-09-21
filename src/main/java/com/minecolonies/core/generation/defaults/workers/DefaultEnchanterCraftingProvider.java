@@ -195,7 +195,6 @@ public class DefaultEnchanterCraftingProvider extends CustomRecipeAndLootTablePr
                 .add(enchantedBook(Enchantments.SWEEPING_EDGE, 3).setWeight(15))
                 .add(enchantedBook(Enchantments.UNBREAKING, 3).setWeight(15))
                 .add(enchantedBook(Enchantments.BLOCK_FORTUNE, 1).setWeight(1))
-                .add(enchantedBook(ModEnchants.raiderDamage.get(), 1).setWeight(15))
         ));
 
         // building level 4
@@ -248,7 +247,6 @@ public class DefaultEnchanterCraftingProvider extends CustomRecipeAndLootTablePr
                 .add(enchantedBook(Enchantments.SWEEPING_EDGE, 3).setWeight(15))
                 .add(enchantedBook(Enchantments.UNBREAKING, 3).setWeight(15))
                 .add(enchantedBook(Enchantments.BLOCK_FORTUNE, 1).setWeight(1))
-                .add(enchantedBook(ModEnchants.raiderDamage.get(), 1).setWeight(15))
                 // plus new level 4 enchants
                 .add(enchantedBook(Enchantments.AQUA_AFFINITY, 1).setWeight(5))
                 .add(enchantedBook(Enchantments.BANE_OF_ARTHROPODS, 4).setWeight(5))
@@ -301,7 +299,6 @@ public class DefaultEnchanterCraftingProvider extends CustomRecipeAndLootTablePr
                 .add(enchantedBook(Enchantments.SMITE, 3).setWeight(15))
                 .add(enchantedBook(Enchantments.SWEEPING_EDGE, 3).setWeight(15))
                 .add(enchantedBook(Enchantments.UNBREAKING, 3).setWeight(15))
-                .add(enchantedBook(ModEnchants.raiderDamage.get(), 1).setWeight(15))
                 .add(enchantedBook(Enchantments.BLOCK_FORTUNE, 1).setWeight(1))
                 // plus level 4 enchants
                 .add(enchantedBook(Enchantments.AQUA_AFFINITY, 1).setWeight(5))
@@ -355,7 +352,6 @@ public class DefaultEnchanterCraftingProvider extends CustomRecipeAndLootTablePr
                 .add(enchantedBook(Enchantments.SWEEPING_EDGE, 3).setWeight(1))
                 .add(enchantedBook(Enchantments.UNBREAKING, 3).setWeight(1))
                 .add(enchantedBook(Enchantments.BLOCK_FORTUNE, 3).setWeight(1))
-                .add(enchantedBook(ModEnchants.raiderDamage.get(), 2).setWeight(1))
         ));
     }
 

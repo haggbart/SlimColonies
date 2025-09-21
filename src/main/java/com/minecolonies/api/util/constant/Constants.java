@@ -21,11 +21,6 @@ public final class Constants
     public static final int    TICKS_SECOND                     = 20;
     public static final int    SECONDS_A_MINUTE                 = 60;
     public static final int    STACKSIZE                        = 64;
-    public static final int    MAX_BARBARIAN_HORDE_SIZE         = 400;
-    public static final int    MIN_BARBARIAN_HORDE_SIZE         = 6;
-    public static final int    MAX_BARBARIAN_DIFFICULTY         = 10;
-    public static final int    DEFAULT_BARBARIAN_DIFFICULTY     = 5;
-    public static final int    MIN_BARBARIAN_DIFFICULTY         = 0;
     public static final int    ENTITY_TRACKING_RANGE            = 256;
     public static final int    ENTITY_UPDATE_FREQUENCY          = 2;
     public static final int    ENTITY_UPDATE_FREQUENCY_FISHHOOK = 5;
@@ -163,7 +158,6 @@ public final class Constants
     public static final int SLOT_PER_LINE = 9;
 
     public static final String SCIMITAR_NAME     = "iron_scimitar";
-    public static final String CHIEFSWORD_NAME   = "chiefsword";
     public static final MobEffect LEVITATION_EFFECT = MobEffects.LEVITATION;
     public static final MobEffect GLOW_EFFECT       = MobEffects.GLOWING;
 

@@ -167,11 +167,6 @@ public final class ColonyView implements IColonyView
     private IRequestManager requestManager;
 
     /**
-     * Wether the colony is raided
-     */
-    private boolean isUnderRaid;
-
-    /**
      * The world.
      */
     private Level world;
@@ -199,7 +194,6 @@ public final class ColonyView implements IColonyView
     /**
      * Whether spies are active and highlight enemy positions.
      */
-    private boolean   spiesEnabled;
     private Set<Long> ticketedChunks = new HashSet<>();
 
     /**
@@ -350,11 +344,7 @@ public final class ColonyView implements IColonyView
             buf.writeBoolean(false);
         }
 
-        buf.writeInt(colony.getRaiderManager().getLastSpawnPoints().size());
-        for (final BlockPos block : colony.getRaiderManager().getLastSpawnPoints())
-        {
-            buf.writeBlockPos(block);
-        }
+        buf.writeInt(0);
 
         buf.writeInt(colony.getTeamColonyColor().ordinal());
 
@@ -365,8 +355,6 @@ public final class ColonyView implements IColonyView
         buf.writeLong(colony.getMercenaryUseTime());
 
         buf.writeUtf(colony.getStructurePack());
-        buf.writeBoolean(colony.getRaiderManager().isRaided());
-        buf.writeBoolean(colony.getRaiderManager().areSpiesEnabled());
 
         if (hasNewSubscribers || colony.isTicketedChunksDirty())
         {
@@ -809,8 +797,6 @@ public final class ColonyView implements IColonyView
             StructurePacks.selectedPack = StructurePacks.getStructurePack(this.style);
         }
 
-        this.isUnderRaid = buf.readBoolean();
-        this.spiesEnabled = buf.readBoolean();
 
         final int ticketChunkCount = buf.readInt();
         if (ticketChunkCount != -1)
@@ -1397,11 +1383,6 @@ public final class ColonyView implements IColonyView
         return null;
     }
 
-    @Override
-    public IRaiderManager getRaiderManager()
-    {
-        return null;
-    }
 
     @Override
     public IEventManager getEventManager()
@@ -1439,11 +1420,6 @@ public final class ColonyView implements IColonyView
         return connectionManager;
     }
 
-    @Override
-    public boolean isRaiding()
-    {
-        return this.isUnderRaid;
-    }
 
     @Override
     public long getMercenaryUseTime()
@@ -1463,11 +1439,6 @@ public final class ColonyView implements IColonyView
         return researchManager;
     }
 
-    @Override
-    public boolean areSpiesEnabled()
-    {
-        return spiesEnabled;
-    }
 
     @Override
     public ICitizenDataView getVisitor(final int citizenId)

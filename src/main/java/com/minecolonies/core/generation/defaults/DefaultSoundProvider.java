@@ -3,7 +3,6 @@ package com.minecolonies.core.generation.defaults;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
 import com.minecolonies.api.colony.jobs.ModJobs;
-import com.minecolonies.api.entity.mobs.RaiderType;
 import com.minecolonies.api.sounds.EventType;
 import com.minecolonies.api.util.constant.Constants;
 import net.minecraft.data.CachedOutput;
@@ -98,16 +97,6 @@ public class DefaultSoundProvider implements DataProvider
             sounds.add(CITIZEN_SOUND_EVENT_PREFIX + "child.female." + soundEvents.name().toLowerCase(Locale.US), createSoundJson("neutral", getDefaultProperties(), childSounds));
         }
 
-        for (final RaiderType type : RaiderType.values())
-        {
-            sounds.add("mob." + type.name().toLowerCase(Locale.US) + ".death", createSoundJson("hostile", getDefaultProperties(), ImmutableList.of("minecolonies:mob/barbarian/death")));
-            sounds.add("mob." + type.name().toLowerCase(Locale.US) + ".say", createSoundJson("hostile", getDefaultProperties(), ImmutableList.of("minecolonies:mob/barbarian/say")));
-            
-            sounds.add("mob." + type.name().toLowerCase(Locale.US) + ".hurt",
-              createSoundJson("hostile",
-                getDefaultProperties(),
-                ImmutableList.of("minecolonies:mob/barbarian/hurt1", "minecolonies:mob/barbarian/hurt2", "minecolonies:mob/barbarian/hurt3", "minecolonies:mob/barbarian/hurt4")));
-        }
 
         sounds.add("mob.citizen.snore", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of("minecolonies:mob/citizen/snore")));
 
@@ -125,17 +114,6 @@ public class DefaultSoundProvider implements DataProvider
         sounds.add("mob.mercenary.step", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of("minecolonies:mob/mercenary/step/step1", "minecolonies:mob/mercenary/step/step2", "minecolonies:mob/mercenary/step/step3", "minecolonies:mob/mercenary/step/step4")));
         sounds.add("tile.sawmill.saw", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of("minecolonies:tile/sawmill/saw")));
 
-        addMusic("record", false,
-          "raid.raid_alert",
-          "raid.raid_alert_early",
-          "raid.raid_won",
-          "raid.raid_won_early");
-
-        addMusic("music", true,
-          "raid.desert.desert_raid",
-          "raid.desert.desert_raid_warning",
-          "raid.desert.desert_raid_victory",
-          "raid.amazon.amazon_raid");
 
         return DataProvider.saveStable(cache, sounds, getPath());
     }

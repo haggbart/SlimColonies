@@ -60,7 +60,6 @@ import static com.minecolonies.api.util.constant.CitizenConstants.BASE_PATHFINDI
 import static com.minecolonies.api.util.constant.Constants.TICKS_FOURTY_MIN;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_COLONY_ID;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_TIME;
-import static com.minecolonies.api.util.constant.RaiderConstants.FOLLOW_RANGE;
 import static com.minecolonies.api.util.constant.TranslationConstants.MESSAGE_INFO_COLONY_MERCENARY_STEAL_CITIZEN;
 import static com.minecolonies.core.entity.ai.minimal.EntityAIInteractToggleAble.*;
 
@@ -175,7 +174,7 @@ public class EntityMercenary extends AbstractFastMinecoloniesEntity implements N
         final ItemStack boots = new ItemStack(Items.CHAINMAIL_BOOTS, 1);
         this.setItemSlot(EquipmentSlot.FEET, boots);
 
-        this.getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(FOLLOW_RANGE);
+        this.getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(BASE_PATHFINDING_RANGE);
         this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.3);
 
         this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(60);

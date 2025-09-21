@@ -577,14 +577,6 @@ public class ColonyPermissionEventHandler
     @SubscribeEvent
     public void on(final LivingHurtEvent event)
     {
-        if (event.getEntity() instanceof ServerPlayer
-              && event.getSource().getEntity() instanceof EntityCitizen
-              && ((EntityCitizen) event.getSource().getEntity()).getCitizenColonyHandler().getColonyId() == colony.getID()
-              && colony.getRaiderManager().isRaided()
-              && !colony.getPermissions().hasPermission((Player) event.getEntity(), Action.GUARDS_ATTACK))
-        {
-            event.setCanceled(true);
-        }
     }
 
     /**

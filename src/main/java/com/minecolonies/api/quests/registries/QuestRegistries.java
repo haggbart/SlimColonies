@@ -18,41 +18,9 @@ import java.util.function.Function;
  */
 public class QuestRegistries
 {
-    /**
-     * Get the reward registry.
-     * @return the reward registry.
-     */
-    static IForgeRegistry<RewardEntry> getQuestRewardsRegistry()
-    {
-        return IMinecoloniesAPI.getInstance().getQuestRewardRegistry();
-    }
 
-    /**
-     * Get the objective registry.
-     * @return the reward registry.
-     */
-    static IForgeRegistry<ObjectiveEntry> getQuestObjectiveRegistry()
-    {
-        return IMinecoloniesAPI.getInstance().getQuestObjectiveRegistry();
-    }
 
-    /**
-     * Get the trigger registry.
-     * @return the reward registry.
-     */
-    static IForgeRegistry<TriggerEntry> getQuestTriggerRegistry()
-    {
-        return IMinecoloniesAPI.getInstance().getQuestTriggerRegistry();
-    }
 
-    /**
-     * Get the dialogue answer result registry.
-     * @return the reward registry.
-     */
-    static IForgeRegistry<DialogueAnswerEntry> getDialogueAnswerResultRegistry()
-    {
-        return IMinecoloniesAPI.getInstance().getQuestDialogueAnswerRegistry();
-    }
 
     /**
      * Quest reward entry type.
@@ -151,7 +119,6 @@ public class QuestRegistries
     public static ResourceLocation ITEM_REWARD_ID         = new ResourceLocation(Constants.MOD_ID, "item");
     public static ResourceLocation SKILL_REWARD_ID        = new ResourceLocation(Constants.MOD_ID, "skill");
     public static ResourceLocation RESEARCH_REWARD_ID     = new ResourceLocation(Constants.MOD_ID, "research");
-    public static ResourceLocation RAID_REWARD_ID         = new ResourceLocation(Constants.MOD_ID, "raid");
     public static ResourceLocation RELATIONSHIP_REWARD_ID = new ResourceLocation(Constants.MOD_ID, "relationship");
     public static ResourceLocation UNLOCK_QUEST_REWARD_ID     = new ResourceLocation(Constants.MOD_ID, "unlockquest");
     public static ResourceLocation QUEST_REPUTATION_REWARD_ID = new ResourceLocation(Constants.MOD_ID, "questreputation");
@@ -180,7 +147,6 @@ public class QuestRegistries
     public static RegistryObject<RewardEntry>  itemReward;
     public static RegistryObject <RewardEntry> skillReward;
     public static RegistryObject <RewardEntry> researchReward;
-    public static RegistryObject <RewardEntry> raidReward;
     public static RegistryObject <RewardEntry> relationshipReward;
     // Happiness reward removed
     public static RegistryObject <RewardEntry> unlockQuestReward;

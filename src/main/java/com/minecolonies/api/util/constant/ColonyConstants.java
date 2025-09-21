@@ -68,22 +68,6 @@ public final class ColonyConstants
      */
     public static final int MAX_COLONY_EVENTS = 100;
 
-    /**
-     * Barbarian Constants.
-     */
-    public static final double ARCHER_BARBARIANS_MULTIPLIER = 0.30;
-    public static final double CHIEF_BARBARIANS_MULTIPLIER  = 0.1;
-
-    /**
-     * Different horde ids and their sizes.
-     */
-    public static final int SMALL_HORDE_MESSAGE_ID  = 1;
-    public static final int MEDIUM_HORDE_MESSAGE_ID = 2;
-    public static final int BIG_HORDE_MESSAGE_ID    = 3;
-    public static final int HUGE_HORDE_MESSAGE_ID   = 4;
-    public static final int SMALL_HORDE_SIZE        = 5;
-    public static final int MEDIUM_HORDE_SIZE       = 10;
-    public static final int BIG_HORDE_SIZE          = 20;
 
     /**
      * Pirate Constants.

@@ -33,7 +33,6 @@ public class EntryPoint
             .addNode(new CommandKillCow().build())
             .addNode(new CommandKillMonster().build())
             .addNode(new CommandKillPig().build())
-            .addNode(new CommandKillRaider().build())
             .addNode(new CommandKillSheep().build());
 
         /*
@@ -47,8 +46,6 @@ public class EntryPoint
             .addNode(new CommandShowClaim().build())
             .addNode(new CommandTeleport().build())
             .addNode(new CommandDeleteColony().build())
-            .addNode(new CommandCanRaiderSpawn().build())
-            .addNode(new CommandRaid().build())
             .addNode(new CommandHomeTeleport().build())
             .addNode(new CommandListColonies().build())
             .addNode(new CommandSetDeletable().build())
@@ -57,7 +54,6 @@ public class EntryPoint
             .addNode(new CommandLoadAllBackups().build())
             .addNode(new CommandColonyInfo().build())
             .addNode(new CommandColonyPrintStats().build())
-            .addNode(new CommandColonyRaidsInfo().build())
             .addNode(new CommandColonyChunks().build())
             .addNode(new CommandRSReset().build())
             .addNode(new CommandRSResetAll().build())
@@ -91,7 +87,6 @@ public class EntryPoint
             .addNode(new CommandWhoAmI().build())
             .addNode(new CommandGetRanks().build())
             .addNode(new CommandUnloadForcedChunks().build())
-            .addNode(new CommandRaidAll().build())
             .addNode(new CommandBackup().build())
             .addNode(new CommandResetPlayerSupplies().build())
             .addNode(new CommandHelp().build())
@@ -111,7 +106,6 @@ public class EntryPoint
             .addNode(new CommandWhoAmI().build())
             .addNode(new CommandGetRanks().build())
             .addNode(new CommandUnloadForcedChunks().build())
-            .addNode(new CommandRaidAll().build())
             .addNode(new CommandBackup().build())
             .addNode(new CommandResetPlayerSupplies().build())
             .addNode(new CommandHelp().build())

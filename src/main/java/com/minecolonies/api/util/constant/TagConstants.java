@@ -43,7 +43,6 @@ public final class TagConstants
     public static final ResourceLocation BREAKABLE_ORE             = new ResourceLocation(MOD_ID, "breakable_ore");
     public static final ResourceLocation RAW_ORE                   = new ResourceLocation(MOD_ID, "raw_ore");
     public static final ResourceLocation MOB_ATTACK_BLACKLIST      = new ResourceLocation(MOD_ID, "mob_attack_blacklist");
-    public static final ResourceLocation RAIDERS                   = new ResourceLocation(MOD_ID, "raiders");
     public static final ResourceLocation IGNORE_NBT                = new ResourceLocation(MOD_ID, "ignore_nbt");
     public static final ResourceLocation ALLOW_INTERACT            = new ResourceLocation(MOD_ID, "allowinteract");
     public static final ResourceLocation COLD_BIOMES               = new ResourceLocation(MOD_ID, "coldbiomes");

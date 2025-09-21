@@ -738,17 +738,6 @@
             }
           ],
           "name": "minecraft:enchanted_book"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:set_nbt",
-              "tag": "{StoredEnchantments:[{id:\"minecolonies:raider_damage_enchant\",lvl:1s}]}"
-            }
-          ],
-          "name": "minecraft:enchanted_book",
-          "weight": 15
         }
       ],
       "rolls": 1.0

@@ -27,8 +27,6 @@ public class VisibleCitizenStatus
       new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/hungry.png"), MESSAGE_INFO_CITIZEN_STATUS_HUNGRY, true);
     public final static VisibleCitizenStatus HOUSE       =
       new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/house_big.png"), MESSAGE_INFO_CITIZEN_STATUS_IDLE, true);
-    public final static VisibleCitizenStatus RAIDED      =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/raid_icon.png"), MESSAGE_INFO_CITIZEN_STATUS_RAID, true);
     public final static VisibleCitizenStatus MOURNING    =
       new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/mourning.png"), MESSAGE_INFO_CITIZEN_STATUS_MOURNING, true);
     public final static VisibleCitizenStatus BAD_WEATHER =

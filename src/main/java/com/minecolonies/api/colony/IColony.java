@@ -245,7 +245,6 @@ public interface IColony
      */
     IVisitorManager getVisitorManager();
 
-    IRaiderManager getRaiderManager();
 
     /**
      * Get the event manager of the colony.

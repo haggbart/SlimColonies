@@ -139,21 +139,6 @@ public class BuildingBarracks extends AbstractBuilding
             return;
         }
 
-        if (colony.getRaiderManager().isRaided())
-        {
-            if (!colony.getRaiderManager().areSpiesEnabled())
-            {
-                if (InventoryUtils.tryRemoveStackFromItemHandler(this.getCapability(ForgeCapabilities.ITEM_HANDLER).orElseGet(null), new ItemStack(Items.GOLD_INGOT, SPIES_GOLD_COST)))
-                {
-                    colony.getRaiderManager().setSpiesEnabled(true);
-                    colony.markDirty();
-                }
-            }
-        }
-        else
-        {
-            colony.getRaiderManager().setSpiesEnabled(false);
-        }
     }
 
     @Override

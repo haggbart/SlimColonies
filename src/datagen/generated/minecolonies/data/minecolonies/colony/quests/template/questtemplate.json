@@ -99,8 +99,7 @@
         1,
         2,
         3,
-        4,
-        5
+        4
       ]
     },
     {
@@ -144,12 +143,6 @@
       "type": "minecolonies:research",
       "details": {
         "id": "this"
-      }
-    },
-    {
-      "type": "minecolonies:raid",
-      "details": {
-        "change": -1
       }
     },
     {

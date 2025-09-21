@@ -4,7 +4,6 @@ import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import com.ldtteam.domumornamentum.block.decorative.PanelBlock;
 import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
 import com.minecolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
-import com.minecolonies.api.entity.mobs.drownedpirate.AbstractDrownedEntityPirateRaider;
 import com.minecolonies.api.items.ModTags;
 import com.minecolonies.api.util.ShapeUtil;
 import com.minecolonies.core.Network;
@@ -157,7 +156,7 @@ public class PathfindingUtils
             }
         }
 
-        if (entity.isInWater() && !(entity instanceof AbstractDrownedEntityPirateRaider))
+        if (entity.isInWater())
         {
             while (!bs.getFluidState().isEmpty())
             {

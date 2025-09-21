@@ -1,7 +1,6 @@
 package com.minecolonies.api.sounds;
 
 import com.minecolonies.api.colony.jobs.ModJobs;
-import com.minecolonies.api.entity.mobs.RaiderType;
 import com.minecolonies.api.util.Tuple;
 import com.minecolonies.api.util.constant.Constants;
 import net.minecraft.core.registries.Registries;
@@ -99,36 +98,12 @@ public final class ModSoundEvents
 
         SOUND_EVENTS.register(TavernSounds.tavernTheme.getLocation().getPath(), () -> TavernSounds.tavernTheme);
 
-        for (final RaiderType raiderType : RaiderType.values())
-        {
-            final SoundEvent raiderHurt = ModSoundEvents.getSoundID("mob." + raiderType.name().toLowerCase(Locale.US) + ".hurt");
-            final SoundEvent raiderDeath = ModSoundEvents.getSoundID("mob." + raiderType.name().toLowerCase(Locale.US) + ".death");
-            final SoundEvent raiderSay = ModSoundEvents.getSoundID("mob." + raiderType.name().toLowerCase(Locale.US) + ".say");
-
-            SOUND_EVENTS.register(raiderHurt.getLocation().getPath(), () ->  raiderHurt);
-            SOUND_EVENTS.register(raiderDeath.getLocation().getPath(), () ->  raiderDeath);
-            SOUND_EVENTS.register(raiderSay.getLocation().getPath(), () ->  raiderSay);
-
-            final Map<RaiderSounds.RaiderSoundTypes, SoundEvent> sounds = new HashMap<>();
-            sounds.put(RaiderSounds.RaiderSoundTypes.HURT, raiderHurt);
-            sounds.put(RaiderSounds.RaiderSoundTypes.DEATH, raiderDeath);
-            sounds.put(RaiderSounds.RaiderSoundTypes.SAY, raiderSay);
-
-            RaiderSounds.raiderSounds.put(raiderType, sounds);
-        }
 
         SAW = ModSoundEvents.getSoundID("tile.sawmill.saw");
         SOUND_EVENTS.register(SAW.getLocation().getPath(), () -> SAW);
 
-        SOUND_EVENTS.register(RaidSounds.WARNING.getLocation().getPath(), () -> RaidSounds.WARNING);
-        SOUND_EVENTS.register(RaidSounds.WARNING_EARLY.getLocation().getPath(), () -> RaidSounds.WARNING_EARLY);
-        SOUND_EVENTS.register(RaidSounds.VICTORY.getLocation().getPath(), () -> RaidSounds.VICTORY);
-        SOUND_EVENTS.register(RaidSounds.VICTORY_EARLY.getLocation().getPath(), () -> RaidSounds.VICTORY_EARLY);
 
-        SOUND_EVENTS.register(RaidSounds.AMAZON_RAID.getLocation().getPath(), () -> RaidSounds.AMAZON_RAID);
-
-        SOUND_EVENTS.register(RaidSounds.DESERT_RAID.getLocation().getPath(), () -> RaidSounds.DESERT_RAID);
-        SOUND_EVENTS.register(RaidSounds.DESERT_RAID_WARNING.getLocation().getPath(), () -> RaidSounds.DESERT_RAID_WARNING);
+        // All raid sounds removed for SlimColonies
 
         SOUND_EVENTS.register(MercenarySounds.mercenaryAttack.getLocation().getPath(), () -> MercenarySounds.mercenaryAttack);
         SOUND_EVENTS.register(MercenarySounds.mercenaryCelebrate.getLocation().getPath(), () -> MercenarySounds.mercenaryCelebrate);

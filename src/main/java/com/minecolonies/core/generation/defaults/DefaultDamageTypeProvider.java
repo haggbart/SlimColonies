@@ -40,47 +40,9 @@ public class DefaultDamageTypeProvider extends JsonCodecProvider<DamageType>
                 Map.entry(DamageSourceKeys.TRAINING.location(), damage("entity.minecolonies.training")),
                 Map.entry(DamageSourceKeys.WAKEY.location(), damage("entity.minecolonies.wakeywakey")),
 
-                Map.entry(DamageSourceKeys.AMAZON.location(), entityDamage(ModEntities.AMAZON)),
-                Map.entry(DamageSourceKeys.AMAZONCHIEF.location(), entityDamage(ModEntities.AMAZONCHIEF)),
-                Map.entry(DamageSourceKeys.AMAZONSPEARMAN.location(), entityDamage(ModEntities.AMAZONSPEARMAN)),
-                Map.entry(DamageSourceKeys.ARCHERBARBARIAN.location(), entityDamage(ModEntities.ARCHERBARBARIAN)),
-                Map.entry(DamageSourceKeys.ARCHERMUMMY.location(), entityDamage(ModEntities.ARCHERMUMMY)),
-                Map.entry(DamageSourceKeys.ARCHERPIRATE.location(), entityDamage(ModEntities.ARCHERPIRATE)),
-                Map.entry(DamageSourceKeys.BARBARIAN.location(), entityDamage(ModEntities.BARBARIAN)),
-                Map.entry(DamageSourceKeys.CHIEFBARBARIAN.location(), entityDamage(ModEntities.CHIEFBARBARIAN)),
-                Map.entry(DamageSourceKeys.CHIEFPIRATE.location(), entityDamage(ModEntities.CHIEFPIRATE)),
                 Map.entry(DamageSourceKeys.MERCENARY.location(), entityDamage(ModEntities.MERCENARY)),
-                Map.entry(DamageSourceKeys.MUMMY.location(), entityDamage(ModEntities.MUMMY)),
-                Map.entry(DamageSourceKeys.NORSEMENARCHER.location(), entityDamage(ModEntities.NORSEMEN_ARCHER)),
-                Map.entry(DamageSourceKeys.NORSEMENCHIEF.location(), entityDamage(ModEntities.NORSEMEN_CHIEF)),
-                Map.entry(DamageSourceKeys.PHARAO.location(), entityDamage(ModEntities.PHARAO)),
-                Map.entry(DamageSourceKeys.PIRATE.location(), entityDamage(ModEntities.PIRATE)),
-                Map.entry(DamageSourceKeys.SHIELDMAIDEN.location(), entityDamage(ModEntities.SHIELDMAIDEN)),
                 Map.entry(DamageSourceKeys.SPEAR.location(), entityDamage(ModEntities.SPEAR)),
-                Map.entry(DamageSourceKeys.VISITOR.location(), entityDamage(ModEntities.VISITOR)),
-                Map.entry(DamageSourceKeys.DROWNED_PIRATE.location(), entityDamage(ModEntities.DROWNED_PIRATE)),
-                Map.entry(DamageSourceKeys.DROWNED_ARCHERPIRATE.location(), entityDamage(ModEntities.DROWNED_ARCHERPIRATE)),
-                Map.entry(DamageSourceKeys.DROWNED_CHIEFPIRATE.location(), entityDamage(ModEntities.DROWNED_CHIEFPIRATE)),
-
-                Map.entry(DamageSourceKeys.CAMP_AMAZON.location(), entityDamage(ModEntities.CAMP_AMAZON)),
-                Map.entry(DamageSourceKeys.CAMP_AMAZONCHIEF.location(), entityDamage(ModEntities.CAMP_AMAZONCHIEF)),
-                Map.entry(DamageSourceKeys.CAMP_AMAZONSPEARMAN.location(), entityDamage(ModEntities.CAMP_AMAZONSPEARMAN)),
-
-                Map.entry(DamageSourceKeys.CAMP_BARBARIAN.location(), entityDamage(ModEntities.CAMP_BARBARIAN)),
-                Map.entry(DamageSourceKeys.CAMP_CHIEFBARBARIAN.location(), entityDamage(ModEntities.CAMP_CHIEFBARBARIAN)),
-                Map.entry(DamageSourceKeys.CAMP_ARCHERBARBARIAN.location(), entityDamage(ModEntities.CAMP_ARCHERBARBARIAN)),
-
-                Map.entry(DamageSourceKeys.CAMP_MUMMY.location(), entityDamage(ModEntities.CAMP_MUMMY)),
-                Map.entry(DamageSourceKeys.CAMP_ARCHERMUMMY.location(), entityDamage(ModEntities.CAMP_ARCHERMUMMY)),
-                Map.entry(DamageSourceKeys.CAMP_PHARAO.location(), entityDamage(ModEntities.CAMP_PHARAO)),
-
-                Map.entry(DamageSourceKeys.CAMP_PIRATE.location(), entityDamage(ModEntities.CAMP_PIRATE)),
-                Map.entry(DamageSourceKeys.CAMP_ARCHERPIRATE.location(), entityDamage(ModEntities.CAMP_ARCHERPIRATE)),
-                Map.entry(DamageSourceKeys.CAMP_CHIEFPIRATE.location(), entityDamage(ModEntities.CAMP_CHIEFPIRATE)),
-
-                Map.entry(DamageSourceKeys.CAMP_NORSEMENARCHER.location(), entityDamage(ModEntities.CAMP_NORSEMEN_ARCHER)),
-                Map.entry(DamageSourceKeys.CAMP_NORSEMENCHIEF.location(), entityDamage(ModEntities.CAMP_NORSEMEN_CHIEF)),
-                Map.entry(DamageSourceKeys.CAMP_SHIELDMAIDEN.location(), entityDamage(ModEntities.CAMP_SHIELDMAIDEN))
+                Map.entry(DamageSourceKeys.VISITOR.location(), entityDamage(ModEntities.VISITOR))
           );
     }
 

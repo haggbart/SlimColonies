@@ -6,7 +6,6 @@ import com.minecolonies.api.colony.colonyEvents.IColonyEntitySpawnEvent;
 import com.minecolonies.api.colony.colonyEvents.IColonyEvent;
 import com.minecolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
 import com.minecolonies.api.colony.managers.interfaces.IEventManager;
-import com.minecolonies.api.colony.managers.interfaces.IEventStructureManager;
 import com.minecolonies.api.util.Log;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,12 +55,10 @@ public class EventManager implements IEventManager
     /**
      * The related structure manager, which takes care of structures for the events.
      */
-    private final EventStructureManager structureManager;
 
     public EventManager(final IColony colony)
     {
         this.colony = colony;
-        structureManager = new EventStructureManager(this, colony);
     }
 
     @Override
@@ -191,7 +188,6 @@ public class EventManager implements IEventManager
             if (event.getStatus() == DONE)
             {
                 event.onFinish();
-                structureManager.loadBackupForEvent(event.getID());
                 colony.markDirty();
                 iterator.remove();
             }
@@ -241,7 +237,6 @@ public class EventManager implements IEventManager
             }
 
             currentEventID = eventManagerNBT.getInt(TAG_EVENT_ID);
-            structureManager.readFromNBT(compound);
         }
     }
 
@@ -260,12 +255,6 @@ public class EventManager implements IEventManager
         eventManagerNBT.putInt(TAG_EVENT_ID, currentEventID);
         eventManagerNBT.put(TAG_EVENT_LIST, eventListNBT);
         compound.put(TAG_EVENT_MANAGER, eventManagerNBT);
-        structureManager.writeToNBT(compound);
     }
 
-    @Override
-    public IEventStructureManager getStructureManager()
-    {
-        return structureManager;
-    }
 }

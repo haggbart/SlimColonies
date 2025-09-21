@@ -387,15 +387,6 @@ public interface IColonyView extends IColony
     String getStructurePack();
 
     /**
-     * If currently being raided.
-     *
-     * @return true if so.
-     */
-    boolean isRaiding();
-
-    boolean areSpiesEnabled();
-
-    /**
      * Gets the data view for a visitor
      *
      * @param citizenId id to query

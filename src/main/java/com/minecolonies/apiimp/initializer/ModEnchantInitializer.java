@@ -1,7 +1,6 @@
 package com.minecolonies.apiimp.initializer;
 
 import com.minecolonies.api.enchants.ModEnchants;
-import com.minecolonies.core.enchants.RaiderDamageEnchant;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 
@@ -14,7 +13,6 @@ public class ModEnchantInitializer
 {
     static
     {
-        ModEnchants.raiderDamage = ENCHANTMENTS.register("raider_damage_enchant", () -> new RaiderDamageEnchant(Enchantment.Rarity.VERY_RARE, new EquipmentSlot[] {EquipmentSlot.MAINHAND}));
     }
     /**
      * Init this.

@@ -135,7 +135,7 @@
     },
     {
       "type": "minecolonies:placeblock",
-      "unlocks-rewards": [0, 1, 2, 3, 4, 5],
+      "unlocks-rewards": [0, 1, 2, 3, 4],
       "details": {
         "target": 0,
         "block": "minecraft:dirt",
@@ -183,12 +183,6 @@
       "type": "minecolonies:research",
       "details": {
         "id": "this"
-      }
-    },
-    {
-      "type": "minecolonies:raid",
-      "details": {
-        "change": -1
       }
     },
     {

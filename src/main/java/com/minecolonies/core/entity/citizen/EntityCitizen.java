@@ -1319,10 +1319,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         {
             if (sourceEntity instanceof ServerPlayer)
             {
-                if (citizenColonyHandler.getColonyOrRegister().getRaiderManager().isRaided())
-                {
-                    return false;
-                }
 
                 if (damage > 1 && !getCitizenColonyHandler().getColonyOrRegister().getPermissions().hasPermission((Player) sourceEntity, Action.HURT_CITIZEN))
                 {
@@ -1529,7 +1525,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     {
         if (citizenColonyHandler.getColonyOrRegister() != null && getCitizenData() != null)
         {
-            citizenColonyHandler.getColonyOrRegister().getRaiderManager().onLostCitizen(getCitizenData());
 
             citizenExperienceHandler.dropExperience();
             this.remove(RemovalReason.KILLED);

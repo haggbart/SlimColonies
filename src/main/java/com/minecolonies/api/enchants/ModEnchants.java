@@ -18,8 +18,4 @@ public class ModEnchants
         // Intentionally left empty
     }
 
-    /**
-     * Raider damage enchant, gives extra damage against raiders
-     */
-    public static RegistryObject<? extends Enchantment> raiderDamage;
 }

@@ -59,7 +59,6 @@ public final class ModQuestInitializer
         QuestRegistries.itemReward = DEFERRED_REGISTER_REWARD.register(ITEM_REWARD_ID.getPath(), () -> new QuestRegistries.RewardEntry(ItemRewardTemplate::createReward));
         QuestRegistries.skillReward = DEFERRED_REGISTER_REWARD.register(SKILL_REWARD_ID.getPath(), () -> new QuestRegistries.RewardEntry(SkillRewardTemplate::createReward));
         QuestRegistries.researchReward = DEFERRED_REGISTER_REWARD.register(RESEARCH_REWARD_ID.getPath(), () -> new QuestRegistries.RewardEntry(ResearchCompleteRewardTemplate::createReward));
-        QuestRegistries.raidReward = DEFERRED_REGISTER_REWARD.register(RAID_REWARD_ID.getPath(), () -> new QuestRegistries.RewardEntry(RaidAdjustmentRewardTemplate::createReward));
         QuestRegistries.relationshipReward = DEFERRED_REGISTER_REWARD.register(RELATIONSHIP_REWARD_ID.getPath(), () -> new QuestRegistries.RewardEntry(RelationshipRewardTemplate::createReward));
         // Happiness reward removed
         QuestRegistries.unlockQuestReward = DEFERRED_REGISTER_REWARD.register(UNLOCK_QUEST_REWARD_ID.getPath(), () -> new QuestRegistries.RewardEntry(UnlockQuestRewardTemplate::createReward));

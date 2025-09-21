@@ -21,7 +21,6 @@ import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.configuration.Configuration;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.crafting.registry.RecipeTypeEntry;
-import com.minecolonies.api.entity.mobs.registry.IMobAIRegistry;
 // Happiness imports removed
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
@@ -39,7 +38,6 @@ import com.minecolonies.core.colony.ColonyManager;
 import com.minecolonies.core.colony.buildings.registry.BuildingDataManager;
 import com.minecolonies.core.colony.interactionhandling.registry.InteractionResponseHandlerManager;
 import com.minecolonies.core.colony.jobs.registry.JobDataManager;
-import com.minecolonies.core.entity.mobs.registry.MobAIRegistry;
 import com.minecolonies.core.entity.pathfinding.registry.PathNavigateRegistry;
 import com.minecolonies.core.research.GlobalResearchTree;
 import com.minecolonies.core.util.FurnaceRecipes;
@@ -53,7 +51,6 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
 {
     private final  IColonyManager                                          colonyManager          = new ColonyManager();
     private final  ICitizenDataManager                                     citizenDataManager     = new CitizenDataManager();
-    private final  IMobAIRegistry                                          mobAIRegistry          = new MobAIRegistry();
     private final  IPathNavigateRegistry              pathNavigateRegistry   = new PathNavigateRegistry();
     private        IForgeRegistry<EquipmentTypeEntry> equipmentTypeRegistry;
     private        IForgeRegistry<BuildingEntry>      buildingRegistry;
@@ -95,12 +92,6 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
         return citizenDataManager;
     }
 
-    @Override
-    @NotNull
-    public IMobAIRegistry getMobAIRegistry()
-    {
-        return mobAIRegistry;
-    }
 
     @Override
     @NotNull

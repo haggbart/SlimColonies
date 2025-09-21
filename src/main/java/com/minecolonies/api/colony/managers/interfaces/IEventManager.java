@@ -103,10 +103,4 @@ public interface IEventManager
      */
     void writeToNBT(@NotNull CompoundTag compound);
 
-    /**
-     * Returns the associated structure manager, which manages structure spawn/despawn for events.
-     *
-     * @return the manager.
-     */
-    IEventStructureManager getStructureManager();
 }
