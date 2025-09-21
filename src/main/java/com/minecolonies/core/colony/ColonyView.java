@@ -167,10 +167,6 @@ public final class ColonyView implements IColonyView
     private IRequestManager requestManager;
 
     /**
-     * Wether the colony is raided
-     */
-
-    /**
      * The world.
      */
     private Level world;
