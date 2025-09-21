@@ -105,7 +105,6 @@ public final class ResearchConstants
     public static final ResourceLocation ARCHER_DAMAGE                = new ResourceLocation(Constants.MOD_ID, "effects/archerdamageaddition");
     public static final ResourceLocation CITIZEN_INV_SLOTS            = new ResourceLocation(Constants.MOD_ID, "effects/citizeninvslotsaddition");
     public static final ResourceLocation CITIZEN_CAP                  = new ResourceLocation(Constants.MOD_ID, "effects/citizencapaddition");
-    public static final ResourceLocation MECHANIC_ENHANCED_GATES      = new ResourceLocation(Constants.MOD_ID, "effects/enhancesgatedurabilityaddition");
     public static final ResourceLocation FLEEING_SPEED                = new ResourceLocation(Constants.MOD_ID, "effects/fleeingspeedaddition");
     public static final ResourceLocation SATLIMIT                     = new ResourceLocation(Constants.MOD_ID, "effects/healingsaturationlimitaddition");
     public static final ResourceLocation HEALTH_BOOST                 = new ResourceLocation(Constants.MOD_ID, "effects/healthaddition");
