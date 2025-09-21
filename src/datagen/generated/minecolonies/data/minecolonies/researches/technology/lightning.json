@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:redstone",
-      "quantity": 2048
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/blockbreakspeedmultiplier",

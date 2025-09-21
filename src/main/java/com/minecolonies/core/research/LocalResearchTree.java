@@ -158,13 +158,7 @@ public class LocalResearchTree implements ILocalResearchTree
                 colony.getResearchManager().markDirty();
                 return;
             }
-            final InvWrapper playerInv = new InvWrapper(player.getInventory());
-            if (!research.hasEnoughResources(playerInv))
-            {
-                MessageUtils.format("com.minecolonies.coremod.research.costnotavailable", MutableComponent.create(research.getName())).sendTo(player);
-                SoundUtils.playErrorSound(player, player.blockPosition());
-                return;
-            }
+            // Check research requirements (building levels, etc.) but skip item costs
             if (!research.getResearchRequirements().isEmpty())
             {
                 for (IResearchRequirement requirement : research.getResearchRequirements())
@@ -177,24 +171,7 @@ public class LocalResearchTree implements ILocalResearchTree
                     }
                 }
             }
-            // We know the player has the items, so now we can remove them safely.
-            for (IResearchCost cost : research.getCostList())
-            {
-                int toRemoveLeft = cost.getCount();
-
-                for (Item item : cost.getItems())
-                {
-                    final List<Integer> slotsWithMaterial = InventoryUtils.findAllSlotsInItemHandlerWith(playerInv, stack -> stack.getItem().equals(item));
-                    for (Integer slotNum : slotsWithMaterial)
-                    {
-                        toRemoveLeft = toRemoveLeft - playerInv.extractItem(slotNum, toRemoveLeft, false).getCount();
-                        if (toRemoveLeft <= 0)
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
+            // Research no longer requires item costs - skip resource validation and removal
             MessageUtils.format(MESSAGE_RESEARCH_STARTED, MutableComponent.create(research.getName())).sendTo(player);
             research.startResearch(colony.getResearchManager().getResearchTree());
             colony.getResearchManager().markDirty();
@@ -248,37 +225,7 @@ public class LocalResearchTree implements ILocalResearchTree
                 }
             }
 
-            if (!player.isCreative())
-            {
-                final List<ItemStorage> costList = IGlobalResearchTree.getInstance().getResearchResetCosts();
-                final InvWrapper playerInv = new InvWrapper(player.getInventory());
-                for (final ItemStorage cost : costList)
-                {
-                    final int count = InventoryUtils.getItemCountInItemHandler(playerInv,
-                      stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, cost.getItemStack(), !cost.ignoreDamageValue(), !cost.ignoreNBT()));
-                    if (count < cost.getAmount())
-                    {
-                        MessageUtils.format("com.minecolonies.coremod.research.costnotavailable",
-                          MutableComponent.create(IGlobalResearchTree.getInstance().getResearch(research.getBranch(), research.getId()).getName())).sendTo(player);
-                        SoundUtils.playErrorSound(player, player.blockPosition());
-                        return;
-                    }
-                }
-                for (ItemStorage cost : costList)
-                {
-                    final List<Integer> slotsWithMaterial = InventoryUtils.findAllSlotsInItemHandlerWith(playerInv,
-                      stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, cost.getItemStack(), !cost.ignoreDamageValue(), !cost.ignoreNBT()));
-                    int amount = cost.getAmount();
-                    for (Integer slotNum : slotsWithMaterial)
-                    {
-                        amount = amount - playerInv.extractItem(slotNum, amount, false).getCount();
-                        if (amount <= 0)
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
+            // Research reset no longer requires item costs - skip cost validation and removal
             MessageUtils.format("com.minecolonies.coremod.research.undo",
                 MutableComponent.create(IGlobalResearchTree.getInstance().getResearch(research.getBranch(), research.getId()).getName()))
               .sendTo(player);

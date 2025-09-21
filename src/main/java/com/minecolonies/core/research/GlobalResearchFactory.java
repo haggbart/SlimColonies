@@ -80,14 +80,7 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
         compound.putBoolean(TAG_AUTOSTART, research.isAutostart());
         compound.putBoolean(TAG_IMMUTABLE, research.isImmutable());
         compound.putBoolean(TAG_HIDDEN, research.isHidden());
-        @NotNull final ListTag costTagList = research.getCostList().stream().map(cost ->
-        {
-            final CompoundTag costCompound = new CompoundTag();
-            costCompound.putString(TAG_COST_TYPE, cost.getType().getRegistryName().toString());
-            costCompound.put(TAG_COST_NBT, cost.writeToNBT());
-            return compound;
-        }).collect(NBTUtils.toListNBT());
-        compound.put(TAG_COSTS, costTagList);
+        // Research no longer uses costs - skip cost serialization
 
         @NotNull final ListTag reqTagList = research.getResearchRequirements().stream().map(req ->
         {
@@ -137,10 +130,7 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
 
         final IGlobalResearch research = getNewInstance(id, parent, branch, name, subtitle, depth, sortOrder, onlyChild, hidden, autostart, instant, immutable);
 
-        NBTUtils.streamCompound(nbt.getList(TAG_COSTS, Tag.TAG_COMPOUND)).forEach(compound -> {
-            final ModResearchCosts.ResearchCostEntry researchCostType = IMinecoloniesAPI.getInstance().getResearchCostRegistry().getValue(new ResourceLocation(compound.getString(TAG_COST_TYPE)));
-            research.addCost(researchCostType.readFromNBT(compound.getCompound(TAG_COST_NBT)));
-        });
+        // Research no longer uses costs - skip cost deserialization
         NBTUtils.streamCompound(nbt.getList(TAG_REQS, Tag.TAG_COMPOUND))
             .forEach(compound -> research.addRequirement(Objects.requireNonNull(IMinecoloniesAPI.getInstance()
                 .getResearchRequirementRegistry()
@@ -173,12 +163,7 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
         packetBuffer.writeBoolean(input.isAutostart());
         packetBuffer.writeBoolean(input.isImmutable());
         packetBuffer.writeBoolean(input.isHidden());
-        packetBuffer.writeVarInt(input.getCostList().size());
-        for (IResearchCost cost : input.getCostList())
-        {
-            packetBuffer.writeRegistryId(IMinecoloniesAPI.getInstance().getResearchCostRegistry(), cost.getType());
-            packetBuffer.writeNbt(cost.writeToNBT());
-        }
+        // Research no longer uses costs - skip cost serialization entirely
         packetBuffer.writeVarInt(input.getResearchRequirements().size());
         for (IResearchRequirement req : input.getResearchRequirements())
         {
@@ -217,13 +202,7 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
 
         final IGlobalResearch research = getNewInstance(id, parent, branch, name, subtitle, depth, sortOrder, hasOnlyChild, hidden, autostart, instant, immutable);
 
-        final int costSize = buffer.readVarInt();
-        for(int i = 0; i < costSize; i++)
-        {
-            final ModResearchCosts.ResearchCostEntry researchCostEntry = buffer.readRegistryIdSafe(ModResearchCosts.ResearchCostEntry.class);
-            research.addCost(researchCostEntry.readFromNBT(buffer.readNbt()));
-        }
-
+        // Research no longer uses costs - skip cost deserialization entirely
         final int reqCount = buffer.readVarInt();
         for(int i = 0; i < reqCount; i++)
         {

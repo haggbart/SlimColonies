@@ -97,7 +97,8 @@ public class MineColonies
         ModSoundEvents.SOUND_EVENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModInteractionsInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModResearchEffectInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModResearchCostInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+        // Research no longer uses item costs - disabled cost type registration
+        // ModResearchCostInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModLootConditions.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         SupplyLoot.GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBannerPatterns.BANNER_PATTERNS.register(FMLJavaModLoadingContext.get().getModEventBus());

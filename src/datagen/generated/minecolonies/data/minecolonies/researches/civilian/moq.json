@@ -1,17 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecolonies:clipboard",
-      "quantity": 1
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:book",
-      "quantity": 16
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/min_order",

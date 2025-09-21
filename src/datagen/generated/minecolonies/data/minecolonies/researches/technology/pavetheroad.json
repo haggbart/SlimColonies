@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_tag",
-      "quantity": 32,
-      "tag": "minecolonies:concrete"
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/blockhutconcretemixer",

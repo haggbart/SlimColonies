@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:combat",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:emerald",
-      "quantity": 32
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/fleeingdamagemultiplier",

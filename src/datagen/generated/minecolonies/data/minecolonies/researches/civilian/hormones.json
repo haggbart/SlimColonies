@@ -1,12 +1,5 @@
 {
   "branch": "minecolonies:civilian",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:cooked_chicken",
-      "quantity": 64
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/growthmultiplier",

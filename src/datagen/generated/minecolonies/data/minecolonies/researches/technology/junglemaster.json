@@ -1,22 +1,5 @@
 {
   "branch": "minecolonies:technology",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:bamboo",
-      "quantity": 16
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:cocoa_beans",
-      "quantity": 16
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:vine",
-      "quantity": 16
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/plantationjungle",

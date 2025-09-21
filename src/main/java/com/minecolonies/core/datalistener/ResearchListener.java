@@ -285,17 +285,13 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
 
             final Tuple<List<IResearchCost>, List<IResearchRequirement>> requirements =
                 parseResearchRequirements(researchId, GsonHelper.getAsJsonArray(researchJson, RESEARCH_REQUIREMENTS_PROP, new JsonArray()));
-            final List<IResearchCost> costs = parseResearchCosts(researchId,
-                GsonHelper.getAsJsonArray(researchJson, RESEARCH_COSTS_PROP, new JsonArray()),
-                GsonHelper.getAsJsonArray(researchJson, RESEARCH_REQUIREMENTS_PROP, new JsonArray()));
+            // Skip cost parsing - research no longer requires item costs
             final List<GlobalResearchEffect> effects =
                 parseResearchEffects(researchId, GsonHelper.getAsJsonArray(researchJson, RESEARCH_EFFECTS_PROP, new JsonArray()), effectCategories);
 
             final GlobalResearch research = new GlobalResearch(researchId, parent, branch, name, subtitle, depth, sortOrder, onlyChild, hidden, autostart, instant, immutable);
-            // TODO: 1.22 remove the json requirements array as a potential input here, costs should move to a separate list to get them mixed out with requirements
-            requirements.getA().forEach(research::addCost);
+            // Skip adding costs - only add requirements and effects
             requirements.getB().forEach(research::addRequirement);
-            costs.forEach(research::addCost);
             effects.forEach(research::addEffect);
 
             researchMap.put(researchId, research);
@@ -338,19 +334,8 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
                 continue;
             }
 
-            final ModResearchCosts.ResearchCostEntry researchCostEntry = IMinecoloniesAPI.getInstance().getResearchCostRegistry().getValue(type);
-            if (researchCostEntry != null)
-            {
-                try
-                {
-                    costs.add(researchCostEntry.readFromJson(requirementJson));
-                }
-                catch (Exception ex)
-                {
-                    Log.getLogger().warn("Research '{}' requirement #{} is invalid. {}", researchId, index, ex.getMessage());
-                }
-                continue;
-            }
+            // Skip cost entries - research no longer requires item costs
+            // Cost registry has been removed - skip any cost-type entries
 
             Log.getLogger().warn("Research '{}' requirement #{} is invalid, type '{}' does not exist.", researchId, index, type);
         }
@@ -366,33 +351,8 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
      */
     private List<IResearchCost> parseResearchCosts(final ResourceLocation researchId, final JsonArray jsonCosts, final JsonArray jsonRequirements)
     {
-        final List<IResearchCost> costs = new ArrayList<>();
-        for (int index = 0; index < jsonCosts.size(); index++)
-        {
-            final JsonObject jsonCost = jsonCosts.get(index).getAsJsonObject();
-
-            final ResourceLocation type = GsonHelper.getAsResourceLocation(jsonCost, RESEARCH_REQUIREMENT_TYPE_PROP, null);
-            if (type == null)
-            {
-                Log.getLogger().warn("Research '{}' cost #{} is missing the required '{}' property.", researchId, index, RESEARCH_REQUIREMENT_TYPE_PROP);
-                continue;
-            }
-
-            final ModResearchCosts.ResearchCostEntry researchCostEntry = IMinecoloniesAPI.getInstance().getResearchCostRegistry().getValue(type);
-            if (researchCostEntry != null)
-            {
-                try
-                {
-                    costs.add(researchCostEntry.readFromJson(jsonCost));
-                }
-                catch (Exception ex)
-                {
-                    Log.getLogger().warn("Research '{}' cost #{} is invalid. {}", researchId, index, ex.getMessage());
-                }
-            }
-        }
-
-        return costs;
+        // Research no longer uses item costs - return empty list
+        return new ArrayList<>();
     }
 
     /**

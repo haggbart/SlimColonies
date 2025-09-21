@@ -1,22 +1,5 @@
 {
   "branch": "minecolonies:combat",
-  "costs": [
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:rotten_flesh",
-      "quantity": 8
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:bone",
-      "quantity": 8
-    },
-    {
-      "type": "minecolonies:item_simple",
-      "item": "minecraft:spider_eye",
-      "quantity": 8
-    }
-  ],
   "effects": [
     {
       "id": "minecolonies:effects/knighttauntmobsunlock",
