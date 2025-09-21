@@ -4,7 +4,6 @@ import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.util.Log;
-import com.minecolonies.core.colony.events.raid.RaidManager;
 import com.minecolonies.core.commands.commandTypes.IMCCommand;
 import com.minecolonies.core.commands.commandTypes.IMCOPCommand;
 import com.minecolonies.core.research.LocalResearchTree;

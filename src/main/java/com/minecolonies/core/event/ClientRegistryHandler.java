@@ -10,26 +10,8 @@ import com.minecolonies.api.tileentities.MinecoloniesTileEntities;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.core.client.model.*;
 import com.minecolonies.core.client.model.ScarecrowModel;
-import com.minecolonies.core.client.model.raiders.*;
 import com.minecolonies.core.client.render.*;
 import com.minecolonies.core.client.render.mobs.RenderMercenary;
-import com.minecolonies.core.client.render.mobs.amazon.RendererAmazon;
-import com.minecolonies.core.client.render.mobs.amazon.RendererAmazonSpearman;
-import com.minecolonies.core.client.render.mobs.amazon.RendererChiefAmazon;
-import com.minecolonies.core.client.render.mobs.barbarians.RendererBarbarian;
-import com.minecolonies.core.client.render.mobs.barbarians.RendererChiefBarbarian;
-import com.minecolonies.core.client.render.mobs.drownedpirates.RendererDrownedArcherPirate;
-import com.minecolonies.core.client.render.mobs.drownedpirates.RendererDrownedChiefPirate;
-import com.minecolonies.core.client.render.mobs.drownedpirates.RendererDrownedPirate;
-import com.minecolonies.core.client.render.mobs.egyptians.RendererArcherMummy;
-import com.minecolonies.core.client.render.mobs.egyptians.RendererMummy;
-import com.minecolonies.core.client.render.mobs.egyptians.RendererPharao;
-import com.minecolonies.core.client.render.mobs.norsemen.RendererArcherNorsemen;
-import com.minecolonies.core.client.render.mobs.norsemen.RendererChiefNorsemen;
-import com.minecolonies.core.client.render.mobs.norsemen.RendererShieldmaidenNorsemen;
-import com.minecolonies.core.client.render.mobs.pirates.RendererArcherPirate;
-import com.minecolonies.core.client.render.mobs.pirates.RendererChiefPirate;
-import com.minecolonies.core.client.render.mobs.pirates.RendererPirate;
 import com.minecolonies.core.client.render.projectile.FireArrowRenderer;
 import com.minecolonies.core.client.render.projectile.RendererSpear;
 import com.minecolonies.core.client.render.worldevent.ColonyBlueprintRenderer;
@@ -160,17 +142,7 @@ public class ClientRegistryHandler
     {
         event.registerLayerDefinition(MERCENARY, MercenaryModel::createMesh);
 
-        event.registerLayerDefinition(AMAZON, ModelAmazon::createMesh);
-        event.registerLayerDefinition(AMAZON_CHIEF, ModelAmazonChief::createMesh);
-        event.registerLayerDefinition(AMAZON_SPEARMAN, ModelAmazonSpearman::createMesh);
-
-        event.registerLayerDefinition(ARCHER_MUMMY, ModelArcherMummy::createMesh);
-        event.registerLayerDefinition(MUMMY, ModelMummy::createMesh);
-        event.registerLayerDefinition(PHARAO, ModelPharaoh::createMesh);
-
-        event.registerLayerDefinition(SHIELD_MAIDEN, ModelShieldmaiden::createMesh);
-        event.registerLayerDefinition(NORSEMEN_ARCHER, ModelArcherNorsemen::createMesh);
-        event.registerLayerDefinition(NORSEMEN_CHIEF, ModelChiefNorsemen::createMesh);
+        // All raider model layer definitions removed for SlimColonies
 
         event.registerLayerDefinition(SCARECROW, ScarecrowModel::createMesh);
 
@@ -281,57 +253,7 @@ public class ClientRegistryHandler
         event.registerEntityRenderer(ModEntities.MC_NORMAL_ARROW, TippableArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.DRUID_POTION, m -> new ThrownItemRenderer<>(m, 1.0F, true));
 
-        // Raiders
-
-        event.registerEntityRenderer(ModEntities.BARBARIAN, RendererBarbarian::new);
-        event.registerEntityRenderer(ModEntities.ARCHERBARBARIAN, RendererBarbarian::new);
-        event.registerEntityRenderer(ModEntities.CHIEFBARBARIAN, RendererChiefBarbarian::new);
-
-        event.registerEntityRenderer(ModEntities.PIRATE, RendererPirate::new);
-        event.registerEntityRenderer(ModEntities.ARCHERPIRATE, RendererArcherPirate::new);
-        event.registerEntityRenderer(ModEntities.CHIEFPIRATE, RendererChiefPirate::new);
-
-        event.registerEntityRenderer(ModEntities.MUMMY, RendererMummy::new);
-        event.registerEntityRenderer(ModEntities.ARCHERMUMMY, RendererArcherMummy::new);
-        event.registerEntityRenderer(ModEntities.PHARAO, RendererPharao::new);
-
-        event.registerEntityRenderer(ModEntities.SHIELDMAIDEN, RendererShieldmaidenNorsemen::new);
-        event.registerEntityRenderer(ModEntities.NORSEMEN_ARCHER, RendererArcherNorsemen::new);
-        event.registerEntityRenderer(ModEntities.NORSEMEN_CHIEF, RendererChiefNorsemen::new);
-
-        event.registerEntityRenderer(ModEntities.AMAZON, RendererAmazon::new);
-        event.registerEntityRenderer(ModEntities.AMAZONCHIEF, RendererChiefAmazon::new);
-        event.registerEntityRenderer(ModEntities.AMAZONSPEARMAN, RendererAmazonSpearman::new);
-
-        event.registerEntityRenderer(ModEntities.DROWNED_PIRATE, RendererDrownedPirate::new);
-        event.registerEntityRenderer(ModEntities.DROWNED_ARCHERPIRATE, RendererDrownedArcherPirate::new);
-        event.registerEntityRenderer(ModEntities.DROWNED_CHIEFPIRATE, RendererDrownedChiefPirate::new);
-
-        // Camp Raiders
-
-        event.registerEntityRenderer(ModEntities.CAMP_BARBARIAN, RendererBarbarian::new);
-        event.registerEntityRenderer(ModEntities.CAMP_ARCHERBARBARIAN, RendererBarbarian::new);
-        event.registerEntityRenderer(ModEntities.CAMP_CHIEFBARBARIAN, RendererChiefBarbarian::new);
-
-        event.registerEntityRenderer(ModEntities.CAMP_PIRATE, RendererPirate::new);
-        event.registerEntityRenderer(ModEntities.CAMP_ARCHERPIRATE, RendererArcherPirate::new);
-        event.registerEntityRenderer(ModEntities.CAMP_CHIEFPIRATE, RendererChiefPirate::new);
-
-        event.registerEntityRenderer(ModEntities.CAMP_MUMMY, RendererMummy::new);
-        event.registerEntityRenderer(ModEntities.CAMP_ARCHERMUMMY, RendererArcherMummy::new);
-        event.registerEntityRenderer(ModEntities.CAMP_PHARAO, RendererPharao::new);
-
-        event.registerEntityRenderer(ModEntities.CAMP_SHIELDMAIDEN, RendererShieldmaidenNorsemen::new);
-        event.registerEntityRenderer(ModEntities.CAMP_NORSEMEN_ARCHER, RendererArcherNorsemen::new);
-        event.registerEntityRenderer(ModEntities.CAMP_NORSEMEN_CHIEF, RendererChiefNorsemen::new);
-
-        event.registerEntityRenderer(ModEntities.CAMP_AMAZON, RendererAmazon::new);
-        event.registerEntityRenderer(ModEntities.CAMP_AMAZONCHIEF, RendererChiefAmazon::new);
-        event.registerEntityRenderer(ModEntities.CAMP_AMAZONSPEARMAN, RendererAmazonSpearman::new);
-
-        event.registerEntityRenderer(ModEntities.CAMP_DROWNED_PIRATE, RendererDrownedPirate::new);
-        event.registerEntityRenderer(ModEntities.CAMP_DROWNED_ARCHERPIRATE, RendererDrownedArcherPirate::new);
-        event.registerEntityRenderer(ModEntities.CAMP_DROWNED_CHIEFPIRATE, RendererDrownedChiefPirate::new);
+        // All raider renderers removed for SlimColonies
 
         // Misc
 

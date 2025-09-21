@@ -4,7 +4,6 @@ import com.minecolonies.api.blocks.decorative.AbstractBlockGate;
 import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
-import com.minecolonies.api.entity.mobs.AbstractEntityMinecoloniesRaider;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.core.MineColonies;
 import com.minecolonies.core.colony.buildings.AbstractBuildingGuards;

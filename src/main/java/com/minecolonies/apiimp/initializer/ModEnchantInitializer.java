@@ -1,7 +1,6 @@
 package com.minecolonies.apiimp.initializer;
 
 import com.minecolonies.api.enchants.ModEnchants;
-import com.minecolonies.core.enchants.RaiderDamageEnchant;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 

@@ -1,7 +1,5 @@
 package com.minecolonies.core.items;
 
-import com.minecolonies.api.entity.mobs.RaiderMobUtils;
-import com.minecolonies.api.entity.mobs.barbarians.AbstractEntityBarbarianRaider;
 import com.minecolonies.api.items.IChiefSwordItem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
