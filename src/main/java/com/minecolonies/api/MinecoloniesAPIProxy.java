@@ -18,7 +18,6 @@ import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.configuration.Configuration;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.crafting.registry.RecipeTypeEntry;
-import com.minecolonies.api.entity.mobs.registry.IMobAIRegistry;
 // Happiness imports removed
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
@@ -63,11 +62,6 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
         return apiInstance.getCitizenDataManager();
     }
 
-    @Override
-    public IMobAIRegistry getMobAIRegistry()
-    {
-        return apiInstance.getMobAIRegistry();
-    }
 
     @Override
     public IPathNavigateRegistry getPathNavigateRegistry()

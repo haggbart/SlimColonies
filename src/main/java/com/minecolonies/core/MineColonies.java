@@ -89,11 +89,11 @@ public class MineColonies
         ModResearchRequirementInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeSerializerInitializer.RECIPE_SERIALIZER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeSerializerInitializer.RECIPE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModColonyEventTypeInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+        // ModColonyEventTypeInitializer removed - no raid events in SlimColonies
         ModCraftingTypesInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModJobsInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeTypesInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
-        RaiderMobUtils.ATTRIBUTES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        // RaiderMobUtils removed - no raiders in SlimColonies
         ModSoundEvents.SOUND_EVENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModInteractionsInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModResearchEffectInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());

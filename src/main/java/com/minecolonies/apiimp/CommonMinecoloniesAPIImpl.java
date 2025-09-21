@@ -92,12 +92,6 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
         return citizenDataManager;
     }
 
-    @Override
-    @NotNull
-    public IMobAIRegistry getMobAIRegistry()
-    {
-        return null; // Mob AI registry disabled for SlimColonies
-    }
 
     @Override
     @NotNull

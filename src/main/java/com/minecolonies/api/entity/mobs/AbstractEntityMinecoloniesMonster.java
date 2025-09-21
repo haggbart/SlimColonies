@@ -93,7 +93,7 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
         this.goalSelector = new CustomGoalSelector(this.goalSelector);
         this.targetSelector = new CustomGoalSelector(this.targetSelector);
         this.xpReward = BARBARIAN_EXP_DROP;
-        IMinecoloniesAPI.getInstance().getMobAIRegistry().applyToMob(this);
+        // Mob AI registry disabled for SlimColonies
     }
 
     /**
