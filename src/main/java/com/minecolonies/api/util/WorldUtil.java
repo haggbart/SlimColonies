@@ -178,16 +178,6 @@ public class WorldUtil
         return world.getDayTime() % 24000 <= pastTime;
     }
 
-    /**
-     * Check if it's currently afternoon the world.
-     *
-     * @param world the world to check.
-     * @return true if so.
-     */
-    public static boolean isPastNoon(final Level world)
-    {
-        return isPastTime(world, NOON);
-    }
 
     /**
      * Check if a world is of the overworld type.
@@ -234,18 +224,6 @@ public class WorldUtil
         return regKey == type;
     }
 
-    /**
-     * Check to see if the world is peaceful.
-     * <p>
-     * There are several checks performed here, currently both gamerule and difficulty.
-     *
-     * @param world world to check
-     * @return true if peaceful
-     */
-    public static boolean isPeaceful(@NotNull final Level world)
-    {
-        return !world.getLevelData().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) || world.getDifficulty().equals(Difficulty.PEACEFUL);
-    }
 
     /**
      * Custom set block state, with 1 instead of default flag 3, to skip vanilla's path notify upon block change, making setBlockState expensive. The state change still affects
