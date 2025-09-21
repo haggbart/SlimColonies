@@ -1,7 +1,7 @@
 # SlimColonies Project
 
 ## Overview
-This is a fork of MineColonies Minecraft mod, intended to create a streamlined version.
+This is a stripped-down fork of MineColonies with many features removed to make colonies less demanding.
 
 ## Development Commands
 
