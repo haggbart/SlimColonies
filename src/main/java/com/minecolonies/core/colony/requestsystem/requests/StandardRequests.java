@@ -580,29 +580,6 @@ public final class StandardRequests
         {
             final MutableComponent result = Component.literal("");
             result.append(getRequest().getEquipmentType().getDisplayName());
-
-            if (getRequest().getMinLevel() > EquipmentLevelConstants.TOOL_LEVEL_HAND)
-            {
-                result.append(Component.literal(" "));
-                result.append(Component.translatable(RequestSystemTranslationConstants.REQUESTS_TYPE_TOOL_MINIMUM_LEVEL_PREFIX));
-                result.append(Component.literal(" "));
-                result.append(getRequest().isArmor() ? ItemStackUtils.swapArmorGrade(getRequest().getMinLevel()) : ItemStackUtils.swapToolGrade(getRequest().getMinLevel()));
-            }
-
-            if (getRequest().getMaxLevel() < Integer.MAX_VALUE)
-            {
-                if (getRequest().getMinLevel() > EquipmentLevelConstants.TOOL_LEVEL_HAND)
-                {
-                    result.append(Component.literal(" "));
-                    result.append(Component.translatable(TranslationConstants.COM_MINECOLONIES_GENERAL_AND));
-                }
-
-                result.append(Component.literal(" "));
-                result.append(Component.translatable(RequestSystemTranslationConstants.REQUESTS_TYPE_TOOL_MAXIMUM_LEVEL_PREFIX));
-                result.append(Component.literal(" "));
-                result.append(getRequest().isArmor() ? ItemStackUtils.swapArmorGrade(getRequest().getMaxLevel()) : ItemStackUtils.swapToolGrade(getRequest().getMaxLevel()));
-            }
-
             return result;
         }
 
