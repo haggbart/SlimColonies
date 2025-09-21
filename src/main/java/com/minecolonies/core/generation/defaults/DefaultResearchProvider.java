@@ -1859,22 +1859,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                       .addItemCost(Items.REDSTONE, 64)
                                       .addEffect(ModBuildings.mechanic.get().getBuildingBlock(), 1)
                                       .addToList(r);
-        final Research enhanced_gates1 = new Research(new ResourceLocation(Constants.MOD_ID, "technology/enhanced_gates1"), TECH).setParentResearch(whatYaNeed)
-                                           .setTranslatedName("Enhanced Gates I")
-                                           .setIcon(ModItems.woodgate)
-                                           .addItemCost(ModItems.woodgate, 64)
-                                           .addItemCost(ModItems.ancientTome, 2)
-                                           .addItemCost(Items.IRON_BLOCK, 5)
-                                           .addEffect(MECHANIC_ENHANCED_GATES, 1)
-                                           .addToList(r);
-        new Research(new ResourceLocation(Constants.MOD_ID, "technology/enhanced_gates2"), TECH).setParentResearch(enhanced_gates1)
-          .setTranslatedName("Enhanced Gates II")
-          .setIcon(ModItems.irongate)
-          .addItemCost(ModItems.irongate, 64)
-          .addItemCost(ModItems.ancientTome, 2)
-          .addItemCost(Items.OBSIDIAN, 32)
-          .addEffect(MECHANIC_ENHANCED_GATES, 2)
-          .addToList(r);
 
         return r;
     }
