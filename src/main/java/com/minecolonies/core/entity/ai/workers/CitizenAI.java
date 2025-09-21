@@ -153,13 +153,6 @@ public class CitizenAI implements IStateAI
             return CitizenAIState.SICK;
         }
 
-        // Raiding
-        if (citizen.getCitizenColonyHandler().getColonyOrRegister().getRaiderManager().isRaided())
-        {
-            citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_RAID), ChatPriority.IMPORTANT));
-            citizen.setVisibleStatusIfNone(RAIDED);
-            return CitizenAIState.SLEEP;
-        }
 
         // Sleeping
         if (!WorldUtil.isPastTime(CompatibilityUtils.getWorldFromCitizen(citizen), NIGHT - 2000))

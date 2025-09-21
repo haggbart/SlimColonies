@@ -74,8 +74,6 @@ public class CommandTranslationConstants
     @NonNls
     public static final String COMMAND_OFFICER_ADD_SUCCESS                   = "com.minecolonies.command.addofficer.success";
     @NonNls
-    public static final String COMMAND_CAN_RAIDER_SPAWN_SUCCESS              = "com.minecolonies.command.canspawnraider.success";
-    @NonNls
     public static final String COMMAND_OWNER_CHANGE_SUCCESS                  = "com.minecolonies.command.ownerchange.success";
     @NonNls
     public static final String COMMAND_CLAIM_SUCCESS                         = "com.minecolonies.command.claim.success";
@@ -110,12 +108,6 @@ public class CommandTranslationConstants
     @NonNls
     public static final String COMMAND_COLONY_LOAD_BACKUP_SUCCESS            = "com.minecolonies.command.loadbackup.success";
     @NonNls
-    public static final String COMMAND_RAID_NOW_SUCCESS                      = "com.minecolonies.command.raidnow.success";
-    @NonNls
-    public static final String COMMAND_RAID_NOW_FAILURE                      = "com.minecolonies.command.raidnow.failure";
-    @NonNls
-    public static final String COMMAND_RAID_TONIGHT_SUCCESS                  = "com.minecolonies.command.raidtonight.success";
-    @NonNls
     public static final String COMMAND_REQUEST_SYSTEM_RESET_SUCCESS          = "com.minecolonies.command.rsreset.success";
     @NonNls
     public static final String COMMAND_REQUEST_SYSTEM_RESET_ALL_SUCCESS      = "com.minecolonies.command.rsresetall.success";
@@ -129,8 +121,6 @@ public class CommandTranslationConstants
     public static final String COMMAND_HELP_INFO_DISCORD                     = "com.minecolonies.command.help.discord";
     @NonNls
     public static final String COMMAND_PRUNE_WORLD_WARNING                   = "com.minecolonies.command.prune.next";
-    @NonNls
-    public static final String COMMAND_RAID_TONIGHT_WARNING                  = "com.minecolonies.command.raidtonight";
     @NonNls
     public static final String COMMAND_RESET_SUPPLY_SUCCESS                  = "com.minecolonies.command.resetsupply";
     @NonNls

@@ -190,29 +190,6 @@ public final class TranslationConstants
     @NonNls
     public static final String REALLY_FAR_DESC                                                      = "com.minecolonies.coremod.max.schematic.reallyfar";
     @NonNls
-    public static final String RAID_EVENT_MESSAGE                                                   = "event.minecolonies.raidmessage";
-    @NonNls
-    public static final String RAID_EVENT_MESSAGE_PIRATE                                            = "event.minecolonies.raidmessage_p";
-    @NonNls
-    public static final String RAID_EVENT_MESSAGE_U_PIRATE                                          = "event.minecolonies.raidmessage_u";
-    @NonNls
-    public static final String RAID_AMAZON                                                          = "com.minecolonies.coremod.raid.amazon.name";
-    @NonNls
-    public static final String RAID_EGYPTIAN                                                        = "com.minecolonies.coremod.raid.egyptian.name";
-    @NonNls
-    public static final String RAID_BARBARIAN                                                       = "com.minecolonies.coremod.raid.barbarian.name";
-    @NonNls
-    public static final String RAID_PIRATE                                                          = "com.minecolonies.coremod.raid.pirate.name";
-    @NonNls
-    public static final String RAID_NORSEMEN                                                        = "com.minecolonies.coremod.raid.norsemen.name";
-    @NonNls
-    public static final String ONLY_X_BARBARIANS_LEFT_MESSAGE       = "com.minecolonies.coremod.barbarians.left";
-    @NonNls
-    public static final String INDIVIDUAL_RAID_FINISH               = "com.minecolonies.coremod.raid.end";
-    @NonNls
-    public static final String RAID_END_MERCY                       = "com.minecolonies.core.barbarians.mercy";
-    public static final String RAID_END                             = "com.minecolonies.coremod.barbarians.killed";
-    @NonNls
     public static final String CANT_PLACE_COLONY_TOO_CLOSE_TO_SPAWN = "com.minecolonies.core.founding.tooclosetospawn";
     @NonNls
     public static final String CANT_PLACE_COLONY_TOO_FAR_FROM_SPAWN                                 = "com.minecolonies.core.founding.toofarfromspawn";
@@ -262,10 +239,6 @@ public final class TranslationConstants
     public static final String COM_MINECOLONIES_COREMOD_GUI_HIRE_UNPAUSE                            = "com.minecolonies.coremod.gui.hiring.buttonunpaused";
     @NonNls
     public static final String CMC_GUI_TOWNHALL_BUILDING_LEVEL                                      = "com.minecolonies.coremod.gui.townhall.buildinglevel";
-    @NonNls
-    public static final String PIRATES_SAILING_OFF_MESSAGE          = "com.minecolonies.coremod.raid.sailing.away";
-    @NonNls
-    public static final String STRUCTURE_SPAWNER_BREAKS                                             = "com.minecolonies.core.raidevent.spawnerbreaks";
     @NonNls
     public static final String ALL_PIRATE_SPAWNERS_DESTROYED_MESSAGE                                = "com.minecolonies.coremod.pirates.spawners.destroyed";
     @NonNls
@@ -358,8 +331,6 @@ public final class TranslationConstants
     public static final String DEMANDS                                                              = "com.minecolonies.coremod.entity.citizen.demands.";
     @NonNls
     public static final String COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_RAINING                      = "com.minecolonies.coremod.entity.citizen.raining";
-    @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_RAID                         = "com.minecolonies.coremod.entity.citizen.raid";
     @NonNls
     public static final String COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_SLEEPING                     = "com.minecolonies.coremod.entity.citizen.sleeping";
     @NonNls
@@ -774,8 +745,6 @@ public final class TranslationConstants
     public static final String MESSAGE_INFO_CITIZEN_STATUS_HUNGRY   = "com.minecolonies.gui.visiblestatus.eat";
     @NonNls
     public static final String MESSAGE_INFO_CITIZEN_STATUS_IDLE     = "com.minecolonies.gui.visiblestatus.idle";
-    @NonNls
-    public static final String MESSAGE_INFO_CITIZEN_STATUS_RAID     = "com.minecolonies.gui.visiblestatus.raid";
     @NonNls
     public static final String MESSAGE_INFO_CITIZEN_STATUS_MOURNING = "com.minecolonies.gui.visiblestatus.mourn";
     @NonNls

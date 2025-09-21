@@ -29,25 +29,10 @@ public class ItemAncientTome extends AbstractItemMinecolonies
     public void inventoryTick(final ItemStack stack, final Level worldIn, final Entity entityIn, final int itemSlot, final boolean isSelected)
     {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-        if (!worldIn.isClientSide)
-        {
-            final IColony colony = IColonyManager.getInstance().getClosestColony(worldIn, entityIn.blockPosition());
-            final CompoundTag tag = new CompoundTag();
-
-            if (colony != null)
-            {
-                tag.putBoolean(NbtTagConstants.TAG_RAID_WILL_HAPPEN, colony.getRaiderManager().willRaidTonight());
-            }
-            else
-            {
-                tag.putBoolean(NbtTagConstants.TAG_RAID_WILL_HAPPEN, false);
-            }
-            stack.setTag(tag);
-        }
     }
 
     public boolean isFoil(final ItemStack stack)
     {
-        return stack.getTag() != null && stack.getTag().getBoolean(NbtTagConstants.TAG_RAID_WILL_HAPPEN);
+        return false;
     }
 }

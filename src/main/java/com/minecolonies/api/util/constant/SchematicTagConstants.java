@@ -23,12 +23,6 @@ public class SchematicTagConstants
     public static final String TAG_ARCHER = "archer";
     public static final String TAG_GATE   = "gate";
 
-    /**
-     * Raider tags.
-     */
-    public static final String NORMAL_RAIDER = "normal";
-    public static final String ARCHER_RAIDER = "archer";
-    public static final String BOSS_RAIDER   = "boss";
 
     /**
      * Plantation field tags.

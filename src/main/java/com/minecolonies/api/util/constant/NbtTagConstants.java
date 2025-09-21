@@ -195,25 +195,6 @@ public final class NbtTagConstants
      */
     public static final String COLONY_DAY = "colonyday";
 
-    /**
-     * Tag to store if raidable to a colony.
-     */
-    public static final String TAG_RAIDABLE = "raidable";
-
-    /**
-     * Tag to store nights since last raid
-     */
-    public static final String TAG_NIGHTS_SINCE_LAST_RAID = "nightsRaid";
-
-    /**
-     * Tag to store raid history data
-     */
-    public static final String TAG_RAID_HISTORY = "raidhistory";
-
-    /**
-     * Tag on the ancient tome used to indicate if a raid will happen.
-     */
-    public static final String TAG_RAID_WILL_HAPPEN = "raidWillHappen";
 
     /**
      * Tag to store if auto deletable to a colony.
@@ -507,7 +488,7 @@ public final class NbtTagConstants
     public static final String TAG_PRINT_PROGRESS   = "printProgrss";
 
     /**
-     * Raid manager tag
+     * Schematic list tag
      */
     public static final String TAG_SCHEMATIC_LIST = "ships";
 

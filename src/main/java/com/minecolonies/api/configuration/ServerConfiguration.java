@@ -35,7 +35,6 @@ public class ServerConfiguration extends AbstractConfiguration
     public final ForgeConfigSpec.IntValue     colonyLoadStrictness;
     public final ForgeConfigSpec.IntValue     maxTreeSize;
     public final ForgeConfigSpec.BooleanValue noSupplyPlacementRestrictions;
-    public final ForgeConfigSpec.BooleanValue skyRaiders;
 
     /*  --------------------------------------------------------------------------- *
      *  ------------------- ######## Research settings ######## ------------------- *
@@ -73,13 +72,6 @@ public class ServerConfiguration extends AbstractConfiguration
      *  ------------------- ######## Combat Settings ######## ------------------- *
      *  ------------------------------------------------------------------------- */
 
-    public final ForgeConfigSpec.BooleanValue enableColonyRaids;
-    public final ForgeConfigSpec.IntValue     raidDifficulty;
-    public final ForgeConfigSpec.IntValue     maxRaiders;
-    public final ForgeConfigSpec.BooleanValue raidersbreakblocks;
-    public final ForgeConfigSpec.IntValue     averageNumberOfNightsBetweenRaids;
-    public final ForgeConfigSpec.IntValue     minimumNumberOfNightsBetweenRaids;
-    public final ForgeConfigSpec.BooleanValue raidersbreakdoors;
     public final ForgeConfigSpec.BooleanValue mobAttackCitizens;
     public final ForgeConfigSpec.DoubleValue  guardDamageMultiplier;
     public final ForgeConfigSpec.DoubleValue  guardHealthMult;
@@ -146,7 +138,6 @@ public class ServerConfiguration extends AbstractConfiguration
         colonyLoadStrictness = defineInteger(builder, "colonyloadstrictness", 3, 1, 15);
         maxTreeSize = defineInteger(builder, "maxtreesize", 400, 1, 1000);
         noSupplyPlacementRestrictions = defineBoolean(builder, "nosupplyplacementrestrictions", false);
-        skyRaiders = defineBoolean(builder, "skyraiders", false);
 
         swapToCategory(builder, "research");
         researchCreativeCompletion = defineBoolean(builder, "researchcreativecompletion", true);
@@ -176,14 +167,7 @@ public class ServerConfiguration extends AbstractConfiguration
 
         swapToCategory(builder, "combat");
 
-        enableColonyRaids = defineBoolean(builder, "dobarbariansspawn", true);
-        raidDifficulty = defineInteger(builder, "barbarianhordedifficulty", DEFAULT_BARBARIAN_DIFFICULTY, MIN_BARBARIAN_DIFFICULTY, MAX_BARBARIAN_DIFFICULTY);
-        maxRaiders = defineInteger(builder, "maxBarbarianSize", 80, MIN_BARBARIAN_HORDE_SIZE, MAX_BARBARIAN_HORDE_SIZE);
-        raidersbreakblocks = defineBoolean(builder, "dobarbariansbreakthroughwalls", true);
-        averageNumberOfNightsBetweenRaids = defineInteger(builder, "averagenumberofnightsbetweenraids", 14, 1, 50);
-        minimumNumberOfNightsBetweenRaids = defineInteger(builder, "minimumnumberofnightsbetweenraids", 10, 1, 30);
         mobAttackCitizens = defineBoolean(builder, "mobattackcitizens", true);
-        raidersbreakdoors = defineBoolean(builder, "shouldraiderbreakdoors", true);
         guardDamageMultiplier = defineDouble(builder, "guardDamageMultiplier", 1.0, 0.1, 15.0);
         guardHealthMult = defineDouble(builder, "guardhealthmult", 1.0, 0.1, 5.0);
         pvp_mode = defineBoolean(builder, "pvp_mode", false);

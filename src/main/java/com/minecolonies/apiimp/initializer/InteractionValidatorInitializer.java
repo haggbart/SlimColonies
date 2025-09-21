@@ -346,8 +346,6 @@ public class InteractionValidatorInitializer
                        && !citizen.getColony().getRaiderManager().isRaided()
                        && !citizen.getCitizenMournHandler().isMourning());
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_RAID),
-          citizen -> citizen.getEntity().isPresent() && citizen.getColony().getRaiderManager().isRaided());
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_SLEEPING),
           citizen -> citizen.getEntity().isPresent() && citizen.isAsleep());
