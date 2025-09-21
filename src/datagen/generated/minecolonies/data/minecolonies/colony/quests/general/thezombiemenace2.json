@@ -59,9 +59,7 @@
       ]
     }
   ],
-  "parents": [
-    "minecolonies:general/thezombiemenace1"
-  ],
+  "parents": [],
   "rewards": [
     {
       "type": "minecolonies:item",
@@ -69,7 +67,8 @@
         "item": "minecraft:diamond",
         "qty": 1
       }
-    }
+    },
+    {}
   ],
   "triggers": [
     {

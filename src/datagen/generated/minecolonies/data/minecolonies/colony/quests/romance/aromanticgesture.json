@@ -92,7 +92,9 @@
         "item": "minecraft:diamond",
         "qty": 1
       }
-    }
+    },
+    {},
+    {}
   ],
   "triggers": [
     {

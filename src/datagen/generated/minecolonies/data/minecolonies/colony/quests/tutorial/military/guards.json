@@ -153,7 +153,7 @@
     }
   ],
   "parents": [
-    "minecolonies:tutorial/military/zombies"
+    "minecolonies:tutorial/forester"
   ],
   "rewards": [
     {
@@ -171,7 +171,7 @@
       "state": {
         "notmatch": {
           "finavquests": [
-            "minecolonies:tutorial/military/zombies"
+            "minecolonies:tutorial/forester"
           ]
         }
       }

@@ -107,7 +107,8 @@
         "item": "minecraft:emerald",
         "qty": 1
       }
-    }
+    },
+    {}
   ],
   "triggers": [
     {

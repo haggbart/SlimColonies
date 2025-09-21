@@ -233,7 +233,8 @@
         "nbt": "{id: \"minecraft:splash_potion\", Count: 1b, tag: {RepairCost: 0, Potion: \"minecraft:poison\", display: {Name: '{\"text\":\"Suspicious Potion\"}'}}}",
         "qty": 1
       }
-    }
+    },
+    {}
   ],
   "triggers": [
     {

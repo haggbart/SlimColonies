@@ -7,12 +7,6 @@
       "quantity": 9
     }
   ],
-  "effects": [
-    {
-      "id": "minecolonies:effects/happinessmultiplier",
-      "level": 2
-    }
-  ],
   "icon": "minecolonies:textures/icons/research/happy2.png",
   "parentResearch": "minecolonies:civilian/circus",
   "requirements": [

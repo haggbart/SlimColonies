@@ -7,12 +7,6 @@
       "quantity": 27
     }
   ],
-  "effects": [
-    {
-      "id": "minecolonies:effects/happinessmultiplier",
-      "level": 4
-    }
-  ],
   "icon": "minecolonies:textures/icons/research/happy4.png",
   "parentResearch": "minecolonies:civilian/spectacle",
   "requirements": [

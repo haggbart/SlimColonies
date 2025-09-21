@@ -2,7 +2,7 @@
   "name": "Building Defences",
   "max-occurrences": 1,
   "parents": [
-    "minecolonies:tutorial/military/zombies"
+    "minecolonies:tutorial/forester"
   ],
   "triggers": [
     {
@@ -10,7 +10,7 @@
       "state": {
         "notmatch": {
           "finavquests": [
-            "minecolonies:tutorial/military/zombies"
+            "minecolonies:tutorial/forester"
           ]
         }
       }
