@@ -91,8 +91,7 @@
         "item": "minecraft:gold_ingot",
         "qty": 1
       }
-    },
-    {}
+    }
   ],
   "triggers": [
     {

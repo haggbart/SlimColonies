@@ -200,8 +200,6 @@
       }
     },
     {
-    },
-    {
       "type": "minecolonies:questreputation",
       "details": {
         "qty": 0.5
