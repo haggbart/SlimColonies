@@ -73,11 +73,9 @@ public class WindowsBarracksSpies extends BOWindow implements ButtonHandler
         int goldCount = InventoryUtils.getItemCountInItemHandler(playerInv, Items.GOLD_INGOT);
         goldCount += InventoryUtils.getItemCountInItemHandler(rackInv, Items.GOLD_INGOT);
 
-        if (!buildingView.getColony().isRaiding() || goldCount < GOLD_COST || buildingView.getColony().areSpiesEnabled())
-        {
-            findPaneOfTypeByID(BUTTON_HIRE, ButtonImage.class).disable();
-        }
-        findPaneOfTypeByID(TEXT_ID, Text.class).setText(Component.translatable(DESCRIPTION_BARRACKS_HIRE_SPIES));
+        // Spies are disabled in SlimColonies since raids don't exist
+        findPaneOfTypeByID(BUTTON_HIRE, ButtonImage.class).disable();
+        findPaneOfTypeByID(TEXT_ID, Text.class).setText(Component.literal("Spies are disabled in SlimColonies (no raids)"));
     }
 
     @Override

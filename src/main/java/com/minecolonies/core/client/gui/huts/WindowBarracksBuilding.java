@@ -122,26 +122,19 @@ public class WindowBarracksBuilding extends AbstractWindowModuleBuilding<Buildin
                 return;
             }
 
-            if (view.isRaiding())
-            {
-                findPaneOfTypeByID(LABEL_CURRENNT, Text.class).setText(mountDistanceString(spawnPoints.get(spawnPoints.size() - 1)));
-            }
             positionsList.setDataProvider(new ScrollingList.DataProvider()
             {
                 @Override
                 public int getElementCount()
                 {
-                    return spawnPoints.size() - (view.isRaiding() ? 1 : 0);
+                    return spawnPoints.size();
                 }
 
                 @Override
                 public void updateElement(final int index, @NotNull final Pane rowPane)
                 {
                     final BlockPos pos = spawnPoints.get(index);
-                    if (!(view.isRaiding() && index == spawnPoints.size() - 1))
-                    {
-                        rowPane.findPaneOfTypeByID(LABEL_POS, Text.class).setText(Component.literal((index + 1) + ": " + mountDistanceString(pos)));
-                    }
+                    rowPane.findPaneOfTypeByID(LABEL_POS, Text.class).setText(Component.literal((index + 1) + ": " + mountDistanceString(pos)));
                 }
             });
         }

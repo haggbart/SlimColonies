@@ -391,9 +391,6 @@ public interface IColonyView extends IColony
      *
      * @return true if so.
      */
-    boolean isRaiding();
-
-    boolean areSpiesEnabled();
 
     /**
      * Gets the data view for a visitor

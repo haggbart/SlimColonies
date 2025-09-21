@@ -169,7 +169,6 @@ public final class ColonyView implements IColonyView
     /**
      * Wether the colony is raided
      */
-    private boolean isUnderRaid;
 
     /**
      * The world.
@@ -199,7 +198,6 @@ public final class ColonyView implements IColonyView
     /**
      * Whether spies are active and highlight enemy positions.
      */
-    private boolean   spiesEnabled;
     private Set<Long> ticketedChunks = new HashSet<>();
 
     /**
@@ -361,8 +359,6 @@ public final class ColonyView implements IColonyView
         buf.writeLong(colony.getMercenaryUseTime());
 
         buf.writeUtf(colony.getStructurePack());
-        buf.writeBoolean(false);
-        buf.writeBoolean(false);
 
         if (hasNewSubscribers || colony.isTicketedChunksDirty())
         {
@@ -805,8 +801,6 @@ public final class ColonyView implements IColonyView
             StructurePacks.selectedPack = StructurePacks.getStructurePack(this.style);
         }
 
-        this.isUnderRaid = buf.readBoolean();
-        this.spiesEnabled = buf.readBoolean();
 
         final int ticketChunkCount = buf.readInt();
         if (ticketChunkCount != -1)
@@ -1430,11 +1424,6 @@ public final class ColonyView implements IColonyView
         return connectionManager;
     }
 
-    @Override
-    public boolean isRaiding()
-    {
-        return this.isUnderRaid;
-    }
 
     @Override
     public long getMercenaryUseTime()
@@ -1454,11 +1443,6 @@ public final class ColonyView implements IColonyView
         return researchManager;
     }
 
-    @Override
-    public boolean areSpiesEnabled()
-    {
-        return spiesEnabled;
-    }
 
     @Override
     public ICitizenDataView getVisitor(final int citizenId)
