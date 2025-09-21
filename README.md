@@ -13,9 +13,9 @@ For players who want the automation and assistance of colonies without the city 
 ### ✅ Completed
 - [x] Simplified happiness system
 - [x] Removed unnecessary quests
+- [x] **Removed raid system**
 
 ### 📋 Planned Simplifications
-- [ ] Remove raid system
 - [ ] Remove disease system
 - [ ] Simplify death/resurrection to basic respawning
 - [ ] Clean research tree of complex mechanics
