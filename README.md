@@ -1,21 +1,24 @@
-[![CLA assistant](https://cla-assistant.io/readme/badge/ldtteam/minecolonies)](https://cla-assistant.io/ldtteam/minecolonies)
-[![Build Status](https://buildsystem.ldtteam.com/app/rest/builds/buildType:LetSDevTogether_Minecolonies_Alpha_Release/statusIcon)](http://buildsystem.ldtteam.com/)
+# SlimColonies
 
-![mcol logo](minecolonies_logo.png)
+**Self-sufficient colonies that actually help you**
 
+SlimColonies is a fork of MineColonies where colonists take care of themselves. Build your colony, assign workers, and get back to playing Minecraft while they handle the rest. No babysitting, no events, no demands - just helpful NPCs that enhance your world.
 
-# MineColonies
+## Philosophy
 
-MineColonies is an interactive building mod that allows you to create a thriving town within Minecraft. It lets your leadership skills soar by providing you with everything you need to build your kingdom. MineColonies gives you the flexibility to create a colony as unique as every player. With so many options, you'll create a different colony every time, adapt it to any biome, build inside a mountain, on top of one, under the ocean, or in the sky.
+For players who want the automation and assistance of colonies without the city management gameplay. While MineColonies offers deep colony simulation for those who enjoy that complexity, here your colonists are self-sufficient helpers who work alongside you without requiring active management.
 
-The limit is your imagination!
+## Simplification Progress
 
-MineColonies features NPC workers such as Builders, Farmers, Fishers, Foresters, Guards, Miners, Smelters, Bakers, Cooks, Couriers, five types of animal herders, Composters, and many more, with even more being developed and added as the mod grows.
+### ✅ Completed
+- [x] Simplified happiness system
+- [x] Removed unnecessary quests
 
-It also includes specialized buildings such as the Warehouse, House, Town Hall, Barracks, Library, University, and even the School.
-
-#### Website:
-https://www.minecolonies.com/
+### 📋 Planned Simplifications
+- [ ] Remove raid system
+- [ ] Remove disease system
+- [ ] Simplify death/resurrection to basic respawning
+- [ ] Clean research tree of complex mechanics
 
 ## For Users
 
