@@ -16,10 +16,10 @@ For players who want the automation and assistance of colonies without the city 
 - [x] Removed raid system
 - [x] Removed disease system
 - [x] Removed trample prevention research (Soft Shoes)
+- [x] Removed research item cost requirements
 
 ### 📋 Planned Simplifications
 - [ ] Simplify death/resurrection to basic respawning
-- [ ] Clean research tree of complex mechanics
 
 ## For Users
 
