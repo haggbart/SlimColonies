@@ -121,10 +121,6 @@ public interface ICitizenManager extends IEntityManager
      */
     void setPotentialMaxCitizens(final int newMaxCitizens);
 
-    /**
-     * Check for the citizen happiness and update the colony happiness with it.
-     */
-    void checkCitizensForHappiness();
 
     /**
      * Tick the citizen data of all active citizens.

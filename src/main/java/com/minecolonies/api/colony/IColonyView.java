@@ -298,12 +298,6 @@ public interface IColonyView extends IColony
      */
     void removePlayer(UUID player);
 
-    /**
-     * Getter for the overall happiness.
-     *
-     * @return the happiness, a double.
-     */
-    double getOverallHappiness();
 
     @Override
     BlockPos getCenter();

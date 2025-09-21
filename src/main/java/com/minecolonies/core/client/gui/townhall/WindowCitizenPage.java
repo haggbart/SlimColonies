@@ -18,12 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import org.jetbrains.annotations.NotNull;
-
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.*;
-
-import static com.minecolonies.api.util.constant.TranslationConstants.PARTIAL_HAPPINESS_MODIFIER_NAME;
 import static com.minecolonies.api.util.constant.WindowConstants.*;
 
 /**

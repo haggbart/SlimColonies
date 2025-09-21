@@ -1060,16 +1060,6 @@ public final class ColonyView implements IColonyView
         Network.getNetwork().sendToServer(new PermissionsMessage.RemovePlayer(this, player));
     }
 
-    /**
-     * Getter for the overall happiness.
-     *
-     * @return the happiness, a double.
-     */
-    @Override
-    public double getOverallHappiness()
-    {
-        return 10.0; // Default happiness value
-    }
 
     @Override
     public BlockPos getCenter()

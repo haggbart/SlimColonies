@@ -106,21 +106,8 @@ public class CitizenFoodHandler implements ICitizenFoodHandler
     @Override
     public CitizenFoodStats getFoodHappinessStats()
     {
-        if (foodStatCache == null || dirty)
-        {
-            int qualityFoodCounter = 0;
-            Set<Item> uniqueFoods = new HashSet<>();
-            for (final Item foodItem : lastEatenFoods)
-            {
-                if (foodItem instanceof IMinecoloniesFoodItem)
-                {
-                    qualityFoodCounter++;
-                }
-                uniqueFoods.add(foodItem);
-            }
-            foodStatCache = new CitizenFoodStats(Math.max(1, uniqueFoods.size()), qualityFoodCounter);
-        }
-        return foodStatCache;
+        // Happiness system removed - return default high values so food variety/quality checks always pass
+        return new CitizenFoodStats(10, 10);
     }
 
     @Override

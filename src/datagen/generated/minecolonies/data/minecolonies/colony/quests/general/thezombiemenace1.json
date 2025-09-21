@@ -67,14 +67,6 @@
         "item": "minecraft:iron_ingot",
         "qty": 2
       }
-    },
-    {
-      "type": "minecolonies:happiness",
-      "details": {
-        "days": 7,
-        "qty": 1,
-        "target": 0
-      }
     }
   ],
   "triggers": [

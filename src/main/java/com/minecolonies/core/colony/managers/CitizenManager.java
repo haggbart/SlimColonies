@@ -540,11 +540,6 @@ public class CitizenManager implements ICitizenManager
         this.potentialMaxCitizens = newPotentialMax;
     }
 
-    @Override
-    public void checkCitizensForHappiness()
-    {
-        // Happiness system removed - no longer needed
-    }
 
     @Override
     public boolean tickCitizenData(final int tickRate)
