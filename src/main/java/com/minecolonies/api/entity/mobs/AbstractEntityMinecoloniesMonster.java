@@ -11,7 +11,6 @@ import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRat
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
 import com.minecolonies.api.entity.other.AbstractFastMinecoloniesEntity;
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
-import com.minecolonies.api.sounds.RaiderSounds;
 import com.minecolonies.api.util.Log;
 import com.minecolonies.api.util.MathUtils;
 import com.minecolonies.core.entity.pathfinding.navigation.AbstractAdvancedPathNavigate;
@@ -34,9 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 import static com.minecolonies.api.entity.citizen.AbstractEntityCitizen.ENTITY_AI_TICKRATE;
-import static com.minecolonies.api.entity.mobs.RaiderMobUtils.MOB_ATTACK_DAMAGE;
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
-import static com.minecolonies.api.util.constant.RaiderConstants.*;
 
 /**
  * Abstract for all villain entities.
@@ -97,7 +94,6 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
         this.targetSelector = new CustomGoalSelector(this.targetSelector);
         this.xpReward = BARBARIAN_EXP_DROP;
         IMinecoloniesAPI.getInstance().getMobAIRegistry().applyToMob(this);
-        RaiderMobUtils.setEquipment(this);
     }
 
     /**
@@ -165,7 +161,6 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
      *
      * @return the type enum.
      */
-    public abstract RaiderType getRaiderType();
 
     @NotNull
     @Override
@@ -205,20 +200,20 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
     @Override
     protected SoundEvent getHurtSound(final DamageSource damageSourceIn)
     {
-        return RaiderSounds.raiderSounds.get(getRaiderType()).get(RaiderSounds.RaiderSoundTypes.HURT);
+        return null;
     }
 
     @Override
     protected SoundEvent getDeathSound()
     {
-        return RaiderSounds.raiderSounds.get(getRaiderType()).get(RaiderSounds.RaiderSoundTypes.DEATH);
+        return null;
     }
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return RaiderSounds.raiderSounds.get(getRaiderType()).get(RaiderSounds.RaiderSoundTypes.SAY);
+        return null;
     }
 
     /**
@@ -240,7 +235,7 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
      */
     public void initStatsFor(final double baseHealth, final double difficulty, final double baseDamage)
     {
-        this.getAttribute(MOB_ATTACK_DAMAGE.get()).setBaseValue(baseDamage);
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(baseDamage);
 
         final double armor = difficulty * ARMOR;
         this.getAttribute(Attributes.ARMOR).setBaseValue(armor);
@@ -317,7 +312,7 @@ public abstract class AbstractEntityMinecoloniesMonster extends AbstractFastMine
     public static AttributeSupplier.Builder getDefaultAttributes()
     {
         return LivingEntity.createLivingAttributes()
-                 .add(MOB_ATTACK_DAMAGE.get())
+                 .add(Attributes.ATTACK_DAMAGE)
                  .add(Attributes.MAX_HEALTH)
                  .add(Attributes.ARMOR)
                  .add(Attributes.MOVEMENT_SPEED, MOVEMENT_SPEED)

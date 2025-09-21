@@ -1,8 +1,6 @@
 package com.minecolonies.api.colony.managers.interfaces;
 
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.colonyEvents.IColonyRaidEvent;
-import com.minecolonies.api.entity.mobs.AbstractEntityMinecoloniesRaider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 
@@ -216,9 +214,9 @@ public interface IRaiderManager
      *
      * @param entity
      */
-    void onRaiderDeath(AbstractEntityMinecoloniesRaider entity);
+    default void onRaiderDeath(Object entity) { /* No-op */ }
 
-    void onRaidEventFinished(IColonyRaidEvent event);
+    default void onRaidEventFinished(Object event) { /* No-op */ }
 
     /**
      * Notify raid manager of a passing through raid.

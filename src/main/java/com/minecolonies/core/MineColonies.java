@@ -13,8 +13,6 @@ import com.minecolonies.api.creativetab.ModCreativeTabs;
 import com.minecolonies.api.enchants.ModEnchants;
 import com.minecolonies.api.entity.ModEntities;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
-import com.minecolonies.api.entity.mobs.AbstractEntityMinecoloniesRaider;
-import com.minecolonies.api.entity.mobs.RaiderMobUtils;
 import com.minecolonies.api.items.ModBannerPatterns;
 import com.minecolonies.api.items.ModTags;
 import com.minecolonies.api.equipment.ModEquipmentTypes;
@@ -201,43 +199,7 @@ public class MineColonies
         event.put(ModEntities.CITIZEN, AbstractEntityCitizen.getDefaultAttributes().build());
         event.put(ModEntities.VISITOR, AbstractEntityCitizen.getDefaultAttributes().build());
         event.put(ModEntities.MERCENARY, EntityMercenary.getDefaultAttributes().build());
-        event.put(ModEntities.BARBARIAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.ARCHERBARBARIAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CHIEFBARBARIAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.PHARAO, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.MUMMY, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.ARCHERMUMMY, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.PIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.ARCHERPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CHIEFPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.AMAZON, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.AMAZONSPEARMAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.AMAZONCHIEF, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.NORSEMEN_ARCHER, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.NORSEMEN_CHIEF, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.SHIELDMAIDEN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.DROWNED_PIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.DROWNED_ARCHERPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.DROWNED_CHIEFPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
 
-        event.put(ModEntities.CAMP_BARBARIAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_ARCHERBARBARIAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_CHIEFBARBARIAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_PIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_ARCHERPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_CHIEFPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_PHARAO, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_MUMMY, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_ARCHERMUMMY, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_AMAZON, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_AMAZONSPEARMAN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_AMAZONCHIEF, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_NORSEMEN_ARCHER, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_NORSEMEN_CHIEF, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_SHIELDMAIDEN, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_DROWNED_PIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_DROWNED_ARCHERPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
-        event.put(ModEntities.CAMP_DROWNED_CHIEFPIRATE, AbstractEntityMinecoloniesRaider.getDefaultAttributes().build());
     }
 
     @SubscribeEvent

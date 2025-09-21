@@ -30,7 +30,6 @@ import com.minecolonies.core.Network;
 import com.minecolonies.core.colony.buildings.modules.BuildingModules;
 import com.minecolonies.core.colony.buildings.modules.SettingsModule;
 import com.minecolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
-import com.minecolonies.core.colony.events.raid.RaidManager;
 import com.minecolonies.core.colony.managers.*;
 import com.minecolonies.core.colony.permissions.ColonyPermissionEventHandler;
 import com.minecolonies.core.colony.permissions.Permissions;
@@ -151,9 +150,9 @@ public class Colony implements IColony
     private final IVisitorManager visitorManager = new VisitorManager(this);
 
     /**
-     * Barbarian manager of the colony.
+     * Raid manager of the colony (disabled).
      */
-    private final IRaiderManager raidManager = new RaidManager(this);
+    private final IRaiderManager raidManager = new DisabledRaiderManager();
 
     /**
      * Event manager of the colony.
@@ -612,7 +611,6 @@ public class Colony implements IColony
         {
             isDay = false;
             eventManager.onNightFall();
-            raidManager.onNightFall();
 
             citizenManager.updateCitizenSleep(false);
             eventDescManager.computeNews();
@@ -803,7 +801,6 @@ public class Colony implements IColony
             this.pack = compound.getString(TAG_PACK);
         }
 
-        raidManager.read(compound);
 
         if (compound.contains(TAG_AUTO_DELETE))
         {
@@ -918,7 +915,6 @@ public class Colony implements IColony
 
         compound.put(TAG_QUEST_MANAGER, questManager.serializeNBT());
         compound.put(NbtTagConstants.TAG_EVENT_DESC_MANAGER, eventDescManager.serializeNBT());
-        raidManager.write(compound);
 
         @NotNull final CompoundTag researchManagerCompound = new CompoundTag();
         researchManager.writeToNBT(researchManagerCompound);
