@@ -56,12 +56,6 @@ public interface ICitizenFoodHandler
      */
     void write(CompoundTag compound);
 
-    /**
-     * Disease modifier based on the food values.
-     * @param baseModifier the modifier to the original disease chance.
-     * @return the modifier.
-     */
-    double getDiseaseModifier(double baseModifier);
 
     /**
      * If the citizen has a full food history to allow a good analysis.

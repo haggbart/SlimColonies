@@ -26,12 +26,6 @@ public class JobCrusher extends AbstractJobCrafter<EntityAIWorkCrusher, JobCrush
         super(entity);
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        final int skill = getCitizen().getCitizenSkillHandler().getLevel(getCitizen().getWorkBuilding().getModule(BuildingModules.CRUSHER_WORK).getPrimarySkill());
-        return (int) ((100 - skill)/25.0);
-    }
 
     /**
      * Get the RenderBipedCitizen.Model to use when the Citizen performs this job role.

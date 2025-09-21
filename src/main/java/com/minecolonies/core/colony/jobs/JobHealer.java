@@ -70,9 +70,4 @@ public class JobHealer extends AbstractJob<EntityAIWorkHealer, JobHealer>
         }
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        return 0;
-    }
 }

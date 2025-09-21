@@ -192,12 +192,6 @@ public interface IJob<AI extends ITickingStateAI> extends INBTSerializable<Compo
      */
     boolean allowsAvoidance();
 
-    /**
-     * Disease modifier of the job.
-     *
-     * @return the modifier of the job.
-     */
-    double getDiseaseModifier();
 
     /**
      * When job removed (death of citizen or job change).

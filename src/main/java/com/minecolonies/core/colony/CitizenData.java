@@ -2085,11 +2085,6 @@ public class CitizenData implements ICitizenData
         return null;
     }
 
-    @Override
-    public double getDiseaseModifier()
-    {
-        return citizenFoodHandler.getDiseaseModifier(getJob() == null ? 1 : getJob().getDiseaseModifier());
-    }
 
     @Override
     public int getLeisureTime()
