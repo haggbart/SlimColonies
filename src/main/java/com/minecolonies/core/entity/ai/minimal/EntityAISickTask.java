@@ -16,7 +16,6 @@ import com.minecolonies.api.util.SoundUtils;
 import com.minecolonies.core.Network;
 import com.minecolonies.core.colony.buildings.workerbuildings.BuildingHospital;
 import com.minecolonies.core.colony.interactionhandling.StandardInteraction;
-import com.minecolonies.core.datalistener.model.Disease;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
 import com.minecolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 import com.minecolonies.core.network.messages.client.CircleParticleEffectMessage;
@@ -35,8 +34,8 @@ import net.minecraft.world.level.block.state.properties.BedPart;
 import java.util.List;
 
 import static com.minecolonies.api.util.constant.GuardConstants.BASIC_VOLUME;
+import static com.minecolonies.api.util.constant.TranslationConstants.INJURED_NEED_TREATMENT;
 import static com.minecolonies.api.util.constant.TranslationConstants.NO_HOSPITAL;
-import static com.minecolonies.api.util.constant.TranslationConstants.WAITING_FOR_CURE;
 import static com.minecolonies.core.entity.ai.minimal.EntityAISickTask.DiseaseState.*;
 import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseaseHandler.SEEK_DOCTOR_HEALTH;
 
@@ -45,10 +44,6 @@ import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseas
  */
 public class EntityAISickTask implements IStateAI
 {
-    /**
-     * Min distance to hut before pathing to hospital.
-     */
-    private static final int MIN_DIST_TO_HUT = 5;
 
     /**
      * Min distance to hospital before trying to find a bed.
@@ -121,7 +116,7 @@ public class EntityAISickTask implements IStateAI
         this.citizen = citizen;
         this.citizenData = citizen.getCitizenData();
 
-        citizen.getCitizenAI().addTransition(new TickingTransition<>(CitizenAIState.SICK, this::isSick, () -> CHECK_FOR_CURE, 20));
+        citizen.getCitizenAI().addTransition(new TickingTransition<>(CitizenAIState.SICK, this::isHurt, () -> CHECK_FOR_CURE, 20));
         citizen.getCitizenAI().addTransition(new TickingTransition<>(CHECK_FOR_CURE, () -> true, this::checkForCure, 20));
         citizen.getCitizenAI().addTransition(new TickingTransition<>(WANDER, () -> true, this::wander, 200));
 
@@ -134,10 +129,9 @@ public class EntityAISickTask implements IStateAI
         citizen.getCitizenAI().addTransition(new TickingTransition<>(FIND_EMPTY_BED, () -> true, this::findEmptyBed, 20));
     }
 
-    private boolean isSick()
+    private boolean isHurt()
     {
-        if (citizen.getCitizenData().getCitizenDiseaseHandler().isSick()
-            || citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
+        if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
         {
             reset();
             return true;
@@ -241,17 +235,8 @@ public class EntityAISickTask implements IStateAI
             return CHECK_FOR_CURE;
         }
 
-        final Disease disease = citizen.getCitizenData().getCitizenDiseaseHandler().getDisease();
-        if (disease == null)
-        {
-            return CitizenAIState.IDLE;
-        }
-
-        final List<ItemStorage> list = disease.cureItems();
-        if (!list.isEmpty())
-        {
-            citizen.setItemInHand(InteractionHand.MAIN_HAND, list.get(citizen.getRandom().nextInt(list.size())).getItemStack());
-        }
+        // No cure items needed for injuries - just rest
+        citizen.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
 
         citizen.swing(InteractionHand.MAIN_HAND);
         citizen.playSound(SoundEvents.NOTE_BLOCK_HARP.get(), (float) BASIC_VOLUME, (float) SoundUtils.getRandomPentatonic(citizen.getRandom()));
@@ -277,18 +262,7 @@ public class EntityAISickTask implements IStateAI
      */
     private void cure()
     {
-        final Disease disease = citizen.getCitizenData().getCitizenDiseaseHandler().getDisease();
-        if (disease != null)
-        {
-            for (final ItemStorage cure : disease.cureItems())
-            {
-                final int slot = InventoryUtils.findFirstSlotInProviderNotEmptyWith(citizen, Disease.hasCureItem(cure));
-                if (slot != -1)
-                {
-                    citizenData.getInventory().extractItem(slot, 1, false);
-                }
-            }
-        }
+        // For injuries, no specific cure items needed - just rest and treatment
 
         if (usedBed != null)
         {
@@ -413,24 +387,23 @@ public class EntityAISickTask implements IStateAI
     private IState searchHospital()
     {
         final IColony colony = citizenData.getColony();
-        final Disease disease = citizen.getCitizenData().getCitizenDiseaseHandler().getDisease();
         bestHospital = colony.getBuildingManager().getBestBuilding(citizen, BuildingHospital.class);
 
         if (bestHospital == null)
         {
-            if (disease == null)
+            if (!citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
             {
                 return CitizenAIState.IDLE;
             }
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(NO_HOSPITAL, disease.name(), disease.getCureString()),
+            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(NO_HOSPITAL),
               Component.translatable(NO_HOSPITAL),
               ChatPriority.BLOCKING));
             return WANDER;
         }
-        else if (disease != null)
+        else if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
         {
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(WAITING_FOR_CURE, disease.name(), disease.getCureString()),
-              Component.translatable(WAITING_FOR_CURE),
+            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(INJURED_NEED_TREATMENT),
+              Component.translatable(INJURED_NEED_TREATMENT),
               ChatPriority.BLOCKING));
         }
 
@@ -444,30 +417,14 @@ public class EntityAISickTask implements IStateAI
      */
     private IState checkForCure()
     {
-        final Disease disease = citizen.getCitizenData().getCitizenDiseaseHandler().getDisease();
-        if (disease == null)
+        // For injuries, no cure items needed - just check if still hurt
+        if (citizen.getHealth() > SEEK_DOCTOR_HEALTH)
         {
-            if (citizen.getHealth() > SEEK_DOCTOR_HEALTH)
-            {
-                reset();
-                return CitizenAIState.IDLE;
-            }
-            return GO_TO_HUT;
+            reset();
+            return CitizenAIState.IDLE;
         }
-        for (final ItemStorage cure : disease.cureItems())
-        {
-            final int slot = InventoryUtils.findFirstSlotInProviderNotEmptyWith(citizen, Disease.hasCureItem(cure));
-            if (slot == -1)
-            {
-                if (citizen.getCitizenData().getCitizenDiseaseHandler().isSick())
-                {
-                    return GO_TO_HUT;
-                }
 
-                reset();
-                return CitizenAIState.IDLE;
-            }
-        }
+        // Still injured, proceed to apply treatment
         return APPLY_CURE;
     }
 

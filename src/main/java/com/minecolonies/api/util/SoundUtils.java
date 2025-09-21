@@ -139,10 +139,6 @@ public final class SoundUtils
         {
             playSoundAtCitizenWith(worldIn, pos, EventType.GENERAL, citizen);
         }
-        else if (v <= 0.4 && citizen.getEntity().isPresent() && citizen.getCitizenDiseaseHandler().isSick())
-        {
-            playSoundAtCitizenWith(worldIn, pos, EventType.SICKNESS, citizen);
-        }
         else if (v <= 0.5 && (citizen.getHomeBuilding() == null || citizen.getHomeBuilding().getBuildingLevelEquivalent() <= 2))
         {
             playSoundAtCitizenWith(worldIn, pos, EventType.BAD_HOUSING, citizen);

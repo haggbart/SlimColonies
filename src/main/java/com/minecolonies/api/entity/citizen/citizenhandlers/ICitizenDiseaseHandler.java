@@ -1,12 +1,11 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
-import com.minecolonies.core.datalistener.model.Disease;
 import com.minecolonies.api.colony.ICitizenData;
 import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Citizen disease handler interface.
+ * Citizen injury treatment handler interface.
  */
 public interface ICitizenDiseaseHandler
 {
@@ -15,12 +14,6 @@ public interface ICitizenDiseaseHandler
      */
     void update(final int tickRate);
 
-    /**
-     * Check if the citizen is sick and must be healed..
-     *
-     * @return true if so.
-     */
-    boolean isSick();
 
     /**
      * Write the handler to NBT.
@@ -36,23 +29,12 @@ public interface ICitizenDiseaseHandler
      */
     void read(final CompoundTag compound);
 
-    /**
-     * Get the current disease, if any.
-     *
-     * @return the disease instance.
-     */
-    @Nullable
-    Disease getDisease();
 
     /**
-     * Cure the citizen.
+     * Cure/treat the citizen.
      */
     void cure();
 
-    /**
-     * Called when two citizens collide.
-     */
-    void onCollission(final ICitizenData citizen);
 
     /**
      * True when the citizen needs to go to a hospital because its hurt
@@ -71,11 +53,4 @@ public interface ICitizenDiseaseHandler
      */
     void setSleepsAtHospital(final boolean isAtHospital);
 
-    /**
-     * Set a disease on the citizen.
-     *
-     * @param disease to set.
-     * @return true if they actually became sick.
-     */
-    boolean setDisease(Disease disease);
 }

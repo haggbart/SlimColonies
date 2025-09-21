@@ -137,8 +137,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(SOFT_SHOES).setTranslatedName("Farmers will no longer trample crops"));
         effects.add(new ResearchEffect(FISH_TREASURE).setTranslatedName("Fishers can find treasure outside the ocean"));
         effects.add(new ResearchEffect(NETHER_LOG).setTranslatedName("Adds expedition log to Nether Mine"));
-        effects.add(new ResearchEffect(MASKS).setTranslatedName("Reduce disease transmission"));
-        effects.add(new ResearchEffect(VACCINES).setTranslatedName("Citizens are immune for longer after treatment"));
         effects.add(new ResearchEffect(TELESCOPE).setTranslatedName("Farther rallying banner range"));
         effects.add(new ResearchEffect(STANDARD).setTranslatedName("Place Rallying Banner at location"));
         effects.add(new ResearchEffect(MORE_AIR).setTranslatedName("Citizens can stay longer underwater"));
@@ -471,23 +469,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
           .addEffect(HEALTH_BOOST, 6)
           .addToList(r);
 
-        final Research masks = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/masks"), CIVIL).setParentResearch(firstAid2)
-          .setTranslatedName("Masks")
-          .setTranslatedSubtitle("Solidarity")
-          .setIcon(new ResourceLocation("minecolonies:textures/icons/research/hp4.png"))
-          .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.LIBRARY_ID), 3)
-          .addItemCost(Items.WHITE_WOOL, 32)
-          .addEffect(MASKS, 1)
-          .addToList(r);
-
-        new Research(new ResourceLocation(Constants.MOD_ID, "civilian/vaccines"), CIVIL).setParentResearch(masks)
-          .setTranslatedName("Vaccines")
-          .setTranslatedSubtitle("Obvious Measures")
-          .setIcon(new ResourceLocation("minecolonies:textures/icons/research/hp5.png"))
-          .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.HOSPITAL_ID), 3)
-          .addItemCost(Items.EGG, 64)
-          .addEffect(VACCINES, 1)
-          .addToList(r);
 
         final Research circus = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/circus"), CIVIL).setParentResearch(firstAid)
                                   .setTranslatedName("Circus")

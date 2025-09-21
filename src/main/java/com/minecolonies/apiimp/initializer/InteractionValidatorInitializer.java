@@ -74,11 +74,6 @@ public class InteractionValidatorInitializer
           citizen -> citizen.getColony() != null && citizen.getSaturation() <= LOW_SATURATION && citizen.getEntity().isPresent()
                        && citizen.getColony().getBuildingManager().getBestBuilding(citizen.getEntity().get(), BuildingCook.class) == null
                        && InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(citizen.getInventory(), ISFOOD) == -1);
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO_HOSPITAL),
-            citizen -> citizen.getColony() != null && citizen.getEntity().isPresent() && citizen.getCitizenDiseaseHandler().isSick()
-                       && citizen.getColony().getBuildingManager().getBestBuilding(citizen.getEntity().get(), BuildingHospital.class) == null);
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(WAITING_FOR_CURE),
-          citizen -> citizen.getColony() != null && citizen.getEntity().isPresent() && citizen.getCitizenDiseaseHandler().getDisease() != null);
 
         InteractionValidatorRegistry.registerPosBasedPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_CHESTFULL),
           (citizen, pos) ->
@@ -164,10 +159,6 @@ public class InteractionValidatorInitializer
 
           });
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(PATIENT_FULL_INVENTORY),
-            citizen -> citizen.getEntity().isPresent() && citizen.getCitizenDiseaseHandler().isSick()
-                && !citizen.getEntity().get().getInventoryCitizen().hasSpace());
-
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(PUPIL_NO_CARPET),
           citizen -> citizen.getEntity().isPresent() && citizen.isChild() && citizen.getWorkBuilding() instanceof BuildingSchool
                        && ((BuildingSchool) citizen.getWorkBuilding()).getRandomPlaceToSit() == null);
@@ -176,7 +167,7 @@ public class InteractionValidatorInitializer
           citizen -> citizen.getJob() instanceof JobFisherman && ((JobFisherman) citizen.getJob()).getPonds().isEmpty());
 
         InteractionValidatorRegistry.registerPosBasedPredicate(Component.translatable(SUBOPTIMAL_POND),
-          (citizen, pos) -> 
+          (citizen, pos) ->
           {
             return citizen.getJob() instanceof JobFisherman && (BlockPosUtil.getDistance(citizen.getEntity().get().blockPosition(), pos) <= SUBOPTIMAL_POND_COMPLAINT_DISTANCE);
           });

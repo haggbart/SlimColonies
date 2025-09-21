@@ -644,16 +644,7 @@ public class WindowColonyMap extends AbstractWindowSkeleton
                     }
                 }
 
-                if (data.isSick())
-                {
-                    final Image sickIcon = new Image();
-                    sickIcon.setImage(new ResourceLocation("minecolonies:textures/icons/small_sick_icon.png"), false);
-                    sickIcon.setSize(4, 8);
-                    sickIcon.setPosition(3,-3);
-                    citizenView.addChild(sickIcon);
-                    citizenView.setSize(citizenView.getWidth() + 6, citizenView.getHeight() + 6);
-                }
-                else if (data.getSaturation() < LOW_SATURATION)
+                if (data.getSaturation() < LOW_SATURATION)
                 {
                     final Image saturationIcon = new Image();
                     saturationIcon.setImage(GUI_ICONS_LOCATION,

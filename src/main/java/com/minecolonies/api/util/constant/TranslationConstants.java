@@ -312,7 +312,7 @@ public final class TranslationConstants
     @NonNls
     public static final String NO_HOSPITAL                                                          = "com.minecolonies.coremod.ai.nohospital";
     @NonNls
-    public static final String WAITING_FOR_CURE                                                     = "com.minecolonies.coremod.ai.waitingforcure";
+    public static final String INJURED_NEED_TREATMENT                                               = "com.minecolonies.coremod.ai.injured";
     @NonNls
     public static final String PUPIL_NO_CARPET                                                      = "com.minecolonies.coremod.school.nocarpet";
     @NonNls
