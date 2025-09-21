@@ -150,11 +150,11 @@ public class ContainerCitizenInventory extends AbstractContainerMenu
 
         List<GuardGear> guardGear = switch (workBuildingLevel)
         {
-            case 5-> GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_IRON, ARMOR_LEVEL_MAX, LEATHER_BUILDING_LEVEL_RANGE, DIA_BUILDING_LEVEL_RANGE);
-            case 4-> GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_CHAIN, ARMOR_LEVEL_DIAMOND, LEATHER_BUILDING_LEVEL_RANGE, DIA_BUILDING_LEVEL_RANGE);
-            case 3-> GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_LEATHER, ARMOR_LEVEL_IRON, LEATHER_BUILDING_LEVEL_RANGE, IRON_BUILDING_LEVEL_RANGE);
-            case 2-> GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_LEATHER, ARMOR_LEVEL_CHAIN, LEATHER_BUILDING_LEVEL_RANGE, CHAIN_BUILDING_LEVEL_RANGE);
-            case 1-> GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_LEATHER, ARMOR_LEVEL_GOLD, LEATHER_BUILDING_LEVEL_RANGE, GOLD_BUILDING_LEVEL_RANGE);
+            case 5-> GuardGearBuilder.buildGearForLevel();
+            case 4-> GuardGearBuilder.buildGearForLevel();
+            case 3-> GuardGearBuilder.buildGearForLevel();
+            case 2-> GuardGearBuilder.buildGearForLevel();
+            case 1-> GuardGearBuilder.buildGearForLevel();
             default-> Collections.emptyList();
         };
 

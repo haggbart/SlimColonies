@@ -110,11 +110,11 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
         );
         worker.setCanPickUpLoot(true);
 
-        itemsNeeded.add(GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_IRON, ARMOR_LEVEL_MAX, LEATHER_BUILDING_LEVEL_RANGE, DIA_BUILDING_LEVEL_RANGE));
-        itemsNeeded.add(GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_CHAIN, ARMOR_LEVEL_DIAMOND, LEATHER_BUILDING_LEVEL_RANGE, DIA_BUILDING_LEVEL_RANGE));
-        itemsNeeded.add(GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_LEATHER, ARMOR_LEVEL_IRON, LEATHER_BUILDING_LEVEL_RANGE, IRON_BUILDING_LEVEL_RANGE));
-        itemsNeeded.add(GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_LEATHER, ARMOR_LEVEL_CHAIN, LEATHER_BUILDING_LEVEL_RANGE, CHAIN_BUILDING_LEVEL_RANGE));
-        itemsNeeded.add(GuardGearBuilder.buildGearForLevel(ARMOR_LEVEL_LEATHER, ARMOR_LEVEL_GOLD, LEATHER_BUILDING_LEVEL_RANGE, GOLD_BUILDING_LEVEL_RANGE));
+        itemsNeeded.add(GuardGearBuilder.buildGearForLevel());
+        itemsNeeded.add(GuardGearBuilder.buildGearForLevel());
+        itemsNeeded.add(GuardGearBuilder.buildGearForLevel());
+        itemsNeeded.add(GuardGearBuilder.buildGearForLevel());
+        itemsNeeded.add(GuardGearBuilder.buildGearForLevel());
     }
 
     @Override
@@ -732,7 +732,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
 
     private ItemStack findTool(@NotNull final EquipmentTypeEntry tool)
     {
-        return findItem(stack -> ItemStackUtils.hasEquipmentLevel(stack, tool, 0, building.getMaxEquipmentLevel()));
+        return findItem(stack -> ItemStackUtils.hasEquipmentLevel(stack, tool, 0, Integer.MAX_VALUE));
     }
 
     private ItemStack findTool(@NotNull final BlockState target, final BlockPos pos)
@@ -756,7 +756,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                 for (final GuardGear item : itemList)
                 {
                     if (item.getType().equals(equipSlot)
-                        && building.getBuildingLevel() >= item.getMinBuildingLevelRequired() && building.getBuildingLevel() <= item.getMaxBuildingLevelRequired())
+)
                     {
                         if (!item.test(worker.getInventoryCitizen().getArmorInSlot(item.getType())))
                         {
@@ -850,10 +850,6 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
         {
             for (final GuardGear item : itemList)
             {
-                if (!(building.getBuildingLevel() >= item.getMinBuildingLevelRequired() && building.getBuildingLevel() <= item.getMaxBuildingLevelRequired()))
-                {
-                    continue;
-                }
 
                 int bestSlot = -1;
                 int bestLevel = -1;
@@ -887,7 +883,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                     if (ItemStackUtils.isEmpty(virtualEquipmentSlots.get(item.getType())))
                     {
                         // create request
-                        checkForToolOrWeaponAsync(item.getItemNeeded(), item.getMinArmorLevel(), item.getMaxArmorLevel());
+                        checkForToolOrWeaponAsync(item.getItemNeeded(), 0, Integer.MAX_VALUE);
                     }
                 }
                 else

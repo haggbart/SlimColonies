@@ -48,7 +48,6 @@ import java.util.List;
 
 import static com.minecolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
 import static com.minecolonies.api.util.constant.Constants.TICKS_SECOND;
-import static com.minecolonies.api.util.constant.EquipmentLevelConstants.TOOL_LEVEL_WOOD_OR_GOLD;
 import static com.minecolonies.api.util.constant.StatisticsConstants.FISH_CAUGHT;
 import static com.minecolonies.api.util.constant.TranslationConstants.SUBOPTIMAL_POND;
 import static com.minecolonies.api.util.constant.TranslationConstants.WATER_TOO_FAR;
@@ -265,7 +264,7 @@ public class EntityAIWorkFisherman extends AbstractEntityAISkill<JobFisherman, B
      */
     private boolean hasRodButNotEquipped()
     {
-        return InventoryUtils.hasItemHandlerEquipmentWithLevel(getInventory(), ModEquipmentTypes.fishing_rod.get(), TOOL_LEVEL_WOOD_OR_GOLD, building.getMaxEquipmentLevel())
+        return InventoryUtils.hasItemHandlerEquipmentWithLevel(getInventory(), ModEquipmentTypes.fishing_rod.get(), 0, Integer.MAX_VALUE)
                  && worker.getMainHandItem() != null
                  && !ModEquipmentTypes.fishing_rod.get().checkIsEquipment(worker.getMainHandItem());
     }
@@ -642,7 +641,7 @@ public class EntityAIWorkFisherman extends AbstractEntityAISkill<JobFisherman, B
     private int getRodSlot()
     {
         return InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(getInventory(), ModEquipmentTypes.fishing_rod.get(),
-          TOOL_LEVEL_WOOD_OR_GOLD, building.getMaxEquipmentLevel());
+          0, Integer.MAX_VALUE);
     }
 
     /**

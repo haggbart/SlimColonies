@@ -12,10 +12,6 @@ import java.util.List;
 
 public interface IBuildingWorker extends IBuilding
 {
-    /**
-     * Minimal level to ask for wood tools. (WOOD_HUT_LEVEL + 1 == stone)
-     */
-    int WOOD_HUT_LEVEL = 0;
 
     /**
      * The abstract method which creates a job for the building.
@@ -65,12 +61,6 @@ public interface IBuildingWorker extends IBuilding
     @NotNull
     String getJobName();
 
-    /**
-     * Get the max tool level useable by the worker.
-     *
-     * @return the integer.
-     */
-    int getMaxEquipmentLevel();
 
     /**
      * Method which defines if a worker should be allowed to work during the rain.

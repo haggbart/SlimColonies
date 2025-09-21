@@ -229,7 +229,7 @@ public final class ItemStackUtils
             return false;
         }
 
-        return equipmentType.checkIsEquipment(stack) && verifyEquipmentLevel(stack, equipmentType.getMiningLevel(stack), minimalLevel, maximumLevel);
+        return equipmentType.checkIsEquipment(stack);
     }
 
     /**

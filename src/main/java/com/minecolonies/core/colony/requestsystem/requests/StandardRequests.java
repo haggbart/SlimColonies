@@ -589,7 +589,7 @@ public final class StandardRequests
                 result.append(getRequest().isArmor() ? ItemStackUtils.swapArmorGrade(getRequest().getMinLevel()) : ItemStackUtils.swapToolGrade(getRequest().getMinLevel()));
             }
 
-            if (getRequest().getMaxLevel() < EquipmentLevelConstants.TOOL_LEVEL_MAXIMUM)
+            if (getRequest().getMaxLevel() < Integer.MAX_VALUE)
             {
                 if (getRequest().getMinLevel() > EquipmentLevelConstants.TOOL_LEVEL_HAND)
                 {

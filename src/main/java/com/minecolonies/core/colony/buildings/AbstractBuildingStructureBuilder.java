@@ -29,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static com.minecolonies.api.util.constant.EquipmentLevelConstants.TOOL_LEVEL_WOOD_OR_GOLD;
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 
 /**
@@ -159,7 +158,7 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
      */
     private boolean checkIfShouldKeepEquipment(final EquipmentTypeEntry type, final ItemStack stack, final List<ItemStorage> localAlreadyKept)
     {
-        if (ItemStackUtils.hasEquipmentLevel(stack, type, TOOL_LEVEL_WOOD_OR_GOLD, getMaxEquipmentLevel()))
+        if (ItemStackUtils.hasEquipmentLevel(stack, type, 0, Integer.MAX_VALUE))
         {
             for (final ItemStorage storage : localAlreadyKept)
             {
