@@ -19,7 +19,7 @@ import com.minecolonies.api.entity.citizen.AbstractCivilianEntity;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.Skill;
 import com.minecolonies.api.entity.citizen.VisibleCitizenStatus;
-import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenDiseaseHandler;
+import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenInjuryHandler;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenSkillHandler;
 import com.minecolonies.api.eventbus.events.colony.citizens.CitizenJobChangedModEvent;
@@ -36,7 +36,7 @@ import com.minecolonies.core.colony.interactionhandling.QuestDeliveryInteraction
 import com.minecolonies.core.colony.interactionhandling.QuestDialogueInteraction;
 import com.minecolonies.core.colony.interactionhandling.ServerCitizenInteraction;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
-import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseaseHandler;
+import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler;
 import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenFoodHandler;
 import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenMournHandler;
 import com.minecolonies.core.entity.citizen.citizenhandlers.CitizenSkillHandler;
@@ -226,7 +226,7 @@ public class CitizenData implements ICitizenData
     /**
      * Disease handler
      */
-    private final CitizenDiseaseHandler citizenDiseaseHandler;
+    private final CitizenInjuryHandler citizenInjuryHandler;
 
     /**
      * The citizen chat options on the server side.
@@ -354,7 +354,7 @@ public class CitizenData implements ICitizenData
         this.citizenMournHandler = new CitizenMournHandler(this);
         this.citizenSkillHandler = new CitizenSkillHandler();
         this.citizenFoodHandler = new CitizenFoodHandler(this);
-        citizenDiseaseHandler = new CitizenDiseaseHandler(this);
+        citizenInjuryHandler = new CitizenInjuryHandler(this);
     }
 
     @Override
@@ -1226,9 +1226,9 @@ public class CitizenData implements ICitizenData
     }
 
     @Override
-    public ICitizenDiseaseHandler getCitizenDiseaseHandler()
+    public ICitizenInjuryHandler getCitizenInjuryHandler()
     {
-        return citizenDiseaseHandler;
+        return citizenInjuryHandler;
     }
 
     @Override
@@ -1314,7 +1314,7 @@ public class CitizenData implements ICitizenData
         // Happiness system removed
         citizenMournHandler.write(nbtTagCompound);
         citizenFoodHandler.write(nbtTagCompound);
-        citizenDiseaseHandler.write(nbtTagCompound);
+        citizenInjuryHandler.write(nbtTagCompound);
 
         inventory.write(nbtTagCompound);
         nbtTagCompound.putInt(TAG_HELD_ITEM_SLOT, inventory.getHeldItemSlot(InteractionHand.MAIN_HAND));
@@ -1480,7 +1480,7 @@ public class CitizenData implements ICitizenData
         // Happiness system removed
         this.citizenMournHandler.read(nbtTagCompound);
         this.citizenFoodHandler.read(nbtTagCompound);
-        citizenDiseaseHandler.read(nbtTagCompound);
+        citizenInjuryHandler.read(nbtTagCompound);
 
         if (nbtTagCompound.contains(TAG_LEVEL_MAP) && !nbtTagCompound.contains(TAG_NEW_SKILLS))
         {
@@ -1675,7 +1675,7 @@ public class CitizenData implements ICitizenData
             }
         }
 
-        citizenDiseaseHandler.update(tickRate);
+        citizenInjuryHandler.update(tickRate);
     }
 
     @Override

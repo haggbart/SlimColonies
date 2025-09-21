@@ -7,8 +7,6 @@ import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.constant.NbtTagConstants;
 import com.minecolonies.core.colony.buildings.AbstractBuilding;
-import com.minecolonies.core.datalistener.model.Disease;
-import com.minecolonies.core.datalistener.DiseasesListener;
 import com.minecolonies.core.entity.ai.workers.util.Patient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -209,13 +207,7 @@ public class BuildingHospital extends AbstractBuilding
      */
     private static boolean isCureItem(final ItemStack stack)
     {
-        for (final Disease disease : DiseasesListener.getDiseases())
-        {
-            for (final ItemStorage cureItem : disease.cureItems())
-            {
-                return Disease.isCureItem(stack, cureItem);
-            }
-        }
+        // No cure items needed for injuries - healing is done directly
         return false;
     }
 

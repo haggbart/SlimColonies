@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Citizen injury treatment handler interface.
  */
-public interface ICitizenDiseaseHandler
+public interface ICitizenInjuryHandler
 {
     /**
      * To tick the handler.

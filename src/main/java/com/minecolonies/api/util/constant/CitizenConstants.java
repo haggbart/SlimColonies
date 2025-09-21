@@ -214,17 +214,12 @@ public final class CitizenConstants
     public static final int CHANCE_TO_DUMP = 8;
 
     /**
-     * Disease tag,
+     * Injury tag,
      */
-    public static final String TAG_DISEASE = "disease";
+    public static final String TAG_INJURY = "injury";
 
     /**
-     * Disease iod tag.
-     */
-    public static final String TAG_DISEASE_ID = "disease_id";
-
-    /**
-     * Disease immunity tag,
+     * Injury immunity tag,
      */
     public static final String TAG_IMMUNITY = "immunity";
 

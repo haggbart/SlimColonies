@@ -1,7 +1,7 @@
 package com.minecolonies.core.entity.citizen.citizenhandlers;
 
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenDiseaseHandler;
+import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenInjuryHandler;
 import com.minecolonies.core.colony.jobs.AbstractJobGuard;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -12,7 +12,7 @@ import static com.minecolonies.api.util.constant.StatisticsConstants.CITIZENS_HE
 /**
  * Handler taking care of citizen injuries and hospital treatment.
  */
-public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
+public class CitizenInjuryHandler implements ICitizenInjuryHandler
 {
     /**
      * Health at which citizens seek a doctor.
@@ -44,7 +44,7 @@ public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
      *
      * @param citizen the citizen owning the handler.
      */
-    public CitizenDiseaseHandler(final ICitizenData citizen)
+    public CitizenInjuryHandler(final ICitizenData citizen)
     {
         this.citizenData = citizen;
     }
@@ -76,18 +76,18 @@ public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
     {
         CompoundTag treatmentTag = new CompoundTag();
         treatmentTag.putInt(TAG_IMMUNITY, immunityTicks);
-        compound.put(TAG_DISEASE, treatmentTag);
+        compound.put(TAG_INJURY, treatmentTag);
     }
 
     @Override
     public void read(final CompoundTag compound)
     {
-        if (!compound.contains(TAG_DISEASE, Tag.TAG_COMPOUND))
+        if (!compound.contains(TAG_INJURY, Tag.TAG_COMPOUND))
         {
             return;
         }
 
-        CompoundTag treatmentTag = compound.getCompound(TAG_DISEASE);
+        CompoundTag treatmentTag = compound.getCompound(TAG_INJURY);
         this.immunityTicks = treatmentTag.getInt(TAG_IMMUNITY);
     }
 

@@ -99,7 +99,7 @@ public class EntityAIWorkHealer extends AbstractEntityAIInteract<JobHealer, Buil
 
         final BuildingHospital hospital = building;
         for (final AbstractEntityCitizen citizen : WorldUtil.getEntitiesWithinBuilding(world, AbstractEntityCitizen.class, building,
-            cit -> cit.getCitizenData() != null && cit.getCitizenData().getCitizenDiseaseHandler().isHurt()))
+            cit -> cit.getCitizenData() != null && cit.getCitizenData().getCitizenInjuryHandler().isHurt()))
         {
             hospital.checkOrCreatePatientFile(citizen.getCivilianID());
         }
@@ -107,13 +107,13 @@ public class EntityAIWorkHealer extends AbstractEntityAIInteract<JobHealer, Buil
         for (final Patient patient : hospital.getPatients())
         {
             final ICitizenData data = hospital.getColony().getCitizenManager().getCivilian(patient.getId());
-            if (data == null || !data.getEntity().isPresent() || (data.getEntity().isPresent() && !data.getEntity().get().getCitizenData().getCitizenDiseaseHandler().isHurt()))
+            if (data == null || !data.getEntity().isPresent() || (data.getEntity().isPresent() && !data.getEntity().get().getCitizenData().getCitizenInjuryHandler().isHurt()))
             {
                 hospital.removePatientFile(patient);
                 continue;
             }
             final EntityCitizen citizen = (EntityCitizen) data.getEntity().get();
-            // Disease system removed - check if citizen is hurt
+            // Check if citizen is injured
 
             if (patient.getState() == Patient.PatientState.NEW)
             {
@@ -174,7 +174,7 @@ public class EntityAIWorkHealer extends AbstractEntityAIInteract<JobHealer, Buil
         }
 
         final ICitizenData data = building.getColony().getCitizenManager().getCivilian(currentPatient.getId());
-        if (data == null || !data.getEntity().isPresent() || !data.getEntity().get().getCitizenData().getCitizenDiseaseHandler().isHurt())
+        if (data == null || !data.getEntity().isPresent() || !data.getEntity().get().getCitizenData().getCitizenInjuryHandler().isHurt())
         {
             currentPatient = null;
             return DECIDE;
@@ -206,7 +206,7 @@ public class EntityAIWorkHealer extends AbstractEntityAIInteract<JobHealer, Buil
         }
 
         final ICitizenData data = building.getColony().getCitizenManager().getCivilian(currentPatient.getId());
-        if (data == null || !data.getEntity().isPresent() || !data.getEntity().get().getCitizenData().getCitizenDiseaseHandler().isHurt())
+        if (data == null || !data.getEntity().isPresent() || !data.getEntity().get().getCitizenData().getCitizenInjuryHandler().isHurt())
         {
             currentPatient = null;
             return DECIDE;
@@ -220,7 +220,7 @@ public class EntityAIWorkHealer extends AbstractEntityAIInteract<JobHealer, Buil
 
         // For injuries, just heal the citizen directly
         citizen.heal(10);
-        data.getCitizenDiseaseHandler().cure();
+        data.getCitizenInjuryHandler().cure();
 
         recordTreatmentStats(citizen);
         worker.getCitizenExperienceHandler().addExperience(BASE_XP_GAIN);
@@ -242,7 +242,7 @@ public class EntityAIWorkHealer extends AbstractEntityAIInteract<JobHealer, Buil
         }
 
         final ICitizenData data = building.getColony().getCitizenManager().getCivilian(currentPatient.getId());
-        if (data == null || !data.getEntity().isPresent() || !data.getEntity().get().getCitizenData().getCitizenDiseaseHandler().isHurt())
+        if (data == null || !data.getEntity().isPresent() || !data.getEntity().get().getCitizenData().getCitizenInjuryHandler().isHurt())
         {
             currentPatient = null;
             return DECIDE;
@@ -278,7 +278,7 @@ public class EntityAIWorkHealer extends AbstractEntityAIInteract<JobHealer, Buil
         progressTicks = 0;
         recordTreatmentStats(citizen);
         worker.getCitizenExperienceHandler().addExperience(BASE_XP_GAIN);
-        citizen.getCitizenData().getCitizenDiseaseHandler().cure();
+        citizen.getCitizenData().getCitizenInjuryHandler().cure();
         currentPatient.setState(Patient.PatientState.TREATED);
         currentPatient = null;
         return DECIDE;

@@ -146,7 +146,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
      */
     ICitizenSkillHandler getCitizenSkillHandler();
 
-    ICitizenDiseaseHandler getCitizenDiseaseHandler();
+    ICitizenInjuryHandler getCitizenInjuryHandler();
 
     /**
      * Schedule restart and cleanup.

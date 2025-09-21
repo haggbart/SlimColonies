@@ -36,13 +36,13 @@ import java.util.List;
 import static com.minecolonies.api.util.constant.GuardConstants.BASIC_VOLUME;
 import static com.minecolonies.api.util.constant.TranslationConstants.INJURED_NEED_TREATMENT;
 import static com.minecolonies.api.util.constant.TranslationConstants.NO_HOSPITAL;
-import static com.minecolonies.core.entity.ai.minimal.EntityAISickTask.DiseaseState.*;
-import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenDiseaseHandler.SEEK_DOCTOR_HEALTH;
+import static com.minecolonies.core.entity.ai.minimal.EntityAIInjuredTask.InjuryState.*;
+import static com.minecolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler.SEEK_DOCTOR_HEALTH;
 
 /**
- * The AI task for citizens to execute when they are supposed to eat.
+ * The AI task for injured citizens to seek medical treatment.
  */
-public class EntityAISickTask implements IStateAI
+public class EntityAIInjuredTask implements IStateAI
 {
 
     /**
@@ -81,9 +81,9 @@ public class EntityAISickTask implements IStateAI
     private BlockPos usedBed;
 
     /**
-     * The different types of AIStates related to being sick.
+     * The different types of AIStates related to being injured.
      */
-    public enum DiseaseState implements IState
+    public enum InjuryState implements IState
     {
         CHECK_FOR_CURE,
         GO_TO_HUT,
@@ -110,7 +110,7 @@ public class EntityAISickTask implements IStateAI
      *
      * @param citizen the citizen.
      */
-    public EntityAISickTask(final EntityCitizen citizen)
+    public EntityAIInjuredTask(final EntityCitizen citizen)
     {
         super();
         this.citizen = citizen;
@@ -131,7 +131,7 @@ public class EntityAISickTask implements IStateAI
 
     private boolean isHurt()
     {
-        if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
+        if (citizen.getCitizenData().getCitizenInjuryHandler().isHurt())
         {
             reset();
             return true;
@@ -145,7 +145,7 @@ public class EntityAISickTask implements IStateAI
      *
      * @return start over.
      */
-    public DiseaseState wander()
+    public InjuryState wander()
     {
         EntityNavigationUtils.walkToRandomPos(citizen, 10, 0.6D);
         return CHECK_FOR_CURE;
@@ -156,7 +156,7 @@ public class EntityAISickTask implements IStateAI
      *
      * @return the next state to go to.
      */
-    private DiseaseState findEmptyBed()
+    private InjuryState findEmptyBed()
     {
         // Finding bed
         if (usedBed == null && citizen.getCitizenData() != null)
@@ -190,7 +190,7 @@ public class EntityAISickTask implements IStateAI
                           && state.getValue(BedBlock.PART).equals(BedPart.HEAD)
                           && world.isEmptyBlock(pos.above()))
                     {
-                        citizen.getCitizenData().getCitizenDiseaseHandler().setSleepsAtHospital(true);
+                        citizen.getCitizenData().getCitizenInjuryHandler().setSleepsAtHospital(true);
                         usedBed = pos;
                         ((BuildingHospital) hospital).registerPatient(usedBed, citizen.getCivilianID());
                         return FIND_EMPTY_BED;
@@ -274,7 +274,7 @@ public class EntityAISickTask implements IStateAI
             citizen.getCitizenData().setBedPos(BlockPos.ZERO);
         }
         citizen.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-        citizen.getCitizenData().getCitizenDiseaseHandler().cure();
+        citizen.getCitizenData().getCitizenInjuryHandler().cure();
         citizen.setHealth(citizen.getMaxHealth());
         reset();
     }
@@ -345,7 +345,7 @@ public class EntityAISickTask implements IStateAI
     private IState goToHut()
     {
         final IBuilding buildingWorker = citizenData.getWorkBuilding();
-        citizen.getCitizenData().getCitizenDiseaseHandler().setSleepsAtHospital(false);
+        citizen.getCitizenData().getCitizenInjuryHandler().setSleepsAtHospital(false);
 
         if (buildingWorker == null)
         {
@@ -366,7 +366,7 @@ public class EntityAISickTask implements IStateAI
      */
     private IState goToHospital()
     {
-        citizen.getCitizenData().getCitizenDiseaseHandler().setSleepsAtHospital(false);
+        citizen.getCitizenData().getCitizenInjuryHandler().setSleepsAtHospital(false);
         if (bestHospital == null)
         {
             return SEARCH_HOSPITAL;
@@ -391,7 +391,7 @@ public class EntityAISickTask implements IStateAI
 
         if (bestHospital == null)
         {
-            if (!citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
+            if (!citizen.getCitizenData().getCitizenInjuryHandler().isHurt())
             {
                 return CitizenAIState.IDLE;
             }
@@ -400,7 +400,7 @@ public class EntityAISickTask implements IStateAI
               ChatPriority.BLOCKING));
             return WANDER;
         }
-        else if (citizen.getCitizenData().getCitizenDiseaseHandler().isHurt())
+        else if (citizen.getCitizenData().getCitizenInjuryHandler().isHurt())
         {
             citizenData.triggerInteraction(new StandardInteraction(Component.translatable(INJURED_NEED_TREATMENT),
               Component.translatable(INJURED_NEED_TREATMENT),
@@ -438,7 +438,7 @@ public class EntityAISickTask implements IStateAI
         citizen.stopUsingItem();
         citizen.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         bestHospital = null;
-        citizen.getCitizenData().getCitizenDiseaseHandler().setSleepsAtHospital(false);
+        citizen.getCitizenData().getCitizenInjuryHandler().setSleepsAtHospital(false);
     }
 
     // TODO: Citizen AI should set status icons
