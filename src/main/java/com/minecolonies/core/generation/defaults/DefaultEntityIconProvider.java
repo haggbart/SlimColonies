@@ -53,7 +53,7 @@ public class DefaultEntityIconProvider implements DataProvider
     private static boolean IsEntitySkin(@NotNull final ResourceLocation id)
     {
         return id.getPath().endsWith(".png") &&
-                (id.getPath().startsWith("textures/entity/citizen/") || id.getPath().startsWith("textures/entity/raiders/"));
+                id.getPath().startsWith("textures/entity/citizen/");
     }
 
     @NotNull
