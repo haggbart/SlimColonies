@@ -89,7 +89,6 @@ public final class ModCreativeTabs
           output.accept(ModItems.flagBanner);
 
           output.accept(ModItems.ancientTome);
-          output.accept(ModItems.chiefSword);
           output.accept(ModItems.scimitar);
           output.accept(ModItems.pharaoscepter);
           output.accept(ModItems.firearrow);

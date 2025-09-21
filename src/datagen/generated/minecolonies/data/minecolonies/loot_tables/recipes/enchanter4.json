@@ -502,17 +502,6 @@
           "functions": [
             {
               "function": "minecraft:set_nbt",
-              "tag": "{StoredEnchantments:[{id:\"minecolonies:raider_damage_enchant\",lvl:1s}]}"
-            }
-          ],
-          "name": "minecraft:enchanted_book",
-          "weight": 15
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:set_nbt",
               "tag": "{StoredEnchantments:[{id:\"minecraft:aqua_affinity\",lvl:1s}]}"
             }
           ],

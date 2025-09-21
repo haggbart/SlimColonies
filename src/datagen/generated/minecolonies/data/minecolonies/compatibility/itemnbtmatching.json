@@ -1058,17 +1058,6 @@
     "item": "minecolonies:chickpea"
   },
   {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:chiefsword"
-  },
-  {
     "item": "minecolonies:chorus_bread"
   },
   {

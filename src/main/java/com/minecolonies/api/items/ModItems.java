@@ -20,7 +20,6 @@ public final class ModItems
     public static Item bannerRallyGuards;
     public static Item supplyCamp;
     public static Item ancientTome;
-    public static Item chiefSword;
     public static Item scimitar;
     public static Item scepterLumberjack;
     public static Item pharaoscepter;
