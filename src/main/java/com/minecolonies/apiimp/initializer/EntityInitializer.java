@@ -86,14 +86,6 @@ public class EntityInitializer
                 .setShouldReceiveVelocityUpdates(true));
 
 
-            ModEntities.SPEAR = build(registry, "spear",
-              EntityType.Builder.<SpearEntity>of(SpearEntity::new, MobCategory.MISC)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
-                .sized(0.5F, 0.5F)
-                .setShouldReceiveVelocityUpdates(true));
-
-
         }
     }
 
