@@ -1,7 +1,6 @@
 package com.minecolonies.api.items;
 
 import net.minecraft.world.item.Item;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Class handling the registering of the mod items.
@@ -29,7 +28,6 @@ public final class ModItems
     public static Item clipboard;
     public static Item compost;
     public static Item resourceScroll;
-
 
     public static Item plateArmorHelmet;
     public static Item plateArmorChest;
@@ -75,5 +73,4 @@ public final class ModItems
          * Intentionally left empty.
          */
     }
-
 }
