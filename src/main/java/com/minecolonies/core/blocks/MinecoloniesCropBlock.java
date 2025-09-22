@@ -42,22 +42,7 @@ import static com.minecolonies.api.util.constant.Constants.UPDATE_FLAG;
  */
 public class MinecoloniesCropBlock extends AbstractBlockMinecolonies<MinecoloniesCropBlock>
 {
-    public static String BELL_PEPPER = "bell_pepper";
-    public static String CABBAGE = "cabbage";
-    public static String CHICKPEA = "chickpea";
-    public static String DURUM = "durum";
-    public static String EGGPLANT = "eggplant";
-    public static String GARLIC = "garlic";
-    public static String ONION = "onion";
-    public static String SOYBEAN = "soybean";
-    public static String TOMATO = "tomato";
-    public static String RICE = "rice";
-
-    public static String BUTTERNUT_SQUASH = "butternut_squash";
-    public static String CORN = "corn";
-    public static String MINT = "mint";
-    public static String NETHER_PEPPER = "nether_pepper";
-    public static String PEAS = "peas";
+    // Crop constants removed - crops are no longer used
 
     public static final  IntegerProperty AGE = IntegerProperty.create("age", 0, 6);
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {

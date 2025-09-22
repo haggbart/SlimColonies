@@ -97,22 +97,6 @@ public final class ModBlocks
     public static MinecoloniesFarmland                                              floodedFarmland;
     public static AbstractBlockMinecolonies<? extends AbstractBlockMinecolonies<?>> blockColonySign;
 
-    public static MinecoloniesCropBlock blockBellPepper;
-    public static MinecoloniesCropBlock blockCabbage;
-    public static MinecoloniesCropBlock blockChickpea;
-    public static MinecoloniesCropBlock blockDurum;
-    public static MinecoloniesCropBlock blockEggplant;
-    public static MinecoloniesCropBlock blockGarlic;
-    public static MinecoloniesCropBlock blockOnion;
-    public static MinecoloniesCropBlock blockSoyBean;
-    public static MinecoloniesCropBlock blockTomato;
-    public static MinecoloniesCropBlock blockRice;
-
-    public static MinecoloniesCropBlock blockButternutSquash;
-    public static MinecoloniesCropBlock blockCorn;
-    public static MinecoloniesCropBlock blockMint;
-    public static MinecoloniesCropBlock blockNetherPepper;
-    public static MinecoloniesCropBlock blockPeas;
 
     /**
      * Private constructor to hide the implicit public one.
@@ -186,22 +170,6 @@ public final class ModBlocks
     @NotNull
     public static MinecoloniesCropBlock[] getCrops()
     {
-        return new MinecoloniesCropBlock[] {
-          blockBellPepper,
-          blockCabbage,
-          blockChickpea,
-          blockDurum,
-          blockEggplant,
-          blockGarlic,
-          blockOnion,
-          blockSoyBean,
-          blockTomato,
-          blockRice,
-          blockCorn,
-          blockNetherPepper,
-          blockPeas,
-          blockMint,
-          blockButternutSquash
-        };
+        return new MinecoloniesCropBlock[0];
     }
 }
