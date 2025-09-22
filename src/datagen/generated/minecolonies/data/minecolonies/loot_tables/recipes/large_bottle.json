@@ -10,7 +10,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecolonies:large_empty_bottle",
+          "name": "minecraft:glass_bottle",
           "quality": 1,
           "weight": 0
         }

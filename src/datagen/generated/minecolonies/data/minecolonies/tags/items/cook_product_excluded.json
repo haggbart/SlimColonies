@@ -3,10 +3,6 @@
     "minecraft:bread",
     "minecraft:cake",
     "minecraft:cookie",
-    "minecraft:pumpkin_pie",
-    "minecolonies:cheese_pizza",
-    "minecolonies:plain_cheesecake",
-    "minecolonies:apple_pie",
-    "minecolonies:cornmeal"
+    "minecraft:pumpkin_pie"
   ]
 }

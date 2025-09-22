@@ -7,8 +7,6 @@ import com.ldtteam.blockui.views.ScrollingList;
 import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.crafting.ItemStorage;
-import com.minecolonies.api.items.IMinecoloniesFoodItem;
-import com.minecolonies.api.util.FoodUtils;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.core.Network;
 import com.minecolonies.core.client.gui.AbstractModuleWindow;
@@ -23,8 +21,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
-import static com.minecolonies.api.util.constant.TranslationConstants.FOOD_QUALITY_TOOLTIP;
-import static com.minecolonies.api.util.constant.TranslationConstants.VANILLA_FOOD_QUALITY_TOOLTIP;
 import static com.minecolonies.api.util.constant.WindowConstants.*;
 import static org.jline.utils.AttributedStyle.WHITE;
 
@@ -63,7 +59,6 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
      */
     private String filter = "";
 
-
     /**
      * Grouped list that can be further filtered.
      */
@@ -77,7 +72,7 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
     /**
      * Update delay.
      */
-    private int                    tick;
+    private int tick;
 
     /**
      * The currently selected menu.
@@ -87,7 +82,7 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
     /**
      * Constructor for the minimum stock window view.
      *
-     * @param building class extending
+     * @param building   class extending
      * @param moduleView the module view.
      */
     public RestaurantMenuModuleWindow(final IBuildingView building, final RestaurantMenuModuleView moduleView)
@@ -166,7 +161,6 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
         }
     }
 
-
     /**
      * Updates the resource list in the GUI with the info we need.
      */
@@ -183,23 +177,14 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
         {
             findPaneByID("warning").hide();
 
-            boolean hasGoodMinecoloniesFood = false;
-            for (ItemStorage menuItem : menu)
+            // Food tier system removed - only show warning if menu is completely empty
+            if (menu.isEmpty())
             {
-                if (menuItem.getItem() instanceof IMinecoloniesFoodItem minecoloniesFoodItem && minecoloniesFoodItem.getTier() >= 2)
-                {
-                    hasGoodMinecoloniesFood = true;
-                    break;
-                }
-            }
-
-            if (hasGoodMinecoloniesFood)
-            {
-                findPaneByID("poorwarning").hide();
+                findPaneByID("poorwarning").show();
             }
             else
             {
-                findPaneByID("poorwarning").show();
+                findPaneByID("poorwarning").hide();
             }
         }
 
@@ -233,40 +218,9 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
                 rowPane.findPaneOfTypeByID(RESOURCE_ICON, ItemIcon.class).setItem(resource);
 
                 final Gradient gradient = rowPane.findPaneOfTypeByID("gradient", Gradient.class);
-                if (resource.getItem() instanceof IMinecoloniesFoodItem foodItem)
-                {
-                    if (foodItem.getTier() == 3)
-                    {
-                        gradient.setGradientStart(255, 215, 0, 255);
-                        gradient.setGradientEnd(255, 215, 0, 255);
-                    }
-                    else if (foodItem.getTier() == 2)
-                    {
-                        gradient.setGradientStart(211, 211, 211, 255);
-                        gradient.setGradientEnd(211, 211, 211, 255);
-                    }
-                    else if (foodItem.getTier() == 1)
-                    {
-                        gradient.setGradientStart(205, 127, 50, 255);
-                        gradient.setGradientEnd(205, 127, 50, 255);
-                    }
-
-                    PaneBuilders.tooltipBuilder()
-                            .append(Component.translatable(FOOD_QUALITY_TOOLTIP, FoodUtils.getBuildingLevelForFood(resource)))
-                            .hoverPane(gradient)
-                            .build();
-                }
-                else
-                {
-                    gradient.setGradientStart(0, 0, 0, 0);
-                    gradient.setGradientEnd(0, 0, 0, 0);
-
-                    PaneBuilders.tooltipBuilder()
-                            .append(Component.translatable(FOOD_QUALITY_TOOLTIP, FoodUtils.getBuildingLevelForFood(resource)))
-                            .appendNL(Component.translatable(VANILLA_FOOD_QUALITY_TOOLTIP))
-                            .hoverPane(gradient)
-                            .build();
-                }
+                // Food tier system removed - all food is equal now, no special coloring
+                gradient.setGradientStart(0, 0, 0, 0);
+                gradient.setGradientEnd(0, 0, 0, 0);
             }
         });
     }
@@ -277,8 +231,8 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
     private void updateResources()
     {
         final Predicate<ItemStack> filterPredicate = stack -> filter.isEmpty()
-                                                                || stack.getDescriptionId().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US))
-                                                                || stack.getHoverName().getString().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US));
+            || stack.getDescriptionId().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US))
+            || stack.getHoverName().getString().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US));
         currentDisplayedList.clear();
         for (final ItemStorage storage : groupedItemList)
         {
@@ -295,13 +249,15 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
 
     /**
      * Apply sorting to display list based on the scores.
+     *
      * @param displayedList list to apply sorting to.
      */
     protected void applySorting(final List<ItemStorage> displayedList)
     {
         displayedList.sort((o1, o2) -> {
-            int score = o1.getItem() instanceof IMinecoloniesFoodItem foodItem ? foodItem.getTier()* -100 : -o1.getItemStack().getFoodProperties(null).getNutrition();
-            int score2 = o2.getItem() instanceof IMinecoloniesFoodItem foodItem2 ? foodItem2.getTier()* -100 : -o2.getItemStack().getFoodProperties(null).getNutrition();
+            // Simplified sorting - just by nutrition value (higher nutrition first)
+            int score = o1.getItemStack().getFoodProperties(null) != null ? -o1.getItemStack().getFoodProperties(null).getNutrition() : 0;
+            int score2 = o2.getItemStack().getFoodProperties(null) != null ? -o2.getItemStack().getFoodProperties(null).getNutrition() : 0;
 
             final int scoreComparison = Integer.compare(score, score2);
             if (scoreComparison != 0)
@@ -348,52 +304,20 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
                 resourceLabel.setColors(WHITE);
                 final ItemIcon itemIcon = rowPane.findPaneOfTypeByID(RESOURCE_ICON, ItemIcon.class);
                 itemIcon.setItem(resource);
-                final boolean isInMenu  = moduleView.getMenu().contains(new ItemStorage(resource));
+                final boolean isInMenu = moduleView.getMenu().contains(new ItemStorage(resource));
                 final Button switchButton = rowPane.findPaneOfTypeByID(BUTTON_SWITCH, Button.class);
                 final Gradient gradient = rowPane.findPaneOfTypeByID("gradient", Gradient.class);
-                if (resource.getItem() instanceof IMinecoloniesFoodItem foodItem)
-                {
-                    if (foodItem.getTier() == 3)
-                    {
-                        gradient.setGradientStart(255, 215, 0, 255);
-                        gradient.setGradientEnd(255, 215, 0, 255);
-                    }
-                    else if (foodItem.getTier() == 2)
-                    {
-                        gradient.setGradientStart(211, 211, 211, 255);
-                        gradient.setGradientEnd(211, 211, 211, 255);
-                    }
-                    else if (foodItem.getTier() == 1)
-                    {
-                        gradient.setGradientStart(205, 127, 50, 255);
-                        gradient.setGradientEnd(205, 127, 50, 255);
-                    }
-
-                    PaneBuilders.tooltipBuilder()
-                            .append(Component.translatable(FOOD_QUALITY_TOOLTIP, FoodUtils.getBuildingLevelForFood(resource)))
-                            .hoverPane(gradient)
-                            .build();
-                }
-                else
-                {
-                    gradient.setGradientStart(0, 0, 0, 0);
-                    gradient.setGradientEnd(0, 0, 0, 0);
-
-                    PaneBuilders.tooltipBuilder()
-                            .append(Component.translatable(FOOD_QUALITY_TOOLTIP, FoodUtils.getBuildingLevelForFood(resource)))
-                            .appendNL(Component.translatable(VANILLA_FOOD_QUALITY_TOOLTIP))
-                            .hoverPane(gradient)
-                            .build();
-                }
+                // Food tier system removed - all food is equal, no special coloring
+                gradient.setGradientStart(0, 0, 0, 0);
+                gradient.setGradientEnd(0, 0, 0, 0);
 
                 if (moduleView.hasReachedLimit())
                 {
                     switchButton.disable();
                     PaneBuilders.tooltipBuilder()
-                      .append(Component.translatable(LABEL_LIMIT_REACHED))
-                      .hoverPane(switchButton)
-                      .build();
-
+                        .append(Component.translatable(LABEL_LIMIT_REACHED))
+                        .hoverPane(switchButton)
+                        .build();
                 }
                 if (isInMenu)
                 {

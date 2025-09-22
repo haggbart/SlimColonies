@@ -155,9 +155,7 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
           .add(Items.SPIDER_EYE)
           .add(Items.TROPICAL_FISH)
           .add(Items.PUFFERFISH)
-          .add(Items.SUSPICIOUS_STEW)
-          .add(ModItems.chorusBread)
-          .add(ModItems.goldenBread);
+          .add(Items.SUSPICIOUS_STEW);
 
         tag(ModTags.breakable_ore)
           .addTag(ItemTags.COAL_ORES)
@@ -193,11 +191,7 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
         tag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_BAKER))
           .addTag(Tags.Items.CROPS_WHEAT);
         tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_BAKER));
-        tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_BAKER))
-          .add(ModItems.cornmeal)
-          .add(ModItems.cheese_pizza)
-          .add(ModItems.plain_cheesecake)
-          .add(ModItems.apple_pie);
+        tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_BAKER));
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_BAKER))
           .add(Items.BREAD, Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE)
           .add(Items.PACKED_MUD)
@@ -235,60 +229,14 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
           .add(Items.DRIED_KELP)
           .add(Items.DRIED_KELP_BLOCK)
           .add(Items.EGG)
-          .add(ModItems.large_milk_bottle)
-          .add(ModItems.large_soy_milk_bottle)
-          .add(ModItems.large_water_bottle)
           .add(Items.MILK_BUCKET);
 
         tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_COOK))
           .addTag(Tags.Items.CROPS_WHEAT);
-        tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_COOK))
-          .add(ModItems.baked_salmon)
-          .add(ModItems.butter)
-          .add(ModItems.cabochis)
-          .add(ModItems.cheddar_cheese)
-          .add(ModItems.congee)
-          .add(ModItems.cooked_rice)
-          .add(ModItems.eggplant_dolma)
-          .add(ModItems.feta_cheese)
-          .add(ModItems.lamb_stew)
-          .add(ModItems.pasta_plain)
-          .add(ModItems.pasta_tomato)
-          .add(ModItems.pepper_hummus)
-          .add(ModItems.pottage)
-          .add(ModItems.raw_noodle)
-          .add(ModItems.rice_ball)
-          .add(ModItems.tofu)
-          .add(ModItems.creamcheese)
-          .add(ModItems.soysauce)
-          .add(ModItems.cheese_ravioli)
-          .add(ModItems.chicken_broth)
-          .add(ModItems.corn_chowder)
-          .add(ModItems.spicy_grilled_chicken)
-          .add(ModItems.kebab)
-          .add(ModItems.meat_ravioli)
-          .add(ModItems.mint_jelly)
-          .add(ModItems.mint_tea)
-          .add(ModItems.pea_soup)
-          .add(ModItems.polenta)
-          .add(ModItems.potato_soup)
-          .add(ModItems.squash_soup)
-          .add(ModItems.veggie_ravioli)
-          .add(ModItems.yogurt)
-          .add(ModItems.baked_salmon)
-          .add(ModItems.eggdrop_soup)
-          .add(ModItems.fish_n_chips)
-          .add(ModItems.kimchi)
-          .add(ModItems.pierogi)
-          .add(ModItems.veggie_quiche)
-          .add(ModItems.veggie_soup)
-          .add(ModItems.yogurt_with_berries)
-          .add(ModItems.mutton_dinner)
-          .add(ModItems.tortillas)
-          .add(ModItems.spicy_eggplant);
+        tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_COOK));
 
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_COOK))
-          .add(Items.BREAD, Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE, ModItems.cheese_pizza, ModItems.plain_cheesecake, ModItems.apple_pie, ModItems.cornmeal);
+          .add(Items.BREAD, Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE);
         tag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_DYER))
           .addTag(Tags.Items.DYES);
         tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_DYER));

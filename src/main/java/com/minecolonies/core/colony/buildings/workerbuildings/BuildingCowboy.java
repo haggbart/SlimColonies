@@ -116,10 +116,7 @@ public class BuildingCowboy extends AbstractBuilding
      */
     public ItemStack getMilkInputItem()
     {
-        if (getSetting(MILK_ITEM).getValue().equals(ModItems.large_milk_bottle.getDescriptionId()))
-        {
-            return ModItems.large_empty_bottle.getDefaultInstance();
-        }
+        // Simplified to only use vanilla buckets
         return Items.BUCKET.getDefaultInstance();
     }
 
@@ -129,10 +126,7 @@ public class BuildingCowboy extends AbstractBuilding
      */
     public ItemStack getMilkOutputItem()
     {
-        if (getSetting(MILK_ITEM).getValue().equals(ModItems.large_milk_bottle.getDescriptionId()))
-        {
-            return ModItems.large_milk_bottle.getDefaultInstance();
-        }
+        // Simplified to only use vanilla milk buckets
         return Items.MILK_BUCKET.getDefaultInstance();
     }
 
@@ -161,7 +155,7 @@ public class BuildingCowboy extends AbstractBuilding
             if (bucketsToKeep > 0)
             {
                 requiredItems.put(s -> s.is(Items.BUCKET), new Tuple<>(bucketsToKeep, false));
-                requiredItems.put(s -> s.is(ModItems.large_empty_bottle), new Tuple<>(bucketsToKeep, true));
+                // Removed large bottle requirement - only vanilla buckets now
             }
 
             if (bowlsToKeep > 0)
@@ -200,11 +194,7 @@ public class BuildingCowboy extends AbstractBuilding
                         .withInputs(List.of(List.of(Items.BUCKET.getDefaultInstance())))
                         .withRequiredEntity(animal.getType())
                         .build());
-                recipes.add(GenericRecipe.builder()
-                        .withOutput(ModItems.large_milk_bottle)
-                        .withInputs(List.of(List.of(ModItems.large_empty_bottle.getDefaultInstance())))
-                        .withRequiredEntity(animal.getType())
-                        .build());
+                // Removed large milk bottle recipe - only vanilla buckets supported
             }
             else if (animal instanceof Goat)
             {
@@ -213,11 +203,7 @@ public class BuildingCowboy extends AbstractBuilding
                     .withInputs(List.of(List.of(Items.BUCKET.getDefaultInstance())))
                     .withRequiredEntity(animal.getType())
                     .build());
-                recipes.add(GenericRecipe.builder()
-                    .withOutput(ModItems.large_milk_bottle)
-                    .withInputs(List.of(List.of(ModItems.large_empty_bottle.getDefaultInstance())))
-                    .withRequiredEntity(animal.getType())
-                    .build());
+                // Removed large milk bottle recipe for goats - only vanilla buckets supported
             }
 
             return recipes;

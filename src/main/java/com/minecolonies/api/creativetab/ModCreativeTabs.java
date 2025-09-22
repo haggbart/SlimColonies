@@ -106,10 +106,15 @@ public final class ModCreativeTabs
           output.accept(ModItems.cakeBatter);
           output.accept(ModItems.rawPumpkinPie);
 
-          output.accept(ModItems.milkyBread);
-          output.accept(ModItems.sugaryBread);
-          output.accept(ModItems.goldenBread);
-          output.accept(ModItems.chorusBread);
+          for (final Block crop : ModBlocks.getCrops())
+          {
+              output.accept(crop);
+          }
+
+          output.accept(ModBlocks.farmland);
+          output.accept(ModBlocks.floodedFarmland);
+
+          // Custom bread items removed for simplification
 
 
       }).build());
@@ -124,33 +129,6 @@ public final class ModCreativeTabs
             }
       }
 
-      public static final RegistryObject<CreativeModeTab> FOOD = TAB_REG.register("mcfood", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1)
-                                                                                                      .icon(() -> new ItemStack(ModBlocks.blockTomato))
-                                                                                                      .title(Component.translatable("com.minecolonies.creativetab.food")).displayItems((config, output) -> {
-          output.accept(ModBlocks.farmland);
-          output.accept(ModBlocks.floodedFarmland);
-
-          for (final Block crop : ModBlocks.getCrops())
-          {
-              output.accept(crop);
-          }
-
-          // bottles
-          output.accept(ModItems.large_empty_bottle);
-          output.accept(ModItems.large_water_bottle);
-          output.accept(ModItems.large_milk_bottle);
-          output.accept(ModItems.large_soy_milk_bottle);
-
-          for (final Item food : ModItems.getAllIngredients())
-          {
-              output.accept(food);
-          }
-
-          for (final Item food : ModItems.getAllFoods())
-          {
-              output.accept(food);
-          }
-      }).build());
 
     /**
      * Private constructor to hide the implicit one.

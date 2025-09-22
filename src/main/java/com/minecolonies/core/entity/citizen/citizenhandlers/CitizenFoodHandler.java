@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableList;
 import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
-import com.minecolonies.api.items.IMinecoloniesFoodItem;
 import com.minecolonies.core.colony.interactionhandling.StandardInteraction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -71,13 +70,7 @@ public class CitizenFoodHandler implements ICitizenFoodHandler
         lastEatenFoods.add(item);
         citizenData.markDirty(TICKS_SECOND);
         dirty = true;
-        if (lastEatenFoods.size() >= FOOD_QUEUE_SIZE)
-        {
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(NO + FOOD_DIVERSITY), ChatPriority.IMPORTANT));
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(NO + FOOD_QUALITY), ChatPriority.IMPORTANT));
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(NO + FOOD_DIVERSITY + URGENT), ChatPriority.BLOCKING));
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(NO + FOOD_QUALITY + URGENT), ChatPriority.BLOCKING));
-        }
+        // No more food quality/diversity complaints
     }
 
     @Override
