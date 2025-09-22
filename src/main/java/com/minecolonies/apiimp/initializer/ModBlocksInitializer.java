@@ -24,7 +24,6 @@ import java.util.List;
 
 import static com.minecolonies.api.blocks.decorative.AbstractBlockGate.IRON_GATE;
 import static com.minecolonies.api.blocks.decorative.AbstractBlockGate.WOODEN_GATE;
-import static com.minecolonies.core.blocks.MinecoloniesCropBlock.*;
 
 /**
  * This class deals with the initialization of blocks and their items.

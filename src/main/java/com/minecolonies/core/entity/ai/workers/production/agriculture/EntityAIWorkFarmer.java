@@ -21,14 +21,12 @@ import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.api.util.constant.translation.RequestSystemTranslationConstants;
 import com.minecolonies.core.Network;
 import com.minecolonies.core.blocks.BlockScarecrow;
-import com.minecolonies.core.blocks.MinecoloniesCropBlock;
 import com.minecolonies.core.colony.buildingextensions.FarmField;
 import com.minecolonies.core.colony.buildings.modules.BuildingExtensionsModule;
 import com.minecolonies.core.colony.buildings.workerbuildings.BuildingFarmer;
 import com.minecolonies.core.colony.interactionhandling.StandardInteraction;
 import com.minecolonies.core.colony.jobs.JobFarmer;
 import com.minecolonies.core.entity.ai.workers.crafting.AbstractEntityAICrafting;
-import com.minecolonies.core.items.ItemCrop;
 import com.minecolonies.core.network.messages.client.CompostParticleMessage;
 import com.minecolonies.core.util.AdvancementUtils;
 import com.minecolonies.core.util.citizenutils.CitizenItemUtils;
@@ -36,7 +34,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.BlockItem;
@@ -106,7 +103,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
      * Farming icon
      */
     private static final VisibleCitizenStatus FARMING_ICON =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/farmer.png"), "com.minecolonies.gui.visiblestatus.farmer");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/farmer.png"), "com.minecolonies.gui.visiblestatus.farmer");
 
     /**
      * Changed after finished harvesting in order to dump the inventory.
@@ -132,10 +129,10 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     {
         super(job);
         super.registerTargets(
-          new AITarget(PREPARING, this::prepareForFarming, TICKS_SECOND),
-          new AITarget(FARMER_HOE, this::workAtField, 5),
-          new AITarget(FARMER_PLANT, this::workAtField, 5),
-          new AITarget(FARMER_HARVEST, this::workAtField, 5)
+            new AITarget(PREPARING, this::prepareForFarming, TICKS_SECOND),
+            new AITarget(FARMER_HOE, this::workAtField, 5),
+            new AITarget(FARMER_PLANT, this::workAtField, 5),
+            new AITarget(FARMER_HARVEST, this::workAtField, 5)
         );
         worker.setCanPickUpLoot(true);
     }
@@ -375,18 +372,17 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         }
         final BlockState blockState = world.getBlockState(position);
         if (farmField.isNoPartOfField(world, position)
-              || (world.getBlockState(position.above()).getBlock() instanceof CropBlock)
-              || (world.getBlockState(position.above()).getBlock() instanceof BlockScarecrow)
-              || (!blockState.is(BlockTags.DIRT) && !(blockState.getBlock() instanceof FarmBlock))
-              ||  isRightFarmLandForCrop(farmField, blockState)
-              || (world.getBlockState(position.above()).getBlock() instanceof MinecoloniesCropBlock)
+            || (world.getBlockState(position.above()).getBlock() instanceof CropBlock)
+            || (world.getBlockState(position.above()).getBlock() instanceof BlockScarecrow)
+            || (!blockState.is(BlockTags.DIRT) && !(blockState.getBlock() instanceof FarmBlock))
+            || isRightFarmLandForCrop(farmField, blockState)
         )
         {
             return null;
         }
 
         final BlockState aboveState = world.getBlockState(position.above());
-        if (aboveState.canBeReplaced() && !(aboveState.getBlock() instanceof MinecoloniesCropBlock))
+        if (aboveState.canBeReplaced())
         {
             world.destroyBlock(position.above(), true);
         }
@@ -398,10 +394,10 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
 
         final BlockHitResult blockHitResult = new BlockHitResult(Vec3.ZERO, Direction.UP, position, false);
         final UseOnContext useOnContext = new UseOnContext(world,
-          null,
-          InteractionHand.MAIN_HAND,
-          getInventory().getStackInSlot(InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(getInventory(), ModEquipmentTypes.hoe.get(), 0, Integer.MAX_VALUE)),
-          blockHitResult);
+            null,
+            InteractionHand.MAIN_HAND,
+            getInventory().getStackInSlot(InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(getInventory(), ModEquipmentTypes.hoe.get(), 0, Integer.MAX_VALUE)),
+            blockHitResult);
         final BlockState toolModifiedState = blockState.getToolModifiedState(useOnContext, ToolActions.HOE_TILL, true);
         if (toolModifiedState == null || !toolModifiedState.is(Blocks.FARMLAND))
         {
@@ -493,10 +489,10 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             }
         }
         while (
-          -z > farmField.getRadius(Direction.NORTH)
-            || x > farmField.getRadius(Direction.EAST)
-            || z > farmField.getRadius(Direction.SOUTH)
-            || -x > farmField.getRadius(Direction.WEST)
+            -z > farmField.getRadius(Direction.NORTH)
+                || x > farmField.getRadius(Direction.EAST)
+                || z > farmField.getRadius(Direction.SOUTH)
+                || -x > farmField.getRadius(Direction.WEST)
         );
 
         return new BlockPos(x, 0, z);
@@ -607,7 +603,10 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                 createCorrectFarmlandForSeed(farmField.getSeed(), position);
                 CitizenItemUtils.damageItemInHand(worker, InteractionHand.MAIN_HAND, 1);
                 worker.decreaseSaturationForContinuousAction();
-                worker.getCitizenColonyHandler().getColonyOrRegister().getStatisticsManager().increment(LAND_TILLED, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
+                worker.getCitizenColonyHandler()
+                    .getColonyOrRegister()
+                    .getStatisticsManager()
+                    .increment(LAND_TILLED, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
 
                 return true;
             }
@@ -618,8 +617,9 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
 
     /**
      * Create the correct farmland for a given seed.
+     *
      * @param seed the crop.
-     * @param pos the position.
+     * @param pos  the position.
      */
     private void createCorrectFarmlandForSeed(final ItemStack seed, final BlockPos pos)
     {
@@ -628,7 +628,8 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
 
     /**
      * Check if this is the right farm land for the specific crop.
-     * @param farmField the field we're testing this for.
+     *
+     * @param farmField  the field we're testing this for.
      * @param blockState the state we're testing this on.
      * @return true if so.
      */
@@ -650,7 +651,10 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         {
             if (mineBlock(position.above()))
             {
-                worker.getCitizenColonyHandler().getColonyOrRegister().getStatisticsManager().increment(CROPS_HARVESTED, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
+                worker.getCitizenColonyHandler()
+                    .getColonyOrRegister()
+                    .getStatisticsManager()
+                    .increment(CROPS_HARVESTED, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
                 worker.getCitizenExperienceHandler().addExperience(XP_PER_HARVEST);
             }
             else
@@ -708,12 +712,11 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     {
         position = getSurfacePos(position);
         if (position == null
-              || farmField.isNoPartOfField(world, position)
-              || world.getBlockState(position.above()).getBlock() instanceof CropBlock
-              || world.getBlockState(position.above()).getBlock() instanceof StemBlock
-              || world.getBlockState(position).getBlock() instanceof BlockScarecrow
-              || !isRightFarmLandForCrop(farmField, world.getBlockState(position))
-              || world.getBlockState(position.above()).getBlock() instanceof MinecoloniesCropBlock)
+            || farmField.isNoPartOfField(world, position)
+            || world.getBlockState(position.above()).getBlock() instanceof CropBlock
+            || world.getBlockState(position.above()).getBlock() instanceof StemBlock
+            || world.getBlockState(position).getBlock() instanceof BlockScarecrow
+            || !isRightFarmLandForCrop(farmField, world.getBlockState(position)))
         {
             return null;
         }
@@ -740,7 +743,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             return false;
         }
 
-        if (item.getItem() instanceof BlockItem blockItem && (blockItem.getBlock() instanceof CropBlock || blockItem.getBlock() instanceof StemBlock || blockItem.getBlock() instanceof MinecoloniesCropBlock)
+        if (item.getItem() instanceof BlockItem blockItem && (blockItem.getBlock() instanceof CropBlock || blockItem.getBlock() instanceof StemBlock)
             && blockItem.getBlock().defaultBlockState().canSurvive(worker.level(), position.above()))
         {
             @NotNull final Item seed = item.getItem();
@@ -793,7 +796,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             if (InventoryUtils.shrinkItemCountInItemHandler(worker.getInventoryCitizen(), this::isCompost))
             {
                 Network.getNetwork().sendToPosition(new CompostParticleMessage(position.above()),
-                  new PacketDistributor.TargetPoint(position.getX(), position.getY(), position.getZ(), BLOCK_BREAK_SOUND_RANGE, world.dimension()));
+                    new PacketDistributor.TargetPoint(position.getX(), position.getY(), position.getZ(), BLOCK_BREAK_SOUND_RANGE, world.dimension()));
                 crop.growCrops(world, position.above(), state);
                 state = world.getBlockState(position.above());
                 block = state.getBlock();
@@ -807,36 +810,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                 }
             }
             return crop.isMaxAge(state) ? position : null;
-        }
-        else if (block instanceof MinecoloniesCropBlock minecoloniesCrop)
-        {
-            if (minecoloniesCrop.isMaxAge(state))
-            {
-                return position;
-            }
-            final int amountOfCompostInInv = InventoryUtils.getItemCountInItemHandler(worker.getInventoryCitizen(), this::isCompost);
-            if (amountOfCompostInInv == 0)
-            {
-                return null;
-            }
-
-            if (InventoryUtils.shrinkItemCountInItemHandler(worker.getInventoryCitizen(), this::isCompost))
-            {
-                Network.getNetwork().sendToPosition(new CompostParticleMessage(position.above()),
-                  new PacketDistributor.TargetPoint(position.getX(), position.getY(), position.getZ(), BLOCK_BREAK_SOUND_RANGE, world.dimension()));
-                minecoloniesCrop.attemptGrow(state, (ServerLevel) world, position.above());
-                state = world.getBlockState(position.above());
-                block = state.getBlock();
-                if (block instanceof MinecoloniesCropBlock)
-                {
-                    minecoloniesCrop = (MinecoloniesCropBlock) block;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            return minecoloniesCrop.isMaxAge(state) ? position : null;
         }
         return null;
     }

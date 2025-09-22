@@ -14,7 +14,6 @@ import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.CraftingUtils;
 import com.minecolonies.api.util.ItemStackUtils;
 import com.minecolonies.api.util.OptionalPredicate;
-import com.minecolonies.core.blocks.MinecoloniesCropBlock;
 import com.minecolonies.core.client.gui.modules.FarmFieldsModuleWindow;
 import com.minecolonies.core.colony.buildingextensions.FarmField;
 import com.minecolonies.core.colony.buildings.AbstractBuilding;
@@ -23,7 +22,6 @@ import com.minecolonies.core.colony.buildings.modules.BuildingExtensionsModule;
 import com.minecolonies.core.colony.buildings.modules.settings.BoolSetting;
 import com.minecolonies.core.colony.buildings.modules.settings.SettingKey;
 import com.minecolonies.core.colony.buildings.moduleviews.FieldsModuleView;
-import com.minecolonies.core.items.ItemCrop;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -50,7 +48,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 import static com.minecolonies.api.util.constant.TagConstants.CRAFTING_FARMER;
@@ -66,7 +63,7 @@ public class BuildingFarmer extends AbstractBuilding
      * The beekeeper mode.
      */
     public static final ISettingKey<BoolSetting> FERTILIZE =
-      new SettingKey<>(BoolSetting.class, new ResourceLocation(com.minecolonies.api.util.constant.Constants.MOD_ID, "fertilize"));
+        new SettingKey<>(BoolSetting.class, new ResourceLocation(com.minecolonies.api.util.constant.Constants.MOD_ID, "fertilize"));
 
     /**
      * Descriptive string of the profession.
@@ -107,7 +104,6 @@ public class BuildingFarmer extends AbstractBuilding
         keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.hoe.get()), new Tuple<>(1, true));
         keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.axe.get()), new Tuple<>(1, true));
     }
-
 
     /**
      * Override this method if you want to keep an amount of items in inventory. When the inventory is full, everything get's dumped into the building chest. But you can use this
@@ -176,6 +172,7 @@ public class BuildingFarmer extends AbstractBuilding
 
     /**
      * Get the offset to work at relative to the scarecrow.
+     *
      * @return the blockpos.
      */
     public BlockPos getWorkingOffset()
@@ -185,6 +182,7 @@ public class BuildingFarmer extends AbstractBuilding
 
     /**
      * Set the current index within the current field
+     *
      * @param i the value to set.
      * @return current value.
      */
@@ -196,6 +194,7 @@ public class BuildingFarmer extends AbstractBuilding
 
     /**
      * Get the current index within the current field
+     *
      * @return current value.
      */
     public int getCell()
@@ -205,6 +204,7 @@ public class BuildingFarmer extends AbstractBuilding
 
     /**
      * Set the previous position which has been worked at.
+     *
      * @param position to set.
      */
     public void setPrevPos(final BlockPos position)
@@ -214,6 +214,7 @@ public class BuildingFarmer extends AbstractBuilding
 
     /**
      * Set the offset to work at relative to the scarecrow.
+     *
      * @param blockPos the pos to set.
      */
     public void setWorkingOffset(final BlockPos blockPos)
@@ -223,6 +224,7 @@ public class BuildingFarmer extends AbstractBuilding
 
     /**
      * Get the previous position which has been worked at.
+     *
      * @return current prev pos.
      */
     public BlockPos getPrevPos()
@@ -284,7 +286,9 @@ public class BuildingFarmer extends AbstractBuilding
         @Override
         public @NotNull List<IBuildingExtension> getMatchingExtension(final Predicate<IBuildingExtension> predicateToMatch)
         {
-            return building.getColony().getBuildingManager().getBuildingExtensions(field -> field.getBuildingExtensionType() == BuildingExtensionRegistries.farmField.get() && predicateToMatch.test(field));
+            return building.getColony()
+                .getBuildingManager()
+                .getBuildingExtensions(field -> field.getBuildingExtensionType() == BuildingExtensionRegistries.farmField.get() && predicateToMatch.test(field));
         }
 
         @Override
@@ -353,7 +357,7 @@ public class BuildingFarmer extends AbstractBuilding
         public OptionalPredicate<ItemStack> getIngredientValidator()
         {
             return CraftingUtils.getIngredientValidatorBasedOnTags(CRAFTING_FARMER)
-                     .combine(super.getIngredientValidator());
+                .combine(super.getIngredientValidator());
         }
 
         @Override
@@ -373,30 +377,15 @@ public class BuildingFarmer extends AbstractBuilding
             List<IGenericRecipe> recipes = new ArrayList<>(super.getAdditionalRecipesForDisplayPurposesOnly(world));
             for (final ItemStack stack : IColonyManager.getInstance().getCompatibilityManager().getListOfAllItems())
             {
-                if (stack.getItem() instanceof ItemCrop cropItem && cropItem.getBlock() instanceof MinecoloniesCropBlock crop)
-                {
-                    // MineColonies crop
-                    final TagKey<Biome> preferredBiome = crop.getPreferredBiome();
-                    final Supplier<List<Component>> restrictions = preferredBiome == null ? ArrayList::new
-                            : () -> provideBiomeList(preferredBiome);
-
-                    recipes.add(GenericRecipe.builder()
-                            .withInputs(List.of(List.of(cropItem.getDefaultInstance())))
-                            .withIntermediate(crop.getPreferredFarmland())
-                            .withLootTable(crop.getLootTable())
-                            .withRequiredTool(ModEquipmentTypes.hoe.get())
-                            .withRestrictions(restrictions)
-                            .build());
-                }
-                else if (stack.getItem() instanceof BlockItem item && item.getBlock() instanceof CropBlock crop)
+                if (stack.getItem() instanceof BlockItem item && item.getBlock() instanceof CropBlock crop)
                 {
                     // regular crop
                     recipes.add(GenericRecipe.builder()
-                            .withInputs(List.of(List.of(crop.getCloneItemStack(world, BlockPos.ZERO, crop.defaultBlockState()))))
-                            .withIntermediate(Blocks.FARMLAND)
-                            .withLootTable(crop.getLootTable())
-                            .withRequiredTool(ModEquipmentTypes.hoe.get())
-                            .build());
+                        .withInputs(List.of(List.of(crop.getCloneItemStack(world, BlockPos.ZERO, crop.defaultBlockState()))))
+                        .withIntermediate(Blocks.FARMLAND)
+                        .withLootTable(crop.getLootTable())
+                        .withRequiredTool(ModEquipmentTypes.hoe.get())
+                        .build());
                 }
                 else if (stack.is(Tags.Items.SEEDS))
                 {
@@ -404,19 +393,19 @@ public class BuildingFarmer extends AbstractBuilding
                     if (stack.getItem() instanceof BlockItem item && item.getBlock() instanceof StemBlock stem)
                     {
                         recipes.add(GenericRecipe.builder()
-                                .withOutput(stem.getFruit())
-                                .withInputs(List.of(List.of(stack)))
-                                .withIntermediate(Blocks.FARMLAND)
-                                .withRequiredTool(ModEquipmentTypes.hoe.get())
-                                .build());
+                            .withOutput(stem.getFruit())
+                            .withInputs(List.of(List.of(stack)))
+                            .withIntermediate(Blocks.FARMLAND)
+                            .withRequiredTool(ModEquipmentTypes.hoe.get())
+                            .build());
                     }
                     else
                     {
                         recipes.add(GenericRecipe.builder()
-                                .withInputs(List.of(List.of(stack)))
-                                .withIntermediate(Blocks.FARMLAND)
-                                .withRequiredTool(ModEquipmentTypes.hoe.get())
-                                .build());
+                            .withInputs(List.of(List.of(stack)))
+                            .withIntermediate(Blocks.FARMLAND)
+                            .withRequiredTool(ModEquipmentTypes.hoe.get())
+                            .build());
                     }
                 }
             }
@@ -427,20 +416,23 @@ public class BuildingFarmer extends AbstractBuilding
         private List<Component> provideBiomeList(@NotNull final TagKey<Biome> preferredBiome)
         {
             final Minecraft mc = Minecraft.getInstance();
-            if (mc.level == null || mc.player == null) return List.of();
+            if (mc.level == null || mc.player == null)
+            {
+                return List.of();
+            }
 
             final Biome currentBiome = mc.level.getBiome(mc.player.blockPosition()).get();
 
             final Registry<Biome> biomeRegistry = mc.level.registryAccess().registryOrThrow(preferredBiome.registry());
             final Object[] biomes = biomeRegistry.getTag(preferredBiome).get().stream()
-                    .map(b -> {
-                        final MutableComponent name = Component.translatable(biomeRegistry.getKey(b.get()).toLanguageKey("biome"));
-                        return b.get() == currentBiome ? name.withStyle(ChatFormatting.DARK_GREEN) : name;
-                    })
-                    .toArray();
+                .map(b -> {
+                    final MutableComponent name = Component.translatable(biomeRegistry.getKey(b.get()).toLanguageKey("biome"));
+                    return b.get() == currentBiome ? name.withStyle(ChatFormatting.DARK_GREEN) : name;
+                })
+                .toArray();
 
             return List.of(Component.translatable(PARTIAL_JEI_INFO + "biomerestriction",
-                    Component.translatable(String.join(", ", Collections.nCopies(biomes.length, "%s")), biomes)));
+                Component.translatable(String.join(", ", Collections.nCopies(biomes.length, "%s")), biomes)));
         }
 
         @NotNull
@@ -450,11 +442,7 @@ public class BuildingFarmer extends AbstractBuilding
             final List<ResourceLocation> tables = new ArrayList<>(super.getAdditionalLootTables());
             for (final ItemStack stack : IColonyManager.getInstance().getCompatibilityManager().getListOfAllItems())
             {
-                if (stack.getItem() instanceof ItemCrop cropItem && cropItem.getBlock() instanceof MinecoloniesCropBlock crop)
-                {
-                    tables.add(crop.getLootTable());
-                }
-                else if (stack.getItem() instanceof BlockItem item && item.getBlock() instanceof CropBlock crop)
+                if (stack.getItem() instanceof BlockItem item && item.getBlock() instanceof CropBlock crop)
                 {
                     tables.add(crop.getLootTable());
                 }

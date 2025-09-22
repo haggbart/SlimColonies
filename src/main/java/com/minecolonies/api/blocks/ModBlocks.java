@@ -4,7 +4,6 @@ import com.minecolonies.api.blocks.decorative.AbstractBlockGate;
 import com.minecolonies.api.blocks.decorative.AbstractBlockMinecoloniesConstructionTape;
 import com.minecolonies.api.blocks.decorative.AbstractColonyFlagBanner;
 import com.minecolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
-import com.minecolonies.core.blocks.MinecoloniesCropBlock;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -163,9 +162,4 @@ public final class ModBlocks
         };
     }
 
-    @NotNull
-    public static MinecoloniesCropBlock[] getCrops()
-    {
-        return new MinecoloniesCropBlock[0];
-    }
 }
