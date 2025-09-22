@@ -1433,17 +1433,6 @@
     "item": "minecolonies:soysauce"
   },
   {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:spear"
-  },
-  {
     "item": "minecolonies:spicy_eggplant"
   },
   {

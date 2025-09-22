@@ -76,7 +76,6 @@ public final class ModItemsInitializer
         ModItems.resourceScroll = new ItemResourceScroll(new Item.Properties());
         ModItems.scepterBeekeeper = new ItemScepterBeekeeper(new Item.Properties());
         ModItems.mistletoe = new ItemMistletoe(new Item.Properties());
-        ModItems.spear = new ItemSpear(new Item.Properties());
         ModItems.questLog = new ItemQuestLog(new Item.Properties());
 
         ModItems.breadDough = new ItemBreadDough(new Item.Properties());
@@ -255,7 +254,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
         registry.register(new ResourceLocation(Constants.MOD_ID, "mistletoe"), ModItems.mistletoe);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "spear"), ModItems.spear);
         registry.register(new ResourceLocation(Constants.MOD_ID, "questlog"), ModItems.questLog);
         registry.register(new ResourceLocation(Constants.MOD_ID, "colonymap"), ModItems.colonyMap);
 

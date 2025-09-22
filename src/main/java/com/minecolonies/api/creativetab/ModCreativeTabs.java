@@ -90,7 +90,6 @@ public final class ModCreativeTabs
 
           output.accept(ModItems.ancientTome);
           output.accept(ModItems.scimitar);
-          output.accept(ModItems.spear);
 
           output.accept(ModItems.plateArmorHelmet);
           output.accept(ModItems.plateArmorChest);

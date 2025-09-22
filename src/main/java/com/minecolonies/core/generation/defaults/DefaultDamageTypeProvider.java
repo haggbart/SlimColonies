@@ -41,7 +41,6 @@ public class DefaultDamageTypeProvider extends JsonCodecProvider<DamageType>
                 Map.entry(DamageSourceKeys.WAKEY.location(), damage("entity.minecolonies.wakeywakey")),
 
                 Map.entry(DamageSourceKeys.MERCENARY.location(), entityDamage(ModEntities.MERCENARY)),
-                Map.entry(DamageSourceKeys.SPEAR.location(), entityDamage(ModEntities.SPEAR)),
                 Map.entry(DamageSourceKeys.VISITOR.location(), entityDamage(ModEntities.VISITOR))
           );
     }

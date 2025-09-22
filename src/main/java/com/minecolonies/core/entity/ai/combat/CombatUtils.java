@@ -6,7 +6,6 @@ import com.minecolonies.api.entity.ModEntities;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.core.colony.buildings.AbstractBuildingGuards;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
-import com.minecolonies.core.items.ItemSpear;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -51,10 +50,6 @@ public class CombatUtils
         if (rangedWeaponItem instanceof BowItem)
         {
             arrowEntity = ((BowItem) rangedWeaponItem).customArrow(arrowEntity);
-        }
-        else if (rangedWeaponItem instanceof ItemSpear)
-        {
-            arrowEntity = ModEntities.SPEAR.create(shooter.level);
         }
         else if (rangedWeaponItem instanceof TridentItem)
         {

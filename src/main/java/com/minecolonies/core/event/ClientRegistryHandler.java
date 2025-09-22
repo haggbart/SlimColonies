@@ -12,7 +12,6 @@ import com.minecolonies.core.client.model.*;
 import com.minecolonies.core.client.model.ScarecrowModel;
 import com.minecolonies.core.client.render.*;
 import com.minecolonies.core.client.render.mobs.RenderMercenary;
-import com.minecolonies.core.client.render.projectile.RendererSpear;
 import com.minecolonies.core.client.render.worldevent.ColonyBlueprintRenderer;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -236,7 +235,6 @@ public class ClientRegistryHandler
         event.registerEntityRenderer(ModEntities.CITIZEN, RenderBipedCitizen::new);
         event.registerEntityRenderer(ModEntities.VISITOR, RenderBipedCitizen::new);
         event.registerEntityRenderer(ModEntities.FISHHOOK, RenderFishHook::new);
-        event.registerEntityRenderer(ModEntities.SPEAR, RendererSpear::new);
 
         event.registerEntityRenderer(ModEntities.MC_NORMAL_ARROW, TippableArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.DRUID_POTION, m -> new ThrownItemRenderer<>(m, 1.0F, true));
@@ -269,8 +267,6 @@ public class ClientRegistryHandler
 
         Arrays.stream(ModBlocks.getCrops()).forEach(hut -> ItemBlockRenderTypes.setRenderLayer(hut, RenderType.cutout()));
 
-        ItemProperties.register(ModItems.spear, new ResourceLocation("throwing"), (item, world, entity, light) ->
-                                                                           (entity != null && entity.isUsingItem() && entity.getUseItem() == item) ? 1.0F : 0.0F);
         ItemProperties.register(ModItems.buildGoggles, new ResourceLocation("disabled"), (item, world, entity, light) ->
                 (ColonyBlueprintRenderer.willRenderBlueprints() ? 0.0F : 1.0F));
     }
