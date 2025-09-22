@@ -17,7 +17,6 @@ public class ModEntities
 
     public static EntityType<? extends Projectile> FISHHOOK;
 
-    public static EntityType<? extends PathfinderMob> MERCENARY;
 
 
     public static EntityType<? extends Entity> SITTINGENTITY;

@@ -19,7 +19,6 @@ public class DamageSourceKeys
     public static ResourceKey<DamageType> TRAINING = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Constants.MOD_ID, "training"));
     public static ResourceKey<DamageType> GUARD = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Constants.MOD_ID, "guard"));
     public static ResourceKey<DamageType> GUARD_PVP = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Constants.MOD_ID, "guardpvp"));
-    public static ResourceKey<DamageType> MERCENARY = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Constants.MOD_ID, "mercenary"));
 
 
 }

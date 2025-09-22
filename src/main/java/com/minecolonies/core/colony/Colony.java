@@ -284,10 +284,6 @@ public class Colony implements IColony
         .addPattern(BannerPatterns.BASE, DyeColor.WHITE)
         .toListTag();
 
-    /**
-     * The last time the mercenaries were used.
-     */
-    private long mercenaryLastUse = 0;
 
     /**
      * The amount of additional child time gathered when the colony is not loaded.
@@ -723,7 +719,6 @@ public class Colony implements IColony
     {
         dimensionId = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(compound.getString(TAG_DIMENSION)));
 
-        mercenaryLastUse = compound.getLong(TAG_MERCENARY_TIME);
         additionalChildTime = compound.getInt(TAG_CHILD_TIME);
 
         // Permissions
@@ -880,7 +875,6 @@ public class Colony implements IColony
         compound.putString(TAG_NAME, name);
         BlockPosUtil.write(compound, TAG_CENTER, center);
 
-        compound.putLong(TAG_MERCENARY_TIME, mercenaryLastUse);
 
         compound.putInt(TAG_CHILD_TIME, additionalChildTime);
 
@@ -1777,24 +1771,6 @@ public class Colony implements IColony
         this.isDirty = dirty;
     }
 
-    /**
-     * Save the time when mercenaries are used, to set a cooldown.
-     */
-    @Override
-    public void usedMercenaries()
-    {
-        mercenaryLastUse = world.getGameTime();
-        markDirty();
-    }
-
-    /**
-     * Get the last time mercenaries were used.
-     */
-    @Override
-    public long getMercenaryUseTime()
-    {
-        return mercenaryLastUse;
-    }
 
     @Override
     public boolean useAdditionalChildTime(final int amount)

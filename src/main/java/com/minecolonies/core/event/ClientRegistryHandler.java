@@ -11,7 +11,6 @@ import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.core.client.model.*;
 import com.minecolonies.core.client.model.ScarecrowModel;
 import com.minecolonies.core.client.render.*;
-import com.minecolonies.core.client.render.mobs.RenderMercenary;
 import com.minecolonies.core.client.render.worldevent.ColonyBlueprintRenderer;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -116,7 +115,6 @@ public class ClientRegistryHandler
     public static final ModelLayerLocation MALE_ALCHEMIST = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_alchemist"), "male_alchemist");
     public static final ModelLayerLocation FEMALE_ALCHEMIST = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "female_alchemist"), "female_alchemist");
 
-    public static final ModelLayerLocation MERCENARY    = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "mercenary"), "mercenary");
 
     // All raider model layer locations removed for SlimColonies
 
@@ -128,7 +126,6 @@ public class ClientRegistryHandler
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
-        event.registerLayerDefinition(MERCENARY, MercenaryModel::createMesh);
 
         // All raider model layer definitions removed for SlimColonies
 
@@ -243,7 +240,6 @@ public class ClientRegistryHandler
 
         // Misc
 
-        event.registerEntityRenderer(ModEntities.MERCENARY, RenderMercenary::new);
         event.registerEntityRenderer(ModEntities.SITTINGENTITY, RenderSitting::new);
         event.registerEntityRenderer(ModEntities.MINECART, (context) -> new MinecartRenderer<>(context, ModelLayers.MINECART));
 

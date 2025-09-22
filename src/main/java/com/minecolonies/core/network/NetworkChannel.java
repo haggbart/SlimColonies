@@ -175,7 +175,6 @@ public class NetworkChannel
         registerMessage(++idx, RestartCitizenMessage.class, RestartCitizenMessage::new);
         registerMessage(++idx, SortWarehouseMessage.class, SortWarehouseMessage::new);
         registerMessage(++idx, PostBoxRequestMessage.class, PostBoxRequestMessage::new);
-        registerMessage(++idx, HireMercenaryMessage.class, HireMercenaryMessage::new);
         registerMessage(++idx, HutRenameMessage.class, HutRenameMessage::new);
         registerMessage(++idx, BuildingHiringModeMessage.class, BuildingHiringModeMessage::new);
         registerMessage(++idx, DecorationBuildRequestMessage.class, DecorationBuildRequestMessage::new);

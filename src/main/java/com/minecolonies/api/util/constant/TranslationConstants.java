@@ -709,10 +709,6 @@ public final class TranslationConstants
     @NonNls
     public static final String MESSAGE_INFO_COLONY_VISITOR_DIED             = "com.minecolonies.coremod.gui.tavern.visitordeath";
     @NonNls
-    public static final String MESSAGE_INFO_COLONY_MERCENARY_STEAL_CITIZEN  = "com.minecolonies.coremod.mercenary.mercenarystealcitizen";
-    @NonNls
-    public static final String MESSAGE_INFO_COLONY_MERCENARY_STEAL_BUILDING = "com.minecolonies.coremod.mercenary.stealbuilding";
-    @NonNls
     public static final String MESSAGE_INFO_COLONY_CHILD_GREW_UP            = "com.minecolonies.coremod.progress.childgrow";
     @NonNls
     public static final String MESSAGE_INFO_COLONY_DELETE_SUCCESS           = "com.minecolonies.coremod.gui.colony.delete.success";

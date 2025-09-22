@@ -105,12 +105,6 @@ public final class ModSoundEvents
 
         // All raid sounds removed for SlimColonies
 
-        SOUND_EVENTS.register(MercenarySounds.mercenaryAttack.getLocation().getPath(), () -> MercenarySounds.mercenaryAttack);
-        SOUND_EVENTS.register(MercenarySounds.mercenaryCelebrate.getLocation().getPath(), () -> MercenarySounds.mercenaryCelebrate);
-        SOUND_EVENTS.register(MercenarySounds.mercenaryDie.getLocation().getPath(), () -> MercenarySounds.mercenaryDie);
-        SOUND_EVENTS.register(MercenarySounds.mercenaryHurt.getLocation().getPath(), () -> MercenarySounds.mercenaryHurt);
-        SOUND_EVENTS.register(MercenarySounds.mercenarySay.getLocation().getPath(), () -> MercenarySounds.mercenarySay);
-        SOUND_EVENTS.register(MercenarySounds.mercenaryStep.getLocation().getPath(), () -> MercenarySounds.mercenaryStep);
     }
 
     /**
