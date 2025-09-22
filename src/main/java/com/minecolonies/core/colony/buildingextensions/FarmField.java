@@ -247,7 +247,7 @@ public class FarmField extends AbstractBuildingExtensionModule
     {
         EMPTY(new ResourceLocation("minecraft", "textures/item/iron_hoe.png")), 
         HOED(new ResourceLocation("minecraft", "textures/item/wheat_seeds.png")), 
-        PLANTED(new ResourceLocation("minecolonies", "textures/item/crops/durum.png"));
+        PLANTED(new ResourceLocation("minecraft", "textures/item/wheat.png"));
 
         protected final ResourceLocation stageIcon;
 

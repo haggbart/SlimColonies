@@ -826,9 +826,6 @@
     "item": "minecolonies:barrel_block"
   },
   {
-    "item": "minecolonies:bell_pepper"
-  },
-  {
     "item": "minecolonies:blockconstructiontape"
   },
   {
@@ -1019,16 +1016,7 @@
     "item": "minecolonies:build_goggles"
   },
   {
-    "item": "minecolonies:butternut_squash"
-  },
-  {
-    "item": "minecolonies:cabbage"
-  },
-  {
     "item": "minecolonies:cake_batter"
-  },
-  {
-    "item": "minecolonies:chickpea"
   },
   {
     "item": "minecolonies:clipboard"
@@ -1049,25 +1037,10 @@
     "item": "minecolonies:cookie_dough"
   },
   {
-    "item": "minecolonies:corn"
-  },
-  {
     "item": "minecolonies:decorationcontroller"
   },
   {
-    "item": "minecolonies:durum"
-  },
-  {
-    "item": "minecolonies:eggplant"
-  },
-  {
     "item": "minecolonies:farmland"
-  },
-  {
-    "item": "minecolonies:floodedfarmland"
-  },
-  {
-    "item": "minecolonies:garlic"
   },
   {
     "item": "minecolonies:gate_iron"
@@ -1093,19 +1066,7 @@
     "item": "minecolonies:mediumquarry"
   },
   {
-    "item": "minecolonies:mint"
-  },
-  {
     "item": "minecolonies:mistletoe"
-  },
-  {
-    "item": "minecolonies:nether_pepper"
-  },
-  {
-    "item": "minecolonies:onion"
-  },
-  {
-    "item": "minecolonies:peas"
   },
   {
     "checkednbtkeys": [
@@ -1159,9 +1120,6 @@
   },
   {
     "item": "minecolonies:resourcescroll"
-  },
-  {
-    "item": "minecolonies:rice"
   },
   {
     "checkednbtkeys": [
@@ -1256,16 +1214,10 @@
     "item": "minecolonies:simplequarry"
   },
   {
-    "item": "minecolonies:soybean"
-  },
-  {
     "item": "minecolonies:supplycampdeployer"
   },
   {
     "item": "minecolonies:supplychestdeployer"
-  },
-  {
-    "item": "minecolonies:tomato"
   },
   {
     "item": "minecraft:acacia_boat"

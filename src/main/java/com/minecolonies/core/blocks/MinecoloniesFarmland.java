@@ -49,7 +49,6 @@ public class MinecoloniesFarmland extends AbstractBlockMinecolonies<Minecolonies
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final String FARMLAND         = "farmland";
-    public static final String FLOODED_FARMLAND = "floodedfarmland";
 
     public static final    IntegerProperty MOISTURE     = BlockStateProperties.MOISTURE;
     protected final VoxelShape shape;
