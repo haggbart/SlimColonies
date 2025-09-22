@@ -320,13 +320,6 @@ public class CustomRecipeManager
             }
         }
 
-        for (final MinecoloniesCropBlock crop : ModBlocks.getCrops())
-        {
-            for (final Block source : crop.getDroppedFrom())
-            {
-                lootIds.add(source.getLootTable());
-            }
-        }
 
         for (final String producerKey : BuildingEntry.getALlModuleProducers().keySet())
         {

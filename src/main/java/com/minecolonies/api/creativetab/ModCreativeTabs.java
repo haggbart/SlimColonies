@@ -106,10 +106,6 @@ public final class ModCreativeTabs
           output.accept(ModItems.cakeBatter);
           output.accept(ModItems.rawPumpkinPie);
 
-          for (final Block crop : ModBlocks.getCrops())
-          {
-              output.accept(crop);
-          }
 
 
           // Custom bread items removed for simplification

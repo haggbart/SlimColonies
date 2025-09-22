@@ -22,21 +22,16 @@ import com.minecolonies.core.colony.buildings.modules.BuildingExtensionsModule;
 import com.minecolonies.core.colony.buildings.modules.settings.BoolSetting;
 import com.minecolonies.core.colony.buildings.modules.settings.SettingKey;
 import com.minecolonies.core.colony.buildings.moduleviews.FieldsModuleView;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.StemBlock;
@@ -46,12 +41,14 @@ import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 import static com.minecolonies.api.util.constant.TagConstants.CRAFTING_FARMER;
-import static com.minecolonies.api.util.constant.TranslationConstants.PARTIAL_JEI_INFO;
 import static com.minecolonies.api.util.constant.translation.GuiTranslationConstants.FIELD_LIST_FARMER_NO_SEED;
 
 /**
@@ -410,29 +407,6 @@ public class BuildingFarmer extends AbstractBuilding
                 }
             }
             return recipes;
-        }
-
-        @NotNull
-        private List<Component> provideBiomeList(@NotNull final TagKey<Biome> preferredBiome)
-        {
-            final Minecraft mc = Minecraft.getInstance();
-            if (mc.level == null || mc.player == null)
-            {
-                return List.of();
-            }
-
-            final Biome currentBiome = mc.level.getBiome(mc.player.blockPosition()).get();
-
-            final Registry<Biome> biomeRegistry = mc.level.registryAccess().registryOrThrow(preferredBiome.registry());
-            final Object[] biomes = biomeRegistry.getTag(preferredBiome).get().stream()
-                .map(b -> {
-                    final MutableComponent name = Component.translatable(biomeRegistry.getKey(b.get()).toLanguageKey("biome"));
-                    return b.get() == currentBiome ? name.withStyle(ChatFormatting.DARK_GREEN) : name;
-                })
-                .toArray();
-
-            return List.of(Component.translatable(PARTIAL_JEI_INFO + "biomerestriction",
-                Component.translatable(String.join(", ", Collections.nCopies(biomes.length, "%s")), biomes)));
         }
 
         @NotNull

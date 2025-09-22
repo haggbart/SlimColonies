@@ -262,7 +262,6 @@ public class ClientRegistryHandler
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.blockBarrel, RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.blockWayPoint, RenderType.cutout());
 
-        Arrays.stream(ModBlocks.getCrops()).forEach(hut -> ItemBlockRenderTypes.setRenderLayer(hut, RenderType.cutout()));
 
         ItemProperties.register(ModItems.buildGoggles, new ResourceLocation("disabled"), (item, world, entity, light) ->
             (ColonyBlueprintRenderer.willRenderBlueprints() ? 0.0F : 1.0F));

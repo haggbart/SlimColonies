@@ -1,9 +1,7 @@
 package com.minecolonies.core.items;
 
 import com.minecolonies.api.util.constant.Constants;
-import com.minecolonies.core.blocks.MinecoloniesCropBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -11,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
-import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import static net.minecraft.world.item.BoneMealItem.applyBonemeal;
@@ -32,8 +29,7 @@ public class ItemCompost extends AbstractItemMinecolonies
     }
 
     /**
-     * Wrapper around {@link net.minecraft.world.item.BoneMealItem#applyBonemeal(ItemStack, Level, BlockPos, Player)}
-     * to handle {@link MinecoloniesCropBlock} as well.
+     * Wrapper around {@link net.minecraft.world.item.BoneMealItem#applyBonemeal(ItemStack, Level, BlockPos, Player)}.
      *
      * @param stack  the input item stack.
      * @param level  the input level.
@@ -43,23 +39,6 @@ public class ItemCompost extends AbstractItemMinecolonies
      */
     private static boolean applyCompost(@NotNull ItemStack stack, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player)
     {
-        BlockState state = level.getBlockState(pos);
-        if (state.getBlock() instanceof MinecoloniesCropBlock cropBlock)
-        {
-            if (!cropBlock.isMaxAge(state))
-            {
-                if (level instanceof ServerLevel serverLevel)
-                {
-                    cropBlock.attemptGrow(state, serverLevel, pos);
-                    stack.shrink(1);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
         return applyBonemeal(stack, level, pos, player);
     }
 
@@ -79,5 +58,3 @@ public class ItemCompost extends AbstractItemMinecolonies
         return InteractionResult.PASS;
     }
 }
-
-
