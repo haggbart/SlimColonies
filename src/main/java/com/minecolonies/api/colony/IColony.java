@@ -315,17 +315,6 @@ public interface IColony
      */
     IResearchManager getResearchManager();
 
-    /**
-     * Save the time when mercenaries are used, to set a cooldown.
-     */
-    void usedMercenaries();
-
-    /**
-     * Get the last time mercenaries were used.
-     *
-     * @return the mercenary use time.
-     */
-    long getMercenaryUseTime();
 
     CompoundTag getColonyTag();
 

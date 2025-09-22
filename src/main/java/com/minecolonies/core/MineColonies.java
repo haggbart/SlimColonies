@@ -29,7 +29,6 @@ import com.minecolonies.core.blocks.huts.BlockHutGateHouse;
 import com.minecolonies.core.colony.IColonyManagerCapability;
 import com.minecolonies.core.colony.requestsystem.init.RequestSystemInitializer;
 import com.minecolonies.core.colony.requestsystem.init.StandardFactoryControllerInitializer;
-import com.minecolonies.core.entity.mobs.EntityMercenary;
 import com.minecolonies.core.event.*;
 import com.minecolonies.core.loot.SupplyLoot;
 import com.minecolonies.core.placementhandlers.PlacementHandlerInitializer;
@@ -199,7 +198,6 @@ public class MineColonies
     {
         event.put(ModEntities.CITIZEN, AbstractEntityCitizen.getDefaultAttributes().build());
         event.put(ModEntities.VISITOR, AbstractEntityCitizen.getDefaultAttributes().build());
-        event.put(ModEntities.MERCENARY, EntityMercenary.getDefaultAttributes().build());
 
     }
 

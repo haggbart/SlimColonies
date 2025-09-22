@@ -176,10 +176,6 @@ public final class ColonyView implements IColonyView
      */
     private boolean printProgress;
 
-    /**
-     * The last use time of the mercenaries.
-     */
-    private long mercenaryLastUseTime = 0;
 
     /**
      * The default style.
@@ -352,7 +348,6 @@ public final class ColonyView implements IColonyView
         flagNBT.put(TAG_BANNER_PATTERNS, colony.getColonyFlag());
         buf.writeNbt(flagNBT);
 
-        buf.writeLong(colony.getMercenaryUseTime());
 
         buf.writeUtf(colony.getStructurePack());
 
@@ -785,7 +780,6 @@ public final class ColonyView implements IColonyView
         this.teamColonyColor = ChatFormatting.values()[buf.readInt()];
         this.colonyFlag = buf.readNbt().getList(TAG_BANNER_PATTERNS, Constants.TAG_COMPOUND);
 
-        this.mercenaryLastUseTime = buf.readLong();
 
         this.style = buf.readUtf(32767);
         if (isNewSubscription
@@ -1421,17 +1415,6 @@ public final class ColonyView implements IColonyView
     }
 
 
-    @Override
-    public long getMercenaryUseTime()
-    {
-        return mercenaryLastUseTime;
-    }
-
-    @Override
-    public void usedMercenaries()
-    {
-        mercenaryLastUseTime = world.getGameTime();
-    }
 
     @Override
     public IResearchManager getResearchManager()

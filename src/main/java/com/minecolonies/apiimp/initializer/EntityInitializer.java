@@ -5,7 +5,6 @@ import com.minecolonies.api.entity.ModEntities;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
 import com.minecolonies.core.entity.visitor.VisitorCitizen;
-import com.minecolonies.core.entity.mobs.EntityMercenary;
 import com.minecolonies.core.entity.other.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -52,13 +51,6 @@ public class EntityInitializer
               .sized((float) CITIZEN_WIDTH, (float) CITIZEN_HEIGHT)
               .setShouldReceiveVelocityUpdates(true));
 
-            ModEntities.MERCENARY = build(registry, "mercenary",
-              EntityType.Builder.of(EntityMercenary::new, MobCategory.CREATURE)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
-                .sized((float) CITIZEN_WIDTH, (float) CITIZEN_HEIGHT));
-
-
             ModEntities.SITTINGENTITY = build(registry, "sittingentity",
               EntityType.Builder.<SittingEntity>of(SittingEntity::new, MobCategory.MISC)
                 .setTrackingRange(ENTITY_TRACKING_RANGE)
@@ -84,8 +76,6 @@ public class EntityInitializer
                 .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
                 .sized(0.25F, 0.25F)
                 .setShouldReceiveVelocityUpdates(true));
-
-
         }
     }
 

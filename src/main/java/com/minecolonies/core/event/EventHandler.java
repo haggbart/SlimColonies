@@ -37,7 +37,6 @@ import com.minecolonies.core.colony.jobs.JobFarmer;
 import com.minecolonies.core.colony.requestsystem.locations.EntityLocation;
 import com.minecolonies.core.commands.EntryPoint;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
-import com.minecolonies.core.entity.mobs.EntityMercenary;
 import com.minecolonies.core.event.capabilityproviders.MinecoloniesChunkCapabilityProvider;
 import com.minecolonies.core.event.capabilityproviders.MinecoloniesWorldCapabilityProvider;
 import com.minecolonies.core.event.capabilityproviders.MinecoloniesWorldColonyManagerCapabilityProvider;
@@ -141,7 +140,6 @@ public class EventHandler
             {
                 ((Mob) event.getEntity()).targetSelector.addGoal(6,
                   new NearestAttackableTargetGoal<>((Mob) event.getEntity(), EntityCitizen.class, true, citizen -> !citizen.isInvisible()));
-                ((Mob) event.getEntity()).targetSelector.addGoal(7, new NearestAttackableTargetGoal<>((Mob) event.getEntity(), EntityMercenary.class, true));
             }
 
             if (event.getEntity() instanceof AbstractFastMinecoloniesEntity && ((ServerLevel) event.getLevel()).getEntity(event.getEntity().getUUID()) != null)

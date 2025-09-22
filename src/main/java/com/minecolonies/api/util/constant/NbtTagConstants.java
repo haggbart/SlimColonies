@@ -86,7 +86,6 @@ public final class NbtTagConstants
     public static final String TAG_FLICKER        = "Flicker";
     public static final String TAG_TRAIL          = "Trail";
     public static final String TAG_TYPE           = "Type";
-    public static final String TAG_MERCENARY_TIME = "mercenaryUseTime";
     public static final String TAG_IDLE           = "idle";
     public static final String TAG_JOB_STATUS     = "jobStatus";
     public static final String TAG_PURGED_MOBS    = "purgedMobs";

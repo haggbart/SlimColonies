@@ -18,8 +18,6 @@
     <button id="map" size="129 17" pos="110 116"  textcolor="black"
                  label="$(com.minecolonies.coremod.gui.townHall.map)" source="minecolonies:textures/gui/builderhut/builder_button_medium_large_map.png"/>
 
-    <button id="mercenaries" size="129 17" pos="110 136"  textcolor="black"
-                 label="$(com.minecolonies.coremod.gui.townhall.mercenary)" source="minecolonies:textures/gui/builderhut/builder_button_medium_large_merc.png"/>
 
     <!-- Visual Changes, Right Side -->
 

@@ -52,11 +52,6 @@ public final class WindowConstants
     public static final String BUTTON_CITIZENS = "citizens";
 
     /**
-     * Id of the citizens button in the GUI.
-     */
-    public static final String BUTTON_WORKORDER = "workOrder";
-
-    /**
      * Id of the button displaying the Happiness in the GUI
      */
     public static final String BUTTON_STATS = "happiness";
@@ -81,13 +76,9 @@ public final class WindowConstants
      */
     public static final String BUTTON_PATREON = "patreon";
 
-    /**
-     * Id of the mercenary button in the GUI.
-     */
-    public static final String BUTTON_MERCENARY = "mercenaries";
 
     /**
-     * Id of the mercenary button in the GUI.
+     * Id of the town hall map button in the GUI.
      */
     public static final String BUTTON_TOWNHALLMAP = "map";
 
@@ -574,12 +565,6 @@ public final class WindowConstants
      */
     //GUI List Elements
     public static final String GUI_LIST_ELEMENT_NAME  = "name";
-    public static final String GUI_LIST_BUTTON_SWITCH = "switch";
-
-    /**
-     * GuardControl GUI
-     */
-    public static final String LEVEL_LABEL = "level";
 
     /**
      * Id of the done button in the GUI.
@@ -650,57 +635,6 @@ public final class WindowConstants
      * Id of the resource add button.
      */
     public static final String REQUEST_CANCEL = "cancel";
-
-    /**
-     * Xp-bar height.
-     */
-    public static final int XP_HEIGHT = 5;
-
-    /**
-     * The x-distance to the left border of the gui of the xpBar.
-     */
-    public static final int LEFT_BORDER_X = 10;
-
-    /**
-     * The y-distance to the top-left border of the gui of the xpBar.
-     */
-    public static final int LEFT_BORDER_Y = 10;
-
-    /**
-     * The column in which the icon starts.
-     */
-    public static final int XP_BAR_ICON_COLUMN = 0;
-
-    /**
-     * The column where the icon ends.
-     */
-    public static final int XP_BAR_ICON_COLUMN_END = 172;
-
-    /**
-     * The width of the end piece of the xpBar.
-     */
-    public static final int XP_BAR_ICON_COLUMN_END_WIDTH = 10;
-
-    /**
-     * The offset where the end should be placed in the GUI.
-     */
-    public static final int XP_BAR_ICON_END_OFFSET = 90;
-
-    /**
-     * The width of the xpBar (Original width is halved to fit in the gui).
-     */
-    public static final int XP_BAR_WIDTH = 182 / 2;
-
-    /**
-     * The row where the emtpy Happiness bar starts.
-     */
-
-    public static final int HAPPINESS_BAR_EMPTY_ROW = 0;
-
-    /**
-     * The row where the full happiness bar starts.
-     */
-    public static final int HAPPINESS_BAR_FULL_ROW = 0;
 
     /**
      * X position of the empty heart icon.
@@ -949,10 +883,6 @@ public final class WindowConstants
      */
     public static final String REQUESTER = "requester";
 
-    /**
-     * Id of the parent label.
-     */
-    public static final String PARENT = "parent";
 
     /**
      * The divider for the life count.
@@ -1015,11 +945,6 @@ public final class WindowConstants
     public static final String CITIZEN_JOB = "job";
 
     /**
-     * Id of the job label in the GUI.
-     */
-    public static final String CITIZEN_LIVING = "living";
-
-    /**
      * Edit button for the hut name.
      */
     public static final String BUTTON_EDIT_NAME = "editName";
@@ -1044,10 +969,6 @@ public final class WindowConstants
      */
     public static final String CITIZEN_LIST_UNEMP = "unemployed";
 
-    /**
-     * Id of the job list in the GUI.
-     */
-    public static final String JOB_LIST = "jobs";
 
     /**
      * Id of the attributes label in the GUI.
@@ -1183,22 +1104,7 @@ public final class WindowConstants
     /**
      * Id of the hire/fire button in the GUI.
      */
-    public static final String BUTTON_ASSIGN = "assign";
-
-    /**
-     * Id of the hire/fire button in the GUI.
-     */
     public static final String LABEL_NAME = "name";
-
-    /**
-     * Id of the hire/fire button in the GUI.
-     */
-    public static final String LABEL_DIST = "dist";
-
-    /**
-     * Id to identify the list of the citizen in the view.
-     */
-    public static final String LIST_CITIZEN = "assignedCitizen";
 
     /**
      * The progress update label.
@@ -1211,12 +1117,7 @@ public final class WindowConstants
     public static final String INPUT_ADDRANK_NAME         = "addRankName";
     public static final String BUTTON_REMOVE_RANK         = "removeRank";
     public static final String TOWNHALL_RANK_LIST         = "rankList";
-    public static final String TOWNHALL_ADD_RANK_ERROR    = "rankNameError";
     public static final String TOWNHALL_RANK_PICKER       = "rankPicker";
-    public static final String TOWNHALL_PERM_MANAGEMENT   = "permissionsManagement";
-    public static final String TOWNHALL_PERM_LIST         = "permissionsList";
-    public static final String TOWNHALL_PERM_SETTINGS     = "permissionsSettings";
-    public static final String TOWNHALL_PERM_MODE_TOGGLE  = "permissionsModeToggle";
     public static final String TOWNHALL_BUTTON_SUBSCRIBER = "setSubscriber";
     public static final String TOWNHALL_RANK_TYPE_PICKER  = "rankTypePicker";
 

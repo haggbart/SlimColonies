@@ -97,7 +97,6 @@ public class WindowMainPage extends AbstractWindowTownHall
 
         registerButton(BUTTON_CHANGE_SPEC, this::doNothing);
         registerButton(BUTTON_RENAME, this::renameClicked);
-        registerButton(BUTTON_MERCENARY, this::mercenaryClicked);
         registerButton(BUTTON_TOWNHALLMAP, this::mapButtonClicked);
         registerButton(BUTTON_PATREON, this::patreonClicked);
 
@@ -369,11 +368,6 @@ public class WindowMainPage extends AbstractWindowTownHall
 
         title.setText(Component.literal(building.getColony().getName()));
 
-        if (building.getColony().getMercenaryUseTime() != 0
-            && building.getColony().getWorld().getGameTime() - building.getColony().getMercenaryUseTime() < TICKS_FOURTY_MIN)
-        {
-            findPaneOfTypeByID(BUTTON_MERCENARY, Button.class).disable();
-        }
     }
 
     /**
@@ -384,13 +378,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         new WindowTownHallNameEntry(building.getColony()).open();
     }
 
-    /**
-     * Action performed when mercenary button is clicked.
-     */
-    private void mercenaryClicked()
-    {
-        new WindowTownHallMercenary(building.getColony()).open();
-    }
 
     /**
      * Opens the map on button clicked
