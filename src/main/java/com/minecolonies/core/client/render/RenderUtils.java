@@ -43,11 +43,6 @@ public class RenderUtils
                     return HumanoidModel.ArmPose.BOW_AND_ARROW;
                 }
 
-                if (useanim == UseAnim.SPEAR)
-                {
-                    return HumanoidModel.ArmPose.THROW_SPEAR;
-                }
-
                 if (useanim == UseAnim.CROSSBOW && hand == entity.getUsedItemHand())
                 {
                     return HumanoidModel.ArmPose.CROSSBOW_CHARGE;
