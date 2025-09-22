@@ -26,7 +26,6 @@ import static com.minecolonies.api.blocks.decorative.AbstractBlockGate.IRON_GATE
 import static com.minecolonies.api.blocks.decorative.AbstractBlockGate.WOODEN_GATE;
 import static com.minecolonies.core.blocks.MinecoloniesCropBlock.*;
 import static com.minecolonies.core.blocks.MinecoloniesFarmland.FARMLAND;
-import static com.minecolonies.core.blocks.MinecoloniesFarmland.FLOODED_FARMLAND;
 
 /**
  * This class deals with the initialization of blocks and their items.
@@ -124,7 +123,6 @@ public final class ModBlocksInitializer
         ModBlocks.blockIronGate = new BlockGate(IRON_GATE, 10f, 6, 8).registerBlock(registry);
         ModBlocks.blockWoodenGate = new BlockGate(WOODEN_GATE, 7f, 6, 5).registerBlock(registry);
         ModBlocks.farmland = new MinecoloniesFarmland(FARMLAND, false, 15.0).registerBlock(registry);
-        ModBlocks.floodedFarmland = new MinecoloniesFarmland(FLOODED_FARMLAND, true, 13.0).registerBlock(registry);
         ModBlocks.blockColonySign = new BlockColonySign().registerBlock(registry);
 
         // Crops removed for simplification
@@ -215,7 +213,6 @@ public final class ModBlocksInitializer
         ModBlocks.blockDecorationPlaceholder.registerBlockItem(registry, new Item.Properties());
         ModBlocks.blockCompostedDirt.registerBlockItem(registry, new Item.Properties());
         ModBlocks.farmland.registerBlockItem(registry, new Item.Properties());
-        ModBlocks.floodedFarmland.registerBlockItem(registry, new Item.Properties());
         ModBlocks.blockColonySign.registerBlockItem(registry, new Item.Properties());
 
         // Crop items removed for simplification

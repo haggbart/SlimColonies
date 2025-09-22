@@ -2222,7 +2222,6 @@
     "com.minecolonies.core.item.crop.tooltip.biome.humidbiomes": "Only suitable for Hot and Humid Biomes",
     "com.minecolonies.core.item.crop.tooltip.biome.drybiomes": "Only suitable for Hot and Dry Biomes",
     "block.minecolonies.farmland": "Tilled Soil",
-    "block.minecolonies.floodedfarmland": "Flooded Soil",
     "com.minecolonies.job.chef": "Chef",
     "item.minecolonies.cabochis": "Cabochis",
     "item.minecolonies.congee": "Congee",

@@ -94,7 +94,6 @@ public final class ModBlocks
     public static AbstractBlockGate                                                                                 blockIronGate;
     public static AbstractBlockGate                                                                                 blockWoodenGate;
     public static MinecoloniesFarmland                                                                              farmland;
-    public static MinecoloniesFarmland                                                                              floodedFarmland;
     public static AbstractBlockMinecolonies<? extends AbstractBlockMinecolonies<?>>                                 blockColonySign;
 
     /**
