@@ -51,8 +51,6 @@ public class EntityInitializer
               .sized((float) CITIZEN_WIDTH, (float) CITIZEN_HEIGHT)
               .setShouldReceiveVelocityUpdates(true));
 
-
-
             ModEntities.SITTINGENTITY = build(registry, "sittingentity",
               EntityType.Builder.<SittingEntity>of(SittingEntity::new, MobCategory.MISC)
                 .setTrackingRange(ENTITY_TRACKING_RANGE)
@@ -78,8 +76,6 @@ public class EntityInitializer
                 .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
                 .sized(0.25F, 0.25F)
                 .setShouldReceiveVelocityUpdates(true));
-
-
         }
     }
 
