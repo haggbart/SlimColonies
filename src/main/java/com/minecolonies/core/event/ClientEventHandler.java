@@ -178,9 +178,6 @@ public class ClientEventHandler
                 return;
             }
 
-            double foodValue = FoodUtils.getFoodValue(stack, stack.getItem().getFoodProperties(), colony.getResearchManager().getResearchEffects().getEffectStrength(SATURATION));
-            final int foodTier = FoodUtils.getFoodTier(foodValue);
-
             final ICitizenDataView citizenData = (ICitizenDataView) WindowCitizenInventory.activeCitizenInventory.getCitizenData();
             final IColonyView colonyView = (IColonyView) citizenData.getColony();
 
@@ -196,19 +193,10 @@ public class ClientEventHandler
                 }
             }
 
-            final int homeBuildingLevel =
-                colonyView.getBuilding(citizenData.getHomeBuilding()) == null ? 0 : colonyView.getBuilding(citizenData.getHomeBuilding()).getBuildingLevel();
-            if (FoodUtils.canEatLevel(event.getItemStack(), homeBuildingLevel))
+            // Simply show if it's not on the restaurant menu
+            if (cookBuilding != null && !cookBuilding.getModuleView(RESTAURANT_MENU).getMenu().contains(new ItemStorage(event.getItemStack())))
             {
-                event.getToolTip().add(Component.translatable(TranslationConstants.TIER_TOOLTIP + foodTier).withStyle(ChatFormatting.GRAY));
-                if (cookBuilding != null && !cookBuilding.getModuleView(RESTAURANT_MENU).getMenu().contains(new ItemStorage(event.getItemStack())))
-                {
-                    event.getToolTip().add(Component.translatable("com.minecolonies.coremod.item.tooltip.nomenu").withStyle(ChatFormatting.RED));
-                }
-            }
-            else
-            {
-                event.getToolTip().add(Component.translatable("com.minecolonies.coremod.item.tooltip.needbetterfood").withStyle(ChatFormatting.RED));
+                event.getToolTip().add(Component.translatable("com.minecolonies.coremod.item.tooltip.nomenu").withStyle(ChatFormatting.RED));
             }
         }
     }

@@ -12,7 +12,6 @@ import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
 import com.minecolonies.api.items.CheckedNbtKey;
 import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.items.ModTags;
-import com.minecolonies.core.items.ItemBowlFood;
 import com.minecolonies.core.util.AdvancementUtils;
 import com.minecolonies.core.util.FurnaceRecipes;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -63,35 +62,35 @@ public final class ItemStackUtils
     private static final Pattern TEMPLATE_PATH_PATTERN = Pattern.compile("\\[PATH(?::([^=]*)=([^]]*))?]");
 
     private static final Map<Item, Integer> VANILLA_ARMOR_DISTRIBUTION = Map.ofEntries(entry(Items.LEATHER_HELMET, 1),
-      entry(Items.LEATHER_CHESTPLATE, 1),
-      entry(Items.LEATHER_LEGGINGS, 1),
-      entry(Items.LEATHER_BOOTS, 1),
-      entry(Items.GOLDEN_HELMET, 1),
-      entry(Items.GOLDEN_CHESTPLATE, 1),
-      entry(Items.GOLDEN_LEGGINGS, 1),
-      entry(Items.GOLDEN_BOOTS, 1),
-      entry(Items.CHAINMAIL_HELMET, 2),
-      entry(Items.CHAINMAIL_CHESTPLATE, 2),
-      entry(Items.CHAINMAIL_LEGGINGS, 2),
-      entry(Items.CHAINMAIL_BOOTS, 2),
-      entry(Items.IRON_HELMET, 3),
-      entry(Items.IRON_CHESTPLATE, 3),
-      entry(Items.IRON_LEGGINGS, 3),
-      entry(Items.IRON_BOOTS, 3),
-      entry(Items.DIAMOND_HELMET, 4),
-      entry(Items.DIAMOND_CHESTPLATE, 4),
-      entry(Items.DIAMOND_LEGGINGS, 4),
-      entry(Items.DIAMOND_BOOTS, 4),
-      entry(Items.NETHERITE_HELMET, 5),
-      entry(Items.NETHERITE_CHESTPLATE, 5),
-      entry(Items.NETHERITE_LEGGINGS, 5),
-      entry(Items.NETHERITE_BOOTS, 5));
+        entry(Items.LEATHER_CHESTPLATE, 1),
+        entry(Items.LEATHER_LEGGINGS, 1),
+        entry(Items.LEATHER_BOOTS, 1),
+        entry(Items.GOLDEN_HELMET, 1),
+        entry(Items.GOLDEN_CHESTPLATE, 1),
+        entry(Items.GOLDEN_LEGGINGS, 1),
+        entry(Items.GOLDEN_BOOTS, 1),
+        entry(Items.CHAINMAIL_HELMET, 2),
+        entry(Items.CHAINMAIL_CHESTPLATE, 2),
+        entry(Items.CHAINMAIL_LEGGINGS, 2),
+        entry(Items.CHAINMAIL_BOOTS, 2),
+        entry(Items.IRON_HELMET, 3),
+        entry(Items.IRON_CHESTPLATE, 3),
+        entry(Items.IRON_LEGGINGS, 3),
+        entry(Items.IRON_BOOTS, 3),
+        entry(Items.DIAMOND_HELMET, 4),
+        entry(Items.DIAMOND_CHESTPLATE, 4),
+        entry(Items.DIAMOND_LEGGINGS, 4),
+        entry(Items.DIAMOND_BOOTS, 4),
+        entry(Items.NETHERITE_HELMET, 5),
+        entry(Items.NETHERITE_CHESTPLATE, 5),
+        entry(Items.NETHERITE_LEGGINGS, 5),
+        entry(Items.NETHERITE_BOOTS, 5));
 
     private static final Map<EquipmentSlot, List<Item>> VANILLA_ARMOR_MAPPING =
-      Map.ofEntries(entry(EquipmentSlot.HEAD, List.of(Items.LEATHER_HELMET, Items.CHAINMAIL_HELMET, Items.IRON_HELMET, Items.DIAMOND_HELMET)),
-        entry(EquipmentSlot.CHEST, List.of(Items.LEATHER_CHESTPLATE, Items.CHAINMAIL_CHESTPLATE, Items.IRON_CHESTPLATE, Items.DIAMOND_CHESTPLATE)),
-        entry(EquipmentSlot.LEGS, List.of(Items.LEATHER_LEGGINGS, Items.CHAINMAIL_LEGGINGS, Items.IRON_LEGGINGS, Items.DIAMOND_LEGGINGS)),
-        entry(EquipmentSlot.FEET, List.of(Items.LEATHER_BOOTS, Items.CHAINMAIL_BOOTS, Items.IRON_BOOTS, Items.DIAMOND_BOOTS)));
+        Map.ofEntries(entry(EquipmentSlot.HEAD, List.of(Items.LEATHER_HELMET, Items.CHAINMAIL_HELMET, Items.IRON_HELMET, Items.DIAMOND_HELMET)),
+            entry(EquipmentSlot.CHEST, List.of(Items.LEATHER_CHESTPLATE, Items.CHAINMAIL_CHESTPLATE, Items.IRON_CHESTPLATE, Items.DIAMOND_CHESTPLATE)),
+            entry(EquipmentSlot.LEGS, List.of(Items.LEATHER_LEGGINGS, Items.CHAINMAIL_LEGGINGS, Items.IRON_LEGGINGS, Items.DIAMOND_LEGGINGS)),
+            entry(EquipmentSlot.FEET, List.of(Items.LEATHER_BOOTS, Items.CHAINMAIL_BOOTS, Items.IRON_BOOTS, Items.DIAMOND_BOOTS)));
 
     /**
      * Variable representing the empty itemstack in 1.10. Used for easy updating to 1.11
@@ -139,12 +138,12 @@ public final class ItemStackUtils
      * True if this stack is a standard food item (has at least some healing and some saturation, not purely for effects).
      */
     public static final Predicate<ItemStack> ISFOOD =
-      stack ->
-      {
-          final FoodProperties foodProperties = stack.isEdible() ? stack.getFoodProperties(null) : null;
-          return ItemStackUtils.isNotEmpty(stack) && foodProperties != null && foodProperties.getNutrition() > 0
-                     && foodProperties.getSaturationModifier() > 0 && !stack.is(ModTags.excludedFood);
-      };
+        stack ->
+        {
+            final FoodProperties foodProperties = stack.isEdible() ? stack.getFoodProperties(null) : null;
+            return ItemStackUtils.isNotEmpty(stack) && foodProperties != null && foodProperties.getNutrition() > 0
+                && foodProperties.getSaturationModifier() > 0 && !stack.is(ModTags.excludedFood);
+        };
 
     /**
      * Predicate describing things which work in the furnace.
@@ -215,7 +214,7 @@ public final class ItemStackUtils
     /**
      * Verifies if there is equipment of the specified type.
      *
-     * @param stack        the stack to test.
+     * @param stack         the stack to test.
      * @param equipmentType the type of equipment needed
      * @return true if equipment is acceptable
      */
@@ -248,10 +247,10 @@ public final class ItemStackUtils
     /**
      * Verifies if an item has an appropriated grade.
      *
-     * @param itemStack    the equipment
-     * @param equipmentLevel    the equipment level
-     * @param minimalLevel the minimum level needed
-     * @param maximumLevel the maximum level needed (usually the worker's hut level)
+     * @param itemStack      the equipment
+     * @param equipmentLevel the equipment level
+     * @param minimalLevel   the minimum level needed
+     * @param maximumLevel   the maximum level needed (usually the worker's hut level)
      * @return true if equipment is acceptable
      */
     public static boolean verifyEquipmentLevel(@NotNull final ItemStack itemStack, final int equipmentLevel, final int minimalLevel, final int maximumLevel)
@@ -518,7 +517,12 @@ public final class ItemStackUtils
      * @param min         if the count of stack2 has to be at least the same as stack1.
      * @return True when they are equal except the stacksize, false when not.
      */
-    public static boolean compareItemStacksIgnoreStackSize(final ItemStack itemStack1, final ItemStack itemStack2, final boolean matchDamage, final boolean matchNBT, final boolean min)
+    public static boolean compareItemStacksIgnoreStackSize(
+        final ItemStack itemStack1,
+        final ItemStack itemStack2,
+        final boolean matchDamage,
+        final boolean matchNBT,
+        final boolean min)
     {
         return compareItemStacksIgnoreStackSize(itemStack1, itemStack2, matchDamage, matchNBT, false, false);
     }
@@ -534,12 +538,12 @@ public final class ItemStackUtils
      * @return True when they are equal except the stacksize, false when not.
      */
     public static boolean compareItemStacksIgnoreStackSize(
-      final ItemStack itemStack1,
-      final ItemStack itemStack2,
-      final boolean matchDamage,
-      final boolean matchNBT,
-      final boolean min,
-      final boolean matchNBTExactly)
+        final ItemStack itemStack1,
+        final ItemStack itemStack2,
+        final boolean matchDamage,
+        final boolean matchNBT,
+        final boolean min,
+        final boolean matchNBTExactly)
     {
         if (isEmpty(itemStack1) && isEmpty(itemStack2))
         {
@@ -712,7 +716,7 @@ public final class ItemStackUtils
     public static boolean hasSmeltableInFurnaceAndNoFuel(final FurnaceBlockEntity entity)
     {
         return !ItemStackUtils.isEmpty(entity.getItem(SMELTABLE_SLOT))
-                 && ItemStackUtils.isEmpty(entity.getItem(FUEL_SLOT));
+            && ItemStackUtils.isEmpty(entity.getItem(FUEL_SLOT));
     }
 
     /**
@@ -724,7 +728,7 @@ public final class ItemStackUtils
     public static boolean hasNeitherFuelNorSmeltAble(final FurnaceBlockEntity entity)
     {
         return ItemStackUtils.isEmpty(entity.getItem(SMELTABLE_SLOT))
-                 && ItemStackUtils.isEmpty(entity.getItem(FUEL_SLOT));
+            && ItemStackUtils.isEmpty(entity.getItem(FUEL_SLOT));
     }
 
     /**
@@ -736,7 +740,7 @@ public final class ItemStackUtils
     public static boolean hasFuelInFurnaceAndNoSmeltable(final FurnaceBlockEntity entity)
     {
         return ItemStackUtils.isEmpty(entity.getItem(SMELTABLE_SLOT))
-                 && !ItemStackUtils.isEmpty(entity.getItem(FUEL_SLOT));
+            && !ItemStackUtils.isEmpty(entity.getItem(FUEL_SLOT));
     }
 
     /**
@@ -748,7 +752,7 @@ public final class ItemStackUtils
     public static boolean hasBrewableAndNoFuel(final BrewingStandBlockEntity entity)
     {
         return !ItemStackUtils.isEmpty(entity.getItem(INGREDIENT_SLOT))
-                 && ItemStackUtils.isEmpty(entity.getItem(BREWING_FUEL_SLOT));
+            && ItemStackUtils.isEmpty(entity.getItem(BREWING_FUEL_SLOT));
     }
 
     /**
@@ -760,7 +764,7 @@ public final class ItemStackUtils
     public static boolean hasNeitherFuelNorBrewable(final BrewingStandBlockEntity entity)
     {
         return ItemStackUtils.isEmpty(entity.getItem(INGREDIENT_SLOT))
-                 && ItemStackUtils.isEmpty(entity.getItem(BREWING_FUEL_SLOT));
+            && ItemStackUtils.isEmpty(entity.getItem(BREWING_FUEL_SLOT));
     }
 
     /**
@@ -772,7 +776,7 @@ public final class ItemStackUtils
     public static boolean hasFuelAndNoBrewable(final BrewingStandBlockEntity entity)
     {
         return ItemStackUtils.isEmpty(entity.getItem(INGREDIENT_SLOT))
-                 && !ItemStackUtils.isEmpty(entity.getItem(BREWING_FUEL_SLOT));
+            && !ItemStackUtils.isEmpty(entity.getItem(BREWING_FUEL_SLOT));
     }
 
     /**
@@ -835,8 +839,9 @@ public final class ItemStackUtils
      * @return a tuple of (boolean, result), where the boolean is false if result didn't resolve to a valid item
      */
     @NotNull
-    public static Tuple<Boolean, String> parseIdTemplate(@Nullable final String value,
-                                                         @NotNull final ResourceLocation baseItemId)
+    public static Tuple<Boolean, String> parseIdTemplate(
+        @Nullable final String value,
+        @NotNull final ResourceLocation baseItemId)
     {
         if (value == null)
         {
@@ -857,13 +862,14 @@ public final class ItemStackUtils
         });
 
         return new Tuple<>(ForgeRegistries.ITEMS.containsKey(new ResourceLocation(itemId)),
-                itemId + (nbtIndex >= 0 ? value.substring(nbtIndex) : ""));
+            itemId + (nbtIndex >= 0 ? value.substring(nbtIndex) : ""));
     }
 
     /**
      * Reports if this stack has a custom Tag value that is not purely a damage value.
+     *
      * @param stack the stack to inspect
-     * @return      true if the stack has a non-damage tag value
+     * @return true if the stack has a non-damage tag value
      */
     public static boolean hasTag(@NotNull final ItemStack stack)
     {
@@ -906,8 +912,8 @@ public final class ItemStackUtils
     /**
      * Consume food helper.
      *
-     * @param foodStack   the itemstack of food.
-     * @param citizen     the citizen entity.
+     * @param foodStack the itemstack of food.
+     * @param citizen   the citizen entity.
      * @param inventory optional inventory to insert stack into if not citizen.
      */
     public static void consumeFood(final ItemStack foodStack, final AbstractEntityCitizen citizen, final Inventory inventory)
@@ -922,21 +928,18 @@ public final class ItemStackUtils
         {
             itemUseReturn = new ItemStack(Items.GLASS_BOTTLE);
         }
-        else if (foodStack.getItem() instanceof ItemBowlFood)
-        {
-            itemUseReturn = new ItemStack(Items.BOWL);
-        }
+        // ItemBowlFood removed - vanilla foods handle containers automatically
 
         if (!itemUseReturn.isEmpty() && itemUseReturn.getItem() != foodStack.getItem())
         {
             if (citizenData.getInventory().isFull() || (inventory != null && !inventory.add(itemUseReturn)))
             {
                 InventoryUtils.spawnItemStack(
-                  citizen.level,
-                  citizen.getX(),
-                  citizen.getY(),
-                  citizen.getZ(),
-                  itemUseReturn
+                    citizen.level,
+                    citizen.getX(),
+                    citizen.getY(),
+                    citizen.getZ(),
+                    itemUseReturn
                 );
             }
             else

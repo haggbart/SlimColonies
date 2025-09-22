@@ -83,10 +83,6 @@ public final class ModItemsInitializer
         ModItems.cakeBatter = new ItemCakeBatter(new Item.Properties());
         ModItems.rawPumpkinPie = new ItemRawPumpkinPie(new Item.Properties());
 
-        ModItems.milkyBread = new ItemMilkyBread(new Item.Properties());
-        ModItems.sugaryBread = new ItemSugaryBread(new Item.Properties());
-        ModItems.goldenBread = new ItemGoldenBread(new Item.Properties());
-        ModItems.chorusBread = new ItemChorusBread(new Item.Properties());
 
         ModItems.adventureToken = new ItemAdventureToken(new Item.Properties());
 
