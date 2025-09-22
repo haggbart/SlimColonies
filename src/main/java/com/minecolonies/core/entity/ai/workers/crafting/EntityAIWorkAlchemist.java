@@ -303,6 +303,13 @@ public class EntityAIWorkAlchemist extends AbstractEntityAICrafting<JobAlchemist
     }
 
     @Override
+    public boolean hasWorkToDo()
+    {
+        // Alchemist can always work to either craft or go gather mistletoe, netherwart, etc.
+        return true;
+    }
+
+    @Override
     protected IAIState decide()
     {
         worker.getCitizenData().setVisibleStatus(VisibleCitizenStatus.WORKING);
