@@ -62,12 +62,6 @@ public interface IBuildingWorker extends IBuilding
     String getJobName();
 
 
-    /**
-     * Method which defines if a worker should be allowed to work during the rain.
-     *
-     * @return true if so.
-     */
-    boolean canWorkDuringTheRain();
 
     /**
      * Primary skill getter.

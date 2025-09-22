@@ -279,14 +279,6 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             {
                 continue;
             }
-            // WORKING_IN_RAIN does nothing if the server config equivalent is already on, and it blocks other research of the same tier.
-            // I'd rather remove it at the initial ResearchListener, but JsonReloadListeners only fire long before the config files are read,
-            // and colonies that already bought the research before changing configs do need the ability to cancel or undo it.
-            if(IMinecoloniesAPI.getInstance().getConfig().getServer().workersAlwaysWorkInRain.get() && research.getEffects().size() == 1 &&
-                 research.getEffects().get(0).getId().equals(WORKING_IN_RAIN) && building.getColony().getResearchManager().getResearchTree().getResearch(branch, researchList.get(i)) == null)
-            {
-                continue;
-            }
 
             final int offsetX = (depth * (GRADIENT_WIDTH + X_SPACING)) + INITIAL_X_OFFSET + ICON_X_OFFSET;
             final int offsetY = nextHeight * (GRADIENT_HEIGHT + Y_SPACING) + Y_SPACING + TIMELABEL_Y_POSITION;

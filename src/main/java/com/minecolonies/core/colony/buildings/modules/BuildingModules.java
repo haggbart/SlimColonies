@@ -103,7 +103,7 @@ public class BuildingModules
      */
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> COMPOSTER_WORK                  =
       new BuildingEntry.ModuleProducer<>("composter_work",
-        () -> new WorkerBuildingModule(ModJobs.composter.get(), Skill.Stamina, Skill.Athletics, false, (b) -> 1),
+        () -> new WorkerBuildingModule(ModJobs.composter.get(), Skill.Stamina, Skill.Athletics, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule,SettingsModuleView> COMPOSTER_SETTINGS              =
       new BuildingEntry.ModuleProducer<>("composter_settings",
@@ -111,7 +111,7 @@ public class BuildingModules
         () -> SettingsModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> FARMER_CRAFT        =
-      new BuildingEntry.ModuleProducer<>("farmer_craft", () -> new CraftingWorkerBuildingModule(ModJobs.farmer.get(), Skill.Stamina, Skill.Athletics, false, b -> 1),
+      new BuildingEntry.ModuleProducer<>("farmer_craft", () -> new CraftingWorkerBuildingModule(ModJobs.farmer.get(), Skill.Stamina, Skill.Athletics, b -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingFarmer.CraftingModule,CraftingModuleView> FARMER_WORK         =
       new BuildingEntry.ModuleProducer<>("farmer_work", () -> new BuildingFarmer.CraftingModule(ModJobs.farmer.get()), () -> CraftingModuleView::new);
@@ -123,7 +123,7 @@ public class BuildingModules
         .with(AbstractCraftingBuildingModule.RECIPE_MODE, new CrafterRecipeSetting()), () -> SettingsModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> PLANTATION_WORK       =
-      new BuildingEntry.ModuleProducer<>("plantation_work", () -> new CraftingWorkerBuildingModule(ModJobs.planter.get(), Skill.Agility, Skill.Dexterity, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("plantation_work", () -> new CraftingWorkerBuildingModule(ModJobs.planter.get(), Skill.Agility, Skill.Dexterity, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingPlantation.CraftingModule,CraftingModuleView> PLANTATION_CRAFT      =
       new BuildingEntry.ModuleProducer<>("plantation_craft", () -> new BuildingPlantation.CraftingModule(ModJobs.planter.get()), () -> CraftingModuleView::new);
@@ -135,7 +135,7 @@ public class BuildingModules
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> FLORIST_WORK          =
       new BuildingEntry.ModuleProducer<>("florist_work",
-        () -> new WorkerBuildingModule(ModJobs.florist.get(), Skill.Dexterity, Skill.Agility, false, (b) -> 1),
+        () -> new WorkerBuildingModule(ModJobs.florist.get(), Skill.Dexterity, Skill.Agility, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<ItemListModule,FloristFlowerListModuleView> FLORIST_ITEMS         =
       new BuildingEntry.ModuleProducer<>("florist_items", () -> new ItemListModule(BUILDING_FLOWER_LIST), () -> FloristFlowerListModuleView::new);
@@ -145,7 +145,7 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> BEEKEEPER_WORK        =
-      new BuildingEntry.ModuleProducer<>("beekeeper_work", () -> new WorkerBuildingModule(ModJobs.beekeeper.get(), Skill.Dexterity, Skill.Adaptability, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("beekeeper_work", () -> new WorkerBuildingModule(ModJobs.beekeeper.get(), Skill.Dexterity, Skill.Adaptability, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule,SettingsModuleView> BEEKEEPER_SETTINGS    =
       new BuildingEntry.ModuleProducer<>("beekeeper_settings", () -> new SettingsModule()
@@ -158,7 +158,7 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("beekeeper_herding", BuildingBeekeeper.HerdingModule::new, null);
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> CHICKENHERDER_WORK              =
-      new BuildingEntry.ModuleProducer<>("chickenherder_work", () -> new WorkerBuildingModule(ModJobs.chickenHerder.get(), Skill.Adaptability, Skill.Agility, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("chickenherder_work", () -> new WorkerBuildingModule(ModJobs.chickenHerder.get(), Skill.Adaptability, Skill.Agility, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingChickenHerder.HerdingModule,IBuildingModuleView> CHICKENHERDER_HERDING           =
       new BuildingEntry.ModuleProducer<>("chickenherder_herding", BuildingChickenHerder.HerdingModule::new, null);
@@ -169,7 +169,7 @@ public class BuildingModules
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> COWHERDER_WORK      =
       new BuildingEntry.ModuleProducer<>("cowherder_work",
-        () -> new WorkerBuildingModule(ModJobs.cowboy.get(), Skill.Athletics, Skill.Stamina, false, (b) -> 1),
+        () -> new WorkerBuildingModule(ModJobs.cowboy.get(), Skill.Athletics, Skill.Stamina, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule,SettingsModuleView> COWHERDER_SETTINGS  =
       new BuildingEntry.ModuleProducer<>("cowherder_settings", () -> new SettingsModule().with(AbstractBuilding.BREEDING, new BoolSetting(true))
@@ -183,11 +183,11 @@ public class BuildingModules
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> FISHER_WORK         =
       new BuildingEntry.ModuleProducer<>("fisher_work",
-        () -> new WorkerBuildingModule(ModJobs.fisherman.get(), Skill.Focus, Skill.Agility, false, (b) -> 1),
+        () -> new WorkerBuildingModule(ModJobs.fisherman.get(), Skill.Focus, Skill.Agility, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule, WorkerBuildingModuleView> RABBITHERDER_WORK     =
-      new BuildingEntry.ModuleProducer<>("rabbitherder_work", () -> new WorkerBuildingModule(ModJobs.rabbitHerder.get(), Skill.Agility, Skill.Athletics, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("rabbitherder_work", () -> new WorkerBuildingModule(ModJobs.rabbitHerder.get(), Skill.Agility, Skill.Athletics, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule, SettingsModuleView>             RABBITHERDER_SETTINGS =
       new BuildingEntry.ModuleProducer<>("rabbitherder_settings", () -> new SettingsModule().with(AbstractBuilding.BREEDING, new BoolSetting(true)), () -> SettingsModuleView::new);
@@ -198,7 +198,7 @@ public class BuildingModules
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> SHEPERD_WORK          =
       new BuildingEntry.ModuleProducer<>("sheperd_work",
-        () -> new WorkerBuildingModule(ModJobs.shepherd.get(), Skill.Focus, Skill.Strength, false, (b) -> 1),
+        () -> new WorkerBuildingModule(ModJobs.shepherd.get(), Skill.Focus, Skill.Strength, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule,SettingsModuleView> SHEPERD_SETTINGS      =
       new BuildingEntry.ModuleProducer<>("sheperd_settings", () -> new SettingsModule().with(AbstractBuilding.BREEDING, new BoolSetting(true))
@@ -208,7 +208,7 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("sheperd_herding", BuildingShepherd.HerdingModule::new, null);
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule, WorkerBuildingModuleView> SWINEHERDER_WORK     =
-      new BuildingEntry.ModuleProducer<>("swineherder_work", () -> new WorkerBuildingModule(ModJobs.swineHerder.get(), Skill.Strength, Skill.Athletics, true, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("swineherder_work", () -> new WorkerBuildingModule(ModJobs.swineHerder.get(), Skill.Strength, Skill.Athletics, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule, SettingsModuleView>             SWINEHERDER_SETTINGS =
       new BuildingEntry.ModuleProducer<>("swineherder_settings", () -> new SettingsModule().with(AbstractBuilding.BREEDING, new BoolSetting(true)), () -> SettingsModuleView::new);
@@ -222,7 +222,7 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> ALCHEMIST_WORK          =
-      new BuildingEntry.ModuleProducer<>("alchemist_work", () -> new CraftingWorkerBuildingModule(ModJobs.alchemist.get(), Skill.Dexterity, Skill.Mana, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("alchemist_work", () -> new CraftingWorkerBuildingModule(ModJobs.alchemist.get(), Skill.Dexterity, Skill.Mana, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingAlchemist.CraftingModule,CraftingModuleView> ALCHEMIST_CRAFT         =
       new BuildingEntry.ModuleProducer<>("alchemist_craft", () -> new BuildingAlchemist.CraftingModule(ModJobs.alchemist.get()), () -> CraftingModuleView::new);
@@ -234,23 +234,23 @@ public class BuildingModules
     public static final BuildingEntry.ModuleProducer<BuildingBaker.SmeltingModule,CraftingModuleView> BAKER_SMELT                     =
       new BuildingEntry.ModuleProducer<>("baker_smelt", () -> new BuildingBaker.SmeltingModule(ModJobs.baker.get()), () -> CraftingModuleView::new);
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> BAKER_WORK                      = new BuildingEntry.ModuleProducer<>(
-      "baker_work", () -> new CraftingWorkerBuildingModule(ModJobs.baker.get(), Skill.Knowledge, Skill.Dexterity, false, (b) -> 1, Skill.Dexterity, Skill.Knowledge),
+      "baker_work", () -> new CraftingWorkerBuildingModule(ModJobs.baker.get(), Skill.Knowledge, Skill.Dexterity, (b) -> 1, Skill.Dexterity, Skill.Knowledge),
       () -> WorkerBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> BLACKSMITH_WORK                 = new BuildingEntry.ModuleProducer<>(
-      "blacksmith_work", () -> new CraftingWorkerBuildingModule(ModJobs.blacksmith.get(), Skill.Strength, Skill.Focus, false, (b) -> 1, Skill.Strength, Skill.Focus),
+      "blacksmith_work", () -> new CraftingWorkerBuildingModule(ModJobs.blacksmith.get(), Skill.Strength, Skill.Focus, (b) -> 1, Skill.Strength, Skill.Focus),
       () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingBlacksmith.CraftingModule,CraftingModuleView> BLACKSMITH_CRAFT                =
       new BuildingEntry.ModuleProducer<>("blacksmith_craft", () -> new BuildingBlacksmith.CraftingModule(ModJobs.blacksmith.get()), () -> CraftingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> CONCRETEMIXER_WORK    =
-      new BuildingEntry.ModuleProducer<>("concretemixer_work", () -> new CraftingWorkerBuildingModule(ModJobs.concreteMixer.get(), Skill.Stamina, Skill.Dexterity, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("concretemixer_work", () -> new CraftingWorkerBuildingModule(ModJobs.concreteMixer.get(), Skill.Stamina, Skill.Dexterity, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingConcreteMixer.CraftingModule,CraftingModuleView> CONCRETEMIXER_CRAFT   =
       new BuildingEntry.ModuleProducer<>("concretemixer_craft", () -> new BuildingConcreteMixer.CraftingModule(ModJobs.concreteMixer.get()), () -> CraftingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> CRUSHER_WORK        =
-      new BuildingEntry.ModuleProducer<>("crusher_work", () -> new CraftingWorkerBuildingModule(ModJobs.crusher.get(), Skill.Stamina, Skill.Strength, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("crusher_work", () -> new CraftingWorkerBuildingModule(ModJobs.crusher.get(), Skill.Stamina, Skill.Strength, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingCrusher.CraftingModule,CraftingModuleView> CRUSHER_CRAFT       =
       new BuildingEntry.ModuleProducer<>("crusher_craft", () -> new BuildingCrusher.CraftingModule(ModJobs.crusher.get()), () -> CraftingModuleView::new);
@@ -263,7 +263,6 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("dyer_work", () -> new CraftingWorkerBuildingModule(ModJobs.dyer.get(),
         Skill.Creativity,
         Skill.Dexterity,
-        false,
         (b) -> 1,
         Skill.Dexterity,
         Skill.Creativity), () -> WorkerBuildingModuleView::new);
@@ -276,7 +275,6 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("fletcher_work", () -> new CraftingWorkerBuildingModule(ModJobs.fletcher.get(),
         Skill.Dexterity,
         Skill.Creativity,
-        true,
         (b) -> 1,
         Skill.Creativity,
         Skill.Dexterity), () -> WorkerBuildingModuleView::new);
@@ -290,7 +288,6 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("glassblower_work", () -> new CraftingWorkerBuildingModule(ModJobs.glassblower.get(),
         Skill.Creativity,
         Skill.Focus,
-        false,
         (b) -> 1,
         Skill.Focus,
         Skill.Creativity), () -> WorkerBuildingModuleView::new);
@@ -303,7 +300,7 @@ public class BuildingModules
         () -> () -> new DOCraftingModuleView(BuildingGlassblower.DOCraftingModule::getStaticIngredientValidator));
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> MECHANIC_WORK         =
-      new BuildingEntry.ModuleProducer<>("mechanic_work", () -> new CraftingWorkerBuildingModule(ModJobs.mechanic.get(), Skill.Knowledge, Skill.Agility, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("mechanic_work", () -> new CraftingWorkerBuildingModule(ModJobs.mechanic.get(), Skill.Knowledge, Skill.Agility, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingMechanic.CraftingModule,CraftingModuleView> MECHANIC_CRAFT        =
       new BuildingEntry.ModuleProducer<>("mechanic_craft", () -> new BuildingMechanic.CraftingModule(ModJobs.mechanic.get()), () -> CraftingModuleView::new);
@@ -312,7 +309,7 @@ public class BuildingModules
         () -> () -> new DOCraftingModuleView(BuildingMechanic.DOCraftingModule::getStaticIngredientValidator));
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> SAWMILL_WORK          =
-      new BuildingEntry.ModuleProducer<>("sawmill_work", () -> new CraftingWorkerBuildingModule(ModJobs.sawmill.get(), Skill.Knowledge, Skill.Dexterity, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("sawmill_work", () -> new CraftingWorkerBuildingModule(ModJobs.sawmill.get(), Skill.Knowledge, Skill.Dexterity, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingSawmill.CraftingModule,CraftingModuleView> SAWMILL_CRAFT         =
       new BuildingEntry.ModuleProducer<>("sawmill_craft", () -> new BuildingSawmill.CraftingModule(ModJobs.sawmill.get()), () -> CraftingModuleView::new);
@@ -321,13 +318,13 @@ public class BuildingModules
         () -> () -> new DOCraftingModuleView(BuildingSawmill.DOCraftingModule::getStaticIngredientValidator));
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> SIFTER_WORK           =
-      new BuildingEntry.ModuleProducer<>("sifter_work", () -> new CraftingWorkerBuildingModule(ModJobs.sifter.get(), Skill.Focus, Skill.Strength, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("sifter_work", () -> new CraftingWorkerBuildingModule(ModJobs.sifter.get(), Skill.Focus, Skill.Strength, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingSifter.CraftingModule,CraftingModuleView> SIFTER_CRAFT          =
       new BuildingEntry.ModuleProducer<>("sifter_craft", () -> new BuildingSifter.CraftingModule(ModJobs.sifter.get()), () -> CraftingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> SMELTER_WORK          =
-      new BuildingEntry.ModuleProducer<>("smelter_work", () -> new CraftingWorkerBuildingModule(ModJobs.smelter.get(), Skill.Athletics, Skill.Strength, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("smelter_work", () -> new CraftingWorkerBuildingModule(ModJobs.smelter.get(), Skill.Athletics, Skill.Strength, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingSmeltery.SmeltingModule,CraftingModuleView> SMELTER_SMELTING      =
       new BuildingEntry.ModuleProducer<>("smelter_smelting", () -> new BuildingSmeltery.SmeltingModule(ModJobs.smelter.get()), () -> CraftingModuleView::new);
@@ -335,7 +332,7 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("smelter_orebreak", () -> new BuildingSmeltery.OreBreakingModule(ModJobs.smelter.get()), () -> CraftingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> STONEMASON_WORK       =
-      new BuildingEntry.ModuleProducer<>("stonemason_work", () -> new CraftingWorkerBuildingModule(ModJobs.stoneMason.get(), Skill.Creativity, Skill.Dexterity, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("stonemason_work", () -> new CraftingWorkerBuildingModule(ModJobs.stoneMason.get(), Skill.Creativity, Skill.Dexterity, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingStonemason.CraftingModule,CraftingModuleView> STONEMASON_CRAFT      =
       new BuildingEntry.ModuleProducer<>("stonemason_craft", () -> new BuildingStonemason.CraftingModule(ModJobs.stoneMason.get()), () -> CraftingModuleView::new);
@@ -347,7 +344,6 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("stonesmelter_work", () -> new CraftingWorkerBuildingModule(ModJobs.stoneSmeltery.get(),
         Skill.Athletics,
         Skill.Dexterity,
-        false,
         (b) -> 1,
         Skill.Dexterity,
         Skill.Athletics), () -> WorkerBuildingModuleView::new);
@@ -359,7 +355,7 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<DeliverymanAssignmentModule,WorkerBuildingModuleView> COURIER_WORK        =
-      new BuildingEntry.ModuleProducer<>("courier_work", () -> new DeliverymanAssignmentModule(ModJobs.delivery.get(), Skill.Agility, Skill.Adaptability, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("courier_work", () -> new DeliverymanAssignmentModule(ModJobs.delivery.get(), Skill.Agility, Skill.Adaptability, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CourierAssignmentModule,CourierAssignmentModuleView> WAREHOUSE_COURIERS    =
@@ -374,22 +370,22 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<ChildrenBuildingModule,PupilBuildingModuleView> PUPIL_WORK            =
-      new BuildingEntry.ModuleProducer<>("pupil_work", () -> new ChildrenBuildingModule(ModJobs.pupil.get(), Skill.Knowledge, Skill.Mana, true, (b) -> 2 * b.getBuildingLevel()),
+      new BuildingEntry.ModuleProducer<>("pupil_work", () -> new ChildrenBuildingModule(ModJobs.pupil.get(), Skill.Knowledge, Skill.Mana, (b) -> 2 * b.getBuildingLevel()),
         () -> PupilBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,StudentBuildingModuleView> STUDENT_WORK          =
       new BuildingEntry.ModuleProducer<>("student_work",
-        () -> new WorkerBuildingModule(ModJobs.student.get(), Skill.Intelligence, Skill.Intelligence, true, (b) -> 2 * b.getBuildingLevel()),
+        () -> new WorkerBuildingModule(ModJobs.student.get(), Skill.Intelligence, Skill.Intelligence, (b) -> 2 * b.getBuildingLevel()),
         () -> StudentBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> TEACHER_WORK          =
       new BuildingEntry.ModuleProducer<>("teacher_work",
-        () -> new WorkerBuildingModule(ModJobs.teacher.get(), Skill.Knowledge, Skill.Mana, true, (b) -> 1),
+        () -> new WorkerBuildingModule(ModJobs.teacher.get(), Skill.Knowledge, Skill.Mana, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> UNIVERSITY_WORK       =
       new BuildingEntry.ModuleProducer<>("university_work",
-        () -> new WorkerBuildingModule(ModJobs.researcher.get(), Skill.Knowledge, Skill.Mana, true, ISchematicProvider::getBuildingLevel),
+        () -> new WorkerBuildingModule(ModJobs.researcher.get(), Skill.Knowledge, Skill.Mana, ISchematicProvider::getBuildingLevel),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<IBuildingModule,UniversityResearchModuleView> UNIVERSITY_RESEARCH   =
       new BuildingEntry.ModuleProducer<>("university_research", null, () -> UniversityResearchModuleView::new);
@@ -399,7 +395,7 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> BUILDER_WORK                    =
-      new BuildingEntry.ModuleProducer<>("builder_work", () -> new WorkerBuildingModule(ModJobs.builder.get(), Skill.Adaptability, Skill.Athletics, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("builder_work", () -> new WorkerBuildingModule(ModJobs.builder.get(), Skill.Adaptability, Skill.Athletics, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule,SettingsModuleView> BUILDER_SETTINGS                =
       new BuildingEntry.ModuleProducer<>("builder_settings", () -> new SettingsModule()
@@ -416,13 +412,12 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("buildingresources", BuildingResourcesModule::new, () -> BuildingResourcesModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<NoPrivateCrafterWorkerModule,WorkerBuildingModuleView> COOK_WORK           =
-      new BuildingEntry.ModuleProducer<>("cook_craft", () -> new NoPrivateCrafterWorkerModule(ModJobs.cook.get(), Skill.Adaptability, Skill.Knowledge, true, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("cook_craft", () -> new NoPrivateCrafterWorkerModule(ModJobs.cook.get(), Skill.Adaptability, Skill.Knowledge, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> CHEF_WORK           =
       new BuildingEntry.ModuleProducer<>("chef_work", () -> new CraftingWorkerBuildingModule(ModJobs.chef.get(),
         Skill.Creativity,
         Skill.Knowledge,
-        false,
         (b) -> 1,
         Skill.Knowledge,
         Skill.Creativity), () -> WorkerBuildingModuleView::new);
@@ -436,7 +431,7 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("forester_craft", () -> new BuildingLumberjack.CraftingModule(ModJobs.lumberjack.get()), () -> CraftingModuleView::new);
     public static final BuildingEntry.ModuleProducer<LumberjackAssignmentModule,WorkerBuildingModuleView> FORESTER_WORK         =
       new BuildingEntry.ModuleProducer<>("forester_work",
-        () -> new LumberjackAssignmentModule(ModJobs.lumberjack.get(), Skill.Strength, Skill.Focus, false, (b) -> 1, Skill.Focus, Skill.Strength),
+        () -> new LumberjackAssignmentModule(ModJobs.lumberjack.get(), Skill.Strength, Skill.Focus, (b) -> 1, Skill.Focus, Skill.Strength),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule,SettingsModuleView> FORESTER_SETTINGS =
       new BuildingEntry.ModuleProducer<>("forester_settings", () -> new SettingsModule()
@@ -451,7 +446,7 @@ public class BuildingModules
 
     public static final BuildingEntry.ModuleProducer<HospitalAssignmentModule,WorkerBuildingModuleView> HEALER_WORK           =
       new BuildingEntry.ModuleProducer<>("healer_work",
-        () -> new HospitalAssignmentModule(ModJobs.healer.get(), Skill.Mana, Skill.Knowledge, true, (b) -> 1),
+        () -> new HospitalAssignmentModule(ModJobs.healer.get(), Skill.Mana, Skill.Knowledge, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<HomeBuildingModule, IBuildingModuleView>        HOME   =
@@ -461,7 +456,7 @@ public class BuildingModules
 
     public static final BuildingEntry.ModuleProducer<MinerBuildingModule,CombinedHiringLimitModuleView> MINER_WORK            =
       new BuildingEntry.ModuleProducer<>("miner_work",
-        () -> new MinerBuildingModule(ModJobs.miner.get(), Skill.Strength, Skill.Stamina, false, (b) -> 1),
+        () -> new MinerBuildingModule(ModJobs.miner.get(), Skill.Strength, Skill.Stamina, (b) -> 1),
         () -> CombinedHiringLimitModuleView::new);
     public static final BuildingEntry.ModuleProducer<SimpleCraftingModule,CraftingModuleView> MINER_CRAFT           =
       new BuildingEntry.ModuleProducer<>("miner_craft", () -> new SimpleCraftingModule(ModJobs.miner.get()), () -> CraftingModuleView::new);
@@ -477,7 +472,7 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("miner_guard_assign", null, () -> MinerGuardAssignModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<MinerBuildingModule,CombinedHiringLimitModuleView> QUARRIER_WORK         =
-      new BuildingEntry.ModuleProducer<>("quarrier_work", () -> new MinerBuildingModule(ModJobs.quarrier.get(), Skill.Strength, Skill.Stamina, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("quarrier_work", () -> new MinerBuildingModule(ModJobs.quarrier.get(), Skill.Strength, Skill.Stamina, (b) -> 1),
         () -> CombinedHiringLimitModuleView::new);
     public static final BuildingEntry.ModuleProducer<QuarryModule,MinerAssignmentModuleView> SIMPLE_QUARRY           =
       new BuildingEntry.ModuleProducer<>("simple_quarry", () -> new QuarryModule(32), () -> MinerAssignmentModuleView::new);
@@ -503,38 +498,37 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<WorkAtHomeBuildingModule,ArcherSquireModuleView> ARCHERY_WORK_HOME               = new BuildingEntry.ModuleProducer<>(
-      "archery_work", () -> new WorkAtHomeBuildingModule(ModJobs.archerInTraining.get(), Skill.Agility, Skill.Adaptability, false, ISchematicProvider::getBuildingLevel),
+      "archery_work", () -> new WorkAtHomeBuildingModule(ModJobs.archerInTraining.get(), Skill.Agility, Skill.Adaptability, ISchematicProvider::getBuildingLevel),
       () -> ArcherSquireModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<WorkAtHomeBuildingModule,KnightSquireBuildingModuleView> KNIGHT_TRAINING                 =
       new BuildingEntry.ModuleProducer<>("knight_training", () -> new WorkAtHomeBuildingModule(ModJobs.knightInTraining.get(),
         Skill.Adaptability,
         Skill.Stamina,
-        false,
         ISchematicProvider::getBuildingLevel), () -> KnightSquireBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> KNIGHT_BARRACKS_WORK = new BuildingEntry.ModuleProducer<>(
-      "knight_barracks_work", () -> new GuardBuildingModule(ModGuardTypes.knight.get(), true, ISchematicProvider::getBuildingLevel),
+      "knight_barracks_work", () -> new GuardBuildingModule(ModGuardTypes.knight.get(), ISchematicProvider::getBuildingLevel),
       () -> CombinedHiringLimitModuleView::new);
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> RANGER_BARRACKS_WORK = new BuildingEntry.ModuleProducer<>(
-      "ranger_barracks_work", () -> new GuardBuildingModule(ModGuardTypes.ranger.get(), true, ISchematicProvider::getBuildingLevel),
+      "ranger_barracks_work", () -> new GuardBuildingModule(ModGuardTypes.ranger.get(), ISchematicProvider::getBuildingLevel),
       () -> CombinedHiringLimitModuleView::new);
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> DRUID_BARRACKS_WORK  = new BuildingEntry.ModuleProducer<>(
-      "druid_barracks_work", () -> new GuardBuildingModule(ModGuardTypes.druid.get(), true, ISchematicProvider::getBuildingLevel),
+      "druid_barracks_work", () -> new GuardBuildingModule(ModGuardTypes.druid.get(), ISchematicProvider::getBuildingLevel),
       () -> CombinedHiringLimitModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> KNIGHT_TOWER_WORK =
-      new BuildingEntry.ModuleProducer<>("knight_tower_work", () -> new GuardBuildingModule(ModGuardTypes.knight.get(), true, (b) -> 1), () -> CombinedHiringLimitModuleView::new);
+      new BuildingEntry.ModuleProducer<>("knight_tower_work", () -> new GuardBuildingModule(ModGuardTypes.knight.get(), (b) -> 1), () -> CombinedHiringLimitModuleView::new);
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> RANGER_TOWER_WORK =
-      new BuildingEntry.ModuleProducer<>("ranger_tower_work", () -> new GuardBuildingModule(ModGuardTypes.ranger.get(), true, (b) -> 1), () -> CombinedHiringLimitModuleView::new);
+      new BuildingEntry.ModuleProducer<>("ranger_tower_work", () -> new GuardBuildingModule(ModGuardTypes.ranger.get(), (b) -> 1), () -> CombinedHiringLimitModuleView::new);
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> DRUID_TOWER_WORK  =
-      new BuildingEntry.ModuleProducer<>("druid_tower_work", () -> new GuardBuildingModule(ModGuardTypes.druid.get(), true, (b) -> 1), () -> CombinedHiringLimitModuleView::new);
+      new BuildingEntry.ModuleProducer<>("druid_tower_work", () -> new GuardBuildingModule(ModGuardTypes.druid.get(), (b) -> 1), () -> CombinedHiringLimitModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> KNIGHT_GATE_WORK = new BuildingEntry.ModuleProducer<>(
-        "knight_gate_work", () -> new GuardBuildingModule(ModGuardTypes.knight.get(), true, (b) -> 2),
+        "knight_gate_work", () -> new GuardBuildingModule(ModGuardTypes.knight.get(), (b) -> 2),
         () -> CombinedHiringLimitModuleView::new);
     public static final BuildingEntry.ModuleProducer<GuardBuildingModule,CombinedHiringLimitModuleView> RANGER_GATE_WORK = new BuildingEntry.ModuleProducer<>(
-        "ranger_gate_work", () -> new GuardBuildingModule(ModGuardTypes.ranger.get(), true, (b) -> 2),
+        "ranger_gate_work", () -> new GuardBuildingModule(ModGuardTypes.ranger.get(), (b) -> 2),
         () -> CombinedHiringLimitModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<IBuildingModule,ToolModuleView> GUARD_TOOL     =
@@ -557,7 +551,7 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> ENCHANTER_WORK        =
-      new BuildingEntry.ModuleProducer<>("enchanter_work", () -> new CraftingWorkerBuildingModule(ModJobs.enchanter.get(), Skill.Mana, Skill.Knowledge, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("enchanter_work", () -> new CraftingWorkerBuildingModule(ModJobs.enchanter.get(), Skill.Mana, Skill.Knowledge, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingEnchanter.CraftingModule,CraftingModuleView> ENCHANTER_CRAFT       =
       new BuildingEntry.ModuleProducer<>("enchanter_craft", () -> new BuildingEnchanter.CraftingModule(ModJobs.enchanter.get()), () -> CraftingModuleView::new);
@@ -568,11 +562,11 @@ public class BuildingModules
       new BuildingEntry.ModuleProducer<>("graveyard", GraveyardManagementModule::new, () -> GraveyardManagementModuleView::new);
     public static final BuildingEntry.ModuleProducer<WorkerBuildingModule,WorkerBuildingModuleView> GRAVEYARD_WORK          =
       new BuildingEntry.ModuleProducer<>("graveyard_work",
-        () -> new WorkerBuildingModule(ModJobs.undertaker.get(), Skill.Strength, Skill.Mana, false, (b) -> 1),
+        () -> new WorkerBuildingModule(ModJobs.undertaker.get(), Skill.Strength, Skill.Mana, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule,WorkerBuildingModuleView> NETHERWORKER_WORK       =
-      new BuildingEntry.ModuleProducer<>("netherworker_work", () -> new CraftingWorkerBuildingModule(ModJobs.netherworker.get(), Skill.Adaptability, Skill.Strength, false, (b) -> 1),
+      new BuildingEntry.ModuleProducer<>("netherworker_work", () -> new CraftingWorkerBuildingModule(ModJobs.netherworker.get(), Skill.Adaptability, Skill.Strength, (b) -> 1),
         () -> WorkerBuildingModuleView::new);
     public static final BuildingEntry.ModuleProducer<BuildingNetherWorker.CraftingModule,CraftingModuleView> NETHERWORKER_CRAFT      =
       new BuildingEntry.ModuleProducer<>("netherworker_craft", () -> new BuildingNetherWorker.CraftingModule(ModJobs.netherworker.get()), () -> CraftingModuleView::new);

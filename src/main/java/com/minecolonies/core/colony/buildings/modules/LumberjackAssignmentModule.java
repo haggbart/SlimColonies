@@ -23,12 +23,11 @@ public class LumberjackAssignmentModule extends CraftingWorkerBuildingModule imp
     public LumberjackAssignmentModule(final JobEntry entry,
       final Skill primary,
       final Skill secondary,
-      final boolean canWorkingDuringRain,
       final Function<IBuilding, Integer> sizeLimit,
       final Skill craftingSpeedSkill,
       final Skill recipeImprovementSkill)
     {
-        super(entry, primary, secondary, canWorkingDuringRain, sizeLimit, craftingSpeedSkill, recipeImprovementSkill);
+        super(entry, primary, secondary, sizeLimit, craftingSpeedSkill, recipeImprovementSkill);
     }
 
     @Override

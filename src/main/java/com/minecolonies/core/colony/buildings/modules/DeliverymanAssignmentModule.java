@@ -23,10 +23,9 @@ public class DeliverymanAssignmentModule extends WorkerBuildingModule implements
     public DeliverymanAssignmentModule(final JobEntry entry,
       final Skill primary,
       final Skill secondary,
-      final boolean canWorkingDuringRain,
       final Function<IBuilding, Integer> sizeLimit)
     {
-        super(entry, primary, secondary, canWorkingDuringRain, sizeLimit);
+        super(entry, primary, secondary, sizeLimit);
     }
 
     @Override
