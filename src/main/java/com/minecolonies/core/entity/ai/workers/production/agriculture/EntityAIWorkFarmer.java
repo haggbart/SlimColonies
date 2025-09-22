@@ -22,7 +22,6 @@ import com.minecolonies.api.util.constant.translation.RequestSystemTranslationCo
 import com.minecolonies.core.Network;
 import com.minecolonies.core.blocks.BlockScarecrow;
 import com.minecolonies.core.blocks.MinecoloniesCropBlock;
-import com.minecolonies.core.blocks.MinecoloniesFarmland;
 import com.minecolonies.core.colony.buildingextensions.FarmField;
 import com.minecolonies.core.colony.buildings.modules.BuildingExtensionsModule;
 import com.minecolonies.core.colony.buildings.workerbuildings.BuildingFarmer;
@@ -378,7 +377,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         if (farmField.isNoPartOfField(world, position)
               || (world.getBlockState(position.above()).getBlock() instanceof CropBlock)
               || (world.getBlockState(position.above()).getBlock() instanceof BlockScarecrow)
-              || (!blockState.is(BlockTags.DIRT) && !(blockState.getBlock() instanceof MinecoloniesFarmland) && !(blockState.getBlock() instanceof FarmBlock))
+              || (!blockState.is(BlockTags.DIRT) && !(blockState.getBlock() instanceof FarmBlock))
               ||  isRightFarmLandForCrop(farmField, blockState)
               || (world.getBlockState(position.above()).getBlock() instanceof MinecoloniesCropBlock)
         )
@@ -624,14 +623,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
      */
     private void createCorrectFarmlandForSeed(final ItemStack seed, final BlockPos pos)
     {
-        if (seed.getItem() instanceof ItemCrop itemCrop)
-        {
-            world.setBlockAndUpdate(pos, ((MinecoloniesCropBlock) itemCrop.getBlock()).getPreferredFarmland().defaultBlockState());
-        }
-        else
-        {
-            world.setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
-        }
+        world.setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
     }
 
     /**
@@ -642,14 +634,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
      */
     private boolean isRightFarmLandForCrop(final FarmField farmField, final BlockState blockState)
     {
-        if (farmField.getSeed().getItem() instanceof ItemCrop itemCrop)
-        {
-            return blockState.getBlock() == ((MinecoloniesCropBlock) itemCrop.getBlock()).getPreferredFarmland();
-        }
-        else
-        {
-            return blockState.getBlock() instanceof FarmBlock;
-        }
+        return blockState.getBlock() instanceof FarmBlock;
     }
 
     /**

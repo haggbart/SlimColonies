@@ -111,7 +111,6 @@ public final class ModCreativeTabs
               output.accept(crop);
           }
 
-          output.accept(ModBlocks.farmland);
 
           // Custom bread items removed for simplification
 

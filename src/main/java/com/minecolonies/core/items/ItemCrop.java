@@ -4,7 +4,6 @@ import com.minecolonies.api.blocks.AbstractBlockHut;
 import com.minecolonies.api.util.MessageUtils;
 import com.minecolonies.api.util.constant.TranslationConstants;
 import com.minecolonies.core.blocks.MinecoloniesCropBlock;
-import com.minecolonies.core.blocks.MinecoloniesFarmland;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -58,7 +57,7 @@ public class ItemCrop extends BlockItem
         {
             final BlockPos clickedPos = ctx.getClickedPos().below();
             final BlockState worldState = ctx.getLevel().getBlockState(clickedPos);
-            if (ctx.getLevel().isClientSide && (worldState.getBlock() instanceof MinecoloniesFarmland || worldState.getBlock() instanceof FarmBlock))
+            if (ctx.getLevel().isClientSide && worldState.getBlock() instanceof FarmBlock)
             {
                 MessageUtils.format(Component.translatable("com.minecolonies.core.crop.cantplant")).sendTo(player);
             }
