@@ -163,15 +163,6 @@ public abstract class AbstractJobCrafter<AI extends AbstractEntityAIBasic<J, ? e
         return getDataStore().getAssignedTasks();
     }
 
-    /**
-     * Returns whether or not the job has a currentTask.
-     *
-     * @return true if has currentTask, otherwise false.
-     */
-    public boolean hasTask()
-    {
-        return !getTaskQueueFromDataStore().isEmpty();
-    }
 
     /**
      * Returns the {@link IRequest} of the current Task.
