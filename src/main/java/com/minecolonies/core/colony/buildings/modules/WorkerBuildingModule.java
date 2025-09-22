@@ -48,10 +48,6 @@ public class WorkerBuildingModule extends AbstractAssignedCitizenModule
      */
     private final JobEntry jobEntry;
 
-    /**
-     * Check if this worker by default can work in the rain.
-     */
-    private final boolean canWorkingDuringRain;
 
     /**
      * Max size in terms of assignees.
@@ -62,13 +58,11 @@ public class WorkerBuildingModule extends AbstractAssignedCitizenModule
       final JobEntry entry,
       final Skill primary,
       final Skill secondary,
-      final boolean canWorkingDuringRain,
       final Function<IBuilding, Integer> sizeLimit)
     {
         this.jobEntry = entry;
         this.primary = primary;
         this.secondary = secondary;
-        this.canWorkingDuringRain = canWorkingDuringRain;
         this.sizeLimit = sizeLimit;
     }
 
@@ -231,11 +225,6 @@ public class WorkerBuildingModule extends AbstractAssignedCitizenModule
         return jobEntry.produceJob(citizen);
     }
 
-    @Override
-    public boolean canWorkDuringTheRain()
-    {
-        return building.getBuildingLevel() >= building.getMaxBuildingLevel() || canWorkingDuringRain;
-    }
 
     @NotNull
     @Override

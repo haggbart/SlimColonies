@@ -36,10 +36,9 @@ public class GuardBuildingModule extends WorkAtHomeBuildingModule implements IBu
 
     public GuardBuildingModule(
       final GuardType type,
-      final boolean canWorkingDuringRain,
       final Function<IBuilding, Integer> sizeLimit)
     {
-        super(type.getJobEntry().get(), type.getPrimarySkill(), type.getSecondarySkill(), canWorkingDuringRain, sizeLimit);
+        super(type.getJobEntry().get(), type.getPrimarySkill(), type.getSecondarySkill(), sizeLimit);
     }
 
     @Override

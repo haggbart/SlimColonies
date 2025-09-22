@@ -158,7 +158,6 @@ public final class ResearchConstants
     public static final ResourceLocation RETREAT           = new ResourceLocation(Constants.MOD_ID, "effects/retreatunlock");
     public static final ResourceLocation SHIELD_USAGE      = new ResourceLocation(Constants.MOD_ID, "effects/shieldusageunlock");
     public static final ResourceLocation KNIGHT_WHIRLWIND  = new ResourceLocation(Constants.MOD_ID, "effects/whirlwindabilityunlock");
-    public static final ResourceLocation WORKING_IN_RAIN   = new ResourceLocation(Constants.MOD_ID, "effects/workinginrainunlock");
     public static final ResourceLocation USE_TOTEM         = new ResourceLocation(Constants.MOD_ID, "effects/usetotemunlock");
     public static final ResourceLocation RECIPE_MODE       = new ResourceLocation(Constants.MOD_ID, "effects/recipemodeunlock");
     public static final ResourceLocation BUILDER_MODE      = new ResourceLocation(Constants.MOD_ID, "effects/buildermodeunlock");

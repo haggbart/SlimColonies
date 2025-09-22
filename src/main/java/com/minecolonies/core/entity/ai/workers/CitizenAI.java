@@ -31,7 +31,6 @@ import java.util.List;
 
 import static com.minecolonies.api.entity.citizen.AbstractEntityCitizen.ENTITY_AI_TICKRATE;
 import static com.minecolonies.api.entity.citizen.VisibleCitizenStatus.*;
-import static com.minecolonies.api.research.util.ResearchConstants.WORKING_IN_RAIN;
 import static com.minecolonies.api.util.constant.CitizenConstants.*;
 import static com.minecolonies.api.util.constant.Constants.DEFAULT_SPEED;
 import static com.minecolonies.api.util.constant.TranslationConstants.*;
@@ -216,16 +215,6 @@ public class CitizenAI implements IStateAI
             return CitizenAIState.MOURN;
         }
 
-        // Raining
-        if (CompatibilityUtils.getWorldFromCitizen(citizen).isRaining() && !shouldWorkWhileRaining() && !WorldUtil.isNetherType(citizen.level))
-        {
-            citizen.setVisibleStatusIfNone(BAD_WEATHER);
-            if (!citizen.getCitizenData().getCitizenMournHandler().isMourning())
-            {
-                citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_RAINING), ChatPriority.HIDDEN));
-            }
-            return CitizenAIState.IDLE;
-        }
 
         // Work
         if (citizen.isBaby() && citizen.getCitizenJobHandler().getColonyJob() instanceof JobPupil && citizen.level.getDayTime() % 24000 > NOON)
@@ -284,31 +273,4 @@ public class CitizenAI implements IStateAI
                     (citizen.getCitizenData().getSaturation() < LOW_SATURATION && citizen.getHealth() < SEEK_DOCTOR_HEALTH));
     }
 
-    /**
-     * Checks if the citizen should work even when it rains.
-     *
-     * @return true if his building level is bigger than 5.
-     */
-    private boolean shouldWorkWhileRaining()
-    {
-        if (MineColonies.getConfig().getServer().workersAlwaysWorkInRain.get())
-        {
-            return true;
-        }
-
-        final ICitizenColonyHandler colonyHandler = citizen.getCitizenColonyHandler();
-        if (colonyHandler.getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(WORKING_IN_RAIN) > 0)
-        {
-            return true;
-        }
-
-        if (colonyHandler.getWorkBuilding() != null)
-        {
-            if (colonyHandler.getWorkBuilding().hasModule(WorkerBuildingModule.class))
-            {
-                return colonyHandler.getWorkBuilding().getFirstModuleOccurance(WorkerBuildingModule.class).canWorkDuringTheRain();
-            }
-        }
-        return false;
-    }
 }

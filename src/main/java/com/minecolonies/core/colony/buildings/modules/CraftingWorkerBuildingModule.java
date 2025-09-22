@@ -21,12 +21,11 @@ public class CraftingWorkerBuildingModule extends WorkerBuildingModule implement
     public CraftingWorkerBuildingModule(final JobEntry entry,
       final Skill primary,
       final Skill secondary,
-      final boolean canWorkingDuringRain,
       final Function<IBuilding, Integer> sizeLimit,
       final Skill craftingSpeedSkill,
       final Skill recipeImprovementSkill)
     {
-        super(entry, primary, secondary, canWorkingDuringRain, sizeLimit);
+        super(entry, primary, secondary, sizeLimit);
         this.craftingSpeedSkill = craftingSpeedSkill;
         this.recipeImprovementSkill = recipeImprovementSkill;
     }
@@ -34,10 +33,9 @@ public class CraftingWorkerBuildingModule extends WorkerBuildingModule implement
     public CraftingWorkerBuildingModule(final JobEntry entry,
       final Skill primary,
       final Skill secondary,
-      final boolean canWorkingDuringRain,
       final Function<IBuilding, Integer> sizeLimit)
     {
-        super(entry, primary, secondary, canWorkingDuringRain, sizeLimit);
+        super(entry, primary, secondary, sizeLimit);
         this.craftingSpeedSkill = primary;
         this.recipeImprovementSkill = secondary;
     }

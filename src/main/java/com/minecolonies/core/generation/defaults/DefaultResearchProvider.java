@@ -129,7 +129,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(SLEEP_LESS).setTranslatedName("Guards Need Less Sleep"));
         effects.add(new ResearchEffect(GUARD_CRIT).setTranslatedName("Guards have a chance to score critical hits").setLevels(new double[] {0.2, 0.3, 0.4, 0.5}));
         effects.add(new ResearchEffect(KNIGHT_WHIRLWIND).setTranslatedName("Knights Learn Special Attack That Damages and Knocks Back Nearby Enemies"));
-        effects.add(new ResearchEffect(WORKING_IN_RAIN).setTranslatedName("Citizens Work in Rain"));
         effects.add(new ResearchEffect(UNDERTAKER_RUN).setTranslatedName("Undertaker unlocks run ability").setTranslatedSubtitle("Teach Undertaker the ability to run towards graves"));
         effects.add(new ResearchEffect(USE_TOTEM).setTranslatedName("Undertaker gains the ability to use Totems of Undying to assist in Resurrection"));
         effects.add(new ResearchEffect(RECIPE_MODE).setTranslatedName("Add the option to select recipes based on Warehouse stock"));
@@ -1581,13 +1580,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                .addItemCost(Items.PAPER, 256)
                                .addEffect(RECIPES, 4)
                                .addToList(r);
-        new Research(new ResourceLocation(Constants.MOD_ID, "technology/rainman"), TECH).setParentResearch(rtm)
-          .setTranslatedName("Rainman")
-          .setTranslatedSubtitle("Raindrops are falling on my head...")
-          .setIcon(Items.SPLASH_POTION)
-          .addItemCost(Items.SALMON_BUCKET, 27)
-          .addEffect(WORKING_IN_RAIN, 1)
-          .addToList(r);
 
         new Research(new ResourceLocation(Constants.MOD_ID, "technology/warehousemaster"), TECH).setParentResearch(memoryAid)
           .setTranslatedName("Warehouse Master")
