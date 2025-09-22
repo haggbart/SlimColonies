@@ -1,18 +1,13 @@
 package com.minecolonies.apiimp.initializer;
 
-import com.ldtteam.blockui.Color;
 import com.minecolonies.api.blocks.ModBlocks;
-import com.minecolonies.api.entity.ModEntities;
 import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.core.items.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -123,15 +118,7 @@ public final class ModItemsInitializer
         ModItems.colonyMap = new ItemColonyMap(new Item.Properties());
 
 
-
         // Only keeping basic dough items - all other food items removed
-        ModItems.muffin_dough = new Item((new Item.Properties()));
-        ModItems.manchet_dough = new Item((new Item.Properties()));
-        ModItems.raw_noodle = new Item((new Item.Properties()));
-        ModItems.butter = new Item((new Item.Properties()));
-        ModItems.cornmeal = new Item((new Item.Properties()));
-        ModItems.creamcheese = new Item((new Item.Properties()));
-        ModItems.soysauce = new Item((new Item.Properties()));
 
         // Large bottle system removed for simplicity
 
@@ -185,14 +172,7 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "magicpotion"), ModItems.magicpotion);
         registry.register(new ResourceLocation(Constants.MOD_ID, "build_goggles"), ModItems.buildGoggles);
 
-        // Register only the basic ingredient items that were kept
-        registry.register(new ResourceLocation(Constants.MOD_ID, "butter"), ModItems.butter);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "manchet_dough"), ModItems.manchet_dough);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "muffin_dough"), ModItems.muffin_dough);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "raw_noodle"), ModItems.raw_noodle);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "cornmeal"), ModItems.cornmeal);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "creamcheese"), ModItems.creamcheese);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "soysauce"), ModItems.soysauce);
+        // All other food item registrations removed for simplification
 
         // Large bottle registrations removed
 
@@ -207,18 +187,5 @@ public final class ModItemsInitializer
         // No food items to register for composting since they were all removed
 
         ComposterBlock.COMPOSTABLES.put(ModItems.mistletoe, 0.5f);
-    }
-
-    private static void registerCompostItemFromNutrition(final Item item, final float factor)
-    {
-        final FoodProperties food = item.getFoodProperties(new ItemStack(item), null);
-        if (food != null)
-        {
-            final float strength = Math.min(1.0f, food.getNutrition() / factor);
-            if (strength > 0)
-            {
-                ComposterBlock.COMPOSTABLES.put(item, strength);
-            }
-        }
     }
 }

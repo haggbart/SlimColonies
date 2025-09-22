@@ -45,14 +45,7 @@ public final class ModItems
     public static Item cakeBatter;
     public static Item rawPumpkinPie;
 
-    // Basic ingredient items
-    public static Item muffin_dough;
-    public static Item manchet_dough;
-    public static Item raw_noodle;
-    public static Item butter;
-    public static Item cornmeal;
-    public static Item creamcheese;
-    public static Item soysauce;
+    // All other food items removed for simplification
 
     public static Item adventureToken;
 
