@@ -106,10 +106,7 @@ public final class ModCreativeTabs
           output.accept(ModItems.cakeBatter);
           output.accept(ModItems.rawPumpkinPie);
 
-          output.accept(ModItems.milkyBread);
-          output.accept(ModItems.sugaryBread);
-          output.accept(ModItems.goldenBread);
-          output.accept(ModItems.chorusBread);
+          // Custom bread items removed for simplification
 
 
       }).build());

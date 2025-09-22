@@ -1449,7 +1449,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         new Research(new ResourceLocation(Constants.MOD_ID, "technology/knowtheend"), TECH).setParentResearch(theFlintstones)
           .setTranslatedName("Know the End")
           .setTranslatedSubtitle("Unlock the secrets of the most mysterious dimension.")
-          .setIcon(ModItems.chorusBread)
+          .setIcon(Items.CHORUS_FRUIT)
           .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, "baker"), 3)
           .addItemCost(Items.CHORUS_FRUIT, 64)
           .addEffect(new ResourceLocation("minecolonies:effects/knowledgeoftheendunlock"), 1)

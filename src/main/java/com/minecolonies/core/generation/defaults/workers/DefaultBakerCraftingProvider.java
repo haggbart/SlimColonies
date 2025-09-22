@@ -72,48 +72,7 @@ public class DefaultBakerCraftingProvider extends CustomRecipeProvider
           .intermediate(Blocks.FURNACE)
           .build(consumer);
 
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "sugary_bread")
-          .inputs(List.of(new ItemStorage(new ItemStack(ModBlocks.blockDurum, 8)),
-            new ItemStorage(new ItemStack(Items.HONEY_BOTTLE))))
-          .result(new ItemStack(ModItems.sugaryBread, 4))
-          .lootTable(DefaultRecipeLootProvider.LOOT_TABLE_GLASS_BOTTLE)
-          .minBuildingLevel(3)
-          .showTooltip(true)
-          .build(consumer);
-
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "milky_bread")
-          .inputs(List.of(new ItemStorage(new ItemStack(ModBlocks.blockDurum, 8)),
-            new ItemStorage(new ItemStack(ModItems.large_milk_bottle))))
-          .result(new ItemStack(ModItems.milkyBread, 4))
-          .lootTable(DefaultRecipeLootProvider.LOOT_TABLE_LARGE_BOTTLE)
-          .minBuildingLevel(4)
-          .showTooltip(true)
-          .build(consumer);
-
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "smilky_bread")
-          .inputs(List.of(new ItemStorage(new ItemStack(ModBlocks.blockDurum, 8)),
-            new ItemStorage(new ItemStack(ModItems.large_soy_milk_bottle))))
-          .result(new ItemStack(ModItems.milkyBread, 4))
-          .lootTable(DefaultRecipeLootProvider.LOOT_TABLE_LARGE_BOTTLE)
-          .minBuildingLevel(4)
-          .showTooltip(true)
-          .build(consumer);
-
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "golden_bread")
-          .inputs(List.of(new ItemStorage(new ItemStack(ModBlocks.blockDurum, 8)),
-            new ItemStorage(new ItemStack(Items.GOLD_INGOT))))
-          .result(new ItemStack(ModItems.goldenBread, 4))
-          .minBuildingLevel(5)
-          .showTooltip(true)
-          .build(consumer);
-
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "chorus_bread")
-          .inputs(List.of(new ItemStorage(new ItemStack(ModBlocks.blockDurum, 8)),
-            new ItemStorage(new ItemStack(Items.CHORUS_FRUIT))))
-          .result(new ItemStack(ModItems.chorusBread, 4))
-          .minResearchId(ResearchConstants.THE_END)
-          .showTooltip(true)
-          .build(consumer);
+        // Custom bread recipes removed for simplification - baker now focuses on vanilla items
 
         CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "cookie_dough")
           .inputs(List.of(new ItemStorage(new ItemStack(Items.WHEAT, 2)),

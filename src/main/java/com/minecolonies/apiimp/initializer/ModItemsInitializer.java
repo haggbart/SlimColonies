@@ -228,10 +228,7 @@ public final class ModItemsInitializer
         ModItems.creamcheese = new Item((new Item.Properties()));
         ModItems.soysauce = new Item((new Item.Properties()));
 
-        ModItems.large_empty_bottle = new ItemLargeBottle((new Item.Properties()));
-        ModItems.large_milk_bottle = new ItemLargeBottle((new Item.Properties().craftRemainder(ModItems.large_empty_bottle)));
-        ModItems.large_water_bottle = new ItemLargeBottle((new Item.Properties().craftRemainder(ModItems.large_empty_bottle)));
-        ModItems.large_soy_milk_bottle = new ItemLargeBottle((new Item.Properties().craftRemainder(ModItems.large_empty_bottle)));
+        // Large bottle system removed for simplicity
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "supplychestdeployer"), ModItems.supplyChest);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scan_analyzer"), ModItems.scanAnalyzer);
@@ -355,10 +352,7 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "mintchoco_cheesecake"), ModItems.mintchoco_cheesecake);
         registry.register(new ResourceLocation(Constants.MOD_ID, "spicy_eggplant"), ModItems.spicy_eggplant);
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "large_empty_bottle"), ModItems.large_empty_bottle);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "large_water_bottle"), ModItems.large_water_bottle);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "large_milk_bottle"), ModItems.large_milk_bottle);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "large_soy_milk_bottle"), ModItems.large_soy_milk_bottle);
+        // Large bottle registrations removed
 
 
     }
