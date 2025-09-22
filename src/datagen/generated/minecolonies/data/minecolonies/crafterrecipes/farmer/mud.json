@@ -6,7 +6,7 @@
       "item": "minecraft:dirt"
     },
     {
-      "item": "minecolonies:large_water_bottle"
+      "item": "minecraft:water_bucket"
     }
   ],
   "intermediate": "minecraft:air",
