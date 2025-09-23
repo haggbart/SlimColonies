@@ -44,15 +44,6 @@ public class CitizenFoodHandler implements ICitizenFoodHandler
      */
     private final EvictingQueue<Item> lastEatenFoods = EvictingQueue.create(FOOD_QUEUE_SIZE);
 
-    /**
-     * Food stat cache to avoid recalculating constantly.
-     */
-    private CitizenFoodStats foodStatCache = null;
-
-    /**
-     * Dirty tracking if food stat cache has to be recalculated.
-     */
-    private boolean dirty = false;
 
     /**
      * Create the food handler.
@@ -69,8 +60,6 @@ public class CitizenFoodHandler implements ICitizenFoodHandler
     {
         lastEatenFoods.add(item);
         citizenData.markDirty(TICKS_SECOND);
-        dirty = true;
-        // No more food quality/diversity complaints
     }
 
     @Override
@@ -79,29 +68,7 @@ public class CitizenFoodHandler implements ICitizenFoodHandler
         return lastEatenFoods.peek();
     }
 
-    @Override
-    public int checkLastEaten(final Item item)
-    {
-        int foundIndex = -1;
 
-        int index = -1;
-        for (final Item foodItem : lastEatenFoods)
-        {
-            index++;
-            if (foodItem == item)
-            {
-                foundIndex = index;
-            }
-        }
-        return foundIndex;
-    }
-
-    @Override
-    public CitizenFoodStats getFoodHappinessStats()
-    {
-        // Happiness system removed - return default high values so food variety/quality checks always pass
-        return new CitizenFoodStats(10, 10);
-    }
 
     @Override
     public boolean hasFullFoodHistory()

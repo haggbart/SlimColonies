@@ -153,8 +153,6 @@ public class CommandCitizenInfo implements IMCColonyOfficerCommand
             context.getSource()
                 .sendSuccess(() -> Component.translatable(CommandTranslationConstants.COMMAND_CITIZEN_INFO_FOOD,
                     citizenData.getCitizenFoodHandler().hasFullFoodHistory(),
-                    citizenData.getCitizenFoodHandler().getFoodHappinessStats().quality(),
-                    citizenData.getCitizenFoodHandler().getFoodHappinessStats().diversity(),
                     lastEatenCompiled), false);
         }
 

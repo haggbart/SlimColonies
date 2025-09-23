@@ -634,13 +634,9 @@ public final class TranslationConstants
     @NonNls
     public static final String PACK_DESC                                          = "com.minecolonies.coremod.gui.colony.packdesc";
     @NonNls
-    public static final String FOOD_QUALITY_TOOLTIP                               = "com.minecolonies.core.gui.restaurant.foodquality";
-    @NonNls
     public static final String COM_MINECOLONIES_MAP_NEED_COLONY                   = "com.minecolonies.core.item.colonymap.needcolony";
     @NonNls
     public static final String COM_MINECOLONIES_MAP_COLONY_SET                    = "com.minecolonies.core.item.colonymap.registered";
-    @NonNls
-    public static final String VANILLA_FOOD_QUALITY_TOOLTIP                       = "com.minecolonies.core.gui.restaurant.vanillafoodquality";
     @NonNls
     public static final String COM_MINECOLONIES_SIGN_COLONY_SET          = "com.minecolonies.core.item.sign.registered";
     @NonNls
@@ -651,10 +647,6 @@ public final class TranslationConstants
     public static final String COM_MINECOLONIES_CORE_COLONY_SIGN_TOOLTIP_COLONY = "com.minecolonies.core.item.colonysign.tip.colony";
     @NonNls
     public static final String COM_MINECOLONIES_SIGN_NULL_COLONY                  = "com.minecolonies.core.item.sign.nullcolony";
-    @NonNls
-    public static final String FOOD_QUALITY                                       = "foodquality";
-    @NonNls
-    public static final String FOOD_DIVERSITY                                     = "fooddiversity";
     @NonNls
     public static final String URGENT                                             = ".urgent";
     @NonNls
