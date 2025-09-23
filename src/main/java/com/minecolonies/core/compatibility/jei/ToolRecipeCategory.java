@@ -1,6 +1,5 @@
 package com.minecolonies.core.compatibility.jei;
 
-import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.util.constant.TranslationConstants;
 import com.minecolonies.core.colony.crafting.ToolUsage;
 import com.minecolonies.core.colony.crafting.ToolsAnalyzer;
@@ -19,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class ToolRecipeCategory implements IRecipeCategory<ToolUsage>
     public ToolRecipeCategory(@NotNull final IGuiHelper guiHelper)
     {
         this.background = guiHelper.createBlankDrawable(WIDTH, HEIGHT);
-        this.icon = guiHelper.createDrawableItemStack(new ItemStack(ModItems.plateArmorChest));
+        this.icon = guiHelper.createDrawableItemStack(new ItemStack(Items.IRON_PICKAXE));
         this.slot = guiHelper.getSlotDrawable();
     }
 

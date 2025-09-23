@@ -1066,50 +1066,6 @@
     "item": "minecolonies:mistletoe"
   },
   {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:plate_armor_boots"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:plate_armor_chest"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:plate_armor_helmet"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:plate_armor_legs"
-  },
-  {
     "item": "minecolonies:questlog"
   },
   {

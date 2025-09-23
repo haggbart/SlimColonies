@@ -41,11 +41,6 @@ public class DefaultBlacksmithCraftingProvider extends CustomRecipeProvider
     @Override
     protected void registerRecipes(@NotNull final Consumer<FinishedRecipe> consumer)
     {
-        plate(consumer, 4, 1, ModItems.plateArmorHelmet);
-        plate(consumer, 7, 3, ModItems.plateArmorChest);
-        plate(consumer, 6, 4, ModItems.plateArmorLegs);
-        plate(consumer, 3, 1, ModItems.plateArmorBoots);
-
         netherite(consumer, Items.DIAMOND_SWORD, Items.NETHERITE_SWORD);
         netherite(consumer, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE);
         netherite(consumer, Items.DIAMOND_AXE, Items.NETHERITE_AXE);
@@ -73,22 +68,6 @@ public class DefaultBlacksmithCraftingProvider extends CustomRecipeProvider
             .minResearchId(ResearchConstants.BUILDERS_ASSISTANT_HAMMER)
             .showTooltip(true)
             .build(consumer);
-    }
-
-    private void plate(@NotNull final Consumer<FinishedRecipe> consumer,
-                       final int ironCount, final int coalCount,
-                       @NotNull final ItemLike output)
-    {
-        CustomRecipeBuilder.create(BLACKSMITH, MODULE_CRAFTING,
-                        ForgeRegistries.ITEMS.getKey(output.asItem()).getPath())
-                .inputs(List.of(new ItemStorage(new ItemStack(Items.IRON_INGOT, ironCount)),
-                        new ItemStorage(new ItemStack(Items.LEATHER)),
-                        new ItemStorage(new ItemStack(Items.COAL, coalCount))))
-                .result(new ItemStack(output))
-                .minBuildingLevel(4)
-                .minResearchId(ResearchConstants.PLATE_ARMOR)
-                .showTooltip(true)
-                .build(consumer);
     }
 
     private void netherite(@NotNull final Consumer<FinishedRecipe> consumer,
