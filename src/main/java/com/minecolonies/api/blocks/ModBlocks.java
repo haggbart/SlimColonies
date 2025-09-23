@@ -4,8 +4,6 @@ import com.minecolonies.api.blocks.decorative.AbstractBlockGate;
 import com.minecolonies.api.blocks.decorative.AbstractBlockMinecoloniesConstructionTape;
 import com.minecolonies.api.blocks.decorative.AbstractColonyFlagBanner;
 import com.minecolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
-import com.minecolonies.core.blocks.MinecoloniesCropBlock;
-import com.minecolonies.core.blocks.MinecoloniesFarmland;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -93,7 +91,6 @@ public final class ModBlocks
     public static AbstractColonyFlagBanner<? extends AbstractColonyFlagBanner<?>>                                   blockColonyWallBanner;
     public static AbstractBlockGate                                                                                 blockIronGate;
     public static AbstractBlockGate                                                                                 blockWoodenGate;
-    public static MinecoloniesFarmland                                                                              farmland;
     public static AbstractBlockMinecolonies<? extends AbstractBlockMinecolonies<?>>                                 blockColonySign;
 
     /**
@@ -165,9 +162,4 @@ public final class ModBlocks
         };
     }
 
-    @NotNull
-    public static MinecoloniesCropBlock[] getCrops()
-    {
-        return new MinecoloniesCropBlock[0];
-    }
 }

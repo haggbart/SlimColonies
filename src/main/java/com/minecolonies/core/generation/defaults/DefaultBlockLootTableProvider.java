@@ -71,13 +71,7 @@ public class DefaultBlockLootTableProvider extends SimpleLootTableProvider
                                      .otherwise(LootItem.lootTableItem(Blocks.DIRT)
                                                   .when(ExplosionCondition.survivesExplosion()))));
 
-        saveBlock(ModBlocks.farmland, registrar, lootPool -> lootPool.add(AlternativesEntry.alternatives().otherwise(LootItem.lootTableItem(Blocks.DIRT))));
 
-        for (Block block : ModBlocks.getCrops())
-        {
-            final LootItemBlockStatePropertyCondition.Builder cropCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 6));
-            saveBlock(block, registrar, lootPool -> lootPool.add(LootItem.lootTableItem(block.asItem()).when(cropCondition).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)).otherwise(LootItem.lootTableItem(block.asItem()))));
-        }
 
         // intentionally no drops -- creative only
         //saveBlock(ModBlocks.blockDecorationPlaceholder);
