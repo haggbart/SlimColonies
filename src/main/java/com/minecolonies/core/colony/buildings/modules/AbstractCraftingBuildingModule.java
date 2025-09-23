@@ -55,7 +55,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.minecolonies.api.research.util.ResearchConstants.RECIPES;
 import static com.minecolonies.api.util.constant.BuildingConstants.*;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_DISABLED_RECIPES;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_RECIPES;
@@ -154,7 +153,7 @@ public abstract class AbstractCraftingBuildingModule extends AbstractBuildingMod
      */
     protected int getMaxRecipes()
     {
-        double increase = 1 + building.getColony().getResearchManager().getResearchEffects().getEffectStrength(RECIPES);
+        double increase = 1 + 2.0;
         if (canLearnManyRecipes())
         {
             increase *= EXTRA_RECIPE_MULTIPLIER;

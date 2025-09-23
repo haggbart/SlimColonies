@@ -98,7 +98,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(MINIMUM_STOCK).setTranslatedName("Buildings Can Minimum Stock %3$s%% More").setLevels(new double[] {0.5, 1, 2}));
         effects.add(new ResearchEffect(MORE_ORES).setTranslatedName("Miners Find +%3$s%% More Ores").setLevels(new double[] {0.1, 0.25, 0.5, 1, 2}));
         effects.add(new ResearchEffect(PODZOL_CHANCE).setTranslatedName("Composters Get +%3$s%% More Podzol").setLevels(new double[] {1, 2}));
-        effects.add(new ResearchEffect(RECIPES).setTranslatedName("Workers Can Learn +%3$s%% More Recipes").setLevels(new double[] {0.25, 0.5, 1, 2}));
+        effects.add(new ResearchEffect(RECIPES).setTranslatedName("Workers Can Learn +%3$s%% More Recipes").setLevels(new double[] {0.25, 0.5}));
         effects.add(new ResearchEffect(REGENERATION).setTranslatedName("Citizen Regeneration +%3$s%%").setLevels(new double[] {0.1, 0.25, 0.5, 1, 2}));
         effects.add(new ResearchEffect(SATURATION).setTranslatedName("Citizen Saturation Per Meal +%3$s%%").setLevels(new double[] {0.1, 0.2, 0.3, 0.4, 0.5}));
         effects.add(new ResearchEffect(TEACHING).setTranslatedName("XP Gain When Studying +%3$s%%").setLevels(new double[] {0.05, 0.1, 0.25, 0.5, 1}));
@@ -1565,21 +1565,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                       .addEffect(RECIPES, 2)
                                       .setSortOrder(1)
                                       .addToList(r);
-        final Research recipeBook = new Research(new ResourceLocation(Constants.MOD_ID, "technology/recipebook"), TECH).setParentResearch(cheatSheet)
-                                      .setTranslatedName("Recipe Book")
-                                      .setIcon(Items.ENCHANTED_BOOK)
-                                      .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.SAWMILL_ID), 3)
-                                      .addItemCost(Items.PAPER, 128)
-                                      .addEffect(RECIPES, 3)
-                                      .addToList(r);
-        final Research rtm = new Research(new ResourceLocation(Constants.MOD_ID, "technology/rtm"), TECH).setParentResearch(recipeBook)
-                               .setTranslatedName("RTM")
-                               .setTranslatedSubtitle("I saw some information on this somewhere...")
-                               .setIcon(Items.BOOKSHELF)
-                               .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.SAWMILL_ID), 4)
-                               .addItemCost(Items.PAPER, 256)
-                               .addEffect(RECIPES, 4)
-                               .addToList(r);
 
         new Research(new ResourceLocation(Constants.MOD_ID, "technology/warehousemaster"), TECH).setParentResearch(memoryAid)
           .setTranslatedName("Warehouse Master")

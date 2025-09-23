@@ -27,6 +27,7 @@ complexity, here your colonists are self-sufficient helpers who work alongside y
 - [x] Removed mercenary system
 - [x] Removed various weapons
 - [x] Removed courier building level carrying capacity restrictions
+- [x] Removed crafting recipe capacity research requirements (max capacity by default)
 
 ### 📋 Planned Simplifications
 
