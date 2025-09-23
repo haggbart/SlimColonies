@@ -7,7 +7,6 @@ import com.minecolonies.core.items.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -65,7 +64,6 @@ public final class ModItemsInitializer
         ModItems.cookieDough = new ItemCookieDough(new Item.Properties());
         ModItems.cakeBatter = new ItemCakeBatter(new Item.Properties());
         ModItems.rawPumpkinPie = new ItemRawPumpkinPie(new Item.Properties());
-
 
         ModItems.adventureToken = new ItemAdventureToken(new Item.Properties());
 
@@ -127,8 +125,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "cake_batter"), ModItems.cakeBatter);
         registry.register(new ResourceLocation(Constants.MOD_ID, "raw_pumpkin_pie"), ModItems.rawPumpkinPie);
 
-        // Removed milky_bread, sugary_bread, golden_bread, chorus_bread registrations
-
         registry.register(new ResourceLocation(Constants.MOD_ID, "adventure_token"), ModItems.adventureToken);
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "santa_hat"), ModItems.santaHat);
@@ -143,19 +139,10 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "sifter_mesh_diamond"), ModItems.sifterMeshDiamond);
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "build_goggles"), ModItems.buildGoggles);
-
-        // All other food item registrations removed for simplification
-
-        // Large bottle registrations removed
-
-
     }
 
     private static void registerCompostItems()
     {
-        // these items aren't registered in "getAllFoods" - all removed
-
         // No ingredient items to register for composting since most were removed
-        // No food items to register for composting since they were all removed
     }
 }

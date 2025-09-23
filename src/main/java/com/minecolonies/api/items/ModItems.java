@@ -38,8 +38,6 @@ public final class ModItems
     public static Item cakeBatter;
     public static Item rawPumpkinPie;
 
-    // All other food items removed for simplification
-
     public static Item adventureToken;
 
     public static Item scrollColonyTP;
@@ -52,7 +50,6 @@ public final class ModItems
     public static Item sifterMeshFlint;
     public static Item sifterMeshIron;
     public static Item sifterMeshDiamond;
-
 
     public static Item buildGoggles;
     public static Item scanAnalyzer;
