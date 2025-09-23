@@ -11,11 +11,9 @@ import com.minecolonies.core.entity.pathfinding.pathjobs.PathJobRandomPos;
 import com.minecolonies.core.entity.pathfinding.pathresults.PathResult;
 import com.minecolonies.core.entity.pathfinding.pathresults.TreePathResult;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -23,10 +21,10 @@ import java.util.List;
 public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
 {
     //  Parent class private members
-    protected final Mob    ourEntity;
-    protected       double       walkSpeedFactor = 1.0D;
+    protected final Mob      ourEntity;
+    protected       double   walkSpeedFactor = 1.0D;
     @Nullable
-    protected       BlockPos     originalDestination;
+    protected       BlockPos originalDestination;
 
     /**
      * The navigators node costs
@@ -34,8 +32,8 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
     private PathingOptions pathingOptions = new PathingOptions();
 
     public AbstractAdvancedPathNavigate(
-      final Mob entityLiving,
-      final Level worldIn)
+        final Mob entityLiving,
+        final Level worldIn)
     {
         super(entityLiving, worldIn);
         this.ourEntity = mob;
@@ -45,8 +43,8 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
      * Used to path away from a position.
      *
      * @param currentPosition the position to avoid.
-     * @param range the range he should move out of.
-     * @param speed the speed to run at.
+     * @param range           the range he should move out of.
+     * @param speed           the speed to run at.
      * @param safeDestination if the destination is save and should be set.
      * @return the result of the pathing.
      */
@@ -55,23 +53,12 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
     /**
      * Try to move to a certain position.
      *
-     * @param x     the x target.
-     * @param y     the y target.
-     * @param z     the z target.
-     * @param speed the speed to walk.
+     * @param pos             the target position.
+     * @param speed           the speed to walk.
+     * @param safeDestination if the destination is safe and should be set.
      * @return the PathResult.
      */
     protected abstract PathResult<? extends IPathJob> walkTo(final BlockPos pos, final double speed, final boolean safeDestination);
-
-    /**
-     * Used to path away from a ourEntity.
-     *
-     * @param target        the ourEntity.
-     * @param distance the distance to move to.
-     * @param combatMovementSpeed    the speed to run at.
-     * @return the result of the pathing.
-     */
-    protected abstract PathResult<? extends IPathJob> moveAwayFromLivingEntity(final Entity target, final double distance, final double combatMovementSpeed);
 
     /**
      * Attempt to move to a specific pos.
@@ -85,10 +72,6 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
     /**
      * Attemps to move in the given direction, walking at least range blocks
      *
-     * @param towards
-     * @param range
-     * @param speedFactor
-     * @return
      */
     @Nullable
     protected abstract PathResult<AbstractPathJob> walkTowards(BlockPos towards, double range, double speedFactor);
@@ -107,7 +90,7 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
      *
      * @param range the range he should move out of.
      * @param speed the speed to run at.
-     * @param pos the pos to circle around.
+     * @param pos   the pos to circle around.
      * @return the result of the pathing.
      */
     protected abstract PathResult<? extends IPathJob> walkToRandomPosAround(final int range, final double speed, final BlockPos pos);
@@ -138,9 +121,9 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
      * @return the result of the pathing.
      */
     protected abstract PathResult<? extends IPathJob> walkToRandomPos(
-      final int range,
-      final double speed,
-      final net.minecraft.util.Tuple<BlockPos, BlockPos> corners);
+        final int range,
+        final double speed,
+        final net.minecraft.util.Tuple<BlockPos, BlockPos> corners);
 
     /**
      * Used to path towards a random pos within some restrictions
@@ -161,35 +144,26 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
      * @param startRestriction the start of the restricted area.
      * @param endRestriction   the end of the restricted area.
      * @param speed            walking speed.
-     * @param excludedTrees       the trees which should be cut.
+     * @param excludedTrees    the trees which should be cut.
      * @return the result of the search.
      */
     public abstract TreePathResult walkToTree(
-      final BlockPos startRestriction,
-      final BlockPos endRestriction,
-      final double speed,
-      final List<ItemStorage> excludedTrees,
-      final int dyntreesize,
-      final IColony colony);
+        final BlockPos startRestriction,
+        final BlockPos endRestriction,
+        final double speed,
+        final List<ItemStorage> excludedTrees,
+        final int dyntreesize,
+        final IColony colony);
 
     /**
      * Used to find a tree.
      *
-     * @param range      in the range.
-     * @param speed      walking speed.
+     * @param range         in the range.
+     * @param speed         walking speed.
      * @param excludedTrees the trees which should be cut.
      * @return the result of the search.
      */
     public abstract TreePathResult walkToTree(final int range, final double speed, final List<ItemStorage> excludedTrees, final int dyntreesize, final IColony colony);
-
-    /**
-     * Used to walk a living ourEntity with a speed.
-     *
-     * @param e     the ourEntity.
-     * @param speed the speed.
-     * @return the result.
-     */
-    protected abstract PathResult<? extends IPathJob> walkToEntity(@NotNull final Entity e, final double speed);
 
     /**
      * Get the pathing options
@@ -210,13 +184,6 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
     {
         return ourEntity;
     }
-
-    /**
-     * Sets the desired position to reach, used also for stuckhandling
-     *
-     * @param pos
-     */
-    public abstract void setSafeDestinationPos(BlockPos pos);
 
     /**
      * Sets the stuck handler for this navigator

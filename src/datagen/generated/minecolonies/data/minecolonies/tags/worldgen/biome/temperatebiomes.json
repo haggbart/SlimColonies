@@ -1,9 +1,4 @@
 {
-  "remove": [
-    "#forge:is_cold",
-    "#forge:is_dry",
-    "#forge:is_desert"
-  ],
   "values": [
     "#minecraft:has_structure/village_plains",
     "#forge:is_plains",

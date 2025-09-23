@@ -149,11 +149,11 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
         @NotNull final BlockPos start = PathfindingUtils.prepareStart(ourEntity);
 
         return setPathJob(new PathJobMoveAwayFromLocation(CompatibilityUtils.getWorldFromEntity(ourEntity),
-          start,
-          avoid,
-          (int) range,
-          (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
-          ourEntity), null, speedFactor, safeDestination);
+            start,
+            avoid,
+            (int) range,
+            (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
+            ourEntity), null, speedFactor, safeDestination);
     }
 
     @Nullable
@@ -161,10 +161,10 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     protected PathResult<AbstractPathJob> walkTowards(final BlockPos towards, final double range, final double speedFactor)
     {
         return setPathJob(new PathJobMoveTowards(CompatibilityUtils.getWorldFromEntity(ourEntity),
-          PathfindingUtils.prepareStart(ourEntity),
-          towards,
-          (int) range,
-          ourEntity), null, speedFactor, false);
+            PathfindingUtils.prepareStart(ourEntity),
+            towards,
+            (int) range,
+            ourEntity), null, speedFactor, false);
     }
 
     @Nullable
@@ -172,11 +172,11 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     {
         @NotNull final BlockPos start = PathfindingUtils.prepareStart(ourEntity);
         final PathResult<PathJobRandomPos> result = setPathJob(new PathJobRandomPos(CompatibilityUtils.getWorldFromEntity(ourEntity),
-          start,
+            start,
             range,
-          (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
+            (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
 
-          ourEntity), null, speedFactor, true);
+            ourEntity), null, speedFactor, true);
 
         if (result == null)
         {
@@ -191,11 +191,11 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     protected PathResult<PathJobRandomPos> walkToRandomPosAround(final int range, final double speedFactor, final BlockPos pos)
     {
         final PathResult<PathJobRandomPos> result = setPathJob(new PathJobRandomPos(CompatibilityUtils.getWorldFromEntity(ourEntity),
-          PathfindingUtils.prepareStart(ourEntity),
-          3,
-          (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
-          range,
-          ourEntity, pos), pos, speedFactor, false);
+            PathfindingUtils.prepareStart(ourEntity),
+            3,
+            (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
+            range,
+            ourEntity, pos), pos, speedFactor, false);
 
         if (result == null)
         {
@@ -208,9 +208,9 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
 
     @Override
     protected PathResult<PathJobRandomPos> walkToRandomPos(
-      final int range,
-      final double speedFactor,
-      final net.minecraft.util.Tuple<BlockPos, BlockPos> corners)
+        final int range,
+        final double speedFactor,
+        final net.minecraft.util.Tuple<BlockPos, BlockPos> corners)
     {
         return walkToRandomPos(range, speedFactor, corners, false);
     }
@@ -255,9 +255,9 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     @Nullable
     @Override
     public <T extends AbstractPathJob> PathResult<T> setPathJob(
-      @NotNull final AbstractPathJob job,
-      final BlockPos dest,
-      final double speedFactor, final boolean safeDestination)
+        @NotNull final AbstractPathJob job,
+        final BlockPos dest,
+        final double speedFactor, final boolean safeDestination)
     {
         if (pauseTicks > 0)
         {
@@ -483,11 +483,11 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     {
         @NotNull final BlockPos start = PathfindingUtils.prepareStart(ourEntity);
         return setPathJob(
-          new PathJobMoveToLocation(CompatibilityUtils.getWorldFromEntity(ourEntity),
-            start,
-            desiredPos,
-            (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
-            ourEntity),
+            new PathJobMoveToLocation(CompatibilityUtils.getWorldFromEntity(ourEntity),
+                start,
+                desiredPos,
+                (int) ourEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
+                ourEntity),
             desiredPos, speedFactor, safeDestination);
     }
 
@@ -530,7 +530,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     {
         // TODO improve road walking. This is better in some situations, but still not great.
         return !WorkerUtil.isPathBlock(level.getBlockState(BlockPos.containing(start.x, start.y - 1, start.z)).getBlock())
-                 && super.canMoveDirectly(start, end);
+            && super.canMoveDirectly(start, end);
     }
 
     public double getSpeedFactor()
@@ -668,14 +668,14 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
         {
             @NotNull final PathPointExtended pEx = (PathPointExtended) this.getPath().getNode(this.getPath().getNextNodeIndex());
             final PathPointExtended pExNext = getPath().getNodeCount() > this.getPath().getNextNodeIndex() + 1
-                                                ? (PathPointExtended) this.getPath()
-              .getNode(this.getPath()
-                .getNextNodeIndex() + 1) : null;
+                ? (PathPointExtended) this.getPath()
+                .getNode(this.getPath()
+                    .getNextNodeIndex() + 1) : null;
 
             final BlockPos pos = new BlockPos(pEx.x, pEx.y, pEx.z);
             if (pEx.isOnLadder() && pExNext != null && (pEx.y != pExNext.y || mob.getY() > pEx.y) && PathfindingUtils.isLadder(level.getBlockState(pos),
-              pathResult != null ? pathResult.getJob().getPathingOptions() : getPathingOptions())
-                  && level.getBlockState(pos).getFluidState().isEmpty())
+                pathResult != null ? pathResult.getJob().getPathingOptions() : getPathingOptions())
+                && level.getBlockState(pos).getFluidState().isEmpty())
             {
                 return handlePathPointOnLadder(pEx);
             }
@@ -727,16 +727,16 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
         {
             @NotNull final PathPointExtended pEx = (PathPointExtended) this.getPath().getNode(this.getPath().getNextNodeIndex());
             PathPointExtended pExNext = getPath().getNodeCount() > this.getPath().getNextNodeIndex() + 1
-                                          ? (PathPointExtended) this.getPath()
-              .getNode(this.getPath()
-                .getNextNodeIndex() + 1) : null;
+                ? (PathPointExtended) this.getPath()
+                .getNode(this.getPath()
+                    .getNextNodeIndex() + 1) : null;
 
             if (pExNext != null && pEx.x == pExNext.x && pEx.z == pExNext.z)
             {
                 pExNext = getPath().getNodeCount() > this.getPath().getNextNodeIndex() + 2
-                            ? (PathPointExtended) this.getPath()
-                  .getNode(this.getPath()
-                    .getNextNodeIndex() + 2) : null;
+                    ? (PathPointExtended) this.getPath()
+                    .getNode(this.getPath()
+                        .getNextNodeIndex() + 2) : null;
             }
 
             if (pEx.isOnRails() || pEx.isRailsExit())
@@ -763,8 +763,8 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
             {
                 final BlockState blockstate = level.getBlockState(blockPos);
                 RailShape railshape = blockstate.getBlock() instanceof BaseRailBlock
-                                        ? ((BaseRailBlock) blockstate.getBlock()).getRailDirection(blockstate, level, blockPos, null)
-                                        : RailShape.NORTH_SOUTH;
+                    ? ((BaseRailBlock) blockstate.getBlock()).getRailDirection(blockstate, level, blockPos, null)
+                    : RailShape.NORTH_SOUTH;
                 double yOffset = 0.0D;
                 if (railshape.isAscending())
                 {
@@ -908,8 +908,8 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
         //  Prevent shortcuts when swimming
         final int curIndex = this.getPath().getNextNodeIndex();
         if (curIndex > 0
-              && (curIndex + 1) < this.getPath().getNodeCount()
-              && this.getPath().getNode(curIndex - 1).y != pEx.y)
+            && (curIndex + 1) < this.getPath().getNodeCount()
+            && this.getPath().getNode(curIndex - 1).y != pEx.y)
         {
             //  Work around the initial 'spin back' when dropping into water
             oldIndex = curIndex + 1;
@@ -920,7 +920,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
         Vec3 Vector3d = this.getPath().getNextEntityPos(this.ourEntity);
 
         if (Vector3d.distanceToSqr(new Vec3(ourEntity.getX(), Vector3d.y, ourEntity.getZ())) < 0.1
-              && Math.abs(ourEntity.getY() - Vector3d.y) < 0.5)
+            && Math.abs(ourEntity.getY() - Vector3d.y) < 0.5)
         {
             this.getPath().advance();
             if (this.isDone())
@@ -956,14 +956,14 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
             //  If current node is bottom of a ladder, then stay on this node until
             //  the ourEntity reaches the bottom, otherwise they will try to head out early
             if (pEx.isOnLadder() && pEx.getLadderFacing() == Direction.DOWN
-                  && !pExNext.isOnLadder())
+                && !pExNext.isOnLadder())
             {
                 final Vec3 vec3 = getTempMobPos();
                 if ((vec3.y - (double) pEx.y) < MIN_Y_DISTANCE)
                 {
                     this.path.setNextNodeIndex(curNodeNext);
                 }
-                 return;
+                return;
             }
 
             if (!pEx.isOnRails() && ourEntity.vehicle != null)
@@ -990,8 +990,8 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
             // TODO: Only keep advancing if distance gets closer, instead of looping many points, check if entity pos at node is even needed, normal pos probably fine
             Vec3 next = this.path.getEntityPosAtNode(this.mob, i);
             if (Math.abs(this.mob.getX() - next.x) < (double) this.maxDistanceToWaypoint - Math.abs(this.mob.getY() - (next.y)) * 0.1
-                  && Math.abs(this.mob.getZ() - next.z) < (double) this.maxDistanceToWaypoint - Math.abs(this.mob.getY() - (next.y)) * 0.1 &&
-                  Math.abs(this.mob.getY() - next.y) <= 1.0D)
+                && Math.abs(this.mob.getZ() - next.z) < (double) this.maxDistanceToWaypoint - Math.abs(this.mob.getY() - (next.y)) * 0.1 &&
+                Math.abs(this.mob.getY() - next.y) <= 1.0D)
             {
                 this.path.advance();
                 wentAhead = true;
@@ -1116,26 +1116,26 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
 
     @Override
     public TreePathResult walkToTree(
-      final BlockPos startRestriction,
-      final BlockPos endRestriction,
-      final double speed,
-      final List<ItemStorage> excludedTrees,
-      final int dyntreesize,
-      final IColony colony)
+        final BlockPos startRestriction,
+        final BlockPos endRestriction,
+        final double speed,
+        final List<ItemStorage> excludedTrees,
+        final int dyntreesize,
+        final IColony colony)
     {
         @NotNull final BlockPos start = PathfindingUtils.prepareStart(ourEntity);
         final BlockPos furthestRestriction = BlockPosUtil.getFurthestCorner(start, startRestriction, endRestriction);
 
         final PathJobFindTree job =
-          new PathJobFindTree(CompatibilityUtils.getWorldFromEntity(mob),
-            start,
-            startRestriction,
-            endRestriction,
-            furthestRestriction,
-            excludedTrees,
-            dyntreesize,
-            colony,
-            ourEntity);
+            new PathJobFindTree(CompatibilityUtils.getWorldFromEntity(mob),
+                start,
+                startRestriction,
+                endRestriction,
+                furthestRestriction,
+                excludedTrees,
+                dyntreesize,
+                colony,
+                ourEntity);
 
         return (TreePathResult) setPathJob(job, null, speed, true);
     }
@@ -1152,21 +1152,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
         }
 
         return (TreePathResult) setPathJob(
-          new PathJobFindTree(CompatibilityUtils.getWorldFromEntity(mob), start, buildingPos, range, excludedTrees, dyntreesize, colony, ourEntity), null, speed, true);
-    }
-
-    @Nullable
-    @Override
-    public PathResult<PathJobMoveToLocation> walkToEntity(@NotNull final Entity e, final double speed)
-    {
-        return walkTo(e.blockPosition(), speed, false);
-    }
-
-    @Nullable
-    @Override
-    public PathResult<PathJobMoveAwayFromLocation> moveAwayFromLivingEntity(@NotNull final Entity e, final double distance, final double speed)
-    {
-        return walkAwayFrom(e.blockPosition(), distance, speed, true);
+            new PathJobFindTree(CompatibilityUtils.getWorldFromEntity(mob), start, buildingPos, range, excludedTrees, dyntreesize, colony, ourEntity), null, speed, true);
     }
 
     @Override
@@ -1180,12 +1166,6 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     public BlockPos getSafeDestination()
     {
         return safeDestinationPos;
-    }
-
-    @Override
-    public void setSafeDestinationPos(final BlockPos pos)
-    {
-        safeDestinationPos = pos;
     }
 
     /**
@@ -1216,7 +1196,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     {
         if (pauseTicks > TICKS_SECOND * 120)
         {
-            Log.getLogger().warn("Tried to pause entity pathfinding for " + mob + " too long for " + pauseTicks + " ticks.", new Exception());
+            Log.getLogger().warn("Tried to pause entity pathfinding for {} too long for {} ticks.", mob, pauseTicks, new Exception());
             this.pauseTicks = 50;
         }
         else
