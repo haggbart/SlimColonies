@@ -10,29 +10,58 @@ babysitting, no events, no demands - just helpful NPCs that enhance your world.
 For players who want the automation and assistance of colonies without the city management gameplay. While MineColonies offers deep colony simulation for those who enjoy that
 complexity, here your colonists are self-sufficient helpers who work alongside you without requiring active management.
 
+## What Makes Colonies "Demanding"?
+
+Many features in the original MineColonies require constant player intervention or force unnecessary complexity:
+
+- **Research-Gated Basic Functionality**: Simple quality-of-life features like efficient ordering (25% threshold) were locked behind research, causing couriers to spam small orders
+  and waste time instead of working properly by default.
+
+- **Arbitrary Management Systems**: Happiness, diseases, and raids created busywork that pulled players away from actually building and exploring to babysit their colonists.
+
+- **Overcomplicated Progression**: Basic worker efficiency was tied to research requirements and item costs, making colonies feel like a chore to maintain rather than helpful
+  automation.
+
+SlimColonies removes these pain points and makes sensible behaviors the default, so your colonists work intelligently from day one without requiring a PhD in colony management.
+
 ## Simplification Progress
 
 ### ✅ Completed
 
+#### Major System Removals
+
 - [x] Removed happiness system
-- [x] Removed unnecessary quests
 - [x] Removed raid system
 - [x] Removed disease system
-- [x] Removed trample prevention research
-- [x] Removed research item cost requirements
+- [x] Removed mercenary system
 - [x] Removed custom farmland and crops
 - [x] Removed custom foods and recipes
-- [x] Simplified food mechanic
-- [x] Removed working in rain mechanic
-- [x] Removed mercenary system
-- [x] Removed various weapons
-- [x] Removed courier building level carrying capacity restrictions
+- [x] Removed druid guard type
+
+#### Research & Progression Simplification
+
+- [x] Removed unnecessary quests that should be default (moved to default behavior)
+- [x] Removed trample prevention research
+- [x] Removed research item cost requirements
 - [x] Removed crafting recipe capacity research requirements (max capacity by default)
 - [x] Removed minimum order quantity research (25% threshold ordering now default)
 
+#### Minor Changes & Quality of Life
+
+- [x] Simplified food mechanic
+- [x] Removed working in rain mechanic
+- [x] Removed various weapons
+- [x] Removed courier building level carrying capacity restrictions
+- [x] Remove Scimitar
+- [x] Remove Plate Armor
+
+#### Misc & Other
+
+- [x] Many other small changes
+
 ### 📋 Planned Simplifications
 
-- [ ] Simplify death/resurrection to basic respawning
+- [ ] TODO
 
 ## For Users
 
@@ -52,8 +81,8 @@ MineColonies crashes every time? Have a suggestion? Found a bug? Create an issue
 2. Go to the [issues page](https://github.com/ldtteam/minecolonies/issues).
 3. Click `New Issue`
 4. Choose which type of issue you want to create.
-4. Fill in the form. Don't leave anything out!
-5. Click `Submit New Issue` and wait for a response!
+5. Fill in the form. Don't leave anything out!
+6. Click `Submit New Issue` and wait for a response!
 
 ## For Developers
 
