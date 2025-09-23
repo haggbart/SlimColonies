@@ -30,15 +30,14 @@ public class PathJobMoveTowards extends AbstractPathJob implements IDestinationP
      * @param start       starting location.
      * @param direction   location to avoid.
      * @param minDistance how far to move away.
-     * @param range       max range to search.
      * @param entity      the entity.
      */
     public PathJobMoveTowards(
-      final Level world,
-      @NotNull final BlockPos start,
-      @NotNull final BlockPos direction,
-      final int minDistance,
-      final Mob entity)
+        final Level world,
+        @NotNull final BlockPos start,
+        @NotNull final BlockPos direction,
+        final int minDistance,
+        final Mob entity)
     {
         super(world, start, minDistance * 2, new PathResult<PathJobMoveTowards>(), entity);
 
@@ -67,8 +66,8 @@ public class PathJobMoveTowards extends AbstractPathJob implements IDestinationP
     protected boolean isAtDestination(@NotNull final MNode n)
     {
         return BlockPosUtil.distManhattan(start, n.x, n.y, n.z) > minDistance
-                 && SurfaceType.getSurfaceType(world, cachedBlockLookup.getBlockState(n.x, n.y - 1, n.z), tempWorldPos.set(n.x, n.y - 1, n.z), getPathingOptions())
-                      == SurfaceType.WALKABLE;
+            && SurfaceType.getSurfaceType(world, cachedBlockLookup.getBlockState(n.x, n.y - 1, n.z), tempWorldPos.set(n.x, n.y - 1, n.z), getPathingOptions())
+            == SurfaceType.WALKABLE;
     }
 
     @Override

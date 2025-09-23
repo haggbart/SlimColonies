@@ -38,8 +38,8 @@ public final class Pond
      *
      * @param world The world the player is in.
      * @param water The coordinate to check.
-     * @param problematicPosition Will contain position of problematic block (if not null && pond was not found).
-     * @return true if water.
+     * @param problematicPosition Will contain position of problematic block (if not null &amp;&amp; pond was not found).
+     * @return the pond state indicating validity and any issues.
      */
     public static PondState checkPond(@NotNull final BlockGetter world, @NotNull final BlockPos water, @Nullable final MutableBlockPos problematicPosition)
     {
