@@ -15,9 +15,6 @@ public class ShapeUtil
     /**
      * Fast shape max for normal blocks
      *
-     * @param shape
-     * @param axis
-     * @return
      */
     public static double max(final VoxelShape shape, final Direction.Axis axis)
     {
@@ -38,9 +35,6 @@ public class ShapeUtil
     /**
      * Fast shape min for normal Blocks
      *
-     * @param shape
-     * @param axis
-     * @return
      */
     public static double min(final VoxelShape shape, final Direction.Axis axis)
     {
@@ -61,8 +55,6 @@ public class ShapeUtil
     /**
      * Check if a shape is empty
      *
-     * @param shape
-     * @return
      */
     public static boolean isEmpty(final VoxelShape shape)
     {
@@ -106,10 +98,6 @@ public class ShapeUtil
     /**
      * Check if the given block has a collision shape
      *
-     * @param world
-     * @param pos
-     * @param state
-     * @return
      */
     public static boolean hasCollision(final BlockGetter world, final BlockPos pos, final BlockState state)
     {
@@ -124,10 +112,6 @@ public class ShapeUtil
     /**
      * Check if the given block has a collision shape
      *
-     * @param world
-     * @param pos
-     * @param state
-     * @return
      */
     public static boolean hasCollision(final BlockGetter world, final int x, final int y, final int z, final BlockState state)
     {
@@ -142,9 +126,6 @@ public class ShapeUtil
     /**
      * Check if the given block has a collision shape
      *
-     * @param state
-     * @param collisionShape
-     * @return
      */
     public static boolean hasCollision(final BlockState state, final VoxelShape collisionShape)
     {
