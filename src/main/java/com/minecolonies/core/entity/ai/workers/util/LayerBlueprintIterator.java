@@ -1,7 +1,6 @@
 package com.minecolonies.core.entity.ai.workers.util;
 
 import com.ldtteam.structurize.blueprints.v1.Blueprint;
-import com.ldtteam.structurize.placement.AbstractBlueprintIterator;
 import com.ldtteam.structurize.placement.AbstractBlueprintIteratorWrapper;
 import com.ldtteam.structurize.placement.StructureIterators;
 import com.ldtteam.structurize.placement.structure.IStructureHandler;
@@ -12,7 +11,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.TriPredicate;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,17 +18,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * A BlueprintIterator which only iterates over one Y-level (layer) of a blueprint, using the iterator pattern of a different iterator
  */
+@SuppressWarnings("removal")
 public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
 {
     /**
      * The current selected layer
      */
-    private int layer;
+    private       int                     layer;
     /**
      * The handler of the wrapped iterator (which wraps all methods to only work on a blueprint of one block high, of the current layer)
      */
@@ -38,12 +36,13 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
     /**
      * The originally passed handler (containing the entire blueprint). As the progressPos of this iterator is relative to the entire blueprint, this is the structureHandler "used" by this iterator
      */
-    private final IStructureHandler originalHandler;
+    private final IStructureHandler       originalHandler;
 
     /**
      * Construct a new LayerBlueprintIterator, based on the given iterator strategy and using the given handler
+     *
      * @param iteratorId The iterator strategy. It accepts any of the names of the registered iterators (e.g. inwardcircle, hilbert, default, ...)
-     * @param handler The IStructureHandler to be used with this iterator
+     * @param handler    The IStructureHandler to be used with this iterator
      */
     public LayerBlueprintIterator(final String iteratorId, final IStructureHandler handler)
     {
@@ -54,8 +53,9 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
      * Internally used iterator, with both a handler for the wrapped iterator, and the original one, used by this iterator
      * (This is a trick to have a reference to the handler to pass to both the super class, and to set it to a field at the same time,
      * since you cannot have a variable declaration before a super call in any other way)
-     * @param iteratorId The iterator strategy
-     * @param handler The wrapped structure handler, to be used by the wrapped iterator
+     *
+     * @param iteratorId      The iterator strategy
+     * @param handler         The wrapped structure handler, to be used by the wrapped iterator
      * @param originalHandler The original one
      */
     private LayerBlueprintIterator(final String iteratorId, final StructureHandlerWrapper handler, final IStructureHandler originalHandler)
@@ -68,6 +68,7 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
 
     /**
      * Set the layer of this iterator. It resets the blueprint slice used by the wrapped iterator, and resets it to the beginning
+     *
      * @param newLevel the new layer
      */
     public void setLayer(final int newLevel)
@@ -83,6 +84,7 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
 
     /**
      * Get the current layer
+     *
      * @return the current layer
      */
     public int getLayer()
@@ -138,23 +140,25 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
     /**
      * A wrapper for an IStructureHandler, to return information about a blueprint of a single layer
      */
-    private static class StructureHandlerWrapper implements IStructureHandler {
+    private static class StructureHandlerWrapper implements IStructureHandler
+    {
         /**
          * The original IStructureHandler, which this is based on
          */
-        private final IStructureHandler delegate;
+        private final IStructureHandler      delegate;
         /**
          * The wrapping LayerBlueprintIterator. It is used to get the current layer we are iterating over, to get just that Y-level from the blueprint
          */
-        private LayerBlueprintIterator outer;
+        private       LayerBlueprintIterator outer;
 
         /**
          * A blueprint slice of the original blueprint
          */
-        private       Blueprint         layerBlueprint;
+        private Blueprint layerBlueprint;
 
         /**
          * Create a new StructureHandlerWrapper
+         *
          * @param delegate The IStructureHandler to wrap
          */
         private StructureHandlerWrapper(final IStructureHandler delegate)
@@ -165,6 +169,7 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
         /**
          * Sets the LayerBlueprintIterator. Because of technical reasons (i.e. an instance of this class is needed when the superclass constructor of LayerBlueprintIterator is called),
          * it is not possible to give an instance of the class in the constructor, or to make this an inner class
+         *
          * @param iterator The iterator
          */
         private void setOuter(final LayerBlueprintIterator iterator)
@@ -193,6 +198,7 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
 
         /**
          * Helper to get the layer from the iterator. `outer` may temporarily be null, during the super class constructor call of LayerBlueprintIterator
+         *
          * @return the layer, or a default "0" when outer is not initialised yet
          */
         private int getLayer()
@@ -213,7 +219,7 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
             final CompoundTag[][][] tags = blueprint.getTileEntities();
             final short[][][] structure = blueprint.getStructure();
             final int layer = getLayer();
-            final short[][][] structureAtLayer = new short[][][] { structure[layer] };
+            final short[][][] structureAtLayer = new short[][][] {structure[layer]};
             final List<CompoundTag> tagsAtLayer = new ArrayList<>();
 
             for (int i = 0; i < sizeZ; i++)
@@ -224,13 +230,20 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
                     {
                         final CompoundTag tag = tags[layer][i][j].copy();
                         // The Blueprint will sort them by stored position again, which will be on the 0'th Y-level in the slice
-                        tag.putShort("y", (short)0);
+                        tag.putShort("y", (short) 0);
                         tagsAtLayer.add(tag);
                     }
                 }
             }
 
-            layerBlueprint = new Blueprint(sizeX, sizeY, sizeZ, blueprint.getPalleteSize(), Arrays.asList(blueprint.getPalette()), structureAtLayer, tagsAtLayer.toArray(new CompoundTag[0]), blueprint.getRequiredMods());
+            layerBlueprint = new Blueprint(sizeX,
+                sizeY,
+                sizeZ,
+                blueprint.getPalleteSize(),
+                Arrays.asList(blueprint.getPalette()),
+                structureAtLayer,
+                tagsAtLayer.toArray(new CompoundTag[0]),
+                blueprint.getRequiredMods());
         }
 
         @Override
@@ -254,8 +267,8 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
         public BlockPos getWorldPos()
         {
             return delegate.getWorldPos()
-                     .subtract(delegate.getBluePrint().getPrimaryBlockOffset())
-                     .offset(layerBlueprint.getPrimaryBlockOffset().atY(getLayer()));
+                .subtract(delegate.getBluePrint().getPrimaryBlockOffset())
+                .offset(layerBlueprint.getPrimaryBlockOffset().atY(getLayer()));
         }
 
         @Override
