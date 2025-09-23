@@ -183,7 +183,6 @@ public class NetworkChannel
         registerMessage(++idx, EnchanterWorkerSetMessage.class, EnchanterWorkerSetMessage::new);
         registerMessage(++idx, InteractionResponse.class, InteractionResponse::new);
         registerMessage(++idx, TryResearchMessage.class, TryResearchMessage::new);
-        registerMessage(++idx, HireSpiesMessage.class, HireSpiesMessage::new);
         registerMessage(++idx, AddMinimumStockToBuildingModuleMessage.class, AddMinimumStockToBuildingModuleMessage::new);
         registerMessage(++idx, RemoveMinimumStockFromBuildingModuleMessage.class, RemoveMinimumStockFromBuildingModuleMessage::new);
         registerMessage(++idx, FarmFieldPlotResizeMessage.class, FarmFieldPlotResizeMessage::new);

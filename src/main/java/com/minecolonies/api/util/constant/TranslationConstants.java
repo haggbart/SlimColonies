@@ -458,8 +458,6 @@ public final class TranslationConstants
     @NonNls
     public static final String WARNING_MISSING_BUILD_TOOL                         = "item.buildtool.missing";
     @NonNls
-    public static final String DESCRIPTION_BARRACKS_HIRE_SPIES                    = "com.minecolonies.coremod.gui.barracks.spies.desc";
-    @NonNls
     public static final String LABEL_HAPPINESS_MODIFIER                           = "com.minecolonies.coremod.gui.happiness.happinessmodifier";
     @NonNls
     public static final String LABEL_HAPPINESS_POSITIVE                           = "com.minecolonies.coremod.gui.happiness.positive";
