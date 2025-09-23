@@ -245,7 +245,7 @@ public class BuildingAlchemist extends AbstractBuilding
             if (!super.isRecipeCompatible(recipe))
                 return false;
 
-            return recipe.getPrimaryOutput().getItem() == ModItems.magicpotion;
+            return false; // Magic potion recipe removed with druid system
         }
 
         @Override

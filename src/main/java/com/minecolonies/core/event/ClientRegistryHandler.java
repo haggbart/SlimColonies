@@ -100,8 +100,6 @@ public class ClientRegistryHandler
     public static final ModelLayerLocation MALE_STUDENT         = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_student"), "male_student");
     public static final ModelLayerLocation MALE_HEALER          = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_healer"), "male_healer");
     public static final ModelLayerLocation MALE_CRAFTER         = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_crafter"), "male_crafter");
-    public static final ModelLayerLocation MALE_DRUID           = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_druid"), "male_druid");
-    public static final ModelLayerLocation FEMALE_DRUID         = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "female_druid"), "female_druid");
     public static final ModelLayerLocation MALE_NETHERWORKER    = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_netherworker"), "male_netherworker");
     public static final ModelLayerLocation FEMALE_NETHERWORKER  = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "female_netherworker"), "female_netherworker");
     public static final ModelLayerLocation MALE_ENCHANTER       = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_enchanter"), "male_enchanter");
@@ -199,8 +197,6 @@ public class ClientRegistryHandler
         event.registerLayerDefinition(MALE_STUDENT, MaleStudentModel::createMesh);
         event.registerLayerDefinition(MALE_HEALER, MaleHealerModel::createMesh);
         event.registerLayerDefinition(MALE_CRAFTER, MaleCrafterModel::createMesh);
-        event.registerLayerDefinition(MALE_DRUID, MaleDruidModel::createMesh);
-        event.registerLayerDefinition(FEMALE_DRUID, FemaleDruidModel::createMesh);
         event.registerLayerDefinition(MALE_NETHERWORKER, MaleNetherWorkerModel::createMesh);
         event.registerLayerDefinition(FEMALE_NETHERWORKER, FemaleNetherWorkerModel::createMesh);
         event.registerLayerDefinition(MALE_FLORIST, MaleFloristModel::createMesh);
@@ -236,7 +232,6 @@ public class ClientRegistryHandler
         event.registerEntityRenderer(ModEntities.FISHHOOK, RenderFishHook::new);
 
         event.registerEntityRenderer(ModEntities.MC_NORMAL_ARROW, TippableArrowRenderer::new);
-        event.registerEntityRenderer(ModEntities.DRUID_POTION, m -> new ThrownItemRenderer<>(m, 1.0F, true));
 
         // All raider renderers removed for SlimColonies
 

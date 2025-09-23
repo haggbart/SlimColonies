@@ -131,8 +131,6 @@ public class ModModelTypeInitializer
         ModModelTypes.NETHERWORKER = new SimpleModelType(ModModelTypes.NETHERWORKER_ID, 1, new MaleNetherWorkerModel(context.bakeLayer(ClientRegistryHandler.MALE_NETHERWORKER)), new FemaleNetherWorkerModel(context.bakeLayer(ClientRegistryHandler.FEMALE_NETHERWORKER)));
         reg.register(ModModelTypes.NETHERWORKER);
 
-        ModModelTypes.DRUID = new SimpleModelType(ModModelTypes.DRUID_ID, 1, new MaleDruidModel(context.bakeLayer(ClientRegistryHandler.MALE_DRUID)), new FemaleDruidModel(context.bakeLayer(ClientRegistryHandler.FEMALE_DRUID)));
-        reg.register(ModModelTypes.DRUID);
 
         ModModelTypes.ENCHANTER = new SimpleModelType(ModModelTypes.ENCHANTER_ID, 1, new MaleEnchanterModel(context.bakeLayer(ClientRegistryHandler.MALE_ENCHANTER)), new FemaleEnchanterModel(context.bakeLayer(ClientRegistryHandler.FEMALE_ENCHANTER)));
         reg.register(ModModelTypes.ENCHANTER);

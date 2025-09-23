@@ -288,11 +288,6 @@ public final class ModJobsInitializer
           .setRegistryName(ModJobs.QUARRY_MINER_ID)
           .createJobEntry());
 
-        ModJobs.druid = register(DEFERRED_REGISTER, ModJobs.DRUID_ID.getPath(), () -> new JobEntry.Builder()
-          .setJobProducer(JobDruid::new)
-          .setJobViewProducer(() -> DefaultJobView::new)
-          .setRegistryName(ModJobs.DRUID_ID)
-          .createJobEntry());
 
         ModJobs.alchemist = register(DEFERRED_REGISTER, ModJobs.ALCHEMIST_ID.getPath(), () -> new JobEntry.Builder()
           .setJobProducer(JobAlchemist::new)

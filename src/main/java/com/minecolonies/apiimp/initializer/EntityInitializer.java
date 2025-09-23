@@ -70,12 +70,6 @@ public class EntityInitializer
                 .sized(0.5F, 0.5F)
                 .setShouldReceiveVelocityUpdates(true));
 
-            ModEntities.DRUID_POTION = build(registry, "druidpotion",
-              EntityType.Builder.<DruidPotionEntity>of(DruidPotionEntity::new, MobCategory.MISC)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
-                .sized(0.25F, 0.25F)
-                .setShouldReceiveVelocityUpdates(true));
         }
     }
 

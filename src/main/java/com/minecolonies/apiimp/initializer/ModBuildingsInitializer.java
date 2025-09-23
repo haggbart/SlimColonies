@@ -69,7 +69,6 @@ public final class ModBuildingsInitializer
           .setRegistryName(new ResourceLocation(Constants.MOD_ID, ModBuildings.BARRACKS_TOWER_ID))
           .addBuildingModuleProducer(KNIGHT_BARRACKS_WORK)
           .addBuildingModuleProducer(RANGER_BARRACKS_WORK)
-          .addBuildingModuleProducer(DRUID_BARRACKS_WORK)
           .addBuildingModuleProducer(GUARD_TOOL)
           .addBuildingModuleProducer(GUARD_ENTITY_LIST)
           .addBuildingModuleProducer(GUARD_SETTINGS)

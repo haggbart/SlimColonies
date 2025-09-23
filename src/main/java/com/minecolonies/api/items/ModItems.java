@@ -54,7 +54,6 @@ public final class ModItems
     public static Item sifterMeshIron;
     public static Item sifterMeshDiamond;
 
-    public static Item magicpotion;
 
     public static Item buildGoggles;
     public static Item scanAnalyzer;
