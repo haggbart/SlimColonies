@@ -1256,11 +1256,6 @@ public final class ColonyView implements IColonyView
         return null;
     }
 
-    @Override
-    public boolean isColonyUnderAttack()
-    {
-        return false;
-    }
 
     @Override
     public boolean isValidAttackingPlayer(final Player entity)
