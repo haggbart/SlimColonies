@@ -30,20 +30,9 @@ public interface IGlobalResearch
      */
     boolean canDisplay(int uni_level);
 
-    /**
-     * Check whether all resources are available to execute the research.
-     *
-     * @param inventory the inventory to check in.
-     * @return true if so
-     */
-    boolean hasEnoughResources(final IItemHandler inventory);
+    // hasEnoughResources method removed - research no longer has item costs
 
-    /**
-     * Get the cost list from the research.
-     *
-     * @return the list.
-     */
-    List<IResearchCost> getCostList();
+    // getCostList method removed - research no longer has item costs
 
     /**
      * Start the research.
@@ -154,11 +143,7 @@ public interface IGlobalResearch
      */
     void addChild(final ResourceLocation child);
 
-    /**
-     * Add an individual cost.
-     * @param cost the individual item to add to the cost list, as a reseach cost instance.
-     */
-    void addCost(final IResearchCost cost);
+    // addCost method removed - research no longer has item costs
 
     /**
      * Add an individual effect.

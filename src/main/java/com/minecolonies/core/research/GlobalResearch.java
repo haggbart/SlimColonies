@@ -2,7 +2,6 @@ package com.minecolonies.core.research;
 
 import com.google.common.collect.ImmutableList;
 import com.minecolonies.api.research.*;
-import com.minecolonies.api.research.IResearchCost;
 import com.minecolonies.api.research.IResearchEffect;
 import com.minecolonies.api.research.util.ResearchState;
 import com.minecolonies.api.util.InventoryUtils;
@@ -21,10 +20,7 @@ import java.util.List;
  */
 public class GlobalResearch implements IGlobalResearch
 {
-    /**
-     * The costList of the research.
-     */
-    private final List<IResearchCost> costList = new ArrayList<>();
+    // Cost list removed - research no longer has item costs
 
     /**
      * The id of the research.
@@ -164,19 +160,7 @@ public class GlobalResearch implements IGlobalResearch
         return uni_level >= depth;
     }
 
-    @Override
-    public boolean hasEnoughResources(final IItemHandler inventory)
-    {
-        // Research no longer requires item costs - always return true
-        return true;
-    }
-
-    @Override
-    public List<IResearchCost> getCostList()
-    {
-        // Research no longer requires item costs - return empty list
-        return ImmutableList.of();
-    }
+    // hasEnoughResources and getCostList methods removed - research no longer has item costs
 
     @Override
     public void startResearch(@NotNull final ILocalResearchTree localResearchTree)
@@ -291,11 +275,7 @@ public class GlobalResearch implements IGlobalResearch
         this.children.add(child);
     }
 
-    @Override
-    public void addCost(final IResearchCost cost)
-    {
-        // Research no longer requires item costs - ignore cost additions
-    }
+    // addCost method removed - research no longer has item costs
 
     public void addEffect(final IResearchEffect effect)
     {

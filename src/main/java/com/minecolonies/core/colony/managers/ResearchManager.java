@@ -189,17 +189,7 @@ public class ResearchManager implements IResearchManager
                 continue;
             }
 
-            // if research has item requirements, only notify player; we don't want to have items disappearing from inventories.
-            if (!research.getCostList().isEmpty())
-            {
-                MessageUtils.format(RESEARCH_AVAILABLE, MutableComponent.create(research.getName())).sendTo(colony).forAllPlayers();
-                for (Player player : colony.getMessagePlayerEntities())
-                {
-                    SoundUtils.playSuccessSound(player, player.blockPosition());
-                }
-            }
-            // Otherwise, we can start the research without user intervention.
-            else
+            // Research no longer has item costs, so we can start it without user intervention.
             {
                 startCostlessResearch(research);
             }

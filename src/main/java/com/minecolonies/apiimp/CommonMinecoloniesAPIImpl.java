@@ -28,7 +28,6 @@ import com.minecolonies.api.eventbus.DefaultEventBus;
 import com.minecolonies.api.eventbus.EventBus;
 import com.minecolonies.api.quests.registries.QuestRegistries;
 import com.minecolonies.api.research.IGlobalResearchTree;
-import com.minecolonies.api.research.ModResearchCosts.ResearchCostEntry;
 import com.minecolonies.api.research.ModResearchEffects;
 import com.minecolonies.api.research.ModResearchRequirements;
 import com.minecolonies.api.util.constant.Constants;
@@ -67,7 +66,7 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
     private static IGlobalResearchTree                                     globalResearchTree     = new GlobalResearchTree();
     private        IForgeRegistry<ModResearchRequirements.ResearchRequirementEntry> researchRequirementRegistry;
     private        IForgeRegistry<ModResearchEffects.ResearchEffectEntry>           researchEffectRegistry;
-    private        IForgeRegistry<ResearchCostEntry>                                researchCostRegistry;
+    // Research cost registry removed - no longer used
     private        IForgeRegistry<RecipeTypeEntry>     recipeTypeEntryRegistry;
     private        IForgeRegistry<CraftingType>                            craftingTypeRegistry;
     private        IForgeRegistry<QuestRegistries.ObjectiveEntry>          questObjectiveRegistry;
@@ -187,11 +186,7 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
     @Override
     public IForgeRegistry<ModResearchEffects.ResearchEffectEntry> getResearchEffectRegistry() {return researchEffectRegistry;}
 
-    @Override
-    public IForgeRegistry<ResearchCostEntry> getResearchCostRegistry()
-    {
-        return researchCostRegistry;
-    }
+    // Research cost registry removed - no longer used
 
     @Override
     public void onRegistryNewRegistry(final NewRegistryEvent event)
@@ -273,10 +268,7 @@ public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
                        .disableSaving().allowModification()
                        .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> researchEffectRegistry = b);
 
-        event.create(new RegistryBuilder<ResearchCostEntry>()
-                       .setName(new ResourceLocation(Constants.MOD_ID, "researchcosttypes"))
-                       .disableSaving().allowModification()
-                       .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> researchCostRegistry = b);
+        // Research cost registry removed - no longer used
 
         event.create(new RegistryBuilder<QuestRegistries.ObjectiveEntry>()
                        .setName(new ResourceLocation(Constants.MOD_ID, "questobjectives"))

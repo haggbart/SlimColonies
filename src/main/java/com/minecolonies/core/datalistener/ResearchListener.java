@@ -283,15 +283,15 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
             final boolean autostart = GsonHelper.getAsBoolean(researchJson, RESEARCH_AUTOSTART_PROP, false);
             final boolean immutable = GsonHelper.getAsBoolean(researchJson, RESEARCH_NO_RESET_PROP, false);
 
-            final Tuple<List<IResearchCost>, List<IResearchRequirement>> requirements =
+            final List<IResearchRequirement> requirements =
                 parseResearchRequirements(researchId, GsonHelper.getAsJsonArray(researchJson, RESEARCH_REQUIREMENTS_PROP, new JsonArray()));
-            // Skip cost parsing - research no longer requires item costs
+            // Research no longer requires item costs - only parse requirements
             final List<GlobalResearchEffect> effects =
                 parseResearchEffects(researchId, GsonHelper.getAsJsonArray(researchJson, RESEARCH_EFFECTS_PROP, new JsonArray()), effectCategories);
 
             final GlobalResearch research = new GlobalResearch(researchId, parent, branch, name, subtitle, depth, sortOrder, onlyChild, hidden, autostart, instant, immutable);
             // Skip adding costs - only add requirements and effects
-            requirements.getB().forEach(research::addRequirement);
+            requirements.forEach(research::addRequirement);
             effects.forEach(research::addEffect);
 
             researchMap.put(researchId, research);
@@ -305,9 +305,9 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
      * @param researchId a json object to retrieve the ID from.
      * @param jsonArray  the array of requirements.
      */
-    private Tuple<List<IResearchCost>, List<IResearchRequirement>> parseResearchRequirements(final ResourceLocation researchId, final JsonArray jsonArray)
+    private List<IResearchRequirement> parseResearchRequirements(final ResourceLocation researchId, final JsonArray jsonArray)
     {
-        final List<IResearchCost> costs = new ArrayList<>();
+        // Research no longer has costs - removed cost parsing
         final List<IResearchRequirement> requirements = new ArrayList<>();
         for (int index = 0; index < jsonArray.size(); index++)
         {
@@ -339,21 +339,10 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
 
             Log.getLogger().warn("Research '{}' requirement #{} is invalid, type '{}' does not exist.", researchId, index, type);
         }
-        return new Tuple<>(costs, requirements);
+        return requirements;
     }
 
-    /**
-     * Parses a JSON object for research costs.
-     *
-     * @param researchId       a json object to retrieve the ID from.
-     * @param jsonCosts        the array of requirements.
-     * @param jsonRequirements the array of requirements.
-     */
-    private List<IResearchCost> parseResearchCosts(final ResourceLocation researchId, final JsonArray jsonCosts, final JsonArray jsonRequirements)
-    {
-        // Research no longer uses item costs - return empty list
-        return new ArrayList<>();
-    }
+    // parseResearchCosts method removed - research no longer has item costs
 
     /**
      * Parses a JSON object for research effects IDs and their levels.

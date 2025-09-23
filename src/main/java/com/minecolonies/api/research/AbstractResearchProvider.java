@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static com.minecolonies.api.research.ModResearchCosts.*;
 
 /**
  * A class for creating the Research-related JSONs, including Research, ResearchEffects, and (optional) Branches.
@@ -475,77 +474,7 @@ public abstract class AbstractResearchProvider implements DataProvider
             return this;
         }
 
-        /**
-         * Adds an item cost to the research. This will be consumed when beginning the research, and will not be refunded.
-         * Multiple ItemCosts are supported, but for UI reasons it's encouraged to keep to 5 or less.
-         *
-         * @param item  The item to require.
-         * @param count The number of the item to require.
-         * @return this.
-         */
-        public Research addItemCost(final Item item, final int count)
-        {
-            final JsonArray costArray = getCostsArray();
-
-            JsonObject cost = new JsonObject();
-            cost.addProperty("type", SIMPLE_ITEM_COST_ID.toString());
-            cost.addProperty("item", ForgeRegistries.ITEMS.getKey(item).toString());
-            cost.addProperty("quantity", count);
-
-            costArray.add(cost);
-            this.json.add("costs", costArray);
-            return this;
-        }
-
-        /**
-         * Adds an item cost to the research. This will be consumed when beginning the research, and will not be refunded.
-         * Multiple ItemCosts are supported, but for UI reasons it's encouraged to keep to 5 or less.
-         *
-         * @param items The item to require.
-         * @param count The number of the item to require.
-         * @return this.
-         */
-        public Research addItemCost(final List<Item> items, final int count)
-        {
-            final JsonArray costArray = getCostsArray();
-
-            JsonArray itemArr = new JsonArray();
-            for (Item item : items)
-            {
-                itemArr.add(ForgeRegistries.ITEMS.getKey(item).toString());
-            }
-
-            JsonObject cost = new JsonObject();
-            cost.addProperty("type", LIST_ITEM_COST_ID.toString());
-            cost.add("items", itemArr);
-            cost.addProperty("quantity", count);
-            costArray.add(cost);
-
-            this.json.add("costs", costArray);
-            return this;
-        }
-
-        /**
-         * Adds an item cost to the research. This will be consumed when beginning the research, and will not be refunded.
-         * Multiple ItemCosts are supported, but for UI reasons it's encouraged to keep to 5 or less.
-         *
-         * @param tag   The tag to require.
-         * @param count The number of the item to require.
-         * @return this.
-         */
-        public Research addItemCost(final TagKey<Item> tag, final int count)
-        {
-            final JsonArray costArray = getCostsArray();
-
-            JsonObject cost = new JsonObject();
-            cost.addProperty("type", TAG_ITEM_COST_ID.toString());
-            cost.addProperty("tag", tag.location().toString());
-            cost.addProperty("quantity", count);
-            costArray.add(cost);
-
-            this.json.add("costs", costArray);
-            return this;
-        }
+        // Research cost methods removed - research no longer has item costs
 
         /**
          * Internal method to ensure the requirements array exists.
@@ -567,25 +496,7 @@ public abstract class AbstractResearchProvider implements DataProvider
             return reqArray;
         }
 
-        /**
-         * Internal method to ensure the costs array exists.
-         *
-         * @return the costs array.
-         */
-        private JsonArray getCostsArray()
-        {
-            final JsonArray costArray;
-            if (this.json.has("costs") && this.json.get("costs").isJsonArray())
-            {
-                costArray = this.json.getAsJsonArray("costs");
-                this.json.remove("costs");
-            }
-            else
-            {
-                costArray = new JsonArray();
-            }
-            return costArray;
-        }
+        // getCostsArray method removed - research no longer has item costs
 
         /**
          * Add an effect to the research.  Research Effects are applied on completion,
