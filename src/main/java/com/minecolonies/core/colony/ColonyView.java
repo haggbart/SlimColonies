@@ -81,21 +81,21 @@ public final class ColonyView implements IColonyView
 
     //  General Attributes
     private final int                            id;
-    private final Map<Integer, IWorkOrderView>   workOrders  = new HashMap<>();
+    private final Map<Integer, IWorkOrderView>   workOrders          = new HashMap<>();
     private final Map<Integer, BlockPos>         workOrderClaimCache = new HashMap<>();
     private       int                            workOrderCachedCount;
     //  Administration/permissions
     @NotNull
-    private final PermissionsView                permissions = new PermissionsView();
+    private final PermissionsView                permissions         = new PermissionsView();
     @NotNull
-    private final Map<BlockPos, IBuildingView>   buildings   = new HashMap<>();
+    private final Map<BlockPos, IBuildingView>   buildings           = new HashMap<>();
     @NotNull
-    private final Set<IBuildingExtension>        fields      = new HashSet<>();
+    private final Set<IBuildingExtension>        fields              = new HashSet<>();
     //  Citizenry
     @NotNull
-    private final Map<Integer, ICitizenDataView> citizens = new HashMap<>();
-    private final Map<Integer, IVisitorViewData> visitors = new HashMap<>();
-    private       String                         name     = "Unknown";
+    private final Map<Integer, ICitizenDataView> citizens            = new HashMap<>();
+    private final Map<Integer, IVisitorViewData> visitors            = new HashMap<>();
+    private       String                         name                = "Unknown";
     private       ResourceKey<Level>             dimensionId;
 
     /**
@@ -132,10 +132,6 @@ public final class ColonyView implements IColonyView
     private boolean hasColonyWarehouse;
 
     /**
-     * Last barbarian spawnpoints.
-     */
-
-    /**
      * The Positions which players can freely interact.
      */
     private final Set<BlockPos> freePositions = new HashSet<>();
@@ -149,11 +145,6 @@ public final class ColonyView implements IColonyView
      * The Set of waypoints.
      */
     private final Map<BlockPos, BlockState> wayPoints = new HashMap<>();
-
-    /**
-     * The overall happiness of the colony (removed - using default).
-     */
-    private double overallHappiness = 10;
 
     /**
      * The hours the colony is without contact with its players.
@@ -175,7 +166,6 @@ public final class ColonyView implements IColonyView
      */
     private boolean printProgress;
 
-
     /**
      * The default style.
      */
@@ -187,7 +177,7 @@ public final class ColonyView implements IColonyView
     private final IResearchManager researchManager;
 
     /**
-     * Whether spies are active and highlight enemy positions.
+     * Set of ticketed chunks for this colony.
      */
     private Set<Long> ticketedChunks = new HashSet<>();
 
@@ -1031,7 +1021,6 @@ public final class ColonyView implements IColonyView
         Network.getNetwork().sendToServer(new PermissionsMessage.RemovePlayer(this, player));
     }
 
-
     @Override
     public BlockPos getCenter()
     {
@@ -1255,7 +1244,6 @@ public final class ColonyView implements IColonyView
         return wayPoints;
     }
 
-
     @Override
     public boolean isRemote()
     {
@@ -1268,11 +1256,6 @@ public final class ColonyView implements IColonyView
         return null;
     }
 
-    @Override
-    public boolean isColonyUnderAttack()
-    {
-        return false;
-    }
 
     @Override
     public boolean isValidAttackingPlayer(final Player entity)
@@ -1358,7 +1341,6 @@ public final class ColonyView implements IColonyView
         return null;
     }
 
-
     @Override
     public IEventManager getEventManager()
     {
@@ -1395,14 +1377,11 @@ public final class ColonyView implements IColonyView
         return connectionManager;
     }
 
-
-
     @Override
     public IResearchManager getResearchManager()
     {
         return researchManager;
     }
-
 
     @Override
     public ICitizenDataView getVisitor(final int citizenId)

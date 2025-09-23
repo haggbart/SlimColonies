@@ -197,35 +197,6 @@ public interface IColony
     @NotNull
     List<Player> getMessagePlayerEntities();
 
-    @NotNull
-    default List<BlockPos> getWayPoints(@NotNull BlockPos position, @NotNull BlockPos target)
-    {
-        final List<BlockPos> tempWayPoints = new ArrayList<>();
-        tempWayPoints.addAll(getWayPoints().keySet());
-        tempWayPoints.addAll(getBuildingManager().getBuildings().keySet());
-
-        final double maxX = Math.max(position.getX(), target.getX());
-        final double maxZ = Math.max(position.getZ(), target.getZ());
-
-        final double minX = Math.min(position.getX(), target.getX());
-        final double minZ = Math.min(position.getZ(), target.getZ());
-
-        final Iterator<BlockPos> iterator = tempWayPoints.iterator();
-        while (iterator.hasNext())
-        {
-            final BlockPos p = iterator.next();
-            final int x = p.getX();
-            final int z = p.getZ();
-            if (x < minX || x > maxX || z < minZ || z > maxZ)
-            {
-                iterator.remove();
-            }
-        }
-
-        return tempWayPoints;
-    }
-
-
     Map<BlockPos, BlockState> getWayPoints();
 
     String getStructurePack();
@@ -317,8 +288,6 @@ public interface IColony
 
 
     CompoundTag getColonyTag();
-
-    boolean isColonyUnderAttack();
 
     boolean isValidAttackingPlayer(Player entity);
 

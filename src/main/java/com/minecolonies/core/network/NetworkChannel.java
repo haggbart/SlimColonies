@@ -34,16 +34,13 @@ import com.minecolonies.core.network.messages.splitting.SplitPacketMessage;
 import com.minecolonies.core.research.GlobalResearchTreeMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -80,9 +77,9 @@ public class NetworkChannel
      * Cache of partially received messages, this holds the data untill it is processed.
      */
     private final Cache<Integer, Map<Integer, byte[]>> messageCache = CacheBuilder.newBuilder()
-                                                                        .expireAfterAccess(1, TimeUnit.MINUTES)
-                                                                        .concurrencyLevel(8)
-                                                                        .build();
+        .expireAfterAccess(1, TimeUnit.MINUTES)
+        .concurrencyLevel(8)
+        .build();
 
     /**
      * An atomic counter which keeps track of the split messages that have been send to somewhere from this network node.
@@ -98,7 +95,8 @@ public class NetworkChannel
     public NetworkChannel(final String channelName)
     {
         final String modVersion = ModList.get().getModContainerById(Constants.MOD_ID).get().getModInfo().getVersion().toString();
-        rawChannel = NetworkRegistry.newSimpleChannel(new ResourceLocation(Constants.MOD_ID, channelName), () -> modVersion, str -> str.equals(modVersion), str -> str.equals(modVersion));
+        rawChannel =
+            NetworkRegistry.newSimpleChannel(new ResourceLocation(Constants.MOD_ID, channelName), () -> modVersion, str -> str.equals(modVersion), str -> str.equals(modVersion));
     }
 
     /**
@@ -183,7 +181,6 @@ public class NetworkChannel
         registerMessage(++idx, EnchanterWorkerSetMessage.class, EnchanterWorkerSetMessage::new);
         registerMessage(++idx, InteractionResponse.class, InteractionResponse::new);
         registerMessage(++idx, TryResearchMessage.class, TryResearchMessage::new);
-        registerMessage(++idx, HireSpiesMessage.class, HireSpiesMessage::new);
         registerMessage(++idx, AddMinimumStockToBuildingModuleMessage.class, AddMinimumStockToBuildingModuleMessage::new);
         registerMessage(++idx, RemoveMinimumStockFromBuildingModuleMessage.class, RemoveMinimumStockFromBuildingModuleMessage::new);
         registerMessage(++idx, FarmFieldPlotResizeMessage.class, FarmFieldPlotResizeMessage::new);
@@ -327,36 +324,6 @@ public class NetworkChannel
     }
 
     /**
-     * Sends the message to the origin of a different message based on the networking context given.
-     *
-     * @param msg message to send
-     * @param ctx network context
-     */
-    public void sendToOrigin(final IMessage msg, final NetworkEvent.Context ctx)
-    {
-        final ServerPlayer player = ctx.getSender();
-        if (player != null) // side check
-        {
-            sendToPlayer(msg, player);
-        }
-        else
-        {
-            sendToServer(msg);
-        }
-    }
-
-    /**
-     * Sends to everyone in dimension.
-     *
-     * @param msg message to send
-     * @param dim target dimension
-     */
-    public void sendToDimension(final IMessage msg, final ResourceLocation dim)
-    {
-        rawChannel.send(PacketDistributor.DIMENSION.with(() -> ResourceKey.create(Registries.DIMENSION, dim)), msg);
-    }
-
-    /**
      * Sends to everyone in circle made using given target point.
      *
      * @param msg message to send
@@ -393,23 +360,6 @@ public class NetworkChannel
     public void sendToTrackingEntity(final IMessage msg, final Entity entity)
     {
         handleSplitting(msg, s -> rawChannel.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), s));
-    }
-
-    /**
-     * Sends to everyone (including given entity) who is in range from entity's pos using formula below.
-     *
-     * <pre>
-     * Math.min(Entity.getType().getTrackingRange(), ChunkManager.this.viewDistance - 1) * 16;
-     * </pre>
-     * <p>
-     * as of 24-06-2019
-     *
-     * @param msg    message to send
-     * @param entity target entity to look at
-     */
-    public void sendToTrackingEntityAndSelf(final IMessage msg, final Entity entity)
-    {
-        handleSplitting(msg, s -> rawChannel.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), s));
     }
 
     /**

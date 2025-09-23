@@ -54,10 +54,6 @@ public class BuildingBarracks extends AbstractBuilding
      */
     private final List<BlockPos> towers = new ArrayList<>();
 
-    /**
-     * The goldcost for spies
-     */
-    public static int SPIES_GOLD_COST = 5;
 
     /**
      * Constructor for a AbstractBuilding.
