@@ -13,11 +13,6 @@ public final class GuardConstants
     public static final int DEFAULT_VISION = 16;
 
     /**
-     * Range a guard should be within of GuardPos.
-     */
-    public static final int GUARD_POS_RANGE = 3;
-
-    /**
      * Range a guard should be within of Follow for Tight Formation.
      */
     public static final int GUARD_FOLLOW_TIGHT_RANGE = 6;
@@ -39,20 +34,6 @@ public final class GuardConstants
 
     // -- Delays -- \\
 
-    /**
-     * Seconds to delay after prepare AI State.
-     */
-    public static final int PREPARE_DELAY_SECONDS = 5;
-
-    /**
-     * Minimum physical Attack delay in ticks, Monsters are immune for 10 ticks
-     */
-    public static final int PHYSICAL_ATTACK_DELAY_MIN = 10;
-
-    /**
-     * Physical Attack delay in ticks.
-     */
-    public static final int PHYSICAL_ATTACK_DELAY_BASE = 20;
 
     // -- Delays -- \\
 
@@ -62,11 +43,6 @@ public final class GuardConstants
      * The base distance for an attack in Blocks.
      */
     public static final int BASE_DISTANCE_FOR_RANGED_ATTACK = 10;
-
-    /**
-     * The base distance for a potion throwing attack in Blocks.
-     */
-    public static final int BASE_DISTANCE_FOR_POTION_ATTACK = 3;
 
     /**
      * Rangers maximum distance in blocks for an attack.(24 max arrow dist)
@@ -123,11 +99,6 @@ public final class GuardConstants
     public static final int KNIGHT_HP_BONUS = 15;
 
     /**
-     * Basic bonus hp for druids
-     */
-    public static final int DRUID_HP_BONUS = 12;
-
-    /**
      * This knight's max distance for attacking.
      */
     public static final int MAX_DISTANCE_FOR_ATTACK = 2;
@@ -161,15 +132,6 @@ public final class GuardConstants
     public static final double MOVE_MINIMAL = 0.01D;
 
     // -- Guard Movement -- \\
-
-    /**
-     * Guard armor constants
-     */
-    public static final Tuple<Integer, Integer> LEATHER_BUILDING_LEVEL_RANGE = new Tuple<>(0, 99);
-    public static final Tuple<Integer, Integer> GOLD_BUILDING_LEVEL_RANGE  = new Tuple<>(1, 2);
-    public static final Tuple<Integer, Integer> CHAIN_BUILDING_LEVEL_RANGE = new Tuple<>(2, 3);
-    public static final Tuple<Integer, Integer> IRON_BUILDING_LEVEL_RANGE  = new Tuple<>(3, 4);
-    public static final Tuple<Integer, Integer> DIA_BUILDING_LEVEL_RANGE   = new Tuple<>(4, 5);
 
     public static final Tuple<Integer, Integer> SHIELD_LEVEL_RANGE          = new Tuple<>(0, 99);
     public static final Tuple<Integer, Integer> SHIELD_BUILDING_LEVEL_RANGE = new Tuple<>(1, 5);

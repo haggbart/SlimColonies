@@ -5,7 +5,6 @@ import com.minecolonies.api.colony.guardtype.registry.ModGuardTypes;
 import com.minecolonies.api.colony.jobs.ModJobs;
 import com.minecolonies.api.entity.citizen.Skill;
 import com.minecolonies.api.util.constant.Constants;
-import com.minecolonies.core.colony.jobs.JobDruid;
 import com.minecolonies.core.colony.jobs.JobKnight;
 import com.minecolonies.core.colony.jobs.JobRanger;
 import net.minecraft.resources.ResourceLocation;
@@ -46,15 +45,5 @@ public final class ModGuardTypesInitializer
                                  .setClazz(JobRanger.class)
                                  .createGuardType());
 
-        ModGuardTypes.druid = DEFERRED_REGISTER.register(ModGuardTypes.DRUID_ID.getPath(), () -> new GuardType.Builder()
-          .setJobTranslationKey(JOB_DRUID)
-          .setButtonTranslationKey(JOB_DRUID_BUTTON)
-          .setPrimarySkill(Skill.Mana)
-          .setSecondarySkill(Skill.Focus)
-          .setWorkerSoundName("druid")
-          .setJobEntry(() -> ModJobs.druid.get())
-          .setRegistryName(ModGuardTypes.DRUID_ID)
-          .setClazz(JobDruid.class)
-          .createGuardType());
     }
 }

@@ -38,12 +38,6 @@ public class DefaultAlchemistCraftingProvider extends CustomRecipeProvider
     @Override
     protected void registerRecipes(@NotNull final Consumer<FinishedRecipe> consumer)
     {
-        CustomRecipeBuilder.create(ALCHEMIST, MODULE_CRAFTING, "magicpotion")
-                .inputs(List.of(new ItemStorage(new ItemStack(ModItems.mistletoe)),
-                        new ItemStorage(new ItemStack(Items.POTION))))
-                .result(new ItemStack(ModItems.magicpotion))
-                .minResearchId(ResearchConstants.DRUID_USE_POTIONS)
-                .showTooltip(true)
-                .build(consumer);
+        // Magic potion recipe removed - druid system removed from SlimColonies
     }
 }

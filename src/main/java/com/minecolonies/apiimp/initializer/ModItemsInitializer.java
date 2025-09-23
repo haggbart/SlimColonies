@@ -105,7 +105,6 @@ public final class ModItemsInitializer
         ModItems.sifterMeshIron = new ItemSifterMesh("sifter_mesh_iron", new Item.Properties().durability(1500).setNoRepair());
         ModItems.sifterMeshDiamond = new ItemSifterMesh("sifter_mesh_diamond", new Item.Properties().durability(2000).setNoRepair());
 
-        ModItems.magicpotion = new ItemMagicPotion("magicpotion", new Item.Properties());
         ModItems.buildGoggles = new ItemBuildGoggles("build_goggles", new Item.Properties());
         ModItems.scanAnalyzer = new ItemScanAnalyzer("scan_analyzer", new Item.Properties());
         ModItems.colonyMap = new ItemColonyMap(new Item.Properties());
@@ -154,7 +153,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "sifter_mesh_iron"), ModItems.sifterMeshIron);
         registry.register(new ResourceLocation(Constants.MOD_ID, "sifter_mesh_diamond"), ModItems.sifterMeshDiamond);
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "magicpotion"), ModItems.magicpotion);
         registry.register(new ResourceLocation(Constants.MOD_ID, "build_goggles"), ModItems.buildGoggles);
 
         // All other food item registrations removed for simplification

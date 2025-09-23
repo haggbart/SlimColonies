@@ -26,7 +26,6 @@ public class ModEntities
 
     public static EntityType<? extends Arrow> MC_NORMAL_ARROW;
 
-    public static EntityType<? extends ThrownPotion> DRUID_POTION;
 
 
 }
