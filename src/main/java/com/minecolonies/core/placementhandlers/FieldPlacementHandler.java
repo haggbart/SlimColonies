@@ -21,6 +21,7 @@ import java.util.List;
 
 import static com.ldtteam.structurize.placement.handlers.placement.PlacementHandlers.handleTileEntityPlacement;
 
+@SuppressWarnings("removal")
 public class FieldPlacementHandler implements IPlacementHandler
 {
     @Override
@@ -31,13 +32,13 @@ public class FieldPlacementHandler implements IPlacementHandler
 
     @Override
     public ActionProcessingResult handle(
-      @NotNull Level world,
-      @NotNull BlockPos pos,
-      @NotNull BlockState blockState,
-      @Nullable CompoundTag tileEntityData,
-      boolean complete,
-      BlockPos centerPos,
-      final PlacementSettings settings)
+        @NotNull Level world,
+        @NotNull BlockPos pos,
+        @NotNull BlockState blockState,
+        @Nullable CompoundTag tileEntityData,
+        boolean complete,
+        BlockPos centerPos,
+        final PlacementSettings settings)
     {
         if (world.getBlockState(pos).getBlock() == ModBlocks.blockScarecrow)
         {

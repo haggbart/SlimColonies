@@ -27,6 +27,7 @@ import static com.ldtteam.structurize.placement.handlers.placement.PlacementHand
 /**
  * Handler for some specific blocks that we want only to paste/cost in the complete mode.
  */
+@SuppressWarnings("removal")
 public class JigsawPlacementHandler implements IPlacementHandler
 {
     @Override
@@ -37,13 +38,13 @@ public class JigsawPlacementHandler implements IPlacementHandler
 
     @Override
     public ActionProcessingResult handle(
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete,
-      final BlockPos centerPos,
-      final PlacementSettings settings)
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete,
+        final BlockPos centerPos,
+        final PlacementSettings settings)
     {
         if (complete)
         {
@@ -90,17 +91,17 @@ public class JigsawPlacementHandler implements IPlacementHandler
 
             WorldUtil.setBlockState(world, pos, finalState, com.ldtteam.structurize.api.util.constant.Constants.UPDATE_FLAG);
         }
-        
+
         return ActionProcessingResult.SUCCESS;
     }
 
     @Override
     public List<ItemStack> getRequiredItems(
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete)
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete)
     {
         if (complete)
         {

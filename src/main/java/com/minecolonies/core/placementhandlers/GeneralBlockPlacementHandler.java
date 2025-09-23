@@ -29,6 +29,7 @@ import java.util.List;
 
 import static com.ldtteam.structurize.placement.handlers.placement.PlacementHandlers.handleTileEntityPlacement;
 
+@SuppressWarnings("removal")
 public class GeneralBlockPlacementHandler implements IPlacementHandler
 {
     @Override
@@ -39,22 +40,23 @@ public class GeneralBlockPlacementHandler implements IPlacementHandler
 
     @Override
     public ActionProcessingResult handle(
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete,
-      final BlockPos centerPos,
-      final PlacementSettings settings)
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete,
+        final BlockPos centerPos,
+        final PlacementSettings settings)
     {
         BlockState placementState = blockState;
-        if (blockState.getBlock() instanceof WallBlock || blockState.getBlock() instanceof FenceBlock || blockState.getBlock() instanceof PillarBlock || blockState.getBlock() instanceof IronBarsBlock)
+        if (blockState.getBlock() instanceof WallBlock || blockState.getBlock() instanceof FenceBlock || blockState.getBlock() instanceof PillarBlock
+            || blockState.getBlock() instanceof IronBarsBlock)
         {
             try
             {
                 final BlockState tempState = blockState.getBlock().getStateForPlacement(
-                  new BlockPlaceContext(world, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,
-                    new BlockHitResult(new Vec3(0, 0, 0), Direction.DOWN, pos, true)));
+                    new BlockPlaceContext(world, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,
+                        new BlockHitResult(new Vec3(0, 0, 0), Direction.DOWN, pos, true)));
                 if (tempState != null)
                 {
                     placementState = tempState;
@@ -94,11 +96,11 @@ public class GeneralBlockPlacementHandler implements IPlacementHandler
 
     @Override
     public List<ItemStack> getRequiredItems(
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete)
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete)
     {
         final List<ItemStack> itemList = new ArrayList<>();
         if (!ChiselAndBitsCheck.isChiselAndBitsBlock(blockState))
@@ -125,5 +127,4 @@ public class GeneralBlockPlacementHandler implements IPlacementHandler
         Log.getLogger().warn("Using nonimplemented general placemant handling! Only with context", new Exception());
         return ActionProcessingResult.PASS;
     }
-
 }

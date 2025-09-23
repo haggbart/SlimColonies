@@ -32,6 +32,7 @@ import static com.minecolonies.api.util.constant.Constants.*;
 import static com.minecolonies.api.util.constant.TranslationConstants.*;
 import static com.minecolonies.api.util.constant.translation.ProgressTranslationConstants.PROGRESS_SUPPLY_CHEST_PLACED;
 
+@SuppressWarnings("removal")
 public class SuppliesHandler implements ISurvivalBlueprintHandler
 {
     public static final String ID = MOD_ID + ":supplies";
@@ -58,14 +59,14 @@ public class SuppliesHandler implements ISurvivalBlueprintHandler
 
     @Override
     public void handle(
-            final Blueprint blueprint,
-            final String packName,
-            final String blueprintPath,
-            final boolean clientPack,
-            final Level world,
-            final Player playerArg,
-            final BlockPos blockPos,
-            final PlacementSettings placementSettings)
+        final Blueprint blueprint,
+        final String packName,
+        final String blueprintPath,
+        final boolean clientPack,
+        final Level world,
+        final Player playerArg,
+        final BlockPos blockPos,
+        final PlacementSettings placementSettings)
     {
         if (clientPack || !StructurePacks.hasPack(packName))
         {
@@ -79,7 +80,7 @@ public class SuppliesHandler implements ISurvivalBlueprintHandler
         blueprint.setRotationMirror(RotationMirror.of(placementSettings.rotation, placementSettings.mirror == Mirror.NONE ? Mirror.NONE : Mirror.FRONT_BACK), world);
 
         if (player.getStats().getValue(Stats.ITEM_USED.get(ModItems.supplyChest)) > 0 && !MineColonies.getConfig().getServer().allowInfiniteSupplyChests.get()
-                && !isFreeInstantPlacementMH(player) && !player.isCreative())
+            && !isFreeInstantPlacementMH(player) && !player.isCreative())
         {
             MessageUtils.format(WARNING_SUPPLY_CHEST_ALREADY_PLACED).sendTo(player);
             SoundUtils.playErrorSound(player, player.blockPosition());
@@ -99,8 +100,8 @@ public class SuppliesHandler implements ISurvivalBlueprintHandler
         if (isFreeInstantPlacementMH(player))
         {
             searchPredicate =
-                    searchPredicate.and(
-                            stack -> stack.hasTag() && stack.getTag().get(PLACEMENT_NBT) != null && stack.getTag().getString(PLACEMENT_NBT).equals(INSTANT_PLACEMENT));
+                searchPredicate.and(
+                    stack -> stack.hasTag() && stack.getTag().get(PLACEMENT_NBT) != null && stack.getTag().getString(PLACEMENT_NBT).equals(INSTANT_PLACEMENT));
         }
 
         final int slot = InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(new InvWrapper(player.getInventory()), searchPredicate);
@@ -117,7 +118,7 @@ public class SuppliesHandler implements ISurvivalBlueprintHandler
             SoundUtils.playSuccessSound(player, player.blockPosition());
 
             StructurePlacementUtils.loadAndPlaceStructureWithRotation(player.level, blueprint,
-                    blockPos, placementSettings.getRotation(), placementSettings.getMirror() != Mirror.NONE ? Mirror.FRONT_BACK : Mirror.NONE, true, player);
+                blockPos, placementSettings.getRotation(), placementSettings.getMirror() != Mirror.NONE ? Mirror.FRONT_BACK : Mirror.NONE, true, player);
         }
         else
         {

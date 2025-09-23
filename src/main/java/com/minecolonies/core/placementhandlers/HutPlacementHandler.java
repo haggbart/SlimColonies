@@ -9,10 +9,10 @@ import com.ldtteam.structurize.util.BlockUtils;
 import com.ldtteam.structurize.util.PlacementSettings;
 import com.minecolonies.api.blocks.AbstractBlockHut;
 import com.minecolonies.api.blocks.ModBlocks;
-import com.minecolonies.core.tileentities.TileEntityColonyBuilding;
 import com.minecolonies.api.util.Log;
 import com.minecolonies.api.util.Utils;
 import com.minecolonies.api.util.WorldUtil;
+import com.minecolonies.core.tileentities.TileEntityColonyBuilding;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +28,7 @@ import java.util.List;
 
 import static com.ldtteam.structurize.placement.handlers.placement.PlacementHandlers.handleTileEntityPlacement;
 
+@SuppressWarnings("removal")
 public class HutPlacementHandler implements IPlacementHandler
 {
     @Override
@@ -38,14 +39,14 @@ public class HutPlacementHandler implements IPlacementHandler
 
     @Override
     public ActionProcessingResult handle(
-      @NotNull final Blueprint blueprint,
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete,
-      final BlockPos centerPos,
-      final PlacementSettings settings)
+        @NotNull final Blueprint blueprint,
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete,
+        final BlockPos centerPos,
+        final PlacementSettings settings)
     {
         if (world.getBlockState(pos).equals(blockState))
         {
@@ -70,17 +71,19 @@ public class HutPlacementHandler implements IPlacementHandler
                         final String location = StructurePacks.getStructurePack(blueprint.getPackName()).getSubPath(blueprint.getFilePath().resolve(blueprint.getFileName()));
                         ((IBlueprintDataProviderBE) be).setBlueprintPath(location);
                     }
-                    else if(!((IBlueprintDataProviderBE) be).getPositionedTags().getOrDefault(BlockPos.ZERO, Collections.emptyList()).contains("invisible"))
+                    else if (!((IBlueprintDataProviderBE) be).getPositionedTags().getOrDefault(BlockPos.ZERO, Collections.emptyList()).contains("invisible"))
                     {
                         final String partialPath;
                         if (((IBlueprintDataProviderBE) be).getSchematicName().isEmpty())
                         {
                             final String[] elements = Utils.splitPath(((IBlueprintDataProviderBE) be).getBlueprintPath());
-                            partialPath = StructurePacks.getStructurePack(blueprint.getPackName()).getSubPath(blueprint.getFilePath().resolve(elements[elements.length - 1].replace(".blueprint", "")));
+                            partialPath = StructurePacks.getStructurePack(blueprint.getPackName())
+                                .getSubPath(blueprint.getFilePath().resolve(elements[elements.length - 1].replace(".blueprint", "")));
                         }
                         else
                         {
-                            partialPath = StructurePacks.getStructurePack(blueprint.getPackName()).getSubPath(Utils.resolvePath(blueprint.getFilePath(), ((IBlueprintDataProviderBE) be).getSchematicName()));
+                            partialPath = StructurePacks.getStructurePack(blueprint.getPackName())
+                                .getSubPath(Utils.resolvePath(blueprint.getFilePath(), ((IBlueprintDataProviderBE) be).getSchematicName()));
                         }
 
                         if (!(world.getBlockEntity(centerPos) instanceof TileEntityColonyBuilding) && be instanceof TileEntityColonyBuilding)
@@ -112,11 +115,11 @@ public class HutPlacementHandler implements IPlacementHandler
 
     @Override
     public List<ItemStack> getRequiredItems(
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete)
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete)
     {
         final List<ItemStack> itemList = new ArrayList<>();
         if (blockState.getBlock() != ModBlocks.blockHutBarracksTower)
