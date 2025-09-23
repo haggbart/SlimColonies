@@ -153,12 +153,7 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
             return START_WORKING;
         }
 
-        if (cannotHoldMoreItems())
-        {
-            this.alreadyKept = new ArrayList<>();
-            this.currentSlot = 0;
-            return DUMPING;
-        }
+        // Building level no longer restricts carrying capacity - removed cannotHoldMoreItems() check
 
         worker.getCitizenData().setVisibleStatus(DELIVERING);
 
@@ -211,7 +206,7 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
      */
     private boolean pickupFromBuilding(@NotNull final IBuilding targetBuilding)
     {
-        if (cannotHoldMoreItems() || InventoryUtils.openSlotCount(worker.getInventoryCitizen()) <= 0)
+        if (InventoryUtils.openSlotCount(worker.getInventoryCitizen()) <= 0)
         {
             return false;
         }
@@ -262,19 +257,6 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
         return false;
     }
 
-    /**
-     * Check if the worker can hold that much items. It depends on his building level. Level 1: 1 stack Level 2: 2 stacks, 4 stacks, 8, unlimited. That's 2^buildingLevel-1.
-     *
-     * @return whether this deliveryman can hold more items
-     */
-    private boolean cannotHoldMoreItems()
-    {
-        if (building.getBuildingLevel() >= building.getMaxBuildingLevel())
-        {
-            return false;
-        }
-        return InventoryUtils.getAmountOfStacksInItemHandler(worker.getInventoryCitizen()) >= Math.pow(2, building.getBuildingLevel() - 1.0D) + 1;
-    }
 
     /**
      * Check if worker of a certain building requires the item now. Or the builder for the current task.

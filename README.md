@@ -26,6 +26,7 @@ complexity, here your colonists are self-sufficient helpers who work alongside y
 - [x] Removed working in rain mechanic
 - [x] Removed mercenary system
 - [x] Removed various weapons
+- [x] Removed courier building level carrying capacity restrictions
 
 ### 📋 Planned Simplifications
 
