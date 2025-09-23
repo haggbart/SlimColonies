@@ -362,12 +362,6 @@ public interface IColonyView extends IColony
     @Override
     void addVisitingPlayer(Player player);
 
-    /**
-     * Get a list of all barb spawn positions in the colony view.
-     *
-     * @return a copy of the list.
-     */
-    List<BlockPos> getLastSpawnPoints();
 
     @Override
     boolean isRemote();

@@ -134,7 +134,6 @@ public final class ColonyView implements IColonyView
     /**
      * Last barbarian spawnpoints.
      */
-    private final List<BlockPos> lastSpawnPoints = new ArrayList<>();
 
     /**
      * The Positions which players can freely interact.
@@ -340,7 +339,6 @@ public final class ColonyView implements IColonyView
             buf.writeBoolean(false);
         }
 
-        buf.writeInt(0);
 
         buf.writeInt(colony.getTeamColonyColor().ordinal());
 
@@ -729,7 +727,6 @@ public final class ColonyView implements IColonyView
         freePositions.clear();
         freeBlocks.clear();
         wayPoints.clear();
-        lastSpawnPoints.clear();
         nameFileIds.clear();
 
         final int blockListSize = buf.readInt();
@@ -770,12 +767,6 @@ public final class ColonyView implements IColonyView
             this.requestManager.deserialize(StandardFactoryController.getInstance(), buf);
         }
 
-        final int barbSpawnListSize = buf.readInt();
-        for (int i = 0; i < barbSpawnListSize; i++)
-        {
-            lastSpawnPoints.add(buf.readBlockPos());
-        }
-        Collections.reverse(lastSpawnPoints);
 
         this.teamColonyColor = ChatFormatting.values()[buf.readInt()];
         this.colonyFlag = buf.readNbt().getList(TAG_BANNER_PATTERNS, Constants.TAG_COMPOUND);
@@ -1264,16 +1255,6 @@ public final class ColonyView implements IColonyView
         return wayPoints;
     }
 
-    /**
-     * Get a list of all barb spawn positions in the colony view.
-     *
-     * @return a copy of the list.
-     */
-    @Override
-    public List<BlockPos> getLastSpawnPoints()
-    {
-        return new ArrayList<>(lastSpawnPoints);
-    }
 
     @Override
     public boolean isRemote()
