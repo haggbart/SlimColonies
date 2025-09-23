@@ -1,16 +1,6 @@
-<window size="190 244" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
+<window size="190 180" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
         >
 
     <layout source="minecolonies:gui/layouthuts/layouthutpageactionsmin.xml"/>
-    <text size="164 11" pos="13 32" color="black" textalign="MIDDLE"
-           label="$(com.minecolonies.coremod.gui.workerhuts.barbpoints.current):"/>
-    <text id="current" size="164 11" pos="13 43" color="black" textalign="MIDDLE"/>
-    <text size="164 11" pos="13 54" color="black" textalign="MIDDLE"
-           label="$(com.minecolonies.coremod.gui.workerhuts.barbpoints):"/>
-    <list id="positions" size="164 45" pos="13 65">
-        <box size="100% 11" linewidth="1">
-            <text id="pos" size="100% 11" color="black"/>
-        </box>
-    </list>
 
 </window>
