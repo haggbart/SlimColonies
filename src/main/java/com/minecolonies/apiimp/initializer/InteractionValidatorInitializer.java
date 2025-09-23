@@ -270,63 +270,6 @@ public class InteractionValidatorInitializer
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + SLEPTTONIGHT),
           citizen -> false); // Disabled without happiness tracking
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + FOOD_QUALITY + URGENT),
-          citizen -> {
-            if (citizen.getHomeBuilding() == null || !citizen.getCitizenFoodHandler().hasFullFoodHistory())
-            {
-                return false;
-            }
-            final int homeBuildingLevel = citizen.getHomeBuilding().getBuildingLevelEquivalent();
-            if (homeBuildingLevel <= 2)
-            {
-                return false;
-            }
-            return citizen.getCitizenFoodHandler().getFoodHappinessStats().quality() < (homeBuildingLevel-2)-1;
-          });
-
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + FOOD_DIVERSITY + URGENT),
-          citizen -> {
-              if (citizen.getHomeBuilding() == null || !citizen.getCitizenFoodHandler().hasFullFoodHistory())
-              {
-                  return false;
-              }
-              final int homeBuildingLevel = citizen.getHomeBuilding().getBuildingLevelEquivalent();
-              if (homeBuildingLevel <= 1)
-              {
-                  return false;
-              }
-              return citizen.getCitizenFoodHandler().getFoodHappinessStats().diversity() < homeBuildingLevel/2.0;
-          });
-
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + FOOD_QUALITY),
-          citizen -> {
-              if (citizen.getHomeBuilding() == null || !citizen.getCitizenFoodHandler().hasFullFoodHistory())
-              {
-                  return false;
-              }
-              final int homeBuildingLevel = citizen.getHomeBuilding().getBuildingLevelEquivalent();
-              if (homeBuildingLevel <= 2)
-              {
-                  return false;
-              }
-              final ICitizenFoodHandler.CitizenFoodStats happinessStats = citizen.getCitizenFoodHandler().getFoodHappinessStats();
-              return happinessStats.quality() < (homeBuildingLevel-2) && happinessStats.quality() >= (homeBuildingLevel-2-1);
-          });
-
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + FOOD_DIVERSITY),
-          citizen -> {
-              if (citizen.getHomeBuilding() == null || !citizen.getCitizenFoodHandler().hasFullFoodHistory())
-              {
-                  return false;
-              }
-              final int homeBuildingLevel = citizen.getHomeBuilding().getBuildingLevelEquivalent();
-              if (homeBuildingLevel <= 1)
-              {
-                  return false;
-              }
-              final ICitizenFoodHandler.CitizenFoodStats happinessStats = citizen.getCitizenFoodHandler().getFoodHappinessStats();
-              return happinessStats.diversity() < homeBuildingLevel && happinessStats.diversity() >= homeBuildingLevel/2.0;
-          });
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_BEEKEEPER_NOFLOWERS),
           citizen -> citizen.getWorkBuilding() instanceof BuildingBeekeeper
