@@ -264,13 +264,6 @@ public class BuildingAlchemist extends AbstractBuilding
         {
             final List<IGenericRecipe> recipes = new ArrayList<>(super.getAdditionalRecipesForDisplayPurposesOnly(world));
 
-            // growing mistletoe
-            recipes.add(GenericRecipe.builder()
-                .withOutput(ModItems.mistletoe)
-                .withIntermediate(Blocks.OAK_LEAVES)
-                .withRequiredTool(ModEquipmentTypes.shears.get())
-                .build());
-
             // growing netherwart
             recipes.add(GenericRecipe.builder()
                 .withOutput(Items.NETHER_WART, 4)

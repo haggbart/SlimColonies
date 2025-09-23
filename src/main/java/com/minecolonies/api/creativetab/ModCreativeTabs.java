@@ -68,7 +68,6 @@ public final class ModCreativeTabs
           output.accept(ModItems.clipboard);
           output.accept(ModItems.resourceScroll);
           output.accept(ModItems.compost);
-          output.accept(ModItems.mistletoe);
           output.accept(ModItems.buildGoggles);
           output.accept(ModItems.scanAnalyzer);
           output.accept(ModItems.questLog);

@@ -69,10 +69,6 @@ public class EntityAIWorkAlchemist extends AbstractEntityAICrafting<JobAlchemist
      */
     private static final int DELAY_TO_HARVEST_NETHERWART = 30;
 
-    /**
-     * Average delay to switch to mistletoe harvesting.
-     */
-    private static final int DELAY_TO_HARVEST_MISTLETOE = 30;
 
     /**
      * BrewingStand to fuel
@@ -107,7 +103,6 @@ public class EntityAIWorkAlchemist extends AbstractEntityAICrafting<JobAlchemist
           new AITarget(RETRIEVING_END_PRODUCT_FROM_BREWINGSTAMD, this::retrieveBrewableFromBrewingStand, TICKS_SECOND),
           new AITarget(RETRIEVING_USED_FUEL_FROM_BREWINGSTAND, this::retrieveUsedFuel, TICKS_SECOND),
           new AITarget(ADD_FUEL_TO_BREWINGSTAND, this::addFuelToBrewingStand, TICKS_SECOND),
-          new AITarget(HARVEST_MISTLETOE, this::harvestMistleToe, TICKS_SECOND),
           new AITarget(HARVEST_NETHERWART, this::harvestNetherWart, TICKS_SECOND)
         );
     }
@@ -225,87 +220,11 @@ public class EntityAIWorkAlchemist extends AbstractEntityAICrafting<JobAlchemist
         return localItems;
     }
 
-    /**
-     * Go to a random position with leaves and hit the leaves until getting a mistletoe.
-     *
-     * @return next state to go to.
-     */
-    private IAIState harvestMistleToe()
-    {
-        if (checkForToolOrWeapon(ModEquipmentTypes.shears.get()))
-        {
-            return IDLE;
-        }
-
-        if (walkTo == null)
-        {
-            final List<BlockPos> leaveList = building.getAllLeavePositions();
-
-            if (leaveList.isEmpty())
-            {
-                return IDLE;
-            }
-
-            final BlockPos randomLeaf = leaveList.get(worker.getRandom().nextInt(leaveList.size()));
-            if (WorldUtil.isBlockLoaded(world, randomLeaf))
-            {
-                if (world.getBlockState(randomLeaf).getBlock() instanceof LeavesBlock)
-                {
-                    walkTo = randomLeaf;
-                }
-                else
-                {
-                    building.removeLeafPosition(randomLeaf);
-                }
-            }
-            return HARVEST_MISTLETOE;
-        }
-
-        if (WorldUtil.isBlockLoaded(world, walkTo) && world.getBlockState(walkTo).getBlock() instanceof LeavesBlock)
-        {
-            if (!walkToWorkPos(walkTo))
-            {
-                return HARVEST_MISTLETOE;
-            }
-
-            final BlockState state = world.getBlockState(walkTo);
-
-            final int slot =
-              InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(worker.getInventoryCitizen(), ModEquipmentTypes.shears.get(), 0, Integer.MAX_VALUE);
-            CitizenItemUtils.setHeldItem(worker, InteractionHand.MAIN_HAND, slot);
-
-            worker.swing(InteractionHand.MAIN_HAND);
-            world.playSound(null,
-              walkTo,
-              state.getSoundType(world, walkTo, worker).getBreakSound(),
-              SoundSource.BLOCKS,
-              state.getSoundType(world, walkTo, worker).getVolume(),
-              state.getSoundType(world, walkTo, worker).getPitch());
-            Network.getNetwork().sendToTrackingEntity(new BlockParticleEffectMessage(walkTo, state, worker.getRandom().nextInt(7) - 1), worker);
-            if (worker.getRandom().nextInt(40) <= 0)
-            {
-                worker.decreaseSaturationForContinuousAction();
-                ItemStack mistletoe = new ItemStack(ModItems.mistletoe, 1);
-                StatsUtil.trackStatByName(building, INGREDIENTS_HARVESTED, mistletoe.getDescriptionId(), mistletoe.getCount());
-                InventoryUtils.addItemStackToItemHandler(worker.getInventoryCitizen(), mistletoe);
-                walkTo = null;
-                CitizenItemUtils.damageItemInHand(worker, InteractionHand.MAIN_HAND, 1);
-                return INVENTORY_FULL;
-            }
-        }
-        else
-        {
-            walkTo = null;
-            return IDLE;
-        }
-
-        return HARVEST_MISTLETOE;
-    }
 
     @Override
     public boolean hasWorkToDo()
     {
-        // Alchemist can always work to either craft or go gather mistletoe, netherwart, etc.
+        // Alchemist can always work to either craft or go gather netherwart, etc.
         return true;
     }
 
@@ -320,11 +239,6 @@ public class EntityAIWorkAlchemist extends AbstractEntityAICrafting<JobAlchemist
                 if (worker.getRandom().nextInt(DELAY_TO_HARVEST_NETHERWART) <= 1)
                 {
                     return HARVEST_NETHERWART;
-                }
-
-                if (worker.getRandom().nextInt(DELAY_TO_HARVEST_MISTLETOE) <= 1)
-                {
-                    return HARVEST_MISTLETOE;
                 }
 
                 if (building.isInBuilding(worker.blockPosition()))

@@ -20,15 +20,6 @@ import static com.minecolonies.api.blocks.decorative.AbstractBlockGate.WOODEN_GA
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModItemsInitializer
 {
-    /**
-     * Spawn egg colors.
-     */
-    private static final int PRIMARY_COLOR_BARBARIAN   = 5;
-    private static final int SECONDARY_COLOR_BARBARIAN = 700;
-    private static final int PRIMARY_COLOR_PIRATE      = 7;
-    private static final int SECONDARY_COLOR_PIRATE    = 600;
-    private static final int PRIMARY_COLOR_EG          = 10;
-    private static final int SECONDARY_COLOR_EG        = 400;
 
     private ModItemsInitializer()
     {
@@ -68,7 +59,6 @@ public final class ModItemsInitializer
         ModItems.compost = new ItemCompost(new Item.Properties());
         ModItems.resourceScroll = new ItemResourceScroll(new Item.Properties());
         ModItems.scepterBeekeeper = new ItemScepterBeekeeper(new Item.Properties());
-        ModItems.mistletoe = new ItemMistletoe(new Item.Properties());
         ModItems.questLog = new ItemQuestLog(new Item.Properties());
 
         ModItems.breadDough = new ItemBreadDough(new Item.Properties());
@@ -129,7 +119,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "resourcescroll"), ModItems.resourceScroll);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "mistletoe"), ModItems.mistletoe);
         registry.register(new ResourceLocation(Constants.MOD_ID, "questlog"), ModItems.questLog);
         registry.register(new ResourceLocation(Constants.MOD_ID, "colonymap"), ModItems.colonyMap);
 
@@ -168,7 +157,5 @@ public final class ModItemsInitializer
 
         // No ingredient items to register for composting since most were removed
         // No food items to register for composting since they were all removed
-
-        ComposterBlock.COMPOSTABLES.put(ModItems.mistletoe, 0.5f);
     }
 }
