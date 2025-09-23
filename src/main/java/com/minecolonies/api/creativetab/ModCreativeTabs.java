@@ -91,11 +91,6 @@ public final class ModCreativeTabs
           output.accept(ModItems.ancientTome);
           output.accept(ModItems.scimitar);
 
-          output.accept(ModItems.plateArmorHelmet);
-          output.accept(ModItems.plateArmorChest);
-          output.accept(ModItems.plateArmorLegs);
-          output.accept(ModItems.plateArmorBoots);
-
           output.accept(ModItems.sifterMeshString);
           output.accept(ModItems.sifterMeshFlint);
           output.accept(ModItems.sifterMeshIron);

@@ -102,11 +102,6 @@ public final class ModItemsInitializer
 
         ModItems.flagBanner = new ItemColonyFlagBanner("colony_banner", new Item.Properties());
 
-        ModItems.plateArmorHelmet = new ItemPlateArmor("plate_armor_helmet", ItemPlateArmor.PLATE_ARMOR, ArmorItem.Type.HELMET, new Item.Properties());
-        ModItems.plateArmorChest = new ItemPlateArmor("plate_armor_chest", ItemPlateArmor.PLATE_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Properties());
-        ModItems.plateArmorLegs = new ItemPlateArmor("plate_armor_legs", ItemPlateArmor.PLATE_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Properties());
-        ModItems.plateArmorBoots = new ItemPlateArmor("plate_armor_boots", ItemPlateArmor.PLATE_ARMOR, ArmorItem.Type.BOOTS, new Item.Properties());
-
         ModItems.sifterMeshString = new ItemSifterMesh("sifter_mesh_string", new Item.Properties().durability(500).setNoRepair());
         ModItems.sifterMeshFlint = new ItemSifterMesh("sifter_mesh_flint", new Item.Properties().durability(1000).setNoRepair());
         ModItems.sifterMeshIron = new ItemSifterMesh("sifter_mesh_iron", new Item.Properties().durability(1500).setNoRepair());
@@ -150,13 +145,6 @@ public final class ModItemsInitializer
         // Removed milky_bread, sugary_bread, golden_bread, chorus_bread registrations
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "adventure_token"), ModItems.adventureToken);
-
-
-        registry.register(new ResourceLocation(Constants.MOD_ID, "plate_armor_helmet"), ModItems.plateArmorHelmet);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "plate_armor_chest"), ModItems.plateArmorChest);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "plate_armor_legs"), ModItems.plateArmorLegs);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "plate_armor_boots"), ModItems.plateArmorBoots);
-
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "santa_hat"), ModItems.santaHat);
         registry.register(new ResourceLocation(Constants.MOD_ID, IRON_GATE), ModItems.irongate);

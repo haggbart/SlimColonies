@@ -172,7 +172,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(THE_END).setTranslatedName("Stonemasons Learn Endstone Recipe and Bakers Learn Chorus Bread Recipe"));
         effects.add(new ResearchEffect(THE_DEPTHS).setTranslatedName("Crusher Learns Deepslate and Tuff Recipes"));
         effects.add(new ResearchEffect(MORE_SCROLLS).setTranslatedName("Enchanter Learns Scroll Recipes to Locate Workers and Summon Guards"));
-        effects.add(new ResearchEffect(PLATE_ARMOR).setTranslatedName("Blacksmith Learns Plate Armor Recipes"));
         effects.add(new ResearchEffect(BUILDERS_ASSISTANT_HAMMER).setTranslatedName("Blacksmith Learns Advanced Builder's Assistant Hammer Recipes"));
 
         //Sifter Mesh triggers
@@ -1047,14 +1046,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
                                       .addItemCost(Items.IRON_INGOT, 64)
                                       .addEffect(ARMOR_DURABILITY, 5)
                                       .addToList(r);
-        new Research(new ResourceLocation(Constants.MOD_ID, "combat/platearmor"), COMBAT).setParentResearch(ironArmor)
-                                     .setTranslatedName("Plate Armor")
-                                     .setSortOrder(2)
-                                     .setIcon(ModItems.plateArmorHelmet)
-                                     .addSingleBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.BLACKSMITH_ID), 4)
-                                     .addItemCost(Items.IRON_INGOT, 32)
-                                     .addEffect(PLATE_ARMOR, 1)
-                                     .addToList(r);
         new Research(new ResourceLocation(Constants.MOD_ID, "combat/diamondskin"), COMBAT).setParentResearch(steelArmor)
           .setTranslatedName("Diamond Skin")
           .setIcon(Items.DIAMOND_HELMET)

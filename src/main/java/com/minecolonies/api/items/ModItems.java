@@ -29,11 +29,6 @@ public final class ModItems
     public static Item compost;
     public static Item resourceScroll;
 
-    public static Item plateArmorHelmet;
-    public static Item plateArmorChest;
-    public static Item plateArmorLegs;
-    public static Item plateArmorBoots;
-
     public static Item santaHat;
 
     public static Item flagBanner;
