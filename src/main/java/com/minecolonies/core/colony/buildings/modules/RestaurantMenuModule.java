@@ -25,7 +25,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static com.minecolonies.api.research.util.ResearchConstants.MIN_ORDER;
 
 /**
  * Minimum stock module.
@@ -139,7 +138,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
                     requestStack = rawStack.copy();
                 }
                 final IToken<?> request = getMatchingRequest(requestStack, list);
-                if (delta > (building.getColony().getResearchManager().getResearchEffects().getEffectStrength(MIN_ORDER) > 0 ? target / 4 : 0))
+                if (delta > target / 4)
                 {
                     if (request == null)
                     {

@@ -138,7 +138,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(TELESCOPE).setTranslatedName("Farther rallying banner range"));
         effects.add(new ResearchEffect(STANDARD).setTranslatedName("Place Rallying Banner at location"));
         effects.add(new ResearchEffect(MORE_AIR).setTranslatedName("Citizens can stay longer underwater"));
-        effects.add(new ResearchEffect(MIN_ORDER).setTranslatedName("Buildings wait a bit longer before placing orders"));
         effects.add(new ResearchEffect(GREEN_REVOLUTION).setTranslatedName("Crops grow outward in offshoots"));
 
         // Building-focused unlocks are derived from the block hut name.  Do not manually add ResourceLocations as a string, as some building blocks have surprising names.
@@ -1577,16 +1576,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
           .setSortOrder(2)
           .addToList(r);
 
-        new Research(new ResourceLocation(Constants.MOD_ID, "civilian/moq"), TECH).setParentResearch(memoryAid)
-          .setTranslatedName("Minimum Order Quantity")
-          .setTranslatedSubtitle("Work smarter, not harder.")
-          .setIcon(ModItems.clipboard)
-          .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.DELIVERYMAN_ID), 9)
-          .addItemCost(ModItems.clipboard, 1)
-          .addItemCost(Items.BOOK, 16)
-          .addEffect(MIN_ORDER, 1)
-          .setSortOrder(3)
-          .addToList(r);
 
         new Research(new ResourceLocation(Constants.MOD_ID, "technology/buildermodes"), TECH).setParentResearch(memoryAid)
           .setTranslatedName("Builder Modes")

@@ -167,7 +167,6 @@ public final class ResearchConstants
     public static final ResourceLocation TELESCOPE          = new ResourceLocation(Constants.MOD_ID, "effects/telescope");
     public static final ResourceLocation STANDARD          = new ResourceLocation(Constants.MOD_ID, "effects/standard");
     public static final ResourceLocation MORE_AIR          = new ResourceLocation(Constants.MOD_ID, "effects/air");
-    public static final ResourceLocation MIN_ORDER         = new ResourceLocation(Constants.MOD_ID, "effects/min_order");
     public static final ResourceLocation GREEN_REVOLUTION  = new ResourceLocation(Constants.MOD_ID, "effects/greenrevolution");
     public static final ResourceLocation BUILDERS_ASSISTANT_HAMMER = new ResourceLocation(Constants.MOD_ID, "effects/assistanthammerunlock");
 

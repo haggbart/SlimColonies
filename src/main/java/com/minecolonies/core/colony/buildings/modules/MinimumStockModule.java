@@ -26,7 +26,6 @@ import java.util.*;
 import java.util.function.Predicate;
 
 import static com.minecolonies.api.research.util.ResearchConstants.MINIMUM_STOCK;
-import static com.minecolonies.api.research.util.ResearchConstants.MIN_ORDER;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_QUANTITY;
 
 /**
@@ -125,7 +124,7 @@ public class MinimumStockModule extends AbstractBuildingModule implements IMinim
                 final int count = InventoryUtils.hasBuildingEnoughElseCount(this.building, new ItemStorage(itemStack, true), target);
                 final int delta = target - count;
                 final IToken<?> request = getMatchingRequest(itemStack, list);
-                if (delta > (building.getColony().getResearchManager().getResearchEffects().getEffectStrength(MIN_ORDER) > 0 ? target / 4 : 0))
+                if (delta > target / 4)
                 {
                     if (request == null)
                     {
