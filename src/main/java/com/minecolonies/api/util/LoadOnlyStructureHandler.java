@@ -14,27 +14,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 /**
  * Load only structure handler just to get dimensions etc from structures, not for placement.
  */
 public class LoadOnlyStructureHandler extends CreativeStructureHandler
 {
-    /**
-     * The minecolonies specific creative structure placer.
-     *
-     * @param world          the world.
-     * @param pos            the pos it is placed at.
-     * @param blueprintFuture  the future of the structure.
-     * @param settings       the placement settings.
-     * @param fancyPlacement if fancy or complete.
-     */
-    public LoadOnlyStructureHandler(final Level world, final BlockPos pos, final Future<Blueprint> blueprintFuture, final PlacementSettings settings, final boolean fancyPlacement)
-    {
-        super(world, pos, blueprintFuture, settings, fancyPlacement);
-    }
-
     /**
      * The minecolonies specific creative structure placer.
      *
@@ -71,7 +56,6 @@ public class LoadOnlyStructureHandler extends CreativeStructureHandler
             return true;
         }
 
-
         return super.shouldBlocksBeConsideredEqual(state1, state2);
     }
 
@@ -85,8 +69,8 @@ public class LoadOnlyStructureHandler extends CreativeStructureHandler
     public boolean isStackFree(@Nullable final ItemStack itemStack)
     {
         return itemStack == null
-                 || itemStack.isEmpty()
-                 || itemStack.is(ItemTags.LEAVES)
-                 || itemStack.getItem() == new ItemStack(ModBlocks.blockDecorationPlaceholder, 1).getItem();
+            || itemStack.isEmpty()
+            || itemStack.is(ItemTags.LEAVES)
+            || itemStack.getItem() == new ItemStack(ModBlocks.blockDecorationPlaceholder, 1).getItem();
     }
 }

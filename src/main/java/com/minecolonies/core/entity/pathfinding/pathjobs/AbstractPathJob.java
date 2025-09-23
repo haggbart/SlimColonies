@@ -1087,13 +1087,16 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Modifies costs if needed for a node
      *
-     * @param cost
-     * @param parent
-     * @param swimstart
-     * @param swimming
-     * @param blockState
-     * @param state
-     * @return
+     * @param cost      the base cost value to modify
+     * @param parent    the parent node in the path
+     * @param swimstart whether swimming is starting at this node
+     * @param swimming  whether the entity is swimming
+     * @param x         the x coordinate of the node
+     * @param y         the y coordinate of the node
+     * @param z         the z coordinate of the node
+     * @param state     the block state at the node position
+     * @param below     the block state below the node position
+     * @return the modified cost value
      */
     protected double modifyCost(
         final double cost,
@@ -1258,11 +1261,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Checks for headblock space
      *
-     * @param parent
-     * @param x
-     * @param y
-     * @param z
-     * @return
      */
     private boolean checkHeadBlock(@Nullable final MNode parent, final int x, final int y, final int z)
     {
@@ -1441,12 +1439,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Handles not passable positions
      *
-     * @param parent
-     * @param x
-     * @param y
-     * @param z
-     * @param target
-     * @return
      */
     private int handleTargetNotPassable(@Nullable final MNode parent, final int x, final int y, final int z, @NotNull final BlockState target)
     {
@@ -1534,12 +1526,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Checks dropping down
      *
-     * @param parent
-     * @param x
-     * @param y
-     * @param z
-     * @param isSwimming
-     * @return
      */
     private int checkDrop(@Nullable final MNode parent, final int x, final int y, final int z, final boolean isSwimming)
     {
@@ -1580,12 +1566,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Handles goto position in liquid
      *
-     * @param x
-     * @param y
-     * @param z
-     * @param below
-     * @param isSwimming
-     * @return
      */
     private int handleInLiquid(final int x, final int y, final int z, @NotNull final BlockState below, final boolean isSwimming)
     {
@@ -1702,7 +1682,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Handles debugging for a given node
      *
-     * @param node
      */
     protected void handleDebugOptions(final MNode node)
     {
@@ -1721,7 +1700,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Add extra nodes to debug view
      *
-     * @param node
      */
     private void handleDebugExtraNode(final MNode node)
     {
@@ -1735,7 +1713,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Add original path nodes to debug view
      *
-     * @param bestNode
      */
     private void handleDebugPathReach(final MNode bestNode)
     {
@@ -1778,7 +1755,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Adds a node to the debug view
      *
-     * @param currentNode
      */
     private void addNodeToDebug(final MNode currentNode)
     {
@@ -1800,7 +1776,6 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     /**
      * Adds a path node to the debug view
      *
-     * @param node
      */
     private void addPathNodeToDebug(final MNode node)
     {

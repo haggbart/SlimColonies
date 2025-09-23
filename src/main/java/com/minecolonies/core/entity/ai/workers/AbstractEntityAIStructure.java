@@ -646,13 +646,11 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
     }
 
     /**
-     * Loads the structure given the name, rotation and position.
+     * Loads the structure given the work order and position.
      *
-     * @param workOrder   the work order.
-     * @param rotateTimes number of times to rotateWithMirror it.
-     * @param position    the position to set it.
-     * @param isMirrored  is the structure mirroed?
-     * @param removal     if removal step.
+     * @param workOrder   the work order containing structure information.
+     * @param position    the position to set the structure.
+     * @param removal     if this is a removal step.
      */
     public void loadStructure(@NotNull final IBuilderWorkOrder workOrder, final BlockPos position, final boolean removal)
     {
