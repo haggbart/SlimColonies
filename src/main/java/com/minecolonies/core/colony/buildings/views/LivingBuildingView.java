@@ -40,7 +40,7 @@ public abstract class LivingBuildingView extends AbstractBuildingView
     /**
      * Removes a resident from the building.
      *
-     * @param index the index to remove it from.
+     * @param id the index to remove it from.
      */
     public void removeResident(final int id)
     {

@@ -16,7 +16,6 @@ import net.minecraftforge.registries.RegisterEvent;
 
 import static com.minecolonies.api.blocks.decorative.AbstractBlockGate.IRON_GATE;
 import static com.minecolonies.api.blocks.decorative.AbstractBlockGate.WOODEN_GATE;
-import static com.minecolonies.api.util.constant.Constants.SCIMITAR_NAME;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModItemsInitializer
@@ -65,7 +64,6 @@ public final class ModItemsInitializer
         ModItems.bannerRallyGuards = new ItemBannerRallyGuards(new Item.Properties());
         ModItems.supplyCamp = new ItemSupplyCampDeployer(new Item.Properties());
         ModItems.ancientTome = new ItemAncientTome(new Item.Properties());
-        ModItems.scimitar = new ItemIronScimitar(new Item.Properties());
         ModItems.clipboard = new ItemClipboard(new Item.Properties());
         ModItems.compost = new ItemCompost(new Item.Properties());
         ModItems.resourceScroll = new ItemResourceScroll(new Item.Properties());
@@ -130,7 +128,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "clipboard"), ModItems.clipboard);
         registry.register(new ResourceLocation(Constants.MOD_ID, "compost"), ModItems.compost);
         registry.register(new ResourceLocation(Constants.MOD_ID, "resourcescroll"), ModItems.resourceScroll);
-        registry.register(new ResourceLocation(Constants.MOD_ID, SCIMITAR_NAME), ModItems.scimitar);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
         registry.register(new ResourceLocation(Constants.MOD_ID, "mistletoe"), ModItems.mistletoe);

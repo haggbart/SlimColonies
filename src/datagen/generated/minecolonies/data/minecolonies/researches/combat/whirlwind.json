@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "minecolonies:iron_scimitar",
+  "icon": "minecraft:iron_sword",
   "parentResearch": "minecolonies:combat/arrowpierce",
   "requirements": [
     {

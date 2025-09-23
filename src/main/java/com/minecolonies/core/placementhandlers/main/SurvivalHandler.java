@@ -50,6 +50,7 @@ import static com.minecolonies.api.util.constant.TranslationConstants.*;
 /**
  * Minecolonies survival blueprint handler.
  */
+@SuppressWarnings("removal")
 public class SurvivalHandler implements ISurvivalBlueprintHandler
 {
 
@@ -80,14 +81,14 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
 
     @Override
     public void handle(
-      final Blueprint blueprint,
-      final String packName,
-      final String blueprintPath,
-      final boolean clientPack,
-      final Level world,
-      final Player player,
-      final BlockPos blockPos,
-      final PlacementSettings placementSettings)
+        final Blueprint blueprint,
+        final String packName,
+        final String blueprintPath,
+        final boolean clientPack,
+        final Level world,
+        final Player player,
+        final BlockPos blockPos,
+        final PlacementSettings placementSettings)
     {
         if (blueprint == null)
         {
@@ -134,8 +135,8 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
         if (anchor.is(ModBlocks.blockPlantationField))
         {
             Network.getNetwork()
-              .sendToPlayer(new OpenPlantationFieldBuildWindowMessage(blockPos, packName, blueprintPath, placementSettings.getRotation(), placementSettings.mirror),
-                (ServerPlayer) player);
+                .sendToPlayer(new OpenPlantationFieldBuildWindowMessage(blockPos, packName, blueprintPath, placementSettings.getRotation(), placementSettings.mirror),
+                    (ServerPlayer) player);
         }
         if (anchor.getBlock() instanceof AbstractBlockHut<?> anchorBlock)
         {
@@ -168,16 +169,18 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
                 world.destroyBlock(blockPos, true);
                 world.setBlockAndUpdate(blockPos, anchor);
                 anchorBlock.onBlockPlacedByBuildTool(world,
-                  blockPos,
-                  anchor,
-                  player,
-                  null,
-                  placementSettings.getMirror() != Mirror.NONE,
-                  packName,
-                  blueprintPath);
+                    blockPos,
+                    anchor,
+                    player,
+                    null,
+                    placementSettings.getMirror() != Mirror.NONE,
+                    packName,
+                    blueprintPath);
                 try
                 {
-                    MinecraftForge.EVENT_BUS.post(new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(world.dimension(), world, blockPos), world.getBlockState(blockPos.below()), player));
+                    MinecraftForge.EVENT_BUS.post(new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(world.dimension(), world, blockPos),
+                        world.getBlockState(blockPos.below()),
+                        player));
                 }
                 catch (final Exception e)
                 {
@@ -209,7 +212,7 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
                         newBlueprintPath = newBlueprintPath.substring(0, newBlueprintPath.length() - 1);
                         newBlueprintPath += level;
                         CreativeBuildingStructureHandler.loadAndPlaceStructureWithRotation(player.level, StructurePacks.getBlueprintFuture(packName, newBlueprintPath),
-                          blockPos, placementSettings.getRotation(), placementSettings.getMirror() != Mirror.NONE ? Mirror.FRONT_BACK : Mirror.NONE, true, (ServerPlayer) player);
+                            blockPos, placementSettings.getRotation(), placementSettings.getMirror() != Mirror.NONE ? Mirror.FRONT_BACK : Mirror.NONE, true, (ServerPlayer) player);
                         finishedUpgrade = true;
                     }
                 }
@@ -270,16 +273,25 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
                 int level = Utils.getBlueprintLevel(blueprint.getFileName());
                 if (level == -1)
                 {
-                    Network.getNetwork().sendToPlayer(new OpenDecoBuildWindowMessage(blockPos, packName, blueprintPath, placementSettings.getRotation(), placementSettings.mirror), (ServerPlayer) player);
+                    Network.getNetwork()
+                        .sendToPlayer(new OpenDecoBuildWindowMessage(blockPos, packName, blueprintPath, placementSettings.getRotation(), placementSettings.mirror),
+                            (ServerPlayer) player);
                 }
                 else
                 {
-                    Network.getNetwork().sendToPlayer(new OpenDecoBuildWindowMessage(blockPos, packName, blueprintPath.replace(level + ".blueprint", "1.blueprint"), placementSettings.getRotation(), placementSettings.mirror), (ServerPlayer) player);
+                    Network.getNetwork()
+                        .sendToPlayer(new OpenDecoBuildWindowMessage(blockPos,
+                            packName,
+                            blueprintPath.replace(level + ".blueprint", "1.blueprint"),
+                            placementSettings.getRotation(),
+                            placementSettings.mirror), (ServerPlayer) player);
                 }
             }
             else
             {
-                Network.getNetwork().sendToPlayer(new OpenDecoBuildWindowMessage(blockPos, packName, blueprintPath, placementSettings.getRotation(), placementSettings.mirror), (ServerPlayer) player);
+                Network.getNetwork()
+                    .sendToPlayer(new OpenDecoBuildWindowMessage(blockPos, packName, blueprintPath, placementSettings.getRotation(), placementSettings.mirror),
+                        (ServerPlayer) player);
             }
         }
 
@@ -288,9 +300,10 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
 
     /**
      * Check if the blueprint is fully inside colony boundaries.
+     *
      * @param blueprint the blueprint to check.
-     * @param colony the colony to check for.
-     * @param blockPos the position to check at.
+     * @param colony    the colony to check for.
+     * @param blockPos  the position to check at.
      * @return true if so.
      */
     private boolean isBlueprintInColony(final Blueprint blueprint, final IColony colony, final BlockPos blockPos)

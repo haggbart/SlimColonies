@@ -1051,7 +1051,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
           .addToList(r);
         new Research(new ResourceLocation(Constants.MOD_ID, "combat/whirlwind"), COMBAT).setParentResearch(arrowPierce)
           .setTranslatedName("Whirlwind")
-          .setIcon(ModItems.scimitar)
+          .setIcon(Items.IRON_SWORD)
           .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.BARRACKS_ID), 4)
           .addEffect(KNIGHT_WHIRLWIND, 1)
           .addToList(r);

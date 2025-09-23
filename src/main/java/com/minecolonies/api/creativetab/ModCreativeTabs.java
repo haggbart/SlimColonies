@@ -89,7 +89,6 @@ public final class ModCreativeTabs
           output.accept(ModItems.flagBanner);
 
           output.accept(ModItems.ancientTome);
-          output.accept(ModItems.scimitar);
 
           output.accept(ModItems.sifterMeshString);
           output.accept(ModItems.sifterMeshFlint);

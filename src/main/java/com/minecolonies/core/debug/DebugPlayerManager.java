@@ -53,8 +53,6 @@ public class DebugPlayerManager
     /**
      * Toggles debugging for the given player
      *
-     * @param player
-     * @return
      */
     public static void setDebugModeFor(final UUID player, boolean enable)
     {

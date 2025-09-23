@@ -1046,17 +1046,6 @@
     "item": "minecolonies:gate_wood"
   },
   {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "minecolonies:iron_scimitar"
-  },
-  {
     "item": "minecolonies:magicpotion"
   },
   {

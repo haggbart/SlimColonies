@@ -632,12 +632,6 @@ public class DefaultRecipeProvider extends RecipeProvider
 
         // Large bottle recipes removed - using vanilla containers instead
 
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.scimitar), RecipeCategory.MISC, Items.IRON_NUGGET, 0.1f, 200)
-            .unlockedBy("has_scimitar", has(ModItems.scimitar))
-            .save(consumer, new ResourceLocation(MOD_ID, "iron_nugget_from_iron_scimitar_smelting"));
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.scimitar), RecipeCategory.MISC, Items.IRON_NUGGET, 0.1f, 100)
-            .unlockedBy("has_scimitar", has(ModItems.scimitar))
-            .save(consumer, new ResourceLocation(MOD_ID, "iron_nugget_from_iron_scimitar_blasting"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.colonyMap)
             .pattern("XXX")
