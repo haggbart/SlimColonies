@@ -30,23 +30,6 @@
             }
           ],
           "name": "minecolonies:supplychestdeployer"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "chance": 0.1,
-              "condition": "minecraft:random_chance"
-            }
-          ],
-          "functions": [
-            {
-              "add": false,
-              "count": 4.0,
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "minecolonies:scroll_buff"
         }
       ],
       "rolls": 1.0

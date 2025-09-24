@@ -1089,21 +1089,6 @@
     "item": "minecolonies:scepterpermission"
   },
   {
-    "item": "minecolonies:scroll_area_tp"
-  },
-  {
-    "item": "minecolonies:scroll_buff"
-  },
-  {
-    "item": "minecolonies:scroll_guard_help"
-  },
-  {
-    "item": "minecolonies:scroll_highlight"
-  },
-  {
-    "item": "minecolonies:scroll_tp"
-  },
-  {
     "checkednbtkeys": [
       {
         "key": "Enchantments"

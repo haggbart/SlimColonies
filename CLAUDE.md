@@ -44,3 +44,4 @@ This is a stripped-down fork of MineColonies with many features removed to make 
 - The project uses Gradle incremental builds - only changed files are recompiled
 - No hot-reload support - must restart game to see changes
 - After changing build files, run `./gradlew clean build`
+- **Do not edit files in `/src/datagen/generated/` - they are auto-generated and will be overwritten by `./gradlew runData`**

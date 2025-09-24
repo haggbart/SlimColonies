@@ -67,21 +67,6 @@ public final class ModItemsInitializer
 
         ModItems.adventureToken = new ItemAdventureToken(new Item.Properties());
 
-        ModItems.scrollColonyTP = new ItemScrollColonyTP(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_tp"), ModItems.scrollColonyTP);
-
-        ModItems.scrollColonyAreaTP = new ItemScrollColonyAreaTP(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_area_tp"), ModItems.scrollColonyAreaTP);
-
-        ModItems.scrollBuff = new ItemScrollBuff(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_buff"), ModItems.scrollBuff);
-
-        ModItems.scrollGuardHelp = new ItemScrollGuardHelp(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_guard_help"), ModItems.scrollGuardHelp);
-
-        ModItems.scrollHighLight = new ItemScrollHighlight(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_highlight"), ModItems.scrollHighLight);
-
         ModItems.irongate = new ItemGate(IRON_GATE, ModBlocks.blockIronGate, new Item.Properties());
         ModItems.woodgate = new ItemGate(WOODEN_GATE, ModBlocks.blockWoodenGate, new Item.Properties());
 

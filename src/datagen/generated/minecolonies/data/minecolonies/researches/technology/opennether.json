@@ -7,8 +7,7 @@
     }
   ],
   "icon": "minecolonies:blockhutnetherworker",
-  "parentResearch": "minecolonies:technology/morescrolls",
-  "researchLevel": 2,
-  "sortOrder": 1,
+  "researchLevel": 1,
+  "sortOrder": 3,
   "subtitle": "com.minecolonies.research.technology.opennether.subtitle"
 }
