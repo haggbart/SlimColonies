@@ -67,11 +67,6 @@ public final class ModItemsInitializer
 
         ModItems.adventureToken = new ItemAdventureToken(new Item.Properties());
 
-
-
-        ModItems.scrollHighLight = new ItemScrollHighlight(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_highlight"), ModItems.scrollHighLight);
-
         ModItems.irongate = new ItemGate(IRON_GATE, ModBlocks.blockIronGate, new Item.Properties());
         ModItems.woodgate = new ItemGate(WOODEN_GATE, ModBlocks.blockWoodenGate, new Item.Properties());
 

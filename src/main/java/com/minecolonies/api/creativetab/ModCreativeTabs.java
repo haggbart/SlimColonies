@@ -67,9 +67,6 @@ public final class ModCreativeTabs
             output.accept(ModItems.questLog);
             output.accept(ModItems.colonyMap);
 
-            output.accept(ModItems.scrollHighLight);
-
-
             output.accept(ModItems.irongate);
             output.accept(ModItems.woodgate);
 

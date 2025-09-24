@@ -39,8 +39,6 @@ public final class ModItems
 
     public static Item adventureToken;
 
-    public static Item scrollHighLight;
-
     public static Item sifterMeshString;
     public static Item sifterMeshFlint;
     public static Item sifterMeshIron;

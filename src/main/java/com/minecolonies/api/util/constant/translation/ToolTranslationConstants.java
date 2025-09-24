@@ -49,9 +49,6 @@ public class ToolTranslationConstants
     public static final String TOOL_RALLY_BANNER_NEEDS_RESEARCH = "item.minecolonies.banner_rally_guards.activated.needsresearch";
 
     @NonNls
-    public static final String TOOL_GENERIC_SCROLL_HIGHLIGHT_DESCRIPTION = "item.minecolonies.scroll_highlight.tip";
-
-    @NonNls
     public static final String TOOL_COLONY_TELEPORT_SCROLL_NO_COLONY        = "item.minecolonies.scroll.colony.none";
     @NonNls
     public static final String TOOL_COLONY_TELEPORT_SCROLL_COLONY_NAME      = "item.minecolonies.scroll.colony.tip";
