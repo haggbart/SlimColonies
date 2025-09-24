@@ -40,24 +40,11 @@ public class ToolTranslationConstants
     public static final String TOOL_TYPE_LIGHTER     = "no.monopixel.slimcolonies.coremod.tooltype.lighter";
 
     @NonNls
-    public static final String TOOL_RALLY_BANNER_ACTIVATED      = "item.minecolonies.banner_rally_guards.activated";
+    public static final String TOOL_BEEHIVE_SCEPTER_ADD_HIVE    = "item.slimcolonies.scepterbeekeeper.addhive";
     @NonNls
-    public static final String TOOL_RALLY_BANNER_DEACTIVATED    = "item.minecolonies.banner_rally_guards.deactivated";
+    public static final String TOOL_BEEHIVE_SCEPTER_REMOVE_HIVE = "item.slimcolonies.scepterbeekeeper.removehive";
     @NonNls
-    public static final String TOOL_RALLY_BANNER_NO_GUARDS      = "item.minecolonies.banner_rally_guards.activated.noguards";
-    @NonNls
-    public static final String TOOL_RALLY_BANNER_NEEDS_RESEARCH = "item.minecolonies.banner_rally_guards.activated.needsresearch";
-
-    @NonNls
-    public static final String TOOL_COLONY_TELEPORT_SCROLL_NO_COLONY   = "item.minecolonies.scroll.colony.none";
-    @NonNls
-    public static final String TOOL_COLONY_TELEPORT_SCROLL_COLONY_NAME = "item.minecolonies.scroll.colony.tip";
-    @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_ADD_HIVE           = "item.minecolonies.scepterbeekeeper.addhive";
-    @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_REMOVE_HIVE        = "item.minecolonies.scepterbeekeeper.removehive";
-    @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_MAX_HIVES          = "item.minecolonies.scepterbeekeeper.maxhives";
+    public static final String TOOL_BEEHIVE_SCEPTER_MAX_HIVES   = "item.slimcolonies.scepterbeekeeper.maxhives";
 
     @NonNls
     public static final String TOOL_GUARD_SCEPTER_ADD_GUARD_TARGET            = "no.monopixel.slimcolonies.coremod.job.guard.toolclickguard";
@@ -69,13 +56,13 @@ public class ToolTranslationConstants
     public static final String TOOL_GUARD_SCEPTER_TOWER_TOO_FAR               = "no.monopixel.slimcolonies.coremod.job.guard.toolclickguardtoofar";
 
     @NonNls
-    public static final String TOOL_LUMBERJACK_SCEPTER_POSITION_A_SET = "item.minecolonies.scepterlumberjack.usedend";
+    public static final String TOOL_LUMBERJACK_SCEPTER_POSITION_A_SET = "item.slimcolonies.scepterlumberjack.usedend";
     @NonNls
-    public static final String TOOL_LUMBERJACK_SCEPTER_POSITION_B_SET = "item.minecolonies.scepterlumberjack.usedstart";
+    public static final String TOOL_LUMBERJACK_SCEPTER_POSITION_B_SET = "item.slimcolonies.scepterlumberjack.usedstart";
     @NonNls
-    public static final String TOOL_LUMBERJACK_SCEPTER_AREA_SET       = "item.minecolonies.scepterlumberjack.restrictionset";
+    public static final String TOOL_LUMBERJACK_SCEPTER_AREA_SET       = "item.slimcolonies.scepterlumberjack.restrictionset";
     @NonNls
-    public static final String TOOL_LUMBERJACK_SCEPTER_AREA_TOO_BIG   = "item.minecolonies.scepterlumberjack.restrictiontoobig";
+    public static final String TOOL_LUMBERJACK_SCEPTER_AREA_TOO_BIG   = "item.slimcolonies.scepterlumberjack.restrictiontoobig";
 
     @NonNls
     public static final String TOOL_PERMISSION_SCEPTER_SET_MODE        = "no.monopixel.slimcolonies.coremod.item.permissionscepter.setmode";

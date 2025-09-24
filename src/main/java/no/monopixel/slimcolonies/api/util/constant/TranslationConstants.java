@@ -265,7 +265,7 @@ public final class TranslationConstants
     @NonNls
     public static final String RECIPE_STATUS                                                        = "no.monopixel.slimcolonies.coremod.gui.workerhuts.recipestatus";
     @NonNls
-    public static final String RACK                                                                 = "block.minecolonies.blockminecoloniesrack";
+    public static final String RACK                                                                 = "block.slimcolonies.blockminecoloniesrack";
     @NonNls
     public static final String RESEARCH_AVAILABLE                                                   = "no.monopixel.slimcolonies.coremod.research.available";
     @NonNls
@@ -309,7 +309,7 @@ public final class TranslationConstants
     @NonNls
     public static final String COLONIST_DEATH_LOCATION                                              = "block.blockhuttownhall.messagecolonistgravelocation";
     @NonNls
-    public static final String HUT_BREAK_WARNING_CHILD_BUILDINGS                                    = "block.minecolonies.blockhut.breakwarn.children";
+    public static final String HUT_BREAK_WARNING_CHILD_BUILDINGS                                    = "block.slimcolonies.blockhut.breakwarn.children";
     @NonNls
     public static final String HUT_BLOCK_MISSING_BUILDING                                           = "no.monopixel.slimcolonies.coremod.gui.nobuilding";
     @NonNls
@@ -346,8 +346,6 @@ public final class TranslationConstants
     public static final String HIRING_MODE_MANUAL                                                   = "no.monopixel.slimcolonies.coremod.gui.hiringmode.manual";
     @NonNls
     public static final String HIRING_MODE_LOCKED                                                   = "no.monopixel.slimcolonies.coremod.gui.hiringmode.locked";
-    @NonNls
-    public static final String WARNING_SUPPLY_SHIP_IN_WATER                                         = "item.supplychestdeployer.invalid";
     @NonNls
     public static final String WARNING_SUPPLY_BUILDING_BAD_BLOCKS                                   = "item.supply.badblocks";
     @NonNls
@@ -449,11 +447,11 @@ public final class TranslationConstants
     public static final String MESSAGE_PERMISSION_SCEPTER_REMOVE_BLOCK_SUCCESS                      =
         "no.monopixel.slimcolonies.coremod.item.permissionscepter.removeblock.success";
     @NonNls
-    public static final String MESSAGE_SCROLL_REGISTERED                                            = "minecolonies.scroll.registered";
+    public static final String MESSAGE_SCROLL_REGISTERED                                            = "slimcolonies.scroll.registered";
     @NonNls
-    public static final String MESSAGE_SCROLL_NO_PERMISSION                                         = "minecolonies.scroll.nopermission";
+    public static final String MESSAGE_SCROLL_NO_PERMISSION                                         = "slimcolonies.scroll.nopermission";
     @NonNls
-    public static final String MESSAGE_SCROLL_NEED_COLONY                                           = "minecolonies.scroll.needcolony";
+    public static final String MESSAGE_SCROLL_NEED_COLONY                                           = "slimcolonies.scroll.needcolony";
     @NonNls
     public static final String WARNING_SUPPLY_CHEST_ALREADY_PLACED                                  = "no.monopixel.slimcolonies.coremod.error.supplychestalreadyplaced";
     @NonNls
