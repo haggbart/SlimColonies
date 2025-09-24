@@ -76,9 +76,6 @@ public final class ModItemsInitializer
         ModItems.scrollBuff = new ItemScrollBuff(new Item.Properties().stacksTo(16));
         registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_buff"), ModItems.scrollBuff);
 
-        ModItems.scrollGuardHelp = new ItemScrollGuardHelp(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_guard_help"), ModItems.scrollGuardHelp);
-
         ModItems.scrollHighLight = new ItemScrollHighlight(new Item.Properties().stacksTo(16));
         registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_highlight"), ModItems.scrollHighLight);
 

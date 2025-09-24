@@ -170,7 +170,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         // Crafter-recipe-only unlocks
         effects.add(new ResearchEffect(THE_END).setTranslatedName("Stonemasons Learn Endstone Recipe and Bakers Learn Chorus Bread Recipe"));
         effects.add(new ResearchEffect(THE_DEPTHS).setTranslatedName("Crusher Learns Deepslate and Tuff Recipes"));
-        effects.add(new ResearchEffect(MORE_SCROLLS).setTranslatedName("Enchanter Learns Scroll Recipes to Locate Workers and Summon Guards"));
         effects.add(new ResearchEffect(BUILDERS_ASSISTANT_HAMMER).setTranslatedName("Blacksmith Learns Advanced Builder's Assistant Hammer Recipes"));
 
         //Sifter Mesh triggers
@@ -1201,17 +1200,10 @@ public class DefaultResearchProvider extends AbstractResearchProvider
 
 
         // Primary Research #3
-        final Research moreScrolls = new Research(new ResourceLocation(Constants.MOD_ID, "technology/morescrolls"), TECH).setTranslatedName("More Scrolls")
-          .setSortOrder(3)
-          .setIcon(ModItems.scrollHighLight)
-          .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, "enchanter"), 3)
-          .addEffect(new ResourceLocation("minecolonies:effects/morescrollsunlock"), 1)
-          .addToList(r);
-
-        final Research netherminer = new Research(new ResourceLocation(Constants.MOD_ID, "technology/opennether"), TECH).setParentResearch(moreScrolls)
+        final Research netherminer = new Research(new ResourceLocation(Constants.MOD_ID, "technology/opennether"), TECH)
                                     .setTranslatedName("Open the Nether")
                                     .setTranslatedSubtitle("It's a dangerous job, but it must be done!")
-                                    .setSortOrder(1)
+                                    .setSortOrder(3)
                                     .setIcon(ModBlocks.blockHutNetherWorker.asItem())
                                     .addEffect(ModBuildings.netherWorker.get().getBuildingBlock(), 1)
                                     .addToList(r);

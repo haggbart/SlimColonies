@@ -42,7 +42,6 @@ public final class ModItems
     public static Item scrollColonyTP;
     public static Item scrollColonyAreaTP;
     public static Item scrollBuff;
-    public static Item scrollGuardHelp;
     public static Item scrollHighLight;
 
     public static Item sifterMeshString;

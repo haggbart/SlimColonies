@@ -18,7 +18,6 @@
   ],
   "intermediate": "minecraft:air",
   "min-building-level": 3,
-  "research-id": "minecolonies:effects/morescrollsunlock",
   "result": "minecolonies:scroll_highlight",
   "show-tooltip": true
 }
