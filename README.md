@@ -37,6 +37,7 @@ SlimColonies removes these pain points and makes sensible behaviors the default,
 - [x] Removed custom farmland and crops
 - [x] Removed custom foods and recipes
 - [x] Removed druid guard type
+- [x] Simplify guard mechanics
 
 #### Research & Progression Simplification
 
