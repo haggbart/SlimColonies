@@ -1,7 +1,5 @@
 package no.monopixel.slimcolonies.core.generation.defaults;
 
-import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.core.generation.SimpleLootTableProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -13,6 +11,8 @@ import net.minecraft.world.level.storage.loot.functions.SetNameFunction;
 import net.minecraft.world.level.storage.loot.functions.SetNbtFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.core.generation.SimpleLootTableProvider;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.Constants.*;
@@ -41,21 +41,21 @@ public class DefaultSupplyLootProvider extends SimpleLootTableProvider
         instantTag.putString(PLACEMENT_NBT, INSTANT_PLACEMENT);
 
         registrar.register(new ResourceLocation(MOD_ID, "chests/supplycamp"), LootContextParamSets.CHEST,
-                LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .add(LootItem.lootTableItem(ModItems.supplyCamp)
-                                    .when(LootItemRandomChanceCondition.randomChance(0.01f))
-                                        .apply(SetNbtFunction.setTag(instantTag))
-                                        .apply(SetNameFunction.setName(Component.translatable("item.minecolonies.supply.free", ModItems.supplyCamp.getDescription()))))
-                        ));
+            LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(ModItems.supplyCamp)
+                        .when(LootItemRandomChanceCondition.randomChance(0.01f))
+                        .apply(SetNbtFunction.setTag(instantTag))
+                        .apply(SetNameFunction.setName(Component.translatable("item.slimcolonies.supply.free", ModItems.supplyCamp.getDescription()))))
+                ));
 
         registrar.register(new ResourceLocation(MOD_ID, "chests/supplyship"), LootContextParamSets.CHEST,
-                LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .add(LootItem.lootTableItem(ModItems.supplyChest)
-                                    .when(LootItemRandomChanceCondition.randomChance(0.01f))
-                                        .apply(SetNbtFunction.setTag(instantTag))
-                                        .apply(SetNameFunction.setName(Component.translatable("item.minecolonies.supply.free", ModItems.supplyChest.getDescription()))))
-                        ));
+            LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(ModItems.supplyChest)
+                        .when(LootItemRandomChanceCondition.randomChance(0.01f))
+                        .apply(SetNbtFunction.setTag(instantTag))
+                        .apply(SetNameFunction.setName(Component.translatable("item.slimcolonies.supply.free", ModItems.supplyChest.getDescription()))))
+                ));
     }
 }

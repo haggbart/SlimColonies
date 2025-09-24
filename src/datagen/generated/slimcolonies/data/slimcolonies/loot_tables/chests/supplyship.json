@@ -20,7 +20,7 @@
             {
               "function": "minecraft:set_name",
               "name": {
-                "translate": "item.minecolonies.supply.free",
+                "translate": "item.slimcolonies.supply.free",
                 "with": [
                   {
                     "translate": "item.slimcolonies.supplychestdeployer"

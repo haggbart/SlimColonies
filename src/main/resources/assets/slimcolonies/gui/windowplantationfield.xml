@@ -5,7 +5,7 @@
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_left.png" size="6 15" pos="44 12"/>
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_center.png" size="90 15" pos="50 12"/>
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_right.png" size="6 15" pos="140 12"/>
-    <text size="130 11" pos="30 14" color="red" textalign="MIDDLE" label="$(block.minecolonies.blockhutplantationfield)"/>
+    <text size="130 11" pos="30 14" color="red" textalign="MIDDLE" label="$(block.slimcolonies.blockhutplantationfield)"/>
 
     <text id="not-in-colony" size="164 11" pos="13 55" color="black" textalign="MIDDLE"
           label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.notincolony)"/>

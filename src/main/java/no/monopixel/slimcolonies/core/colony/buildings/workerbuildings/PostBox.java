@@ -3,6 +3,10 @@ package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
 import com.ldtteam.blockui.views.BOWindow;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.Tuple;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.buildings.IRSComponent;
@@ -15,10 +19,6 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.IRequestResol
 import no.monopixel.slimcolonies.core.client.gui.WindowPostBox;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.util.Tuple;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -61,7 +61,6 @@ public class PostBox extends AbstractBuilding implements IRSComponent
         return 0;
     }
 
-
     @Override
     public void onRequestedRequestCancelled(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)
     {
@@ -76,7 +75,7 @@ public class PostBox extends AbstractBuilding implements IRSComponent
     @Override
     public Tuple<BlockPos, BlockPos> getCorners()
     {
-        return new Tuple<>(getPosition(),getPosition());
+        return new Tuple<>(getPosition(), getPosition());
     }
 
     @Override
@@ -112,7 +111,7 @@ public class PostBox extends AbstractBuilding implements IRSComponent
         @Override
         public MutableComponent getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)
         {
-            return Component.translatable("block.minecolonies.blockpostbox.name");
+            return Component.translatable("block.slimcolonies.blockpostbox.name");
         }
     }
 }
