@@ -49,9 +49,6 @@ public class DefaultSupplyLootProvider extends SimpleLootTableProvider
                                     .when(LootItemRandomChanceCondition.randomChance(0.01f))
                                         .apply(SetNbtFunction.setTag(instantTag))
                                         .apply(SetNameFunction.setName(Component.translatable("item.minecolonies.supply.free", ModItems.supplyCamp.getDescription()))))
-                                .add(LootItem.lootTableItem(ModItems.scrollBuff)
-                                    .when(LootItemRandomChanceCondition.randomChance(0.1f))
-                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
                         ));
 
         registrar.register(new ResourceLocation(MOD_ID, "chests/supplyship"), LootContextParamSets.CHEST,
@@ -61,9 +58,6 @@ public class DefaultSupplyLootProvider extends SimpleLootTableProvider
                                     .when(LootItemRandomChanceCondition.randomChance(0.01f))
                                         .apply(SetNbtFunction.setTag(instantTag))
                                         .apply(SetNameFunction.setName(Component.translatable("item.minecolonies.supply.free", ModItems.supplyChest.getDescription()))))
-                                .add(LootItem.lootTableItem(ModItems.scrollBuff)
-                                    .when(LootItemRandomChanceCondition.randomChance(0.1f))
-                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
                         ));
     }
 }

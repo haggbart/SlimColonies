@@ -68,8 +68,6 @@ public final class ModItemsInitializer
         ModItems.adventureToken = new ItemAdventureToken(new Item.Properties());
 
 
-        ModItems.scrollBuff = new ItemScrollBuff(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_buff"), ModItems.scrollBuff);
 
         ModItems.scrollHighLight = new ItemScrollHighlight(new Item.Properties().stacksTo(16));
         registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_highlight"), ModItems.scrollHighLight);

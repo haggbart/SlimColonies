@@ -50,8 +50,6 @@ public class ToolTranslationConstants
 
     @NonNls
     public static final String TOOL_GENERIC_SCROLL_HIGHLIGHT_DESCRIPTION = "item.minecolonies.scroll_highlight.tip";
-    @NonNls
-    public static final String TOOL_GENERIC_SCROLL_BUFF_DESCRIPTION      = "item.minecolonies.scroll_buff.tip";
 
     @NonNls
     public static final String TOOL_COLONY_TELEPORT_SCROLL_NO_COLONY        = "item.minecolonies.scroll.colony.none";
