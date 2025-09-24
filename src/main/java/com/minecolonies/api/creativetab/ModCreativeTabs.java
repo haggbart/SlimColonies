@@ -73,7 +73,6 @@ public final class ModCreativeTabs
             output.accept(ModItems.scrollGuardHelp);
             output.accept(ModItems.scrollHighLight);
 
-            output.accept(ModItems.santaHat);
 
             output.accept(ModItems.irongate);
             output.accept(ModItems.woodgate);

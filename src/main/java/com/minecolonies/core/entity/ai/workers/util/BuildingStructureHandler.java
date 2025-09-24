@@ -46,6 +46,7 @@ import static com.minecolonies.api.util.constant.StatisticsConstants.BLOCKS_PLAC
  * <p>
  * It internally uses a structure it transparently loads.
  */
+@SuppressWarnings("removal")
 public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B extends AbstractBuildingStructureBuilder> extends AbstractStructureHandler
 {
     /**
@@ -86,9 +87,9 @@ public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B ex
      * @param entityAIStructure the AI handling this structure.
      */
     public BuildingStructureHandler(
-      final Level world,
+        final Level world,
         final IWorkOrder workOrder,
-      final AbstractEntityAIStructure<J, B> entityAIStructure,
+        final AbstractEntityAIStructure<J, B> entityAIStructure,
         final BuildingProgressStage[] stages)
     {
         super(world,
@@ -174,9 +175,9 @@ public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B ex
         structureAI.getWorker().setItemSlot(EquipmentSlot.MAINHAND, requiredItems.isEmpty() ? ItemStackUtils.EMPTY : requiredItems.get(0));
 
         if (Mth.floor(structureAI.getWorker().getX()) == worldPos.getX()
-              && Mth.abs(worldPos.getY() - (int) structureAI.getWorker().getY()) <= 1
-              && Mth.floor(structureAI.getWorker().getZ()) == worldPos.getZ()
-              && structureAI.getWorker().getNavigation().isDone())
+            && Mth.abs(worldPos.getY() - (int) structureAI.getWorker().getY()) <= 1
+            && Mth.floor(structureAI.getWorker().getZ()) == worldPos.getZ()
+            && structureAI.getWorker().getNavigation().isDone())
         {
             EntityNavigationUtils.walkAwayFrom(structureAI.getWorker(), worldPos, 1, 1.0);
         }
@@ -207,28 +208,34 @@ public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B ex
 
             for (final ItemStack stack : list)
             {
-                StatsUtil.trackStat( structureAI.getWorker().getCitizenData().getWorkBuilding(), BLOCKS_PLACED,  1);
+                StatsUtil.trackStat(structureAI.getWorker().getCitizenData().getWorkBuilding(), BLOCKS_PLACED, 1);
                 structureAI.reduceNeededResources(stack);
                 structureAI.getWorker()
-                  .getCitizenColonyHandler()
-                  .getColonyOrRegister()
-                  .getStatisticsManager()
-                  .increment(BLOCKS_PLACED, structureAI.getWorker().getCitizenColonyHandler().getColonyOrRegister().getDay());
+                    .getCitizenColonyHandler()
+                    .getColonyOrRegister()
+                    .getStatisticsManager()
+                    .increment(BLOCKS_PLACED, structureAI.getWorker().getCitizenColonyHandler().getColonyOrRegister().getDay());
             }
-            
+
             BlockState blockStateForSound;
-            if (state.getBlock() == com.ldtteam.structurize.blocks.ModBlocks.blockSolidSubstitution.get()) 
+            if (state.getBlock() == com.ldtteam.structurize.blocks.ModBlocks.blockSolidSubstitution.get())
             {
                 // If the builder is placing a substitution block, use the sound of the substituted block
                 // fancyPlacement() could be checked here, but is always true for this Handler.
                 blockStateForSound = structureAI.getSolidSubstitution(pos);
             }
-            else 
+            else
             {
                 // If the block is not a substitution block, use the sound of the block itself
                 blockStateForSound = state;
             }
-            structureAI.getWorker().queueSound(blockStateForSound.getSoundType().getPlaceSound(), worldPos, 10, 0, (blockStateForSound.getSoundType().getVolume() + 1.0F) * 0.5F, blockStateForSound.getSoundType().getPitch() * 0.8F);
+            structureAI.getWorker()
+                .queueSound(blockStateForSound.getSoundType().getPlaceSound(),
+                    worldPos,
+                    10,
+                    0,
+                    (blockStateForSound.getSoundType().getVolume() + 1.0F) * 0.5F,
+                    blockStateForSound.getSoundType().getPitch() * 0.8F);
         }
 
         if (state.getBlock() == ModBlocks.blockWayPoint)
@@ -308,9 +315,9 @@ public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B ex
     public boolean isStackFree(@Nullable final ItemStack itemStack)
     {
         return itemStack == null
-                 || itemStack.isEmpty()
-                 || itemStack.is(ItemTags.LEAVES)
-                 || itemStack.getItem() == new ItemStack(ModBlocks.blockDecorationPlaceholder, 1).getItem();
+            || itemStack.isEmpty()
+            || itemStack.is(ItemTags.LEAVES)
+            || itemStack.getItem() == new ItemStack(ModBlocks.blockDecorationPlaceholder, 1).getItem();
     }
 
     @Override
@@ -361,7 +368,7 @@ public class BuildingStructureHandler<J extends AbstractJobStructure<?, J>, B ex
         }
 
         return (block1 == Blocks.GRASS_BLOCK && block2 == Blocks.DIRT)
-                 || (block2 == Blocks.GRASS_BLOCK && block1 == Blocks.DIRT)
-                 || (block1 == ModBlocks.blockRack && block2 == ModBlocks.blockRack);
+            || (block2 == Blocks.GRASS_BLOCK && block1 == Blocks.DIRT)
+            || (block1 == ModBlocks.blockRack && block2 == ModBlocks.blockRack);
     }
 }

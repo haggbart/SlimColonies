@@ -6,9 +6,9 @@ import com.minecolonies.api.util.LoadOnlyStructureHandler;
 import com.minecolonies.core.colony.buildings.AbstractBuildingStructureBuilder;
 import com.minecolonies.core.colony.jobs.AbstractJobStructure;
 import com.minecolonies.core.entity.ai.workers.AbstractEntityAIStructure;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
@@ -16,6 +16,7 @@ import java.util.function.Function;
 /**
  * Load only structure handler just to get dimensions etc from structures, not for placement specific for worker usage.
  */
+@SuppressWarnings("removal")
 public final class WorkerLoadOnlyStructureHandler<J extends AbstractJobStructure<?, J>, B extends AbstractBuildingStructureBuilder> extends LoadOnlyStructureHandler
 {
     /**
@@ -33,8 +34,8 @@ public final class WorkerLoadOnlyStructureHandler<J extends AbstractJobStructure
      * @param fancyPlacement if fancy or complete.
      */
     public WorkerLoadOnlyStructureHandler(
-      final Level world, final BlockPos pos, final Blueprint blueprint, final PlacementSettings settings, final boolean fancyPlacement,
-      final AbstractEntityAIStructure<J, B> entityAIStructure)
+        final Level world, final BlockPos pos, final Blueprint blueprint, final PlacementSettings settings, final boolean fancyPlacement,
+        final AbstractEntityAIStructure<J, B> entityAIStructure)
     {
         super(world, pos, blueprint, settings, fancyPlacement);
         this.structureAI = entityAIStructure;

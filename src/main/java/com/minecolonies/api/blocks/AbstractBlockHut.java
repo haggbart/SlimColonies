@@ -32,7 +32,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
@@ -53,15 +54,15 @@ import static com.minecolonies.api.util.constant.TranslationConstants.*;
  * Base class for all Minecolonies Hut Blocks. Hut Blocks are the base blocks for Minecolonies buildings.
  * Extending this class enables all the blueprint functionalities.
  */
-@SuppressWarnings("PMD.ExcessiveImports")
+@SuppressWarnings({"PMD.ExcessiveImports", "removal"})
 public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends AbstractColonyBlock<B> implements
-                                                                                                                        IAnchorBlock,
-                                                                                                                        INamedBlueprintAnchorBlock,
-                                                                                                                        ILeveledBlueprintAnchorBlock,
-                                                                                                                        IRequirementsBlueprintAnchorBlock,
-                                                                                                                        IInvisibleBlueprintAnchorBlock,
-                                                                                                                        ISpecialCreativeHandlerAnchorBlock,
-                                                                                                                        IBuildingBrowsableBlock
+    IAnchorBlock,
+    INamedBlueprintAnchorBlock,
+    ILeveledBlueprintAnchorBlock,
+    IRequirementsBlueprintAnchorBlock,
+    IInvisibleBlueprintAnchorBlock,
+    ISpecialCreativeHandlerAnchorBlock,
+    IBuildingBrowsableBlock
 
 {
     /**
@@ -100,14 +101,14 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
      * @param style   the style of the building
      */
     public void onBlockPlacedByBuildTool(
-      @NotNull final Level worldIn,
-      @NotNull final BlockPos pos,
-      final BlockState state,
-      final LivingEntity placer,
-      final ItemStack stack,
-      final boolean mirror,
-      final String style,
-      final String blueprintPath)
+        @NotNull final Level worldIn,
+        @NotNull final BlockPos pos,
+        final BlockState state,
+        final LivingEntity placer,
+        final ItemStack stack,
+        final boolean mirror,
+        final String style,
+        final String blueprintPath)
     {
         final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
         if (tileEntity instanceof AbstractTileEntityColonyBuilding)
@@ -141,7 +142,8 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
 
         if (InventoryUtils.findFirstSlotInItemHandlerWith(new InvWrapper(player.getInventory()), this) == -1)
         {
-            requirements.add(Component.translatable("com.minecolonies.coremod.hut.cost", Component.translatable("block." + Constants.MOD_ID + "." + getHutName())).setStyle((Style.EMPTY).withColor(ChatFormatting.RED)));
+            requirements.add(Component.translatable("com.minecolonies.coremod.hut.cost", Component.translatable("block." + Constants.MOD_ID + "." + getHutName()))
+                .setStyle((Style.EMPTY).withColor(ChatFormatting.RED)));
             return requirements;
         }
 
@@ -206,21 +208,26 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
     }
 
     @Override
-    public AbstractStructureHandler getStructureHandler(final Level level, final BlockPos blockPos, final Blueprint blueprint, final PlacementSettings placementSettings, final boolean b)
+    public AbstractStructureHandler getStructureHandler(
+        final Level level,
+        final BlockPos blockPos,
+        final Blueprint blueprint,
+        final PlacementSettings placementSettings,
+        final boolean b)
     {
         return new CreativeBuildingStructureHandler(level, blockPos, blueprint, placementSettings, b);
     }
 
     @Override
     public boolean setup(
-      final ServerPlayer player,
-      final Level world,
-      final BlockPos pos,
-      final Blueprint blueprint,
-      final PlacementSettings settings,
-      final boolean fancyPlacement,
-      final String pack,
-      final String path)
+        final ServerPlayer player,
+        final Level world,
+        final BlockPos pos,
+        final Blueprint blueprint,
+        final PlacementSettings settings,
+        final boolean fancyPlacement,
+        final String pack,
+        final String path)
     {
         final BlockState anchor = blueprint.getBlockState(blueprint.getPrimaryBlockOffset());
         if (!(anchor.getBlock() instanceof AbstractBlockHut<?>) || (!fancyPlacement && player.isCreative()))
@@ -235,13 +242,13 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
         world.destroyBlock(pos, true);
         world.setBlockAndUpdate(pos, anchor);
         ((AbstractBlockHut<?>) anchor.getBlock()).onBlockPlacedByBuildTool(world,
-          pos,
-          anchor,
-          player,
-          null,
-          settings.getMirror() != Mirror.NONE,
-          pack,
-          path);
+            pos,
+            anchor,
+            player,
+            null,
+            settings.getMirror() != Mirror.NONE,
+            pack,
+            path);
 
         if (IMinecoloniesAPI.getInstance().getConfig().getServer().blueprintBuildMode.get())
         {
@@ -297,9 +304,10 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
 
     /**
      * Check if we got permissions to paste.
+     *
      * @param anchor the anchor of the paste.
      * @param player the player pasting it.
-     * @param pos the position its pasted at.
+     * @param pos    the position its pasted at.
      * @return true if fine.
      */
     private boolean canPaste(final Block anchor, final Player player, final BlockPos pos)
@@ -308,7 +316,7 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
 
         if (colony == null)
         {
-            if(anchor == ModBlocks.blockHutTownHall)
+            if (anchor == ModBlocks.blockHutTownHall)
             {
                 return true;
             }
@@ -339,6 +347,7 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
 
     /**
      * Get the blueprint name.
+     *
      * @return the name.
      */
     public String getBlueprintName()

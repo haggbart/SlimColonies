@@ -48,10 +48,6 @@ import static com.minecolonies.api.util.constant.TranslationConstants.COM_MINECO
  */
 public class CitizenDataView implements ICitizenDataView
 {
-    /**
-     * Santa Hat.
-     */
-    private static ItemStack cachedDisplaySantaHat = null;
 
     private static final String TAG_HELD_ITEM_SLOT = "HeldItemSlot";
 
@@ -620,25 +616,7 @@ public class CitizenDataView implements ICitizenDataView
     @Override
     public ItemStack getDisplayArmor(final EquipmentSlot equipmentSlot)
     {
-        if (cachedDisplaySantaHat == null)
-        {
-            if (MineColonies.getConfig().getClient().holidayFeatures.get() && LocalDate.now(Clock.systemDefaultZone()).getMonth() == Month.DECEMBER)
-            {
-                cachedDisplaySantaHat = new ItemStack(ModItems.santaHat);
-            }
-            else
-            {
-                cachedDisplaySantaHat = ItemStack.EMPTY;
-            }
-        }
-
-        final ItemStack currentHat = getInventory().getArmorInSlot(equipmentSlot);
-        if (currentHat.isEmpty() && cachedDisplaySantaHat != null && cachedDisplaySantaHat != ItemStack.EMPTY && equipmentSlot == EquipmentSlot.HEAD)
-        {
-            return cachedDisplaySantaHat;
-        }
-
-        return currentHat;
+        return getInventory().getArmorInSlot(equipmentSlot);
     }
 
 }

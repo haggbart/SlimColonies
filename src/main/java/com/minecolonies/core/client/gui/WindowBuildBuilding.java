@@ -56,6 +56,7 @@ import static com.minecolonies.api.util.constant.WindowConstants.*;
 /**
  * BOWindow for selecting the style and confirming the resources.
  */
+@SuppressWarnings("removal")
 public class WindowBuildBuilding extends AbstractWindowSkeleton
 {
     /**
@@ -71,8 +72,8 @@ public class WindowBuildBuilding extends AbstractWindowSkeleton
         final BlockState worldState = handler.getWorld().getBlockState(worldPos);
 
         return worldState.getBlock() instanceof IBuilderUndestroyable
-                 || worldState.getBlock() == Blocks.BEDROCK
-                 || (info.getBlockInfo().getState().getBlock() instanceof AbstractBlockHut && handler.getWorldPos().equals(worldPos));
+            || worldState.getBlock() == Blocks.BEDROCK
+            || (info.getBlockInfo().getState().getBlock() instanceof AbstractBlockHut && handler.getWorldPos().equals(worldPos));
     };
 
     /**
@@ -163,12 +164,14 @@ public class WindowBuildBuilding extends AbstractWindowSkeleton
 
     /**
      * Check if this one can be upgraded.
+     *
      * @return true if so.
      */
     public boolean canBeUpgraded()
     {
         final IBuildingView parentBuilding = building.getColony().getBuilding(building.getParent());
-        return building.getBuildingLevel() < building.getBuildingMaxLevel() && (parentBuilding == null || building.getBuildingLevel() < parentBuilding.getBuildingLevel() || parentBuilding.getBuildingLevel() >= parentBuilding.getBuildingMaxLevel());
+        return building.getBuildingLevel() < building.getBuildingMaxLevel() && (parentBuilding == null || building.getBuildingLevel() < parentBuilding.getBuildingLevel()
+            || parentBuilding.getBuildingLevel() >= parentBuilding.getBuildingMaxLevel());
     }
 
     /**
@@ -235,11 +238,11 @@ public class WindowBuildBuilding extends AbstractWindowSkeleton
         builders.clear();
         builders.add(new Tuple<>(Component.translatable(ModJobs.builder.get().getTranslationKey()).getString() + ":", BlockPos.ZERO));
         builders.addAll(building.getColony().getBuildings().stream()
-                          .filter(build -> build instanceof AbstractBuildingBuilderView && !((AbstractBuildingBuilderView) build).getWorkerName().isEmpty()
-                                             && build.getBuildingType() != ModBuildings.miner.get())
-                          .map(build -> new Tuple<>(((AbstractBuildingBuilderView) build).getWorkerName(), build.getPosition()))
-                          .sorted(Comparator.comparing(item -> item.getB().distSqr(building.getPosition())))
-                          .collect(Collectors.toList()));
+            .filter(build -> build instanceof AbstractBuildingBuilderView && !((AbstractBuildingBuilderView) build).getWorkerName().isEmpty()
+                && build.getBuildingType() != ModBuildings.miner.get())
+            .map(build -> new Tuple<>(((AbstractBuildingBuilderView) build).getWorkerName(), build.getPosition()))
+            .sorted(Comparator.comparing(item -> item.getB().distSqr(building.getPosition())))
+            .collect(Collectors.toList()));
 
         initBuilderNavigation();
     }
@@ -305,7 +308,8 @@ public class WindowBuildBuilding extends AbstractWindowSkeleton
         }
 
         name = name.substring(0, name.length() - 1) + nextLevel + ".blueprint";
-        ClientFutureProcessor.queueBlueprint(new ClientFutureProcessor.BlueprintProcessingData(StructurePacks.getBlueprintFuture(styles.get(stylesDropDownList.getSelectedIndex()), name), (blueprint -> {
+        ClientFutureProcessor.queueBlueprint(new ClientFutureProcessor.BlueprintProcessingData(StructurePacks.getBlueprintFuture(styles.get(stylesDropDownList.getSelectedIndex()),
+            name), (blueprint -> {
             resources.clear();
             if (blueprint == null)
             {
@@ -317,14 +321,15 @@ public class WindowBuildBuilding extends AbstractWindowSkeleton
 
             blueprint.setRotationMirror(RotationMirror.of(BlockPosUtil.getRotationFromRotations(building.getRotation()), building.isMirrored() ? Mirror.FRONT_BACK : Mirror.NONE),
                 world);
-            StructurePlacer placer = new StructurePlacer(new LoadOnlyStructureHandler(Minecraft.getInstance().level, building.getPosition(), blueprint, new PlacementSettings(), true));
+            StructurePlacer placer =
+                new StructurePlacer(new LoadOnlyStructureHandler(Minecraft.getInstance().level, building.getPosition(), blueprint, new PlacementSettings(), true));
             StructurePhasePlacementResult result;
             BlockPos progressPos = NULL_POS;
 
             do
             {
                 result = placer.executeStructureStep(world, null, progressPos, StructurePlacer.Operation.GET_RES_REQUIREMENTS,
-                  () -> placer.getIterator().increment(DONT_TOUCH_PREDICATE.and((info, pos, handler) -> false)), true);
+                    () -> placer.getIterator().increment(DONT_TOUCH_PREDICATE.and((info, pos, handler) -> false)), true);
 
                 progressPos = result.getIteratorPos();
                 for (final ItemStack stack : result.getBlockResult().getRequiredItems())
@@ -336,9 +341,7 @@ public class WindowBuildBuilding extends AbstractWindowSkeleton
 
             window.findPaneOfTypeByID(LIST_RESOURCES, ScrollingList.class).refreshElementPanes();
             updateResourceList();
-
         })));
-
     }
 
     /**

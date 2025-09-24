@@ -82,7 +82,6 @@ public final class ModItemsInitializer
         ModItems.scrollHighLight = new ItemScrollHighlight(new Item.Properties().stacksTo(16));
         registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_highlight"), ModItems.scrollHighLight);
 
-        ModItems.santaHat = new ItemSantaHead("santa_hat", ItemSantaHead.SANTA_HAT, ArmorItem.Type.HELMET, new Item.Properties());
         ModItems.irongate = new ItemGate(IRON_GATE, ModBlocks.blockIronGate, new Item.Properties());
         ModItems.woodgate = new ItemGate(WOODEN_GATE, ModBlocks.blockWoodenGate, new Item.Properties());
 
@@ -127,7 +126,6 @@ public final class ModItemsInitializer
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "adventure_token"), ModItems.adventureToken);
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "santa_hat"), ModItems.santaHat);
         registry.register(new ResourceLocation(Constants.MOD_ID, IRON_GATE), ModItems.irongate);
         registry.register(new ResourceLocation(Constants.MOD_ID, WOODEN_GATE), ModItems.woodgate);
         registry.register(new ResourceLocation(Constants.MOD_ID, "colony_banner"), ModItems.flagBanner);

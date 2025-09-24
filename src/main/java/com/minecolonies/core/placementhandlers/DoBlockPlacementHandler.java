@@ -41,6 +41,7 @@ import java.util.List;
 
 import static com.ldtteam.structurize.placement.handlers.placement.PlacementHandlers.handleTileEntityPlacement;
 
+@SuppressWarnings("removal")
 public class DoBlockPlacementHandler implements IPlacementHandler
 {
     @Override
@@ -51,22 +52,23 @@ public class DoBlockPlacementHandler implements IPlacementHandler
 
     @Override
     public ActionProcessingResult handle(
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete,
-      final BlockPos centerPos,
-      final PlacementSettings settings)
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete,
+        final BlockPos centerPos,
+        final PlacementSettings settings)
     {
         BlockState placementState = blockState;
-        if (blockState.getBlock() instanceof WallBlock || blockState.getBlock() instanceof FenceBlock || blockState.getBlock() instanceof PillarBlock || blockState.getBlock() instanceof IronBarsBlock)
+        if (blockState.getBlock() instanceof WallBlock || blockState.getBlock() instanceof FenceBlock || blockState.getBlock() instanceof PillarBlock
+            || blockState.getBlock() instanceof IronBarsBlock)
         {
             try
             {
                 final BlockState tempState = blockState.getBlock().getStateForPlacement(
-                  new BlockPlaceContext(world, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,
-                    new BlockHitResult(new Vec3(0, 0, 0), Direction.DOWN, pos, true)));
+                    new BlockPlaceContext(world, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,
+                        new BlockHitResult(new Vec3(0, 0, 0), Direction.DOWN, pos, true)));
                 if (tempState != null)
                 {
                     placementState = tempState;
@@ -88,7 +90,7 @@ public class DoBlockPlacementHandler implements IPlacementHandler
                 {
                     handleTileEntityPlacement(tileEntityData, world, pos, settings);
                     placementState.getBlock().setPlacedBy(world, pos, placementState, null, placementState.getBlock().getCloneItemStack(placementState,
-                      new BlockHitResult(new Vec3(0,0,0), Direction.NORTH, pos, false), world, pos, null));
+                        new BlockHitResult(new Vec3(0, 0, 0), Direction.NORTH, pos, false), world, pos, null));
                 }
                 catch (final Exception ex)
                 {
@@ -109,7 +111,7 @@ public class DoBlockPlacementHandler implements IPlacementHandler
             {
                 handleTileEntityPlacement(tileEntityData, world, pos, settings);
                 blockState.getBlock().setPlacedBy(world, pos, placementState, null, placementState.getBlock().getCloneItemStack(placementState,
-                  new BlockHitResult(new Vec3(0,0,0), Direction.NORTH, pos, false), world, pos, null));
+                    new BlockHitResult(new Vec3(0, 0, 0), Direction.NORTH, pos, false), world, pos, null));
             }
             catch (final Exception ex)
             {
@@ -122,11 +124,11 @@ public class DoBlockPlacementHandler implements IPlacementHandler
 
     @Override
     public List<ItemStack> getRequiredItems(
-      @NotNull final Level world,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockState blockState,
-      @Nullable final CompoundTag tileEntityData,
-      final boolean complete)
+        @NotNull final Level world,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockState blockState,
+        @Nullable final CompoundTag tileEntityData,
+        final boolean complete)
     {
         final List<ItemStack> itemList = new ArrayList<>();
         if (tileEntityData != null)
@@ -146,7 +148,8 @@ public class DoBlockPlacementHandler implements IPlacementHandler
     /**
      * Calculate the correct DO item.
      * Considering type and, for the builder we do want the generic type to be used here.
-     * @param item the item to output.
+     *
+     * @param item       the item to output.
      * @param blockState the blockstate in the world.
      * @return the adjusted item.
      */
@@ -166,7 +169,8 @@ public class DoBlockPlacementHandler implements IPlacementHandler
         }
         else if (blockState.getBlock() instanceof FancyTrapdoorBlock)
         {
-            item.getOrCreateTag().putString("type", complete ? blockState.getValue(FancyTrapdoorBlock.TYPE).toString().toUpperCase() : FancyTrapdoorType.FULL.toString().toUpperCase());
+            item.getOrCreateTag()
+                .putString("type", complete ? blockState.getValue(FancyTrapdoorBlock.TYPE).toString().toUpperCase() : FancyTrapdoorType.FULL.toString().toUpperCase());
         }
         else if (blockState.getBlock() instanceof PanelBlock)
         {

@@ -27,7 +27,6 @@ public final class ModItems
     public static Item compost;
     public static Item resourceScroll;
 
-    public static Item santaHat;
 
     public static Item flagBanner;
     public static Item irongate;

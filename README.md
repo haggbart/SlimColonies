@@ -54,6 +54,7 @@ SlimColonies removes these pain points and makes sensible behaviors the default,
 - [x] Removed courier building level carrying capacity restrictions
 - [x] Remove Scimitar
 - [x] Remove Plate Armor
+- [x] Simplified visitor recruitment (no cost)
 
 #### Misc & Other
 
