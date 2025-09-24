@@ -38,9 +38,3 @@ jobs:
     - name: Run tests
       run: ./gradlew test
 
-    - name: Upload build artifacts
-      if: github.ref == 'refs/heads/master'
-      uses: actions/upload-artifact@v4
-      with:
-        name: slimcolonies-dev-build
-        path: build/libs/*.jar
