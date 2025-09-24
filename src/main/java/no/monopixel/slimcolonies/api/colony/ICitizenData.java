@@ -1,0 +1,455 @@
+package no.monopixel.slimcolonies.api.colony;
+
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.jobs.IJob;
+import no.monopixel.slimcolonies.api.entity.ai.JobStatus;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
+import com.minecolonies.api.entity.citizen.citizenhandlers.*;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenInjuryHandler;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenMournHandler;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenSkillHandler;
+import no.monopixel.slimcolonies.api.quests.IQuestGiver;
+import no.monopixel.slimcolonies.api.quests.IQuestParticipant;
+import no.monopixel.slimcolonies.api.util.Tuple;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.UUID;
+
+public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticipant
+{
+    /**
+     * Maximum saturation of a citizen.
+     */
+    int MAX_SATURATION = 20;
+
+    /**
+     * When a building is destroyed, inform the citizen so it can do any cleanup of associations that the building's. own IBuilding.onDestroyed did not do.
+     *
+     * @param building building that is destroyed.
+     */
+    void onRemoveBuilding(IBuilding building);
+
+    /**
+     * Returns the home building of the citizen.
+     *
+     * @return home building.
+     */
+    @Nullable
+    IBuilding getHomeBuilding();
+
+    /**
+     * Sets the home of the citizen.
+     *
+     * @param building home building.
+     */
+    void setHomeBuilding(@Nullable IBuilding building);
+
+    /**
+     * Returns the work building of a citizen.
+     *
+     * @return home building of a citizen.
+     */
+    @Nullable
+    IBuilding getWorkBuilding();
+
+    /**
+     * Returns the job of the citizen.
+     *
+     * @return Job of the citizen.
+     */
+    IJob<?> getJob();
+
+    /**
+     * Sets the job of this citizen.
+     *
+     * @param job Job of the citizen.
+     */
+    void setJob(IJob<?> job);
+
+    /**
+     * Returns the job subclass needed. Returns null on type mismatch.
+     *
+     * @param type the type of job wanted.
+     * @param <J>  The job type returned.
+     * @return the job this citizen has.
+     */
+    @Nullable
+    <J extends IJob<?>> J getJob(@NotNull Class<J> type);
+
+    /**
+     * Set the last position of the citizen.
+     *
+     * @param lastPosition the last position.
+     */
+    void setLastPosition(BlockPos lastPosition);
+
+    /**
+     * Get the last position of the citizen.
+     *
+     * @return the last position.
+     */
+    BlockPos getLastPosition();
+
+    /**
+     * Sets the citizens current saturation.
+     *
+     * @param saturation to set
+     */
+    void setSaturation(double saturation);
+
+    /**
+     * Check if citizen is asleep.
+     *
+     * @return true if so.
+     */
+    boolean isAsleep();
+
+    /**
+     * Getter for the bedPos.
+     *
+     * @return the bedPos.
+     */
+    BlockPos getBedPos();
+
+    /**
+     * Set asleep.
+     *
+     * @param asleep true if asleep.
+     */
+    void setAsleep(boolean asleep);
+
+    /**
+     * Set the bed pos.
+     *
+     * @param bedPos the pos to set.
+     */
+    void setBedPos(BlockPos bedPos);
+
+
+    /**
+     * The Handler for the citizens mourning.
+     *
+     * @return the instance of the handler
+     */
+    ICitizenMournHandler getCitizenMournHandler();
+
+    /**
+     * Get the citizen skill handler.
+     *
+     * @return the handler.
+     */
+    ICitizenSkillHandler getCitizenSkillHandler();
+
+    ICitizenInjuryHandler getCitizenInjuryHandler();
+
+    /**
+     * Schedule restart and cleanup.
+     *
+     * @param player the player scheduling it.
+     */
+    void scheduleRestart(ServerPlayer player);
+
+    /**
+     * AI will be restarted, also restart building etc
+     *
+     * @return true if so.
+     */
+    boolean shouldRestart();
+
+    /**
+     * Restart done successfully
+     */
+    void restartDone();
+
+    /**
+     * Set the child flag.
+     *
+     * @param isChild boolean
+     */
+    void setIsChild(boolean isChild);
+
+    /**
+     * Check if the citizen just ate.
+     *
+     * @return true if so.
+     */
+    boolean justAte();
+
+    /**
+     * Set or reset if the citizen just ate.
+     *
+     * @param justAte true if justAte, false to reset.
+     */
+    void setJustAte(boolean justAte);
+
+    /**
+     * If is idle at job.
+     *
+     * @return true if so.
+     */
+    boolean isIdleAtJob();
+
+    /**
+     * Queries the citizen's job status.
+     */
+    JobStatus getJobStatus();
+
+    /**
+     * Set the working status of the citizen.
+     *
+     * @param status the job status
+     */
+    void setJobStatus(final JobStatus status);
+
+    /**
+     * Gets the entity
+     * @return
+     */
+    @Override
+    Optional<AbstractEntityCitizen> getEntity();
+
+    /**
+     * Gets the citizen's status
+     *
+     * @return status
+     */
+    VisibleCitizenStatus getStatus();
+
+    /**
+     * Sets the citizens status
+     *
+     * @param status status to set
+     */
+    void setVisibleStatus(VisibleCitizenStatus status);
+
+    /**
+     * Gets a location of interest of this citizen's job.
+     *
+     * @return the location, or null if nowhere is particularly interesting right now.
+     */
+    @Nullable BlockPos getStatusPosition();
+
+    /**
+     * Sets the location of interest of this citizen.
+     *
+     * @param pos the location, or null to clear.
+     */
+    void setStatusPosition(@Nullable BlockPos pos);
+
+    /**
+     * Get the random var of the citizen.
+     * @return the random.
+     */
+    Random getRandom();
+
+    /**
+     * Applies the effects of research to the data's entity
+     */
+    void applyResearchEffects();
+
+
+    /**
+     * Sets the next position to respawn at
+     *
+     * @param pos position to set
+     */
+    void setNextRespawnPosition(final BlockPos pos);
+
+    /**
+     * Returns whether the citizen has food in their inventory that's not good enough (but no good food)
+     * @return true if so
+     */
+    boolean needsBetterFood();
+
+    /**
+     * Get the partner of the citizen.
+     * @return the partner or null if non existent.
+     */
+    @Nullable
+    ICitizenData getPartner();
+
+    /**
+     * Get the list of children of a citizen.
+     * @return the citizen ids.
+     */
+    List<Integer> getChildren();
+
+    /**
+     * Get the list of children of a citizen.
+     * @return the citizen ids.
+     */
+    List<Integer> getSiblings();
+
+    /**
+     * Get the names of the parents.
+     * @return the name.
+     */
+    Tuple<String, String> getParents();
+
+    /**
+     * Add one or more siblings to a citizen.
+     * @param siblings the ids of the siblings.
+     */
+    void addSiblings(final Integer...siblings);
+
+    /**
+     * Add one or more children to a citizen.
+     * @param children the ids of the children.
+     */
+    void addChildren(final Integer...children);
+
+    /**
+     * Set a new partner to the citizen.
+     * @param id the partner id.
+     */
+    void setPartner(final int id);
+
+    /**
+     * On death of a citizen this is invoked on the related citizens.
+     * @param id the id of the citizen.
+     */
+    void onDeath(final Integer id);
+
+    /**
+     * Set the parents of the citizen.
+     * @param firstParent the parent name.
+     * @param secondParent second parent name.
+     */
+    void setParents(final String firstParent, final String secondParent);
+
+    /**
+     * Generate the name of the citizen.
+     * @param rand used random func.
+     * @param firstParentName name of the first parent.
+     * @param secondParentName name of the second parent.
+     */
+    void generateName(@NotNull final Random rand, final String firstParentName, final String secondParentName, final CitizenNameFile nameFile);
+
+    /**
+     * Check if the two citizens are related.
+     * @param data the data of the citizen.
+     * @return true if so.
+     */
+    boolean isRelatedTo(ICitizenData data);
+
+    /**
+     * Check if the two citizens live together.
+     * @param data the data of the other citizen.
+     * @return true if so.
+     */
+    boolean doesLiveWith(ICitizenData data);
+
+    /**
+     * Set if the worker is currently working actively.
+     *
+     * @param b true if so.
+     */
+    default void setWorking(final boolean b)
+    {
+        //noop
+    }
+
+    /**
+     * Check if the worker is currently actively working.
+     * @return true if so.
+     */
+    default boolean isWorking()
+    {
+        return true;
+    }
+
+    /**
+     * On citizen being resurrected.
+     */
+    void onResurrect();
+
+    /**
+     * Check if the citizen has some kind of custom texture.
+     * @return true if so.
+     */
+    default boolean hasCustomTexture()
+    {
+        return false;
+    }
+
+    /**
+     * Setter of the custom texture.
+     * @param texture the texture uuid.
+     */
+    void setCustomTexture(UUID texture);
+
+    /**
+     * Get custom texture uuid.
+     * @return uuid to return.
+     */
+    UUID getCustomTexture();
+
+    /**
+     * Sets the citizen idle for a certain amount of days
+     *
+     * @param days amount of days
+     */
+    void setIdleDays(int days);
+
+    /**
+     * On completing a quest.
+     * @param questId the id of the completed quest.
+     */
+    void onQuestCompletion(ResourceLocation questId);
+
+    /**
+     * Trigger for server side interaction closing.
+     * @param key the key of the interaction.
+     * @param sender the player closing it.
+     */
+    void onInteractionClosed(Component key, ServerPlayer sender);
+
+    /**
+     * Called after buildings loaded
+     */
+    void onBuildingLoad();
+
+    /**
+     * Called when a player interacts with a citizen
+     *
+     * @param player the player that interacted
+     */
+    void setInteractedRecently(final UUID player);
+
+    /**
+     * If any quest is assigned to the citizen.
+     * @return true if so.
+     */
+    boolean hasQuestAssignment();
+
+    /**
+     * Get the home position of the citizen.
+     * @return the pos to go home to.
+     */
+    @Nullable
+    BlockPos getHomePosition();
+
+
+    /**
+     * The Handler for the citizens food.
+     *
+     * @return the instance of the handler
+     */
+    ICitizenFoodHandler getCitizenFoodHandler();
+
+    /**
+     * Get leisure time. Time in ticks citizens might be wanting to do leisure instead of work.
+     * @return the leftover leisure time.
+     */
+    int getLeisureTime();
+}

@@ -1,0 +1,224 @@
+package no.monopixel.slimcolonies.apiimp.initializer;
+
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import com.minecolonies.core.blocks.*;
+import no.monopixel.slimcolonies.core.blocks.*;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockColonyFlagBanner;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockColonyFlagWallBanner;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockConstructionTape;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockGate;
+import com.minecolonies.core.blocks.huts.*;
+import no.monopixel.slimcolonies.core.blocks.huts.*;
+import no.monopixel.slimcolonies.core.blocks.schematic.BlockWaypoint;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegisterEvent;
+
+import static no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockGate.IRON_GATE;
+import static no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockGate.WOODEN_GATE;
+
+/**
+ * This class deals with the initialization of blocks and their items.
+ */
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public final class ModBlocksInitializer
+{
+
+    private ModBlocksInitializer()
+    {
+        throw new IllegalStateException("Tried to initialize: ModBlockInitializer but this is a Utility class.");
+    }
+
+    @SubscribeEvent
+    public static void registerBlocks(RegisterEvent event)
+    {
+        if (event.getRegistryKey().equals(ForgeRegistries.Keys.BLOCKS))
+        {
+            ModBlocksInitializer.init(event.getForgeRegistry());
+        }
+    }
+
+    /**
+     * Initializes {@link ModBlocks} with the block instances.
+     *
+     * @param registry The registry to register the new blocks.
+     */
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
+    public static void init(final IForgeRegistry<Block> registry)
+    {
+        ModBlocks.blockHutBaker = new BlockHutBaker().registerBlock(registry);
+        ModBlocks.blockHutBlacksmith = new BlockHutBlacksmith().registerBlock(registry);
+        ModBlocks.blockHutBuilder = new BlockHutBuilder().registerBlock(registry);
+        ModBlocks.blockHutHome = new BlockHutCitizen().registerBlock(registry);
+        ModBlocks.blockHutDeliveryman = new BlockHutDeliveryman().registerBlock(registry);
+        ModBlocks.blockHutFarmer = new BlockHutFarmer().registerBlock(registry);
+        ModBlocks.blockScarecrow = new BlockScarecrow().registerBlock(registry);
+        ModBlocks.blockHutFisherman = new BlockHutFisherman().registerBlock(registry);
+        ModBlocks.blockHutGuardTower = new BlockHutGuardTower().registerBlock(registry);
+        ModBlocks.blockHutLumberjack = new BlockHutLumberjack().registerBlock(registry);
+        ModBlocks.blockHutMiner = new BlockHutMiner().registerBlock(registry);
+        ModBlocks.blockHutStonemason = new BlockHutStonemason().registerBlock(registry);
+        ModBlocks.blockHutTownHall = new BlockHutTownHall().registerBlock(registry);
+        ModBlocks.blockHutWareHouse = new BlockHutWareHouse().registerBlock(registry);
+        ModBlocks.blockHutShepherd = new BlockHutShepherd().registerBlock(registry);
+        ModBlocks.blockHutCowboy = new BlockHutCowboy().registerBlock(registry);
+        ModBlocks.blockHutSwineHerder = new BlockHutSwineHerder().registerBlock(registry);
+        ModBlocks.blockHutChickenHerder = new BlockHutChickenHerder().registerBlock(registry);
+        ModBlocks.blockHutBarracks = new BlockHutBarracks().registerBlock(registry);
+        ModBlocks.blockHutBarracksTower = new BlockHutBarracksTower().registerBlock(registry);
+        ModBlocks.blockHutCook = new BlockHutCook().registerBlock(registry);
+        ModBlocks.blockHutSmeltery = new BlockHutSmeltery().registerBlock(registry);
+        ModBlocks.blockHutComposter = new BlockHutComposter().registerBlock(registry);
+        ModBlocks.blockHutLibrary = new BlockHutLibrary().registerBlock(registry);
+        ModBlocks.blockHutArchery = new BlockHutArchery().registerBlock(registry);
+        ModBlocks.blockHutSawmill = new BlockHutSawmill().registerBlock(registry);
+        ModBlocks.blockHutCombatAcademy = new BlockHutCombatAcademy().registerBlock(registry);
+        ModBlocks.blockHutStoneSmeltery = new BlockHutStoneSmeltery().registerBlock(registry);
+        ModBlocks.blockHutCrusher = new BlockHutCrusher().registerBlock(registry);
+        ModBlocks.blockHutSifter = new BlockHutSifter().registerBlock(registry);
+        ModBlocks.blockHutFlorist = new BlockHutFlorist().registerBlock(registry);
+        ModBlocks.blockHutEnchanter = new BlockHutEnchanter().registerBlock(registry);
+        ModBlocks.blockHutUniversity = new BlockHutUniversity().registerBlock(registry);
+        ModBlocks.blockHutHospital = new BlockHutHospital().registerBlock(registry);
+        ModBlocks.blockHutSchool = new BlockHutSchool().registerBlock(registry);
+        ModBlocks.blockHutGlassblower = new BlockHutGlassblower().registerBlock(registry);
+        ModBlocks.blockHutDyer = new BlockHutDyer().registerBlock(registry);
+        ModBlocks.blockHutFletcher = new BlockHutFletcher().registerBlock(registry);
+        ModBlocks.blockHutMechanic = new BlockHutMechanic().registerBlock(registry);
+        ModBlocks.blockHutTavern = new BlockHutTavern().registerBlock(registry);
+        ModBlocks.blockHutPlantation = new BlockHutPlantation().registerBlock(registry);
+        ModBlocks.blockPlantationField = new BlockPlantationField().registerBlock(registry);
+        ModBlocks.blockHutRabbitHutch = new BlockHutRabbitHutch().registerBlock(registry);
+        ModBlocks.blockHutConcreteMixer = new BlockHutConcreteMixer().registerBlock(registry);
+        ModBlocks.blockHutBeekeeper = new BlockHutBeekeeper().registerBlock(registry);
+        ModBlocks.blockHutMysticalSite = new BlockHutMysticalSite().registerBlock(registry);
+        ModBlocks.blockHutGraveyard = new BlockHutGraveyard().registerBlock(registry);
+        ModBlocks.blockHutNetherWorker = new BlockHutNetherWorker().registerBlock(registry);
+        ModBlocks.blockHutAlchemist = new BlockHutAlchemist().registerBlock(registry);
+        ModBlocks.blockHutKitchen = new BlockHutKitchen().registerBlock(registry);
+        ModBlocks.blockHutGateHouse = new BlockHutGateHouse().registerBlock(registry);
+
+        ModBlocks.blockConstructionTape = new BlockConstructionTape().registerBlock(registry);
+        ModBlocks.blockRack = new BlockMinecoloniesRack().registerBlock(registry);
+        ModBlocks.blockGrave = new BlockMinecoloniesGrave().registerBlock(registry);
+        ModBlocks.blockNamedGrave = new BlockMinecoloniesNamedGrave().registerBlock(registry);
+        ModBlocks.blockWayPoint = new BlockWaypoint().registerBlock(registry);
+        ModBlocks.blockPostBox = new BlockPostBox().registerBlock(registry);
+        ModBlocks.blockStash = new BlockStash().registerBlock(registry);
+        ModBlocks.blockDecorationPlaceholder = new BlockDecorationController().registerBlock(registry);
+        ModBlocks.blockBarrel = new BlockBarrel().registerBlock(registry);
+        ModBlocks.blockCompostedDirt = new BlockCompostedDirt().registerBlock(registry);
+        ModBlocks.blockColonyBanner = new BlockColonyFlagBanner().registerBlock(registry);
+        ModBlocks.blockColonyWallBanner = new BlockColonyFlagWallBanner().registerBlock(registry);
+        ModBlocks.blockIronGate = new BlockGate(IRON_GATE, 10f, 6, 8).registerBlock(registry);
+        ModBlocks.blockWoodenGate = new BlockGate(WOODEN_GATE, 7f, 6, 5).registerBlock(registry);
+        ModBlocks.blockColonySign = new BlockColonySign().registerBlock(registry);
+
+        // Crops removed for simplification
+
+        ModBlocks.blockSimpleQuarry = new SimpleQuarry().registerBlock(registry);
+        ModBlocks.blockMediumQuarry = new MediumQuarry().registerBlock(registry);
+        //ModBlocks.blockLargeQuarry = new LargeQuarry().registerBlock(registry);
+    }
+
+    @SubscribeEvent
+    public static void registerItems(RegisterEvent event)
+    {
+        if (event.getRegistryKey().equals(ForgeRegistries.Keys.ITEMS))
+        {
+            ModBlocksInitializer.registerBlockItem(event.getForgeRegistry());
+
+            registerCompostItems();
+        }
+    }
+
+    /**
+     * Initializes the registry with the relevant item produced by the relevant blocks.
+     *
+     * @param registry The item registry to add the items too.
+     */
+    public static void registerBlockItem(final IForgeRegistry<Item> registry)
+    {
+        ModBlocks.blockHutBaker.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutBlacksmith.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutBuilder.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutHome.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutDeliveryman.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutFarmer.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockScarecrow.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutFisherman.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutGuardTower.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutLumberjack.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutMiner.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutStonemason.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutTownHall.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutWareHouse.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutShepherd.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutCowboy.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutSwineHerder.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutChickenHerder.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutBarracksTower.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutBarracks.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutCook.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutSmeltery.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutComposter.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutLibrary.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutArchery.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutCombatAcademy.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutSawmill.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutStoneSmeltery.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutCrusher.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutSifter.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutFlorist.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutEnchanter.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutUniversity.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutHospital.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutSchool.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutGlassblower.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutDyer.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutFletcher.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutMechanic.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutTavern.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutPlantation.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockPlantationField.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutRabbitHutch.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutConcreteMixer.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutBeekeeper.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutMysticalSite.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutGraveyard.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutNetherWorker.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutAlchemist.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutKitchen.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockHutGateHouse.registerBlockItem(registry, new Item.Properties());
+
+        ModBlocks.blockConstructionTape.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockRack.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockGrave.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockNamedGrave.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockWayPoint.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockBarrel.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockPostBox.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockStash.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockDecorationPlaceholder.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockCompostedDirt.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockColonySign.registerBlockItem(registry, new Item.Properties());
+
+        // Crop items removed for simplification
+
+        ModBlocks.blockSimpleQuarry.registerBlockItem(registry, new Item.Properties());
+        ModBlocks.blockMediumQuarry.registerBlockItem(registry, new Item.Properties());
+        //ModBlocks.blockLargeQuarry.registerBlockItem(registry, new Item.Properties());
+    }
+
+    private static void registerCompostItems()
+    {
+        // Crops removed, only keeping composted dirt
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.blockCompostedDirt.asItem(), 1f);
+    }
+}

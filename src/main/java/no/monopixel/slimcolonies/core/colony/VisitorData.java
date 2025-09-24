@@ -1,0 +1,120 @@
+package no.monopixel.slimcolonies.core.colony;
+
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IVisitorData;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+import org.jetbrains.annotations.NotNull;
+
+import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
+import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.TAG_SITTING;
+
+/**
+ * Data for visitors
+ */
+public class VisitorData extends CitizenData implements IVisitorData
+{
+    /**
+     * The position the citizen is sitting at
+     */
+    private BlockPos sittingPosition = BlockPos.ZERO;
+
+    /**
+     * Create a CitizenData given an ID. Used as a super-constructor or during loading.
+     *
+     * @param id     ID of the Citizen.
+     * @param colony Colony the Citizen belongs to.
+     */
+    public VisitorData(final int id, final IColony colony)
+    {
+        super(id, colony);
+    }
+
+    @Override
+    public CompoundTag serializeNBT()
+    {
+        CompoundTag compoundNBT = super.serializeNBT();
+        BlockPosUtil.write(compoundNBT, TAG_SITTING, sittingPosition);
+        return compoundNBT;
+    }
+
+    @Override
+    public void deserializeNBT(final CompoundTag nbtTagCompound)
+    {
+        super.deserializeNBT(nbtTagCompound);
+        sittingPosition = BlockPosUtil.read(nbtTagCompound, TAG_SITTING);
+    }
+
+
+    /**
+     * Loads this citizen data from nbt
+     *
+     * @param colony colony to load for
+     * @param nbt    nbt compound to read from
+     * @return new CitizenData
+     */
+    public static IVisitorData loadVisitorFromNBT(final IColony colony, final CompoundTag nbt)
+    {
+        final IVisitorData data = new VisitorData(nbt.getInt(TAG_ID), colony);
+        data.deserializeNBT(nbt);
+        return data;
+    }
+
+    @Override
+    public void serializeViewNetworkData(@NotNull final FriendlyByteBuf buf)
+    {
+        super.serializeViewNetworkData(buf);
+    }
+
+    @Override
+    public BlockPos getSittingPosition()
+    {
+        return sittingPosition;
+    }
+
+    @Override
+    public void setSittingPosition(final BlockPos pos)
+    {
+        this.sittingPosition = pos;
+    }
+
+    @Override
+    public void updateEntityIfNecessary()
+    {
+        if (getEntity().isPresent())
+        {
+            final Entity entity = getEntity().get();
+            if (entity.isAlive() && WorldUtil.isEntityBlockLoaded(entity.level, entity.blockPosition()))
+            {
+                return;
+            }
+        }
+
+        if (getLastPosition() != BlockPos.ZERO && (getLastPosition().getX() != 0 && getLastPosition().getZ() != 0) && WorldUtil.isEntityBlockLoaded(getColony().getWorld(),
+          getLastPosition()))
+        {
+            getColony().getVisitorManager().spawnOrCreateCivilian(this, getColony().getWorld(), getLastPosition(), true);
+        }
+        else if (getHomeBuilding() != null)
+        {
+            if (WorldUtil.isEntityBlockLoaded(getColony().getWorld(), getHomeBuilding().getID()))
+            {
+                final BlockPos spawnPos = BlockPosUtil.findSpawnPosAround(getColony().getWorld(), getHomeBuilding().getID());
+                if (spawnPos != null)
+                {
+                    getColony().getVisitorManager().spawnOrCreateCivilian(this, getColony().getWorld(), spawnPos, true);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void applyResearchEffects()
+    {
+        // no research effects for now
+    }
+}

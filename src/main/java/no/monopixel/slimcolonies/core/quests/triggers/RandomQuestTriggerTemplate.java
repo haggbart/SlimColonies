@@ -1,0 +1,45 @@
+package no.monopixel.slimcolonies.core.quests.triggers;
+
+import com.google.gson.JsonObject;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.quests.IQuestTriggerTemplate;
+import no.monopixel.slimcolonies.api.quests.ITriggerReturnData;
+
+import static no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateConstants.MAX_TICKRATE;
+import static no.monopixel.slimcolonies.api.quests.QuestParseConstant.RARITY_ID;
+
+/**
+ * Random quest trigger.
+ */
+public class RandomQuestTriggerTemplate implements IQuestTriggerTemplate
+{
+    /**
+     * There is a 1 in oneInChance, chance of this quest to be triggered.
+     */
+    private final int oneInChance;
+
+    /**
+     * Create a new instance of this trigger.
+     * @param oneInChance the chance for this.
+     */
+    public RandomQuestTriggerTemplate(final int oneInChance)
+    {
+        this.oneInChance = oneInChance;
+    }
+
+    /**
+     * Create a new trigger directly from json.
+     * @param randomQuestTriggerJson the json associated to this trigger.
+     */
+    public static RandomQuestTriggerTemplate createStateTrigger(final JsonObject randomQuestTriggerJson)
+    {
+        return new RandomQuestTriggerTemplate(randomQuestTriggerJson.get(RARITY_ID).getAsInt());
+    }
+
+    @Override
+    public ITriggerReturnData canTriggerQuest(final IColony colony)
+    {
+        // Attempted once every 500 ticks.
+        return new BooleanTriggerReturnData(oneInChance > 0 && colony.getWorld().random.nextInt(oneInChance) < MAX_TICKRATE);
+    }
+}
