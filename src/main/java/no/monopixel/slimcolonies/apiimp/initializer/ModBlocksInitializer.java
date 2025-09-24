@@ -1,16 +1,5 @@
 package no.monopixel.slimcolonies.apiimp.initializer;
 
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import com.minecolonies.core.blocks.*;
-import no.monopixel.slimcolonies.core.blocks.*;
-import no.monopixel.slimcolonies.core.blocks.decorative.BlockColonyFlagBanner;
-import no.monopixel.slimcolonies.core.blocks.decorative.BlockColonyFlagWallBanner;
-import no.monopixel.slimcolonies.core.blocks.decorative.BlockConstructionTape;
-import no.monopixel.slimcolonies.core.blocks.decorative.BlockGate;
-import com.minecolonies.core.blocks.huts.*;
-import no.monopixel.slimcolonies.core.blocks.huts.*;
-import no.monopixel.slimcolonies.core.blocks.schematic.BlockWaypoint;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -19,6 +8,15 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegisterEvent;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.blocks.*;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockColonyFlagBanner;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockColonyFlagWallBanner;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockConstructionTape;
+import no.monopixel.slimcolonies.core.blocks.decorative.BlockGate;
+import no.monopixel.slimcolonies.core.blocks.huts.*;
+import no.monopixel.slimcolonies.core.blocks.schematic.BlockWaypoint;
 
 import static no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockGate.IRON_GATE;
 import static no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockGate.WOODEN_GATE;

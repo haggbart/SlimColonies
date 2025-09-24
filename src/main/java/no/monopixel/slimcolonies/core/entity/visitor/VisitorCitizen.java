@@ -1,38 +1,5 @@
 package no.monopixel.slimcolonies.core.entity.visitor;
 
-import com.minecolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
-import no.monopixel.slimcolonies.api.colony.requestsystem.location.ILocation;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import com.minecolonies.api.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
-import no.monopixel.slimcolonies.api.inventory.container.ContainerCitizenInventory;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
-import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.client.gui.WindowInteraction;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.TavernBuildingModule;
-import no.monopixel.slimcolonies.core.entity.ai.minimal.EntityAIInteractToggleAble;
-import no.monopixel.slimcolonies.core.entity.ai.minimal.LookAtEntityGoal;
-import no.monopixel.slimcolonies.core.entity.ai.minimal.LookAtEntityInteractGoal;
-import no.monopixel.slimcolonies.core.entity.ai.visitor.EntityAIVisitor;
-import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenExperienceHandler;
-import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInventoryHandler;
-import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenJobHandler;
-import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenSleepHandler;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MovementHandler;
-import no.monopixel.slimcolonies.core.network.messages.client.ItemParticleEffectMessage;
-import no.monopixel.slimcolonies.core.network.messages.server.colony.OpenInventoryMessage;
-import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -55,6 +22,36 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.NameTagItem;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
+import no.monopixel.slimcolonies.api.colony.*;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.permissions.Action;
+import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
+import no.monopixel.slimcolonies.api.colony.requestsystem.location.ILocation;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.*;
+import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
+import no.monopixel.slimcolonies.api.inventory.container.ContainerCitizenInventory;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
+import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
+import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.client.gui.WindowInteraction;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.TavernBuildingModule;
+import no.monopixel.slimcolonies.core.entity.ai.minimal.EntityAIInteractToggleAble;
+import no.monopixel.slimcolonies.core.entity.ai.minimal.LookAtEntityGoal;
+import no.monopixel.slimcolonies.core.entity.ai.minimal.LookAtEntityInteractGoal;
+import no.monopixel.slimcolonies.core.entity.ai.visitor.EntityAIVisitor;
+import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
+import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenExperienceHandler;
+import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInventoryHandler;
+import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenJobHandler;
+import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenSleepHandler;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MovementHandler;
+import no.monopixel.slimcolonies.core.network.messages.client.ItemParticleEffectMessage;
+import no.monopixel.slimcolonies.core.network.messages.server.colony.OpenInventoryMessage;
+import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -114,7 +111,7 @@ public class VisitorCitizen extends AbstractEntityCitizen
     /**
      * The location used for requests
      */
-    private ILocation              location = null;
+    private ILocation location = null;
 
     /**
      * Constructor for a new citizen typed entity.
@@ -580,9 +577,9 @@ public class VisitorCitizen extends AbstractEntityCitizen
                 final String deathLocation = BlockPosUtil.getString(blockPosition());
 
                 MessageUtils.format(MESSAGE_INFO_COLONY_VISITOR_DIED, getCitizenData().getName(), cause.getMsgId(), deathLocation)
-                  .withPriority(MessagePriority.DANGER)
-                  .sendTo(colony)
-                  .forManagers();
+                    .withPriority(MessagePriority.DANGER)
+                    .sendTo(colony)
+                    .forManagers();
             }
         }
     }

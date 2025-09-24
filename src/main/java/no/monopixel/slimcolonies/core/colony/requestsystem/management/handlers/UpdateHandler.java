@@ -7,7 +7,6 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.management.update.Upda
 import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
 import no.monopixel.slimcolonies.core.colony.requestsystem.management.IStandardRequestManager;
 import no.monopixel.slimcolonies.core.colony.requestsystem.management.handlers.update.IUpdateStep;
-import com.minecolonies.core.colony.requestsystem.management.handlers.update.implementation.*;
 import no.monopixel.slimcolonies.core.colony.requestsystem.management.handlers.update.implementation.InitialUpdate;
 import no.monopixel.slimcolonies.core.colony.requestsystem.management.handlers.update.implementation.ResetRSToRemoveAssistantCookResolver;
 import no.monopixel.slimcolonies.core.colony.requestsystem.management.handlers.update.implementation.ResetRSToStoreJobInResolvers;
@@ -20,10 +19,10 @@ public class UpdateHandler implements IUpdateHandler
 {
     @VisibleForTesting
     private static final List<IUpdateStep> UPDATE_STEPS = Lists.newArrayList(
-      new InitialUpdate(),
-      new ResetRSToStoreJobInResolvers(),
-      new ResetRSToUpdateRestaurantResolver(),
-      new ResetRSToRemoveAssistantCookResolver()
+        new InitialUpdate(),
+        new ResetRSToStoreJobInResolvers(),
+        new ResetRSToUpdateRestaurantResolver(),
+        new ResetRSToRemoveAssistantCookResolver()
     );
 
     private final IStandardRequestManager manager;
@@ -45,13 +44,13 @@ public class UpdateHandler implements IUpdateHandler
         }
 
         UPDATE_STEPS.stream()
-          .filter(s -> s.updatesToVersion() > manager.getCurrentVersion())
-          .sorted(Comparator.comparing(IUpdateStep::updatesToVersion))
-          .forEachOrdered(s ->
-          {
-              manager.setCurrentVersion(s.updatesToVersion());
-              s.update(type, manager);
-          });
+            .filter(s -> s.updatesToVersion() > manager.getCurrentVersion())
+            .sorted(Comparator.comparing(IUpdateStep::updatesToVersion))
+            .forEachOrdered(s ->
+            {
+                manager.setCurrentVersion(s.updatesToVersion());
+                s.update(type, manager);
+            });
     }
 
     @Override

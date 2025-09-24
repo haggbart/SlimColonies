@@ -1,15 +1,5 @@
 package no.monopixel.slimcolonies.api.colony;
 
-import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
-import com.minecolonies.api.colony.managers.interfaces.*;
-import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
-import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
-import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
-import no.monopixel.slimcolonies.api.colony.requestsystem.requester.IRequester;
-import no.monopixel.slimcolonies.api.colony.workorders.IWorkManager;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.quests.IQuestManager;
-import no.monopixel.slimcolonies.api.research.IResearchManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -25,10 +15,21 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.event.TickEvent;
+import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
+import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
+import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
+import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
+import no.monopixel.slimcolonies.api.colony.requestsystem.requester.IRequester;
+import no.monopixel.slimcolonies.api.colony.workorders.IWorkManager;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.quests.IQuestManager;
+import no.monopixel.slimcolonies.api.research.IResearchManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Interface of the Colony and ColonyView which will have to implement the following methods.
@@ -217,7 +218,6 @@ public interface IColony
      */
     IVisitorManager getVisitorManager();
 
-
     /**
      * Get the event manager of the colony.
      *
@@ -255,6 +255,7 @@ public interface IColony
 
     /**
      * Get the connection manager of the colony.
+     *
      * @return the connection manager.
      */
     IColonyConnectionManager getConnectionManager();
@@ -286,7 +287,6 @@ public interface IColony
      * @return the research manager object.
      */
     IResearchManager getResearchManager();
-
 
     CompoundTag getColonyTag();
 

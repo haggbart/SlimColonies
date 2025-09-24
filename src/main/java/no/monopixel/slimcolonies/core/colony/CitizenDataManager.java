@@ -1,10 +1,9 @@
 package no.monopixel.slimcolonies.core.colony;
 
-import com.minecolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.util.Log;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import no.monopixel.slimcolonies.api.colony.*;
+import no.monopixel.slimcolonies.api.util.Log;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_ID;
@@ -32,7 +31,7 @@ public class CitizenDataManager implements ICitizenDataManager
         catch (final RuntimeException ex)
         {
             Log.getLogger().error(String.format("A CitizenData.View for #%d has thrown an exception during loading, its state cannot be restored. Report this to the mod author",
-              citizenDataView.getId()), ex);
+                citizenDataView.getId()), ex);
             citizenDataView = null;
         }
 

@@ -1,10 +1,5 @@
 package no.monopixel.slimcolonies.apiimp.initializer;
 
-import no.monopixel.slimcolonies.api.inventory.ModContainers;
-import com.minecolonies.api.inventory.container.*;
-import no.monopixel.slimcolonies.api.inventory.container.*;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import com.minecolonies.core.client.gui.containers.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -13,6 +8,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.inventory.ModContainers;
+import no.monopixel.slimcolonies.api.inventory.container.*;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.client.gui.containers.*;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

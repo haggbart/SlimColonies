@@ -1,9 +1,5 @@
 package no.monopixel.slimcolonies.apiimp.initializer;
 
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import com.minecolonies.core.items.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,6 +7,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegisterEvent;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.items.*;
 
 import static no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockGate.IRON_GATE;

@@ -4,14 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import com.minecolonies.api.quests.*;
-import no.monopixel.slimcolonies.api.quests.*;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.network.messages.client.GlobalQuestSyncMessage;
-import com.minecolonies.core.quests.*;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -20,6 +12,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.quests.*;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.network.messages.client.GlobalQuestSyncMessage;
 import no.monopixel.slimcolonies.core.quests.QuestTemplate;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +26,6 @@ import java.util.function.Function;
 
 import static no.monopixel.slimcolonies.core.generation.DataGeneratorConstants.COLONY_QUESTS_DIR;
 import static no.monopixel.slimcolonies.core.quests.QuestParsingConstants.*;
-import static no.monopixel.slimcolonies.core.quests.QuestParsingConstants.BRACE_CLOSE;
 
 /**
  * Loader for Json based quest data.
@@ -52,6 +49,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
 
     /**
      * Sync to client.
+     *
      * @param player to send it to.
      */
     public static void sendGlobalQuestPackets(final ServerPlayer player)
@@ -68,6 +66,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
 
     /**
      * Read the data from the packet and parse it.
+     *
      * @param byteBuf pck.
      */
     public static void readGlobalQuestPackets(final FriendlyByteBuf byteBuf)
@@ -91,6 +90,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
 
     /**
      * Our universal apply.
+     *
      * @param jsonElementMap the map.
      */
     private static void apply(final Map<ResourceLocation, JsonElement> jsonElementMap)
@@ -251,7 +251,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
             return colony -> {
                 final List<ITriggerReturnData<?>> returnList = new ArrayList<>();
 
-                for (final IQuestTriggerTemplate trigger: triggers)
+                for (final IQuestTriggerTemplate trigger : triggers)
                 {
                     ITriggerReturnData<?> returnData = trigger.canTriggerQuest(questId, colony);
                     if (returnData.isPositive())
@@ -273,7 +273,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
         //order = order.replaceAll("\\s+", "");
 
         // Split by words and braces, but keep the chars
-        final List<String> values = Arrays.asList(order.replaceAll("\\s+","").split("((?<=\\w)|(?=\\w)|(?<=[)(])|(?=[)(]))"));
+        final List<String> values = Arrays.asList(order.replaceAll("\\s+", "").split("((?<=\\w)|(?=\\w)|(?<=[)(])|(?=[)(]))"));
 
         final List<String> types = new ArrayList<>();
         for (String value : values)
@@ -302,7 +302,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
         final Map<String, IQuestTriggerTemplate> triggerMap = new HashMap<>();
         for (int i = 0; i < triggers.size(); i++)
         {
-            triggerMap.put(String.valueOf(i+1), triggers.get(i));
+            triggerMap.put(String.valueOf(i + 1), triggers.get(i));
         }
 
         if (values.isEmpty())
@@ -396,7 +396,12 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
      * @param colony the colony.
      * @return predicate from data
      */
-    private static List<ITriggerReturnData<?>> evaluate(final IColony colony, final Map<String, IQuestTriggerTemplate> triggerMap, final ExpressionNode expressionTree, final Map<String, ITriggerReturnData<?>> triggerDataCache, final ResourceLocation questId)
+    private static List<ITriggerReturnData<?>> evaluate(
+        final IColony colony,
+        final Map<String, IQuestTriggerTemplate> triggerMap,
+        final ExpressionNode expressionTree,
+        final Map<String, ITriggerReturnData<?>> triggerDataCache,
+        final ResourceLocation questId)
     {
         switch (expressionTree.expression)
         {

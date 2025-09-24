@@ -3,46 +3,6 @@ package no.monopixel.slimcolonies.core.colony;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.ldtteam.structurize.util.BlockUtils;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import com.minecolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.ISettingsModule;
-import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
-import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
-import com.minecolonies.api.colony.managers.interfaces.*;
-import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
-import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.api.colony.permissions.Rank;
-import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
-import no.monopixel.slimcolonies.api.colony.requestsystem.requester.IRequester;
-import no.monopixel.slimcolonies.api.colony.workorders.IWorkManager;
-import no.monopixel.slimcolonies.api.compatibility.newstruct.BlueprintMapping;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.quests.IQuestManager;
-import no.monopixel.slimcolonies.api.research.IResearchManager;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.api.util.constant.NbtTagConstants;
-import no.monopixel.slimcolonies.api.util.constant.Suppression;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.SettingsModule;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
-import com.minecolonies.core.colony.managers.*;
-import no.monopixel.slimcolonies.core.colony.managers.*;
-import no.monopixel.slimcolonies.core.colony.permissions.ColonyPermissionEventHandler;
-import no.monopixel.slimcolonies.core.colony.permissions.Permissions;
-import no.monopixel.slimcolonies.core.colony.pvp.AttackingPlayer;
-import no.monopixel.slimcolonies.core.colony.requestsystem.management.manager.StandardRequestManager;
-import no.monopixel.slimcolonies.core.colony.workorders.WorkManager;
-import no.monopixel.slimcolonies.core.datalistener.CitizenNameListener;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewRemoveWorkOrderMessage;
-import no.monopixel.slimcolonies.core.quests.QuestManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -65,6 +25,42 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.colony.*;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.ISettingsModule;
+import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
+import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
+import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
+import no.monopixel.slimcolonies.api.colony.permissions.Action;
+import no.monopixel.slimcolonies.api.colony.permissions.Rank;
+import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
+import no.monopixel.slimcolonies.api.colony.requestsystem.requester.IRequester;
+import no.monopixel.slimcolonies.api.colony.workorders.IWorkManager;
+import no.monopixel.slimcolonies.api.compatibility.newstruct.BlueprintMapping;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.quests.IQuestManager;
+import no.monopixel.slimcolonies.api.research.IResearchManager;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.api.util.constant.NbtTagConstants;
+import no.monopixel.slimcolonies.api.util.constant.Suppression;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.SettingsModule;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
+import no.monopixel.slimcolonies.core.colony.managers.*;
+import no.monopixel.slimcolonies.core.colony.permissions.ColonyPermissionEventHandler;
+import no.monopixel.slimcolonies.core.colony.permissions.Permissions;
+import no.monopixel.slimcolonies.core.colony.pvp.AttackingPlayer;
+import no.monopixel.slimcolonies.core.colony.requestsystem.management.manager.StandardRequestManager;
+import no.monopixel.slimcolonies.core.colony.workorders.WorkManager;
+import no.monopixel.slimcolonies.core.datalistener.CitizenNameListener;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewRemoveWorkOrderMessage;
+import no.monopixel.slimcolonies.core.quests.QuestManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -152,7 +148,6 @@ public class Colony implements IColony
      * Citizen manager of the colony.
      */
     private final IVisitorManager visitorManager = new VisitorManager(this);
-
 
     /**
      * Event manager of the colony.
@@ -287,7 +282,6 @@ public class Colony implements IColony
     private ListTag colonyFlag = new BannerPattern.Builder()
         .addPattern(BannerPatterns.BASE, DyeColor.WHITE)
         .toListTag();
-
 
     /**
      * The amount of additional child time gathered when the colony is not loaded.
@@ -1452,7 +1446,6 @@ public class Colony implements IColony
         this.markDirty();
     }
 
-
     /**
      * Get all the waypoints of the colony.
      *
@@ -1764,7 +1757,6 @@ public class Colony implements IColony
     {
         this.isDirty = dirty;
     }
-
 
     @Override
     public boolean useAdditionalChildTime(final int amount)

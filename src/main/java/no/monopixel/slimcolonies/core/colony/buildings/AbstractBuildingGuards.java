@@ -1,27 +1,5 @@
 package no.monopixel.slimcolonies.core.colony.buildings;
 
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.buildings.IGuardBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingKey;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.AIOneTimeEventTarget;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import com.minecolonies.core.colony.buildings.modules.settings.*;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.*;
-import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingMiner;
-import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
-import no.monopixel.slimcolonies.core.entity.pathfinding.Pathfinding;
-import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobRandomPos;
-import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
-import no.monopixel.slimcolonies.core.util.AttributeModifierUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -35,6 +13,27 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArrowItem;
+import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.colony.buildings.IGuardBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingKey;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.AIOneTimeEventTarget;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.*;
+import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingMiner;
+import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
+import no.monopixel.slimcolonies.core.entity.pathfinding.Pathfinding;
+import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobRandomPos;
+import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
+import no.monopixel.slimcolonies.core.util.AttributeModifierUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,20 +53,20 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
      * Settings.
      */
     public static final ISettingKey<BoolSetting>            RETREAT      =
-      new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "retreat"));
+        new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "retreat"));
     public static final ISettingKey<BoolSetting>            HIRE_TRAINEE =
-      new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "hiretrainee"));
+        new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "hiretrainee"));
     public static final ISettingKey<GuardPatrolModeSetting> PATROL_MODE  =
-      new SettingKey<>(GuardPatrolModeSetting.class, new ResourceLocation(Constants.MOD_ID, "patrolmode"));
+        new SettingKey<>(GuardPatrolModeSetting.class, new ResourceLocation(Constants.MOD_ID, "patrolmode"));
     public static final ISettingKey<GuardFollowModeSetting> FOLLOW_MODE  =
-      new SettingKey<>(GuardFollowModeSetting.class, new ResourceLocation(Constants.MOD_ID, "followmode"));
+        new SettingKey<>(GuardFollowModeSetting.class, new ResourceLocation(Constants.MOD_ID, "followmode"));
     public static final ISettingKey<GuardTaskSetting>       GUARD_TASK   =
-      new SettingKey<>(GuardTaskSetting.class, new ResourceLocation(Constants.MOD_ID, "guardtask"));
+        new SettingKey<>(GuardTaskSetting.class, new ResourceLocation(Constants.MOD_ID, "guardtask"));
 
 
     //manual patroll. retreat, hire from training
 
-    ////// --------------------------- NBTConstants --------------------------- \\\\\\
+    /// /// --------------------------- NBTConstants --------------------------- \\\\\\
     private static final String NBT_JOB            = "guardType";
     private static final String NBT_PATROL_TARGETS = "patrol targets";
     private static final String NBT_TARGET         = "target";
@@ -114,7 +113,6 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
      */
     private UUID followPlayerUUID;
 
-
     /**
      * A temporary next patrol point, which gets consumed and used once
      */
@@ -149,17 +147,17 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
         keepX.put(itemStack -> !ItemStackUtils.isEmpty(itemStack) && ItemStackUtils.doesItemServeAsWeapon(itemStack), new Tuple<>(1, true));
 
         keepX.put(itemStack -> !ItemStackUtils.isEmpty(itemStack)
-                                 && itemStack.getItem() instanceof ArmorItem
-                                 && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.CHEST, new Tuple<>(1, true));
+            && itemStack.getItem() instanceof ArmorItem
+            && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.CHEST, new Tuple<>(1, true));
         keepX.put(itemStack -> !ItemStackUtils.isEmpty(itemStack)
-                                 && itemStack.getItem() instanceof ArmorItem
-                                 && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.HEAD, new Tuple<>(1, true));
+            && itemStack.getItem() instanceof ArmorItem
+            && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.HEAD, new Tuple<>(1, true));
         keepX.put(itemStack -> !ItemStackUtils.isEmpty(itemStack)
-                                 && itemStack.getItem() instanceof ArmorItem
-                                 && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.LEGS, new Tuple<>(1, true));
+            && itemStack.getItem() instanceof ArmorItem
+            && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.LEGS, new Tuple<>(1, true));
         keepX.put(itemStack -> !ItemStackUtils.isEmpty(itemStack)
-                                 && itemStack.getItem() instanceof ArmorItem
-                                 && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.FEET, new Tuple<>(1, true));
+            && itemStack.getItem() instanceof ArmorItem
+            && ((ArmorItem) itemStack.getItem()).getEquipmentSlot() == EquipmentSlot.FEET, new Tuple<>(1, true));
 
         keepX.put(itemStack -> {
             if (ItemStackUtils.isEmpty(itemStack) || !(itemStack.getItem() instanceof ArrowItem))
@@ -198,7 +196,7 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
 
     //// ---- NBT Overrides ---- \\\\
 
-    //// ---- Overrides ---- \\\\
+    /// / ---- Overrides ---- \\\\
 
     @Override
     public void deserializeNBT(final CompoundTag compound)
@@ -223,7 +221,6 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
         {
             followPlayerUUID = compound.getUUID(NBT_PLAYER_UUID);
         }
-
     }
 
     @Override
@@ -357,6 +354,7 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
 
     /**
      * Set the patroll timer.
+     *
      * @param timer the timer to set.
      */
     public void setPatrolTimer(final int timer)
@@ -530,8 +528,6 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
         return this.getPosition();
     }
 
-
-
     @Override
     public void setPlayerToFollow(final Player player)
     {
@@ -679,14 +675,14 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
          *
          * @return the position of the mine
          */
-        public BlockPos getMinePos() { return minePos; }
+        public BlockPos getMinePos() {return minePos;}
 
         /**
          * Set the position of the mine the guard is patrolling
          *
          * @param pos the position of the mine
          */
-        public void setMinePos(BlockPos pos) { this.minePos = pos; }
+        public void setMinePos(BlockPos pos) {this.minePos = pos;}
 
         @Override
         public int getRange()

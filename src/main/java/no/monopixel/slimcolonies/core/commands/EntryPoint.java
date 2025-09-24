@@ -1,19 +1,15 @@
 package no.monopixel.slimcolonies.core.commands;
 
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.commands.CommandSourceStack;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import com.minecolonies.core.commands.citizencommands.*;
-import com.minecolonies.core.commands.colonycommands.*;
 import no.monopixel.slimcolonies.core.commands.citizencommands.*;
 import no.monopixel.slimcolonies.core.commands.colonycommands.*;
 import no.monopixel.slimcolonies.core.commands.colonycommands.requestsystem.CommandRSReset;
 import no.monopixel.slimcolonies.core.commands.colonycommands.requestsystem.CommandRSResetAll;
-import com.minecolonies.core.commands.generalcommands.*;
-import com.minecolonies.core.commands.killcommands.*;
 import no.monopixel.slimcolonies.core.commands.generalcommands.*;
 import no.monopixel.slimcolonies.core.commands.killcommands.*;
 import no.monopixel.slimcolonies.core.debug.command.CommandToggleDebug;
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.commands.CommandSourceStack;
 
 /**
  * Entry point to commands.

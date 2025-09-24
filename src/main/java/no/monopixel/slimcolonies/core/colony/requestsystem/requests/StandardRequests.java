@@ -1,13 +1,19 @@
 package no.monopixel.slimcolonies.core.colony.requestsystem.requests;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
+import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestState;
-import com.minecolonies.api.colony.requestsystem.requestable.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.crafting.AbstractCrafting;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.crafting.PrivateCrafting;
@@ -22,13 +28,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.WorkerBuildin
 import no.monopixel.slimcolonies.core.colony.jobs.views.CrafterJobView;
 import no.monopixel.slimcolonies.core.colony.jobs.views.DmanJobView;
 import no.monopixel.slimcolonies.core.colony.requestable.SmeltableOre;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -188,7 +187,7 @@ public final class StandardRequests
             // getRequest().getTag() is a long string that can't be easily be read by players or turned into a translation key.
             // Instead, try to get a translated text first.
             final String tagKey = "com.minecolonies.coremod.tag." + getRequest().getTag().toString().toLowerCase().replace
-                                                                                                                     ("namedtag[", "").replace(':', '.').replace("]", "");
+                ("namedtag[", "").replace(':', '.').replace("]", "");
             final MutableComponent tagText = Component.translatable(tagKey);
             // test the translated text; if there's a difference, the client has a matching translation key.
             if (!tagText.getString().equals(tagKey))
@@ -238,9 +237,9 @@ public final class StandardRequests
         public Component getShortDisplayString()
         {
             return Component.literal("")
-                     .append(Component.translatable(RequestSystemTranslationConstants.REQUESTS_TYPE_DELIVERY)
-                               .append(Component.literal(getRequest().getStack().getCount() + " "))
-                               .append(getRequest().getStack().getDisplayName()));
+                .append(Component.translatable(RequestSystemTranslationConstants.REQUESTS_TYPE_DELIVERY)
+                    .append(Component.literal(getRequest().getStack().getCount() + " "))
+                    .append(getRequest().getStack().getDisplayName()));
         }
 
         @NotNull
@@ -296,7 +295,9 @@ public final class StandardRequests
 
             if (posInList >= 0)
             {
-            	return posInList == 0 ? ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_PROGRESS)) : ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_QUEUE, posInList));
+                return posInList == 0
+                    ? ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_PROGRESS))
+                    : ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_QUEUE, posInList));
             }
             else
             {
@@ -383,14 +384,15 @@ public final class StandardRequests
 
             if (posInList >= 0)
             {
-                return posInList == 0 ? ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_PROGRESS)) : ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_QUEUE, posInList));
+                return posInList == 0
+                    ? ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_PROGRESS))
+                    : ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_QUEUE, posInList));
             }
             else
             {
                 return ImmutableList.of(Component.translatable(FROM, requester));
             }
         }
-
     }
 
     /**
@@ -405,10 +407,10 @@ public final class StandardRequests
         }
 
         protected AbstractCraftingRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final RequestState state,
-          @NotNull final C requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final RequestState state,
+            @NotNull final C requested)
         {
             super(requester, token, state, requested);
         }
@@ -417,7 +419,9 @@ public final class StandardRequests
         @Override
         public final Component getShortDisplayString()
         {
-            return Component.translatable(RequestSystemTranslationConstants.REQUEST_SYSTEM_CRAFTING_DISPLAY, Component.literal(String.valueOf(getRequest().getMinCount())), getRequest().getStack().getDisplayName());
+            return Component.translatable(RequestSystemTranslationConstants.REQUEST_SYSTEM_CRAFTING_DISPLAY,
+                Component.literal(String.valueOf(getRequest().getMinCount())),
+                getRequest().getStack().getDisplayName());
         }
 
         @Override
@@ -460,7 +464,9 @@ public final class StandardRequests
                 int posInList = getPosInList(colony, view, getId());
                 if (posInList >= 0)
                 {
-                	return posInList == 0 ? ImmutableList.of(Component.translatable(AT, requester), Component.translatable(IN_PROGRESS)) : ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_QUEUE, posInList));
+                    return posInList == 0
+                        ? ImmutableList.of(Component.translatable(AT, requester), Component.translatable(IN_PROGRESS))
+                        : ImmutableList.of(Component.translatable(FROM, requester), Component.translatable(IN_QUEUE, posInList));
                 }
                 else if (getState() == RequestState.FOLLOWUP_IN_PROGRESS)
                 {
@@ -494,17 +500,17 @@ public final class StandardRequests
     {
 
         protected PrivateCraftingRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final PrivateCrafting requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final PrivateCrafting requested)
         {
             super(requester, token, requested);
         }
 
         protected PrivateCraftingRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final RequestState state, @NotNull final PrivateCrafting requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final RequestState state, @NotNull final PrivateCrafting requested)
         {
             super(requester, token, state, requested);
         }
@@ -529,17 +535,17 @@ public final class StandardRequests
     {
 
         protected PublicCraftingRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final PublicCrafting requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final PublicCrafting requested)
         {
             super(requester, token, requested);
         }
 
         protected PublicCraftingRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final RequestState state, @NotNull final PublicCrafting requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final RequestState state, @NotNull final PublicCrafting requested)
         {
             super(requester, token, state, requested);
         }
@@ -607,10 +613,10 @@ public final class StandardRequests
         }
 
         FoodRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final RequestState state,
-          @NotNull final Food requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final RequestState state,
+            @NotNull final Food requested)
         {
             super(requester, token, state, requested);
         }
@@ -631,18 +637,18 @@ public final class StandardRequests
             if (foodExamples == null)
             {
                 foodExamples = ImmutableList.copyOf(IColonyManager.getInstance()
-                                                      .getCompatibilityManager()
-                                                      .getListOfAllItems()
-                                                      .stream()
-                                                      .filter(item -> item.isEdible())
-                                                      .collect(Collectors.toList()));
+                    .getCompatibilityManager()
+                    .getListOfAllItems()
+                    .stream()
+                    .filter(item -> item.isEdible())
+                    .collect(Collectors.toList()));
             }
 
             if (!this.getRequest().getExclusionList().isEmpty())
             {
                 return ImmutableList.copyOf(foodExamples.stream()
-                        .filter(item -> this.getRequest().matches(item))
-                        .collect(Collectors.toList()));
+                    .filter(item -> this.getRequest().matches(item))
+                    .collect(Collectors.toList()));
             }
 
             return foodExamples;
@@ -665,10 +671,10 @@ public final class StandardRequests
         }
 
         SmeltAbleOreRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final RequestState state,
-          @NotNull final SmeltableOre requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final RequestState state,
+            @NotNull final SmeltableOre requested)
         {
             super(requester, token, state, requested);
         }
@@ -687,11 +693,11 @@ public final class StandardRequests
             if (oreExamples == null)
             {
                 oreExamples = ImmutableList.copyOf(IColonyManager.getInstance()
-                                                     .getCompatibilityManager()
-                                                     .getListOfAllItems()
-                                                     .stream()
-                                                     .filter(IColonyManager.getInstance().getCompatibilityManager()::isOre)
-                                                     .collect(Collectors.toList()));
+                    .getCompatibilityManager()
+                    .getListOfAllItems()
+                    .stream()
+                    .filter(IColonyManager.getInstance().getCompatibilityManager()::isOre)
+                    .collect(Collectors.toList()));
             }
             return oreExamples;
         }
@@ -713,10 +719,10 @@ public final class StandardRequests
         }
 
         BurnableRequest(
-          @NotNull final IRequester requester,
-          @NotNull final IToken<?> token,
-          @NotNull final RequestState state,
-          @NotNull final Burnable requested)
+            @NotNull final IRequester requester,
+            @NotNull final IToken<?> token,
+            @NotNull final RequestState state,
+            @NotNull final Burnable requested)
         {
             super(requester, token, state, requested);
         }
@@ -737,11 +743,11 @@ public final class StandardRequests
             if (burnableExamples == null)
             {
                 burnableExamples = ImmutableList.copyOf(IColonyManager.getInstance()
-                                                          .getCompatibilityManager()
-                                                          .getListOfAllItems()
-                                                          .stream()
-                                                          .filter(FurnaceBlockEntity::isFuel)
-                                                          .collect(Collectors.toList()));
+                    .getCompatibilityManager()
+                    .getListOfAllItems()
+                    .stream()
+                    .filter(FurnaceBlockEntity::isFuel)
+                    .collect(Collectors.toList()));
             }
 
             return burnableExamples;
@@ -793,9 +799,10 @@ public final class StandardRequests
 
     /**
      * Find the position the request is in the list.
-     * @return the position.
+     *
      * @param colony the colony.
-     * @param view the building view.
+     * @param view   the building view.
+     * @return the position.
      */
     private static int getPosInList(final IColonyView colony, final IBuildingView view, final IToken<?> id)
     {

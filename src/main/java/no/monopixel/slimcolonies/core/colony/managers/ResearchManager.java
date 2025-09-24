@@ -1,11 +1,18 @@
 package no.monopixel.slimcolonies.core.colony.managers;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
-import com.minecolonies.api.research.*;
 import no.monopixel.slimcolonies.api.research.*;
 import no.monopixel.slimcolonies.api.research.util.ResearchState;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
@@ -16,14 +23,6 @@ import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewR
 import no.monopixel.slimcolonies.core.research.LocalResearch;
 import no.monopixel.slimcolonies.core.research.LocalResearchTree;
 import no.monopixel.slimcolonies.core.research.ResearchEffectManager;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -88,7 +87,6 @@ public class ResearchManager implements IResearchManager
 
             final ColonyViewResearchManagerViewMessage message = new ColonyViewResearchManagerViewMessage(colony, this);
             players.forEach(player -> Network.getNetwork().sendToPlayer(message, player));
-
         }
         clearDirty();
     }
@@ -139,19 +137,19 @@ public class ResearchManager implements IResearchManager
     @Override
     public void checkAutoStartResearch()
     {
-        if(colony == null || !(colony instanceof Colony))
+        if (colony == null || !(colony instanceof Colony))
         {
             return;
         }
         final List<IGlobalResearch> removes = new ArrayList<>();
-        for(IGlobalResearch research : autoStartResearch)
+        for (IGlobalResearch research : autoStartResearch)
         {
             if (!IGlobalResearchTree.getInstance().isResearchRequirementsFulfilled(research.getResearchRequirements(), colony))
             {
                 continue;
             }
             // Unlockable Branch Research should trigger even if the university isn't at the required depth. Otherwise, we do need to consider it. CheckAutoStart will rerun on the university upgrade completion.
-            if(IGlobalResearchTree.getInstance().getBranchData(research.getBranch()).getType() != ResearchBranchType.UNLOCKABLES)
+            if (IGlobalResearchTree.getInstance().getBranchData(research.getBranch()).getType() != ResearchBranchType.UNLOCKABLES)
             {
                 int level = 0;
                 Map<BlockPos, IBuilding> buildings = colony.getBuildingManager().getBuildings();
@@ -174,7 +172,7 @@ public class ResearchManager implements IResearchManager
             boolean researchAlreadyRun = false;
             for (ILocalResearch progressResearch : colony.getResearchManager().getResearchTree().getResearchInProgress())
             {
-                if(progressResearch.getId().equals(research.getId()))
+                if (progressResearch.getId().equals(research.getId()))
                 {
                     researchAlreadyRun = true;
                     break;
@@ -182,7 +180,7 @@ public class ResearchManager implements IResearchManager
             }
             // Don't want to spam people about in-progress or already-completed research.  Because these might change within a world,
             // we can't just save them or check against effects.
-            if(researchAlreadyRun || colony.getResearchManager().getResearchTree().hasCompletedResearch(research.getId()))
+            if (researchAlreadyRun || colony.getResearchManager().getResearchTree().hasCompletedResearch(research.getId()))
             {
                 removes.add(research);
                 continue;
@@ -202,7 +200,8 @@ public class ResearchManager implements IResearchManager
 
     /**
      * Start researches that have no item consumption cost, and notify players of available for those with a cost.
-     * @param research      The global research to start.
+     *
+     * @param research The global research to start.
      */
     private void startCostlessResearch(IGlobalResearch research)
     {
@@ -216,7 +215,7 @@ public class ResearchManager implements IResearchManager
             }
         }
         tree.addResearch(research.getBranch(), new LocalResearch(research.getId(), research.getBranch(), research.getDepth()));
-        if(research.isInstant() || (creativePlayer && MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get()))
+        if (research.isInstant() || (creativePlayer && MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get()))
         {
             ILocalResearch localResearch = tree.getResearch(research.getBranch(), research.getId());
             localResearch.setProgress(IGlobalResearchTree.getInstance().getBranchData(research.getBranch()).getBaseTime(research.getDepth()));
@@ -232,9 +231,9 @@ public class ResearchManager implements IResearchManager
             }
 
             MessageUtils.format(RESEARCH_CONCLUDED + ThreadLocalRandom.current().nextInt(3),
-                MutableComponent.create(IGlobalResearchTree.getInstance().getResearch(research.getBranch(), research.getId()).getName()))
-              .sendTo(colony)
-              .forAllPlayers();
+                    MutableComponent.create(IGlobalResearchTree.getInstance().getResearch(research.getBranch(), research.getId()).getName()))
+                .sendTo(colony)
+                .forAllPlayers();
             for (Player player : colony.getMessagePlayerEntities())
             {
                 SoundUtils.playSuccessSound(player, player.blockPosition());
@@ -243,9 +242,9 @@ public class ResearchManager implements IResearchManager
         else
         {
             MessageUtils.format(RESEARCH_AVAILABLE, MutableComponent.create(research.getName()))
-              .append(MESSAGE_RESEARCH_STARTED, MutableComponent.create(research.getName()))
-              .sendTo(colony)
-              .forAllPlayers();
+                .append(MESSAGE_RESEARCH_STARTED, MutableComponent.create(research.getName()))
+                .sendTo(colony)
+                .forAllPlayers();
             for (Player player : colony.getMessagePlayerEntities())
             {
                 SoundUtils.playSuccessSound(player, player.blockPosition());

@@ -1,7 +1,6 @@
 package no.monopixel.slimcolonies.core.colony.requestsystem.init;
 
 import no.monopixel.slimcolonies.api.colony.requestsystem.manager.RequestMappingHandler;
-import com.minecolonies.api.colony.requestsystem.requestable.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.crafting.PrivateCrafting;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.crafting.PublicCrafting;

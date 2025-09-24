@@ -1,7 +1,5 @@
 package no.monopixel.slimcolonies.core.colony.requestsystem.management;
 
-import com.minecolonies.api.colony.requestsystem.data.*;
-import com.minecolonies.api.colony.requestsystem.management.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.data.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.management.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;

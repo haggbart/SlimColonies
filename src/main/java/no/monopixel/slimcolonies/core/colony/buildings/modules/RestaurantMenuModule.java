@@ -1,10 +1,14 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
 import com.google.common.reflect.TypeToken;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import com.minecolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.AbstractBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IAltersRequiredItems;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IPersistentModule;
@@ -16,20 +20,16 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.Stack;
 import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.crafting.RecipeStorage;
-import com.minecolonies.api.util.*;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.util.*;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
-
 
 /**
  * Minimum stock module.
@@ -54,7 +54,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
     /**
      * Whether the worker here can cook.
      */
-    private final boolean                      canCook;
+    private final boolean canCook;
 
     /**
      * Get max stock calculation.
@@ -63,6 +63,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
 
     /**
      * Get the restaurant menu.
+     *
      * @return the menu.
      */
     public Set<ItemStorage> getMenu()
@@ -72,9 +73,10 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
 
     /**
      * Create a restaurant menu module.
+     *
      * @param canCook whether the worker here can cook.
      */
-    public RestaurantMenuModule(final boolean canCook, final Function<IBuilding, Integer> expectedStock )
+    public RestaurantMenuModule(final boolean canCook, final Function<IBuilding, Integer> expectedStock)
     {
         this.canCook = canCook;
         this.expectedStock = expectedStock;
@@ -82,6 +84,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
 
     /**
      * Add a new menu item.
+     *
      * @param itemStack the menu item to add.
      */
     public void addMenuItem(final ItemStack itemStack)
@@ -97,6 +100,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
 
     /**
      * Remove a menu item.
+     *
      * @param itemStack the menu item to remove.
      */
     public void removeMenuItem(final ItemStack itemStack)
@@ -184,6 +188,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
 
     /**
      * Get the max stock in stacks per menu item.
+     *
      * @return the max stock.
      */
     public int getExpectedStock()
@@ -196,7 +201,9 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
     {
         for (final ItemStorage menuItem : menu)
         {
-            consumer.accept(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, menuItem.getItemStack(), false, true), menuItem.getItemStack().getMaxStackSize() * getExpectedStock(), false);
+            consumer.accept(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, menuItem.getItemStack(), false, true),
+                menuItem.getItemStack().getMaxStackSize() * getExpectedStock(),
+                false);
             if (canCook && MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getFirstSmeltingRecipeByResult(menuItem) instanceof RecipeStorage recipeStorage)
             {
                 final ItemStack smeltStack = recipeStorage.getInput().get(0).getItemStack();

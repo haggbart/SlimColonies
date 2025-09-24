@@ -3,7 +3,6 @@ package no.monopixel.slimcolonies.core.colony.buildings.modules;
 import com.google.common.collect.ImmutableList;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuildingWorkerModule;
-import com.minecolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
 import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.IRequestResolver;
@@ -24,10 +23,10 @@ public class NoPrivateCrafterWorkerModule extends WorkerBuildingModule implement
     ICreatesResolversModule
 {
     public NoPrivateCrafterWorkerModule(
-      final JobEntry entry,
-      final Skill primary,
-      final Skill secondary,
-      final Function<IBuilding, Integer> sizeLimit)
+        final JobEntry entry,
+        final Skill primary,
+        final Skill secondary,
+        final Function<IBuilding, Integer> sizeLimit)
     {
         super(entry, primary, secondary, sizeLimit);
     }
@@ -35,6 +34,7 @@ public class NoPrivateCrafterWorkerModule extends WorkerBuildingModule implement
     @Override
     public List<IRequestResolver<?>> createResolvers()
     {
-        return ImmutableList.of(new BuildingRequestResolver(building.getRequester().getLocation(), building.getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)));
+        return ImmutableList.of(new BuildingRequestResolver(building.getRequester().getLocation(),
+            building.getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)));
     }
 }

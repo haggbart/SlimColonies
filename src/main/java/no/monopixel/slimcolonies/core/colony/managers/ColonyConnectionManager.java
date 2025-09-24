@@ -1,7 +1,11 @@
 package no.monopixel.slimcolonies.core.colony.managers;
 
-import com.minecolonies.api.colony.*;
-import com.minecolonies.api.colony.connections.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.connections.*;
@@ -11,12 +15,6 @@ import no.monopixel.slimcolonies.api.util.WorldUtil;
 import no.monopixel.slimcolonies.core.entity.pathfinding.Pathfinding;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobSignConnection;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,6 +62,7 @@ public class ColonyConnectionManager implements IColonyConnectionManager
 
     /**
      * Create a new connection manager.
+     *
      * @param colony its colony.
      */
     public ColonyConnectionManager(final IColony colony)
@@ -73,6 +72,7 @@ public class ColonyConnectionManager implements IColonyConnectionManager
 
     /**
      * Get the closest node with an open nextNode connection.
+     *
      * @param pos the pos the connection point is at.
      * @return a possible node or null.
      */
@@ -87,7 +87,7 @@ public class ColonyConnectionManager implements IColonyConnectionManager
             if (!node.hasNextNode())
             {
                 final int localDistance = (int) node.getPosition().distSqr(pos);
-                if (localDistance <= 50*50 && localDistance < distance)
+                if (localDistance <= 50 * 50 && localDistance < distance)
                 {
                     distance = localDistance;
                     potentialConnection = node;
@@ -117,7 +117,8 @@ public class ColonyConnectionManager implements IColonyConnectionManager
                 return false;
             }
 
-            final PendingConnectionNode newNode = new PendingConnectionNode(connectionPoint, createSignPath(connectionPoint, potentialConnection.getPosition()), PendingConnectionNode.PendingConnectionType.DEFAULT);
+            final PendingConnectionNode newNode =
+                new PendingConnectionNode(connectionPoint, createSignPath(connectionPoint, potentialConnection.getPosition()), PendingConnectionNode.PendingConnectionType.DEFAULT);
             newNode.alterPreviousNode(potentialConnection.getPosition());
             if (potentialConnection.getTargetColonyId() != -1)
             {
@@ -130,9 +131,10 @@ public class ColonyConnectionManager implements IColonyConnectionManager
 
         for (final BlockPos gateHousePos : gateHouses)
         {
-            if (gateHousePos.distSqr(connectionPoint) <= 50*50)
+            if (gateHousePos.distSqr(connectionPoint) <= 50 * 50)
             {
-                final PendingConnectionNode newNode = new PendingConnectionNode(connectionPoint, createSignPath(connectionPoint, gateHousePos), PendingConnectionNode.PendingConnectionType.DEFAULT);
+                final PendingConnectionNode newNode =
+                    new PendingConnectionNode(connectionPoint, createSignPath(connectionPoint, gateHousePos), PendingConnectionNode.PendingConnectionType.DEFAULT);
                 newNode.alterPreviousNode(gateHousePos);
 
                 pendingColonyConnections.put(connectionPoint, newNode);
@@ -176,7 +178,9 @@ public class ColonyConnectionManager implements IColonyConnectionManager
             return false;
         }
 
-        final PendingConnectionNode newNode = new PendingConnectionNode(thisColonyConnectionPos.getPosition(), createSignPath(thisColonyConnectionPos.getPosition(), targetColonyConnectionPos), PendingConnectionNode.PendingConnectionType.CONNECT_COLONY);
+        final PendingConnectionNode newNode = new PendingConnectionNode(thisColonyConnectionPos.getPosition(),
+            createSignPath(thisColonyConnectionPos.getPosition(), targetColonyConnectionPos),
+            PendingConnectionNode.PendingConnectionType.CONNECT_COLONY);
         newNode.alterPreviousNode(targetColonyConnectionPos);
         newNode.setTargetColonyId(targetColony.getID());
 
@@ -274,7 +278,9 @@ public class ColonyConnectionManager implements IColonyConnectionManager
                         }
                         if (potentialConnection != null)
                         {
-                            final PendingConnectionNode newNode = new PendingConnectionNode(potentialConnection.getPosition(), createSignPath(potentialConnection.getPosition(), pendingConnection.getKey()), PendingConnectionNode.PendingConnectionType.FIX_PATH);
+                            final PendingConnectionNode newNode = new PendingConnectionNode(potentialConnection.getPosition(),
+                                createSignPath(potentialConnection.getPosition(), pendingConnection.getKey()),
+                                PendingConnectionNode.PendingConnectionType.FIX_PATH);
                             newNode.alterPreviousNode(pendingConnection.getKey());
                             newNode.alterNextNode(potentialConnection.getNextNode());
                             if (pendingConnection.getValue().getTargetColonyId() != -1)
@@ -298,7 +304,9 @@ public class ColonyConnectionManager implements IColonyConnectionManager
                     }
                     colony.getWorld().destroyBlock(pendingConnection.getKey(), true);
                     pendingColonyConnections.remove(pendingConnection.getKey());
-                    MessageUtils.format(COM_MINECOLONIES_CONNECTION_PATH_FAILURE, pendingConnection.getKey().toShortString(), pendingConnection.getValue().getPreviousNode().toShortString()).withPriority(MessageUtils.MessagePriority.DANGER).sendTo(colony).forManagers();
+                    MessageUtils.format(COM_MINECOLONIES_CONNECTION_PATH_FAILURE,
+                        pendingConnection.getKey().toShortString(),
+                        pendingConnection.getValue().getPreviousNode().toShortString()).withPriority(MessageUtils.MessagePriority.DANGER).sendTo(colony).forManagers();
                 }
             }
         }
@@ -310,8 +318,9 @@ public class ColonyConnectionManager implements IColonyConnectionManager
 
     /**
      * Handle the connection between two colonies. Make sure both gates are reachable.
-     * @param thisColonyConnectionPos the connection pos in this colony.
-     * @param targetColonyId the target colony id.
+     *
+     * @param thisColonyConnectionPos   the connection pos in this colony.
+     * @param targetColonyId            the target colony id.
      * @param targetColonyConnectionPos the connection pos in the target colony.
      */
     private void connectToColony(final BlockPos thisColonyConnectionPos, final int targetColonyId, final BlockPos targetColonyConnectionPos)
@@ -419,6 +428,7 @@ public class ColonyConnectionManager implements IColonyConnectionManager
 
     /**
      * Go through connected colonies and check for potential neighbors and update name, or remove if necessary.
+     *
      * @param connectedColonies the list of connected colonies to process.
      */
     private void updateConnectedColonies(final TreeMap<Integer, ColonyConnection> connectedColonies)
@@ -507,7 +517,7 @@ public class ColonyConnectionManager implements IColonyConnectionManager
             }
         }
 
-       gateHouses.remove(gateHousePosition);
+        gateHouses.remove(gateHousePosition);
 
         // Set connected pos to zero, can't teleport to gatehouse now.
         for (final ColonyConnection connectedColonyData : directlyConnectedColonies.values())
@@ -546,12 +556,12 @@ public class ColonyConnectionManager implements IColonyConnectionManager
     @Override
     public void deserializeFromView(@NotNull final FriendlyByteBuf buf)
     {
-       final int directConnectionsSize = buf.readInt();
-       for (int i = 0; i < directConnectionsSize; i++)
-       {
-           final ColonyConnection connectedColonyData = new ColonyConnection().deserializeByteBuf(buf);
-           directlyConnectedColonies.put(connectedColonyData.id, connectedColonyData);
-       }
+        final int directConnectionsSize = buf.readInt();
+        for (int i = 0; i < directConnectionsSize; i++)
+        {
+            final ColonyConnection connectedColonyData = new ColonyConnection().deserializeByteBuf(buf);
+            directlyConnectedColonies.put(connectedColonyData.id, connectedColonyData);
+        }
 
         final int indirectConnectionsSize = buf.readInt();
         for (int i = 0; i < indirectConnectionsSize; i++)

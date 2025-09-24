@@ -1,7 +1,10 @@
 package no.monopixel.slimcolonies.core.colony.buildings.moduleviews;
 
 import com.ldtteam.blockui.views.BOWindow;
-import com.minecolonies.api.colony.buildings.modules.*;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.AbstractBuildingModuleView;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IItemListModuleView;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
@@ -10,12 +13,7 @@ import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.client.gui.modules.ItemListModuleWindow;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.building.AssignFilterableItemMessage;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-
 import no.monopixel.slimcolonies.core.network.messages.server.colony.building.ResetFilterableItemMessage;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -55,8 +53,9 @@ public class ItemListModuleView extends AbstractBuildingModuleView implements II
 
     /**
      * Create a nw grouped item list view for the client side.
-     * @param id the id.
-     * @param desc desc lang string.
+     *
+     * @param id       the id.
+     * @param desc     desc lang string.
      * @param inverted enabling or disabling.
      * @param allItems a supplier for all the items.
      */

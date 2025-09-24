@@ -1,5 +1,20 @@
 package no.monopixel.slimcolonies.core.compatibility;
 
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.storage.LevelResource;
+import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
@@ -16,22 +31,6 @@ import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.AnimalHerdingModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.SimpleCraftingModule;
-import com.minecolonies.core.colony.crafting.*;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.storage.LevelResource;
-import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.core.colony.crafting.*;
 import no.monopixel.slimcolonies.core.compatibility.jei.JEIPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -51,7 +50,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
  * which crafter, as a way to verify that all intended items are covered by the appropriate crafters (or not).  It
  * also produces another file that just contains all tags for each item, both to check the crafting tags themselves
  * and to help pick appropriate tags to add to the crafting tags if something is missing.
- *
+ * <p>
  * The logic of evaluating recipes closely resembles {@link JEIPlugin}, but
  * we want this to happen server-side without depending on anything from that.
  */
@@ -59,11 +58,13 @@ public class CraftingTagAuditor
 {
     /**
      * Run the auditor to generate the output file.
-     * @param server the current Minecraft server
+     *
+     * @param server              the current Minecraft server
      * @param customRecipeManager the custom recipe manager (mainly used for loot checks)
      */
-    public static void doRecipeAudit(@NotNull final MinecraftServer server,
-                                     @NotNull final CustomRecipeManager customRecipeManager)
+    public static void doRecipeAudit(
+        @NotNull final MinecraftServer server,
+        @NotNull final CustomRecipeManager customRecipeManager)
     {
         createFile("item tag audit", server, "tag_item_audit.csv", writer -> doItemTagAudit(writer, server));
         createFile("block tag audit", server, "tag_block_audit.csv", writer -> doBlockTagAudit(writer, server));
@@ -76,10 +77,11 @@ public class CraftingTagAuditor
         createFile("compost audit", server, "compost_audit.csv", writer -> doCompostAudit(writer, server));
     }
 
-    private static boolean createFile(@NotNull final String description,
-                                      @NotNull final MinecraftServer server,
-                                      @NotNull final String filename,
-                                      @NotNull final Writeable generator)
+    private static boolean createFile(
+        @NotNull final String description,
+        @NotNull final MinecraftServer server,
+        @NotNull final String filename,
+        @NotNull final Writeable generator)
     {
         final Path outputPath = server.getWorldPath(LevelResource.ROOT).resolve(MOD_ID).resolve(filename);
 
@@ -116,8 +118,9 @@ public class CraftingTagAuditor
         return items;
     }
 
-    private static void doItemTagAudit(@NotNull final BufferedWriter writer,
-                                       @NotNull final MinecraftServer server) throws IOException
+    private static void doItemTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         writeItemHeaders(writer);
         writer.write(",tags...");
@@ -128,26 +131,27 @@ public class CraftingTagAuditor
             writeItemData(writer, item);
 
             item.getTags()
-                    .map(t -> t.location().toString())
-                    .sorted()
-                    .forEach(t ->
-            {
-                try
+                .map(t -> t.location().toString())
+                .sorted()
+                .forEach(t ->
                 {
-                    writer.write(',');
-                    writer.write(t);
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            });
+                    try
+                    {
+                        writer.write(',');
+                        writer.write(t);
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                });
             writer.newLine();
         }
     }
 
-    private static void doBlockTagAudit(@NotNull final BufferedWriter writer,
-                                        @NotNull final MinecraftServer server) throws IOException
+    private static void doBlockTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         writer.write("block,name,tags...");
         writer.newLine();
@@ -162,27 +166,28 @@ public class CraftingTagAuditor
             ForgeRegistries.BLOCKS.tags().getReverseTag(entry.getValue()).ifPresent(tags ->
             {
                 tags.getTagKeys()
-                        .map(t -> t.location().toString())
-                        .sorted()
-                        .forEach(t ->
+                    .map(t -> t.location().toString())
+                    .sorted()
+                    .forEach(t ->
+                    {
+                        try
                         {
-                            try
-                            {
-                                writer.write(',');
-                                writer.write(t);
-                            }
-                            catch (IOException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        });
+                            writer.write(',');
+                            writer.write(t);
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
             });
             writer.newLine();
         }
     }
 
-    private static void doPathBlockTagAudit(@NotNull final BufferedWriter writer,
-                                            @NotNull final MinecraftServer server) throws IOException
+    private static void doPathBlockTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         writer.write("block,name,path,climbable,dangerous");
         writer.newLine();
@@ -213,14 +218,18 @@ public class CraftingTagAuditor
         }
     }
 
-    private static void doBiomeTagAudit(@NotNull final BufferedWriter writer,
-                                        @NotNull final MinecraftServer server) throws IOException
+    private static void doBiomeTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         writer.write("biome,name,tags...");
         writer.newLine();
 
         final Registry<Biome> biomes = server.registryAccess().registry(Registries.BIOME).orElse(null);
-        if (biomes == null) { return; }
+        if (biomes == null)
+        {
+            return;
+        }
 
         for (final ResourceLocation id : biomes.keySet().stream().sorted().toList())
         {
@@ -230,37 +239,38 @@ public class CraftingTagAuditor
             writer.write(Component.translatable(id.toLanguageKey("biome")).getString().replace("\"", "\"\""));
             writer.write('"');
             biomes.getHolder(ResourceKey.create(biomes.key(), id)).ifPresent(holder ->
-                    holder.tags()
-                        .map(t -> t.location().toString())
-                        .sorted()
-                        .forEach(t ->
+                holder.tags()
+                    .map(t -> t.location().toString())
+                    .sorted()
+                    .forEach(t ->
+                    {
+                        try
                         {
-                            try
-                            {
-                                writer.write(',');
-                                writer.write(t);
-                            }
-                            catch (IOException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }));
+                            writer.write(',');
+                            writer.write(t);
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }));
             writer.newLine();
         }
     }
 
-    private static void doRecipeAudit(@NotNull final BufferedWriter writer,
-                                      @NotNull final MinecraftServer server,
-                                      @NotNull final CustomRecipeManager customRecipeManager) throws IOException
+    private static void doRecipeAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server,
+        @NotNull final CustomRecipeManager customRecipeManager) throws IOException
     {
         final Map<CraftingType, List<IGenericRecipe>> vanillaRecipesMap =
-                RecipeAnalyzer.buildVanillaRecipesMap(server.getRecipeManager(), server.overworld());
+            RecipeAnalyzer.buildVanillaRecipesMap(server.getRecipeManager(), server.overworld());
         final List<Animal> animals = RecipeAnalyzer.createAnimals(server.overworld());
         final List<ICraftingBuildingModule> crafters = getCraftingModules()
-                .stream()
-                .sorted(Comparator.comparing((ICraftingBuildingModule m) -> m instanceof SimpleCraftingModule).reversed()
-                        .thenComparing(ICraftingBuildingModule::getCustomRecipeKey))
-                .toList();  // sort the simple modules first (2x2 crafting, personal only)
+            .stream()
+            .sorted(Comparator.comparing((ICraftingBuildingModule m) -> m instanceof SimpleCraftingModule).reversed()
+                .thenComparing(ICraftingBuildingModule::getCustomRecipeKey))
+            .toList();  // sort the simple modules first (2x2 crafting, personal only)
         final List<AnimalHerdingModule> herders = getHerdingModules();
         final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap = new HashMap<>();
 
@@ -304,7 +314,7 @@ public class CraftingTagAuditor
             writeItemData(writer, item);
 
             final Map<Object, List<IGenericRecipe>> crafterMap =
-                    craftingMap.getOrDefault(new ItemStorage(item, true, false), Collections.emptyMap());
+                craftingMap.getOrDefault(new ItemStorage(item, true, false), Collections.emptyMap());
 
             writeCrafterValue(writer, crafterMap, null);
             for (final ICraftingBuildingModule crafter : crafters)
@@ -319,16 +329,17 @@ public class CraftingTagAuditor
         }
     }
 
-    private static void doDomumAudit(@NotNull final BufferedWriter writer,
-                                     @NotNull final MinecraftServer server) throws IOException
+    private static void doDomumAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         final List<IGenericRecipe> cutterRecipes = new ArrayList<>(ModCraftingTypes.ARCHITECTS_CUTTER.get().findRecipes(server.getRecipeManager(), server.overworld()));
         cutterRecipes.sort(Comparator.comparing(r -> ForgeRegistries.ITEMS.getKey(r.getPrimaryOutput().getItem()).toString()));
         final List<ICraftingBuildingModule> crafters = getCraftingModules()
-                .stream()
-                .filter(m -> m.canLearn(ModCraftingTypes.ARCHITECTS_CUTTER.get()))
-                .sorted(Comparator.comparing(ICraftingBuildingModule::getCustomRecipeKey))
-                .toList();
+            .stream()
+            .filter(m -> m.canLearn(ModCraftingTypes.ARCHITECTS_CUTTER.get()))
+            .sorted(Comparator.comparing(ICraftingBuildingModule::getCustomRecipeKey))
+            .toList();
 
         writer.write("type,");
         writeItemHeaders(writer);
@@ -344,12 +355,12 @@ public class CraftingTagAuditor
             boolean first = true;
 
             final List<ItemStack> allSkins = recipe.getInputs().stream()
-                    .flatMap(Collection::stream)
-                    .map(ItemStorage::new)
-                    .distinct()
-                    .sorted(Comparator.comparing(s -> ForgeRegistries.ITEMS.getKey(s.getItem()).toString()))
-                    .map(ItemStorage::getItemStack)
-                    .toList();
+                .flatMap(Collection::stream)
+                .map(ItemStorage::new)
+                .distinct()
+                .sorted(Comparator.comparing(s -> ForgeRegistries.ITEMS.getKey(s.getItem()).toString()))
+                .map(ItemStorage::getItemStack)
+                .toList();
             for (final ItemStack skin : allSkins)
             {
                 if (first)
@@ -371,8 +382,9 @@ public class CraftingTagAuditor
         }
     }
 
-    private static void doToolsAudit(@NotNull final BufferedWriter writer,
-                                     @NotNull final MinecraftServer server) throws IOException
+    private static void doToolsAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         final List<ToolUsage> toolUsages = ToolsAnalyzer.findTools();
 
@@ -406,8 +418,9 @@ public class CraftingTagAuditor
         }
     }
 
-    private static void doFoodAudit(@NotNull final BufferedWriter writer,
-                                    @NotNull final MinecraftServer server) throws IOException
+    private static void doFoodAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         writeItemHeaders(writer);
         writer.write(",nutrition,maxlevel,tier,foodvalue,fullhealth");
@@ -415,10 +428,16 @@ public class CraftingTagAuditor
 
         for (final ItemStack item : getAllItems())
         {
-            if (!ItemStackUtils.ISFOOD.test(item)) continue;
+            if (!ItemStackUtils.ISFOOD.test(item))
+            {
+                continue;
+            }
 
             final FoodProperties properties = item.getItem().getFoodProperties(item, null);
-            if (properties == null) continue;
+            if (properties == null)
+            {
+                continue;
+            }
 
             writeItemData(writer, item);
 
@@ -438,8 +457,9 @@ public class CraftingTagAuditor
         }
     }
 
-    private static void doCompostAudit(@NotNull final BufferedWriter writer,
-                                       @NotNull final MinecraftServer server) throws IOException
+    private static void doCompostAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
     {
         writeItemHeaders(writer);
         writer.write(",vanilla,mcol");
@@ -475,8 +495,9 @@ public class CraftingTagAuditor
         writer.write("item,name");
     }
 
-    private static void writeItemData(@NotNull final BufferedWriter writer,
-                                      @NotNull final ItemStack stack) throws IOException
+    private static void writeItemData(
+        @NotNull final BufferedWriter writer,
+        @NotNull final ItemStack stack) throws IOException
     {
         writeItemStack(writer, stack);
         writer.write(",\"");
@@ -484,8 +505,9 @@ public class CraftingTagAuditor
         writer.write('"');
     }
 
-    private static void writeItemStack(@NotNull final BufferedWriter writer,
-                                       @NotNull final ItemStack stack) throws IOException
+    private static void writeItemStack(
+        @NotNull final BufferedWriter writer,
+        @NotNull final ItemStack stack) throws IOException
     {
         writer.write('"');
         writer.write(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
@@ -496,9 +518,10 @@ public class CraftingTagAuditor
         writer.write('"');
     }
 
-    private static void writeCrafterValue(@NotNull final BufferedWriter writer,
-                                          @NotNull final Map<Object, List<IGenericRecipe>> crafterMap,
-                                          @Nullable final Object crafter) throws IOException
+    private static void writeCrafterValue(
+        @NotNull final BufferedWriter writer,
+        @NotNull final Map<Object, List<IGenericRecipe>> crafterMap,
+        @Nullable final Object crafter) throws IOException
     {
         writer.write(',');
 
@@ -509,10 +532,11 @@ public class CraftingTagAuditor
         }
     }
 
-    private static void add(@NotNull final CustomRecipeManager customRecipeManager,
-                            @NotNull final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap,
-                            @Nullable final Object crafter,
-                            @NotNull final IGenericRecipe recipe)
+    private static void add(
+        @NotNull final CustomRecipeManager customRecipeManager,
+        @NotNull final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap,
+        @Nullable final Object crafter,
+        @NotNull final IGenericRecipe recipe)
     {
         for (final ItemStack stack : recipe.getAllMultiOutputs())
         {
@@ -531,15 +555,16 @@ public class CraftingTagAuditor
         }
     }
 
-    private static void add(@NotNull final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap,
-                            @Nullable final Object crafter,
-                            @NotNull final IGenericRecipe recipe,
-                            @NotNull final ItemStack stack)
+    private static void add(
+        @NotNull final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap,
+        @Nullable final Object crafter,
+        @NotNull final IGenericRecipe recipe,
+        @NotNull final ItemStack stack)
     {
         craftingMap
-                .computeIfAbsent(new ItemStorage(stack, true, false), s -> new HashMap<>())
-                .computeIfAbsent(crafter, c -> new ArrayList<>())
-                .add(recipe);
+            .computeIfAbsent(new ItemStorage(stack, true, false), s -> new HashMap<>())
+            .computeIfAbsent(crafter, c -> new ArrayList<>())
+            .add(recipe);
     }
 
     private static List<ICraftingBuildingModule> getCraftingModules()

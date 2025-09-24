@@ -1,5 +1,8 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.monster.Monster;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
 import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
 import no.monopixel.slimcolonies.api.entity.ai.IStateAI;
@@ -17,12 +20,8 @@ import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.StandardInteraction;
 import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
 import no.monopixel.slimcolonies.core.colony.jobs.JobPupil;
-import com.minecolonies.core.entity.ai.minimal.*;
 import no.monopixel.slimcolonies.core.entity.ai.minimal.*;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.monster.Monster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ import static no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen
 import static no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus.*;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.DEFAULT_SPEED;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING;
 import static no.monopixel.slimcolonies.core.entity.ai.minimal.EntityAIEatTask.RESTAURANT_LIMIT;
 import static no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler.SEEK_DOCTOR_HEALTH;
 
@@ -204,9 +203,9 @@ public class CitizenAI implements IStateAI
             if (lastState != CitizenAIState.MOURN)
             {
                 citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING,
-                  citizen.getCitizenData().getCitizenMournHandler().getDeceasedCitizens().iterator().next()),
-                  Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING),
-                  ChatPriority.IMPORTANT));
+                    citizen.getCitizenData().getCitizenMournHandler().getDeceasedCitizens().iterator().next()),
+                    Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING),
+                    ChatPriority.IMPORTANT));
 
                 citizen.setVisibleStatusIfNone(MOURNING);
             }
@@ -222,7 +221,7 @@ public class CitizenAI implements IStateAI
         }
 
         if (citizen.getCitizenJobHandler().getColonyJob() != null
-            && citizen.getCitizenJobHandler().getColonyJob().getWorkerAI() instanceof AbstractEntityAIBasic<?,?> abstractEntityAIBasic && !abstractEntityAIBasic.canGoIdle()
+            && citizen.getCitizenJobHandler().getColonyJob().getWorkerAI() instanceof AbstractEntityAIBasic<?, ?> abstractEntityAIBasic && !abstractEntityAIBasic.canGoIdle()
             && (citizen.getCitizenData().getLeisureTime() <= 0
             || !citizen.getCitizenData().getJob().canAIBeInterrupted()))
         {
@@ -267,8 +266,7 @@ public class CitizenAI implements IStateAI
         }
 
         return citizen.getCitizenData().getSaturation() <= CitizenConstants.AVERAGE_SATURATION &&
-                 (citizen.getCitizenData().getSaturation() <= RESTAURANT_LIMIT ||
-                    (citizen.getCitizenData().getSaturation() < LOW_SATURATION && citizen.getHealth() < SEEK_DOCTOR_HEALTH));
+            (citizen.getCitizenData().getSaturation() <= RESTAURANT_LIMIT ||
+                (citizen.getCitizenData().getSaturation() < LOW_SATURATION && citizen.getHealth() < SEEK_DOCTOR_HEALTH));
     }
-
 }

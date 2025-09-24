@@ -1,18 +1,18 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
+import net.minecraft.nbt.CompoundTag;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.HiringMode;
-import com.minecolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IAssignsCitizen;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingEventsModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IPersistentModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ITickingModule;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.Optional;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_LIVING_RESIDENTS;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_RESIDENTS;

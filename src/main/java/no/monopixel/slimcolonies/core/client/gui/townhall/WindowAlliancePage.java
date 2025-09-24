@@ -4,7 +4,7 @@ import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.controls.Button;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.ScrollingList;
-import com.minecolonies.api.colony.connections.*;
+import net.minecraft.network.chat.Component;
 import no.monopixel.slimcolonies.api.colony.connections.ColonyConnection;
 import no.monopixel.slimcolonies.api.colony.connections.ConnectionEvent;
 import no.monopixel.slimcolonies.api.colony.connections.ConnectionEventType;
@@ -13,13 +13,12 @@ import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.TriggerConnectionEventMessage;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
+import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.BUTTON_ALLIANCE;
 
 /**
  * BOWindow for the town hall ally list.
@@ -30,8 +29,8 @@ public class WindowAlliancePage extends AbstractWindowTownHall
      * Buttons to alter ally status on colony list.
      */
     private static final String REQUEST_ALLY = "requestally";
-    private static final String START_FEUD = "startfeud";
-    private static final String SET_NEUTRAL = "setneutral";
+    private static final String START_FEUD   = "startfeud";
+    private static final String SET_NEUTRAL  = "setneutral";
 
     // Button to accept ally request.
     private static final String ACCEPT_ALLY = "acceptally";
@@ -39,9 +38,9 @@ public class WindowAlliancePage extends AbstractWindowTownHall
     /**
      * Special buttons
      */
-    private static final String LIST_DIRECT = "directcolonylist";
+    private static final String LIST_DIRECT   = "directcolonylist";
     private static final String LIST_INDIRECT = "indirectcolonylist";
-    private static final String LIST_EVENTS = "connectioneventlist";
+    private static final String LIST_EVENTS   = "connectioneventlist";
 
     /**
      * Scrollinglists of connections.
@@ -210,11 +209,11 @@ public class WindowAlliancePage extends AbstractWindowTownHall
                 rowPane.findPaneOfTypeByID("name", Text.class).setText(Component.literal(eventData.name()));
                 rowPane.findPaneOfTypeByID("desc", Text.class).setText(Component.translatable(eventData.connectionEventType().translationKey()));
 
-                rowPane.findPaneOfTypeByID("acceptally", Button.class).setVisible(eventData.connectionEventType() == ConnectionEventType.ALLY_REQUEST && diplomacyStatus != DiplomacyStatus.ALLIES);
+                rowPane.findPaneOfTypeByID("acceptally", Button.class)
+                    .setVisible(eventData.connectionEventType() == ConnectionEventType.ALLY_REQUEST && diplomacyStatus != DiplomacyStatus.ALLIES);
             }
         });
     }
-
 
     @Override
     protected String getWindowId()

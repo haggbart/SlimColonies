@@ -1,44 +1,5 @@
 package no.monopixel.slimcolonies.core.event;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import no.monopixel.slimcolonies.api.blocks.interfaces.IRSComponentBlock;
-import no.monopixel.slimcolonies.api.client.render.modeltype.CitizenModel;
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IVisitorData;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.IGuardBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
-import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
-import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.api.entity.ModEntities;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.blocks.BlockScarecrow;
-import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTownHall;
-import no.monopixel.slimcolonies.core.client.render.RenderBipedCitizen;
-import no.monopixel.slimcolonies.core.colony.ColonyManager;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.TavernBuildingModule;
-import no.monopixel.slimcolonies.core.colony.interactionhandling.RecruitmentInteraction;
-import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
-import no.monopixel.slimcolonies.core.commands.EntryPoint;
-import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesChunkCapabilityProvider;
-import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesWorldCapabilityProvider;
-import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesWorldColonyManagerCapabilityProvider;
-import no.monopixel.slimcolonies.core.network.messages.client.OpenSuggestionWindowMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkCapabilityMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkRangeCapabilityMessage;
-import no.monopixel.slimcolonies.core.util.ChunkClientDataHelper;
-import no.monopixel.slimcolonies.core.util.ChunkDataHelper;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -63,7 +24,10 @@ import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.event.*;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingConversionEvent;
@@ -75,19 +39,57 @@ import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.blocks.interfaces.IRSComponentBlock;
+import no.monopixel.slimcolonies.api.client.render.modeltype.CitizenModel;
+import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.IVisitorData;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.IGuardBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
+import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
+import no.monopixel.slimcolonies.api.colony.permissions.Action;
+import no.monopixel.slimcolonies.api.entity.ModEntities;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.blocks.BlockScarecrow;
+import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTownHall;
+import no.monopixel.slimcolonies.core.client.render.RenderBipedCitizen;
+import no.monopixel.slimcolonies.core.colony.ColonyManager;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.TavernBuildingModule;
+import no.monopixel.slimcolonies.core.colony.interactionhandling.RecruitmentInteraction;
+import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
+import no.monopixel.slimcolonies.core.commands.EntryPoint;
+import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
+import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesChunkCapabilityProvider;
+import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesWorldCapabilityProvider;
+import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesWorldColonyManagerCapabilityProvider;
+import no.monopixel.slimcolonies.core.network.messages.client.OpenSuggestionWindowMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkCapabilityMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkRangeCapabilityMessage;
+import no.monopixel.slimcolonies.core.util.ChunkClientDataHelper;
+import no.monopixel.slimcolonies.core.util.ChunkDataHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
 
+import static net.minecraftforge.eventbus.api.EventPriority.HIGHEST;
+import static net.minecraftforge.eventbus.api.EventPriority.LOWEST;
 import static no.monopixel.slimcolonies.api.util.constant.ColonyManagerConstants.NO_COLONY_ID;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_COLONY_ID;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_EVENT_ID;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.translation.BaseGameTranslationConstants.BASE_BED_OCCUPIED;
-import static net.minecraftforge.eventbus.api.EventPriority.HIGHEST;
-import static net.minecraftforge.eventbus.api.EventPriority.LOWEST;
 
 /**
  * Handles all forge events.
@@ -98,7 +100,6 @@ public class EventHandler
      * Player position map for watching chunk entries
      */
     private static final Map<UUID, ChunkPos> playerPositions = new HashMap<>();
-
 
     @SubscribeEvent
     public static void onCommandsRegister(final RegisterCommandsEvent event)
@@ -117,12 +118,12 @@ public class EventHandler
         if (!event.getLevel().isClientSide())
         {
             if (MineColonies.getConfig().getServer().mobAttackCitizens.get() && event.getEntity() instanceof Mob && event.getEntity() instanceof Enemy && !(event.getEntity()
-              .getType()
+                .getType()
                 .is(ModTags.mobAttackBlacklist))
                 && !(event.getEntity() instanceof AbstractFastMinecoloniesEntity))
             {
                 ((Mob) event.getEntity()).targetSelector.addGoal(6,
-                  new NearestAttackableTargetGoal<>((Mob) event.getEntity(), EntityCitizen.class, true, citizen -> !citizen.isInvisible()));
+                    new NearestAttackableTargetGoal<>((Mob) event.getEntity(), EntityCitizen.class, true, citizen -> !citizen.isInvisible()));
             }
 
             if (event.getEntity() instanceof AbstractFastMinecoloniesEntity && ((ServerLevel) event.getLevel()).getEntity(event.getEntity().getUUID()) != null)
@@ -137,7 +138,6 @@ public class EventHandler
             }
         }
     }
-
 
     /**
      * Event called to attach capabilities on a chunk.
@@ -159,7 +159,8 @@ public class EventHandler
     public static void onAttachingCapabilitiesWorld(@NotNull final AttachCapabilitiesEvent<Level> event)
     {
         event.addCapability(new ResourceLocation(Constants.MOD_ID, "chunkupdate"), new MinecoloniesWorldCapabilityProvider());
-        event.addCapability(new ResourceLocation(Constants.MOD_ID, "colonymanager"), new MinecoloniesWorldColonyManagerCapabilityProvider(event.getObject().dimension() == Level.OVERWORLD));
+        event.addCapability(new ResourceLocation(Constants.MOD_ID, "colonymanager"),
+            new MinecoloniesWorldColonyManagerCapabilityProvider(event.getObject().dimension() == Level.OVERWORLD));
     }
 
     /**
@@ -280,10 +281,10 @@ public class EventHandler
         ChunkDataHelper.loadChunk(chunk, world);
 
         Network.getNetwork()
-          .sendToPlayer(new UpdateChunkRangeCapabilityMessage(world,
-            chunkPos.x,
-            chunkPos.z,
-            8, true), (ServerPlayer) event.player);
+            .sendToPlayer(new UpdateChunkRangeCapabilityMessage(world,
+                chunkPos.x,
+                chunkPos.z,
+                8, true), (ServerPlayer) event.player);
 
         final ChunkCapData chunkCapData = ColonyUtils.getChunkCapData(chunk);
         Network.getNetwork().sendToPlayer(new UpdateChunkCapabilityMessage(chunkCapData), (ServerPlayer) event.player);
@@ -377,14 +378,13 @@ public class EventHandler
             for (final IColony colony : IColonyManager.getInstance().getAllColonies())
             {
                 if (colony.getPermissions().hasPermission(player, Action.CAN_KEEP_COLONY_ACTIVE_WHILE_AWAY)
-                      || colony.getPermissions().hasPermission(player, Action.RECEIVE_MESSAGES_FAR_AWAY))
+                    || colony.getPermissions().hasPermission(player, Action.RECEIVE_MESSAGES_FAR_AWAY))
                 {
                     colony.getPackageManager().addImportantColonyPlayer(player);
                     colony.getPackageManager().sendColonyViewPackets();
                     colony.getPackageManager().sendPermissionsPackets();
                 }
             }
-
         }
     }
 
@@ -427,7 +427,7 @@ public class EventHandler
                 final LevelChunk chunk = world.getChunk(newChunkPos.x, newChunkPos.z);
                 final int owningColony = ColonyUtils.getOwningColony(chunk);
                 if (owningColony != NO_COLONY_ID
-                      && entityCitizen.getCitizenColonyHandler().getColonyId() != owningColony)
+                    && entityCitizen.getCitizenColonyHandler().getColonyId() != owningColony)
                 {
                     final IColony colony = IColonyManager.getInstance().getColonyByWorld(owningColony, entityCitizen.level);
                     if (colony != null)
@@ -460,8 +460,8 @@ public class EventHandler
             if (spawner instanceof SpawnerBlockEntity spawnerBE && spawnerBE.getSpawner().nextSpawnData != null)
             {
                 final IColony colony = IColonyManager.getInstance()
-                                         .getColonyByDimension(spawnerBE.getSpawner().nextSpawnData.getEntityToSpawn().getInt(TAG_COLONY_ID),
-                    world.dimension());
+                    .getColonyByDimension(spawnerBE.getSpawner().nextSpawnData.getEntityToSpawn().getInt(TAG_COLONY_ID),
+                        world.dimension());
                 if (colony != null)
                 {
                     colony.getEventManager().onTileEntityBreak(spawnerBE.getSpawner().nextSpawnData.getEntityToSpawn().getInt(TAG_EVENT_ID), spawner);
@@ -489,7 +489,7 @@ public class EventHandler
         {
             final IColony colony = IColonyManager.getInstance().getIColony(world, event.getPos());
             if (colony != null
-                  && !colony.getPermissions().hasPermission(player, Action.ACCESS_HUTS))
+                && !colony.getPermissions().hasPermission(player, Action.ACCESS_HUTS))
             {
                 event.setCanceled(true);
             }
@@ -541,8 +541,8 @@ public class EventHandler
                     if (!stack.isEmpty() && !world.isClientSide)
                     {
                         Network.getNetwork()
-                          .sendToPlayer(new OpenSuggestionWindowMessage(block.defaultBlockState().setValue(AbstractBlockHut.FACING,
-                            event.getEntity().getDirection()), event.getPos().relative(event.getFace()), stack), (ServerPlayer) player);
+                            .sendToPlayer(new OpenSuggestionWindowMessage(block.defaultBlockState().setValue(AbstractBlockHut.FACING,
+                                event.getEntity().getDirection()), event.getPos().relative(event.getFace()), stack), (ServerPlayer) player);
                     }
                     event.setCanceled(true);
                 }
@@ -562,7 +562,7 @@ public class EventHandler
     private static boolean playerRightClickInteract(@NotNull final Player player, final Level world, final BlockPos pos)
     {
         return !player.isShiftKeyDown() || player.getMainHandItem() == null || player.getMainHandItem().getItem() == null
-                 || player.getMainHandItem().getItem().doesSneakBypassUse(player.getMainHandItem(), world, pos, player);
+            || player.getMainHandItem().getItem().doesSneakBypassUse(player.getMainHandItem(), world, pos, player);
     }
 
     /**
@@ -658,9 +658,9 @@ public class EventHandler
         // Global events
         // Halloween ghost mode
         if (event.getLevel().isClientSide() && MineColonies.getConfig().getClient().holidayFeatures.get() &&
-              (LocalDateTime.now().getDayOfMonth() == 31 && LocalDateTime.now().getMonth() == Month.OCTOBER
-                 || LocalDateTime.now().getDayOfMonth() == 1 && LocalDateTime.now().getMonth() == Month.NOVEMBER
-                 || LocalDateTime.now().getDayOfMonth() == 2 && LocalDateTime.now().getMonth() == Month.NOVEMBER))
+            (LocalDateTime.now().getDayOfMonth() == 31 && LocalDateTime.now().getMonth() == Month.OCTOBER
+                || LocalDateTime.now().getDayOfMonth() == 1 && LocalDateTime.now().getMonth() == Month.NOVEMBER
+                || LocalDateTime.now().getDayOfMonth() == 2 && LocalDateTime.now().getMonth() == Month.NOVEMBER))
         {
             // Re-enable for ghostly halloween
             RenderBipedCitizen.isItGhostTime = false;
@@ -691,7 +691,6 @@ public class EventHandler
             Log.getLogger().info("Removed all colony views");
         }
     }
-
 
     /**
      * Gets called when a Hoglin, Pig, Piglin, Villager, or ZombieVillager gets converted to something else.
@@ -726,7 +725,7 @@ public class EventHandler
                     event.setCanceled(true);
 
                     visitorData.triggerInteraction(new RecruitmentInteraction(Component.translatable(
-                      "com.minecolonies.coremod.gui.chat.recruitstorycured", visitorData.getName().split(" ")[0]), ChatPriority.IMPORTANT));
+                        "com.minecolonies.coremod.gui.chat.recruitstorycured", visitorData.getName().split(" ")[0]), ChatPriority.IMPORTANT));
                     visitorData.getEntity().ifPresent(e -> e.setPos(entity.getX(), entity.getY(), entity.getZ()));
                     if (!entity.isSilent())
                     {
@@ -746,7 +745,8 @@ public class EventHandler
         if (lastTickMs > 50)
         {
             TickRateStateMachine.slownessFactor = Mth.clamp(lastTickMs / 50, 1.0D, 5.0D);
-        } else
+        }
+        else
         {
             TickRateStateMachine.slownessFactor = 1.0D;
         }

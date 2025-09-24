@@ -2,8 +2,13 @@ package no.monopixel.slimcolonies.core.colony.interactionhandling;
 
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.BOWindow;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import com.minecolonies.api.colony.*;
 import no.monopixel.slimcolonies.api.colony.*;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
@@ -15,12 +20,6 @@ import no.monopixel.slimcolonies.api.util.MessageUtils;
 import no.monopixel.slimcolonies.api.util.StatsUtil;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,7 +48,6 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
         new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.showstats"), null),
         recruitAnswer,
         new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.notnow"), null)};
-
 
     public RecruitmentInteraction(final ICitizen data)
     {

@@ -1,16 +1,16 @@
 package no.monopixel.slimcolonies.core.tileentities;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityWareHouse;
 import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
-import com.minecolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,7 +21,6 @@ import java.util.function.Predicate;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_FIVE_MIN;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 import static no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingWareHouse.MAX_STORAGE_UPGRADE;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 /**
  * Class which handles the tileEntity of our colony warehouse.
@@ -31,7 +30,7 @@ public class TileEntityWareHouse extends AbstractTileEntityWareHouse
     /**
      * Time of last sent notifications.
      */
-    private long lastNotification                   = 0;
+    private long lastNotification = 0;
 
     public TileEntityWareHouse(final BlockPos pos, final BlockState state)
     {
@@ -139,7 +138,7 @@ public class TileEntityWareHouse extends AbstractTileEntityWareHouse
             @Nullable final BlockEntity chest = getRackForStack(stack);
             if (chest == null)
             {
-                if(level.getGameTime() - lastNotification > TICKS_FIVE_MIN)
+                if (level.getGameTime() - lastNotification > TICKS_FIVE_MIN)
                 {
                     lastNotification = level.getGameTime();
                     if (getBuilding().getBuildingLevel() == getBuilding().getMaxBuildingLevel())
@@ -162,12 +161,14 @@ public class TileEntityWareHouse extends AbstractTileEntityWareHouse
             }
 
             final int index = i;
-            chest.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(handler -> InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(inventoryCitizen, index, handler));
+            chest.getCapability(ForgeCapabilities.ITEM_HANDLER, null)
+                .ifPresent(handler -> InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(inventoryCitizen, index, handler));
         }
     }
 
     /**
      * Get a rack for a stack.
+     *
      * @param stack the stack to insert.
      * @return the matching rack.
      */

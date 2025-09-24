@@ -2,8 +2,13 @@ package no.monopixel.slimcolonies.core.colony.interactionhandling;
 
 import com.ldtteam.blockui.controls.ItemIcon;
 import com.ldtteam.blockui.views.BOWindow;
-import com.minecolonies.api.colony.*;
-import com.minecolonies.api.colony.interactionhandling.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import no.monopixel.slimcolonies.api.colony.*;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
@@ -13,13 +18,6 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.core.client.gui.WindowRequestDetail;
 import no.monopixel.slimcolonies.core.client.gui.citizen.RequestWindowCitizen;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -37,17 +35,17 @@ public class RequestBasedInteraction extends ServerCitizenInteraction
 
     @SuppressWarnings("unchecked")
     private static final Tuple<Component, Component>[] tuples = (Tuple<Component, Component>[]) new Tuple[] {
-      new Tuple<>(Component.translatable(INTERACTION_R_OKAY), null),
-      new Tuple<>(Component.translatable(INTERACTION_R_REMIND), null),
-      new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.cancel"), null),
-      new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.fulfill"), null)};
+        new Tuple<>(Component.translatable(INTERACTION_R_OKAY), null),
+        new Tuple<>(Component.translatable(INTERACTION_R_REMIND), null),
+        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.cancel"), null),
+        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.fulfill"), null)};
 
     @SuppressWarnings("unchecked")
     private static final Tuple<Component, Component>[] tuplesAsync = (Tuple<Component, Component>[]) new Tuple[] {
-      new Tuple<>(Component.translatable(INTERACTION_R_OKAY), null),
-      new Tuple<>(Component.translatable(INTERACTION_R_IGNORE), null),
-      new Tuple<>(Component.translatable(INTERACTION_R_REMIND), null),
-      new Tuple<>(Component.translatable(INTERACTION_R_SKIP), null)};
+        new Tuple<>(Component.translatable(INTERACTION_R_OKAY), null),
+        new Tuple<>(Component.translatable(INTERACTION_R_IGNORE), null),
+        new Tuple<>(Component.translatable(INTERACTION_R_REMIND), null),
+        new Tuple<>(Component.translatable(INTERACTION_R_SKIP), null)};
 
     /**
      * The request this is related to.
@@ -68,10 +66,10 @@ public class RequestBasedInteraction extends ServerCitizenInteraction
      * @param validator the validator id.
      */
     public RequestBasedInteraction(
-      final Component inquiry,
-      final IChatPriority priority,
-      final Component validator,
-      final IToken<?> token)
+        final Component inquiry,
+        final IChatPriority priority,
+        final Component validator,
+        final IToken<?> token)
     {
         super(inquiry, true, priority, null, validator, priority == ChatPriority.BLOCKING ? tuples : tuplesAsync);
         this.validator = InteractionValidatorRegistry.getTokenBasedInteractionValidatorPredicate(validator);
@@ -86,9 +84,9 @@ public class RequestBasedInteraction extends ServerCitizenInteraction
      * @param token    the token this is related to.
      */
     public RequestBasedInteraction(
-      final Component inquiry,
-      final IChatPriority priority,
-      final IToken<?> token)
+        final Component inquiry,
+        final IChatPriority priority,
+        final IToken<?> token)
     {
         super(inquiry, true, priority, null, inquiry, tuples);
         this.validator = InteractionValidatorRegistry.getTokenBasedInteractionValidatorPredicate(inquiry);

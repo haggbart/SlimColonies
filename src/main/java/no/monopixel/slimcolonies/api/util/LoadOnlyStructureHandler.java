@@ -3,7 +3,6 @@ package no.monopixel.slimcolonies.api.util;
 import com.ldtteam.structurize.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.placement.structure.CreativeStructureHandler;
 import com.ldtteam.structurize.util.PlacementSettings;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -11,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Load only structure handler just to get dimensions etc from structures, not for placement.
  */
+@SuppressWarnings("removal")
 public class LoadOnlyStructureHandler extends CreativeStructureHandler
 {
     /**

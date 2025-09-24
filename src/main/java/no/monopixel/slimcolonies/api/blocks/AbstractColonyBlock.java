@@ -1,5 +1,32 @@
 package no.monopixel.slimcolonies.api.blocks;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.IForgeRegistry;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.blocks.interfaces.ITickableBlockMinecolonies;
 import no.monopixel.slimcolonies.api.colony.IColony;
@@ -13,33 +40,8 @@ import no.monopixel.slimcolonies.api.items.ItemBlockHut;
 import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
 import no.monopixel.slimcolonies.api.util.ColonyUtils;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
-import com.minecolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.IForgeRegistry;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -162,12 +164,12 @@ public abstract class AbstractColonyBlock<B extends AbstractColonyBlock<B>> exte
     @NotNull
     @Override
     public InteractionResult use(
-      final BlockState state,
-      final Level worldIn,
-      final BlockPos pos,
-      final Player player,
-      final InteractionHand hand,
-      final BlockHitResult ray)
+        final BlockState state,
+        final Level worldIn,
+        final BlockPos pos,
+        final Player player,
+        final InteractionHand hand,
+        final BlockHitResult ray)
     {
        /*
         If the world is client, open the gui of the building
@@ -182,7 +184,9 @@ public abstract class AbstractColonyBlock<B extends AbstractColonyBlock<B>> exte
             @Nullable final IBuildingView building = IColonyManager.getInstance().getBuildingView(worldIn.dimension(), pos);
             final LevelChunk chunk = worldIn.getChunkAt(pos);
             final BlockEntity entity = worldIn.getBlockEntity(pos);
-            if (entity instanceof final TileEntityColonyBuilding te && te.getPositionedTags().containsKey(BlockPos.ZERO) && te.getPositionedTags().get(BlockPos.ZERO).contains(DEACTIVATED))
+            if (entity instanceof final TileEntityColonyBuilding te && te.getPositionedTags().containsKey(BlockPos.ZERO) && te.getPositionedTags()
+                .get(BlockPos.ZERO)
+                .contains(DEACTIVATED))
             {
                 if (building == null && ColonyUtils.getOwningColony(chunk) == 0)
                 {
@@ -273,6 +277,7 @@ public abstract class AbstractColonyBlock<B extends AbstractColonyBlock<B>> exte
 
     /**
      * Get the registry name frm the blck hut.
+     *
      * @return the key.
      */
     public ResourceLocation getRegistryName()

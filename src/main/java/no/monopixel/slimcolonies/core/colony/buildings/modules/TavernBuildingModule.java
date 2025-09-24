@@ -2,13 +2,19 @@ package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
 import com.ldtteam.blockui.views.BOWindow;
 import com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.IVisitorData;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
-import com.minecolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.stat.IStat;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
@@ -23,13 +29,6 @@ import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.VisitorSpa
 import no.monopixel.slimcolonies.core.colony.interactionhandling.RecruitmentInteraction;
 import no.monopixel.slimcolonies.core.datalistener.CustomVisitorListener;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.PlayMusicAtPosMessage;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

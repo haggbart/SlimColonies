@@ -1,22 +1,5 @@
 package no.monopixel.slimcolonies.core.compatibility.jei;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
-import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
-import no.monopixel.slimcolonies.api.colony.jobs.IJob;
-import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
-import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
-import no.monopixel.slimcolonies.api.compatibility.IJeiProxy;
-import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
-import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.AnimalHerdingModule;
-import no.monopixel.slimcolonies.core.colony.crafting.RecipeAnalyzer;
-import com.minecolonies.core.compatibility.jei.transfer.*;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
@@ -36,6 +19,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
+import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
+import no.monopixel.slimcolonies.api.colony.jobs.IJob;
+import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
+import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
+import no.monopixel.slimcolonies.api.compatibility.Compatibility;
+import no.monopixel.slimcolonies.api.compatibility.IJeiProxy;
+import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
+import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.AnimalHerdingModule;
+import no.monopixel.slimcolonies.core.colony.crafting.RecipeAnalyzer;
 import no.monopixel.slimcolonies.core.compatibility.jei.transfer.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -85,7 +84,7 @@ public class JEIPlugin implements IModPlugin
 
     private final List<JobBasedRecipeCategory<?>> categories = new ArrayList<>();
     @Nullable
-    private IJeiRuntime jei;
+    private       IJeiRuntime                     jei;
 
     @Override
     public void registerCategories(@NotNull final IRecipeCategoryRegistration registration)
@@ -152,8 +151,9 @@ public class JEIPlugin implements IModPlugin
         }
     }
 
-    private void registerCategory(@NotNull final IRecipeCategoryRegistration registration,
-                                  @NotNull final JobBasedRecipeCategory<?> category)
+    private void registerCategory(
+        @NotNull final IRecipeCategoryRegistration registration,
+        @NotNull final JobBasedRecipeCategory<?> category)
     {
         categories.add(category);
         registration.addRecipeCategories(category);
@@ -163,7 +163,7 @@ public class JEIPlugin implements IModPlugin
     public void registerRecipes(@NotNull final IRecipeRegistration registration)
     {
         registration.addIngredientInfo(new ItemStack(ModBlocks.blockHutComposter.asItem()), VanillaTypes.ITEM_STACK,
-                Component.translatable(TranslationConstants.PARTIAL_JEI_INFO + ModJobs.COMPOSTER_ID.getPath()));
+            Component.translatable(TranslationConstants.PARTIAL_JEI_INFO + ModJobs.COMPOSTER_ID.getPath()));
 
         registration.addRecipes(ModRecipeTypes.TOOLS, ToolRecipeCategory.findRecipes());
         registration.addRecipes(ModRecipeTypes.COMPOSTING, CompostRecipeCategory.findRecipes());
@@ -180,11 +180,12 @@ public class JEIPlugin implements IModPlugin
         }
     }
 
-    private <R> void addJobBasedRecipes(@NotNull final Map<CraftingType, List<IGenericRecipe>> vanilla,
-                                        @NotNull final List<Animal> animals,
-                                        @NotNull final JobBasedRecipeCategory<R> category,
-                                        @NotNull final BiConsumer<RecipeType<R>, List<R>> registrar,
-                                        @NotNull final Level world)
+    private <R> void addJobBasedRecipes(
+        @NotNull final Map<CraftingType, List<IGenericRecipe>> vanilla,
+        @NotNull final List<Animal> animals,
+        @NotNull final JobBasedRecipeCategory<R> category,
+        @NotNull final BiConsumer<RecipeType<R>, List<R>> registrar,
+        @NotNull final Level world)
     {
         try
         {

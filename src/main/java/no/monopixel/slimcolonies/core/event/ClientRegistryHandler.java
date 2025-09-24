@@ -1,18 +1,5 @@
 package no.monopixel.slimcolonies.core.event;
 
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.client.ModKeyMappings;
-import no.monopixel.slimcolonies.api.client.render.modeltype.CitizenModel;
-import no.monopixel.slimcolonies.api.crafting.registry.ModRecipeSerializer;
-import no.monopixel.slimcolonies.api.entity.ModEntities;
-import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import com.minecolonies.core.client.model.*;
-import com.minecolonies.core.client.render.*;
-import no.monopixel.slimcolonies.core.client.model.*;
-import no.monopixel.slimcolonies.core.client.render.*;
-import no.monopixel.slimcolonies.core.client.render.worldevent.ColonyBlueprintRenderer;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -29,6 +16,17 @@ import net.minecraftforge.client.event.RegisterItemDecorationsEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.client.ModKeyMappings;
+import no.monopixel.slimcolonies.api.client.render.modeltype.CitizenModel;
+import no.monopixel.slimcolonies.api.crafting.registry.ModRecipeSerializer;
+import no.monopixel.slimcolonies.api.entity.ModEntities;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.client.model.*;
+import no.monopixel.slimcolonies.core.client.render.*;
+import no.monopixel.slimcolonies.core.client.render.worldevent.ColonyBlueprintRenderer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

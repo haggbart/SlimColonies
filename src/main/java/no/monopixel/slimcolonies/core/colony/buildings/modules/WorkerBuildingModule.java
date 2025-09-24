@@ -1,12 +1,16 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuildingWorkerModule;
-import com.minecolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.jobs.IJob;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
@@ -18,11 +22,6 @@ import no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.BuildingReq
 import no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.PrivateWorkerCraftingProductionResolver;
 import no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.PrivateWorkerCraftingRequestResolver;
 import no.monopixel.slimcolonies.core.util.BuildingUtils;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -36,7 +35,7 @@ import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
  * The worker module for citizen where they are assigned to if they work at it.
  */
 public class WorkerBuildingModule extends AbstractAssignedCitizenModule
-  implements IAssignsJob, IBuildingEventsModule, ITickingModule, IPersistentModule, IBuildingWorkerModule, ICreatesResolversModule
+    implements IAssignsJob, IBuildingEventsModule, ITickingModule, IPersistentModule, IBuildingWorkerModule, ICreatesResolversModule
 {
     /**
      * Module specific skills.
@@ -49,17 +48,16 @@ public class WorkerBuildingModule extends AbstractAssignedCitizenModule
      */
     private final JobEntry jobEntry;
 
-
     /**
      * Max size in terms of assignees.
      */
     private final Function<IBuilding, Integer> sizeLimit;
 
     public WorkerBuildingModule(
-      final JobEntry entry,
-      final Skill primary,
-      final Skill secondary,
-      final Function<IBuilding, Integer> sizeLimit)
+        final JobEntry entry,
+        final Skill primary,
+        final Skill secondary,
+        final Function<IBuilding, Integer> sizeLimit)
     {
         this.jobEntry = entry;
         this.primary = primary;
@@ -226,7 +224,6 @@ public class WorkerBuildingModule extends AbstractAssignedCitizenModule
         return jobEntry.produceJob(citizen);
     }
 
-
     @NotNull
     @Override
     public Skill getPrimarySkill()
@@ -246,11 +243,11 @@ public class WorkerBuildingModule extends AbstractAssignedCitizenModule
     {
         final ImmutableList.Builder<IRequestResolver<?>> builder = ImmutableList.builder();
         builder.add(new BuildingRequestResolver(building.getRequester().getLocation(), building.getColony().getRequestManager()
-            .getFactoryController().getNewInstance(TypeConstants.ITOKEN)),
-          new PrivateWorkerCraftingRequestResolver(building.getRequester().getLocation(), building.getColony().getRequestManager()
-            .getFactoryController().getNewInstance(TypeConstants.ITOKEN), jobEntry),
-          new PrivateWorkerCraftingProductionResolver(building.getRequester().getLocation(), building.getColony().getRequestManager()
-            .getFactoryController().getNewInstance(TypeConstants.ITOKEN), jobEntry));
+                .getFactoryController().getNewInstance(TypeConstants.ITOKEN)),
+            new PrivateWorkerCraftingRequestResolver(building.getRequester().getLocation(), building.getColony().getRequestManager()
+                .getFactoryController().getNewInstance(TypeConstants.ITOKEN), jobEntry),
+            new PrivateWorkerCraftingProductionResolver(building.getRequester().getLocation(), building.getColony().getRequestManager()
+                .getFactoryController().getNewInstance(TypeConstants.ITOKEN), jobEntry));
         return builder.build();
     }
 

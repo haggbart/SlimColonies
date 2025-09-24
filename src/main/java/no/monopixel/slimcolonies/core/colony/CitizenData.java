@@ -1,5 +1,18 @@
 package no.monopixel.slimcolonies.core.colony;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.*;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.CitizenNameFile;
@@ -19,15 +32,14 @@ import no.monopixel.slimcolonies.api.entity.citizen.AbstractCivilianEntity;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.entity.citizen.Skill;
 import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
-import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenInjuryHandler;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenInjuryHandler;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenSkillHandler;
 import no.monopixel.slimcolonies.api.eventbus.events.colony.citizens.CitizenJobChangedModEvent;
 import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
 import no.monopixel.slimcolonies.api.quests.IQuestDeliveryObjective;
 import no.monopixel.slimcolonies.api.quests.IQuestInstance;
 import no.monopixel.slimcolonies.api.quests.IQuestManager;
-import com.minecolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.Suppression;
 import no.monopixel.slimcolonies.core.MineColonies;
@@ -37,25 +49,12 @@ import no.monopixel.slimcolonies.core.colony.interactionhandling.QuestDeliveryIn
 import no.monopixel.slimcolonies.core.colony.interactionhandling.QuestDialogueInteraction;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.ServerCitizenInteraction;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler;
 import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenFoodHandler;
+import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler;
 import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenMournHandler;
 import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenSkillHandler;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewCitizenViewMessage;
 import no.monopixel.slimcolonies.core.util.AttributeModifierUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.*;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -208,7 +207,6 @@ public class CitizenData implements ICitizenData
      */
     private BlockPos lastPosition = new BlockPos(0, 0, 0);
 
-
     /**
      * The citizen happiness handler.
      */
@@ -259,7 +257,6 @@ public class CitizenData implements ICitizenData
      * The citizen data random.
      */
     private final Random random = new Random();
-
 
     /**
      * Consumed position to determine the next position to respawn at.
@@ -1203,7 +1200,6 @@ public class CitizenData implements ICitizenData
         this.bedPos = bedPos;
     }
 
-
     @Override
     public CitizenMournHandler getCitizenMournHandler()
     {
@@ -2081,7 +2077,6 @@ public class CitizenData implements ICitizenData
 
         return null;
     }
-
 
     @Override
     public int getLeisureTime()

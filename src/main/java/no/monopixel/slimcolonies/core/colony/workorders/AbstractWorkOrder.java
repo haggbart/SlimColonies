@@ -3,10 +3,15 @@ package no.monopixel.slimcolonies.core.colony.workorders;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.ldtteam.structurize.blueprints.v1.Blueprint;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import com.minecolonies.api.colony.workorders.*;
 import no.monopixel.slimcolonies.api.colony.workorders.*;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.ColonyUtils;
@@ -14,15 +19,8 @@ import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBuilder;
-import com.minecolonies.core.colony.workorders.view.*;
 import no.monopixel.slimcolonies.core.colony.workorders.view.*;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingProgressStage;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,7 +60,7 @@ public abstract class AbstractWorkOrder implements IBuilderWorkOrder
     private static final String TAG_ITERATOR            = "iterator";
     private static final String TAG_IS_CLEARED          = "cleared";
     private static final String TAG_IS_REQUESTED        = "requested";
-    private static final String TAG_BB = "bb";
+    private static final String TAG_BB                  = "bb";
 
     /**
      * Bimap of workOrder from string to class.
@@ -197,9 +195,9 @@ public abstract class AbstractWorkOrder implements IBuilderWorkOrder
      * @param orderClass class of work order
      */
     private static void addMapping(
-      final String name,
-      @NotNull final Class<? extends IWorkOrder> orderClass,
-      @NotNull final Class<? extends IWorkOrderView> viewClass)
+        final String name,
+        @NotNull final Class<? extends IWorkOrder> orderClass,
+        @NotNull final Class<? extends IWorkOrderView> viewClass)
     {
         if (nameToClassBiMap.containsKey(name))
         {
@@ -766,9 +764,9 @@ public abstract class AbstractWorkOrder implements IBuilderWorkOrder
     private String getMappingName()
     {
         final Optional<String> s = nameToClassBiMap.entrySet().stream()
-          .filter(f -> this.getClass().equals(f.getValue().getA()))
-          .map(Map.Entry::getKey)
-          .findFirst();
+            .filter(f -> this.getClass().equals(f.getValue().getA()))
+            .map(Map.Entry::getKey)
+            .findFirst();
 
         if (!s.isPresent())
         {
@@ -836,10 +834,10 @@ public abstract class AbstractWorkOrder implements IBuilderWorkOrder
     public boolean canBeResolved(final IColony colony, final int level)
     {
         return colony.getBuildingManager()
-          .getBuildings()
-          .values()
-          .stream()
-          .anyMatch(building -> building instanceof BuildingBuilder && !building.getAllAssignedCitizen().isEmpty() && building.getBuildingLevel() >= level);
+            .getBuildings()
+            .values()
+            .stream()
+            .anyMatch(building -> building instanceof BuildingBuilder && !building.getAllAssignedCitizen().isEmpty() && building.getBuildingLevel() >= level);
     }
 
     /**

@@ -3,12 +3,15 @@ package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
 import com.ldtteam.blockui.views.BOWindow;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.buildings.workerbuildings.IWareHouse;
 import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.IRequestResolver;
-import com.minecolonies.api.tileentities.*;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityWareHouse;
@@ -26,10 +29,6 @@ import no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.WarehouseRe
 import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
 import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
 import no.monopixel.slimcolonies.core.tileentities.TileEntityWareHouse;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -145,15 +144,15 @@ public class BuildingWareHouse extends AbstractBuilding implements IWareHouse
 
         builder.addAll(supers);
         builder.add(new WarehouseRequestResolver(getRequester().getLocation(),
-          getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)),
-          new WarehouseConcreteRequestResolver(getRequester().getLocation(),
-          getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN))
-          );
+                getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)),
+            new WarehouseConcreteRequestResolver(getRequester().getLocation(),
+                getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN))
+        );
 
         builder.add(new DeliveryRequestResolver(getRequester().getLocation(),
-          getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)));
+            getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)));
         builder.add(new PickupRequestResolver(getRequester().getLocation(),
-          getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)));
+            getColony().getRequestManager().getFactoryController().getNewInstance(TypeConstants.ITOKEN)));
 
         return builder.build();
     }
@@ -180,7 +179,6 @@ public class BuildingWareHouse extends AbstractBuilding implements IWareHouse
         }
         markDirty();
     }
-
 
     /**
      * BuildWarehouse View.

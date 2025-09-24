@@ -1,32 +1,6 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.production;
 
 import com.google.common.collect.ImmutableList;
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
-import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.IDeliverable;
-import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.StackList;
-import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolHelper;
-import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
-import no.monopixel.slimcolonies.api.crafting.ItemStorage;
-import no.monopixel.slimcolonies.api.entity.ai.JobStatus;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
-import no.monopixel.slimcolonies.api.entity.ai.workers.util.GuardGear;
-import no.monopixel.slimcolonies.api.entity.ai.workers.util.GuardGearBuilder;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.ExpeditionLogModule;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.expedition.ExpeditionLog;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingNetherWorker;
-import no.monopixel.slimcolonies.core.colony.jobs.JobNetherWorker;
-import no.monopixel.slimcolonies.core.entity.ai.workers.crafting.AbstractEntityAICrafting;
-import no.monopixel.slimcolonies.core.items.ItemAdventureToken;
-import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -47,6 +21,31 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.items.IItemHandler;
+import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
+import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.IDeliverable;
+import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.StackList;
+import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolHelper;
+import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
+import no.monopixel.slimcolonies.api.entity.ai.JobStatus;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
+import no.monopixel.slimcolonies.api.entity.ai.workers.util.GuardGear;
+import no.monopixel.slimcolonies.api.entity.ai.workers.util.GuardGearBuilder;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.ExpeditionLogModule;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.expedition.ExpeditionLog;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingNetherWorker;
+import no.monopixel.slimcolonies.core.colony.jobs.JobNetherWorker;
+import no.monopixel.slimcolonies.core.entity.ai.workers.crafting.AbstractEntityAICrafting;
+import no.monopixel.slimcolonies.core.items.ItemAdventureToken;
+import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -57,11 +56,9 @@ import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWork
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.REGENERATION;
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.SATLIMIT;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.GuardConstants.*;
+import static no.monopixel.slimcolonies.api.util.constant.GuardConstants.BASE_PHYSICAL_DAMAGE;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.ITEMS_DISCOVERED;
-import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.TRIPS_COMPLETED;
-import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.MINER_DEATHS;
+import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.*;
 import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.NETHERMINER_MENU;
 import static no.monopixel.slimcolonies.core.entity.ai.workers.production.EntityAIStructureMiner.*;
 
@@ -756,7 +753,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                 for (final GuardGear item : itemList)
                 {
                     if (item.getType().equals(equipSlot)
-)
+                    )
                     {
                         if (!item.test(worker.getInventoryCitizen().getArmorInSlot(item.getType())))
                         {

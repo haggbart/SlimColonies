@@ -1,6 +1,5 @@
 package no.monopixel.slimcolonies.api.tileentities;
 
-import com.minecolonies.core.tileentities.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.RegistryObject;
@@ -35,5 +34,4 @@ public class MinecoloniesTileEntities
     public static RegistryObject<BlockEntityType<TileEntityColonyFlag>> COLONY_FLAG;
 
     public static RegistryObject<BlockEntityType<TileEntityColonySign>> COLONY_SIGN;
-
 }

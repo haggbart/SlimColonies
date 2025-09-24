@@ -1,8 +1,12 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
 import com.google.common.reflect.TypeToken;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.colony.IColony;
-import com.minecolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.IRequest;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestState;
@@ -13,16 +17,13 @@ import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.FriendlyByteBuf;
-
 import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.MINIMUM_STOCK;
@@ -72,8 +73,9 @@ public class MinimumStockModule extends AbstractBuildingModule implements IMinim
 
     /**
      * Get the request from the list that matches this stack.
+     *
      * @param stack the stack to search for in the requests.
-     * @param list the list of requests.
+     * @param list  the list of requests.
      * @return the token of the matching request or null.
      */
     private IToken<?> getMatchingRequest(final ItemStack stack, final Collection<IToken<?>> list)
@@ -151,11 +153,13 @@ public class MinimumStockModule extends AbstractBuildingModule implements IMinim
     @Override
     public void alterItemsToBeKept(final TriConsumer<Predicate<ItemStack>, Integer, Boolean> consumer)
     {
-        if(!minimumStock.isEmpty())
+        if (!minimumStock.isEmpty())
         {
-            for(ItemStorage item:minimumStock.keySet())
+            for (ItemStorage item : minimumStock.keySet())
             {
-                consumer.accept(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, item.getItemStack(), false, true), minimumStock.get(item).intValue() * item.getItemStack().getMaxStackSize(), false);
+                consumer.accept(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, item.getItemStack(), false, true),
+                    minimumStock.get(item).intValue() * item.getItemStack().getMaxStackSize(),
+                    false);
             }
         }
     }

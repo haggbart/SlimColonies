@@ -10,13 +10,11 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.Settings
 import no.monopixel.slimcolonies.core.colony.crafting.ImmutableItemStorageFactory;
 import no.monopixel.slimcolonies.core.colony.crafting.ItemStorageFactory;
 import no.monopixel.slimcolonies.core.colony.crafting.RecipeStorageFactory;
-import com.minecolonies.core.colony.requestsystem.data.*;
 import no.monopixel.slimcolonies.core.colony.requestsystem.data.*;
 import no.monopixel.slimcolonies.core.colony.requestsystem.locations.EntityLocation;
 import no.monopixel.slimcolonies.core.colony.requestsystem.locations.StaticLocation;
 import no.monopixel.slimcolonies.core.colony.requestsystem.requesters.factories.BuildingBasedRequesterFactory;
 import no.monopixel.slimcolonies.core.colony.requestsystem.requests.StandardRequestFactories;
-import com.minecolonies.core.colony.requestsystem.resolvers.factory.*;
 import no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.factory.*;
 import no.monopixel.slimcolonies.core.research.GlobalResearchFactory;
 import no.monopixel.slimcolonies.core.research.LocalResearchFactory;

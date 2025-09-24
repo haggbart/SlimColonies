@@ -1,74 +1,5 @@
 package no.monopixel.slimcolonies.core.entity.citizen;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import com.minecolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.colony.*;
-import no.monopixel.slimcolonies.api.colony.buildings.IGuardBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
-import no.monopixel.slimcolonies.api.colony.jobs.IJob;
-import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
-import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
-import no.monopixel.slimcolonies.api.colony.requestsystem.location.ILocation;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
-import no.monopixel.slimcolonies.api.entity.CustomGoalSelector;
-import no.monopixel.slimcolonies.api.entity.ai.combat.threat.IThreatTableEntity;
-import no.monopixel.slimcolonies.api.entity.ai.combat.threat.ThreatTable;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.AIOneTimeEventTarget;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.CitizenAIState;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.EntityState;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IState;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.entity.citizen.Skill;
-import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
-import com.minecolonies.api.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.api.eventbus.events.colony.citizens.CitizenDiedModEvent;
-import no.monopixel.slimcolonies.api.eventbus.events.colony.citizens.CitizenRemovedModEvent;
-import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
-import no.monopixel.slimcolonies.api.inventory.container.ContainerCitizenInventory;
-import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import no.monopixel.slimcolonies.api.sounds.EventType;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
-import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
-import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.client.gui.WindowInteraction;
-import no.monopixel.slimcolonies.core.colony.Colony;
-import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.WorkerBuildingModule;
-import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.CitizenDiedEvent;
-import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
-import no.monopixel.slimcolonies.core.colony.jobs.JobKnight;
-import no.monopixel.slimcolonies.core.colony.jobs.JobNetherWorker;
-import no.monopixel.slimcolonies.core.colony.jobs.JobRanger;
-import no.monopixel.slimcolonies.core.debug.DebugPlayerManager;
-import com.minecolonies.core.entity.ai.minimal.*;
-import no.monopixel.slimcolonies.core.entity.ai.minimal.*;
-import no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIBasic;
-import no.monopixel.slimcolonies.core.entity.ai.workers.CitizenAI;
-import no.monopixel.slimcolonies.core.entity.ai.workers.guard.AbstractEntityAIGuard;
-import com.minecolonies.core.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MovementHandler;
-import no.monopixel.slimcolonies.core.event.EventHandler;
-import no.monopixel.slimcolonies.core.event.TextureReloadListener;
-import no.monopixel.slimcolonies.core.network.messages.client.ItemParticleEffectMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.VanillaParticleMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewCitizenViewMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.PlaySoundForCitizenMessage;
-import no.monopixel.slimcolonies.core.network.messages.server.colony.OpenInventoryMessage;
-import no.monopixel.slimcolonies.core.util.TeleportHelper;
-import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -110,6 +41,70 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.colony.*;
+import no.monopixel.slimcolonies.api.colony.buildings.IGuardBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
+import no.monopixel.slimcolonies.api.colony.jobs.IJob;
+import no.monopixel.slimcolonies.api.colony.permissions.Action;
+import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
+import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
+import no.monopixel.slimcolonies.api.colony.requestsystem.location.ILocation;
+import no.monopixel.slimcolonies.api.compatibility.Compatibility;
+import no.monopixel.slimcolonies.api.entity.CustomGoalSelector;
+import no.monopixel.slimcolonies.api.entity.ai.combat.threat.IThreatTableEntity;
+import no.monopixel.slimcolonies.api.entity.ai.combat.threat.ThreatTable;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.AIOneTimeEventTarget;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.CitizenAIState;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.EntityState;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IState;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.entity.citizen.Skill;
+import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.*;
+import no.monopixel.slimcolonies.api.eventbus.events.colony.citizens.CitizenDiedModEvent;
+import no.monopixel.slimcolonies.api.eventbus.events.colony.citizens.CitizenRemovedModEvent;
+import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
+import no.monopixel.slimcolonies.api.inventory.container.ContainerCitizenInventory;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.sounds.EventType;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
+import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
+import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
+import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.client.gui.WindowInteraction;
+import no.monopixel.slimcolonies.core.colony.Colony;
+import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.WorkerBuildingModule;
+import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.CitizenDiedEvent;
+import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
+import no.monopixel.slimcolonies.core.colony.jobs.JobKnight;
+import no.monopixel.slimcolonies.core.colony.jobs.JobNetherWorker;
+import no.monopixel.slimcolonies.core.colony.jobs.JobRanger;
+import no.monopixel.slimcolonies.core.debug.DebugPlayerManager;
+import no.monopixel.slimcolonies.core.entity.ai.minimal.*;
+import no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIBasic;
+import no.monopixel.slimcolonies.core.entity.ai.workers.CitizenAI;
+import no.monopixel.slimcolonies.core.entity.ai.workers.guard.AbstractEntityAIGuard;
+import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.*;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MovementHandler;
+import no.monopixel.slimcolonies.core.event.EventHandler;
+import no.monopixel.slimcolonies.core.event.TextureReloadListener;
+import no.monopixel.slimcolonies.core.network.messages.client.ItemParticleEffectMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.VanillaParticleMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewCitizenViewMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.PlaySoundForCitizenMessage;
+import no.monopixel.slimcolonies.core.network.messages.server.colony.OpenInventoryMessage;
+import no.monopixel.slimcolonies.core.util.TeleportHelper;
+import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -149,7 +144,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     /**
      * It's citizen Id.
      */
-    private int                       citizenId = 0;
+    private int citizenId = 0;
 
     /**
      * Reference to the data representation inside the colony.
@@ -435,7 +430,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
 
         final ItemStack usedStack = player.getItemInHand(hand);
         if (MineColonies.getConfig().getServer().enableInDevelopmentFeatures.get() &&
-              usedStack.getItem() instanceof BlockItem && ((BlockItem) usedStack.getItem()).getBlock() instanceof AbstractBlockHut<?>)
+            usedStack.getItem() instanceof BlockItem && ((BlockItem) usedStack.getItem()).getBlock() instanceof AbstractBlockHut<?>)
         {
             final BuildingEntry entry = ((AbstractBlockHut<?>) ((BlockItem) usedStack.getItem()).getBlock()).getBuildingEntry();
             for (final BuildingEntry.ModuleProducer moduleProducer : entry.getModuleProducers())
@@ -454,8 +449,8 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             {
                 playSound(SoundEvents.VILLAGER_NO, 0.5f, (float) SoundUtils.getRandomPitch(getRandom()));
                 MessageUtils.format(WARNING_INTERACTION_CANT_DO_NOW, this.getCitizenData().getName())
-                  .withPriority(MessagePriority.DANGER)
-                  .sendTo(player);
+                    .withPriority(MessagePriority.DANGER)
+                    .sendTo(player);
             }
             return InteractionResult.PASS;
         }
@@ -494,8 +489,8 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
                 getCitizenData().markDirty(20);
 
                 MessageUtils.format(MESSAGE_INTERACTION_POISON, this.getCitizenData().getName())
-                        .withPriority(MessagePriority.DANGER)
-                        .sendTo(player);
+                    .withPriority(MessagePriority.DANGER)
+                    .sendTo(player);
             }
 
             interactionCooldown = 20 * 20;
@@ -576,7 +571,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     public boolean isInteractionItem(final ItemStack stack)
     {
         return ISFOOD.test(stack) || stack.getItem() == Items.BOOK || stack.getItem() == Items.GOLDEN_APPLE || stack.getItem() == Items.CACTUS
-                 || stack.getItem() == Items.GLOWSTONE_DUST || stack.is(ModTags.poisonous_food);
+            || stack.getItem() == Items.GLOWSTONE_DUST || stack.is(ModTags.poisonous_food);
     }
 
     /**
@@ -609,8 +604,8 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             {
                 playSound(SoundEvents.VILLAGER_NO, 1.0f, (float) SoundUtils.getRandomPitch(getRandom()));
                 MessageUtils.format(MESSAGE_INTERACTION_COOKIE, this.getCitizenData().getName())
-                  .withPriority(MessagePriority.DANGER)
-                  .sendTo(player);
+                    .withPriority(MessagePriority.DANGER)
+                    .sendTo(player);
             }
         }
     }
@@ -942,7 +937,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         if (citizenJobHandler.getColonyJob() != null && MineColonies.getConfig().getServer().enableInDevelopmentFeatures.get())
         {
             super.setCustomName(Component.literal(
-              citizenData.getName() + "[" + citizenJobHandler.getColonyJob().getNameTagDescription() + "]"));
+                citizenData.getName() + "[" + citizenJobHandler.getColonyJob().getNameTagDescription() + "]"));
         }
     }
 
@@ -1250,9 +1245,9 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             final RemovalReason removalReason = getRemovalReason();
 
             Log.getLogger()
-              .warn("Entity:" + getName() + " uuid:" + getUUID() + " id:" + getId() + " removed:" + isRemoved() + " colonyid:" + citizenColonyHandler.getColonyId()
-                      + " entitydata colony id:" + getEntityData().get(DATA_COLONY_ID) + " hascolony:" + (citizenColonyHandler.getColonyOrRegister() != null) +
-                      " registered:" + citizenColonyHandler.registered() + " world:" + level + " saved data:" + tag + " removalReason: " + removalReason);
+                .warn("Entity:" + getName() + " uuid:" + getUUID() + " id:" + getId() + " removed:" + isRemoved() + " colonyid:" + citizenColonyHandler.getColonyId()
+                    + " entitydata colony id:" + getEntityData().get(DATA_COLONY_ID) + " hascolony:" + (citizenColonyHandler.getColonyOrRegister() != null) +
+                    " registered:" + citizenColonyHandler.registered() + " world:" + level + " saved data:" + tag + " removalReason: " + removalReason);
         }
 
         if (handleInWallDamage(damageSource))
@@ -1280,7 +1275,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         return handleDamagePerformed(damageSource, damage, sourceEntity);
     }
 
-    ///////// -------------------- The Handlers -------------------- /////////
+    /// ////// -------------------- The Handlers -------------------- /////////
 
     private boolean handleInWallDamage(@NotNull final DamageSource damageSource)
     {
@@ -1291,7 +1286,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         }
 
         return damageSource.typeHolder().is(DamageTypes.IN_WALL) && citizenSleepHandler.isAsleep()
-                 || Compatibility.isDynTreePresent() && damageSource.typeHolder().is(Compatibility.getDynamicTreeDamage()) || this.isInvulnerable();
+            || Compatibility.isDynTreePresent() && damageSource.typeHolder().is(Compatibility.getDynamicTreeDamage()) || this.isInvulnerable();
     }
 
     /**
@@ -1315,7 +1310,9 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             if (attackerColony != null && citizenColonyHandler.getColonyOrRegister() != null)
             {
                 final IPermissions permission = attackerColony.getPermissions();
-                citizenColonyHandler.getColonyOrRegister().getPermissions().addPlayer(permission.getOwner(), permission.getOwnerName(), permission.getRank(permission.HOSTILE_RANK_ID));
+                citizenColonyHandler.getColonyOrRegister()
+                    .getPermissions()
+                    .addPlayer(permission.getOwner(), permission.getOwnerName(), permission.getRank(permission.HOSTILE_RANK_ID));
             }
         }
 
@@ -1381,7 +1378,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
                 }
 
                 if (citizenData.getWorkBuilding() instanceof AbstractBuildingGuards && ((AbstractBuildingGuards) citizenData.getWorkBuilding()).shallRetrieveOnLowHealth()
-                      && getHealth() < ((int) getMaxHealth() * 0.2D))
+                    && getHealth() < ((int) getMaxHealth() * 0.2D))
                 {
                     damageInc *= 1 - citizenColonyHandler.getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(FLEEING_DAMAGE);
                 }
@@ -1421,7 +1418,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     {
         // Environmental damage
         if (!(attacker instanceof LivingEntity) &&
-              (!(getCitizenJobHandler().getColonyJob() instanceof AbstractJobGuard) || getCitizenJobHandler().getColonyJob().canAIBeInterrupted()))
+            (!(getCitizenJobHandler().getColonyJob() instanceof AbstractJobGuard) || getCitizenJobHandler().getColonyJob().canAIBeInterrupted()))
         {
             EntityNavigationUtils.walkAwayFrom(this, blockPosition(), 5, INITIAL_RUN_SPEED_AVOID);
             return;
@@ -1468,7 +1465,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             {
                 // Checking for guard nearby
                 if (entry.getJob() instanceof AbstractJobGuard && entry.getId() != citizenData.getId()
-                      && BlockPosUtil.getDistanceSquared(entry.getEntity().get().blockPosition(), blockPosition()) < guardHelpRange && entry.getJob().getWorkerAI() != null)
+                    && BlockPosUtil.getDistanceSquared(entry.getEntity().get().blockPosition(), blockPosition()) < guardHelpRange && entry.getJob().getWorkerAI() != null)
                 {
                     final ThreatTable table = ((EntityCitizen) entry.getEntity().get()).getThreatTable();
                     table.addThreat((LivingEntity) attacker, 0);
@@ -1504,7 +1501,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     {
         super.onPlayerCollide(player);
         if (citizenJobHandler.getColonyJob() != null && citizenJobHandler.getColonyJob().getWorkerAI() instanceof AbstractEntityAIBasic && !citizenJobHandler.getColonyJob()
-                                                                                                                                              .isGuard())
+            .isGuard())
         {
             ((AbstractEntityAIBasic) citizenJobHandler.getColonyJob().getWorkerAI()).setDelay(TICKS_SECOND * 3);
         }
@@ -1560,7 +1557,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             if (getCitizenColonyHandler().getColonyOrRegister() != null && getCitizenData() != null)
             {
                 MessageUtils.format(getCombatTracker().getDeathMessage())
-                  .append(Component.literal("! "))
+                    .append(Component.literal("! "))
                     .append(Component.translatable(TranslationConstants.COLONIST_DEATH_LOCATION,
                             BlockPosUtil.calcDirection(blockPosition(), getCitizenColonyHandler().getColonyOrRegister().getCenter()).getLongText())
                         .withStyle(style -> style
@@ -1570,9 +1567,9 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
                                     getBlockY(),
                                     getBlockZ(),
                                     (int) BlockPosUtil.dist(blockPosition(), getCitizenColonyHandler().getColonyOrRegister().getCenter()))))))
-                  .append(!(citizenJobHandler.getColonyJob() instanceof AbstractJobGuard<?>)
-                            ? Component.translatable(COM_MINECOLONIES_COREMOD_MOURN, getCitizenData().getName())
-                            : Component.empty())
+                    .append(!(citizenJobHandler.getColonyJob() instanceof AbstractJobGuard<?>)
+                        ? Component.translatable(COM_MINECOLONIES_COREMOD_MOURN, getCitizenData().getName())
+                        : Component.empty())
                     .append(gravePos != null ? Component.translatable(WARNING_GRAVE_SPAWNED).withStyle(style -> style
                         .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                             Component.translatable("message.positiondist",
@@ -1580,8 +1577,8 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
                                 gravePos.getY(),
                                 gravePos.getZ(),
                                 (int) BlockPosUtil.dist(gravePos, getCitizenColonyHandler().getColonyOrRegister().getCenter()))))) : Component.empty())
-                  .withPriority(MessagePriority.DANGER)
-                  .sendTo(getCitizenColonyHandler().getColonyOrRegister()).forManagers();
+                    .withPriority(MessagePriority.DANGER)
+                    .sendTo(getCitizenColonyHandler().getColonyOrRegister()).forManagers();
             }
 
             if (citizenData.getJob() != null)
@@ -1591,7 +1588,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             citizenColonyHandler.getColonyOrRegister().getCitizenManager().removeCivilian(getCitizenData());
 
             final String deathCause =
-              Component.literal(damageSource.getLocalizedDeathMessage(this).getString()).getString().replaceFirst(this.getDisplayName().getString(), "Citizen");
+                Component.literal(damageSource.getLocalizedDeathMessage(this).getString()).getString().replaceFirst(this.getDisplayName().getString(), "Citizen");
             citizenColonyHandler.getColonyOrRegister().getEventDescriptionManager().addEventDescription(new CitizenDiedEvent(blockPosition(), citizenData.getName(), deathCause));
 
             IMinecoloniesAPI.getInstance().getEventBus().post(new CitizenDiedModEvent(citizenData, damageSource));
@@ -1695,8 +1692,8 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             if (getHealth() > damage * GUARD_BLOCK_DAMAGE)
             {
                 final float blockDamage = CombatRules.getDamageAfterAbsorb(damage * GUARD_BLOCK_DAMAGE,
-                  (float) this.getArmorValue(),
-                  (float) this.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue());
+                    (float) this.getArmorValue(),
+                    (float) this.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue());
                 setHealth(getHealth() - Math.max(GUARD_BLOCK_DAMAGE, blockDamage));
             }
             CitizenItemUtils.damageItemInHand(this, this.getUsedItemHand(), (int) (damage * GUARD_BLOCK_DAMAGE));
@@ -1820,10 +1817,10 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             VoxelShape voxelshape = Shapes.create(AABB.ofSize(vec3, d0, d1, d0));
             EntityDimensions finalEntitydimensions = afterEventSize;
             this.level()
-              .findFreePosition(this, voxelshape, vec3, afterEventSize.width, afterEventSize.height, afterEventSize.width)
-              .ifPresent((p_185956_) -> {
-                  this.setPos(p_185956_.add(0.0D, (double) (-finalEntitydimensions.height) / 2.0D, 0.0D));
-              });
+                .findFreePosition(this, voxelshape, vec3, afterEventSize.width, afterEventSize.height, afterEventSize.width)
+                .ifPresent((p_185956_) -> {
+                    this.setPos(p_185956_.add(0.0D, (double) (-finalEntitydimensions.height) / 2.0D, 0.0D));
+                });
         }
     }
 
@@ -1836,7 +1833,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         }
 
         Network.getNetwork().sendToPosition(new PlaySoundForCitizenMessage(this.getId(), soundEvent, this.getSoundSource(), pos, level, length, repetitions),
-          new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), BLOCK_BREAK_SOUND_RANGE, level.dimension()));
+            new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), BLOCK_BREAK_SOUND_RANGE, level.dimension()));
     }
 
     @Override
@@ -1848,8 +1845,8 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         }
 
         Network.getNetwork()
-          .sendToPosition(new PlaySoundForCitizenMessage(this.getId(), soundEvent, this.getSoundSource(), pos, level, volume, pitch, length, repetitions),
-            new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), BLOCK_BREAK_SOUND_RANGE, level.dimension()));
+            .sendToPosition(new PlaySoundForCitizenMessage(this.getId(), soundEvent, this.getSoundSource(), pos, level, volume, pitch, length, repetitions),
+                new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), BLOCK_BREAK_SOUND_RANGE, level.dimension()));
     }
 
     /**
@@ -1941,13 +1938,14 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
 
     /**
      * Decrease idle saturation.
+     *
      * @return saturation.
      */
     private boolean decreaseIdleSaturation()
     {
         if (citizenData != null)
         {
-            final int buildingLevel = citizenData.getHomeBuilding() == null ? 1 :  citizenData.getHomeBuilding().getBuildingLevelEquivalent();
+            final int buildingLevel = citizenData.getHomeBuilding() == null ? 1 : citizenData.getHomeBuilding().getBuildingLevelEquivalent();
             if (buildingLevel <= 2)
             {
                 citizenData.decreaseSaturation(buildingLevel / 25.0);
@@ -1956,7 +1954,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             {
                 citizenData.decreaseSaturation(buildingLevel / 10.0);
             }
-
         }
         return false;
     }

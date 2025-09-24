@@ -1,11 +1,14 @@
 package no.monopixel.slimcolonies.api.colony;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.jobs.IJob;
 import no.monopixel.slimcolonies.api.entity.ai.JobStatus;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
-import com.minecolonies.api.entity.citizen.citizenhandlers.*;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenInjuryHandler;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenMournHandler;
@@ -13,10 +16,6 @@ import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenSkil
 import no.monopixel.slimcolonies.api.quests.IQuestGiver;
 import no.monopixel.slimcolonies.api.quests.IQuestParticipant;
 import no.monopixel.slimcolonies.api.util.Tuple;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -135,7 +134,6 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
      */
     void setBedPos(BlockPos bedPos);
 
-
     /**
      * The Handler for the citizens mourning.
      *
@@ -213,6 +211,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Gets the entity
+     *
      * @return
      */
     @Override
@@ -248,6 +247,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Get the random var of the citizen.
+     *
      * @return the random.
      */
     Random getRandom();
@@ -256,7 +256,6 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
      * Applies the effects of research to the data's entity
      */
     void applyResearchEffects();
-
 
     /**
      * Sets the next position to respawn at
@@ -267,12 +266,14 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Returns whether the citizen has food in their inventory that's not good enough (but no good food)
+     *
      * @return true if so
      */
     boolean needsBetterFood();
 
     /**
      * Get the partner of the citizen.
+     *
      * @return the partner or null if non existent.
      */
     @Nullable
@@ -280,63 +281,73 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Get the list of children of a citizen.
+     *
      * @return the citizen ids.
      */
     List<Integer> getChildren();
 
     /**
      * Get the list of children of a citizen.
+     *
      * @return the citizen ids.
      */
     List<Integer> getSiblings();
 
     /**
      * Get the names of the parents.
+     *
      * @return the name.
      */
     Tuple<String, String> getParents();
 
     /**
      * Add one or more siblings to a citizen.
+     *
      * @param siblings the ids of the siblings.
      */
-    void addSiblings(final Integer...siblings);
+    void addSiblings(final Integer... siblings);
 
     /**
      * Add one or more children to a citizen.
+     *
      * @param children the ids of the children.
      */
-    void addChildren(final Integer...children);
+    void addChildren(final Integer... children);
 
     /**
      * Set a new partner to the citizen.
+     *
      * @param id the partner id.
      */
     void setPartner(final int id);
 
     /**
      * On death of a citizen this is invoked on the related citizens.
+     *
      * @param id the id of the citizen.
      */
     void onDeath(final Integer id);
 
     /**
      * Set the parents of the citizen.
-     * @param firstParent the parent name.
+     *
+     * @param firstParent  the parent name.
      * @param secondParent second parent name.
      */
     void setParents(final String firstParent, final String secondParent);
 
     /**
      * Generate the name of the citizen.
-     * @param rand used random func.
-     * @param firstParentName name of the first parent.
+     *
+     * @param rand             used random func.
+     * @param firstParentName  name of the first parent.
      * @param secondParentName name of the second parent.
      */
     void generateName(@NotNull final Random rand, final String firstParentName, final String secondParentName, final CitizenNameFile nameFile);
 
     /**
      * Check if the two citizens are related.
+     *
      * @param data the data of the citizen.
      * @return true if so.
      */
@@ -344,6 +355,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Check if the two citizens live together.
+     *
      * @param data the data of the other citizen.
      * @return true if so.
      */
@@ -361,6 +373,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Check if the worker is currently actively working.
+     *
      * @return true if so.
      */
     default boolean isWorking()
@@ -375,6 +388,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Check if the citizen has some kind of custom texture.
+     *
      * @return true if so.
      */
     default boolean hasCustomTexture()
@@ -384,12 +398,14 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Setter of the custom texture.
+     *
      * @param texture the texture uuid.
      */
     void setCustomTexture(UUID texture);
 
     /**
      * Get custom texture uuid.
+     *
      * @return uuid to return.
      */
     UUID getCustomTexture();
@@ -403,13 +419,15 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * On completing a quest.
+     *
      * @param questId the id of the completed quest.
      */
     void onQuestCompletion(ResourceLocation questId);
 
     /**
      * Trigger for server side interaction closing.
-     * @param key the key of the interaction.
+     *
+     * @param key    the key of the interaction.
      * @param sender the player closing it.
      */
     void onInteractionClosed(Component key, ServerPlayer sender);
@@ -428,17 +446,18 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * If any quest is assigned to the citizen.
+     *
      * @return true if so.
      */
     boolean hasQuestAssignment();
 
     /**
      * Get the home position of the citizen.
+     *
      * @return the pos to go home to.
      */
     @Nullable
     BlockPos getHomePosition();
-
 
     /**
      * The Handler for the citizens food.
@@ -449,6 +468,7 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
 
     /**
      * Get leisure time. Time in ticks citizens might be wanting to do leisure instead of work.
+     *
      * @return the leftover leisure time.
      */
     int getLeisureTime();

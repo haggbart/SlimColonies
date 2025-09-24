@@ -1,14 +1,13 @@
 package no.monopixel.slimcolonies.apiimp.initializer;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.DeferredRegister;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.colony.eventhooks.buildingEvents.BuildingBuiltEvent;
 import no.monopixel.slimcolonies.core.colony.eventhooks.buildingEvents.BuildingDeconstructedEvent;
 import no.monopixel.slimcolonies.core.colony.eventhooks.buildingEvents.BuildingRepairedEvent;
 import no.monopixel.slimcolonies.core.colony.eventhooks.buildingEvents.BuildingUpgradedEvent;
-import com.minecolonies.core.colony.eventhooks.citizenEvents.*;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.DeferredRegister;
 import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.*;
 
 /**
@@ -16,7 +15,8 @@ import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.*;
  */
 public final class ModColonyEventDescriptionTypeInitializer
 {
-    public final static DeferredRegister<ColonyEventDescriptionTypeRegistryEntry> DEFERRED_REGISTER = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "colonyeventdesctypes"), Constants.MOD_ID);
+    public final static DeferredRegister<ColonyEventDescriptionTypeRegistryEntry> DEFERRED_REGISTER =
+        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "colonyeventdesctypes"), Constants.MOD_ID);
 
     private ModColonyEventDescriptionTypeInitializer()
     {
@@ -25,14 +25,37 @@ public final class ModColonyEventDescriptionTypeInitializer
 
     static
     {
-        DEFERRED_REGISTER.register(CitizenBornEvent.CITIZEN_BORN_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenBornEvent::loadFromNBT, CitizenBornEvent::loadFromFriendlyByteBuf, CitizenBornEvent.CITIZEN_BORN_EVENT_ID));
-        DEFERRED_REGISTER.register(CitizenSpawnedEvent.CITIZEN_SPAWNED_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenSpawnedEvent::loadFromNBT, CitizenSpawnedEvent::loadFromFriendlyByteBuf, CitizenSpawnedEvent.CITIZEN_SPAWNED_EVENT_ID));
-        DEFERRED_REGISTER.register(VisitorSpawnedEvent.VISITOR_SPAWNED_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(VisitorSpawnedEvent::loadFromNBT, VisitorSpawnedEvent::loadFromFriendlyByteBuf, VisitorSpawnedEvent.VISITOR_SPAWNED_EVENT_ID));
-        DEFERRED_REGISTER.register(CitizenDiedEvent.CITIZEN_DIED_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenDiedEvent::loadFromNBT, CitizenDiedEvent::loadFromFriendlyByteBuf, CitizenDiedEvent.CITIZEN_DIED_EVENT_ID));
-        DEFERRED_REGISTER.register(CitizenGrownUpEvent.CITIZEN_GROWN_UP_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenGrownUpEvent::loadFromNBT, CitizenGrownUpEvent::loadFromFriendlyByteBuf, CitizenGrownUpEvent.CITIZEN_GROWN_UP_EVENT_ID));
-        DEFERRED_REGISTER.register(BuildingBuiltEvent.BUILDING_BUILT_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingBuiltEvent::loadFromNBT, BuildingBuiltEvent::loadFromFriendlyByteBuf, BuildingBuiltEvent.BUILDING_BUILT_EVENT_ID));
-        DEFERRED_REGISTER.register(BuildingUpgradedEvent.BUILDING_UPGRADED_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingUpgradedEvent::loadFromNBT, BuildingUpgradedEvent::loadFromFriendlyByteBuf, BuildingUpgradedEvent.BUILDING_UPGRADED_EVENT_ID));
-        DEFERRED_REGISTER.register(BuildingRepairedEvent.BUILDING_REPAIRED_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingRepairedEvent::loadFromNBT, BuildingRepairedEvent::loadFromFriendlyByteBuf, BuildingRepairedEvent.BUILDING_REPAIRED_EVENT_ID));
-        DEFERRED_REGISTER.register(BuildingDeconstructedEvent.BUILDING_DECONSTRUCTED_EVENT_ID.getPath(), () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingDeconstructedEvent::loadFromNBT, BuildingDeconstructedEvent::loadFromFriendlyByteBuf, BuildingDeconstructedEvent.BUILDING_DECONSTRUCTED_EVENT_ID));
+        DEFERRED_REGISTER.register(CitizenBornEvent.CITIZEN_BORN_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenBornEvent::loadFromNBT, CitizenBornEvent::loadFromFriendlyByteBuf, CitizenBornEvent.CITIZEN_BORN_EVENT_ID));
+        DEFERRED_REGISTER.register(CitizenSpawnedEvent.CITIZEN_SPAWNED_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenSpawnedEvent::loadFromNBT,
+                CitizenSpawnedEvent::loadFromFriendlyByteBuf,
+                CitizenSpawnedEvent.CITIZEN_SPAWNED_EVENT_ID));
+        DEFERRED_REGISTER.register(VisitorSpawnedEvent.VISITOR_SPAWNED_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(VisitorSpawnedEvent::loadFromNBT,
+                VisitorSpawnedEvent::loadFromFriendlyByteBuf,
+                VisitorSpawnedEvent.VISITOR_SPAWNED_EVENT_ID));
+        DEFERRED_REGISTER.register(CitizenDiedEvent.CITIZEN_DIED_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenDiedEvent::loadFromNBT, CitizenDiedEvent::loadFromFriendlyByteBuf, CitizenDiedEvent.CITIZEN_DIED_EVENT_ID));
+        DEFERRED_REGISTER.register(CitizenGrownUpEvent.CITIZEN_GROWN_UP_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(CitizenGrownUpEvent::loadFromNBT,
+                CitizenGrownUpEvent::loadFromFriendlyByteBuf,
+                CitizenGrownUpEvent.CITIZEN_GROWN_UP_EVENT_ID));
+        DEFERRED_REGISTER.register(BuildingBuiltEvent.BUILDING_BUILT_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingBuiltEvent::loadFromNBT,
+                BuildingBuiltEvent::loadFromFriendlyByteBuf,
+                BuildingBuiltEvent.BUILDING_BUILT_EVENT_ID));
+        DEFERRED_REGISTER.register(BuildingUpgradedEvent.BUILDING_UPGRADED_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingUpgradedEvent::loadFromNBT,
+                BuildingUpgradedEvent::loadFromFriendlyByteBuf,
+                BuildingUpgradedEvent.BUILDING_UPGRADED_EVENT_ID));
+        DEFERRED_REGISTER.register(BuildingRepairedEvent.BUILDING_REPAIRED_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingRepairedEvent::loadFromNBT,
+                BuildingRepairedEvent::loadFromFriendlyByteBuf,
+                BuildingRepairedEvent.BUILDING_REPAIRED_EVENT_ID));
+        DEFERRED_REGISTER.register(BuildingDeconstructedEvent.BUILDING_DECONSTRUCTED_EVENT_ID.getPath(),
+            () -> new ColonyEventDescriptionTypeRegistryEntry(BuildingDeconstructedEvent::loadFromNBT,
+                BuildingDeconstructedEvent::loadFromFriendlyByteBuf,
+                BuildingDeconstructedEvent.BUILDING_DECONSTRUCTED_EVENT_ID));
     }
 }

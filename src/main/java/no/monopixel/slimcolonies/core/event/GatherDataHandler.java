@@ -1,15 +1,13 @@
 package no.monopixel.slimcolonies.core.event;
 
-import no.monopixel.slimcolonies.core.generation.DatagenLootTableManager;
-import no.monopixel.slimcolonies.core.generation.ItemNbtCalculator;
-import com.minecolonies.core.generation.defaults.*;
-import com.minecolonies.core.generation.defaults.workers.*;
-import no.monopixel.slimcolonies.core.generation.defaults.*;
-import no.monopixel.slimcolonies.core.generation.defaults.workers.*;
-import no.monopixel.slimcolonies.core.util.SchemFixerUtil;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
+import no.monopixel.slimcolonies.core.generation.DatagenLootTableManager;
+import no.monopixel.slimcolonies.core.generation.ItemNbtCalculator;
+import no.monopixel.slimcolonies.core.generation.defaults.*;
+import no.monopixel.slimcolonies.core.generation.defaults.workers.*;
+import no.monopixel.slimcolonies.core.util.SchemFixerUtil;
 
 public class GatherDataHandler
 {
@@ -37,7 +35,8 @@ public class GatherDataHandler
         generator.addProvider(event.includeServer(), new DefaultDamageTypeProvider(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DefaultAdvancementsProvider(generator.getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), blockTagsProvider);
-        generator.addProvider(event.includeServer(), new DefaultItemTagsProvider(generator.getPackOutput(), event.getLookupProvider(), blockTagsProvider, event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(),
+            new DefaultItemTagsProvider(generator.getPackOutput(), event.getLookupProvider(), blockTagsProvider, event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DefaultEntityTypeTagsProvider(generator.getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DefaultDamageTagsProvider(generator.getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DefaultResearchProvider(generator.getPackOutput()));

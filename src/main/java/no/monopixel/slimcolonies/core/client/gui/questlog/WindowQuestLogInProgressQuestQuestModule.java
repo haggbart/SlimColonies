@@ -3,18 +3,17 @@ package no.monopixel.slimcolonies.core.client.gui.questlog;
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
 import com.ldtteam.blockui.controls.Text;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
-import com.minecolonies.api.quests.*;
 import no.monopixel.slimcolonies.api.quests.IQuestInstance;
 import no.monopixel.slimcolonies.api.quests.IQuestManager;
 import no.monopixel.slimcolonies.api.quests.IQuestObjectiveTemplate;
 import no.monopixel.slimcolonies.api.quests.IQuestTemplate;
 import no.monopixel.slimcolonies.core.client.render.worldevent.HighlightManager;
 import no.monopixel.slimcolonies.core.client.render.worldevent.highlightmanager.CitizenRenderData;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 
 import java.util.List;
 
@@ -46,15 +45,15 @@ public class WindowQuestLogInProgressQuestQuestModule implements WindowQuestLogQ
 
         final Component progressText = objectiveTemplate.getProgressText(quest, Style.EMPTY.withColor(ChatFormatting.GOLD));
         final Component mainComponent = Component.literal(" - ")
-                                          .append(progressText)
-                                          .withStyle(ChatFormatting.GOLD);
+            .append(progressText)
+            .withStyle(ChatFormatting.GOLD);
 
         questObjectiveText.setText(mainComponent);
 
         PaneBuilders.tooltipBuilder()
-          .append(objectiveTemplate.getProgressText(quest, Style.EMPTY.withColor(ChatFormatting.WHITE)))
-          .hoverPane(questObjectiveText)
-          .build();
+            .append(objectiveTemplate.getProgressText(quest, Style.EMPTY.withColor(ChatFormatting.WHITE)))
+            .hoverPane(questObjectiveText)
+            .build();
     }
 
     @Override
@@ -78,9 +77,9 @@ public class WindowQuestLogInProgressQuestQuestModule implements WindowQuestLogQ
         if (label.getRenderedTextWidth() > label.getWidth())
         {
             PaneBuilders.tooltipBuilder()
-              .append(component)
-              .hoverPane(label)
-              .build();
+                .append(component)
+                .hoverPane(label)
+                .build();
         }
     }
 

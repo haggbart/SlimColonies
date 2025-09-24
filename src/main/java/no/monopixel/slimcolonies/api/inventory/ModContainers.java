@@ -1,6 +1,5 @@
 package no.monopixel.slimcolonies.api.inventory;
 
-import com.minecolonies.api.inventory.container.*;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.registries.RegistryObject;
 import no.monopixel.slimcolonies.api.inventory.container.*;

@@ -1,28 +1,5 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.service;
 
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
-import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
-import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.entity.citizen.Skill;
-import no.monopixel.slimcolonies.api.items.ModItems;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.EnchanterStationsModule;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingEnchanter;
-import no.monopixel.slimcolonies.core.colony.interactionhandling.StandardInteraction;
-import no.monopixel.slimcolonies.core.colony.jobs.JobEnchanter;
-import no.monopixel.slimcolonies.core.entity.ai.workers.crafting.AbstractEntityAICrafting;
-import no.monopixel.slimcolonies.core.network.messages.client.CircleParticleEffectMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.StreamParticleEffectMessage;
-import no.monopixel.slimcolonies.core.util.WorkerUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -35,6 +12,28 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
+import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
+import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
+import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.entity.citizen.Skill;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.EnchanterStationsModule;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingEnchanter;
+import no.monopixel.slimcolonies.core.colony.interactionhandling.StandardInteraction;
+import no.monopixel.slimcolonies.core.colony.jobs.JobEnchanter;
+import no.monopixel.slimcolonies.core.entity.ai.workers.crafting.AbstractEntityAICrafting;
+import no.monopixel.slimcolonies.core.network.messages.client.CircleParticleEffectMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.StreamParticleEffectMessage;
+import no.monopixel.slimcolonies.core.util.WorkerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -44,9 +43,9 @@ import java.util.function.Predicate;
 
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.NO_WORKERS_TO_DRAIN_SET;
-import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.ITEMS_ENCHANTED;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.CITIZENS_VISITED;
+import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.ITEMS_ENCHANTED;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.NO_WORKERS_TO_DRAIN_SET;
 
 /**
  * Enchanter AI class.
@@ -107,8 +106,8 @@ public class EntityAIWorkEnchanter extends AbstractEntityAICrafting<JobEnchanter
     {
         super(job);
         super.registerTargets(
-          new AITarget(ENCHANTER_DRAIN, this::gatherAndDrain, 10),
-          new AITarget(ENCHANT, this::enchant, TICKS_SECOND)
+            new AITarget(ENCHANTER_DRAIN, this::gatherAndDrain, 10),
+            new AITarget(ENCHANT, this::enchant, TICKS_SECOND)
         );
         worker.setCanPickUpLoot(true);
     }
@@ -148,7 +147,7 @@ public class EntityAIWorkEnchanter extends AbstractEntityAICrafting<JobEnchanter
                 if (worker.getCitizenData() != null)
                 {
                     worker.getCitizenData()
-                      .triggerInteraction(new StandardInteraction(Component.translatable(NO_WORKERS_TO_DRAIN_SET), ChatPriority.BLOCKING));
+                        .triggerInteraction(new StandardInteraction(Component.translatable(NO_WORKERS_TO_DRAIN_SET), ChatPriority.BLOCKING));
                 }
                 return IDLE;
             }
@@ -236,22 +235,22 @@ public class EntityAIWorkEnchanter extends AbstractEntityAICrafting<JobEnchanter
         if (progressTicks++ < MAX_ENCHANTMENT_TICKS / building.getBuildingLevel())
         {
             Network.getNetwork().sendToTrackingEntity(
-              new CircleParticleEffectMessage(
-                worker.position().add(0, 2, 0),
-                ParticleTypes.ENCHANT,
-                progressTicks), worker);
+                new CircleParticleEffectMessage(
+                    worker.position().add(0, 2, 0),
+                    ParticleTypes.ENCHANT,
+                    progressTicks), worker);
 
             Network.getNetwork().sendToTrackingEntity(
-              new CircleParticleEffectMessage(
-                worker.position().add(0, 1.5, 0),
-                ParticleTypes.ENCHANT,
-                progressTicks), worker);
+                new CircleParticleEffectMessage(
+                    worker.position().add(0, 1.5, 0),
+                    ParticleTypes.ENCHANT,
+                    progressTicks), worker);
 
             Network.getNetwork().sendToTrackingEntity(
-              new CircleParticleEffectMessage(
-                worker.position().add(0, 1, 0),
-                ParticleTypes.ENCHANT,
-                progressTicks), worker);
+                new CircleParticleEffectMessage(
+                    worker.position().add(0, 1, 0),
+                    ParticleTypes.ENCHANT,
+                    progressTicks), worker);
 
             worker.queueSound(SoundEvents.ENCHANTMENT_TABLE_USE, worker.blockPosition().above(), 20, 0, 0.5f, worker.getRandom().nextFloat());
 
@@ -273,8 +272,8 @@ public class EntityAIWorkEnchanter extends AbstractEntityAICrafting<JobEnchanter
             if (loot != null)
             {
                 final int enchantmentLevel = loot.stream()
-                                               .mapToInt(EntityAIWorkEnchanter::getEnchantedBookLevel)
-                                               .max().orElse(0);
+                    .mapToInt(EntityAIWorkEnchanter::getEnchantedBookLevel)
+                    .max().orElse(0);
 
                 //Decrement mana.
                 data.getCitizenSkillHandler().incrementLevel(Skill.Mana, -enchantmentLevel);
@@ -293,8 +292,8 @@ public class EntityAIWorkEnchanter extends AbstractEntityAICrafting<JobEnchanter
         if (stack.getItem().equals(Items.ENCHANTED_BOOK))
         {
             return EnchantedBookItem.getEnchantments(stack).stream()
-                     .mapToInt(nbt -> ((CompoundTag) nbt).getShort("lvl"))
-                     .max().orElse(0);
+                .mapToInt(nbt -> ((CompoundTag) nbt).getShort("lvl"))
+                .max().orElse(0);
         }
         return 0;
     }
@@ -379,18 +378,18 @@ public class EntityAIWorkEnchanter extends AbstractEntityAICrafting<JobEnchanter
             final Vec3 goal = citizenToGatherFrom.getEntity().get().position().add(0, 2, 0);
 
             Network.getNetwork().sendToTrackingEntity(
-              new StreamParticleEffectMessage(
-                start,
-                goal,
-                ParticleTypes.ENCHANT,
-                progressTicks % MAX_PROGRESS_TICKS,
-                MAX_PROGRESS_TICKS), worker);
+                new StreamParticleEffectMessage(
+                    start,
+                    goal,
+                    ParticleTypes.ENCHANT,
+                    progressTicks % MAX_PROGRESS_TICKS,
+                    MAX_PROGRESS_TICKS), worker);
 
             Network.getNetwork().sendToTrackingEntity(
-              new CircleParticleEffectMessage(
-                start,
-                ParticleTypes.HAPPY_VILLAGER,
-                progressTicks), worker);
+                new CircleParticleEffectMessage(
+                    start,
+                    ParticleTypes.HAPPY_VILLAGER,
+                    progressTicks), worker);
 
             WorkerUtil.faceBlock(BlockPos.containing(goal), worker);
 
@@ -489,6 +488,7 @@ public class EntityAIWorkEnchanter extends AbstractEntityAICrafting<JobEnchanter
 
     /**
      * Returns the name of the crafting stat used in the building's statistics.
+     *
      * @return The name of the enchanting statistic.
      */
 

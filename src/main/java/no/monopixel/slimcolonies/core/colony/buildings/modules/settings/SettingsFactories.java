@@ -1,7 +1,14 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules.settings;
 
 import com.google.common.reflect.TypeToken;
-import com.minecolonies.api.colony.buildings.modules.settings.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.*;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
 import no.monopixel.slimcolonies.api.colony.requestsystem.factory.FactoryVoidInput;
@@ -9,15 +16,6 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.factory.IFactoryContro
 import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
 import no.monopixel.slimcolonies.api.util.constant.SerializationIdentifierConstants;
 import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -138,7 +136,7 @@ public class SettingsFactories
             compound.putInt(TAG_VALUE, storage.getCurrentIndex());
 
             final ListTag list = new ListTag();
-            for (final String setting: storage.getSettings())
+            for (final String setting : storage.getSettings())
             {
                 final CompoundTag compoundNBT = new CompoundTag();
                 compoundNBT.putString(TAG_VALUE, setting);
@@ -168,7 +166,7 @@ public class SettingsFactories
         {
             packetBuffer.writeInt(input.getCurrentIndex());
             packetBuffer.writeInt(input.getSettings().size());
-            for (final String setting: input.getSettings())
+            for (final String setting : input.getSettings())
             {
                 packetBuffer.writeUtf(setting);
             }

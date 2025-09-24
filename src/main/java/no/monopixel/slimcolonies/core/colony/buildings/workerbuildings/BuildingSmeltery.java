@@ -1,19 +1,5 @@
 package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
-import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
-import no.monopixel.slimcolonies.api.compatibility.ICompatibilityManager;
-import com.minecolonies.api.crafting.*;
-import no.monopixel.slimcolonies.api.crafting.*;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
-import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipe;
-import no.monopixel.slimcolonies.core.util.FurnaceRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -24,6 +10,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
+import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
+import no.monopixel.slimcolonies.api.compatibility.ICompatibilityManager;
+import no.monopixel.slimcolonies.api.crafting.*;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
+import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipe;
+import no.monopixel.slimcolonies.core.util.FurnaceRecipes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -65,8 +64,8 @@ public class BuildingSmeltery extends AbstractBuilding
         super(c, l);
         keepX.put(IColonyManager.getInstance().getCompatibilityManager()::isOre, new Tuple<>(Integer.MAX_VALUE, true));
         keepX.put(stack -> !ItemStackUtils.isEmpty(stack)
-                             && (stack.getItem() instanceof SwordItem || stack.getItem() instanceof DiggerItem || stack.getItem() instanceof ArmorItem)
-          , new Tuple<>(STUFF_TO_KEEP, true));
+                && (stack.getItem() instanceof SwordItem || stack.getItem() instanceof DiggerItem || stack.getItem() instanceof ArmorItem)
+            , new Tuple<>(STUFF_TO_KEEP, true));
     }
 
     @NotNull
@@ -128,10 +127,10 @@ public class BuildingSmeltery extends AbstractBuilding
         private static IGenericRecipe createSmeltingRecipe(final ItemStack input, final ItemStack output, final Block intermediate)
         {
             return GenericRecipe.builder()
-                    .withInputs(List.of(List.of(input)))
-                    .withOutput(output)
-                    .withIntermediate(intermediate)
-                    .build();
+                .withInputs(List.of(List.of(input)))
+                .withOutput(output)
+                .withIntermediate(intermediate)
+                .build();
         }
     }
 
@@ -178,9 +177,9 @@ public class BuildingSmeltery extends AbstractBuilding
             for (final Item input : ForgeRegistries.ITEMS.tags().getTag(ModTags.breakable_ore))
             {
                 recipes.add(GenericRecipe.builder()
-                        .withInputs(List.of(List.of(input.getDefaultInstance())))
-                        .withLootTable(getLootTable(input))
-                        .build());
+                    .withInputs(List.of(List.of(input.getDefaultInstance())))
+                    .withLootTable(getLootTable(input))
+                    .build());
             }
 
             return recipes;
@@ -204,10 +203,10 @@ public class BuildingSmeltery extends AbstractBuilding
                 }
 
                 final RecipeStorage tempRecipe = RecipeStorage.builder()
-                        .withInputs(Collections.singletonList(new ItemStorage(new ItemStack(input))))
-                        .withSecondaryOutputs(drops)
-                        .withLootTable(getLootTable(input))
-                        .build();
+                    .withInputs(Collections.singletonList(new ItemStorage(new ItemStack(input))))
+                    .withSecondaryOutputs(drops)
+                    .withLootTable(getLootTable(input))
+                    .build();
                 IToken<?> token = IColonyManager.getInstance().getRecipeManager().checkOrAddRecipe(tempRecipe);
                 this.addRecipeToList(token, false);
             }

@@ -1,5 +1,13 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.service;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
@@ -13,7 +21,6 @@ import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
 import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
-import com.minecolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
@@ -23,14 +30,6 @@ import no.monopixel.slimcolonies.core.colony.interactionhandling.StandardInterac
 import no.monopixel.slimcolonies.core.colony.jobs.JobCook;
 import no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIUsesFurnace;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayDeque;

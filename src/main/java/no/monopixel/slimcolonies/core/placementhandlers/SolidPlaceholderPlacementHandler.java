@@ -19,6 +19,7 @@ import java.util.List;
 
 import static com.ldtteam.structurize.api.util.constant.Constants.UPDATE_FLAG;
 
+@SuppressWarnings("removal")
 public class SolidPlaceholderPlacementHandler implements IPlacementHandler
 {
     /**

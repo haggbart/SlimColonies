@@ -1,14 +1,5 @@
 package no.monopixel.slimcolonies.apiimp.initializer;
 
-import no.monopixel.slimcolonies.api.entity.other.MinecoloniesMinecart;
-import no.monopixel.slimcolonies.api.entity.ModEntities;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import no.monopixel.slimcolonies.core.entity.other.CustomArrowEntity;
-import no.monopixel.slimcolonies.core.entity.other.NewBobberEntity;
-import no.monopixel.slimcolonies.core.entity.other.SittingEntity;
-import no.monopixel.slimcolonies.core.entity.visitor.VisitorCitizen;
-import com.minecolonies.core.entity.other.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,6 +9,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegisterEvent;
+import no.monopixel.slimcolonies.api.entity.ModEntities;
+import no.monopixel.slimcolonies.api.entity.other.MinecoloniesMinecart;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
+import no.monopixel.slimcolonies.core.entity.other.CustomArrowEntity;
+import no.monopixel.slimcolonies.core.entity.other.NewBobberEntity;
+import no.monopixel.slimcolonies.core.entity.other.SittingEntity;
+import no.monopixel.slimcolonies.core.entity.visitor.VisitorCitizen;
 import org.jetbrains.annotations.Nullable;
 
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.CITIZEN_HEIGHT;
@@ -34,45 +33,44 @@ public class EntityInitializer
             final @Nullable IForgeRegistry<EntityType<?>> registry = event.getForgeRegistry();
 
             ModEntities.CITIZEN = build(registry, "citizen",
-              EntityType.Builder.of(EntityCitizen::new, MobCategory.CREATURE)
+                EntityType.Builder.of(EntityCitizen::new, MobCategory.CREATURE)
+                    .setTrackingRange(ENTITY_TRACKING_RANGE)
+                    .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
+                    .sized((float) CITIZEN_WIDTH, (float) CITIZEN_HEIGHT)
+                    .setShouldReceiveVelocityUpdates(true));
+
+            ModEntities.FISHHOOK = build(registry, "fishhook",
+                EntityType.Builder.<NewBobberEntity>of(NewBobberEntity::new, MobCategory.MISC)
+                    .setTrackingRange(ENTITY_TRACKING_RANGE)
+                    .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
+                    .sized(0.25F, 0.25F)
+                    .setShouldReceiveVelocityUpdates(true)
+                    .setCustomClientFactory(NewBobberEntity::new));
+
+            ModEntities.VISITOR = build(registry, "visitor", EntityType.Builder.of(VisitorCitizen::new, MobCategory.CREATURE)
                 .setTrackingRange(ENTITY_TRACKING_RANGE)
                 .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
                 .sized((float) CITIZEN_WIDTH, (float) CITIZEN_HEIGHT)
                 .setShouldReceiveVelocityUpdates(true));
 
-            ModEntities.FISHHOOK = build(registry, "fishhook",
-              EntityType.Builder.<NewBobberEntity>of(NewBobberEntity::new, MobCategory.MISC)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
-                .sized(0.25F, 0.25F)
-                .setShouldReceiveVelocityUpdates(true)
-                .setCustomClientFactory(NewBobberEntity::new));
-
-            ModEntities.VISITOR = build(registry, "visitor", EntityType.Builder.of(VisitorCitizen::new, MobCategory.CREATURE)
-              .setTrackingRange(ENTITY_TRACKING_RANGE)
-              .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
-              .sized((float) CITIZEN_WIDTH, (float) CITIZEN_HEIGHT)
-              .setShouldReceiveVelocityUpdates(true));
-
             ModEntities.SITTINGENTITY = build(registry, "sittingentity",
-              EntityType.Builder.<SittingEntity>of(SittingEntity::new, MobCategory.MISC)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
-                .sized(0F, 0.5F));
+                EntityType.Builder.<SittingEntity>of(SittingEntity::new, MobCategory.MISC)
+                    .setTrackingRange(ENTITY_TRACKING_RANGE)
+                    .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
+                    .sized(0F, 0.5F));
 
             ModEntities.MINECART = build(registry, "mcminecart",
-              EntityType.Builder.of(MinecoloniesMinecart::new, MobCategory.MISC)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
-                .sized(0.98F, 0.7F));
+                EntityType.Builder.of(MinecoloniesMinecart::new, MobCategory.MISC)
+                    .setTrackingRange(ENTITY_TRACKING_RANGE)
+                    .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
+                    .sized(0.98F, 0.7F));
 
             ModEntities.MC_NORMAL_ARROW = build(registry, "mcnormalarrow",
-              EntityType.Builder.of(CustomArrowEntity::new, MobCategory.MISC)
-                .setTrackingRange(ENTITY_TRACKING_RANGE)
-                .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
-                .sized(0.5F, 0.5F)
-                .setShouldReceiveVelocityUpdates(true));
-
+                EntityType.Builder.of(CustomArrowEntity::new, MobCategory.MISC)
+                    .setTrackingRange(ENTITY_TRACKING_RANGE)
+                    .setUpdateInterval(ENTITY_UPDATE_FREQUENCY_FISHHOOK)
+                    .sized(0.5F, 0.5F)
+                    .setShouldReceiveVelocityUpdates(true));
         }
     }
 

@@ -1,21 +1,20 @@
 package no.monopixel.slimcolonies.core.research;
 
 import com.google.common.reflect.TypeToken;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.colony.requestsystem.factory.FactoryVoidInput;
-import no.monopixel.slimcolonies.api.colony.requestsystem.factory.IFactoryController;
-import com.minecolonies.api.research.*;
-import no.monopixel.slimcolonies.api.research.*;
-import no.monopixel.slimcolonies.api.research.factories.IGlobalResearchFactory;
-import no.monopixel.slimcolonies.api.util.NBTUtils;
-import no.monopixel.slimcolonies.api.util.constant.SerializationIdentifierConstants;
-import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.colony.requestsystem.factory.FactoryVoidInput;
+import no.monopixel.slimcolonies.api.colony.requestsystem.factory.IFactoryController;
+import no.monopixel.slimcolonies.api.research.*;
+import no.monopixel.slimcolonies.api.research.factories.IGlobalResearchFactory;
+import no.monopixel.slimcolonies.api.util.NBTUtils;
+import no.monopixel.slimcolonies.api.util.constant.SerializationIdentifierConstants;
+import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -121,7 +120,7 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
         final TranslatableContents name = new TranslatableContents(nbt.getString(TAG_NAME), null, TranslatableContents.NO_ARGS);
         final TranslatableContents subtitle = new TranslatableContents(nbt.getString(TAG_SUBTITLE_NAME), null, TranslatableContents.NO_ARGS);
         final int depth = nbt.getInt(TAG_RESEARCH_LVL);
-        final int sortOrder =  nbt.getInt(TAG_RESEARCH_SORT);
+        final int sortOrder = nbt.getInt(TAG_RESEARCH_SORT);
         final boolean onlyChild = nbt.getBoolean(TAG_ONLY_CHILD);
         final boolean instant = nbt.getBoolean(TAG_INSTANT);
         final boolean autostart = nbt.getBoolean(TAG_AUTOSTART);
@@ -204,21 +203,21 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
 
         // Research no longer uses costs - skip cost deserialization entirely
         final int reqCount = buffer.readVarInt();
-        for(int i = 0; i < reqCount; i++)
+        for (int i = 0; i < reqCount; i++)
         {
             final ModResearchRequirements.ResearchRequirementEntry researchRequirementEntry = buffer.readRegistryIdSafe(ModResearchRequirements.ResearchRequirementEntry.class);
             research.addRequirement(researchRequirementEntry.readFromNBT(buffer.readNbt()));
         }
 
         final int effectCount = buffer.readVarInt();
-        for(int i = 0; i < effectCount; i++)
+        for (int i = 0; i < effectCount; i++)
         {
             final ModResearchEffects.ResearchEffectEntry researchEffectEntry = buffer.readRegistryIdSafe(ModResearchEffects.ResearchEffectEntry.class);
             research.addEffect(researchEffectEntry.readFromNBT(buffer.readNbt()));
         }
 
         final int childCount = buffer.readVarInt();
-        for(int i = 0; i < childCount; i++)
+        for (int i = 0; i < childCount; i++)
         {
             research.addChild(buffer.readResourceLocation());
         }

@@ -2,41 +2,6 @@ package no.monopixel.slimcolonies.core.colony.managers;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import com.minecolonies.api.colony.buildings.*;
-import no.monopixel.slimcolonies.api.colony.buildings.*;
-import no.monopixel.slimcolonies.api.colony.buildings.registry.IBuildingDataManager;
-import no.monopixel.slimcolonies.api.colony.buildings.workerbuildings.ITownHall;
-import no.monopixel.slimcolonies.api.colony.buildings.workerbuildings.IWareHouse;
-import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
-import no.monopixel.slimcolonies.api.colony.managers.interfaces.IRegisteredStructureManager;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.eventbus.events.colony.buildings.BuildingAddedModEvent;
-import no.monopixel.slimcolonies.api.eventbus.events.colony.buildings.BuildingRemovedModEvent;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTavern;
-import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTownHall;
-import no.monopixel.slimcolonies.core.colony.Colony;
-import no.monopixel.slimcolonies.core.colony.buildings.BuildingMysticalSite;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingExtensionsModule;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
-import com.minecolonies.core.colony.buildings.workerbuildings.*;
-import no.monopixel.slimcolonies.core.colony.buildingextensions.registry.BuildingExtensionDataManager;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.*;
-import no.monopixel.slimcolonies.core.entity.ai.workers.util.ConstructionTapeHelper;
-import no.monopixel.slimcolonies.core.event.QuestObjectiveEventHandler;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingViewMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingExtensionsUpdateMessage;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewRemoveBuildingMessage;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityDecorationController;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -47,6 +12,38 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
+import no.monopixel.slimcolonies.api.colony.buildings.*;
+import no.monopixel.slimcolonies.api.colony.buildings.registry.IBuildingDataManager;
+import no.monopixel.slimcolonies.api.colony.buildings.workerbuildings.ITownHall;
+import no.monopixel.slimcolonies.api.colony.buildings.workerbuildings.IWareHouse;
+import no.monopixel.slimcolonies.api.colony.managers.interfaces.IRegisteredStructureManager;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.eventbus.events.colony.buildings.BuildingAddedModEvent;
+import no.monopixel.slimcolonies.api.eventbus.events.colony.buildings.BuildingRemovedModEvent;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTavern;
+import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTownHall;
+import no.monopixel.slimcolonies.core.colony.Colony;
+import no.monopixel.slimcolonies.core.colony.buildingextensions.registry.BuildingExtensionDataManager;
+import no.monopixel.slimcolonies.core.colony.buildings.BuildingMysticalSite;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingExtensionsModule;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.*;
+import no.monopixel.slimcolonies.core.entity.ai.workers.util.ConstructionTapeHelper;
+import no.monopixel.slimcolonies.core.event.QuestObjectiveEventHandler;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingExtensionsUpdateMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingViewMessage;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewRemoveBuildingMessage;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityDecorationController;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -335,8 +332,8 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         if (!removedBuildings.isEmpty() && removedBuildings.size() >= buildings.values().size())
         {
             Log.getLogger()
-              .warn("Colony:" + colony.getID()
-                      + " is removing all buildings at once. Did you just load a backup? If not there is a chance that colony data got corrupted and you want to restore a backup.");
+                .warn("Colony:" + colony.getID()
+                    + " is removing all buildings at once. Did you just load a backup? If not there is a chance that colony data got corrupted and you want to restore a backup.");
         }
 
         removedBuildings.forEach(IBuilding::destroy);
@@ -577,10 +574,10 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
                 building.upgradeBuildingLevelToSchematicData();
 
                 Log.getLogger().debug(String.format("Colony %d - new Building %s for %s at %s",
-                  colony.getID(),
-                  building.getBuildingDisplayName(),
-                  tileEntity.getBlockState().getBlock(),
-                  tileEntity.getPosition()));
+                    colony.getID(),
+                    building.getBuildingDisplayName(),
+                    tileEntity.getBlockState().getBlock(),
+                    tileEntity.getPosition()));
 
                 building.setIsMirrored(tileEntity.isMirrored());
                 if (tileEntity.getBlockState().getBlock() instanceof AbstractBlockHut<?>)
@@ -609,9 +606,9 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
             else
             {
                 Log.getLogger().error(String.format("Colony %d unable to create AbstractBuilding for %s at %s",
-                  colony.getID(),
-                  tileEntity.getBlockState().getClass(),
-                  tileEntity.getPosition()), new Exception());
+                    colony.getID(),
+                    tileEntity.getBlockState().getClass(),
+                    tileEntity.getPosition()), new Exception());
             }
 
             colony.getCitizenManager().calculateMaxCitizens();
@@ -646,9 +643,9 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
             }
 
             Log.getLogger().info(String.format("Colony %d - removed AbstractBuilding %s of type %s",
-              colony.getID(),
-              building.getID(),
-              building.getSchematicName()));
+                colony.getID(),
+                building.getID(),
+                building.getSchematicName()));
         }
 
         if (building instanceof BuildingTownHall)
@@ -704,7 +701,8 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         BlockPos goodCook = null;
         for (final IBuilding currentBuilding : buildings.values())
         {
-            if (building.isInstance(currentBuilding) && currentBuilding.getBuildingLevel() > 0 && WorldUtil.isBlockLoaded(colony.getWorld(), currentBuilding.getPosition()) && filter.test(
+            if (building.isInstance(currentBuilding) && currentBuilding.getBuildingLevel() > 0 && WorldUtil.isBlockLoaded(colony.getWorld(), currentBuilding.getPosition())
+                && filter.test(
                 (T) currentBuilding))
             {
                 final double localDistance = currentBuilding.getPosition().distSqr(pos);
@@ -766,7 +764,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
 
         return false;
     }
-
 
     @Override
     public void setTownHall(@Nullable final ITownHall building)
@@ -924,16 +921,16 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
     public List<IBuildingExtension> getBuildingExtensions(Predicate<IBuildingExtension> matcher)
     {
         return buildingExtensions.values().stream()
-                 .filter(matcher)
-                 .toList();
+            .filter(matcher)
+            .toList();
     }
 
     @Override
     public Optional<IBuildingExtension> getMatchingBuildingExtension(Predicate<IBuildingExtension> matcher)
     {
         return getBuildingExtensions(matcher)
-                 .stream()
-                 .findFirst();
+            .stream()
+            .findFirst();
     }
 
     @Override

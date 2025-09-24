@@ -1,24 +1,25 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
-import com.minecolonies.api.colony.buildings.modules.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.AbstractBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingEventsModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IModuleWithExternalBlocks;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IPersistentModule;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.level.block.BedBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_BEDS;
 
@@ -95,13 +96,12 @@ public class BedHandlingModule extends AbstractBuildingModule implements IModule
             {
                 final BlockState state = world.getBlockState(pos);
                 if (state.getBlock() instanceof BedBlock
-                      && state.getValue(BedBlock.OCCUPIED)
-                      && state.getValue(BedBlock.PART).equals(BedPart.HEAD))
+                    && state.getValue(BedBlock.OCCUPIED)
+                    && state.getValue(BedBlock.PART).equals(BedPart.HEAD))
                 {
                     world.setBlock(pos, state.setValue(BedBlock.OCCUPIED, false), 0x03);
                 }
             }
         }
     }
-
 }

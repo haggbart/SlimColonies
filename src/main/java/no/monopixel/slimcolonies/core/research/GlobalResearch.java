@@ -1,10 +1,9 @@
 package no.monopixel.slimcolonies.core.research;
 
-import com.minecolonies.api.research.*;
-import no.monopixel.slimcolonies.api.research.*;
-import no.monopixel.slimcolonies.api.research.util.ResearchState;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.research.*;
+import no.monopixel.slimcolonies.api.research.util.ResearchState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -181,7 +180,7 @@ public class GlobalResearch implements IGlobalResearch
     }
 
     @Override
-    public TranslatableContents getName() { return this.name; }
+    public TranslatableContents getName() {return this.name;}
 
     @Override
     public TranslatableContents getSubtitle()

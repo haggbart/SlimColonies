@@ -1,5 +1,11 @@
 package no.monopixel.slimcolonies.core.entity.ai.minimal;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
@@ -11,7 +17,6 @@ import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.CitizenAIStat
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IState;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
-import com.minecolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
 import no.monopixel.slimcolonies.core.Network;
@@ -24,12 +29,6 @@ import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.entity.other.SittingEntity;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 import no.monopixel.slimcolonies.core.network.messages.client.ItemParticleEffectMessage;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -200,13 +199,13 @@ public class EntityAIEatTask implements IStateAI
         citizen.swing(InteractionHand.MAIN_HAND);
         citizen.playSound(SoundEvents.GENERIC_EAT, (float) BASIC_VOLUME, (float) SoundUtils.getRandomPitch(citizen.getRandom()));
         Network.getNetwork()
-          .sendToTrackingEntity(new ItemParticleEffectMessage(citizen.getMainHandItem(),
-            citizen.getX(),
-            citizen.getY(),
-            citizen.getZ(),
-            citizen.getXRot(),
-            citizen.getYRot(),
-            citizen.getEyeHeight()), citizen);
+            .sendToTrackingEntity(new ItemParticleEffectMessage(citizen.getMainHandItem(),
+                citizen.getX(),
+                citizen.getY(),
+                citizen.getZ(),
+                citizen.getXRot(),
+                citizen.getYRot(),
+                citizen.getEyeHeight()), citizen);
 
         waitingTicks++;
         if (waitingTicks < REQUIRED_TIME_TO_EAT)
@@ -300,7 +299,7 @@ public class EntityAIEatTask implements IStateAI
             {
                 waitingTicks++;
                 if (waitingTicks > SECONDS_A_MINUTE * MINUTES_WAITING_TIME || (citizen.getCitizenData().getJob() instanceof AbstractJobGuard<?>
-                                                                                 && !WorldUtil.isDayTime(citizen.level)))
+                    && !WorldUtil.isDayTime(citizen.level)))
                 {
                     waitingTicks = 0;
                     return GET_FOOD_YOURSELF;
@@ -486,7 +485,8 @@ public class EntityAIEatTask implements IStateAI
      */
     private boolean hasFood()
     {
-        final int slot = FoodUtils.getBestFoodForCitizen(citizen.getInventoryCitizen(), citizen.getCitizenData(), restaurant == null ? null : restaurant.getModule(RESTAURANT_MENU).getMenu());
+        final int slot =
+            FoodUtils.getBestFoodForCitizen(citizen.getInventoryCitizen(), citizen.getCitizenData(), restaurant == null ? null : restaurant.getModule(RESTAURANT_MENU).getMenu());
         if (slot != -1)
         {
             foodSlot = slot;

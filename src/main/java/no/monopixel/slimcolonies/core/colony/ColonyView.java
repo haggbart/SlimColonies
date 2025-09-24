@@ -2,14 +2,31 @@ package no.monopixel.slimcolonies.core.colony;
 
 import com.ldtteam.structurize.storage.StructurePacks;
 import com.ldtteam.structurize.storage.rendering.RenderingCache;
-import com.minecolonies.api.colony.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BannerPattern;
+import net.minecraft.world.level.block.entity.BannerPatterns;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.colony.*;
 import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.IBuildingDataManager;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.buildings.workerbuildings.ITownHallView;
 import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
-import com.minecolonies.api.colony.managers.interfaces.*;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
 import no.monopixel.slimcolonies.api.colony.permissions.ColonyPlayer;
 import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
@@ -43,25 +60,6 @@ import no.monopixel.slimcolonies.core.network.messages.PermissionsMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyFlagChangeMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.TownHallRenameMessage;
 import no.monopixel.slimcolonies.core.quests.QuestManager;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BannerPattern;
-import net.minecraft.world.level.block.entity.BannerPatterns;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -1257,7 +1255,6 @@ public final class ColonyView implements IColonyView
     {
         return null;
     }
-
 
     @Override
     public boolean isValidAttackingPlayer(final Player entity)

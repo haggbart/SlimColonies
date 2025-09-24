@@ -1,10 +1,12 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tuple;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import com.minecolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
@@ -14,9 +16,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingM
 import no.monopixel.slimcolonies.core.colony.jobs.JobQuarrier;
 import no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.StationRequestResolver;
 import no.monopixel.slimcolonies.core.util.BuildingUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Tuple;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +45,7 @@ public class QuarryModule extends AbstractAssignedCitizenModule implements IAssi
 
     /**
      * Create a new quarry module.
+     *
      * @param height the height of the quarry.
      */
     public QuarryModule(final int height)
@@ -151,6 +151,7 @@ public class QuarryModule extends AbstractAssignedCitizenModule implements IAssi
 
     /**
      * Check if the quarry was completed already.
+     *
      * @return true if so.
      */
     public boolean isFinished()

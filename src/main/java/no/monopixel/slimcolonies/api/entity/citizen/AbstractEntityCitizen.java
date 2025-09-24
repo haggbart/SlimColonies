@@ -1,29 +1,6 @@
 package no.monopixel.slimcolonies.api.entity.citizen;
 
 import com.google.common.collect.Lists;
-import no.monopixel.slimcolonies.api.client.render.modeltype.IModelType;
-import no.monopixel.slimcolonies.api.client.render.modeltype.ModModelTypes;
-import no.monopixel.slimcolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
-import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
-import no.monopixel.slimcolonies.api.colony.jobs.IJob;
-import no.monopixel.slimcolonies.api.colony.requestsystem.location.ILocation;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.EntityState;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IState;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
-import com.minecolonies.api.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.api.entity.other.MinecoloniesMinecart;
-import no.monopixel.slimcolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
-import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
-import no.monopixel.slimcolonies.api.sounds.EventType;
-import no.monopixel.slimcolonies.api.util.CompatibilityUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.SoundUtils;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.AbstractAdvancedPathNavigate;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.PathingStuckHandler;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -49,6 +26,28 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.IItemHandler;
+import no.monopixel.slimcolonies.api.client.render.modeltype.IModelType;
+import no.monopixel.slimcolonies.api.client.render.modeltype.ModModelTypes;
+import no.monopixel.slimcolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
+import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
+import no.monopixel.slimcolonies.api.colony.jobs.IJob;
+import no.monopixel.slimcolonies.api.colony.requestsystem.location.ILocation;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.EntityState;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IState;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.*;
+import no.monopixel.slimcolonies.api.entity.other.MinecoloniesMinecart;
+import no.monopixel.slimcolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
+import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
+import no.monopixel.slimcolonies.api.sounds.EventType;
+import no.monopixel.slimcolonies.api.util.CompatibilityUtils;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.SoundUtils;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.AbstractAdvancedPathNavigate;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.PathingStuckHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -133,8 +132,8 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
      * The AI for citizens, controlling different global states
      */
     protected ITickRateStateMachine<IState> entityStateController = new TickRateStateMachine<>(EntityState.INIT,
-      e -> Log.getLogger()
-        .warn("Citizen " + getDisplayName().getString() + " id:" + (getCitizenData() != null ? getCitizenData().getId() : -1) + "from colony: "
+        e -> Log.getLogger()
+            .warn("Citizen " + getDisplayName().getString() + " id:" + (getCitizenData() != null ? getCitizenData().getId() : -1) + "from colony: "
                 + getCitizenColonyHandler().getColonyId() + " state controller exception", e), ENTITY_AI_TICKRATE);
 
     /**
@@ -156,9 +155,9 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
     public static AttributeSupplier.Builder getDefaultAttributes()
     {
         return LivingEntity.createLivingAttributes()
-          .add(Attributes.MAX_HEALTH, BASE_MAX_HEALTH)
-          .add(Attributes.MOVEMENT_SPEED, BASE_MOVEMENT_SPEED)
-          .add(Attributes.FOLLOW_RANGE, BASE_PATHFINDING_RANGE);
+            .add(Attributes.MAX_HEALTH, BASE_MAX_HEALTH)
+            .add(Attributes.MOVEMENT_SPEED, BASE_MOVEMENT_SPEED)
+            .add(Attributes.FOLLOW_RANGE, BASE_PATHFINDING_RANGE);
     }
 
     public GoalSelector getTasks()
@@ -273,9 +272,9 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
     public ResourceLocation getTexture()
     {
         if (texture == null
-              || textureDirty
-              || !texture.getPath().contains(getEntityData().get(DATA_STYLE))
-              || !texture.getPath().contains(getEntityData().get(DATA_TEXTURE_SUFFIX)))
+            || textureDirty
+            || !texture.getPath().contains(getEntityData().get(DATA_STYLE))
+            || !texture.getPath().contains(getEntityData().get(DATA_TEXTURE_SUFFIX)))
         {
             setTexture();
         }
@@ -687,6 +686,7 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
 
     /**
      * On armor removal.
+     *
      * @param stack the removed armor.
      */
     public void onArmorRemove(final ItemStack stack, final EquipmentSlot equipmentSlot)
@@ -696,6 +696,7 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
 
     /**
      * On armor equip.
+     *
      * @param stack the added armor.
      */
     public void onArmorAdd(final ItemStack stack, final EquipmentSlot equipmentSlot)
@@ -757,7 +758,8 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
         }
         if (getName() instanceof MutableComponent mutableComponent)
         {
-            return mutableComponent.withStyle(getCitizenColonyHandler().getColony().getTeamColonyColor()).withStyle((style) -> style.withHoverEvent(this.createHoverEvent()).withInsertion(this.getStringUUID()));
+            return mutableComponent.withStyle(getCitizenColonyHandler().getColony().getTeamColonyColor())
+                .withStyle((style) -> style.withHoverEvent(this.createHoverEvent()).withInsertion(this.getStringUUID()));
         }
         return super.getDisplayName();
     }

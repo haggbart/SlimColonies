@@ -1,11 +1,10 @@
 package no.monopixel.slimcolonies.core.quests;
 
-import no.monopixel.slimcolonies.api.colony.IColony;
-import com.minecolonies.api.quests.*;
-import no.monopixel.slimcolonies.api.quests.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.quests.*;
 
 import java.util.List;
 import java.util.function.Function;
@@ -34,7 +33,6 @@ public class QuestTemplate implements IQuestTemplate
 
     private final List<IQuestRewardTemplate> questRewards;
 
-
     private final int maxOccurrence;
 
     private final Component name;
@@ -46,18 +44,25 @@ public class QuestTemplate implements IQuestTemplate
 
     /**
      * Create new quest data.
-     * @param questID the id of the quest.
-     * @param name the name of the quest.
-     * @param parents the parent quests.
-     * @param maxOccurrence the max num of occurrences.
+     *
+     * @param questID          the id of the quest.
+     * @param name             the name of the quest.
+     * @param parents          the parent quests.
+     * @param maxOccurrence    the max num of occurrences.
      * @param questTriggerList the list of triggers.
-     * @param questObjectives the quest objectives.
-     * @param questTimeout the time until it times out.
-     * @param questRewards its rewards
+     * @param questObjectives  the quest objectives.
+     * @param questTimeout     the time until it times out.
+     * @param questRewards     its rewards
      */
-    public QuestTemplate(final ResourceLocation questID, final Component name,
-      final List<ResourceLocation> parents,
-      final int maxOccurrence, final Function<IColony, List<ITriggerReturnData<?>>> questTriggerList, final List<IQuestObjectiveTemplate> questObjectives, final int questTimeout, final List<IQuestRewardTemplate> questRewards)
+    public QuestTemplate(
+        final ResourceLocation questID,
+        final Component name,
+        final List<ResourceLocation> parents,
+        final int maxOccurrence,
+        final Function<IColony, List<ITriggerReturnData<?>>> questTriggerList,
+        final List<IQuestObjectiveTemplate> questObjectives,
+        final int questTimeout,
+        final List<IQuestRewardTemplate> questRewards)
     {
         this.questID = questID;
         this.name = name;
@@ -98,7 +103,7 @@ public class QuestTemplate implements IQuestTemplate
             {
                 questReward.applyReward(colony, player, colonyQuest);
             }
-            index+=1;
+            index += 1;
         }
     }
 

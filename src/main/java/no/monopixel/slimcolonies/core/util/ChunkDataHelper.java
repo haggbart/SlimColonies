@@ -1,22 +1,21 @@
 package no.monopixel.slimcolonies.core.util;
 
-import no.monopixel.slimcolonies.api.colony.IChunkmanagerCapability;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IColonyTagCapability;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import com.minecolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.colony.IColonyManagerCapability;
-import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkCapabilityMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
+import no.monopixel.slimcolonies.api.colony.IChunkmanagerCapability;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.IColonyTagCapability;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.colony.IColonyManagerCapability;
+import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkCapabilityMessage;
 import org.jetbrains.annotations.Nullable;
 
 import static no.monopixel.slimcolonies.api.colony.IColony.CLOSE_COLONY_CAP;
@@ -151,8 +150,8 @@ public final class ChunkDataHelper
      * @param corners also (un)claim all chunks intersecting this box (if not null)
      */
     public static void claimBuildingChunks(
-      final IColony colony, final boolean add, final BlockPos center, final int range,
-      @Nullable final Tuple<BlockPos, BlockPos> corners)
+        final IColony colony, final boolean add, final BlockPos center, final int range,
+        @Nullable final Tuple<BlockPos, BlockPos> corners)
     {
         buildingClaimInRange(colony, add, range, center, false);
 
@@ -217,11 +216,11 @@ public final class ChunkDataHelper
      * @param force  whether to ignore restrictions.
      */
     private static void buildingClaimInRange(
-      final IColony colony,
-      final boolean add,
-      final int range,
-      final BlockPos center,
-      final boolean force)
+        final IColony colony,
+        final boolean add,
+        final int range,
+        final BlockPos center,
+        final boolean force)
     {
         final Level world = colony.getWorld();
         final IChunkmanagerCapability chunkManager = world.getCapability(CHUNK_STORAGE_UPDATE_CAP, null).resolve().orElse(null);
@@ -246,9 +245,9 @@ public final class ChunkDataHelper
                 if (!force && maxColonySize != 0 && pos.distSqr(colonyCenterCompare) > Math.pow(maxColonySize * BLOCKS_PER_CHUNK, 2))
                 {
                     Log.getLogger()
-                      .debug(
-                        "Tried to claim chunk at pos X:" + pos.getX() + " Z:" + pos.getZ() + " too far away from the colony:" + colony.getID() + " center:" + colony.getCenter()
-                          + " max is config workingRangeTownHall ^2");
+                        .debug(
+                            "Tried to claim chunk at pos X:" + pos.getX() + " Z:" + pos.getZ() + " too far away from the colony:" + colony.getID() + " center:" + colony.getCenter()
+                                + " max is config workingRangeTownHall ^2");
                     continue;
                 }
 
@@ -275,10 +274,10 @@ public final class ChunkDataHelper
      * @param corners the box.
      */
     private static void buildingClaimBox(
-      final IColony colony,
-      final BlockPos anchor,
-      final boolean add,
-      final Tuple<BlockPos, BlockPos> corners)
+        final IColony colony,
+        final BlockPos anchor,
+        final boolean add,
+        final Tuple<BlockPos, BlockPos> corners)
     {
         final Level world = colony.getWorld();
         final IChunkmanagerCapability chunkManager = world.getCapability(CHUNK_STORAGE_UPDATE_CAP, null).resolve().orElse(null);
@@ -297,9 +296,9 @@ public final class ChunkDataHelper
             if (maxColonySize != 0 && pos.distSqr(colonyCenterCompare) > Math.pow(maxColonySize * BLOCKS_PER_CHUNK, 2))
             {
                 Log.getLogger()
-                  .debug(
-                    "Tried to claim chunk at pos X:" + pos.getX() + " Z:" + pos.getZ() + " too far away from the colony:" + colony.getID() + " center:" + colony.getCenter()
-                      + " max is config workingRangeTownHall ^2");
+                    .debug(
+                        "Tried to claim chunk at pos X:" + pos.getX() + " Z:" + pos.getZ() + " too far away from the colony:" + colony.getID() + " center:" + colony.getCenter()
+                            + " max is config workingRangeTownHall ^2");
                 continue;
             }
 
@@ -317,12 +316,12 @@ public final class ChunkDataHelper
      * @param world    the world.
      */
     public static void staticClaimInRange(
-      final int colonyId,
-      final boolean add,
-      final BlockPos center,
-      final int range,
-      final Level world,
-      final boolean forceOwnerChange)
+        final int colonyId,
+        final boolean add,
+        final BlockPos center,
+        final int range,
+        final Level world,
+        final boolean forceOwnerChange)
     {
         final IChunkmanagerCapability chunkManager = world.getCapability(CHUNK_STORAGE_UPDATE_CAP, null).resolve().orElse(null);
         if (chunkManager == null)
@@ -356,12 +355,12 @@ public final class ChunkDataHelper
      * @return true if successful.
      */
     public static boolean tryClaim(
-      final Level world,
-      final BlockPos chunkBlockPos,
-      final boolean add,
-      final int id,
-      final IChunkmanagerCapability chunkManager,
-      boolean forceOwnerChange)
+        final Level world,
+        final BlockPos chunkBlockPos,
+        final boolean add,
+        final int id,
+        final IChunkmanagerCapability chunkManager,
+        boolean forceOwnerChange)
     {
         if (!WorldUtil.isBlockLoaded(world, chunkBlockPos))
         {
@@ -420,12 +419,12 @@ public final class ChunkDataHelper
      * @return true if successful.
      */
     public static boolean tryClaimBuilding(
-      final Level world,
-      final BlockPos chunkBlockPos,
-      final boolean add,
-      final IColony colony,
-      final BlockPos buildingPos,
-      final IChunkmanagerCapability chunkManager)
+        final Level world,
+        final BlockPos chunkBlockPos,
+        final boolean add,
+        final IColony colony,
+        final BlockPos buildingPos,
+        final IChunkmanagerCapability chunkManager)
     {
         if (!WorldUtil.isBlockLoaded(world, chunkBlockPos))
         {
