@@ -268,8 +268,6 @@
     "com.minecolonies.coremod.item.adventure.token.name.gui": "Encounter with: ",
     "item.minecolonies.scroll.colony.tip": "Colony: %s",
     "item.minecolonies.scroll.colony.none": "None, set one with sneak + right-click",
-    "item.minecolonies.scroll_area_tp": "Ultrasafe Colony Group Teleport Scroll",
-    "item.minecolonies.scroll_area_tp.tip": "Safely teleports you and nearby players to the colony",
     "item.minecolonies.scroll_buff": "Sacred Scroll of Regeneration",
     "item.minecolonies.scroll_buff.tip": "Applies regeneration to citizens around you, at least most of the time...",
     "item.minecolonies.scroll_highlight": "Worker-Where-Are-You Scroll",

@@ -58,8 +58,6 @@ public class ToolTranslationConstants
     @NonNls
     public static final String TOOL_COLONY_TELEPORT_SCROLL_COLONY_NAME      = "item.minecolonies.scroll.colony.tip";
     @NonNls
-    public static final String TOOL_COLONY_TELEPORT_AREA_SCROLL_DESCRIPTION = "item.minecolonies.scroll_area_tp.tip";
-    @NonNls
     public static final String TOOL_BEEHIVE_SCEPTER_ADD_HIVE                = "item.minecolonies.scepterbeekeeper.addhive";
     @NonNls
     public static final String TOOL_BEEHIVE_SCEPTER_REMOVE_HIVE             = "item.minecolonies.scepterbeekeeper.removehive";
