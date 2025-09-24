@@ -9,5 +9,5 @@
   "icon": "minecolonies:textures/icons/research/saturation5.png",
   "parentResearch": "slimcolonies:civilian/epicure",
   "researchLevel": 6,
-  "subtitle": "com.slimcolonies.research.civilian.glutton.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.glutton.subtitle"
 }

@@ -9,5 +9,5 @@
   "icon": "minecraft:redstone_torch",
   "parentResearch": "slimcolonies:technology/isthisredstone",
   "researchLevel": 3,
-  "subtitle": "com.slimcolonies.research.technology.redstonepowered.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.technology.redstonepowered.subtitle"
 }

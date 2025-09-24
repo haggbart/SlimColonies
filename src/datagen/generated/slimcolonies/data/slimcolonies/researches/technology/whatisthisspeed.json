@@ -9,5 +9,5 @@
   "icon": "minecraft:comparator",
   "parentResearch": "slimcolonies:technology/heavymachinery",
   "researchLevel": 5,
-  "subtitle": "com.slimcolonies.research.technology.whatisthisspeed.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.technology.whatisthisspeed.subtitle"
 }

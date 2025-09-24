@@ -9,5 +9,5 @@
   "icon": "minecraft:lime_bed",
   "parentResearch": "slimcolonies:combat/tactictraining",
   "researchLevel": 2,
-  "subtitle": "com.slimcolonies.research.combat.coffee.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.combat.coffee.subtitle"
 }

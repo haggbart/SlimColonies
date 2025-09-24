@@ -9,5 +9,5 @@
   "icon": "minecolonies:textures/icons/research/xpgain5.png",
   "parentResearch": "slimcolonies:civilian/master",
   "researchLevel": 6,
-  "subtitle": "com.slimcolonies.research.civilian.phd.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.phd.subtitle"
 }

@@ -9,5 +9,5 @@
   "icon": "minecraft:diamond_boots",
   "parentResearch": "slimcolonies:combat/improvedevasion",
   "researchLevel": 6,
-  "subtitle": "com.slimcolonies.research.combat.agilearcher.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.combat.agilearcher.subtitle"
 }

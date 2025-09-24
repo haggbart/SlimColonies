@@ -1,11 +1,11 @@
 package no.monopixel.slimcolonies.api.colony.jobs.registry;
 
+import net.minecraft.resources.ResourceLocation;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.jobs.IJob;
 import no.monopixel.slimcolonies.api.colony.jobs.IJobView;
-import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.Validate;
 
 import java.util.Objects;
@@ -27,8 +27,8 @@ public final class JobEntry
      */
     public static final class Builder
     {
-        private Function<ICitizenData, IJob<?>> jobProducer;
-        private ResourceLocation                registryName;
+        private Function<ICitizenData, IJob<?>>                               jobProducer;
+        private ResourceLocation                                              registryName;
         private Supplier<BiFunction<IColonyView, ICitizenDataView, IJobView>> jobViewProducer;
 
         /**
@@ -102,6 +102,7 @@ public final class JobEntry
 
     /**
      * Construct a new job instance.
+     *
      * @param data the assigned citizen to the job.
      * @return a new job instance.
      */
@@ -113,9 +114,9 @@ public final class JobEntry
     }
 
     private JobEntry(
-      final Function<ICitizenData, IJob<?>> jobProducer,
-      final Supplier<BiFunction<IColonyView, ICitizenDataView, IJobView>> jobViewProducer,
-      final ResourceLocation key)
+        final Function<ICitizenData, IJob<?>> jobProducer,
+        final Supplier<BiFunction<IColonyView, ICitizenDataView, IJobView>> jobViewProducer,
+        final ResourceLocation key)
     {
         super();
         this.jobProducer = jobProducer;
@@ -125,9 +126,8 @@ public final class JobEntry
 
     public String getTranslationKey()
     {
-        return "com." + key.getNamespace() + ".job." + key.getPath();
+        return "no.monopixel." + key.getNamespace() + ".job." + key.getPath();
     }
-
 
     public ResourceLocation getKey()
     {

@@ -9,5 +9,5 @@
   "icon": "slimcolonies:blockhutalchemist",
   "parentResearch": "slimcolonies:technology/opennether",
   "researchLevel": 2,
-  "subtitle": "com.slimcolonies.research.technology.alchemist.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.technology.alchemist.subtitle"
 }
