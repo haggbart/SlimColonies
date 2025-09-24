@@ -947,14 +947,14 @@ public class DefaultResearchProvider extends AbstractResearchProvider
 
         final Research telescope = new Research(new ResourceLocation(Constants.MOD_ID, "combat/telescope"), COMBAT).setParentResearch(ironSkin)
           .setTranslatedName("Telescope")
-          .setIcon(ModItems.bannerRallyGuards)
+          .setIcon(Items.SPYGLASS)
           .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.BARRACKS_ID), 3)
           .addEffect(TELESCOPE, 1)
           .addToList(r);
 
         new Research(new ResourceLocation(Constants.MOD_ID, "combat/standard"), COMBAT).setParentResearch(telescope)
           .setTranslatedName("Standard")
-          .setIcon(ModItems.bannerRallyGuards)
+          .setIcon(Items.IRON_SWORD)
           .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.BARRACKS_ID), 4)
           .addEffect(STANDARD, 1)
           .addToList(r);

@@ -244,8 +244,6 @@ public class NetworkChannel
         registerMessage(++idx, ClickGuiButtonTriggerMessage.class, ClickGuiButtonTriggerMessage::new);
 
         // Colony-Independent items
-        registerMessage(++idx, RemoveFromRallyingListMessage.class, RemoveFromRallyingListMessage::new);
-        registerMessage(++idx, ToggleBannerRallyGuardsMessage.class, ToggleBannerRallyGuardsMessage::new);
 
         // Research-related messages.
         registerMessage(++idx, GlobalResearchTreeMessage.class, GlobalResearchTreeMessage::new);

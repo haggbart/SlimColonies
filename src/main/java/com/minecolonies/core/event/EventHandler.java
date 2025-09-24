@@ -39,7 +39,6 @@ import com.minecolonies.core.entity.citizen.EntityCitizen;
 import com.minecolonies.core.event.capabilityproviders.MinecoloniesChunkCapabilityProvider;
 import com.minecolonies.core.event.capabilityproviders.MinecoloniesWorldCapabilityProvider;
 import com.minecolonies.core.event.capabilityproviders.MinecoloniesWorldColonyManagerCapabilityProvider;
-import com.minecolonies.core.items.ItemBannerRallyGuards;
 import com.minecolonies.core.network.messages.client.OpenSuggestionWindowMessage;
 import com.minecolonies.core.network.messages.client.UpdateChunkCapabilityMessage;
 import com.minecolonies.core.network.messages.client.UpdateChunkRangeCapabilityMessage;
@@ -397,15 +396,6 @@ public class EventHandler
                 }
             }
 
-            final int size = player.getInventory().getContainerSize();
-            for (int i = 0; i < size; i++)
-            {
-                final ItemStack stack = player.getInventory().getItem(i);
-                if (stack.getItem() instanceof ItemBannerRallyGuards)
-                {
-                    ItemBannerRallyGuards.broadcastPlayerToRally(stack, player.level, new EntityLocation(player.getUUID()));
-                }
-            }
         }
     }
 

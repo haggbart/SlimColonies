@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "minecolonies:banner_rally_guards",
+  "icon": "minecraft:iron_sword",
   "parentResearch": "minecolonies:combat/telescope",
   "requirements": [
     {

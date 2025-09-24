@@ -64,7 +64,6 @@ public class WorldEventContext
             ColonyBlueprintRenderer.renderBlueprints(this);
             ColonyWaypointRenderer.render(this);
             ColonyPatrolPointRenderer.render(this);
-            GuardTowerRallyBannerRenderer.render(this);
             PathfindingDebugRenderer.render(this);
 
             bufferSource.endBatch();

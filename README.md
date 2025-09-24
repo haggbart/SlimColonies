@@ -55,6 +55,7 @@ SlimColonies removes these pain points and makes sensible behaviors the default,
 - [x] Remove Scimitar
 - [x] Remove Plate Armor
 - [x] Simplified visitor recruitment (no cost)
+- [x] Removed scrolls
 
 #### Misc & Other
 

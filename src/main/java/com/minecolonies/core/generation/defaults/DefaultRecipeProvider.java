@@ -517,16 +517,6 @@ public class DefaultRecipeProvider extends RecipeProvider
                 ItemPredicate.Builder.item().of(ItemTags.WOOL).build()))
             .save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.bannerRallyGuards)
-            .pattern("AAA")
-            .pattern("BXB")
-            .pattern("CCC")
-            .define('A', Items.IRON_SWORD)
-            .define('B', ModBlocks.blockHutGuardTower)
-            .define('X', Items.YELLOW_BANNER)
-            .define('C', Items.BOW)
-            .unlockedBy("has_items", hasAllOf(buildTool.get(), ModBlocks.blockHutGuardTower))
-            .save(consumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CHAINMAIL_HELMET)
             .pattern("NCN")

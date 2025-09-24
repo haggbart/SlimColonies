@@ -113,19 +113,6 @@ public interface IGuardBuilding extends IBuilding
      */
     void setPlayerToFollow(Player player);
 
-    /**
-     * Location to to rally to.
-     *
-     * @return the ILocation reference.
-     */
-    ILocation getRallyLocation();
-
-    /**
-     * Sets the location to rally.
-     *
-     * @param location The location to rally to.
-     */
-    void setRallyLocation(final ILocation location);
 
     /**
      * Gets the position to follow.

@@ -54,7 +54,6 @@ public final class ModCreativeTabs
             output.accept(ModItems.assistantHammer_Diamond);
             output.accept(ModItems.scepterBeekeeper);
 
-            output.accept(ModItems.bannerRallyGuards);
 
             output.accept(ModItems.supplyChest);
             output.accept(ModItems.supplyCamp);

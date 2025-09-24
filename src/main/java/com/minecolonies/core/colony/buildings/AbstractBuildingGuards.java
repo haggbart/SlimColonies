@@ -24,7 +24,6 @@ import com.minecolonies.core.colony.requestsystem.locations.StaticLocation;
 import com.minecolonies.core.entity.pathfinding.Pathfinding;
 import com.minecolonies.core.entity.pathfinding.pathjobs.PathJobRandomPos;
 import com.minecolonies.core.entity.pathfinding.pathresults.PathResult;
-import com.minecolonies.core.items.ItemBannerRallyGuards;
 import com.minecolonies.core.util.AttributeModifierUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -49,7 +48,6 @@ import static com.minecolonies.api.research.util.ResearchConstants.ARCHER_USE_AR
 import static com.minecolonies.api.research.util.ResearchConstants.TELESCOPE;
 import static com.minecolonies.api.util.constant.CitizenConstants.GUARD_HEALTH_MOD_BUILDING_NAME;
 import static com.minecolonies.api.util.constant.CitizenConstants.LOW_SATURATION;
-import static com.minecolonies.api.util.constant.TranslationConstants.WARNING_RALLYING_POINT_OUT_OF_RANGE;
 import static com.minecolonies.core.util.ServerUtils.getPlayerFromUUID;
 
 /**
@@ -122,10 +120,6 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
      */
     private UUID followPlayerUUID;
 
-    /**
-     * The location the guard has been set to rally to.
-     */
-    private ILocation rallyLocation;
 
     /**
      * A temporary next patrol point, which gets consumed and used once
@@ -304,11 +298,7 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
     @Nullable
     public Player getPlayerToFollowOrRally()
     {
-        if (rallyLocation != null && rallyLocation instanceof EntityLocation)
-        {
-            return ((EntityLocation) rallyLocation).getPlayerEntity();
-        }
-        else if (getTask().equals(GuardTaskSetting.FOLLOW))
+        if (getTask().equals(GuardTaskSetting.FOLLOW))
         {
             return getPlayerFromUUID(followPlayerUUID, this.colony.getWorld());
         }
@@ -546,93 +536,7 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
         return this.getPosition();
     }
 
-    @Override
-    @Nullable
-    public ILocation getRallyLocation()
-    {
-        if (rallyLocation == null)
-        {
-            return null;
-        }
 
-        boolean outOfRange = false;
-        final IColony colonyAtPosition = IColonyManager.getInstance().getColonyByPosFromDim(rallyLocation.getDimension(), rallyLocation.getInDimensionLocation());
-        if (colonyAtPosition == null || colonyAtPosition.getID() != colony.getID())
-        {
-            if (getColony().getResearchManager().getResearchEffects().getEffectStrength(TELESCOPE) <= 0 || BlockPosUtil.getDistance2D(rallyLocation.getInDimensionLocation(), colony.getCenter()) > 500)
-            {
-                outOfRange = true;
-            }
-        }
-
-        if (rallyLocation instanceof EntityLocation)
-        {
-            final Player player = ((EntityLocation) rallyLocation).getPlayerEntity();
-            if (player == null)
-            {
-                setRallyLocation(null);
-                return null;
-            }
-
-            if (outOfRange)
-            {
-                MessageUtils.format(WARNING_RALLYING_POINT_OUT_OF_RANGE).sendTo(player);
-                setRallyLocation(null);
-                return null;
-            }
-
-            final int size = player.getInventory().getContainerSize();
-            for (int i = 0; i < size; i++)
-            {
-                final ItemStack stack = player.getInventory().getItem(i);
-                if (stack.getItem() instanceof ItemBannerRallyGuards)
-                {
-                    if (((ItemBannerRallyGuards) (stack.getItem())).isActiveForGuardTower(stack, this))
-                    {
-                        return rallyLocation;
-                    }
-                }
-            }
-            // Note: We do not reset the rallyLocation here.
-            // So, if the player doesn't properly deactivate the banner, this will cause relatively minor lag.
-            // But, in exchange, the player does not have to reactivate the banner so often, and it also works
-            // if the user moves the banner around in the inventory.
-            return null;
-        }
-        else if (rallyLocation instanceof StaticLocation)
-        {
-            if (outOfRange)
-            {
-                MessageUtils.format(WARNING_RALLYING_POINT_OUT_OF_RANGE).sendTo(colony.getImportantMessageEntityPlayers());
-                setRallyLocation(null);
-                return null;
-            }
-        }
-
-        return rallyLocation;
-    }
-
-    @Override
-    public void setRallyLocation(final ILocation location)
-    {
-        boolean reduceSaturation = false;
-        if (rallyLocation != null && location == null)
-        {
-            reduceSaturation = true;
-        }
-
-        rallyLocation = location;
-
-        for (final ICitizenData iCitizenData : getAllAssignedCitizen())
-        {
-            if (reduceSaturation && iCitizenData.getSaturation() < LOW_SATURATION)
-            {
-                // In addition to the scaled saturation reduction during rallying, stopping a rally
-                // will - if only LOW_SATURATION is left - set the saturation level to 0.
-                iCitizenData.decreaseSaturation(LOW_SATURATION);
-            }
-        }
-    }
 
     @Override
     public void setPlayerToFollow(final Player player)
