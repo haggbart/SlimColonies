@@ -52,6 +52,7 @@ import java.util.List;
 /**
  * Assistant Hammer item used to allow the player to assist the builder in building
  */
+@SuppressWarnings("removal")
 public class ItemAssistantHammer extends AbstractItemMinecolonies
 {
     /**
