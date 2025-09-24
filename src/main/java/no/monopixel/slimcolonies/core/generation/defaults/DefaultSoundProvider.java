@@ -72,7 +72,7 @@ public class DefaultSoundProvider implements DataProvider
                     for (final File soundFile : subList)
                     {
                         final String soundName = soundFile.getName();
-                        soundList.add("minecolonies:mob/citizen/" + name + "/" + soundName.replace(".ogg", ""));
+                        soundList.add(Constants.MOD_ID + ":mob/citizen/" + name + "/" + soundName.replace(".ogg", ""));
                     }
 
                     for (final ResourceLocation job : mainTypes)
@@ -88,8 +88,8 @@ public class DefaultSoundProvider implements DataProvider
         }
 
         final List<String> childSounds = new ArrayList<>();
-        childSounds.add("minecolonies:mob/citizen/child/laugh1");
-        childSounds.add("minecolonies:mob/citizen/child/laugh2");
+        childSounds.add(Constants.MOD_ID + ":mob/citizen/child/laugh1");
+        childSounds.add(Constants.MOD_ID + ":mob/citizen/child/laugh2");
 
         for (final EventType soundEvents : EventType.values())
         {
@@ -98,15 +98,15 @@ public class DefaultSoundProvider implements DataProvider
         }
 
 
-        sounds.add("mob.citizen.snore", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of("minecolonies:mob/citizen/snore")));
+        sounds.add("mob.citizen.snore", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of(Constants.MOD_ID + ":mob/citizen/snore")));
 
         JsonObject tavernProperties = getDefaultProperties();
         tavernProperties.addProperty("attenuation_distance", 23);
         tavernProperties.addProperty("stream", true);
         tavernProperties.addProperty("comment", "Credits to Darren Curtis - Fireside Tales");
-        sounds.add("tile.tavern.tavern_theme", createSoundJson("music", tavernProperties, ImmutableList.of("minecolonies:tile/tavern/tavern_theme")));
+        sounds.add("tile.tavern.tavern_theme", createSoundJson("music", tavernProperties, ImmutableList.of(Constants.MOD_ID + ":tile/tavern/tavern_theme")));
 
-        sounds.add("tile.sawmill.saw", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of("minecolonies:tile/sawmill/saw")));
+        sounds.add("tile.sawmill.saw", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of(Constants.MOD_ID + ":tile/sawmill/saw")));
 
 
         return DataProvider.saveStable(cache, sounds, getPath());
