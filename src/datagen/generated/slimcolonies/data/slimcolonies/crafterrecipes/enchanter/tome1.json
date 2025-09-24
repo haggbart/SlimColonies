@@ -1,0 +1,19 @@
+{
+  "type": "recipe",
+  "additional-output": [
+    {
+      "item": "minecraft:enchanted_book"
+    }
+  ],
+  "crafter": "enchanter_custom",
+  "inputs": [
+    {
+      "item": "slimcolonies:ancienttome",
+      "matchType": "ignore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "slimcolonies:recipes/enchanter1",
+  "max-building-level": 1,
+  "min-building-level": 1
+}

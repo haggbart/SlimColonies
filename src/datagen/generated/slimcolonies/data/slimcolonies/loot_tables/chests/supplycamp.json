@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.01,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Placement:\"instant\"}"
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "item.minecolonies.supply.free",
+                "with": [
+                  {
+                    "translate": "item.slimcolonies.supplycampdeployer"
+                  }
+                ]
+              }
+            }
+          ],
+          "name": "slimcolonies:supplycampdeployer"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "slimcolonies:chests/supplycamp"
+}

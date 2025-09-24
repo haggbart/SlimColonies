@@ -1,0 +1,30 @@
+{
+  "parent": "slimcolonies:military/build_barracks_tower",
+  "criteria": {
+    "towers": {
+      "conditions": {},
+      "trigger": "slimcolonies:all_barracks_towers"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.build.all_towers.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockhutbarrackstower"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.build.all_towers.title"
+    }
+  },
+  "requirements": [
+    [
+      "towers"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

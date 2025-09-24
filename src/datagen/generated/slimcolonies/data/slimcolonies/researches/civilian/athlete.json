@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/walkingmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "minecolonies:textures/icons/research/speed4.png",
+  "parentResearch": "slimcolonies:civilian/swift",
+  "researchLevel": 6,
+  "subtitle": "com.slimcolonies.research.civilian.athlete.subtitle"
+}

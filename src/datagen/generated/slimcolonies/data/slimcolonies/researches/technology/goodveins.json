@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/moreoresmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:coal_block",
+  "parentResearch": "slimcolonies:technology/veinminer",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 2
+    }
+  ],
+  "researchLevel": 3
+}

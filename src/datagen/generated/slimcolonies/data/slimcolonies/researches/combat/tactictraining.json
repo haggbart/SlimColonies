@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutbarracks",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutbarrackstower",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 3
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 2
+}

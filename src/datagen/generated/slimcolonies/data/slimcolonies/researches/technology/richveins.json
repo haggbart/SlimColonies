@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/moreoresmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:gold_block",
+  "parentResearch": "slimcolonies:technology/goodveins",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4
+}

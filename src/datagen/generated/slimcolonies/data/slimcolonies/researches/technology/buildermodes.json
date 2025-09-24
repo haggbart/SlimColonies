@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/buildermodeunlock",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutbuilder",
+  "parentResearch": "slimcolonies:technology/memoryaid",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:builder",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "sortOrder": 4,
+  "subtitle": "com.slimcolonies.research.technology.buildermodes.subtitle"
+}

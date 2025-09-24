@@ -1,0 +1,12 @@
+{
+  "type": "recipe",
+  "crafter": "baker_smelting",
+  "inputs": [
+    {
+      "item": "slimcolonies:cake_batter"
+    }
+  ],
+  "intermediate": "minecraft:furnace",
+  "min-building-level": 4,
+  "result": "minecraft:cake"
+}

@@ -1,0 +1,260 @@
+{
+  "max-occurrences": 1,
+  "name": "slimcolonies.quests.tutorial.welcome",
+  "objectives": [
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj0.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj0.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 1
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj0.answer0.reply.answer1",
+                "result": {
+                  "type": "slimcolonies:dialogue",
+                  "options": [
+                    {
+                      "answer": "slimcolonies.quests.tutorial.welcome.obj0.answer0.reply.answer1.reply.answer0",
+                      "result": {
+                        "type": "slimcolonies:advanceobjective",
+                        "go-to": 2
+                      }
+                    },
+                    {
+                      "answer": "slimcolonies.quests.tutorial.welcome.obj0.answer0.reply.answer1.reply.answer1",
+                      "result": {
+                        "type": "slimcolonies:advanceobjective",
+                        "go-to": 2
+                      }
+                    }
+                  ],
+                  "text": "slimcolonies.quests.tutorial.welcome.obj0.answer0.reply.answer1.reply"
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.welcome.obj0.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj0.answer1",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj0.answer2",
+          "result": {
+            "type": "slimcolonies:advanceobjective",
+            "go-to": -1
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.welcome.obj0"
+    },
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj1.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj1.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:return"
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.welcome.obj1.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj1.answer1",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj1.answer1.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 2
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj1.answer1.reply.answer1",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 2
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.welcome.obj1.answer1.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj1.answer2",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.welcome.obj1"
+    },
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj2.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj2.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 3
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.welcome.obj2.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj2.answer1",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj2.answer1.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:return"
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.welcome.obj2.answer1.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj2.answer2",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.welcome.obj2"
+    },
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj3.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj3.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:return"
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.welcome.obj3.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj3.answer1",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj3.answer1.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 4
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.tutorial.welcome.obj3.answer1.reply.answer1",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 5
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.welcome.obj3.answer1.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj3.answer2",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.welcome.obj3"
+    },
+    {
+      "type": "slimcolonies:placeblock",
+      "details": {
+        "block": "slimcolonies:blockhutbuilder",
+        "next-objective": 5,
+        "qty": 1,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.welcome.obj5.answer0",
+          "result": {
+            "type": "slimcolonies:advanceobjective",
+            "go-to": 6
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.welcome.obj5",
+      "unlocks-rewards": [
+        0,
+        1
+      ]
+    }
+  ],
+  "parents": [],
+  "rewards": [
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "slimcolonies:questlog",
+        "qty": 1
+      }
+    },
+    {
+      "type": "slimcolonies:unlockquest",
+      "details": {
+        "id": "slimcolonies:tutorial/builder"
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "type": "slimcolonies:citizen",
+      "state": {}
+    }
+  ]
+}

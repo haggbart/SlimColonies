@@ -1,0 +1,215 @@
+{
+  "max-occurrences": 20,
+  "name": "slimcolonies.quests.template.questtemplate",
+  "objectives": [
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.template.questtemplate.obj0.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.template.questtemplate.obj0.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 1
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.template.questtemplate.obj0.answer0.reply.answer1",
+                "result": {
+                  "type": "slimcolonies:return"
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.template.questtemplate.obj0.answer0.reply.answer2",
+                "result": {
+                  "type": "slimcolonies:cancel"
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.template.questtemplate.obj0.answer0.reply.answer3",
+                "result": {
+                  "type": "slimcolonies:dialogue",
+                  "options": [
+                    {
+                      "answer": "slimcolonies.quests.template.questtemplate.obj0.answer0.reply.answer3.reply.answer0",
+                      "result": {
+                        "type": "slimcolonies:advanceobjective",
+                        "go-to": 2
+                      }
+                    }
+                  ],
+                  "text": "slimcolonies.quests.template.questtemplate.obj0.answer0.reply.answer3.reply"
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.template.questtemplate.obj0.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.template.questtemplate.obj0.answer1",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.template.questtemplate.obj0"
+    },
+    {
+      "type": "slimcolonies:delivery",
+      "details": {
+        "item": "minecraft:apple",
+        "next-objective": 3,
+        "qty": 1,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:delivery",
+      "details": {
+        "item": "minecraft:baked_potato",
+        "next-objective": 3,
+        "qty": 1,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:breakblock",
+      "details": {
+        "block": "minecraft:dirt",
+        "next-objective": 4,
+        "qty": 10,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:placeblock",
+      "details": {
+        "block": "minecraft:dirt",
+        "next-objective": 5,
+        "qty": 10,
+        "target": 0
+      },
+      "unlocks-rewards": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "type": "slimcolonies:killentity",
+      "details": {
+        "entity-type": "minecraft:skeleton",
+        "next-objective": 6,
+        "qty": 10,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:buildbuilding",
+      "details": {
+        "type": "slimcolonies:builder",
+        "count-existing": false,
+        "lvl": 3,
+        "qty": 1,
+        "target": 0
+      }
+    }
+  ],
+  "parents": [],
+  "rewards": [
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "minecraft:gold_ingot",
+        "qty": 1
+      }
+    },
+    {
+      "type": "slimcolonies:skill",
+      "details": {
+        "qty": 1,
+        "skill": "Strength",
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:research",
+      "details": {
+        "id": "this"
+      }
+    },
+    {
+      "type": "slimcolonies:relationship",
+      "details": {
+        "type": "couple",
+        "target1": 0,
+        "target2": 1
+      }
+    },
+    {
+      "type": "slimcolonies:questreputation",
+      "details": {
+        "qty": 0.5
+      }
+    },
+    {
+      "type": "slimcolonies:unlockquest",
+      "details": {
+        "id": "slimcolonies:questtemplate"
+      }
+    }
+  ],
+  "triggerOrder": "6 && ((1 && 4) || (2 && 4 && 1) || (1 && 3 && 4)) && 5",
+  "triggers": [
+    {
+      "type": "slimcolonies:random",
+      "rarity": 0
+    },
+    {
+      "type": "slimcolonies:state",
+      "state": {
+        "match": {
+          "type": "slimcolonies:townhall",
+          "level": 3
+        },
+        "path": "buildingManager/buildings"
+      }
+    },
+    {
+      "type": "slimcolonies:state",
+      "state": {
+        "count": 3,
+        "match": {
+          "type": "slimcolonies:guardtower",
+          "level": 3
+        },
+        "path": "buildingManager/buildings"
+      }
+    },
+    {
+      "type": "slimcolonies:citizen",
+      "state": {
+        "match": {
+          "female": true,
+          "job": {
+            "type": "slimcolonies:knight"
+          }
+        }
+      }
+    },
+    {
+      "type": "slimcolonies:questreputation",
+      "qty": 0.5
+    },
+    {
+      "type": "slimcolonies:unlock"
+    }
+  ]
+}

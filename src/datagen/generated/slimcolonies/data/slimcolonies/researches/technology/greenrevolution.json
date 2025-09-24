@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/greenrevolution",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:compost",
+  "parentResearch": "slimcolonies:technology/biodegradable",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:farmer",
+      "level": 4
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 3,
+  "subtitle": "com.slimcolonies.research.technology.greenrevolution.subtitle"
+}

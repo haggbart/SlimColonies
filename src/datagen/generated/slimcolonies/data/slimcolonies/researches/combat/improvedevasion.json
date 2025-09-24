@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/archerarmormultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:golden_boots",
+  "parentResearch": "slimcolonies:combat/evasion",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:archery",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5,
+  "subtitle": "com.slimcolonies.research.combat.improvedevasion.subtitle"
+}

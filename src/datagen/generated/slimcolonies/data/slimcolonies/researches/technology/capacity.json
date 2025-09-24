@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/minimumstockmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:chest_minecart",
+  "parentResearch": "slimcolonies:technology/space",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4,
+  "subtitle": "com.slimcolonies.research.technology.capacity.subtitle"
+}

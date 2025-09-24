@@ -1,0 +1,26 @@
+{
+  "type": "recipe",
+  "additional-output": [
+    {
+      "item": "slimcolonies:sifter_mesh_string"
+    },
+    {
+      "item": "minecraft:cactus"
+    },
+    {
+      "item": "minecraft:sugar_cane"
+    }
+  ],
+  "crafter": "sifter_custom",
+  "inputs": [
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "slimcolonies:sifter_mesh_string"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "slimcolonies:recipes/string/sand",
+  "min-building-level": 1
+}

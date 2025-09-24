@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/archerdamageaddition",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:crossbow",
+  "parentResearch": "slimcolonies:combat/penetratingshot",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 10
+    }
+  ],
+  "researchLevel": 4
+}

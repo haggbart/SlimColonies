@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/growthmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecolonies:textures/icons/research/childgrowth3.png",
+  "parentResearch": "slimcolonies:civilian/hormones",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 3
+    }
+  ],
+  "researchLevel": 4,
+  "subtitle": "com.slimcolonies.research.civilian.puberty.subtitle"
+}

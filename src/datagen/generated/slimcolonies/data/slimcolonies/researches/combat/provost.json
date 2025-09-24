@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleearmormultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:golden_chestplate",
+  "parentResearch": "slimcolonies:combat/duelist",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:combatacademy",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

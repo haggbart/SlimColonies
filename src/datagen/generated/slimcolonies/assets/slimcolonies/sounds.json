@@ -1,0 +1,473 @@
+{
+  "citizen.child.female.bad_housing": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.bad_weather": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.danger": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.farewell": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.general": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.good_housing": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.greeting": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.happy": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.interaction": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.missing_equipment": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.noise": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.off_to_bed": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.saturation_high": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.saturation_low": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.sickness": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.success": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.female.unhappy": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.bad_housing": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.bad_weather": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.danger": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.farewell": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.general": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.good_housing": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.greeting": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.happy": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.interaction": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.missing_equipment": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.noise": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.off_to_bed": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.saturation_high": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.saturation_low": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.sickness": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.success": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "citizen.child.male.unhappy": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/child/laugh1",
+        "stream": false
+      },
+      {
+        "name": "minecolonies:mob/citizen/child/laugh2",
+        "stream": false
+      }
+    ]
+  },
+  "mob.citizen.snore": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:mob/citizen/snore",
+        "stream": false
+      }
+    ]
+  },
+  "tile.sawmill.saw": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "minecolonies:tile/sawmill/saw",
+        "stream": false
+      }
+    ]
+  },
+  "tile.tavern.tavern_theme": {
+    "category": "music",
+    "sounds": [
+      {
+        "attenuation_distance": 23,
+        "comment": "Credits to Darren Curtis - Fireside Tales",
+        "name": "minecolonies:tile/tavern/tavern_theme",
+        "stream": true
+      }
+    ]
+  }
+}

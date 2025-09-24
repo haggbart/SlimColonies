@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockbreakspeedmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "minecraft:repeater",
+  "parentResearch": "slimcolonies:technology/whatisthisspeed",
+  "researchLevel": 6,
+  "subtitle": "com.slimcolonies.research.technology.lightning.subtitle"
+}

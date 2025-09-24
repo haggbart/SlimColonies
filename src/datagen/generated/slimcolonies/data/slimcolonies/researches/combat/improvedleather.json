@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/armordurabilitymultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:leather_helmet",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:townhall",
+      "level": 1
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 4,
+  "subtitle": "com.slimcolonies.research.combat.improvedleather.subtitle"
+}

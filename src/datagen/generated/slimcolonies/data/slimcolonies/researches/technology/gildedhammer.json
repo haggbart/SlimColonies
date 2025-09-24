@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/crushing11unlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:gold_block",
+  "parentResearch": "slimcolonies:technology/rockingroll",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:crusher",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "com.slimcolonies.research.technology.gildedhammer.subtitle"
+}

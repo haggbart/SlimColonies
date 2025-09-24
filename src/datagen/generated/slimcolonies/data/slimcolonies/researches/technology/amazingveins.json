@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/moreoresmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:lapis_block",
+  "parentResearch": "slimcolonies:technology/richveins",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

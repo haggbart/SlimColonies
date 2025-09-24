@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/tooldurabilitymultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:golden_pickaxe",
+  "parentResearch": "slimcolonies:technology/reinforced",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:blacksmith",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

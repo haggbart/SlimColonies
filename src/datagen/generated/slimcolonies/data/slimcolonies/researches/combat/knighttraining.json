@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockattacksmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:barrel",
+  "parentResearch": "slimcolonies:combat/squiretraining",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:combatacademy",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4
+}

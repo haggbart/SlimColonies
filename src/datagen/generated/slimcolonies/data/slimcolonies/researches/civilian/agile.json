@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/walkingmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecolonies:textures/icons/research/speed2.png",
+  "parentResearch": "slimcolonies:civilian/nimble",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:townhall",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4,
+  "subtitle": "com.slimcolonies.research.civilian.agile.subtitle"
+}

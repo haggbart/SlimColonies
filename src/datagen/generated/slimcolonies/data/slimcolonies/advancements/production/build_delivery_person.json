@@ -1,0 +1,33 @@
+{
+  "parent": "slimcolonies:production/build_warehouse",
+  "criteria": {
+    "delivery_person": {
+      "conditions": {
+        "hut_name": "deliveryman",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.build.delivery_person.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockhutdeliveryman"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.build.delivery_person.title"
+    }
+  },
+  "requirements": [
+    [
+      "delivery_person"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

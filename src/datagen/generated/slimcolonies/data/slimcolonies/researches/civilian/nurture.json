@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/growthmultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "minecolonies:textures/icons/research/childgrowth1.png",
+  "parentResearch": "slimcolonies:civilian/higherlearning",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:school",
+      "level": 1
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 2,
+  "subtitle": "com.slimcolonies.research.civilian.nurture.subtitle"
+}

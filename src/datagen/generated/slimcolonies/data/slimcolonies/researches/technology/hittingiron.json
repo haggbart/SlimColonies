@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutblacksmith",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutblacksmith",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 3
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 7,
+  "subtitle": "com.slimcolonies.research.technology.hittingiron.subtitle"
+}

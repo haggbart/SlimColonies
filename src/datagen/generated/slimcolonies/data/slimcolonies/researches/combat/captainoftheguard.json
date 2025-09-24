@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockattacksmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:iron_block",
+  "parentResearch": "slimcolonies:combat/captaintraining",
+  "researchLevel": 6
+}

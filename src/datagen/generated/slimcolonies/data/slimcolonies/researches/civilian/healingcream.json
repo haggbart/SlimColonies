@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/regenerationmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecolonies:textures/icons/research/regeneration2.png",
+  "parentResearch": "slimcolonies:civilian/bandaid",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "com.slimcolonies.research.civilian.healingcream.subtitle"
+}

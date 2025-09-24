@@ -1,0 +1,24 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/farmingmultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:wheat_seeds",
+  "parentResearch": "slimcolonies:technology/biodegradable",
+  "requirements": [
+    {
+      "type": "slimcolonies:alternate-building",
+      "alternate-buildings": [
+        "slimcolonies:farmer",
+        "slimcolonies:composter"
+      ],
+      "level": 3
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 3,
+  "subtitle": "com.slimcolonies.research.technology.bonemeal.subtitle"
+}

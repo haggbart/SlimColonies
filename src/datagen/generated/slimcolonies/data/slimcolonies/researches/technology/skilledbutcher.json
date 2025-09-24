@@ -1,0 +1,25 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/looting",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:beef",
+  "parentResearch": "slimcolonies:technology/biodegradable",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:enchanter",
+      "level": 2
+    },
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:blacksmith",
+      "level": 2
+    }
+  ],
+  "researchLevel": 2,
+  "subtitle": "com.slimcolonies.research.technology.skilledbutcher.subtitle"
+}

@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/healingsaturationlimitaddition",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:splash_potion",
+  "parentResearch": "slimcolonies:civilian/resilience",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:cook",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4
+}

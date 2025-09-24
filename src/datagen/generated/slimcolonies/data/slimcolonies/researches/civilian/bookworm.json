@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/teachingmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecolonies:textures/icons/research/xpgain2.png",
+  "parentResearch": "slimcolonies:civilian/morebooks",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:school",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "com.slimcolonies.research.civilian.bookworm.subtitle"
+}

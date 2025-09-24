@@ -1,0 +1,22 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/farmingmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:bone",
+  "parentResearch": "slimcolonies:technology/dung",
+  "requirements": [
+    {
+      "type": "slimcolonies:alternate-building",
+      "alternate-buildings": [
+        "slimcolonies:farmer",
+        "slimcolonies:composter"
+      ],
+      "level": 5
+    }
+  ],
+  "researchLevel": 4
+}

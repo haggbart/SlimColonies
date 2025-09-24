@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/regenerationmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecolonies:textures/icons/research/regeneration3.png",
+  "parentResearch": "slimcolonies:civilian/healingcream",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4
+}

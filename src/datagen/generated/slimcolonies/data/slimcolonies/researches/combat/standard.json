@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/standard",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:iron_sword",
+  "parentResearch": "slimcolonies:combat/telescope",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:barracks",
+      "level": 4
+    }
+  ],
+  "researchLevel": 5
+}

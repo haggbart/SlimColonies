@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/air",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:potion",
+  "parentResearch": "slimcolonies:civilian/ambition",
+  "researchLevel": 2,
+  "sortOrder": 1
+}

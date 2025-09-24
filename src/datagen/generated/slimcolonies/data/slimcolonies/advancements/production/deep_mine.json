@@ -1,0 +1,30 @@
+{
+  "parent": "slimcolonies:production/build_miner",
+  "criteria": {
+    "mineshaft": {
+      "conditions": {},
+      "trigger": "slimcolonies:deep_mine"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.deep_mine.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:bedrock"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.deep_mine.title"
+    }
+  },
+  "requirements": [
+    [
+      "mineshaft"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

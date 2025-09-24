@@ -1,0 +1,33 @@
+{
+  "parent": "slimcolonies:production/build_library",
+  "criteria": {
+    "enchanter": {
+      "conditions": {
+        "hut_name": "enchanter",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.build.enchanter.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockhutenchanter"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.build.enchanter.title"
+    }
+  },
+  "requirements": [
+    [
+      "enchanter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleedamageaddition",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:wooden_sword",
+  "parentResearch": "slimcolonies:combat/accuracy",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:barracks",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2
+}

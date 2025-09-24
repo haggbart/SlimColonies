@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockplacespeedmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:redstone_lamp",
+  "parentResearch": "slimcolonies:technology/skills",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:blacksmith",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4,
+  "subtitle": "com.slimcolonies.research.technology.tools.subtitle"
+}

@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/fleeingdamagemultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:diamond_boots",
+  "parentResearch": "slimcolonies:combat/retreat",
+  "researchLevel": 6
+}

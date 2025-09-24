@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleedamageaddition",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:iron_sword",
+  "parentResearch": "slimcolonies:combat/powerattack",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 10
+    }
+  ],
+  "researchLevel": 4
+}

@@ -1,0 +1,29 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/recipemodeunlock",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockminecoloniesrack",
+  "parentResearch": "slimcolonies:technology/memoryaid",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:warehouse",
+      "level": 3
+    },
+    {
+      "type": "slimcolonies:alternate-building",
+      "alternate-buildings": [
+        "slimcolonies:sawmill",
+        "slimcolonies:stonemason"
+      ],
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "sortOrder": 2,
+  "subtitle": "com.slimcolonies.research.technology.warehousemaster.subtitle"
+}

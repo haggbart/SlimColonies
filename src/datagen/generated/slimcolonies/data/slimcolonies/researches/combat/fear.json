@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/fleeingdamagemultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:iron_boots",
+  "parentResearch": "slimcolonies:combat/feint",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 8
+    }
+  ],
+  "researchLevel": 4
+}

@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/fleeingdamagemultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:golden_boots",
+  "parentResearch": "slimcolonies:combat/fear",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 12
+    }
+  ],
+  "researchLevel": 5,
+  "subtitle": "com.slimcolonies.research.combat.retreat.subtitle"
+}

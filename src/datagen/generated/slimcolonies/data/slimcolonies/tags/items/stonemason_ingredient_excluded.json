@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:stick",
+    "#minecraft:logs",
+    "#minecraft:planks",
+    "#slimcolonies:mechanic_ingredient",
+    "#slimcolonies:dyer_ingredient"
+  ]
+}

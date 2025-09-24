@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/doublearrowsmultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:arrow",
+  "parentResearch": "slimcolonies:combat/improvedbows",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:archery",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3
+}

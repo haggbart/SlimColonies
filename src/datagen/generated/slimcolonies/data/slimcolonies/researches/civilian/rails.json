@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/railsunlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:detector_rail",
+  "parentResearch": "slimcolonies:civilian/keen",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:deliveryman",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 4,
+  "subtitle": "com.slimcolonies.research.civilian.rails.subtitle"
+}

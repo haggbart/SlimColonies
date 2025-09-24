@@ -1,0 +1,29 @@
+{
+  "type": "recipe",
+  "additional-output": [
+    {
+      "item": "slimcolonies:sifter_mesh_flint"
+    },
+    {
+      "item": "minecraft:cactus"
+    },
+    {
+      "item": "minecraft:sugar_cane"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ],
+  "crafter": "sifter_custom",
+  "inputs": [
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "slimcolonies:sifter_mesh_flint"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "slimcolonies:recipes/flint/sand",
+  "min-building-level": 3
+}

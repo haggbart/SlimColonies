@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/resurrectchanceaddition",
+      "level": 2
+    }
+  ],
+  "icon": "slimcolonies:blockhutgraveyard",
+  "parentResearch": "slimcolonies:civilian/resurrectchance1",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:graveyard",
+      "level": 5
+    }
+  ],
+  "researchLevel": 3,
+  "sortOrder": 1,
+  "subtitle": "com.slimcolonies.research.civilian.resurrectchance2.subtitle"
+}

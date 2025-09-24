@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/fishingtreasure",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:fishing_rod",
+  "parentResearch": "slimcolonies:technology/alchemist",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:fisherman",
+      "level": 4
+    }
+  ],
+  "researchLevel": 3,
+  "sortOrder": 4,
+  "subtitle": "com.slimcolonies.research.technology.oceanheart.subtitle"
+}

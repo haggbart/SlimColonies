@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/telescope",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:spyglass",
+  "parentResearch": "slimcolonies:combat/ironskin",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:barracks",
+      "level": 3
+    }
+  ],
+  "researchLevel": 4
+}

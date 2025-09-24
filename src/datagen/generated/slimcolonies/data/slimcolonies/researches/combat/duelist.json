@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleearmormultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:chainmail_chestplate",
+  "parentResearch": "slimcolonies:combat/riposte",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:smeltery",
+      "level": 3
+    }
+  ],
+  "researchLevel": 4
+}

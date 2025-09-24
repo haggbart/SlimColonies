@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/moreoresmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "minecraft:diamond_block",
+  "parentResearch": "slimcolonies:technology/amazingveins",
+  "researchLevel": 6
+}

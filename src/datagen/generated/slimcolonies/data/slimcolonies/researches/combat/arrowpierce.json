@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/piercingarrowsunlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:enchanted_book",
+  "parentResearch": "slimcolonies:combat/arrowuse",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:archery",
+      "level": 1
+    }
+  ],
+  "researchLevel": 3
+}

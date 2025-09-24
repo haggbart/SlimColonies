@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/podzolchancemultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:podzol",
+  "parentResearch": "slimcolonies:technology/biodegradable",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:composter",
+      "level": 2
+    }
+  ],
+  "researchLevel": 2,
+  "subtitle": "com.slimcolonies.research.technology.podzolchance.subtitle"
+}

@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/knighttauntmobsunlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:chain",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 1
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 5,
+  "subtitle": "com.slimcolonies.research.combat.taunt.subtitle"
+}

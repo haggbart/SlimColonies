@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutschool",
+      "level": 1
+    }
+  ],
+  "exclusiveChildResearch": true,
+  "icon": "slimcolonies:blockhutschool",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:residence",
+      "level": 3
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 4,
+  "subtitle": "com.slimcolonies.research.civilian.higherlearning.subtitle"
+}

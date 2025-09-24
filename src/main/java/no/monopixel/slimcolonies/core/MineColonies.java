@@ -112,7 +112,7 @@ public class MineColonies
 
         ModEnchantInitializer.init();
 
-        LanguageHandler.loadLangPath("assets/minecolonies/lang/%s.json"); // hotfix config comments, it's ugly bcs it's gonna be replaced
+        LanguageHandler.loadLangPath("assets/slimcolonies/lang/%s.json"); // hotfix config comments, it's ugly bcs it's gonna be replaced
         config = new Configuration();
 
         Consumer<TagsUpdatedEvent> onTagsLoaded = (event) -> ModTags.tagsLoaded = true;

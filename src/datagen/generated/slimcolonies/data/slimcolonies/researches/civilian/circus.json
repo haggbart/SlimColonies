@@ -1,0 +1,14 @@
+{
+  "branch": "slimcolonies:civilian",
+  "icon": "minecolonies:textures/icons/research/happy1.png",
+  "parentResearch": "slimcolonies:civilian/firstaid",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:cook",
+      "level": 2
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 2
+}

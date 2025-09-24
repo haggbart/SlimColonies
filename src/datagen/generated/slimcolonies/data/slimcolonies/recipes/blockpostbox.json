@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "forge:chests"
+    },
+    "S": {
+      "item": "structurize:sceptergold"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "XSX",
+    "III",
+    "XXX"
+  ],
+  "result": {
+    "item": "slimcolonies:blockpostbox"
+  },
+  "show_notification": true
+}

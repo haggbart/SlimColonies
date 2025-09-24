@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutsawmill",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutsawmill",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:lumberjack",
+      "level": 3
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 5,
+  "subtitle": "com.slimcolonies.research.technology.woodwork.subtitle"
+}

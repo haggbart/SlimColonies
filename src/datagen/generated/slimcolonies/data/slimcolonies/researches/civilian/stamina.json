@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhuthospital",
+      "level": 1
+    }
+  ],
+  "exclusiveChildResearch": true,
+  "icon": "slimcolonies:blockhuthospital",
+  "researchLevel": 1
+}

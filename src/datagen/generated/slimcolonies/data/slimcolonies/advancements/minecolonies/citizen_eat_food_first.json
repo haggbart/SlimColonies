@@ -1,0 +1,30 @@
+{
+  "parent": "slimcolonies:minecolonies/place_townhall",
+  "criteria": {
+    "citizen_eat_anything": {
+      "conditions": {},
+      "trigger": "slimcolonies:citizen_eat_food"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.citizen_eat_food_first.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:cooked_beef"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.citizen_eat_food_first.title"
+    }
+  },
+  "requirements": [
+    [
+      "citizen_eat_anything"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

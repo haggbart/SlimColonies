@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/minimumstockmultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:chest",
+  "parentResearch": "slimcolonies:technology/sieving",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "com.slimcolonies.research.technology.space.subtitle"
+}
