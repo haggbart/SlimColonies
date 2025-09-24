@@ -2,7 +2,10 @@ package com.minecolonies.core.colony.buildings.modules;
 
 import com.ldtteam.blockui.views.BOWindow;
 import com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE;
-import com.minecolonies.api.colony.*;
+import com.minecolonies.api.colony.ICitizenData;
+import com.minecolonies.api.colony.IColony;
+import com.minecolonies.api.colony.IColonyView;
+import com.minecolonies.api.colony.IVisitorData;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.ModBuildings;
 import com.minecolonies.api.colony.buildings.modules.*;
@@ -10,8 +13,8 @@ import com.minecolonies.api.colony.buildings.modules.stat.IStat;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.sounds.TavernSounds;
 import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.api.util.StatsUtil;
 import com.minecolonies.api.util.MathUtils;
+import com.minecolonies.api.util.StatsUtil;
 import com.minecolonies.core.Network;
 import com.minecolonies.core.client.gui.huts.WindowHutLiving;
 import com.minecolonies.core.colony.buildings.views.LivingBuildingView;
@@ -19,14 +22,13 @@ import com.minecolonies.core.colony.eventhooks.citizenEvents.VisitorSpawnedEvent
 import com.minecolonies.core.colony.interactionhandling.RecruitmentInteraction;
 import com.minecolonies.core.datalistener.CustomVisitorListener;
 import com.minecolonies.core.network.messages.client.colony.PlayMusicAtPosMessage;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,10 +39,11 @@ import java.util.Map;
 import static com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateConstants.MAX_TICKRATE;
 import static com.minecolonies.api.util.constant.Constants.MAX_STORY;
 import static com.minecolonies.api.util.constant.Constants.TAG_COMPOUND;
-import static com.minecolonies.api.util.constant.NbtTagConstants.*;
+import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_VISITORS;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_WORK;
 import static com.minecolonies.api.util.constant.SchematicTagConstants.*;
 import static com.minecolonies.api.util.constant.StatisticsConstants.NEW_VISITORS;
+
 /**
  * Tavern building for the colony. Houses 4 citizens Plays a tavern theme on entering Spawns/allows citizen recruitment Spawns trader/quest npcs
  */
@@ -182,8 +185,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
         final IVisitorData newCitizen = (IVisitorData) building.getColony().getVisitorManager().createAndRegisterCivilianData();
         newCitizen.setBedPos(building.getPosition());
         newCitizen.setHomeBuilding(building);
-        // Initialize skills - same as initial citizens at level 1, better at higher levels
-        // Level 1: 1-9, Level 2: 1-11, Level 3: 1-13, Level 4: 1-15, Level 5: 1-17
         newCitizen.getCitizenSkillHandler().init(8 + building.getBuildingLevel() * 2);
 
         BlockPos spawnPos;
