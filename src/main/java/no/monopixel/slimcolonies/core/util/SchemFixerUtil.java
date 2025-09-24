@@ -4,10 +4,10 @@ import com.google.common.io.Files;
 import com.ldtteam.structurize.api.util.BlockPosUtil;
 import com.ldtteam.structurize.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.blueprints.v1.BlueprintUtil;
-import no.monopixel.slimcolonies.api.util.Log;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
+import no.monopixel.slimcolonies.api.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -25,11 +25,14 @@ public class SchemFixerUtil
 {
     public static void fixSchematics()
     {
-        String baseFolder = Paths.get("").toAbsolutePath().getParent().toString() + "/src/main/resources/assets/minecolonies/schematics";
+        String baseFolder = Paths.get("").toAbsolutePath().getParent().toString() + "/src/main/resources/assets/slimcolonies/schematics";
         File baseFolderFile = new File(baseFolder);
-        if (!baseFolderFile.exists()) { return; }
+        if (!baseFolderFile.exists())
+        {
+            return;
+        }
         final List<File> files = Arrays.asList(baseFolderFile.listFiles());
-        for (File subFolder :files)
+        for (File subFolder : files)
         {
             final File[] subFileArray = subFolder.listFiles();
             if (subFileArray == null)
@@ -47,11 +50,13 @@ public class SchemFixerUtil
                 {
                     if (blueprintFile.getName().startsWith("home"))
                     {
-                        Files.move(blueprintFile, new File(blueprintFile.getPath().substring(0, blueprintFile.getPath().lastIndexOf("/") + 1) + blueprintFile.getName().replace("home", "residence")));
+                        Files.move(blueprintFile,
+                            new File(blueprintFile.getPath().substring(0, blueprintFile.getPath().lastIndexOf("/") + 1) + blueprintFile.getName().replace("home", "residence")));
                     }
                     else if (blueprintFile.getName().startsWith("citizen"))
                     {
-                        Files.move(blueprintFile, new File(blueprintFile.getPath().substring(0, blueprintFile.getPath().lastIndexOf("/") + 1) + blueprintFile.getName().replace("citizen", "residence")));
+                        Files.move(blueprintFile,
+                            new File(blueprintFile.getPath().substring(0, blueprintFile.getPath().lastIndexOf("/") + 1) + blueprintFile.getName().replace("citizen", "residence")));
                     }
                 }
                 catch (Exception ex)
@@ -134,8 +139,8 @@ public class SchemFixerUtil
                 schemDataCompound.putString(TAG_SCHEMATIC_NAME, blueprint.getName());
                 BlockPosUtil.writeToNBT(schemDataCompound, TAG_CORNER_ONE, BlockPos.ZERO.subtract(blueprint.getPrimaryBlockOffset()));
                 BlockPosUtil.writeToNBT(schemDataCompound,
-                  TAG_CORNER_TWO,
-                  new BlockPos(blueprint.getSizeX() - 1, blueprint.getSizeY() - 1, blueprint.getSizeZ() - 1).subtract(blueprint.getPrimaryBlockOffset()));
+                    TAG_CORNER_TWO,
+                    new BlockPos(blueprint.getSizeX() - 1, blueprint.getSizeY() - 1, blueprint.getSizeZ() - 1).subtract(blueprint.getPrimaryBlockOffset()));
                 Log.getLogger().warn("Fixing blueprint schematic name and corners for:" + blueprint.getName());
                 return true;
             }
