@@ -113,8 +113,8 @@ public class CitizenSleepHandler implements ICitizenSleepHandler
         final double xOffset = state.getValue(BedBlock.FACING).getAxis() == Direction.Axis.X && citizen.getCitizenData().isChild() ? 0 : HALF_BLOCK;
 
         citizen.setPos(((double) bedLocation.getX() + xOffset),
-          (double) bedLocation.getY() + 0.6875D,
-          ((double) bedLocation.getZ() + zOffset));
+            (double) bedLocation.getY() + 0.6875D,
+            ((double) bedLocation.getZ() + zOffset));
         citizen.setSleepingPos(bedLocation);
 
         citizen.setDeltaMovement(Vec3.ZERO);
@@ -240,7 +240,7 @@ public class CitizenSleepHandler implements ICitizenSleepHandler
 
         int additionalDist = 0;
 
-        if(citizen.isInvisible())
+        if (citizen.isInvisible())
         {
             return false;
         }
@@ -262,7 +262,8 @@ public class CitizenSleepHandler implements ICitizenSleepHandler
 
         // Estimated arrival is 1hour past night
         final double timeLeft = (citizen.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(WORK_LONGER) == 0
-                                   ? NIGHT : NIGHT + citizen.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(WORK_LONGER) * 1000) - (citizen.level.getDayTime() % 24000);
+            ? NIGHT : NIGHT + citizen.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(WORK_LONGER) * 1000) - (
+            citizen.level.getDayTime() % 24000);
         if (timeLeft <= 0 || (timeLeft - timeNeeded <= 0))
         {
             if (citizen.getCitizenData().getWorkBuilding() != null)
@@ -271,7 +272,8 @@ public class CitizenSleepHandler implements ICitizenSleepHandler
                 if (workHomeDistance > MAX_NO_COMPLAIN_DISTANCE)
                 {
                     citizen.getCitizenData()
-                      .triggerInteraction(new SimpleNotificationInteraction(Component.translatable("com.minecolonies.coremod.gui.chat.hometoofar"), ChatPriority.IMPORTANT));
+                        .triggerInteraction(new SimpleNotificationInteraction(Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.hometoofar"),
+                            ChatPriority.IMPORTANT));
                 }
             }
             return true;

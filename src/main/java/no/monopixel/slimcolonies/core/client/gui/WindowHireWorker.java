@@ -129,10 +129,10 @@ public class WindowHireWorker extends AbstractWindowSkeleton
             final Object[] jobList = moduleViews.stream().map(m -> Component.translatable(m.getJobEntry().getTranslationKey())).toArray();
             final String format = String.join("/", Collections.nCopies(jobList.length, "%s"));
             final MutableComponent jobs = Component.translatable(format, jobList);
-            description = Component.translatable("com.minecolonies.coremod.gui.hiring.dedicated", jobs, description);
+            description = Component.translatable("no.monopixel.slimcolonies.coremod.gui.hiring.dedicated", jobs, description);
         }
 
-        findPaneOfTypeByID(JOB_TITLE_LABEL, Text.class).setText(Component.translatable("com.minecolonies.coremod.gui.hiring.description", description));
+        findPaneOfTypeByID(JOB_TITLE_LABEL, Text.class).setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.hiring.description", description));
     }
 
     /**
@@ -463,7 +463,7 @@ public class WindowHireWorker extends AbstractWindowSkeleton
                     final int skillLevel = entry.getValue().getLevel();
                     final Style skillStyle = createColor(primary, secondary, entry.getKey());
 
-                    textBuilder.append(Component.translatable("com.minecolonies.coremod.gui.citizen.skills." + skillName).setStyle(skillStyle));
+                    textBuilder.append(Component.translatable("no.monopixel.slimcolonies.coremod.gui.citizen.skills." + skillName).setStyle(skillStyle));
                     textBuilder.append(Component.literal(": " + skillLevel).setStyle(skillStyle));
                     if (--skillCount > 0)
                     {
@@ -478,20 +478,21 @@ public class WindowHireWorker extends AbstractWindowSkeleton
                 rowPane.findPaneOfTypeByID(CITIZEN_LABEL, Text.class).setText(citizenLabelComponent);
                 if (citizen.getHomeBuilding() == null)
                 {
-                    rowPane.findPaneOfTypeByID(DISTANCE_LABEL, Text.class).setText(Component.translatable("com.minecolonies.core.gui.hiring.homeless"));
+                    rowPane.findPaneOfTypeByID(DISTANCE_LABEL, Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.gui.hiring.homeless"));
                 }
                 else if (citizen.getHomeBuilding().equals(building.getPosition()))
                 {
-                    rowPane.findPaneOfTypeByID(DISTANCE_LABEL, Text.class).setText(Component.translatable("com.minecolonies.core.gui.hiring.liveshere"));
+                    rowPane.findPaneOfTypeByID(DISTANCE_LABEL, Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.gui.hiring.liveshere"));
                 }
                 else if (citizen.getHomeBuilding().equals(citizen.getWorkBuilding()))
                 {
-                    rowPane.findPaneOfTypeByID(DISTANCE_LABEL, Text.class).setText(Component.translatable("com.minecolonies.core.gui.hiring.livesatwork"));
+                    rowPane.findPaneOfTypeByID(DISTANCE_LABEL, Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.gui.hiring.livesatwork"));
                 }
                 else
                 {
                     rowPane.findPaneOfTypeByID(DISTANCE_LABEL, Text.class)
-                        .setText(Component.translatable("com.minecolonies.core.gui.hiring.distance", (int) Math.sqrt(citizen.getHomeBuilding().distSqr(building.getPosition()))));
+                        .setText(Component.translatable("no.monopixel.slimcolonies.core.gui.hiring.distance",
+                            (int) Math.sqrt(citizen.getHomeBuilding().distSqr(building.getPosition()))));
                 }
 
                 rowPane.findPaneOfTypeByID(ATTRIBUTES_LABEL, Text.class).setText(textBuilder.getText());

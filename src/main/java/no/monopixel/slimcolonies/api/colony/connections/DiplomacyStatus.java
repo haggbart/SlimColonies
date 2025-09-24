@@ -11,10 +11,11 @@ public enum DiplomacyStatus
 
     /**
      * Get translation key for the diplomacy status.
+     *
      * @return the string key.
      */
     public String translationKey()
     {
-        return "com.minecolonies.core.colony.diplomacy.status." + name().toLowerCase();
+        return "no.monopixel.slimcolonies.core.colony.diplomacy.status." + name().toLowerCase();
     }
 }

@@ -163,7 +163,7 @@ public class LocalResearchTree implements ILocalResearchTree
                 {
                     if (!requirement.isFulfilled(colony))
                     {
-                        MessageUtils.format("com.minecolonies.coremod.research.requirementnotmet").sendTo(player);
+                        MessageUtils.format("no.monopixel.slimcolonies.coremod.research.requirementnotmet").sendTo(player);
                         SoundUtils.playErrorSound(player, player.blockPosition());
                         return;
                     }
@@ -190,7 +190,7 @@ public class LocalResearchTree implements ILocalResearchTree
             }
             else
             {
-                MessageUtils.format("com.minecolonies.coremod.research.alreadystarted").sendTo(player);
+                MessageUtils.format("no.monopixel.slimcolonies.coremod.research.alreadystarted").sendTo(player);
                 SoundUtils.playErrorSound(player, player.blockPosition());
             }
         }
@@ -203,7 +203,7 @@ public class LocalResearchTree implements ILocalResearchTree
         // If in progress and get another request, cancel research, and remove it from the local tree.
         if (research.getState() == ResearchState.IN_PROGRESS)
         {
-            MessageUtils.format("com.minecolonies.coremod.research.stopped",
+            MessageUtils.format("no.monopixel.slimcolonies.coremod.research.stopped",
                     MutableComponent.create(IGlobalResearchTree.getInstance().getResearch(research.getBranch(), research.getId()).getName()))
                 .sendTo(player);
             SoundUtils.playSuccessSound(player, player.blockPosition());
@@ -217,14 +217,14 @@ public class LocalResearchTree implements ILocalResearchTree
             {
                 if (researchTree.get(research.getBranch()).get(childIds) != null)
                 {
-                    MessageUtils.format("com.minecolonies.coremod.research.undo.haschilds").sendTo(player);
+                    MessageUtils.format("no.monopixel.slimcolonies.coremod.research.undo.haschilds").sendTo(player);
                     SoundUtils.playErrorSound(player, player.blockPosition());
                     return;
                 }
             }
 
             // Research reset no longer requires item costs - skip cost validation and removal
-            MessageUtils.format("com.minecolonies.coremod.research.undo",
+            MessageUtils.format("no.monopixel.slimcolonies.coremod.research.undo",
                     MutableComponent.create(IGlobalResearchTree.getInstance().getResearch(research.getBranch(), research.getId()).getName()))
                 .sendTo(player);
             SoundUtils.playSuccessSound(player, player.blockPosition());

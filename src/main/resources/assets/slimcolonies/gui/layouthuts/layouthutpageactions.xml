@@ -1,10 +1,10 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
-        >
+>
     <layout source="slimcolonies:gui/layouthuts/layouthutpageactionsmin.xml"/>
 
     <text size="164 11" pos="13 32" textalign="MIDDLE" color="black"
-          label="$(com.minecolonies.coremod.gui.workerhuts.workerassigned)"/>
+          label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.workerassigned)"/>
 
     <list id="workers" size="164 30" pos="13 43">
         <view size="100% 11">
@@ -16,10 +16,10 @@
 
     <button id="hire" size="129 17" pos="30 74" color="black"
             source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
-            label="$(com.minecolonies.coremod.gui.workerhuts.manage)"/>
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.manage)"/>
     <button id="recall" size="129 17" pos="30 92" color="black"
             source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
-            label="$(com.minecolonies.coremod.gui.workerhuts.recall)"/>
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.recall)"/>
 
     <text id="prioValue" size="95 15" pos="30 135" textalign="MIDDLE_LEFT" color="black"/>
 
@@ -30,5 +30,5 @@
 
     <button id="forcePickup" size="129 17" pos="30 154" color="black"
             source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
-            label="$(com.minecolonies.coremod.gui.workerhuts.forcepickup)"/>
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.forcepickup)"/>
 </window>

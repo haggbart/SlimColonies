@@ -14,8 +14,8 @@ public class GuardFollowModeSetting extends StringSettingWithDesc
     /**
      * Different setting possibilities.
      */
-    public static final String TIGHT = "com.minecolonies.core.guard.setting.follow.tight";
-    public static final String LOOSE = "com.minecolonies.core.guard.setting.follow.loose";
+    public static final String TIGHT = "no.monopixel.slimcolonies.core.guard.setting.follow.tight";
+    public static final String LOOSE = "no.monopixel.slimcolonies.core.guard.setting.follow.loose";
 
     /**
      * Create a new follow mode setting.

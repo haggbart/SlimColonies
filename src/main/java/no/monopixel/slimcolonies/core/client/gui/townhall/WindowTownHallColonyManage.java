@@ -51,14 +51,19 @@ public class WindowTownHallColonyManage extends AbstractWindowSkeleton
         registerButton(BUTTON_CREATE, this::onCreate);
 
         this.findPaneOfTypeByID("colonyname", TextField.class).setText(preName.isEmpty() ? Component.translatable(DEFAULT_COLONY_NAME, mc.player.getName()).getString() : preName);
-        this.findPaneOfTypeByID("text1", Text.class).setText(Component.translatable("com.minecolonies.core.settlementcovenant1", Math.max(13, Minecraft.getInstance().level.getGameTime() / TICKS_SECOND / 60 / 100)));
+        this.findPaneOfTypeByID("text1", Text.class)
+            .setText(Component.translatable("no.monopixel.slimcolonies.core.settlementcovenant1",
+                Math.max(13, Minecraft.getInstance().level.getGameTime() / TICKS_SECOND / 60 / 100)));
         if (closestDistance < 1000)
         {
-            this.findPaneOfTypeByID("text3", Text.class).setText(Component.translatable("com.minecolonies.core.settlementcovenant3.hasclose", Component.literal(closestName).withStyle(ChatFormatting.RED) , Component.literal(String.valueOf(closestDistance)).withStyle(ChatFormatting.RED)));
+            this.findPaneOfTypeByID("text3", Text.class)
+                .setText(Component.translatable("no.monopixel.slimcolonies.core.settlementcovenant3.hasclose",
+                    Component.literal(closestName).withStyle(ChatFormatting.RED),
+                    Component.literal(String.valueOf(closestDistance)).withStyle(ChatFormatting.RED)));
         }
         else
         {
-            this.findPaneOfTypeByID("text3", Text.class).setText(Component.translatable("com.minecolonies.core.settlementcovenant3.noclose"));
+            this.findPaneOfTypeByID("text3", Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.settlementcovenant3.noclose"));
         }
     }
 
@@ -71,11 +76,11 @@ public class WindowTownHallColonyManage extends AbstractWindowSkeleton
 
         new VanillaParticleMessage(pos.getX(), pos.getY(), pos.getZ(), ParticleTypes.DRAGON_BREATH).onExecute(null, false);
         Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, Minecraft.getInstance().player.blockPosition(),
-          SoundEvents.CAMPFIRE_CRACKLE, SoundSource.AMBIENT, 2.5f, 0.8f);
+            SoundEvents.CAMPFIRE_CRACKLE, SoundSource.AMBIENT, 2.5f, 0.8f);
         final BlockEntity entity = Minecraft.getInstance().level.getBlockEntity(pos);
 
         Network.getNetwork()
-              .sendToServer(new CreateColonyMessage(pos,
+            .sendToServer(new CreateColonyMessage(pos,
                 reactivate,
                 colonyName,
                 reactivate ? "" : StructurePacks.selectedPack.getName(),

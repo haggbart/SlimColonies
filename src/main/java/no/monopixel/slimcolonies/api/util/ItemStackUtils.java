@@ -1,19 +1,5 @@
 package no.monopixel.slimcolonies.api.util;
 
-import no.monopixel.slimcolonies.api.advancements.AdvancementTriggers;
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
-import no.monopixel.slimcolonies.api.crafting.ItemStorage;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
-import no.monopixel.slimcolonies.api.items.CheckedNbtKey;
-import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import no.monopixel.slimcolonies.core.util.AdvancementUtils;
-import no.monopixel.slimcolonies.core.util.FurnaceRecipes;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -39,6 +25,20 @@ import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.advancements.AdvancementTriggers;
+import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.compatibility.Compatibility;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
+import no.monopixel.slimcolonies.api.items.CheckedNbtKey;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.core.util.AdvancementUtils;
+import no.monopixel.slimcolonies.core.util.FurnaceRecipes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,9 +47,9 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static java.util.Map.entry;
 import static no.monopixel.slimcolonies.api.items.ModTags.fungi;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.*;
-import static java.util.Map.entry;
 
 /**
  * Utility methods for the inventories.
@@ -412,11 +412,11 @@ public final class ItemStackUtils
     {
         if (toolGrade >= 0 && toolGrade <= 4)
         {
-            return Component.translatable("com.minecolonies.coremod.armorlevel." + toolGrade);
+            return Component.translatable("no.monopixel.slimcolonies.coremod.armorlevel." + toolGrade);
         }
 
         // this shouldn't really ever happen, but just in case...
-        return Component.translatable("com.minecolonies.coremod.armorlevel.etc");
+        return Component.translatable("no.monopixel.slimcolonies.coremod.armorlevel.etc");
     }
 
     /**
@@ -429,10 +429,10 @@ public final class ItemStackUtils
     {
         if (toolGrade >= 0 && toolGrade <= 4)
         {
-            return Component.translatable("com.minecolonies.coremod.toollevel." + toolGrade);
+            return Component.translatable("no.monopixel.slimcolonies.coremod.toollevel." + toolGrade);
         }
 
-        return Component.translatable("com.minecolonies.coremod.toollevel.etc");
+        return Component.translatable("no.monopixel.slimcolonies.coremod.toollevel.etc");
     }
 
     /**

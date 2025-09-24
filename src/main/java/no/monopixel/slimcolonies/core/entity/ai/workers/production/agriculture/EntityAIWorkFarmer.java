@@ -103,7 +103,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
      * Farming icon
      */
     private static final VisibleCitizenStatus FARMING_ICON =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/farmer.png"), "com.minecolonies.gui.visiblestatus.farmer");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/farmer.png"), "no.monopixel.slimcolonies.gui.visiblestatus.farmer");
 
     /**
      * Changed after finished harvesting in order to dump the inventory.

@@ -63,7 +63,7 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
     @Override
     public Component getDisplayName()
     {
-        return Component.translatable("com.minecolonies.coremod.blueprint.placement");
+        return Component.translatable("no.monopixel.slimcolonies.coremod.blueprint.placement");
     }
 
     @Override

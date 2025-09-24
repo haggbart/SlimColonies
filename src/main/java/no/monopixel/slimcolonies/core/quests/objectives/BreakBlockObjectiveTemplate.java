@@ -47,7 +47,7 @@ public class BreakBlockObjectiveTemplate extends DialogueObjectiveTemplateTempla
      * @param target       the target citizen.
      * @param blocksToMine the number of blocks to mine.
      * @param blockToMine  the block to mine.
-     * @param rewards the rewards this unlocks.
+     * @param rewards      the rewards this unlocks.
      */
     public BreakBlockObjectiveTemplate(final int target, final int blocksToMine, final Block blockToMine, final int nextObjective, final List<Integer> rewards)
     {
@@ -60,16 +60,17 @@ public class BreakBlockObjectiveTemplate extends DialogueObjectiveTemplateTempla
     @NotNull
     private static DialogueElement buildDialogueTree(final Block blockToMine)
     {
-        final Component text = Component.translatable("com.minecolonies.coremod.questobjectives.breakblock", blockToMine.getName());
-        final AnswerElement answer1 = new AnswerElement(Component.translatable("com.minecolonies.coremod.questobjectives.answer.later"),
-                new IQuestDialogueAnswer.CloseUIDialogueAnswer());
-        final AnswerElement answer2 = new AnswerElement(Component.translatable("com.minecolonies.coremod.questobjectives.answer.cancel"),
-                new IQuestDialogueAnswer.QuestCancellationDialogueAnswer());
+        final Component text = Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.breakblock", blockToMine.getName());
+        final AnswerElement answer1 = new AnswerElement(Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.answer.later"),
+            new IQuestDialogueAnswer.CloseUIDialogueAnswer());
+        final AnswerElement answer2 = new AnswerElement(Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.answer.cancel"),
+            new IQuestDialogueAnswer.QuestCancellationDialogueAnswer());
         return new DialogueElement(text, List.of(answer1, answer2));
     }
 
     /**
      * Parse the mine block objective from json.
+     *
      * @param jsonObject the json to parse it from.
      * @return a new objective object.
      */
@@ -101,10 +102,10 @@ public class BreakBlockObjectiveTemplate extends DialogueObjectiveTemplateTempla
     {
         if (quest.getCurrentObjectiveInstance() instanceof BlockMiningProgressInstance progress)
         {
-            return Component.translatable("com.minecolonies.coremod.questobjectives.breakblock.progress",
-              progress.currentProgress,
-              blocksToMine,
-              blockToMine.getName().setStyle(style));
+            return Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.breakblock.progress",
+                progress.currentProgress,
+                blocksToMine,
+                blockToMine.getName().setStyle(style));
         }
         return Component.empty();
     }
@@ -123,6 +124,7 @@ public class BreakBlockObjectiveTemplate extends DialogueObjectiveTemplateTempla
 
     /**
      * Cleanup the listener of this objective,
+     *
      * @param colonyQuest the listener.
      */
     private void cleanupListener(final IQuestInstance colonyQuest)

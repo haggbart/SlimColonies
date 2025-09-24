@@ -84,7 +84,7 @@ public class ItemColonyFlagBanner extends BannerItem
         }
         else
         {
-            tooltip.add(Component.translatable("com.minecolonies.coremod.item.colony_banner.tooltipempty"));
+            tooltip.add(Component.translatable("no.monopixel.slimcolonies.coremod.item.colony_banner.tooltipempty"));
         }
     }
 }

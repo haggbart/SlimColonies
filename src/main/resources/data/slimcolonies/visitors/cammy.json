@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Eldrin Moonshadow",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.cammy",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.cammy",
   "recruitcost": "minecraft:nether_star",
   "recruitcostcount": 1,
   "gender": "male"

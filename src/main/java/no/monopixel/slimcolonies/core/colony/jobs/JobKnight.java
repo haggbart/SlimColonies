@@ -33,7 +33,7 @@ public class JobKnight extends AbstractJobGuard<JobKnight>
     /**
      * Desc of knight job.
      */
-    public static final String DESC = "com.minecolonies.coremod.job.knight";
+    public static final String DESC = "no.monopixel.slimcolonies.coremod.job.knight";
 
     /**
      * Initialize citizen data.
@@ -61,9 +61,9 @@ public class JobKnight extends AbstractJobGuard<JobKnight>
 
             // +1 Heart every 2 level
             final AttributeModifier healthModLevel =
-              new AttributeModifier(GUARD_HEALTH_MOD_LEVEL_NAME,
-                getCitizen().getCitizenSkillHandler().getLevel(Skill.Stamina) + KNIGHT_HP_BONUS,
-                AttributeModifier.Operation.ADDITION);
+                new AttributeModifier(GUARD_HEALTH_MOD_LEVEL_NAME,
+                    getCitizen().getCitizenSkillHandler().getLevel(Skill.Stamina) + KNIGHT_HP_BONUS,
+                    AttributeModifier.Operation.ADDITION);
             AttributeModifierUtils.addHealthModifier(citizen, healthModLevel);
         }
     }
@@ -77,8 +77,8 @@ public class JobKnight extends AbstractJobGuard<JobKnight>
     @Override
     public boolean ignoresDamage(@NotNull final DamageSource damageSource)
     {
-        if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && this.getColony().getResearchManager().getResearchEffects().getEffectStrength(SHIELD_USAGE) > 0
-                && InventoryUtils.findFirstSlotInItemHandlerWith(this.getCitizen().getInventory(), Items.SHIELD) != -1)
+        if (damageSource.is(DamageTypeTags.IS_EXPLOSION) && this.getColony().getResearchManager().getResearchEffects().getEffectStrength(SHIELD_USAGE) > 0
+            && InventoryUtils.findFirstSlotInItemHandlerWith(this.getCitizen().getInventory(), Items.SHIELD) != -1)
         {
             if (!this.getCitizen().getEntity().isPresent())
             {

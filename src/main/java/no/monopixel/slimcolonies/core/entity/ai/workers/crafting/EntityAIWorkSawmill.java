@@ -17,7 +17,7 @@ public class EntityAIWorkSawmill extends AbstractEntityAICrafting<JobSawmill, Bu
      * Crafting icon
      */
     private final static VisibleCitizenStatus CRAFTING =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/sawmill.png"), "com.minecolonies.gui.visiblestatus.sawmill");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/sawmill.png"), "no.monopixel.slimcolonies.gui.visiblestatus.sawmill");
 
     /**
      * Initialize the sawmill and add all his tasks.

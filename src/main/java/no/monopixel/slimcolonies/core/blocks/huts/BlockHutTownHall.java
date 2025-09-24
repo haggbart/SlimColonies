@@ -72,11 +72,11 @@ public class BlockHutTownHall extends AbstractBlockHut<BlockHutTownHall>
     @Override
     public float getDestroyProgress(final BlockState state, @NotNull final Player player, @NotNull final BlockGetter blockReader, @NotNull final BlockPos pos)
     {
-        if(MineColonies.getConfig().getServer().pvp_mode.get() && player.level instanceof ServerLevel)
+        if (MineColonies.getConfig().getServer().pvp_mode.get() && player.level instanceof ServerLevel)
         {
             final IBuilding building = IColonyManager.getInstance().getBuilding(player.level, pos);
             if (building != null && building.getColony().isCoordInColony(player.level, pos)
-                  && building.getColony().getPermissions().getRank(player).isHostile())
+                && building.getColony().getPermissions().getRank(player).isHostile())
             {
                 final double localProgress = breakProgressOnTownHall;
                 final double hardness = state.getDestroySpeed(player.level, pos) * 20.0 * 1.5;
@@ -134,8 +134,9 @@ public class BlockHutTownHall extends AbstractBlockHut<BlockHutTownHall>
         final List<MutableComponent> requirements = new ArrayList<>();
         if (InventoryUtils.findFirstSlotInItemHandlerWith(new InvWrapper(player.getInventory()), this) == -1)
         {
-            requirements.add(Component.translatable("com.minecolonies.coremod.hut.cost", Component.translatable("block." + Constants.MOD_ID + "." + getHutName())).setStyle((Style.EMPTY).withColor(
-              ChatFormatting.RED)));
+            requirements.add(Component.translatable("no.monopixel.slimcolonies.coremod.hut.cost", Component.translatable("block." + Constants.MOD_ID + "." + getHutName()))
+                .setStyle((Style.EMPTY).withColor(
+                    ChatFormatting.RED)));
         }
 
         return requirements;
@@ -143,7 +144,8 @@ public class BlockHutTownHall extends AbstractBlockHut<BlockHutTownHall>
 
     /**
      * Getter for the Block's state to breakable.
-     * @return  True if the block is eligible for destruction
+     *
+     * @return True if the block is eligible for destruction
      */
     public boolean getValidBreak()
     {
@@ -177,12 +179,12 @@ public class BlockHutTownHall extends AbstractBlockHut<BlockHutTownHall>
     @NotNull
     @Override
     public InteractionResult use(
-      final BlockState state,
-      final Level worldIn,
-      final BlockPos pos,
-      final Player player,
-      final InteractionHand hand,
-      final BlockHitResult ray)
+        final BlockState state,
+        final Level worldIn,
+        final BlockPos pos,
+        final Player player,
+        final InteractionHand hand,
+        final BlockHitResult ray)
     {
        /*
         If the world is client, open the gui of the building
@@ -192,8 +194,8 @@ public class BlockHutTownHall extends AbstractBlockHut<BlockHutTownHall>
             @Nullable final IBuildingView building = IColonyManager.getInstance().getBuildingView(worldIn.dimension(), pos);
 
             if (building != null
-                  && building.getColony() != null
-                  && building.getColony().getPermissions().hasPermission(player, Action.ACCESS_HUTS))
+                && building.getColony() != null
+                && building.getColony().getPermissions().hasPermission(player, Action.ACCESS_HUTS))
             {
                 building.openGui(player.isShiftKeyDown());
             }

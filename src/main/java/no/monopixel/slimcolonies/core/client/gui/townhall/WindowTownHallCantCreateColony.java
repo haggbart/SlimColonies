@@ -15,7 +15,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 
 /**
- *  UI to notify the player that a colony can't be created here.
+ * UI to notify the player that a colony can't be created here.
  */
 public class WindowTownHallCantCreateColony extends AbstractWindowSkeleton
 {
@@ -35,7 +35,7 @@ public class WindowTownHallCantCreateColony extends AbstractWindowSkeleton
         text.setText(warningMsg);
         if (displayConfigTooltip)
         {
-            PaneBuilders.singleLineTooltip(Component.translatable("com.minecolonies.core.configsetting"), text);
+            PaneBuilders.singleLineTooltip(Component.translatable("no.monopixel.slimcolonies.core.configsetting"), text);
         }
     }
 

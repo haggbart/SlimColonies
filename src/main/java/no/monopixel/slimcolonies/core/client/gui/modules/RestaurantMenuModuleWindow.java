@@ -37,7 +37,7 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
     /**
      * Limit reached label.
      */
-    private static final String LABEL_LIMIT_REACHED = "com.minecolonies.coremod.gui.warehouse.limitreached";
+    private static final String LABEL_LIMIT_REACHED = "no.monopixel.slimcolonies.coremod.gui.warehouse.limitreached";
 
     /**
      * Resource scrolling list.

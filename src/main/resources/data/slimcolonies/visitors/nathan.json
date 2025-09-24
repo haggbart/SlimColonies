@@ -3,7 +3,7 @@
   "citizensuffix": "_b",
   "name": "Nathan Reeves",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.nathan",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.nathan",
   "recruitcost": "minecraft:iron_ingot",
   "recruitcostcount": 16,
   "gender": "male"

@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Circinus Coranus",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.andromeda",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.andromeda",
   "recruitcost": "minecraft:amethyst_block",
   "recruitcostcount": 13,
   "gender": "female",

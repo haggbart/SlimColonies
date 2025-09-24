@@ -13,10 +13,11 @@ public enum ConnectionEventType
 
     /**
      * Get translation key for the diplomacy status.
+     *
      * @return the string key.
      */
     public String translationKey()
     {
-        return "com.minecolonies.core.gui.connectionevent." + name().toLowerCase();
+        return "no.monopixel.slimcolonies.core.gui.connectionevent." + name().toLowerCase();
     }
 }

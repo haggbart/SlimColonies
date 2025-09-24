@@ -56,7 +56,7 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
      * Visible combat icon
      */
     private final static VisibleCitizenStatus ARCHER_COMBAT =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/archer_combat.png"), "com.minecolonies.gui.visiblestatus.archer_combat");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/archer_combat.png"), "no.monopixel.slimcolonies.gui.visiblestatus.archer_combat");
 
     private final AbstractEntityAIGuard parentAI;
 
@@ -88,9 +88,9 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
     private final PathingOptions combatPathingOptions;
 
     public RangerCombatAI(
-      final EntityCitizen owner,
-      final ITickRateStateMachine stateMachine,
-      final AbstractEntityAIGuard parentAI)
+        final EntityCitizen owner,
+        final ITickRateStateMachine stateMachine,
+        final AbstractEntityAIGuard parentAI)
     {
         super(owner, stateMachine);
 
@@ -108,7 +108,7 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
     public boolean canAttack()
     {
         final int weaponSlot =
-          InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(user.getInventoryCitizen(), ModEquipmentTypes.bow.get(), 0, Integer.MAX_VALUE);
+            InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(user.getInventoryCitizen(), ModEquipmentTypes.bow.get(), 0, Integer.MAX_VALUE);
 
         if (weaponSlot != -1)
         {
@@ -142,7 +142,7 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
         if (user.distanceToSqr(target) < RANGED_FLEE_SQDIST)
         {
             if (user.getRandom().nextInt(FLEE_CHANCE) == 0 &&
-                  !((AbstractBuildingGuards) user.getCitizenData().getWorkBuilding()).getTask().equals(GuardTaskSetting.GUARD))
+                !((AbstractBuildingGuards) user.getCitizenData().getWorkBuilding()).getTask().equals(GuardTaskSetting.GUARD))
             {
                 EntityNavigationUtils.walkAwayFrom(user, target.blockPosition(), (int) (getAttackDistance() / 2.0), getCombatMovementSpeed());
             }
@@ -284,7 +284,11 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
             damage *= 2;
         }
 
-        if (ColonyConstants.rand.nextDouble() > 1 / (1 + user.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(GUARD_CRIT)))
+        if (ColonyConstants.rand.nextDouble() > 1 / (1 + user.getCitizenColonyHandler()
+            .getColonyOrRegister()
+            .getResearchManager()
+            .getResearchEffects()
+            .getEffectStrength(GUARD_CRIT)))
         {
             damage *= 1.5;
         }
@@ -298,11 +302,11 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
         if (BlockPosUtil.getDistanceSquared(target.blockPosition(), user.blockPosition()) <= 4.0)
         {
             final PathJobMoveAwayFromLocation job = new PathJobMoveAwayFromLocation(user.level,
-              PathfindingUtils.prepareStart(target),
-              target.blockPosition(),
-              (int) 7.0,
-              (int) user.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
-              user);
+                PathfindingUtils.prepareStart(target),
+                target.blockPosition(),
+                (int) 7.0,
+                (int) user.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
+                user);
             final PathResult pathResult = ((MinecoloniesAdvancedPathNavigate) user.getNavigation()).setPathJob(job, null, getCombatMovementSpeed(), true);
             job.setPathingOptions(combatPathingOptions);
             return pathResult;
@@ -354,7 +358,7 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
         {
             final EntityCitizen citizen = (EntityCitizen) entity;
             if (citizen.getCitizenJobHandler().getColonyJob() instanceof AbstractJobGuard && ((AbstractJobGuard<?>) citizen.getCitizenJobHandler().getColonyJob()).isAsleep()
-                  && user.getSensing().hasLineOfSight(citizen))
+                && user.getSensing().hasLineOfSight(citizen))
             {
                 parentAI.setWakeCitizen(citizen);
                 return true;

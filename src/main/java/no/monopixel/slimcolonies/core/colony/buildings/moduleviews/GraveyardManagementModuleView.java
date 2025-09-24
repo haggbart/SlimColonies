@@ -66,9 +66,8 @@ public class GraveyardManagementModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.gui.workerhuts.enchanter.workers";
+        return "no.monopixel.slimcolonies.gui.workerhuts.enchanter.workers";
     }
-
 
     /**
      * Getter of the graves list.

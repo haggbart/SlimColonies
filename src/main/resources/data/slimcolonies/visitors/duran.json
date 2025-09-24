@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Duran",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.duran",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.duran",
   "recruitcost": "minecraft:pufferfish",
   "recruitcostcount": 7,
   "gender": "female"

@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Lupin Vulpes",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.legodoc",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.legodoc",
   "recruitcost": "minecraft:piston",
   "recruitcostcount": 5,
   "gender": "male",

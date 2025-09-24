@@ -37,6 +37,6 @@ public class MinerGuardAssignModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.miner.guardassign";
+        return "no.monopixel.slimcolonies.coremod.gui.miner.guardassign";
     }
 }

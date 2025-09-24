@@ -40,14 +40,14 @@ public class BuildingBuilder extends AbstractBuildingStructureBuilder
     /**
      * Settings key for the building mode.
      */
-    public static final ISettingKey<StringSetting> MODE = new SettingKey<>(StringSetting.class, new ResourceLocation(Constants.MOD_ID, "mode"));
+    public static final ISettingKey<StringSetting>      MODE          = new SettingKey<>(StringSetting.class, new ResourceLocation(Constants.MOD_ID, "mode"));
     public static final ISettingKey<BuilderModeSetting> BUILDING_MODE = new SettingKey<>(BuilderModeSetting.class, new ResourceLocation(Constants.MOD_ID, "buildmode"));
 
     /**
      * Both setting options.
      */
-    public static final String MANUAL_SETTING = "com.minecolonies.core.builder.setting.manual";
-    public static final String AUTO_SETTING = "com.minecolonies.core.builder.setting.automatic";
+    public static final String MANUAL_SETTING = "no.monopixel.slimcolonies.core.builder.setting.manual";
+    public static final String AUTO_SETTING   = "no.monopixel.slimcolonies.core.builder.setting.automatic";
 
     /**
      * The job description.

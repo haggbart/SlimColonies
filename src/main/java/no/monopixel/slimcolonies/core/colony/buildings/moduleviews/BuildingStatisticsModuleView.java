@@ -42,11 +42,12 @@ public class BuildingStatisticsModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.core.gui.modules.stats";
+        return "no.monopixel.slimcolonies.core.gui.modules.stats";
     }
 
     /**
      * Get the statistic manager of the building.
+     *
      * @return the manager.
      */
     public IStatisticsManager getBuildingStatisticsManager()

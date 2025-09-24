@@ -78,15 +78,15 @@ public class WindowSchematicAnalyzer extends AbstractWindowSkeleton
         });
         registerButton(BUTTON_SELECT_SCHEMATIC, b -> {
             new WindowExtendedBuildTool(
-              BlockPos.containing(Minecraft.getInstance().player.position().add(Minecraft.getInstance().player.getLookAngle().multiply(10, 10, 10))),
-              1,
-              (window, blueprint) -> {
-                  Minecraft.getInstance().setScreen(this.getScreen());
-                  final SchemAnalyzerUtil.SchematicAnalyzationResult result = analyzationResults.computeIfAbsent(blueprint, SchemAnalyzerUtil::analyzeSchematic);
-                  sortAnalyzationResults();
-                  switchSelectionTo(getBoxForSide(b), result);
-              },
-              (a) -> true
+                BlockPos.containing(Minecraft.getInstance().player.position().add(Minecraft.getInstance().player.getLookAngle().multiply(10, 10, 10))),
+                1,
+                (window, blueprint) -> {
+                    Minecraft.getInstance().setScreen(this.getScreen());
+                    final SchemAnalyzerUtil.SchematicAnalyzationResult result = analyzationResults.computeIfAbsent(blueprint, SchemAnalyzerUtil::analyzeSchematic);
+                    sortAnalyzationResults();
+                    switchSelectionTo(getBoxForSide(b), result);
+                },
+                (a) -> true
             ).open();
         });
 
@@ -154,10 +154,10 @@ public class WindowSchematicAnalyzer extends AbstractWindowSkeleton
                 final Text countLabel = rowPane.findPaneOfTypeByID(LIST_ENTRY_COUNT, Text.class);
                 countLabel.setText(Component.literal(Integer.toString(storage.getAmount())).withStyle(ChatFormatting.YELLOW));
                 PaneBuilders.tooltipBuilder().hoverPane(countLabel)
-                  .append(Component.translatable("com.minecolonies.coremod.gui.analyzer.score",
-                    storage.getItemStack().getCount(),
-                    storage.getItemStack().getCount() * storage.getAmount()))
-                  .build();
+                    .append(Component.translatable("no.monopixel.slimcolonies.coremod.gui.analyzer.score",
+                        storage.getItemStack().getCount(),
+                        storage.getItemStack().getCount() * storage.getAmount()))
+                    .build();
                 resourceLabel.setText(storage.getItemStack().getHoverName());
                 final ItemStack copy = storage.getItemStack().copy();
                 copy.setCount(1);
@@ -366,26 +366,27 @@ public class WindowSchematicAnalyzer extends AbstractWindowSkeleton
         parent.findPaneOfTypeByID(BUTTON_VIEW_CURRENT, ButtonVanilla.class).setText(Component.literal(name));
 
         box.findPaneOfTypeByID(LABEL_SCORE, Text.class)
-          .setText(Component.translatable("com.minecolonies.coremod.gui.analyzer.complexity", Component.literal("" + next.costScore).withStyle(
-            ChatFormatting.RED).withStyle(ChatFormatting.BOLD)));
+            .setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.analyzer.complexity", Component.literal("" + next.costScore).withStyle(
+                ChatFormatting.RED).withStyle(ChatFormatting.BOLD)));
 
         box.findPaneOfTypeByID(LABEL_BLOCK_COUNTS, Text.class)
-          .setText(Component.translatable("com.minecolonies.coremod.gui.analyzer.blockcounts", Component.literal("" + next.differentBlocks.size()).withStyle(
-            ChatFormatting.BLUE).withStyle(ChatFormatting.BOLD)));
+            .setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.analyzer.blockcounts", Component.literal("" + next.differentBlocks.size()).withStyle(
+                ChatFormatting.BLUE).withStyle(ChatFormatting.BOLD)));
 
         PaneBuilders.tooltipBuilder()
-          .append(Component.translatable("com.minecolonies.coremod.gui.analyzer.score", next.differentBlocks.size() * 40, next.costScore))
-          .hoverPane(box.findPaneOfTypeByID(LABEL_BLOCK_COUNTS, Text.class))
-          .build();
+            .append(Component.translatable("no.monopixel.slimcolonies.coremod.gui.analyzer.score", next.differentBlocks.size() * 40, next.costScore))
+            .hoverPane(box.findPaneOfTypeByID(LABEL_BLOCK_COUNTS, Text.class))
+            .build();
 
         box.findPaneOfTypeByID(LABEL_SIZE, Text.class)
-          .setText(Component.translatable("com.minecolonies.coremod.gui.analyzer.size", Component.literal("[" + next.blueprint.getSizeX() + " " + next.blueprint.getSizeY() + " "
-                                                                                                            + next.blueprint.getSizeZ() + "]")
-            .withStyle(ChatFormatting.YELLOW)
-            .withStyle(ChatFormatting.BOLD)));
+            .setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.analyzer.size",
+                Component.literal("[" + next.blueprint.getSizeX() + " " + next.blueprint.getSizeY() + " "
+                        + next.blueprint.getSizeZ() + "]")
+                    .withStyle(ChatFormatting.YELLOW)
+                    .withStyle(ChatFormatting.BOLD)));
         box.findPaneOfTypeByID(LABEL_BUILDINGS, Text.class)
-          .setText(Component.translatable("com.minecolonies.coremod.gui.analyzer.buildings",
-            Component.literal("" + next.containedBuildings).withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD)));
+            .setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.analyzer.buildings",
+                Component.literal("" + next.containedBuildings).withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD)));
 
         final ScrollingList resourceList = box.findPaneOfTypeByID(LIST_RES, ScrollingList.class);
         resourceList.setVisible(false);

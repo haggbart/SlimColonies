@@ -26,7 +26,7 @@ public class ColonyConnectionModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.core.gui.connections";
+        return "no.monopixel.slimcolonies.core.gui.connections";
     }
 
     @Override

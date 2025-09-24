@@ -63,7 +63,7 @@ public class WindowBuilderResModule extends AbstractModuleWindow
     /**
      * Constructor for window builder hut.
      *
-     * @param building  {@link BuildingBuilder.View}.
+     * @param building {@link BuildingBuilder.View}.
      */
     public WindowBuilderResModule(final String res, final IBuildingView building, final BuildingResourcesModuleView moduleView)
     {
@@ -99,8 +99,8 @@ public class WindowBuilderResModule extends AbstractModuleWindow
             else
             {
                 amountToSet =
-                  InventoryUtils.getItemCountInItemHandler(new InvWrapper(inventory),
-                    stack -> !ItemStackUtils.isEmpty(stack) && ItemStackUtils.compareItemStacksIgnoreStackSize(stack, resource.getItemStack()));
+                    InventoryUtils.getItemCountInItemHandler(new InvWrapper(inventory),
+                        stack -> !ItemStackUtils.isEmpty(stack) && ItemStackUtils.compareItemStacksIgnoreStackSize(stack, resource.getItemStack()));
             }
             resource.setPlayerAmount(amountToSet);
             supplied += Math.min(resource.getAvailable(), resource.getAmount());
@@ -110,7 +110,9 @@ public class WindowBuilderResModule extends AbstractModuleWindow
 
         if (total > 0)
         {
-            findPaneOfTypeByID(LABEL_PROGRESS, Text.class).setText(Component.translatable("com.minecolonies.coremod.gui.progress.res", (int) ((supplied / total) * 100) + "%", moduleView.getProgress() + "%"));
+            findPaneOfTypeByID(LABEL_PROGRESS, Text.class).setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.progress.res",
+                (int) ((supplied / total) * 100) + "%",
+                moduleView.getProgress() + "%"));
         }
 
         resources.sort(new BuildingBuilderResource.ResourceComparator());
@@ -152,7 +154,9 @@ public class WindowBuilderResModule extends AbstractModuleWindow
                 PaneBuilders.tooltipBuilder().hoverPane(pane).build().setText(text);
             }
         }
-        findPaneOfTypeByID(STEP_PROGRESS, Text.class).setText(Component.translatable("com.minecolonies.coremod.gui.progress.step", moduleView.getCurrentStage(), moduleView.getTotalStages()));
+        findPaneOfTypeByID(STEP_PROGRESS, Text.class).setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.progress.step",
+            moduleView.getCurrentStage(),
+            moduleView.getTotalStages()));
     }
 
     /**

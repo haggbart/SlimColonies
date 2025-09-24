@@ -165,7 +165,8 @@ public class WindowAlliancePage extends AbstractWindowTownHall
                 final ColonyConnection colonyData = connectionData.get(index);
                 rowPane.findPaneOfTypeByID("name", Text.class).setText(Component.literal(colonyData.name));
                 rowPane.findPaneOfTypeByID("distance", Text.class)
-                    .setText(Component.translatable("com.minecolonies.coremod.dist.blocks", (int) BlockPosUtil.dist(colonyData.pos, buildingView.getColony().getCenter())));
+                    .setText(Component.translatable("no.monopixel.slimcolonies.coremod.dist.blocks",
+                        (int) BlockPosUtil.dist(colonyData.pos, buildingView.getColony().getCenter())));
                 rowPane.findPaneOfTypeByID("state", Text.class).setText(Component.translatable(colonyData.diplomacyStatus.translationKey()));
 
                 rowPane.findPaneOfTypeByID("requestally", Button.class).setVisible(colonyData.diplomacyStatus == DiplomacyStatus.NEUTRAL);

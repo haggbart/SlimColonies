@@ -41,7 +41,7 @@ public class WindowSupplyStory extends AbstractWindowSkeleton
     /**
      * Type of camp/ship.
      */
-    private final String type;
+    private final String          type;
     private final InteractionHand hand;
 
     /**
@@ -87,20 +87,21 @@ public class WindowSupplyStory extends AbstractWindowSkeleton
             story.add(Component.empty());
         }
 
-        story.add(Component.translatable("com.minecolonies.core.gui.supplies.guide", Component.translatable(stack.getItem().getDescriptionId())));
+        story.add(Component.translatable("no.monopixel.slimcolonies.core.gui.supplies.guide", Component.translatable(stack.getItem().getDescriptionId())));
         story.add(Component.empty());
 
         if (stack.getItem() == ModItems.supplyCamp)
         {
-            story.add(Component.translatable("com.minecolonies.core.gui.supplycamp.guide"));
+            story.add(Component.translatable("no.monopixel.slimcolonies.core.gui.supplycamp.guide"));
         }
         else
         {
-            story.add(Component.translatable("com.minecolonies.core.gui.supplyship.guide"));
+            story.add(Component.translatable("no.monopixel.slimcolonies.core.gui.supplyship.guide"));
         }
 
         this.findPaneOfTypeByID("text", Text.class).setText(story);
-        this.findPaneOfTypeByID("place", Button.class).setText(Component.translatable("com.minecolonies.core.gui.supplies.place", Component.translatable(stack.getItem().getDescriptionId())));
+        this.findPaneOfTypeByID("place", Button.class)
+            .setText(Component.translatable("no.monopixel.slimcolonies.core.gui.supplies.place", Component.translatable(stack.getItem().getDescriptionId())));
     }
 
     /**

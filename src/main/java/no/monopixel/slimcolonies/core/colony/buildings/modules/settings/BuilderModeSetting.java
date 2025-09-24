@@ -22,8 +22,8 @@ public class BuilderModeSetting extends StringSetting
     /**
      * Reason display constants.
      */
-    public static final String NEEDS_RESEARCH_REASON  = "com.minecolonies.coremod.settings.reason.needsresearch";
-    public static final String BUILDER_MODES_RESEARCH = "com.minecolonies.research.technology.buildermodes.name";
+    public static final String NEEDS_RESEARCH_REASON  = "no.monopixel.slimcolonies.coremod.settings.reason.needsresearch";
+    public static final String BUILDER_MODES_RESEARCH = "no.monopixel.slimcolonies.research.technology.buildermodes.name";
 
     /**
      * Create the builder mode setting.

@@ -9,12 +9,12 @@ public class JobTranslationConstants
 {
     // Guard types
     @NonNls
-    public static final String JOB_KNIGHT = "com.minecolonies.job.knight";
+    public static final String JOB_KNIGHT = "no.monopixel.slimcolonies.job.knight";
     @NonNls
-    public static final String JOB_RANGER = "com.minecolonies.job.ranger";
+    public static final String JOB_RANGER = "no.monopixel.slimcolonies.job.ranger";
 
     @NonNls
-    public static final String JOB_KNIGHT_BUTTON = "com.minecolonies.coremod.gui.workerhuts.knight";
+    public static final String JOB_KNIGHT_BUTTON = "no.monopixel.slimcolonies.coremod.gui.workerhuts.knight";
     @NonNls
-    public static final String JOB_RANGER_BUTTON = "com.minecolonies.coremod.gui.workerhuts.ranger";
+    public static final String JOB_RANGER_BUTTON = "no.monopixel.slimcolonies.coremod.gui.workerhuts.ranger";
 }

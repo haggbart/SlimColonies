@@ -1,9 +1,9 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" size="440 244"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
-        >
+>
     <image source="slimcolonies:textures/gui/citizen/colonist_paper.png" size="440 244" pos="0 0"/>
 
-    <text id="desc" size="130 11" pos="60 14" color="black" textalign="MIDDLE" label="$(com.minecolonies.coremod.gui.citizen.stacks)"/>
+    <text id="desc" size="130 11" pos="60 14" color="black" textalign="MIDDLE" label="$(no.monopixel.slimcolonies.coremod.gui.citizen.stacks)"/>
     <input id="name" size="150 18" pos="50 30" maxlength="25"/>
 
     <list id="resources" size="215 136" pos="33 50">
@@ -12,13 +12,13 @@
             <text id="resourceName" size="100 12" pos="20 1" color="black"/>
             <input id="qty" size="25 18" pos="113 1" maxlength="25"/>
 
-            <button label="$(com.minecolonies.coremod.gui.workerhuts.request)" id="request" pos="140 1" size="64 15"
-                         source="slimcolonies:textures/gui/builderhut/builder_button_small.png" color="black"/>
+            <button label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.request)" id="request" pos="140 1" size="64 15"
+                    source="slimcolonies:textures/gui/builderhut/builder_button_small.png" color="black"/>
         </box>
     </list>
 
     <text size="158 11" pos="236 28" textalign="MIDDLE" color="black"
-           label="$(com.minecolonies.coremod.gui.citizen.requests)"/>
+          label="$(no.monopixel.slimcolonies.coremod.gui.citizen.requests)"/>
     <list id="requests" size="158 184" pos="256 44">
         <box id="requestx" size="100% 40" linewidth="1">
             <layout source="slimcolonies:gui/layouthuts/layoutrequeststree.xml"/>
@@ -28,5 +28,5 @@
     <button id="deliverAvailable" pos="42 195" size="40 15"/>
     <text id="test" pos="90 195" size="158 11" color="black" label="Deliver what's available"/>
     <button id="inventory" size="86 17" pos="97 210" color="black" label="$(container.inventory)"
-                 source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"/>
+            source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"/>
 </window>

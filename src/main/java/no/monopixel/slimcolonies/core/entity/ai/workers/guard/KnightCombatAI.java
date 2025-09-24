@@ -63,7 +63,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
      * Combat icon
      */
     private final static VisibleCitizenStatus KNIGHT_COMBAT =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/knight_combat.png"), "com.minecolonies.gui.visiblestatus.knight_combat");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/knight_combat.png"), "no.monopixel.slimcolonies.gui.visiblestatus.knight_combat");
 
     /**
      * Knockback chance
@@ -92,9 +92,9 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
     private static final double COMBAT_SPEED = 1.0;
 
     public KnightCombatAI(
-      final EntityCitizen owner,
-      final ITickRateStateMachine stateMachine,
-      final AbstractEntityAIGuard parentAI)
+        final EntityCitizen owner,
+        final ITickRateStateMachine stateMachine,
+        final AbstractEntityAIGuard parentAI)
     {
         super(owner, stateMachine);
 
@@ -111,7 +111,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
     {
         final int shieldSlot = InventoryUtils.findFirstSlotInItemHandlerWith(user.getInventoryCitizen(), Items.SHIELD);
         if (shieldSlot != -1 && target != null && target.isAlive() && nextAttackTime - user.level.getGameTime() >= MIN_TIME_TO_ATTACK &&
-              user.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(SHIELD_USAGE) > 0)
+            user.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(SHIELD_USAGE) > 0)
         {
             CitizenItemUtils.setHeldItem(user, InteractionHand.OFF_HAND, shieldSlot);
             user.startUsingItem(InteractionHand.OFF_HAND);
@@ -132,10 +132,10 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
     public boolean canAttack()
     {
         final int weaponSlot =
-          InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(user.getInventoryCitizen(),
-            ModEquipmentTypes.sword.get(),
-            0,
-            Integer.MAX_VALUE);
+            InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(user.getInventoryCitizen(),
+                ModEquipmentTypes.sword.get(),
+                0,
+                Integer.MAX_VALUE);
 
         if (weaponSlot != -1)
         {
@@ -202,7 +202,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
     private void doAoeAttack(final DamageSource source, final double damageToBeDealt)
     {
         if (user.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(KNIGHT_WHIRLWIND) > 0
-              && user.getRandom().nextInt(KNOCKBACK_CHANCE) == 0)
+            && user.getRandom().nextInt(KNOCKBACK_CHANCE) == 0)
         {
             List<LivingEntity> entities = user.level.getEntitiesOfClass(LivingEntity.class, user.getBoundingBox().inflate(2.0D, 0.5D, 2.0D));
             for (LivingEntity livingentity : entities)
@@ -210,35 +210,35 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
                 if (livingentity != user && isEntityValidTarget(livingentity) && (!(livingentity instanceof ArmorStand)))
                 {
                     livingentity.knockback(
-                      2F,
-                      Mth.sin(livingentity.getYRot() * ((float) Math.PI)),
-                      (-Mth.cos(livingentity.getYRot() * ((float) Math.PI))));
+                        2F,
+                        Mth.sin(livingentity.getYRot() * ((float) Math.PI)),
+                        (-Mth.cos(livingentity.getYRot() * ((float) Math.PI))));
                     livingentity.hurt(source, (float) (damageToBeDealt / entities.size()));
                 }
             }
 
             user.level.playSound(null,
-              user.getX(),
-              user.getY(),
-              user.getZ(),
-              SoundEvents.PLAYER_ATTACK_SWEEP,
-              user.getSoundSource(),
-              1.0F,
-              1.0F);
+                user.getX(),
+                user.getY(),
+                user.getZ(),
+                SoundEvents.PLAYER_ATTACK_SWEEP,
+                user.getSoundSource(),
+                1.0F,
+                1.0F);
 
             double d0 = (double) (-Mth.sin(user.getYRot() * ((float) Math.PI / 180)));
             double d1 = (double) Mth.cos(user.getYRot() * ((float) Math.PI / 180));
             if (user.level instanceof ServerLevel)
             {
                 ((ServerLevel) user.level).sendParticles(ParticleTypes.SWEEP_ATTACK,
-                  user.getX() + d0,
-                  user.getY(0.5D),
-                  user.getZ() + d1,
-                  2,
-                  d0,
-                  0.0D,
-                  d1,
-                  0.0D);
+                    user.getX() + d0,
+                    user.getY(0.5D),
+                    user.getZ() + d1,
+                    2,
+                    d0,
+                    0.0D,
+                    d1,
+                    0.0D);
             }
 
             lastAoeUseTime = user.level.getGameTime();
@@ -277,7 +277,11 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
             addDmg *= 2;
         }
 
-        if (ColonyConstants.rand.nextDouble() > 1 / (1 + user.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(GUARD_CRIT)))
+        if (ColonyConstants.rand.nextDouble() > 1 / (1 + user.getCitizenColonyHandler()
+            .getColonyOrRegister()
+            .getResearchManager()
+            .getResearchEffects()
+            .getEffectStrength(GUARD_CRIT)))
         {
             addDmg *= 1.5;
             ((ServerLevel) user.level).getChunkSource().broadcastAndSend(user, new ClientboundAnimatePacket(target, 4));
@@ -341,7 +345,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
         {
             final EntityCitizen citizen = (EntityCitizen) entity;
             if (citizen.getCitizenJobHandler().getColonyJob() instanceof AbstractJobGuard && ((AbstractJobGuard<?>) citizen.getCitizenJobHandler().getColonyJob()).isAsleep()
-                  && user.getSensing().hasLineOfSight(citizen))
+                && user.getSensing().hasLineOfSight(citizen))
             {
                 parentAI.setWakeCitizen(citizen);
                 return true;

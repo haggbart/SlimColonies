@@ -3,7 +3,7 @@
   "citizensuffix": "_d",
   "name": "Jesse",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.chewbacca",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.chewbacca",
   "recruitcost": "minecraft:diamond_sword",
   "recruitcostcount": 2,
   "gender": "male"

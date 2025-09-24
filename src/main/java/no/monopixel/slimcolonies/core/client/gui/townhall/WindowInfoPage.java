@@ -46,7 +46,7 @@ public class WindowInfoPage extends AbstractWindowTownHall
     /**
      * Current selected interval.
      */
-    public String selectedInterval = "com.minecolonies.coremod.gui.interval.alltime";
+    public String selectedInterval = "no.monopixel.slimcolonies.coremod.gui.interval.alltime";
 
     /**
      * Constructor for the town hall window.
@@ -158,12 +158,11 @@ public class WindowInfoPage extends AbstractWindowTownHall
                     PaneBuilders.tooltipBuilder().append(nameLabel.getText()).hoverPane(nameLabel).build();
                 }
                 rowPane.findPaneOfTypeByID(POS_LABEL, Text.class)
-                  .setText(Component.literal(event.getEventPos().getX() + " " + event.getEventPos().getY() + " " + event.getEventPos().getZ()));
+                    .setText(Component.literal(event.getEventPos().getX() + " " + event.getEventPos().getY() + " " + event.getEventPos().getZ()));
                 rowPane.findPaneOfTypeByID(BUTTON_ADD_PLAYER_OR_FAKEPLAYER, Button.class).hide();
             }
         });
     }
-
 
     /**
      * Clears and resets all work orders.

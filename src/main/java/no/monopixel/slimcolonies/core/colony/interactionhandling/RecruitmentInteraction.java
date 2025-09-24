@@ -41,13 +41,13 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
     /**
      * The recruit answer
      */
-    private static final Tuple<Component, Component> recruitAnswer = new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.recruit"), null);
+    private static final Tuple<Component, Component> recruitAnswer = new Tuple<>(Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.recruit"), null);
 
     @SuppressWarnings("unchecked")
     private static final Tuple<Component, Component>[] responses = (Tuple<Component, Component>[]) new Tuple[] {
-        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.showstats"), null),
+        new Tuple<>(Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.showstats"), null),
         recruitAnswer,
-        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.notnow"), null)};
+        new Tuple<>(Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.notnow"), null)};
 
     public RecruitmentInteraction(final ICitizen data)
     {
@@ -87,7 +87,7 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
 
             if (!hasSpace)
             {
-                baseText += "\n\n" + Component.translatable("com.minecolonies.coremod.gui.chat.nospacerecruit").getString();
+                baseText += "\n\n" + Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.nospacerecruit").getString();
             }
 
             window.findPaneOfTypeByID(CHAT_LABEL_ID, Text.class).setText(Component.literal(baseText));

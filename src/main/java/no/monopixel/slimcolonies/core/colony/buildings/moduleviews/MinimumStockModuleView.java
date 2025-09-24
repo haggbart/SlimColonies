@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * Client side representation of the minimum stock module.
  */
-public class MinimumStockModuleView extends AbstractBuildingModuleView  implements IMinimumStockModuleView
+public class MinimumStockModuleView extends AbstractBuildingModuleView implements IMinimumStockModuleView
 {
     /**
      * The minimum stock.
@@ -75,6 +75,6 @@ public class MinimumStockModuleView extends AbstractBuildingModuleView  implemen
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.warehouse.stock";
+        return "no.monopixel.slimcolonies.coremod.gui.warehouse.stock";
     }
 }

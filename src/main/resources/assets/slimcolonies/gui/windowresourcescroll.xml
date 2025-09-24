@@ -1,12 +1,12 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" size="190 244"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
-        >
+>
 
     <image source="slimcolonies:textures/gui/builderhut/builder_paper_sketch.png" size="100% 100%"/>
     <image source="slimcolonies:textures/gui/builderhut/builder_charcoal_chalk.png" size="19 59" pos="175 180"/>
 
     <text size="100% 11" pos="0 11" color="black" textalign="MIDDLE"
-           label="$(com.minecolonies.coremod.gui.workerhuts.resourcelist)"/>
+          label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.resourcelist)"/>
 
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_left.png" size="6 15" pos="24 22"/>
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_center.png" size="130 15" pos="30 22"/>

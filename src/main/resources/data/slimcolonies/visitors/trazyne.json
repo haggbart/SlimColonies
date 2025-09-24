@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Trazyne Infinitas",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.trazyne",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.trazyne",
   "recruitcost": "minecraft:piston",
   "recruitcostcount": 8,
   "gender": "male"

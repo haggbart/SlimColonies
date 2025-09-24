@@ -18,7 +18,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
+
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 
 /**
@@ -96,13 +98,14 @@ public class WindowCitizenPage extends AbstractWindowTownHall
         else
         {
             citizens.addAll(building.getColony().getCitizens().values().stream().filter(cit -> cit.getName().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US))
-                                                                                                 || cit.getJobComponent().getString().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US))).toList());
+                || cit.getJobComponent().getString().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US))).toList());
         }
         citizens.sort(COMPARE_BY_NAME);
     }
 
     /**
      * On clicking a citizen name in the list.
+     *
      * @param button the clicked button.
      */
     private void citizenSelected(final Button button)
@@ -134,9 +137,9 @@ public class WindowCitizenPage extends AbstractWindowTownHall
 
         findPaneOfTypeByID(JOB_LABEL, Text.class).setText(selectedCitizen.getJobComponent().withStyle(ChatFormatting.BOLD));
 
-        findPaneOfTypeByID(HEALTH_SHORT_LABEL, Text.class).setText(Component.literal((int)selectedCitizen.getHealth() + "/" + (int) selectedCitizen.getMaxHealth()));
+        findPaneOfTypeByID(HEALTH_SHORT_LABEL, Text.class).setText(Component.literal((int) selectedCitizen.getHealth() + "/" + (int) selectedCitizen.getMaxHealth()));
         // Happiness system removed
-        findPaneOfTypeByID(SATURATION_SHORT_LABEL, Text.class).setText(Component.literal((int)selectedCitizen.getSaturation() + "/" + 20));
+        findPaneOfTypeByID(SATURATION_SHORT_LABEL, Text.class).setText(Component.literal((int) selectedCitizen.getSaturation() + "/" + 20));
 
         selectedEntity = Minecraft.getInstance().level.getEntity(selectedCitizen.getEntityId());
         if (selectedEntity != null && selectedEntity.getPose() == Pose.SLEEPING)
@@ -188,7 +191,7 @@ public class WindowCitizenPage extends AbstractWindowTownHall
                     final String skillName = entry.getKey().name().toLowerCase(Locale.US);
                     final int skillLevel = entry.getValue().getLevel();
 
-                    textBuilder.append(Component.translatable("com.minecolonies.coremod.gui.citizen.skills." + skillName));
+                    textBuilder.append(Component.translatable("no.monopixel.slimcolonies.coremod.gui.citizen.skills." + skillName));
                     textBuilder.append(Component.literal(": " + skillLevel + " "));
                 }
                 PaneBuilders.tooltipBuilder().hoverPane(button).build().setText(textBuilder.build().getText());

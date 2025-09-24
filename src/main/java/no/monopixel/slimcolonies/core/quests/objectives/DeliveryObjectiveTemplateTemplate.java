@@ -60,7 +60,7 @@ public class DeliveryObjectiveTemplateTemplate extends DialogueObjectiveTemplate
      * @param target   the target to receive the delivery.
      * @param item     the item to be delivered.
      * @param quantity the quantity to be delivered.
-     * @param rewards the rewards this unlocks.
+     * @param rewards  the rewards this unlocks.
      */
     public DeliveryObjectiveTemplateTemplate(final int target, final ItemStack item, final int quantity, final int nextObjective, final List<Integer> rewards, final String nbtMode)
     {
@@ -74,23 +74,24 @@ public class DeliveryObjectiveTemplateTemplate extends DialogueObjectiveTemplate
 
     private void buildDialogueTrees()
     {
-        final Component ready = Component.translatable("com.minecolonies.coremod.questobjectives.delivery.ready", item.getDisplayName());
-        final AnswerElement ready1 = new AnswerElement(Component.translatable("com.minecolonies.coremod.questobjectives.delivery.ready.give"),
-                new IQuestDialogueAnswer.NextObjectiveDialogueAnswer(this.nextObjective));
-        final AnswerElement ready2 = new AnswerElement(Component.translatable("com.minecolonies.coremod.questobjectives.delivery.ready.later"),
-                new IQuestDialogueAnswer.CloseUIDialogueAnswer());
+        final Component ready = Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.delivery.ready", item.getDisplayName());
+        final AnswerElement ready1 = new AnswerElement(Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.delivery.ready.give"),
+            new IQuestDialogueAnswer.NextObjectiveDialogueAnswer(this.nextObjective));
+        final AnswerElement ready2 = new AnswerElement(Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.delivery.ready.later"),
+            new IQuestDialogueAnswer.CloseUIDialogueAnswer());
         this.readyDialogueElement = new DialogueElement(ready, List.of(ready1, ready2));
 
-        final Component waiting = Component.translatable("com.minecolonies.coremod.questobjectives.delivery.waiting", item.getDisplayName());
-        final AnswerElement waiting1 = new AnswerElement(Component.translatable("com.minecolonies.coremod.questobjectives.answer.later"),
-                new IQuestDialogueAnswer.CloseUIDialogueAnswer());
-        final AnswerElement waiting2 = new AnswerElement(Component.translatable("com.minecolonies.coremod.questobjectives.delivery.waiting.cancel"),
-                new IQuestDialogueAnswer.QuestCancellationDialogueAnswer());
+        final Component waiting = Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.delivery.waiting", item.getDisplayName());
+        final AnswerElement waiting1 = new AnswerElement(Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.answer.later"),
+            new IQuestDialogueAnswer.CloseUIDialogueAnswer());
+        final AnswerElement waiting2 = new AnswerElement(Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.delivery.waiting.cancel"),
+            new IQuestDialogueAnswer.QuestCancellationDialogueAnswer());
         this.waitingDialogueElement = new DialogueElement(waiting, List.of(waiting1, waiting2));
     }
 
     /**
      * Parse the dialogue objective from json.
+     *
      * @param jsonObject the json to parse it from.
      * @return a new objective object.
      */
@@ -120,7 +121,8 @@ public class DeliveryObjectiveTemplateTemplate extends DialogueObjectiveTemplate
     @Override
     public boolean hasItem(final Player player, final IQuestInstance colonyQuest)
     {
-        return InventoryUtils.getItemCountInItemHandler(new InvWrapper(player.getInventory()), itemStack -> ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, item, !nbtMode.equals("any"), !nbtMode.equals("any"))) >= quantity;
+        return InventoryUtils.getItemCountInItemHandler(new InvWrapper(player.getInventory()),
+            itemStack -> ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, item, !nbtMode.equals("any"), !nbtMode.equals("any"))) >= quantity;
     }
 
     @Override
@@ -144,9 +146,9 @@ public class DeliveryObjectiveTemplateTemplate extends DialogueObjectiveTemplate
     @Override
     public Component getProgressText(final IQuestInstance quest, final Style style)
     {
-        return Component.translatable("com.minecolonies.coremod.questobjectives.delivery.progress",
-          0,
-          quantity,
-          item.getDisplayName().plainCopy().setStyle(style));
+        return Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.delivery.progress",
+            0,
+            quantity,
+            item.getDisplayName().plainCopy().setStyle(style));
     }
 }

@@ -35,13 +35,12 @@ public class WindowStatsPage extends AbstractWindowTownHall
      * Map of intervals.
      */
     public static final LinkedHashMap<String, Integer> INTERVAL = new LinkedHashMap<>();
-
     static
     {
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.yesterday", 1);
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.lastweek", 7);
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.100days", 100);
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.alltime", -1);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.yesterday", 1);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.lastweek", 7);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.100days", 100);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.alltime", -1);
     }
 
     /**
@@ -52,7 +51,7 @@ public class WindowStatsPage extends AbstractWindowTownHall
     /**
      * Current selected interval.
      */
-    public String selectedInterval = "com.minecolonies.coremod.gui.interval.yesterday";
+    public String selectedInterval = "no.monopixel.slimcolonies.coremod.gui.interval.yesterday";
 
     /**
      * Constructor for the town hall window.
@@ -86,7 +85,8 @@ public class WindowStatsPage extends AbstractWindowTownHall
 
         if (MinecoloniesAPIProxy.getInstance().getGlobalResearchTree().hasResearchEffect(CITIZEN_CAP))
         {
-            final int max = Math.max(CitizenConstants.CITIZEN_LIMIT_DEFAULT, (int) this.building.getColony().getResearchManager().getResearchEffects().getEffectStrength(CITIZEN_CAP));
+            final int max =
+                Math.max(CitizenConstants.CITIZEN_LIMIT_DEFAULT, (int) this.building.getColony().getResearchManager().getResearchEffects().getEffectStrength(CITIZEN_CAP));
             citizensCap = Math.min(max, MineColonies.getConfig().getServer().maxCitizenPerColony.get());
         }
         else
@@ -96,27 +96,27 @@ public class WindowStatsPage extends AbstractWindowTownHall
 
         final Text totalCitizenLabel = findPaneOfTypeByID(TOTAL_CITIZENS_LABEL, Text.class);
         totalCitizenLabel.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT,
-          citizensSize,
-          Math.max(citizensSize, building.getColony().getCitizenCountLimit())));
+            citizensSize,
+            Math.max(citizensSize, building.getColony().getCitizenCountLimit())));
         List<MutableComponent> hoverText = new ArrayList<>();
-        if(citizensSize < (citizensCap * 0.9) && citizensSize < (building.getColony().getCitizenCountLimit() * 0.9))
+        if (citizensSize < (citizensCap * 0.9) && citizensSize < (building.getColony().getCitizenCountLimit() * 0.9))
         {
             totalCitizenLabel.setColors(DARKGREEN);
         }
-        else if(citizensSize < citizensCap)
+        else if (citizensSize < citizensCap)
         {
             hoverText.add(Component.translatable(WARNING_POPULATION_NEEDS_HOUSING, this.building.getColony().getName()));
             totalCitizenLabel.setColors(ORANGE);
         }
         else
         {
-            if(citizensCap < MineColonies.getConfig().getServer().maxCitizenPerColony.get())
+            if (citizensCap < MineColonies.getConfig().getServer().maxCitizenPerColony.get())
             {
                 hoverText.add(Component.translatable(WARNING_POPULATION_RESEARCH_LIMITED, this.building.getColony().getName()));
             }
             else
             {
-                hoverText.add(Component.translatable( WARNING_POPULATION_CONFIG_LIMITED, this.building.getColony().getName()));
+                hoverText.add(Component.translatable(WARNING_POPULATION_CONFIG_LIMITED, this.building.getColony().getName()));
             }
             totalCitizenLabel.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT, citizensSize, citizensCap));
             totalCitizenLabel.setColors(RED);
@@ -203,7 +203,8 @@ public class WindowStatsPage extends AbstractWindowTownHall
                     final String jobString = Component.translatable(entry.getKey()).getString();
                     final String formattedJobString = jobString.substring(0, 1).toUpperCase(Locale.US) + jobString.substring(1);
 
-                    final Component numberOfWorkers = Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_EACH, formattedJobString, entry.getValue().getA(), entry.getValue().getB());
+                    final Component numberOfWorkers =
+                        Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_EACH, formattedJobString, entry.getValue().getA(), entry.getValue().getB());
                     label.setText(numberOfWorkers);
                 }
                 else

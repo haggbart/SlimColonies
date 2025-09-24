@@ -25,7 +25,7 @@ public class EntityAIWorkChickenHerder extends AbstractEntityAIHerder<JobChicken
      * Get chicken icon
      */
     private final static VisibleCitizenStatus FIND_CHICKEN =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/chickenherder.png"), "com.minecolonies.gui.visiblestatus.chickenherder");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/chickenherder.png"), "no.monopixel.slimcolonies.gui.visiblestatus.chickenherder");
 
     /**
      * Creates the abstract part of the AI. Always use this constructor!

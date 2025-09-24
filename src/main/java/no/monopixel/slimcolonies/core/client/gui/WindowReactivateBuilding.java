@@ -28,6 +28,7 @@ public class WindowReactivateBuilding extends AbstractWindowSkeleton
 
     /**
      * Creates a new instance of this window.
+     *
      * @param pos the position of the building.
      */
     public WindowReactivateBuilding(@NotNull final BlockPos pos)
@@ -43,11 +44,13 @@ public class WindowReactivateBuilding extends AbstractWindowSkeleton
             final BuildingEntry buildingEntry = IBuildingRegistry.getInstance().getValue(tileEntityColonyBuilding.registryName);
             if (buildingEntry == ModBuildings.home.get() || buildingEntry == ModBuildings.tavern.get())
             {
-                findPaneOfTypeByID("text", Text.class).setText(Component.translatable("com.minecolonies.core.gui.reactivate.message.living", Component.translatable(buildingEntry.getTranslationKey())));
+                findPaneOfTypeByID("text", Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.gui.reactivate.message.living",
+                    Component.translatable(buildingEntry.getTranslationKey())));
             }
             else if (buildingEntry != null)
             {
-                findPaneOfTypeByID("text", Text.class).setText(Component.translatable("com.minecolonies.core.gui.reactivate.message.working", Component.translatable(buildingEntry.getTranslationKey())));
+                findPaneOfTypeByID("text", Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.gui.reactivate.message.working",
+                    Component.translatable(buildingEntry.getTranslationKey())));
             }
         }
     }
@@ -60,7 +63,6 @@ public class WindowReactivateBuilding extends AbstractWindowSkeleton
         Network.getNetwork().sendToServer(new ReactivateBuildingMessage(pos));
         close();
     }
-
 
     /**
      * Cancel reactivation.

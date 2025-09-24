@@ -3,7 +3,7 @@
   "citizensuffix": "_b",
   "name": "Undead",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.undead",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.undead",
   "recruitcost": "minecraft:jack_o_lantern",
   "recruitcostcount": 8,
   "gender": "male"

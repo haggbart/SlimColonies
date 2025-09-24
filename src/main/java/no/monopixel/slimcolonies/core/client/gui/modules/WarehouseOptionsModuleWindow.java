@@ -53,7 +53,8 @@ public class WarehouseOptionsModuleWindow extends AbstractModuleWindow
 
     /**
      * Constructor for window warehouse hut.
-     * @param module the module belonging to it.
+     *
+     * @param module   the module belonging to it.
      * @param building {@link BuildingWareHouse.View}.
      */
     public WarehouseOptionsModuleWindow(final IBuildingView building, final WarehouseOptionsModuleView module)
@@ -71,8 +72,8 @@ public class WarehouseOptionsModuleWindow extends AbstractModuleWindow
         {
             final ButtonImage sortButton = findPaneOfTypeByID(SORT_WAREHOUSE_BUTTON, ButtonImage.class);
             PaneBuilders.tooltipBuilder()
-                .append(Component.translatable("com.minecolonies.coremod.gui.warehouse.sort.disabled.1", BUILDING_LEVEL_FOR_SORTING))
-                .appendNL(Component.translatable("com.minecolonies.coremod.gui.warehouse.sort.disabled.2", BUILDING_LEVEL_FOR_SORTING))
+                .append(Component.translatable("no.monopixel.slimcolonies.coremod.gui.warehouse.sort.disabled.1", BUILDING_LEVEL_FOR_SORTING))
+                .appendNL(Component.translatable("no.monopixel.slimcolonies.coremod.gui.warehouse.sort.disabled.2", BUILDING_LEVEL_FOR_SORTING))
                 .hoverPane(sortButton)
                 .build();
             sortButton.disable();
@@ -118,8 +119,8 @@ public class WarehouseOptionsModuleWindow extends AbstractModuleWindow
         }
 
         findPaneOfTypeByID(UPGRADE_PROGRESS_LABEL, Text.class).setText(Component.translatable(LABEL_X_OF_Z,
-          module.getStorageUpgradeLevel(),
-          BuildingWareHouse.MAX_STORAGE_UPGRADE));
+            module.getStorageUpgradeLevel(),
+            BuildingWareHouse.MAX_STORAGE_UPGRADE));
 
         switch (availability)
         {
@@ -154,8 +155,8 @@ public class WarehouseOptionsModuleWindow extends AbstractModuleWindow
                     neededLabel.hide();
                     addButton.setText(Component.literal("X").setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_RED)));
                     PaneBuilders.tooltipBuilder()
-                        .append(Component.translatable("com.minecolonies.coremod.gui.warehouse.upgrade.disabled.1", buildingView.getBuildingMaxLevel()))
-                        .appendNL(Component.translatable("com.minecolonies.coremod.gui.warehouse.upgrade.disabled.2", buildingView.getBuildingMaxLevel()))
+                        .append(Component.translatable("no.monopixel.slimcolonies.coremod.gui.warehouse.upgrade.disabled.1", buildingView.getBuildingMaxLevel()))
+                        .appendNL(Component.translatable("no.monopixel.slimcolonies.coremod.gui.warehouse.upgrade.disabled.2", buildingView.getBuildingMaxLevel()))
                         .hoverPane(addButton)
                         .build();
                 }
@@ -176,7 +177,7 @@ public class WarehouseOptionsModuleWindow extends AbstractModuleWindow
         neededLabel.setText(Component.literal(resource.getAvailable() + " / " + resource.getAmount()));
         findPaneOfTypeByID(RESOURCE_QUANTITY_MISSING, Text.class).setText(Component.literal(Integer.toString(resource.getAmount() - resource.getAvailable())));
 
-        if(buildingView.getBuildingLevel() >= buildingView.getBuildingMaxLevel())
+        if (buildingView.getBuildingLevel() >= buildingView.getBuildingMaxLevel())
         {
             final ItemStack resourceStackOfOne = new ItemStack(resource.getItem(), 1);
             resourceStackOfOne.setTag(resource.getItemStack().getTag());

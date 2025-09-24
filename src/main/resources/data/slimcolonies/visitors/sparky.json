@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Drace Karaki",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.sparky",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.sparky",
   "recruitcost": "minecraft:snowball",
   "recruitcostcount": 32,
   "gender": "male",

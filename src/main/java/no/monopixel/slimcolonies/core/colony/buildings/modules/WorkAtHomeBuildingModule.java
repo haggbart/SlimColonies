@@ -50,7 +50,7 @@ public class WorkAtHomeBuildingModule extends WorkerBuildingModule implements IA
                     {
                         final MutableComponent jobComponent = MessageUtils.format(citizen.getJob().getJobRegistryEntry().getTranslationKey()).create();
                         final MutableComponent buildingComponent = MessageUtils.format(oldHome.getBuildingDisplayName()).create();
-                        MessageUtils.format("com.minecolonies.coremod.gui.workerhuts.assignedbed",
+                        MessageUtils.format("no.monopixel.slimcolonies.coremod.gui.workerhuts.assignedbed",
                                 citizen.getName(),
                                 jobComponent,
                                 buildingComponent,

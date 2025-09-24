@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.ITEMS_BAKED_DETAIL;
+
 /**
  * Baker AI class.
  */
@@ -21,7 +22,7 @@ public class EntityAIWorkBaker extends AbstractEntityAIRequestSmelter<JobBaker, 
      * Baking icon
      */
     private final static VisibleCitizenStatus BAKING =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/baker.png"), "com.minecolonies.gui.visiblestatus.baker");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/baker.png"), "no.monopixel.slimcolonies.gui.visiblestatus.baker");
 
     /**
      * Constructor for the Baker. Defines the tasks the bakery executes.
@@ -66,11 +67,11 @@ public class EntityAIWorkBaker extends AbstractEntityAIRequestSmelter<JobBaker, 
 
     /**
      * Returns the name of the smelting stat that is used in the building's statistics.
+     *
      * @return the name of the smelting stat.
      */
     protected String getSmeltingStatName()
     {
         return ITEMS_BAKED_DETAIL;
     }
-
 }

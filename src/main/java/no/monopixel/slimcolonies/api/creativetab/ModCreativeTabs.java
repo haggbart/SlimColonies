@@ -22,7 +22,7 @@ public final class ModCreativeTabs
 
     public static final RegistryObject<CreativeModeTab> HUTS = TAB_REG.register("mchuts", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1)
         .icon(() -> new ItemStack(ModBlocks.blockHutTownHall))
-        .title(Component.translatable("com.minecolonies.creativetab.huts")).displayItems((config, output) -> {
+        .title(Component.translatable("no.monopixel.slimcolonies.creativetab.huts")).displayItems((config, output) -> {
             for (final AbstractColonyBlock<?> hut : ModBlocks.getHuts())
             {
                 output.accept(hut);
@@ -31,7 +31,7 @@ public final class ModCreativeTabs
 
     public static final RegistryObject<CreativeModeTab> GENERAL = TAB_REG.register("mcgeneral", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1)
         .icon(() -> new ItemStack(ModBlocks.blockRack))
-        .title(Component.translatable("com.minecolonies.creativetab.general")).displayItems((config, output) -> {
+        .title(Component.translatable("no.monopixel.slimcolonies.creativetab.general")).displayItems((config, output) -> {
             output.accept(ModBlocks.blockScarecrow);
             output.accept(ModBlocks.blockPlantationField);
             output.accept(ModBlocks.blockRack);

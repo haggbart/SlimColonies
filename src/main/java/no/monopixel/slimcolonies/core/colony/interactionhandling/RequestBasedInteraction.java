@@ -37,8 +37,8 @@ public class RequestBasedInteraction extends ServerCitizenInteraction
     private static final Tuple<Component, Component>[] tuples = (Tuple<Component, Component>[]) new Tuple[] {
         new Tuple<>(Component.translatable(INTERACTION_R_OKAY), null),
         new Tuple<>(Component.translatable(INTERACTION_R_REMIND), null),
-        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.cancel"), null),
-        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.fulfill"), null)};
+        new Tuple<>(Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.cancel"), null),
+        new Tuple<>(Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.fulfill"), null)};
 
     @SuppressWarnings("unchecked")
     private static final Tuple<Component, Component>[] tuplesAsync = (Tuple<Component, Component>[]) new Tuple[] {
@@ -154,7 +154,7 @@ public class RequestBasedInteraction extends ServerCitizenInteraction
     @OnlyIn(Dist.CLIENT)
     public boolean onClientResponseTriggered(final int responseId, final Player player, final ICitizenDataView data, final BOWindow window)
     {
-        if (((TranslatableContents) getPossibleResponses().get(responseId).getContents()).getKey().equals("com.minecolonies.coremod.gui.chat.fulfill"))
+        if (((TranslatableContents) getPossibleResponses().get(responseId).getContents()).getKey().equals("no.monopixel.slimcolonies.coremod.gui.chat.fulfill"))
         {
             final IColony colony = IColonyManager.getInstance().getColonyView(data.getColonyId(), player.level.dimension());
 
@@ -186,7 +186,7 @@ public class RequestBasedInteraction extends ServerCitizenInteraction
     {
         super.onServerResponseTriggered(responseId, player, data);
         final Component response = getPossibleResponses().get(responseId);
-        if (response.equals(Component.translatable("com.minecolonies.coremod.gui.chat.cancel")) && data.getColony() != null)
+        if (response.equals(Component.translatable("no.monopixel.slimcolonies.coremod.gui.chat.cancel")) && data.getColony() != null)
         {
             data.getColony().getRequestManager().updateRequestState(token, RequestState.CANCELLED);
         }

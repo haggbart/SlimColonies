@@ -27,9 +27,9 @@ public class WindowTownHallColonyReactivate extends AbstractWindowSkeleton
      * Townhall position
      */
     private final BlockPos pos;
-    private final String preName;
-    private final int closestDistance;
-    private final String closestName;
+    private final String   preName;
+    private final int      closestDistance;
+    private final String   closestName;
 
     public WindowTownHallColonyReactivate(final BlockPos pos, final String closestName, final int closestDistance)
     {
@@ -47,9 +47,10 @@ public class WindowTownHallColonyReactivate extends AbstractWindowSkeleton
         this.preName = ColonyStoryListener.pickRandom(ColonyStoryListener.abandonedColonyNames, biome, random);
         final String story = ColonyStoryListener.pickRandom(ColonyStoryListener.abandonedColonyStories, biome, random);
 
-        this.findPaneOfTypeByID("title", Text.class).setText(Component.translatable("com.minecolonies.core.gui.colony.reactivate.title", this.preName));
-        this.findPaneOfTypeByID("text1", Text.class).setText(Component.translatable(story, this.preName, Component.translatable(biome.unwrapKey().get().location().toLanguageKey("biome"))));
-        this.findPaneOfTypeByID("text2", Text.class).setText(Component.translatable("com.minecolonies.core.gui.colony.reactivate.question", this.preName));
+        this.findPaneOfTypeByID("title", Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.gui.colony.reactivate.title", this.preName));
+        this.findPaneOfTypeByID("text1", Text.class)
+            .setText(Component.translatable(story, this.preName, Component.translatable(biome.unwrapKey().get().location().toLanguageKey("biome"))));
+        this.findPaneOfTypeByID("text2", Text.class).setText(Component.translatable("no.monopixel.slimcolonies.core.gui.colony.reactivate.question", this.preName));
     }
 
     /**

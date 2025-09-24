@@ -3,7 +3,7 @@
   "citizensuffix": "_d",
   "name": "Luz Noceda",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.jmwarrior",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.jmwarrior",
   "recruitcost": "minecraft:ender_eye",
   "recruitcostcount": 1,
   "gender": "female"

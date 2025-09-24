@@ -27,10 +27,10 @@ public class GuardTaskSetting extends StringSettingWithDesc
     /**
      * Different setting possibilities.
      */
-    public static final String PATROL      = "com.minecolonies.core.guard.setting.patrol";
-    public static final String GUARD       = "com.minecolonies.core.guard.setting.guard";
-    public static final String FOLLOW      = "com.minecolonies.core.guard.setting.follow";
-    public static final String PATROL_MINE = "com.minecolonies.core.guard.setting.patrol_mine";
+    public static final String PATROL      = "no.monopixel.slimcolonies.core.guard.setting.patrol";
+    public static final String GUARD       = "no.monopixel.slimcolonies.core.guard.setting.guard";
+    public static final String FOLLOW      = "no.monopixel.slimcolonies.core.guard.setting.follow";
+    public static final String PATROL_MINE = "no.monopixel.slimcolonies.core.guard.setting.patrol_mine";
 
     /**
      * Different trigger button widths.
@@ -49,14 +49,15 @@ public class GuardTaskSetting extends StringSettingWithDesc
     /**
      * Create a new guard task list setting.
      */
-    public GuardTaskSetting(final String...list)
+    public GuardTaskSetting(final String... list)
     {
         super(list);
     }
 
     /**
      * Create a new string list setting.
-     * @param settings the overall list of settings.
+     *
+     * @param settings     the overall list of settings.
      * @param currentIndex the current selected index.
      */
     public GuardTaskSetting(final List<String> settings, final int currentIndex)
@@ -149,15 +150,15 @@ public class GuardTaskSetting extends StringSettingWithDesc
         Component component;
         if (building.getMinePos() != null)
         {
-            component = Component.translatable("com.minecolonies.coremod.gui.worherhuts.patrollingmine", building.getMinePos().toShortString());
+            component = Component.translatable("no.monopixel.slimcolonies.coremod.gui.worherhuts.patrollingmine", building.getMinePos().toShortString());
         }
         else
         {
-            component = Component.translatable("com.minecolonies.coremod.job.guard.assignmine");
+            component = Component.translatable("no.monopixel.slimcolonies.coremod.job.guard.assignmine");
         }
         PaneBuilders.tooltipBuilder()
-          .append(component)
-          .hoverPane(button)
-          .build();
+            .append(component)
+            .hoverPane(button)
+            .build();
     }
 }

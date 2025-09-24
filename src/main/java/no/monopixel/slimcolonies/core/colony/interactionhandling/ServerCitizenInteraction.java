@@ -72,12 +72,12 @@ public abstract class ServerCitizenInteraction extends AbstractInteractionRespon
      */
     @SafeVarargs
     public ServerCitizenInteraction(
-      final Component inquiry,
-      final boolean primary,
-      final IChatPriority priority,
-      final Predicate<ICitizenData> validator,
-      final Component validatorId,
-      final Tuple<Component, Component>... responseTuples)
+        final Component inquiry,
+        final boolean primary,
+        final IChatPriority priority,
+        final Predicate<ICitizenData> validator,
+        final Component validatorId,
+        final Tuple<Component, Component>... responseTuples)
     {
         super(inquiry, primary, priority, responseTuples);
         this.validator = validator;
@@ -135,8 +135,9 @@ public abstract class ServerCitizenInteraction extends AbstractInteractionRespon
 
     /**
      * Check if the response was an ignore response.
+     *
      * @param response the response to compare.
-     * @param player the player that triggered it.
+     * @param player   the player that triggered it.
      */
     private void tryHandleIgnoreResponse(final Component response, final Player player)
     {
@@ -152,7 +153,8 @@ public abstract class ServerCitizenInteraction extends AbstractInteractionRespon
                 // 1 hour later
                 displayAtWorldTick = (int) (player.level.getGameTime() + (TICKS_SECOND * 60 * 60));
             }
-            else if (((TranslatableContents) response.getContents()).getKey().equals(INTERACTION_R_OKAY) || ((TranslatableContents) response.getContents()).getKey().equals(INTERACTION_R_SKIP))
+            else if (((TranslatableContents) response.getContents()).getKey().equals(INTERACTION_R_OKAY) || ((TranslatableContents) response.getContents()).getKey()
+                .equals(INTERACTION_R_SKIP))
             {
                 // 5 minutes
                 displayAtWorldTick = (int) (player.level.getGameTime() + (TICKS_SECOND * 60 * 5));
@@ -166,7 +168,7 @@ public abstract class ServerCitizenInteraction extends AbstractInteractionRespon
     {
         final Component response = getPossibleResponses().get(responseId);
         tryHandleIgnoreResponse(response, player);
-        if (((TranslatableContents) getPossibleResponses().get(responseId).getContents()).getKey().equals("com.minecolonies.coremod.gui.chat.skipchitchat"))
+        if (((TranslatableContents) getPossibleResponses().get(responseId).getContents()).getKey().equals("no.monopixel.slimcolonies.coremod.gui.chat.skipchitchat"))
         {
             final MainWindowCitizen windowCitizen = new MainWindowCitizen(data);
             windowCitizen.open();

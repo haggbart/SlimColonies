@@ -5,45 +5,39 @@ import org.jetbrains.annotations.NonNls;
 public class RequestSystemTranslationConstants
 {
     @NonNls
-    public static final String REQUESTS_TYPE_DELIVERY                  = "com.minecolonies.coremod.request.delivery";
+    public static final String REQUESTS_TYPE_DELIVERY       = "no.monopixel.slimcolonies.coremod.request.delivery";
     @NonNls
-    public static final String REQUESTS_TYPE_PICKUP                    = "com.minecolonies.coremod.request.pickup";
+    public static final String REQUESTS_TYPE_PICKUP         = "no.monopixel.slimcolonies.coremod.request.pickup";
     @NonNls
-    public static final String REQUESTS_TYPE_FOOD                      = "com.minecolonies.coremod.request.food";
+    public static final String REQUESTS_TYPE_FOOD           = "no.monopixel.slimcolonies.coremod.request.food";
     @NonNls
-    public static final String REQUESTS_TYPE_BURNABLE                  = "com.minecolonies.coremod.request.burnable";
+    public static final String REQUESTS_TYPE_BURNABLE       = "no.monopixel.slimcolonies.coremod.request.burnable";
     @NonNls
-    public static final String REQUESTS_TYPE_SMELTABLE_ORE             = "com.minecolonies.coremod.request.smeltableore";
+    public static final String REQUESTS_TYPE_SMELTABLE_ORE  = "no.monopixel.slimcolonies.coremod.request.smeltableore";
     @NonNls
-    public static final String REQUESTS_TYPE_SAPLINGS                  = "com.minecolonies.coremod.gui.workerhuts.saplinglist";
+    public static final String REQUESTS_TYPE_SAPLINGS       = "no.monopixel.slimcolonies.coremod.gui.workerhuts.saplinglist";
     @NonNls
-    public static final String REQUESTS_TYPE_CRAFTING                  = "com.minecolonies.coremod.request.crafting";
+    public static final String REQUESTS_TYPE_CRAFTING       = "no.monopixel.slimcolonies.coremod.request.crafting";
     @NonNls
-    public static final String REQUESTS_TYPE_TOOL_TYPE_PREFIX          = "com.minecolonies.coremod.request.tool.pretype";
+    public static final String REQUESTS_TYPE_COMPOSTABLE    = "no.monopixel.slimcolonies.coremod.request.compostable";
     @NonNls
-    public static final String REQUESTS_TYPE_TOOL_MINIMUM_LEVEL_PREFIX = "com.minecolonies.coremod.request.tool.preminlevel";
+    public static final String REQUESTS_TYPE_COMPOSTABLE_UI = "no.monopixel.slimcolonies.gui.workerhuts.composter.compostables";
     @NonNls
-    public static final String REQUESTS_TYPE_TOOL_MAXIMUM_LEVEL_PREFIX = "com.minecolonies.coremod.request.tool.premaxlevel";
+    public static final String REQUEST_TYPE_FERTILIZER      = "no.monopixel.slimcolonies.coremod.request.fertilizer";
     @NonNls
-    public static final String REQUESTS_TYPE_COMPOSTABLE               = "com.minecolonies.coremod.request.compostable";
-    @NonNls
-    public static final String REQUESTS_TYPE_COMPOSTABLE_UI            = "com.minecolonies.gui.workerhuts.composter.compostables";
-    @NonNls
-    public static final String REQUEST_TYPE_FERTILIZER                 = "com.minecolonies.coremod.request.fertilizer";
-    @NonNls
-    public static final String REQUEST_TYPE_FLOWERS                    = "com.minecolonies.coremod.request.flowers";
+    public static final String REQUEST_TYPE_FLOWERS         = "no.monopixel.slimcolonies.coremod.request.flowers";
 
     @NonNls
-    public static final String REQUEST_SYSTEM_STACK_LIST             = "com.minecolonies.coremod.request.stacklist";
+    public static final String REQUEST_SYSTEM_STACK_LIST             = "no.monopixel.slimcolonies.coremod.request.stacklist";
     @NonNls
-    public static final String REQUEST_SYSTEM_CRAFTING_DISPLAY       = "com.minecolonies.coremod.request.crafting.display";
+    public static final String REQUEST_SYSTEM_CRAFTING_DISPLAY       = "no.monopixel.slimcolonies.coremod.request.crafting.display";
     @NonNls
-    public static final String REQUEST_SYSTEM_CRAFTING_DISPLAY_SHORT       = "com.minecolonies.coremod.request.crafting.display.short";
+    public static final String REQUEST_SYSTEM_CRAFTING_DISPLAY_SHORT = "no.monopixel.slimcolonies.coremod.request.crafting.display.short";
     @NonNls
-    public static final String REQUEST_SYSTEM_BUILDING_LEVEL_TOO_LOW = "com.minecolonies.coremod.request.toolow";
+    public static final String REQUEST_SYSTEM_BUILDING_LEVEL_TOO_LOW = "no.monopixel.slimcolonies.coremod.request.toolow";
 
     @NonNls
-    public static final String REQUEST_RESOLVER_ASYNC  = "com.minecolonies.requestsystem.playerresolver.async";
+    public static final String REQUEST_RESOLVER_ASYNC  = "no.monopixel.slimcolonies.requestsystem.playerresolver.async";
     @NonNls
-    public static final String REQUEST_RESOLVER_NORMAL = "com.minecolonies.requestsystem.playerresolver.normal";
+    public static final String REQUEST_RESOLVER_NORMAL = "no.monopixel.slimcolonies.requestsystem.playerresolver.normal";
 }

@@ -23,7 +23,7 @@ public class WarehouseOptionsModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.workerhuts.settings";
+        return "no.monopixel.slimcolonies.coremod.gui.workerhuts.settings";
     }
 
     @Override

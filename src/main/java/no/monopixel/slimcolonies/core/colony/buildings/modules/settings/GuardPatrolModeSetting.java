@@ -16,8 +16,8 @@ public class GuardPatrolModeSetting extends StringSettingWithDesc
     /**
      * Different setting possibilities.
      */
-    public static final String AUTO   = "com.minecolonies.core.guard.setting.patrol.auto";
-    public static final String MANUAL = "com.minecolonies.core.guard.setting.patrol.manual";
+    public static final String AUTO   = "no.monopixel.slimcolonies.core.guard.setting.patrol.auto";
+    public static final String MANUAL = "no.monopixel.slimcolonies.core.guard.setting.patrol.manual";
 
     /**
      * Create a new patrol mode list setting.

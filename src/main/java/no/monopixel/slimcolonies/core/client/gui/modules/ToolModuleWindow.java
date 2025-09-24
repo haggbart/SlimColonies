@@ -24,7 +24,7 @@ public class ToolModuleWindow extends AbstractModuleWindow
     /**
      * Constructor for the minimum stock window view.
      *
-     * @param building class extending
+     * @param building   class extending
      * @param moduleView the module view.
      */
     public ToolModuleWindow(final String res, final IBuildingView building, final ToolModuleView moduleView)
@@ -33,7 +33,8 @@ public class ToolModuleWindow extends AbstractModuleWindow
 
         this.moduleView = moduleView;
 
-        findPaneOfTypeByID("desc", Text.class).setText(Component.translatable("com.minecolonies.coremod.gui.tooldesc." + ForgeRegistries.ITEMS.getKey(moduleView.getTool()).getPath()));
+        findPaneOfTypeByID("desc", Text.class).setText(Component.translatable(
+            "no.monopixel.slimcolonies.coremod.gui.tooldesc." + ForgeRegistries.ITEMS.getKey(moduleView.getTool()).getPath()));
         registerButton(BUTTON_GIVE_TOOL, this::givePlayerScepter);
     }
 

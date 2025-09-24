@@ -126,8 +126,8 @@ public class WorkOrderModuleWindow extends AbstractModuleWindow
 
         workOrders.clear();
         workOrders.addAll(buildingView.getColony().getWorkOrders().stream()
-                            .filter(finalPredicate)
-                            .toList());
+            .filter(finalPredicate)
+            .toList());
         sortWorkOrders();
     }
 
@@ -153,12 +153,12 @@ public class WorkOrderModuleWindow extends AbstractModuleWindow
 
         Text workOrderTextPanel = rowPane.findPaneOfTypeByID(WORK_ORDER_NAME, Text.class);
         PaneBuilders.tooltipBuilder()
-          .append(order.getDisplayName())
-          .hoverPane(workOrderTextPanel)
-          .build();
+            .append(order.getDisplayName())
+            .hoverPane(workOrderTextPanel)
+            .build();
         workOrderTextPanel.setText(order.getDisplayName());
         rowPane.findPaneOfTypeByID(WORK_ORDER_POS, Text.class)
-          .setText(Component.translatable("com.minecolonies.coremod.gui.blocks.distance", BlockPosUtil.getDistance2D(order.getLocation(), buildingView.getPosition())));
+            .setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.blocks.distance", BlockPosUtil.getDistance2D(order.getLocation(), buildingView.getPosition())));
 
         if (buildingView.getAllAssignedCitizens().isEmpty())
         {
@@ -178,12 +178,12 @@ public class WorkOrderModuleWindow extends AbstractModuleWindow
 
         if (order.getClaimedBy().equals(buildingView.getPosition()))
         {
-            rowPane.findPaneOfTypeByID(WORK_ORDER_SELECT, ButtonImage.class).setText(Component.translatable("com.minecolonies.coremod.gui.builder.cancel"));
+            rowPane.findPaneOfTypeByID(WORK_ORDER_SELECT, ButtonImage.class).setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.builder.cancel"));
         }
         else if (manualMode)
         {
             Button assign = rowPane.findPaneOfTypeByID(WORK_ORDER_SELECT, ButtonImage.class);
-            assign.setText(Component.translatable("com.minecolonies.coremod.gui.builder.select"));
+            assign.setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.builder.select"));
 
             if (!buttonEnabled)
             {

@@ -9,5 +9,5 @@
   "icon": "minecraft:experience_bottle:5",
   "parentResearch": "minecolonies:civilian/reflective",
   "researchLevel": 6,
-  "subtitle": "com.minecolonies.research.civilian.academic.subtitle"
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.academic.subtitle"
 }

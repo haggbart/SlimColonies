@@ -136,13 +136,13 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
         final IColonyView colonyView = IColonyManager.getInstance().getClosestColonyView(level, pos);
         if (colonyView == null)
         {
-            requirements.add(Component.translatable("com.minecolonies.coremod.hut.incolony").setStyle((Style.EMPTY).withColor(ChatFormatting.RED)));
+            requirements.add(Component.translatable("no.monopixel.slimcolonies.coremod.hut.incolony").setStyle((Style.EMPTY).withColor(ChatFormatting.RED)));
             return requirements;
         }
 
         if (InventoryUtils.findFirstSlotInItemHandlerWith(new InvWrapper(player.getInventory()), this) == -1)
         {
-            requirements.add(Component.translatable("com.minecolonies.coremod.hut.cost", Component.translatable("block." + Constants.MOD_ID + "." + getHutName()))
+            requirements.add(Component.translatable("no.monopixel.slimcolonies.coremod.hut.cost", Component.translatable("block." + Constants.MOD_ID + "." + getHutName()))
                 .setStyle((Style.EMPTY).withColor(ChatFormatting.RED)));
             return requirements;
         }

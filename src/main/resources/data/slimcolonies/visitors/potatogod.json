@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Cactus Jack",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.potatogod",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.potatogod",
   "recruitcost": "minecraft:cactus",
   "recruitcostcount": 7,
   "gender": "male"

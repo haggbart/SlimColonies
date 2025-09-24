@@ -74,8 +74,8 @@ public abstract class AbstractWindowSkeleton extends BOWindow implements ButtonH
         {
             buttonNextPage = findPaneOfTypeByID(BUTTON_NEXTPAGE, Button.class);
             buttonPrevPage = findPaneOfTypeByID(BUTTON_PREVPAGE, Button.class);
-            PaneBuilders.singleLineTooltip(Component.translatable("com.minecolonies.core.gui.nextpage"), buttonNextPage);
-            PaneBuilders.singleLineTooltip(Component.translatable("com.minecolonies.core.gui.prevpage"), buttonPrevPage);
+            PaneBuilders.singleLineTooltip(Component.translatable("no.monopixel.slimcolonies.core.gui.nextpage"), buttonNextPage);
+            PaneBuilders.singleLineTooltip(Component.translatable("no.monopixel.slimcolonies.core.gui.prevpage"), buttonPrevPage);
 
             pageNum = findPaneOfTypeByID(LABEL_PAGE_NUMBER, Text.class);
             registerButton(BUTTON_NEXTPAGE, () -> setPage(true, 1));
@@ -144,7 +144,7 @@ public abstract class AbstractWindowSkeleton extends BOWindow implements ButtonH
      * Generic page handler, uses common ids
      *
      * @param relative whether page param is relative or absolute
-     * @param page if relative turn x pages forward/backward, if absolute turn to x-th page
+     * @param page     if relative turn x pages forward/backward, if absolute turn to x-th page
      */
     public void setPage(final boolean relative, final int page)
     {

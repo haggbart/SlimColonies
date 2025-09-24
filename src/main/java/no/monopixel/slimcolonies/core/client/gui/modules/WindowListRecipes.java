@@ -39,7 +39,7 @@ public class WindowListRecipes extends AbstractModuleWindow
     /**
      * Id of the recipe status label in the GUI.
      */
-    private static final String RECIPE_STATUS="recipestatus";
+    private static final String RECIPE_STATUS = "recipestatus";
 
     /**
      * The output item icon.
@@ -78,6 +78,7 @@ public class WindowListRecipes extends AbstractModuleWindow
 
     /**
      * The constructor of the window.
+     *
      * @param view the building view.
      * @param name the layout file.
      */
@@ -96,11 +97,11 @@ public class WindowListRecipes extends AbstractModuleWindow
         super.registerButton(BUTTON_FORWARD, this::forwardClicked);
         super.registerButton(BUTTON_BACKWARD, this::backwardClicked);
         super.registerButton(BUTTON_TOGGLE, this::toggleRecipe);
-
     }
 
     /**
      * Recipe toggle.
+     *
      * @param button the clicked button.
      */
     private void toggleRecipe(final Button button)
@@ -112,6 +113,7 @@ public class WindowListRecipes extends AbstractModuleWindow
 
     /**
      * Backwards clicked in the button.
+     *
      * @param button the clicked button.
      */
     private void backwardClicked(final Button button)
@@ -125,6 +127,7 @@ public class WindowListRecipes extends AbstractModuleWindow
 
     /**
      * Forward clicked.
+     *
      * @param button the clicked button.
      */
     private void forwardClicked(final Button button)
@@ -138,6 +141,7 @@ public class WindowListRecipes extends AbstractModuleWindow
 
     /**
      * On remove recipe clicked.
+     *
      * @param button the clicked button.
      */
     private void removeClicked(final Button button)
@@ -200,7 +204,7 @@ public class WindowListRecipes extends AbstractModuleWindow
                     intermediate.setText(recipe.getRequiredTool().getDisplayName());
                     intermediate.setVisible(true);
                 }
-                else if(recipe.getIntermediate() != Blocks.AIR)
+                else if (recipe.getIntermediate() != Blocks.AIR)
                 {
                     intermediate.setText(recipe.getIntermediate().getName());
                     //intermediate.setVisible(true);
@@ -209,12 +213,12 @@ public class WindowListRecipes extends AbstractModuleWindow
                 if (module.isDisabled(recipe))
                 {
                     rowPane.findPaneOfTypeByID("gradient", Gradient.class).setVisible(true);
-                    rowPane.findPaneOfTypeByID(BUTTON_TOGGLE, Button.class).setText(Component.translatable("com.minecolonies.coremod.gui.recipe.enable"));
+                    rowPane.findPaneOfTypeByID(BUTTON_TOGGLE, Button.class).setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.recipe.enable"));
                 }
                 else
                 {
                     rowPane.findPaneOfTypeByID("gradient", Gradient.class).setVisible(false);
-                    rowPane.findPaneOfTypeByID(BUTTON_TOGGLE, Button.class).setText(Component.translatable("com.minecolonies.coremod.gui.recipe.disable"));
+                    rowPane.findPaneOfTypeByID(BUTTON_TOGGLE, Button.class).setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.recipe.disable"));
                 }
 
                 // Some special recipes might not include all necessary air blocks.
@@ -257,6 +261,7 @@ public class WindowListRecipes extends AbstractModuleWindow
 
     /**
      * Setup the stack with count.
+     *
      * @param storage the storage to get it from.
      * @return the stack with the set count.
      */

@@ -3,7 +3,7 @@
   "citizensuffix": "_d",
   "name": "Tobi Carnage Arruda",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.tobidoes",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.tobidoes",
   "recruitcost": "minecraft:diamond_pickaxe",
   "recruitcostcount": 1,
   "gender": "male"

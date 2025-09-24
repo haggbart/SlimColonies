@@ -83,7 +83,7 @@ public class TileEntityColonySignRenderer implements BlockEntityRenderer<TileEnt
                 if (colonyName.isEmpty())
                 {
                     renderText(matrixStack, buffer, combinedLight, "Unknown Colony", 0, 0);
-                    renderText(matrixStack, buffer, combinedLight, Component.translatable("com.minecolonies.coremod.dist.blocks",distance).getString(), 3, 0);
+                    renderText(matrixStack, buffer, combinedLight, Component.translatable("no.monopixel.slimcolonies.coremod.dist.blocks", distance).getString(), 3, 0);
                 }
                 else
                 {
@@ -106,42 +106,57 @@ public class TileEntityColonySignRenderer implements BlockEntityRenderer<TileEnt
 
     /**
      * Render the name and distance on the sign at offset.
-     * @param colonyName the name.
-     * @param matrixStack the stack.
-     * @param buffer the buffer.
+     *
+     * @param colonyName    the name.
+     * @param matrixStack   the stack.
+     * @param buffer        the buffer.
      * @param combinedLight the light.
-     * @param distance the distance to the colony.
-     * @param offset the offset to render it at.
+     * @param distance      the distance to the colony.
+     * @param offset        the offset to render it at.
      */
-    private void renderColonyNameOnSign(final String colonyName, final PoseStack matrixStack, final @NotNull MultiBufferSource buffer, final int combinedLight, final int distance, final int offset)
+    private void renderColonyNameOnSign(
+        final String colonyName,
+        final PoseStack matrixStack,
+        final @NotNull MultiBufferSource buffer,
+        final int combinedLight,
+        final int distance,
+        final int offset)
     {
         final int textWidth = Minecraft.getInstance().font.width(colonyName);
         if (textWidth > 90)
         {
-            final List<FormattedText> splitName = Minecraft.getInstance().font.getSplitter().splitLines(colonyName, 90, Style.EMPTY);;
+            final List<FormattedText> splitName = Minecraft.getInstance().font.getSplitter().splitLines(colonyName, 90, Style.EMPTY);
+            ;
             for (int i = 0; i < Math.min(2, splitName.size()); i++)
             {
                 renderText(matrixStack, buffer, combinedLight, splitName.get(i).getString(), i, offset);
             }
-            renderText(matrixStack, buffer, combinedLight, Component.translatable("com.minecolonies.coremod.dist.blocks",distance).getString(), 3, offset);
+            renderText(matrixStack, buffer, combinedLight, Component.translatable("no.monopixel.slimcolonies.coremod.dist.blocks", distance).getString(), 3, offset);
         }
         else
         {
             renderText(matrixStack, buffer, combinedLight, colonyName, 0, offset);
-            renderText(matrixStack, buffer, combinedLight, Component.translatable("com.minecolonies.coremod.dist.blocks",distance).getString(), 3, offset);
+            renderText(matrixStack, buffer, combinedLight, Component.translatable("no.monopixel.slimcolonies.coremod.dist.blocks", distance).getString(), 3, offset);
         }
     }
 
     /**
      * Utility ro render a single block (the sign model).
-     * @param state the state of the sign.
-     * @param pose the poststack.
-     * @param buffer the buffer.
-     * @param combinedLight light combined.
+     *
+     * @param state           the state of the sign.
+     * @param pose            the poststack.
+     * @param buffer          the buffer.
+     * @param combinedLight   light combined.
      * @param combinedOverlay overlay.
-     * @param connected if two colonies are connected.
+     * @param connected       if two colonies are connected.
      */
-    private void renderSingleBlock(final BlockState state, final PoseStack pose, final MultiBufferSource buffer, final int combinedLight, final int combinedOverlay, final boolean connected)
+    private void renderSingleBlock(
+        final BlockState state,
+        final PoseStack pose,
+        final MultiBufferSource buffer,
+        final int combinedLight,
+        final int combinedOverlay,
+        final boolean connected)
     {
         final BakedModel usedModel = connected ? model2 : model;
         for (net.minecraft.client.renderer.RenderType rt : usedModel.getRenderTypes(state, RandomSource.create(42), ModelData.EMPTY))
@@ -162,12 +177,13 @@ public class TileEntityColonySignRenderer implements BlockEntityRenderer<TileEnt
 
     /**
      * Text render utility.
-     * @param matrixStack the matrix stack.
-     * @param buffer the buffer.
+     *
+     * @param matrixStack   the matrix stack.
+     * @param buffer        the buffer.
      * @param combinedLight the light.
-     * @param text the text to render.
-     * @param line the line of the text.
-     * @param offset additional offset.
+     * @param text          the text to render.
+     * @param line          the line of the text.
+     * @param offset        additional offset.
      */
     private void renderText(final PoseStack matrixStack, final MultiBufferSource buffer, final int combinedLight, String text, final int line, final float offset)
     {

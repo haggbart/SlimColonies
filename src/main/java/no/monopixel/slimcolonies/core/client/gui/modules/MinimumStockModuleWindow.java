@@ -36,7 +36,7 @@ public class MinimumStockModuleWindow extends AbstractModuleWindow
     /**
      * Limit reached label.
      */
-    private static final String LABEL_LIMIT_REACHED = "com.minecolonies.coremod.gui.warehouse.limitreached";
+    private static final String LABEL_LIMIT_REACHED = "no.monopixel.slimcolonies.coremod.gui.warehouse.limitreached";
 
     /**
      * Resource scrolling list.
@@ -51,12 +51,12 @@ public class MinimumStockModuleWindow extends AbstractModuleWindow
     /**
      * Constructor for the minimum stock window view.
      *
-     * @param building class extending
+     * @param building   class extending
      * @param moduleView the module view.
      */
     public MinimumStockModuleWindow(
-      final IBuildingView building,
-      final IMinimumStockModuleView moduleView)
+        final IBuildingView building,
+        final IMinimumStockModuleView moduleView)
     {
         super(building, Constants.MOD_ID + RESOURCE_STRING);
 
@@ -95,7 +95,10 @@ public class MinimumStockModuleWindow extends AbstractModuleWindow
     {
         if (!moduleView.hasReachedLimit())
         {
-            new WindowSelectRes(this, (stack) -> true, (stack, qty) -> Network.getNetwork().sendToServer(new AddMinimumStockToBuildingModuleMessage(buildingView, stack, qty)), true).open();
+            new WindowSelectRes(this,
+                (stack) -> true,
+                (stack, qty) -> Network.getNetwork().sendToServer(new AddMinimumStockToBuildingModuleMessage(buildingView, stack, qty)),
+                true).open();
         }
     }
 

@@ -17,14 +17,14 @@ public class CrafterRecipeSetting extends StringSettingWithDesc
     /**
      * Reason display constants.
      */
-    public static final String NEEDS_RESEARCH_REASON     = "com.minecolonies.coremod.settings.reason.needsresearch";
-    public static final String WAREHOUSE_MASTER_RESEARCH = "com.minecolonies.research.technology.warehousemaster.name";
+    public static final String NEEDS_RESEARCH_REASON     = "no.monopixel.slimcolonies.coremod.settings.reason.needsresearch";
+    public static final String WAREHOUSE_MASTER_RESEARCH = "no.monopixel.slimcolonies.research.technology.warehousemaster.name";
 
     /**
      * Different setting possibilities.
      */
-    public static final String PRIORITY  = "com.minecolonies.core.crafting.setting.priority";
-    public static final String MAX_STOCK = "com.minecolonies.core.crafting.setting.maxstock";
+    public static final String PRIORITY  = "no.monopixel.slimcolonies.core.crafting.setting.priority";
+    public static final String MAX_STOCK = "no.monopixel.slimcolonies.core.crafting.setting.maxstock";
 
     /**
      * Create a new guard task list setting.

@@ -1,6 +1,6 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" size="190 130"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
-        >
+>
     <image source="slimcolonies:textures/gui/builderhut/builder_paper_short.png" size="190 130"/>
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_left.png" size="6 15" pos="44 12"/>
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_center.png" size="90 15" pos="50 12"/>
@@ -8,10 +8,10 @@
     <text size="130 11" pos="30 14" color="red" textalign="MIDDLE" label="$(block.minecolonies.blockhutplantationfield)"/>
 
     <text id="not-in-colony" size="164 11" pos="13 55" color="black" textalign="MIDDLE"
-           label="$(com.minecolonies.coremod.gui.workerhuts.fields.notincolony)"/>
+          label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.notincolony)"/>
 
     <text id="plants-header" size="130 11" pos="30 30" color="black" textalign="MIDDLE"
-           label="$(com.minecolonies.coremod.gui.workerhuts.plantationfields.plants)"/>
+          label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.plantationfields.plants)"/>
 
     <list id="plants" size="138 32" pos="30 45">
         <view size="130 32">
@@ -31,6 +31,6 @@
     </list>
 
     <button id="repair" size="130 17" pos="30 90" color="black"
-                 source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
-                 label="$(com.minecolonies.coremod.gui.workerhuts.plantationfields.repair)"/>
+            source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.plantationfields.repair)"/>
 </window>

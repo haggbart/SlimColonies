@@ -282,24 +282,24 @@ public class WindowMainPage extends AbstractWindowTownHall
             }
 
             final AbstractTextBuilder.TooltipBuilder textPaneToolTipBuilder =
-                PaneBuilders.tooltipBuilder().hoverPane(textPane).append(Component.translatable("com.minecolonies.core.townhall.patreon.textures"))
+                PaneBuilders.tooltipBuilder().hoverPane(textPane).append(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.textures"))
                     .paragraphBreak()
                     .appendNL(Component.empty())
-                    .appendNL(Component.translatable("com.minecolonies.core.townhall.patreon"))
+                    .appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon"))
                     .paragraphBreak();
 
 
             final AbstractTextBuilder.TooltipBuilder namePaneToolTipBuilder = PaneBuilders.tooltipBuilder().hoverPane(namePane)
-                .append(Component.translatable("com.minecolonies.core.townhall.patreon.names")).paragraphBreak()
+                .append(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.names")).paragraphBreak()
                 .appendNL(Component.empty())
-                .appendNL(Component.translatable("com.minecolonies.core.townhall.patreon")).paragraphBreak();
+                .appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon")).paragraphBreak();
 
             if (isFeatureUnlocked.get() && !isOwner)
             {
                 textPaneToolTipBuilder.appendNL(Component.empty());
                 namePaneToolTipBuilder.appendNL(Component.empty());
-                textPaneToolTipBuilder.appendNL(Component.translatable("com.minecolonies.core.townhall.patreon.needs_owner"));
-                namePaneToolTipBuilder.appendNL(Component.translatable("com.minecolonies.core.townhall.patreon.needs_owner"));
+                textPaneToolTipBuilder.appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.needs_owner"));
+                namePaneToolTipBuilder.appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.needs_owner"));
             }
             textPaneToolTipBuilder.build();
             namePaneToolTipBuilder.build();
@@ -366,7 +366,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         super.onOpened();
 
         title.setText(Component.literal(building.getColony().getName()));
-
     }
 
     /**
@@ -376,7 +375,6 @@ public class WindowMainPage extends AbstractWindowTownHall
     {
         new WindowTownHallNameEntry(building.getColony()).open();
     }
-
 
     /**
      * Opens the map on button clicked

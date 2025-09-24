@@ -3,7 +3,7 @@
   "citizensuffix": "_b",
   "name": "Dr R Cat",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.drcat",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.drcat",
   "recruitcost": "minecraft:baked_potato",
   "recruitcostcount": 64,
   "gender": "male"

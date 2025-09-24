@@ -57,13 +57,12 @@ public class WindowStatsModule extends AbstractModuleWindow
      * Texture of the assign button when it's off and disabled.
      */
     private static final String TEXTURE_ASSIGN_OFF_DISABLED = "minecolonies:textures/gui/builderhut/builder_button_mini_disabled.png";
-
     static
     {
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.yesterday", 1);
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.lastweek", 7);
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.100days", 100);
-        INTERVAL.put("com.minecolonies.coremod.gui.interval.alltime", -1);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.yesterday", 1);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.lastweek", 7);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.100days", 100);
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.alltime", -1);
     }
 
     /**
@@ -74,7 +73,7 @@ public class WindowStatsModule extends AbstractModuleWindow
     /**
      * Current selected interval.
      */
-    public String selectedInterval = "com.minecolonies.coremod.gui.interval.yesterday";
+    public String selectedInterval = "no.monopixel.slimcolonies.coremod.gui.interval.yesterday";
 
     /**
      * Util tags.
@@ -122,8 +121,7 @@ public class WindowStatsModule extends AbstractModuleWindow
         findPaneOfTypeByID("stats", ScrollingList.class).setDataProvider(new ScrollingList.DataProvider()
         {
 
-            private List <String> filteredStats = new ArrayList<>();
-
+            private List<String> filteredStats = new ArrayList<>();
             {
                 int interval = INTERVAL.get(selectedInterval);
 
@@ -152,7 +150,6 @@ public class WindowStatsModule extends AbstractModuleWindow
                     filteredStats.addAll(stats);
                 }
             }
-
             /**
              * The number of rows of the list.
              * @return the number.

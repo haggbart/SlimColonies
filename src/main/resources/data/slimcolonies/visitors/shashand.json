@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Tamamo No Mae",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.shashand",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.shashand",
   "recruitcost": "slimcolonies:ancienttome",
   "recruitcostcount": 9,
   "gender": "female"

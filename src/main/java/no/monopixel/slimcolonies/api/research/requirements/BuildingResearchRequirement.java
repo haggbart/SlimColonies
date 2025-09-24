@@ -128,11 +128,11 @@ public class BuildingResearchRequirement implements IResearchRequirement
 
         if (singleBuilding)
         {
-            return Component.translatable("com.minecolonies.coremod.research.requirement.building.single.level", buildingName, buildingLevel);
+            return Component.translatable("no.monopixel.slimcolonies.coremod.research.requirement.building.single.level", buildingName, buildingLevel);
         }
         else
         {
-            return Component.translatable("com.minecolonies.coremod.research.requirement.building.level", buildingName, buildingLevel);
+            return Component.translatable("no.monopixel.slimcolonies.coremod.research.requirement.building.level", buildingName, buildingLevel);
         }
     }
 

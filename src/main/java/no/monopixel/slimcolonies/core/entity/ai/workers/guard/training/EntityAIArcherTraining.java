@@ -71,7 +71,7 @@ public class EntityAIArcherTraining extends AbstractEntityAITraining<JobArcherTr
      * Shooting icon
      */
     private final static VisibleCitizenStatus ARCHER_TRAIN =
-      new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/archer_uni.png"), "com.minecolonies.gui.visiblestatus.archer_uni");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/archer_uni.png"), "no.monopixel.slimcolonies.gui.visiblestatus.archer_uni");
 
     /**
      * Current target to shoot at.
@@ -98,10 +98,10 @@ public class EntityAIArcherTraining extends AbstractEntityAITraining<JobArcherTr
         //Tasks: Wander around, Find shooting position, go to shooting position, shoot, verify shot
         super(job);
         super.registerTargets(
-          new AITarget(COMBAT_TRAINING, this::findShootingStandPosition, STANDARD_DELAY),
-          new AITarget(ARCHER_SELECT_TARGET, this::selectTarget, STANDARD_DELAY),
-          new AITarget(ARCHER_CHECK_SHOT, this::checkShot, CHECK_SHOT_DELAY),
-          new AITarget(ARCHER_SHOOT, this::shoot, STANDARD_DELAY)
+            new AITarget(COMBAT_TRAINING, this::findShootingStandPosition, STANDARD_DELAY),
+            new AITarget(ARCHER_SELECT_TARGET, this::selectTarget, STANDARD_DELAY),
+            new AITarget(ARCHER_CHECK_SHOT, this::checkShot, CHECK_SHOT_DELAY),
+            new AITarget(ARCHER_SHOOT, this::shoot, STANDARD_DELAY)
 
         );
     }
@@ -121,7 +121,11 @@ public class EntityAIArcherTraining extends AbstractEntityAITraining<JobArcherTr
         }
         final BlockPos targetPos = archeryBuilding.getRandomShootingTarget(worker.getRandom());
         if (targetPos == null || !WorldUtil.isBlockLoaded(world, targetPos) ||
-              !world.clip(new ClipContext(new Vec3(worker.getX(), worker.getEyeY(), worker.getZ()), new Vec3(targetPos.getX() + HALF_BLOCK, targetPos.getY() + HALF_BLOCK, targetPos.getZ() + HALF_BLOCK), ClipContext.Block.COLLIDER, net.minecraft.world.level.ClipContext.Fluid.NONE, worker)).getBlockPos().equals(targetPos))
+            !world.clip(new ClipContext(new Vec3(worker.getX(), worker.getEyeY(), worker.getZ()),
+                new Vec3(targetPos.getX() + HALF_BLOCK, targetPos.getY() + HALF_BLOCK, targetPos.getZ() + HALF_BLOCK),
+                ClipContext.Block.COLLIDER,
+                net.minecraft.world.level.ClipContext.Fluid.NONE,
+                worker)).getBlockPos().equals(targetPos))
         {
             return DECIDE;
         }

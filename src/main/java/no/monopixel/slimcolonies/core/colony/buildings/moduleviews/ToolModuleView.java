@@ -23,6 +23,7 @@ public class ToolModuleView extends AbstractBuildingModuleView
 
     /**
      * The tool of the worker.
+     *
      * @param tool the item.
      */
     public ToolModuleView(final Item tool)
@@ -34,7 +35,7 @@ public class ToolModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.workerhuts.tools";
+        return "no.monopixel.slimcolonies.coremod.gui.workerhuts.tools";
     }
 
     @Override
@@ -58,6 +59,7 @@ public class ToolModuleView extends AbstractBuildingModuleView
 
     /**
      * Get the correct tool.
+     *
      * @return the tool to give.
      */
     public Item getTool()

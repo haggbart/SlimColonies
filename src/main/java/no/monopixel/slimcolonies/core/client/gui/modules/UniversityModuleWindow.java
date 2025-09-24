@@ -49,7 +49,7 @@ public class UniversityModuleWindow extends AbstractModuleWindow
         for (final ResourceLocation branch : inputBranches)
         {
             final List<MutableComponent> requirements = getHidingRequirementDesc(branch);
-            if(requirements.isEmpty() || !IGlobalResearchTree.getInstance().getBranchData(branch).getHidden())
+            if (requirements.isEmpty() || !IGlobalResearchTree.getInstance().getBranchData(branch).getHidden())
             {
                 visibleBranches.add(branch);
                 allReqs.add(requirements);
@@ -63,30 +63,31 @@ public class UniversityModuleWindow extends AbstractModuleWindow
     /**
      * Gets a list describing what requirements must be met to make at least one primary research for a branch visible.
      *
-     * @param branch  The identifier for a branch.
+     * @param branch The identifier for a branch.
      * @return An empty list if at least one primary research is visible, or a list of MutableComponents describing the dependencies for each hidden primary research.
      */
     public List<MutableComponent> getHidingRequirementDesc(final ResourceLocation branch)
     {
         final List<MutableComponent> requirements = new ArrayList<>();
-        for(final ResourceLocation primary : IGlobalResearchTree.getInstance().getPrimaryResearch(branch))
+        for (final ResourceLocation primary : IGlobalResearchTree.getInstance().getPrimaryResearch(branch))
         {
-            if(!IGlobalResearchTree.getInstance().getResearch(branch, primary).isHidden()
-                 || IGlobalResearchTree.getInstance().isResearchRequirementsFulfilled(IGlobalResearchTree.getInstance().getResearch(branch, primary).getResearchRequirements(), buildingView.getColony()))
+            if (!IGlobalResearchTree.getInstance().getResearch(branch, primary).isHidden()
+                || IGlobalResearchTree.getInstance()
+                .isResearchRequirementsFulfilled(IGlobalResearchTree.getInstance().getResearch(branch, primary).getResearchRequirements(), buildingView.getColony()))
             {
                 return Collections.EMPTY_LIST;
             }
             else
             {
-                if(requirements.isEmpty())
+                if (requirements.isEmpty())
                 {
-                    requirements.add(Component.translatable("com.minecolonies.coremod.research.locked"));
+                    requirements.add(Component.translatable("no.monopixel.slimcolonies.coremod.research.locked"));
                 }
                 else
                 {
                     requirements.add(Component.translatable("Or").setStyle((Style.EMPTY).withColor(ChatFormatting.BLUE)));
                 }
-                for(IResearchRequirement req : IGlobalResearchTree.getInstance().getResearch(branch, primary).getResearchRequirements())
+                for (IResearchRequirement req : IGlobalResearchTree.getInstance().getResearch(branch, primary).getResearchRequirements())
                 {
                     // We'll include even completed partial components in the requirement list.
                     if (!req.isFulfilled(buildingView.getColony()))
@@ -108,7 +109,9 @@ public class UniversityModuleWindow extends AbstractModuleWindow
     {
         super.onButtonClicked(button);
 
-        if (button.getParent() != null && ResourceLocation.isValidResourceLocation(button.getParent().getID()) && IGlobalResearchTree.getInstance().getBranches().contains(new ResourceLocation(button.getParent().getID())))
+        if (button.getParent() != null && ResourceLocation.isValidResourceLocation(button.getParent().getID()) && IGlobalResearchTree.getInstance()
+            .getBranches()
+            .contains(new ResourceLocation(button.getParent().getID())))
         {
             new WindowResearchTree(new ResourceLocation(button.getParent().getID()), buildingView, this).open();
         }
@@ -116,14 +119,15 @@ public class UniversityModuleWindow extends AbstractModuleWindow
 
     /**
      * Display the count of InProgress research, and the max number for this university, and change the color text to red if at max.
-     * @param offset        An amount to offset the count of inProgress research, normally zero, or -1 when cancelling a research
+     *
+     * @param offset An amount to offset the count of inProgress research, normally zero, or -1 when cancelling a research
      */
     public void updateResearchCount(final int offset)
     {
         this.findPaneOfTypeByID("maxresearchwarn", Text.class)
-          .setText(Component.translatable("com.minecolonies.coremod.gui.research.countinprogress",
-            buildingView.getColony().getResearchManager().getResearchTree().getResearchInProgress().size() + offset, buildingView.getBuildingLevel()));
-        if(buildingView.getBuildingLevel() <= buildingView.getColony().getResearchManager().getResearchTree().getResearchInProgress().size() + offset)
+            .setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.research.countinprogress",
+                buildingView.getColony().getResearchManager().getResearchTree().getResearchInProgress().size() + offset, buildingView.getBuildingLevel()));
+        if (buildingView.getBuildingLevel() <= buildingView.getColony().getResearchManager().getResearchTree().getResearchInProgress().size() + offset)
         {
             this.findPaneOfTypeByID("maxresearchwarn", Text.class).setColors(Color.getByName("red", 0));
         }
@@ -135,7 +139,7 @@ public class UniversityModuleWindow extends AbstractModuleWindow
 
     private static class ResearchListProvider implements ScrollingList.DataProvider
     {
-        private final List<ResourceLocation> branches;
+        private final List<ResourceLocation>       branches;
         private final List<List<MutableComponent>> requirements;
 
         ResearchListProvider(List<ResourceLocation> branches, List<List<MutableComponent>> requirements)
@@ -155,7 +159,7 @@ public class UniversityModuleWindow extends AbstractModuleWindow
         {
             ButtonImage button = rowPane.findPaneOfTypeByID(GUI_LIST_ELEMENT_NAME, ButtonImage.class);
             button.getParent().setID(branches.get(index).toString());
-            if(requirements.get(index).isEmpty())
+            if (requirements.get(index).isEmpty())
             {
                 button.setText(MutableComponent.create(IGlobalResearchTree.getInstance().getBranchData(branches.get(index)).getName()));
             }
@@ -166,12 +170,18 @@ public class UniversityModuleWindow extends AbstractModuleWindow
             }
 
             // This null check isn't strictly required, but prevents unnecessary creation of tooltip panes, since the contents here never updates.
-            if(button.getHoverPane() == null && (!requirements.get(index).isEmpty() || !IGlobalResearchTree.getInstance().getBranchData(branches.get(index)).getSubtitle().getKey().isEmpty()))
+            if (button.getHoverPane() == null && (!requirements.get(index).isEmpty() || !IGlobalResearchTree.getInstance()
+                .getBranchData(branches.get(index))
+                .getSubtitle()
+                .getKey()
+                .isEmpty()))
             {
                 AbstractTextBuilder.TooltipBuilder hoverText = PaneBuilders.tooltipBuilder().hoverPane(button);
                 if (!IGlobalResearchTree.getInstance().getBranchData(branches.get(index)).getSubtitle().getKey().isEmpty())
                 {
-                    hoverText.append(MutableComponent.create(IGlobalResearchTree.getInstance().getBranchData(branches.get(index)).getSubtitle())).colorName("GRAY").paragraphBreak();
+                    hoverText.append(MutableComponent.create(IGlobalResearchTree.getInstance().getBranchData(branches.get(index)).getSubtitle()))
+                        .colorName("GRAY")
+                        .paragraphBreak();
                 }
                 if (!requirements.get(index).isEmpty())
                 {

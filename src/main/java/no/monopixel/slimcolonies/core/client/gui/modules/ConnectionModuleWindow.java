@@ -27,8 +27,8 @@ public class ConnectionModuleWindow extends AbstractModuleWindow
     /**
      * Special buttons
      */
-    private static final String TRAVEL      = "travel";
-    private static final String LIST_DIRECT = "directcolonylist";
+    private static final String TRAVEL        = "travel";
+    private static final String LIST_DIRECT   = "directcolonylist";
     private static final String LIST_INDIRECT = "indirectcolonylist";
 
     /**
@@ -46,7 +46,7 @@ public class ConnectionModuleWindow extends AbstractModuleWindow
     /**
      * Constructor for the minimum stock window view.
      *
-     * @param building class extending
+     * @param building   class extending
      * @param moduleView the module view.
      */
     public ConnectionModuleWindow(final String res, final IBuildingView building, final ColonyConnectionModuleView moduleView)
@@ -83,9 +83,10 @@ public class ConnectionModuleWindow extends AbstractModuleWindow
     {
         final ColonyConnection connectedColonyData = getColonyDataFromPane(button);
 
-        MessageUtils.format("com.minecolonies.core.gui.colonylist.travel.really", connectedColonyData.name)
+        MessageUtils.format("no.monopixel.slimcolonies.core.gui.colonylist.travel.really", connectedColonyData.name)
             .withPriority(MessageUtils.MessagePriority.IMPORTANT)
-            .withClickEvent(new ClickEventWithExecutable(() -> Network.getNetwork().sendToServer(new TeleportToColonyMessage(mc.level.dimension(), connectedColonyData.id, connectedColonyData.pos, buildingView.getColony().getID()))))
+            .withClickEvent(new ClickEventWithExecutable(() -> Network.getNetwork()
+                .sendToServer(new TeleportToColonyMessage(mc.level.dimension(), connectedColonyData.id, connectedColonyData.pos, buildingView.getColony().getID()))))
             .sendTo(Minecraft.getInstance().player);
         this.close();
     }
@@ -117,7 +118,9 @@ public class ConnectionModuleWindow extends AbstractModuleWindow
             {
                 final ColonyConnection colonyData = connectionData.get(index);
                 rowPane.findPaneOfTypeByID("name", Text.class).setText(Component.literal(colonyData.name));
-                rowPane.findPaneOfTypeByID("distance", Text.class).setText(Component.translatable("com.minecolonies.coremod.dist.blocks", (int) BlockPosUtil.dist(colonyData.pos, buildingView.getColony().getCenter())));
+                rowPane.findPaneOfTypeByID("distance", Text.class)
+                    .setText(Component.translatable("no.monopixel.slimcolonies.coremod.dist.blocks",
+                        (int) BlockPosUtil.dist(colonyData.pos, buildingView.getColony().getCenter())));
                 rowPane.findPaneOfTypeByID("state", Text.class).setText(Component.translatable(colonyData.diplomacyStatus.translationKey()));
 
                 rowPane.findPaneOfTypeByID(TRAVEL, Button.class).setEnabled(colonyData.diplomacyStatus == DiplomacyStatus.ALLIES

@@ -54,7 +54,7 @@ public abstract class AbstractWindowModuleBuilding<B extends IBuildingView> exte
         Button buttonInfo = findPaneOfTypeByID(BUTTON_INFO, Button.class);
         if (buttonInfo != null)
         {
-            buttonInfo.setVisible(I18n.exists(PARTIAL_INFO_TEXT + building.getBuildingType().getTranslationKey().replace("com.minecolonies.building.", "") + ".0"));
+            buttonInfo.setVisible(I18n.exists(PARTIAL_INFO_TEXT + building.getBuildingType().getTranslationKey().replace("no.monopixel.slimcolonies.building.", "") + ".0"));
         }
     }
 
@@ -95,7 +95,9 @@ public abstract class AbstractWindowModuleBuilding<B extends IBuildingView> exte
     private void buildClicked()
     {
         String buttonLabel =
-          buttonBuild.getText().getContents() instanceof TranslatableContents ? ((TranslatableContents) buttonBuild.getText().getContents()).getKey() : buttonBuild.getTextAsString();
+            buttonBuild.getText().getContents() instanceof TranslatableContents
+                ? ((TranslatableContents) buttonBuild.getText().getContents()).getKey()
+                : buttonBuild.getTextAsString();
 
         if (buttonLabel.equalsIgnoreCase(ACTION_CANCEL_BUILD) || buttonLabel.equalsIgnoreCase(ACTION_CANCEL_UPGRADE))
         {

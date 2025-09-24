@@ -37,6 +37,6 @@ public class UniversityResearchModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.research.research";
+        return "no.monopixel.slimcolonies.coremod.research.research";
     }
 }

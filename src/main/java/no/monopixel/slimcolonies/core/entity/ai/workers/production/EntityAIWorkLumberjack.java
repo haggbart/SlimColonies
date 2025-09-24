@@ -137,7 +137,8 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
      * Searching icon
      */
     private final static VisibleCitizenStatus SEARCH =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/lumberjack_search.png"), "com.minecolonies.gui.visiblestatus.lumberjack_search");
+        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/lumberjack_search.png"),
+            "no.monopixel.slimcolonies.gui.visiblestatus.lumberjack_search");
 
     /**
      * Xp bonus per finished tree

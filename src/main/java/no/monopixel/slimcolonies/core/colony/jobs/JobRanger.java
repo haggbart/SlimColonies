@@ -16,7 +16,7 @@ public class JobRanger extends AbstractJobGuard<JobRanger>
     /**
      * The name associated with the job.
      */
-    public static final String DESC = "com.minecolonies.coremod.job.Ranger";
+    public static final String DESC = "no.monopixel.slimcolonies.coremod.job.Ranger";
 
     /**
      * Initialize citizen data.

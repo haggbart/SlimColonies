@@ -79,7 +79,7 @@ public class MinerLevelManagementModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.miner.levels";
+        return "no.monopixel.slimcolonies.coremod.gui.miner.levels";
     }
 
     @Override

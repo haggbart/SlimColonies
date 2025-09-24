@@ -3,7 +3,7 @@
   "citizensuffix": "_w",
   "name": "Lion Girl",
   "chance": 0.001,
-  "storylangkey": "com.minecolonies.coremod.gui.chat.lion0101",
+  "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.lion0101",
   "recruitcost": "minecraft:enchanting_table",
   "recruitcostcount": 1,
   "gender": "female"

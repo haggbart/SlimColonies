@@ -133,6 +133,6 @@ public class CitizenDiedEvent extends AbstractCitizenEvent
     @Override
     public String getSummaryTranslationKey()
     {
-        return "com.minecolonies.core.event.summary.citizen.died";
+        return "no.monopixel.slimcolonies.core.event.summary.citizen.died";
     }
 }

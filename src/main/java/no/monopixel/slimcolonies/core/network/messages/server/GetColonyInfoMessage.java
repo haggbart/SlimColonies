@@ -94,19 +94,34 @@ public class GetColonyInfoMessage implements IMessage
             final double spawnDistance = Math.sqrt(BlockPosUtil.getDistanceSquared2D(pos, world.getSharedSpawnPos()));
             if (spawnDistance < MineColonies.getConfig().getServer().minDistanceFromWorldSpawn.get())
             {
-                Network.getNetwork().sendToPlayer(new OpenCantFoundColonyWarningMessage(Component.translatable("com.minecolonies.core.founding.tooclosetospawn", (int) (MineColonies.getConfig().getServer().minDistanceFromWorldSpawn.get() - spawnDistance)), pos, true), sender);
+                Network.getNetwork()
+                    .sendToPlayer(new OpenCantFoundColonyWarningMessage(Component.translatable("no.monopixel.slimcolonies.core.founding.tooclosetospawn",
+                        (int) (MineColonies.getConfig().getServer().minDistanceFromWorldSpawn.get() - spawnDistance)), pos, true), sender);
             }
             else if (spawnDistance > MineColonies.getConfig().getServer().maxDistanceFromWorldSpawn.get())
             {
-                Network.getNetwork().sendToPlayer(new OpenCantFoundColonyWarningMessage(Component.translatable("com.minecolonies.core.founding.toofarfromspawn", (int) (spawnDistance - MineColonies.getConfig().getServer().maxDistanceFromWorldSpawn.get())), pos, true), sender);
+                Network.getNetwork()
+                    .sendToPlayer(new OpenCantFoundColonyWarningMessage(Component.translatable("no.monopixel.slimcolonies.core.founding.toofarfromspawn",
+                        (int) (spawnDistance - MineColonies.getConfig().getServer().maxDistanceFromWorldSpawn.get())), pos, true), sender);
             }
-            else if (world.getBlockEntity(pos) instanceof TileEntityColonyBuilding townhall && townhall.getPositionedTags().containsKey(BlockPos.ZERO) && townhall.getPositionedTags().get(BlockPos.ZERO).contains(DEACTIVATED))
+            else if (world.getBlockEntity(pos) instanceof TileEntityColonyBuilding townhall && townhall.getPositionedTags().containsKey(BlockPos.ZERO)
+                && townhall.getPositionedTags().get(BlockPos.ZERO).contains(DEACTIVATED))
             {
-                Network.getNetwork().sendToPlayer(new OpenReactivateColonyMessage(nextColony == null ? "" : nextColony.getName(), nextColony == null ? Integer.MAX_VALUE : (int) BlockPosUtil.getDistance(nextColony.getCenter(), pos) - (getConfig().getServer().initialColonySize.get() << 4), pos), sender);
+                Network.getNetwork()
+                    .sendToPlayer(new OpenReactivateColonyMessage(nextColony == null ? "" : nextColony.getName(),
+                        nextColony == null
+                            ? Integer.MAX_VALUE
+                            : (int) BlockPosUtil.getDistance(nextColony.getCenter(), pos) - (getConfig().getServer().initialColonySize.get() << 4),
+                        pos), sender);
             }
             else
             {
-                Network.getNetwork().sendToPlayer(new OpenColonyFoundingCovenantMessage(nextColony == null ? "" : nextColony.getName(), nextColony == null ? Integer.MAX_VALUE : (int) BlockPosUtil.getDistance(nextColony.getCenter(), pos) - (getConfig().getServer().initialColonySize.get() << 4), pos), sender);
+                Network.getNetwork()
+                    .sendToPlayer(new OpenColonyFoundingCovenantMessage(nextColony == null ? "" : nextColony.getName(),
+                        nextColony == null
+                            ? Integer.MAX_VALUE
+                            : (int) BlockPosUtil.getDistance(nextColony.getCenter(), pos) - (getConfig().getServer().initialColonySize.get() << 4),
+                        pos), sender);
             }
         }
         else
@@ -119,7 +134,9 @@ public class GetColonyInfoMessage implements IMessage
             final int blockRange = Math.max(MineColonies.getConfig().getServer().minColonyDistance.get(), getConfig().getServer().initialColonySize.get()) << 4;
             final int distance = (int) BlockPosUtil.getDistance(pos, nextColony.getCenter());
 
-            Network.getNetwork().sendToPlayer(new OpenCantFoundColonyWarningMessage(Component.translatable("com.minecolonies.core.founding.tooclosetocolony", Math.max(100, blockRange - distance)), pos, false), sender);
+            Network.getNetwork()
+                .sendToPlayer(new OpenCantFoundColonyWarningMessage(Component.translatable("no.monopixel.slimcolonies.core.founding.tooclosetocolony",
+                    Math.max(100, blockRange - distance)), pos, false), sender);
         }
     }
 }

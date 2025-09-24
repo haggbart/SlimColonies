@@ -101,8 +101,8 @@ public class WindowResourceList extends AbstractWindowSkeleton
             else
             {
                 amountToSet =
-                  InventoryUtils.getItemCountInItemHandler(new InvWrapper(inventory),
-                    stack -> !ItemStackUtils.isEmpty(stack) && ItemStackUtils.compareItemStacksIgnoreStackSize(stack, resource.getItemStack()));
+                    InventoryUtils.getItemCountInItemHandler(new InvWrapper(inventory),
+                        stack -> !ItemStackUtils.isEmpty(stack) && ItemStackUtils.compareItemStacksIgnoreStackSize(stack, resource.getItemStack()));
             }
 
             resource.setPlayerAmount(amountToSet);
@@ -122,9 +122,9 @@ public class WindowResourceList extends AbstractWindowSkeleton
 
         if (total > 0)
         {
-            findPaneOfTypeByID(LABEL_PROGRESS, Text.class).setText(Component.translatable("com.minecolonies.coremod.gui.progress.res",
-              (int) ((supplied / total) * 100) + "%",
-              moduleView.getProgress() + "%"));
+            findPaneOfTypeByID(LABEL_PROGRESS, Text.class).setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.progress.res",
+                (int) ((supplied / total) * 100) + "%",
+                moduleView.getProgress() + "%"));
         }
 
         resources.sort(new BuildingBuilderResource.ResourceComparator(NOT_NEEDED, HAVE_ENOUGH, IN_DELIVERY, NEED_MORE, DONT_HAVE));

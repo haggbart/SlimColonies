@@ -1,6 +1,6 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
-        size="190 244" >
+        size="190 244">
     <image source="slimcolonies:textures/gui/builderhut/builder_paper.png" size="190 244"/>
 
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_left.png" size="6 15" pos="24 12"/>
@@ -8,11 +8,11 @@
     <image source="slimcolonies:textures/gui/builderhut/builder_sketch_right.png" size="6 15" pos="160 12"/>
     <text id="name" size="128 11" pos="30 14" textalign="MIDDLE" color="red"/>
     <button id="editName" size="15 15" pos="150 11" source="slimcolonies:textures/gui/builderhut/edit.png"
-            tooltip="$(com.minecolonies.gui.edit)"/>
+            tooltip="$(no.monopixel.slimcolonies.gui.edit)"/>
 
     <button id="build" size="129 17" pos="30 110" color="black"
             source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
-            label="$(com.minecolonies.coremod.gui.workerhuts.buildrepair)"/>
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.buildrepair)"/>
     <button id="info" size="17 17" pos="14 214"
-            source="slimcolonies:textures/gui/red_wax_information.png" tooltip="$(com.minecolonies.core.building.help)"/>
+            source="slimcolonies:textures/gui/red_wax_information.png" tooltip="$(no.monopixel.slimcolonies.core.building.help)"/>
 </window>

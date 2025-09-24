@@ -17,7 +17,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
 @ClientPlugin
 public class JourneymapPlugin implements IClientPlugin
 {
-    private Journeymap jmap;
+    private Journeymap    jmap;
     private EventListener listener;
 
     @Override
@@ -27,9 +27,9 @@ public class JourneymapPlugin implements IClientPlugin
         this.listener = new EventListener(this.jmap);
 
         api.subscribe(MOD_ID, EnumSet.of(
-                ClientEvent.Type.MAPPING_STARTED,
-                ClientEvent.Type.MAPPING_STOPPED,
-                ClientEvent.Type.REGISTRY));
+            ClientEvent.Type.MAPPING_STARTED,
+            ClientEvent.Type.MAPPING_STOPPED,
+            ClientEvent.Type.REGISTRY));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class JourneymapPlugin implements IClientPlugin
                 else if (RegistryEvent.RegistryType.INFO_SLOT.equals(registryEvent.getRegistryType()))
                 {
                     final RegistryEvent.InfoSlotRegistryEvent infoSlotRegistry = (RegistryEvent.InfoSlotRegistryEvent) registryEvent;
-                    infoSlotRegistry.register(MOD_ID, "com.minecolonies.coremod.journeymap.currentcolony", 2500, ColonyBorderMapping::getCurrentColony);
+                    infoSlotRegistry.register(MOD_ID, "no.monopixel.slimcolonies.coremod.journeymap.currentcolony", 2500, ColonyBorderMapping::getCurrentColony);
                 }
                 break;
         }

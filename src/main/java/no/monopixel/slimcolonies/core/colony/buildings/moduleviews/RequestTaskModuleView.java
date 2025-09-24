@@ -28,7 +28,7 @@ public abstract class RequestTaskModuleView extends AbstractBuildingModuleView
     @Override
     public BOWindow getWindow()
     {
-        return new WindowHutRequestTaskModule(buildingView,Constants.MOD_ID + ":gui/layouthuts/layouttasklist.xml");
+        return new WindowHutRequestTaskModule(buildingView, Constants.MOD_ID + ":gui/layouthuts/layouttasklist.xml");
     }
 
     @Override
@@ -40,11 +40,12 @@ public abstract class RequestTaskModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.workerhuts.crafter.tasks";
+        return "no.monopixel.slimcolonies.coremod.gui.workerhuts.crafter.tasks";
     }
 
     /**
      * Get the specific task list.
+     *
      * @return the task list.
      */
     public abstract List<IToken<?>> getTasks();

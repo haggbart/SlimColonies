@@ -79,7 +79,7 @@ public class MinerAssignmentModuleView extends AbstractBuildingModuleView implem
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.workerhuts.quarry.miners";
+        return "no.monopixel.slimcolonies.coremod.gui.workerhuts.quarry.miners";
     }
 
     @Override
@@ -113,7 +113,7 @@ public class MinerAssignmentModuleView extends AbstractBuildingModuleView implem
     {
         for (final IBuildingView bView : buildingView.getColony().getBuildings())
         {
-            final MinerAssignmentModuleView view = bView.getModuleViewMatching(MinerAssignmentModuleView.class, m-> !m.buildingView.getId().equals(buildingView.getId()));
+            final MinerAssignmentModuleView view = bView.getModuleViewMatching(MinerAssignmentModuleView.class, m -> !m.buildingView.getId().equals(buildingView.getId()));
             if (view != null && view.getAssignedCitizens().contains(data.getId()))
             {
                 return false;

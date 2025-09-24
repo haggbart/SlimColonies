@@ -79,7 +79,7 @@ public class CourierAssignmentModuleView extends AbstractBuildingModuleView impl
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.workerhuts.warehouse.couriers";
+        return "no.monopixel.slimcolonies.coremod.gui.workerhuts.warehouse.couriers";
     }
 
     @Override
@@ -113,7 +113,7 @@ public class CourierAssignmentModuleView extends AbstractBuildingModuleView impl
     {
         for (final IBuildingView bView : buildingView.getColony().getBuildings())
         {
-            final CourierAssignmentModuleView view = bView.getModuleViewMatching(CourierAssignmentModuleView.class, m-> !m.buildingView.getId().equals(buildingView.getId()));
+            final CourierAssignmentModuleView view = bView.getModuleViewMatching(CourierAssignmentModuleView.class, m -> !m.buildingView.getId().equals(buildingView.getId()));
             if (view != null && view.getAssignedCitizens().contains(data.getId()))
             {
                 return false;

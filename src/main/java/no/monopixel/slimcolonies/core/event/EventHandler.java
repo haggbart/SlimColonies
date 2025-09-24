@@ -725,7 +725,7 @@ public class EventHandler
                     event.setCanceled(true);
 
                     visitorData.triggerInteraction(new RecruitmentInteraction(Component.translatable(
-                        "com.minecolonies.coremod.gui.chat.recruitstorycured", visitorData.getName().split(" ")[0]), ChatPriority.IMPORTANT));
+                        "no.monopixel.slimcolonies.coremod.gui.chat.recruitstorycured", visitorData.getName().split(" ")[0]), ChatPriority.IMPORTANT));
                     visitorData.getEntity().ifPresent(e -> e.setPos(entity.getX(), entity.getY(), entity.getZ()));
                     if (!entity.isSilent())
                     {

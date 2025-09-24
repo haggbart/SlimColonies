@@ -36,11 +36,12 @@ public class DialogueObjectiveTemplateTemplate implements IDialogueObjectiveTemp
     /**
      * Reward unlocks from the objective.
      */
-    private final List<Integer>  rewardUnlocks;
+    private final List<Integer> rewardUnlocks;
 
     /**
      * Create a new dialogue objective.
-     * @param target the target of the dialogue.
+     *
+     * @param target       the target of the dialogue.
      * @param dialogueTree the dialogue tree.
      */
     public DialogueObjectiveTemplateTemplate(final int target, final DialogueElement dialogueTree, final List<Integer> rewards)
@@ -52,6 +53,7 @@ public class DialogueObjectiveTemplateTemplate implements IDialogueObjectiveTemp
 
     /**
      * Getter for the dialogue tree.
+     *
      * @return the tree.
      */
     public DialogueElement getDialogueTree()
@@ -73,18 +75,20 @@ public class DialogueObjectiveTemplateTemplate implements IDialogueObjectiveTemp
 
     /**
      * Parse the dialogue objective from json.
+     *
      * @param jsonObject the json to parse it from.
      * @return a new objective object.
      */
     public static IQuestObjectiveTemplate createObjective(final JsonObject jsonObject)
     {
         return new DialogueObjectiveTemplateTemplate(jsonObject.get(TARGET_KEY).getAsInt(),
-          DialogueElement.parse(jsonObject),
+            DialogueElement.parse(jsonObject),
             parseRewards(jsonObject));
     }
 
     /**
      * Parse the specific reward array from the objective.
+     *
      * @param jsonObject the object to get it from.
      * @return the unlocked rewards.
      */
@@ -125,7 +129,7 @@ public class DialogueObjectiveTemplateTemplate implements IDialogueObjectiveTemp
         final ICitizen citizen = quest.getColony().getCitizen(target == 0 ? quest.getQuestGiverId() : target - 1);
         if (citizen != null)
         {
-            return Component.translatable("com.minecolonies.coremod.questobjectives.answer.progress", citizen.getName()).setStyle(style);
+            return Component.translatable("no.monopixel.slimcolonies.coremod.questobjectives.answer.progress", citizen.getName()).setStyle(style);
         }
         else
         {

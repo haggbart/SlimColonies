@@ -26,7 +26,7 @@ public class WorkOrderListModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.coremod.gui.townhall.workorders";
+        return "no.monopixel.slimcolonies.coremod.gui.townhall.workorders";
     }
 
     @Override

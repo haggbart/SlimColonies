@@ -9,35 +9,35 @@ public class ToolTranslationConstants
 {
     // Tool types
     @NonNls
-    public static final String TOOL_TYPE_NONE        = "com.minecolonies.coremod.tooltype.none";
+    public static final String TOOL_TYPE_NONE        = "no.monopixel.slimcolonies.coremod.tooltype.none";
     @NonNls
-    public static final String TOOL_TYPE_PICKAXE     = "com.minecolonies.coremod.tooltype.pickaxe";
+    public static final String TOOL_TYPE_PICKAXE     = "no.monopixel.slimcolonies.coremod.tooltype.pickaxe";
     @NonNls
-    public static final String TOOL_TYPE_SHOVEL      = "com.minecolonies.coremod.tooltype.shovel";
+    public static final String TOOL_TYPE_SHOVEL      = "no.monopixel.slimcolonies.coremod.tooltype.shovel";
     @NonNls
-    public static final String TOOL_TYPE_AXE         = "com.minecolonies.coremod.tooltype.axe";
+    public static final String TOOL_TYPE_AXE         = "no.monopixel.slimcolonies.coremod.tooltype.axe";
     @NonNls
-    public static final String TOOL_TYPE_HOE         = "com.minecolonies.coremod.tooltype.hoe";
+    public static final String TOOL_TYPE_HOE         = "no.monopixel.slimcolonies.coremod.tooltype.hoe";
     @NonNls
-    public static final String TOOL_TYPE_SWORD       = "com.minecolonies.coremod.tooltype.sword";
+    public static final String TOOL_TYPE_SWORD       = "no.monopixel.slimcolonies.coremod.tooltype.sword";
     @NonNls
-    public static final String TOOL_TYPE_BOW         = "com.minecolonies.coremod.tooltype.bow";
+    public static final String TOOL_TYPE_BOW         = "no.monopixel.slimcolonies.coremod.tooltype.bow";
     @NonNls
-    public static final String TOOL_TYPE_FISHING_ROD = "com.minecolonies.coremod.tooltype.fishingrod";
+    public static final String TOOL_TYPE_FISHING_ROD = "no.monopixel.slimcolonies.coremod.tooltype.fishingrod";
     @NonNls
-    public static final String TOOL_TYPE_SHEARS      = "com.minecolonies.coremod.tooltype.shears";
+    public static final String TOOL_TYPE_SHEARS      = "no.monopixel.slimcolonies.coremod.tooltype.shears";
     @NonNls
-    public static final String TOOL_TYPE_SHIELD      = "com.minecolonies.coremod.tooltype.shield";
+    public static final String TOOL_TYPE_SHIELD      = "no.monopixel.slimcolonies.coremod.tooltype.shield";
     @NonNls
-    public static final String TOOL_TYPE_HELMET      = "com.minecolonies.coremod.tooltype.helmet";
+    public static final String TOOL_TYPE_HELMET      = "no.monopixel.slimcolonies.coremod.tooltype.helmet";
     @NonNls
-    public static final String TOOL_TYPE_LEGGINGS    = "com.minecolonies.coremod.tooltype.leggings";
+    public static final String TOOL_TYPE_LEGGINGS    = "no.monopixel.slimcolonies.coremod.tooltype.leggings";
     @NonNls
-    public static final String TOOL_TYPE_CHEST_PLATE = "com.minecolonies.coremod.tooltype.chestplate";
+    public static final String TOOL_TYPE_CHEST_PLATE = "no.monopixel.slimcolonies.coremod.tooltype.chestplate";
     @NonNls
-    public static final String TOOL_TYPE_BOOTS       = "com.minecolonies.coremod.tooltype.boots";
+    public static final String TOOL_TYPE_BOOTS       = "no.monopixel.slimcolonies.coremod.tooltype.boots";
     @NonNls
-    public static final String TOOL_TYPE_LIGHTER     = "com.minecolonies.coremod.tooltype.lighter";
+    public static final String TOOL_TYPE_LIGHTER     = "no.monopixel.slimcolonies.coremod.tooltype.lighter";
 
     @NonNls
     public static final String TOOL_RALLY_BANNER_ACTIVATED      = "item.minecolonies.banner_rally_guards.activated";
@@ -49,24 +49,24 @@ public class ToolTranslationConstants
     public static final String TOOL_RALLY_BANNER_NEEDS_RESEARCH = "item.minecolonies.banner_rally_guards.activated.needsresearch";
 
     @NonNls
-    public static final String TOOL_COLONY_TELEPORT_SCROLL_NO_COLONY        = "item.minecolonies.scroll.colony.none";
+    public static final String TOOL_COLONY_TELEPORT_SCROLL_NO_COLONY   = "item.minecolonies.scroll.colony.none";
     @NonNls
-    public static final String TOOL_COLONY_TELEPORT_SCROLL_COLONY_NAME      = "item.minecolonies.scroll.colony.tip";
+    public static final String TOOL_COLONY_TELEPORT_SCROLL_COLONY_NAME = "item.minecolonies.scroll.colony.tip";
     @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_ADD_HIVE                = "item.minecolonies.scepterbeekeeper.addhive";
+    public static final String TOOL_BEEHIVE_SCEPTER_ADD_HIVE           = "item.minecolonies.scepterbeekeeper.addhive";
     @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_REMOVE_HIVE             = "item.minecolonies.scepterbeekeeper.removehive";
+    public static final String TOOL_BEEHIVE_SCEPTER_REMOVE_HIVE        = "item.minecolonies.scepterbeekeeper.removehive";
     @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_MAX_HIVES               = "item.minecolonies.scepterbeekeeper.maxhives";
+    public static final String TOOL_BEEHIVE_SCEPTER_MAX_HIVES          = "item.minecolonies.scepterbeekeeper.maxhives";
 
     @NonNls
-    public static final String TOOL_GUARD_SCEPTER_ADD_GUARD_TARGET            = "com.minecolonies.coremod.job.guard.toolclickguard";
+    public static final String TOOL_GUARD_SCEPTER_ADD_GUARD_TARGET            = "no.monopixel.slimcolonies.coremod.job.guard.toolclickguard";
     @NonNls
-    public static final String TOOL_GUARD_SCEPTER_ADD_PATROL_TARGET           = "com.minecolonies.coremod.job.guard.toolclickpatrol";
+    public static final String TOOL_GUARD_SCEPTER_ADD_PATROL_TARGET           = "no.monopixel.slimcolonies.coremod.job.guard.toolclickpatrol";
     @NonNls
-    public static final String TOOL_GUARD_SCEPTER_ADD_PATROL_TARGETS_FINISHED = "com.minecolonies.coremod.job.guard.tooldoubleclick";
+    public static final String TOOL_GUARD_SCEPTER_ADD_PATROL_TARGETS_FINISHED = "no.monopixel.slimcolonies.coremod.job.guard.tooldoubleclick";
     @NonNls
-    public static final String TOOL_GUARD_SCEPTER_TOWER_TOO_FAR               = "com.minecolonies.coremod.job.guard.toolclickguardtoofar";
+    public static final String TOOL_GUARD_SCEPTER_TOWER_TOO_FAR               = "no.monopixel.slimcolonies.coremod.job.guard.toolclickguardtoofar";
 
     @NonNls
     public static final String TOOL_LUMBERJACK_SCEPTER_POSITION_A_SET = "item.minecolonies.scepterlumberjack.usedend";
@@ -78,13 +78,13 @@ public class ToolTranslationConstants
     public static final String TOOL_LUMBERJACK_SCEPTER_AREA_TOO_BIG   = "item.minecolonies.scepterlumberjack.restrictiontoobig";
 
     @NonNls
-    public static final String TOOL_PERMISSION_SCEPTER_SET_MODE        = "com.minecolonies.coremod.item.permissionscepter.setmode";
+    public static final String TOOL_PERMISSION_SCEPTER_SET_MODE        = "no.monopixel.slimcolonies.coremod.item.permissionscepter.setmode";
     @NonNls
-    public static final String TOOL_PERMISSION_SCEPTER_MODE            = "com.minecolonies.coremod.item.permissionscepter.mode";
+    public static final String TOOL_PERMISSION_SCEPTER_MODE            = "no.monopixel.slimcolonies.coremod.item.permissionscepter.mode";
     @NonNls
-    public static final String TOOL_PERMISSION_SCEPTER_MODE_BLOCK      = "com.minecolonies.coremod.item.permissionscepter.mode.block";
+    public static final String TOOL_PERMISSION_SCEPTER_MODE_BLOCK      = "no.monopixel.slimcolonies.coremod.item.permissionscepter.mode.block";
     @NonNls
-    public static final String TOOL_PERMISSION_SCEPTER_MODE_LOCATION   = "com.minecolonies.coremod.item.permissionscepter.mode.location";
+    public static final String TOOL_PERMISSION_SCEPTER_MODE_LOCATION   = "no.monopixel.slimcolonies.coremod.item.permissionscepter.mode.location";
     @NonNls
-    public static final String TOOL_PERMISSION_SCEPTER_PERMISSION_DENY = "com.minecolonies.coremod.item.permissionscepter.permission.deny";
+    public static final String TOOL_PERMISSION_SCEPTER_PERMISSION_DENY = "no.monopixel.slimcolonies.coremod.item.permissionscepter.permission.deny";
 }

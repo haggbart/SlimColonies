@@ -16,8 +16,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ExpeditionLogModuleView extends AbstractBuildingModuleView
 {
-    private boolean updated;
-    private boolean unlocked;
+    private boolean       updated;
+    private boolean       unlocked;
     private ExpeditionLog log = new ExpeditionLog();
 
     @Override
@@ -65,6 +65,6 @@ public class ExpeditionLogModuleView extends AbstractBuildingModuleView
     @Override
     public String getDesc()
     {
-        return "com.minecolonies.gui.workerhuts.expeditionlog";
+        return "no.monopixel.slimcolonies.gui.workerhuts.expeditionlog";
     }
 }

@@ -27,10 +27,10 @@ public class WindowTownHallDeleteAbandonColony extends AbstractWindowSkeleton
     /**
      * String constants.
      */
-    private static final String DELETE_PROCEED = "com.minecolonies.core.gui.colony.delete.proceed";
-    private static final String ABANDON_PROCEED = "com.minecolonies.core.gui.colony.abandon.proceed";
-    private static final String DELETE_WARNING =    "com.minecolonies.core.gui.colony.delete.warning";
-    private static final String ABANDON_WARNING =    "com.minecolonies.core.gui.colony.abandon.warning";
+    private static final String DELETE_PROCEED  = "no.monopixel.slimcolonies.core.gui.colony.delete.proceed";
+    private static final String ABANDON_PROCEED = "no.monopixel.slimcolonies.core.gui.colony.abandon.proceed";
+    private static final String DELETE_WARNING  = "no.monopixel.slimcolonies.core.gui.colony.delete.warning";
+    private static final String ABANDON_WARNING = "no.monopixel.slimcolonies.core.gui.colony.abandon.warning";
 
     /**
      * Townhall position
@@ -55,12 +55,22 @@ public class WindowTownHallDeleteAbandonColony extends AbstractWindowSkeleton
         if (MineColonies.getConfig().getServer().allowInfiniteColonies.get())
         {
             this.findPaneOfTypeByID("abandon", ButtonImage.class).show();
-            this.findPaneOfTypeByID("warningtext", Text.class).setText(Component.translatable(ABANDON_WARNING, oldColonyPos.getX(), oldColonyPos.getY(), oldColonyPos.getZ(), Component.literal(oldColonyName).withStyle(ChatFormatting.DARK_RED)));
+            this.findPaneOfTypeByID("warningtext", Text.class)
+                .setText(Component.translatable(ABANDON_WARNING,
+                    oldColonyPos.getX(),
+                    oldColonyPos.getY(),
+                    oldColonyPos.getZ(),
+                    Component.literal(oldColonyName).withStyle(ChatFormatting.DARK_RED)));
         }
         else
         {
             this.findPaneOfTypeByID("abandon", ButtonImage.class).hide();
-            this.findPaneOfTypeByID("warningtext", Text.class).setText(Component.translatable(DELETE_WARNING, oldColonyPos.getX(), oldColonyPos.getY(), oldColonyPos.getZ(), Component.literal(oldColonyName).withStyle(ChatFormatting.DARK_RED)));
+            this.findPaneOfTypeByID("warningtext", Text.class)
+                .setText(Component.translatable(DELETE_WARNING,
+                    oldColonyPos.getX(),
+                    oldColonyPos.getY(),
+                    oldColonyPos.getZ(),
+                    Component.literal(oldColonyName).withStyle(ChatFormatting.DARK_RED)));
         }
     }
 

@@ -277,11 +277,11 @@ public class WindowPermissionsPage extends AbstractWindowTownHall
         else
         {
             AbstractTextBuilder.TooltipBuilder hoverText = PaneBuilders.tooltipBuilder().hoverPane(playerNameField);
-            hoverText.append(Component.translatable("com.minecolonies.coremod.gui.townhall.player_permission_error")).paragraphBreak();
+            hoverText.append(Component.translatable("no.monopixel.slimcolonies.coremod.gui.townhall.player_permission_error")).paragraphBreak();
             hoverText.build();
 
             AbstractTextBuilder.TooltipBuilder hoverText2 = PaneBuilders.tooltipBuilder().hoverPane(rankNameField);
-            hoverText2.append(Component.translatable("com.minecolonies.core.gui.townhall.rank_permission_error")).paragraphBreak();
+            hoverText2.append(Component.translatable("no.monopixel.slimcolonies.core.gui.townhall.rank_permission_error")).paragraphBreak();
             hoverText2.build();
 
             rankNameField.setEnabled(false);

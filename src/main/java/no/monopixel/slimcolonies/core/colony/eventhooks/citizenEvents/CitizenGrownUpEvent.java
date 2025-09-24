@@ -78,6 +78,6 @@ public class CitizenGrownUpEvent extends AbstractCitizenEvent
     @Override
     public String getSummaryTranslationKey()
     {
-        return "com.minecolonies.core.event.summary.citizen.grownup";
+        return "no.monopixel.slimcolonies.core.event.summary.citizen.grownup";
     }
 }

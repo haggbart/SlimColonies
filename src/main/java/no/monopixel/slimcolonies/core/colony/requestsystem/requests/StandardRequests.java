@@ -186,7 +186,7 @@ public final class StandardRequests
             combined.append(Component.literal(getRequest().getCount() + " "));
             // getRequest().getTag() is a long string that can't be easily be read by players or turned into a translation key.
             // Instead, try to get a translated text first.
-            final String tagKey = "com.minecolonies.coremod.tag." + getRequest().getTag().toString().toLowerCase().replace
+            final String tagKey = "no.monopixel.slimcolonies.coremod.tag." + getRequest().getTag().toString().toLowerCase().replace
                 ("namedtag[", "").replace(':', '.').replace("]", "");
             final MutableComponent tagText = Component.translatable(tagKey);
             // test the translated text; if there's a difference, the client has a matching translation key.

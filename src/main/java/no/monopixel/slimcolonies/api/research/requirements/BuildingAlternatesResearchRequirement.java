@@ -130,11 +130,11 @@ public class BuildingAlternatesResearchRequirement implements IResearchRequireme
             final BuildingEntry buildingEntry = IBuildingRegistry.getInstance().getValue(building);
             final MutableComponent buildingName = buildingEntry != null ? Component.translatable(buildingEntry.getTranslationKey()) : Component.empty();
 
-            requirementList.append(Component.translatable("com.minecolonies.coremod.research.requirement.building.level", buildingName, buildingLevel));
+            requirementList.append(Component.translatable("no.monopixel.slimcolonies.coremod.research.requirement.building.level", buildingName, buildingLevel));
 
             if (iterator.hasNext())
             {
-                requirementList.append(Component.translatable("com.minecolonies.coremod.research.requirement.building.or"));
+                requirementList.append(Component.translatable("no.monopixel.slimcolonies.coremod.research.requirement.building.or"));
             }
         }
         return requirementList;

@@ -165,7 +165,7 @@ public class ClientEventHandler
                     }
                 }
 
-                event.getToolTip().add(Component.translatable("com.minecolonies.coremod.tooltip.schematic.tier", tier));
+                event.getToolTip().add(Component.translatable("no.monopixel.slimcolonies.coremod.tooltip.schematic.tier", tier));
             }
         }
 
@@ -173,7 +173,7 @@ public class ClientEventHandler
         {
             if (!FoodUtils.EDIBLE.test(stack))
             {
-                event.getToolTip().add(Component.translatable("com.minecolonies.coremod.item.tooltip.wrongfood").withStyle(ChatFormatting.RED));
+                event.getToolTip().add(Component.translatable("no.monopixel.slimcolonies.coremod.item.tooltip.wrongfood").withStyle(ChatFormatting.RED));
                 return;
             }
 
@@ -195,7 +195,7 @@ public class ClientEventHandler
             // Simply show if it's not on the restaurant menu
             if (cookBuilding != null && !cookBuilding.getModuleView(RESTAURANT_MENU).getMenu().contains(new ItemStorage(event.getItemStack())))
             {
-                event.getToolTip().add(Component.translatable("com.minecolonies.coremod.item.tooltip.nomenu").withStyle(ChatFormatting.RED));
+                event.getToolTip().add(Component.translatable("no.monopixel.slimcolonies.coremod.item.tooltip.nomenu").withStyle(ChatFormatting.RED));
             }
         }
     }

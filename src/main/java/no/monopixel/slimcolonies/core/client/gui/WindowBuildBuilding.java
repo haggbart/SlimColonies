@@ -141,7 +141,7 @@ public class WindowBuildBuilding extends AbstractWindowSkeleton
 
         if (building.getBuildingLevel() == 0)
         {
-            buttonBuild.setText(Component.translatable("com.minecolonies.coremod.gui.workerhuts.build"));
+            buttonBuild.setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.workerhuts.build"));
             findPaneOfTypeByID(BUTTON_REPAIR, Button.class).hide();
             findPaneOfTypeByID(BUTTON_DECONSTRUCT_BUILDING, Button.class).hide();
             findPaneOfTypeByID(BUTTON_PICKUP_BUILDING, Button.class).show();
