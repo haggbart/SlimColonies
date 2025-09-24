@@ -1,6 +1,5 @@
 package com.minecolonies.core.colony.interactionhandling;
 
-import com.ldtteam.blockui.PaneBuilders;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.BOWindow;
 import com.minecolonies.api.IMinecoloniesAPI;
@@ -25,7 +24,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Collections;
 import java.util.List;
 
-import static com.minecolonies.api.util.constant.StatisticsConstants.VISITORS_ABSCONDED;
 import static com.minecolonies.api.util.constant.StatisticsConstants.VISITORS_RECRUITED;
 import static com.minecolonies.api.util.constant.TranslationConstants.*;
 import static com.minecolonies.api.util.constant.WindowConstants.CHAT_LABEL_ID;
@@ -47,14 +45,10 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
 
     @SuppressWarnings("unchecked")
     private static final Tuple<Component, Component>[] responses = (Tuple<Component, Component>[]) new Tuple[] {
-      new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.showstats"), null),
-      recruitAnswer,
-      new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.notnow"), null)};
+        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.showstats"), null),
+        recruitAnswer,
+        new Tuple<>(Component.translatable("com.minecolonies.coremod.gui.chat.notnow"), null)};
 
-    /**
-     * Chance for a bad visitor
-     */
-    private static final int BAD_VISITOR_CHANCE = 2;
 
     public RecruitmentInteraction(final ICitizen data)
     {
@@ -62,8 +56,8 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
     }
 
     public RecruitmentInteraction(
-      final Component inquiry,
-      final IChatPriority priority)
+        final Component inquiry,
+        final IChatPriority priority)
     {
         super(inquiry, true, priority, d -> true, null, responses);
     }
@@ -88,15 +82,16 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
         {
             final IColonyView colony = (IColonyView) dataView.getColony();
 
-            window.findPaneOfTypeByID(CHAT_LABEL_ID, Text.class).setText(PaneBuilders.textBuilder()
-                .append(Component.literal(dataView.getName() + ": "))
-                .append(this.getInquiry())
-                .emptyLines(1)
-                .appendNL(Component.translatable(
-                    colony.getCitizens().size() < colony.getCitizenCountLimit() ? "com.minecolonies.coremod.gui.chat.recruit.free"
-                        : "com.minecolonies.coremod.gui.chat.nospacerecruit.free"))
-                .appendNL(Component.literal(""))
-                .getText());
+            final boolean hasSpace = colony.getCitizens().size() < colony.getCitizenCountLimit();
+
+            String baseText = dataView.getName() + ": " + this.getInquiry().getString();
+
+            if (!hasSpace)
+            {
+                baseText += "\n\n" + Component.translatable("com.minecolonies.coremod.gui.chat.nospacerecruit").getString();
+            }
+
+            window.findPaneOfTypeByID(CHAT_LABEL_ID, Text.class).setText(Component.literal(baseText));
         }
     }
 
@@ -116,46 +111,37 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
             IColony colony = data.getColony();
             if (colony.getCitizenManager().getCurrentCitizenCount() < colony.getCitizenManager().getPotentialMaxCitizens())
             {
-                    // Recruits visitor as new citizen and respawns entity
-                    colony.getVisitorManager().removeCivilian(data);
-                    data.setHomeBuilding(null);
-                    data.setJob(null);
+                // Recruits visitor as new citizen and respawns entity
+                colony.getVisitorManager().removeCivilian(data);
+                data.setHomeBuilding(null);
+                data.setJob(null);
 
-                    final IBuilding tavern = colony.getBuildingManager().getFirstBuildingMatching(b -> b.getBuildingType() == ModBuildings.tavern.get());
-                    
-                    if (colony.getWorld().random.nextInt(100) <= BAD_VISITOR_CHANCE)
-                    {
-                        StatsUtil.trackStat(tavern, VISITORS_ABSCONDED, 1);
-                        colony.getStatisticsManager().increment(VISITORS_ABSCONDED, colony.getDay());
+                final IBuilding tavern = colony.getBuildingManager().getFirstBuildingMatching(b -> b.getBuildingType() == ModBuildings.tavern.get());
+                StatsUtil.trackStat(tavern, VISITORS_RECRUITED, 1);
+                colony.getStatisticsManager().increment(VISITORS_RECRUITED, colony.getDay());
 
-                        MessageUtils.format(MESSAGE_RECRUITMENT_RAN_OFF, data.getName()).sendTo(colony).forAllPlayers();
-                        return;
-                    }
-                    StatsUtil.trackStat(tavern, VISITORS_RECRUITED, 1);
-                    colony.getStatisticsManager().increment(VISITORS_RECRUITED, colony.getDay());
+                // Create and read new citizen
+                ICitizenData newCitizen = colony.getCitizenManager().createAndRegisterCivilianData();
+                newCitizen.deserializeNBT(data.serializeNBT());
+                newCitizen.setParents("", "");
+                newCitizen.setLastPosition(data.getLastPosition());
 
-                    // Create and read new citizen
-                    ICitizenData newCitizen = colony.getCitizenManager().createAndRegisterCivilianData();
-                    newCitizen.deserializeNBT(data.serializeNBT());
-                    newCitizen.setParents("", "");
-                    newCitizen.setLastPosition(data.getLastPosition());
+                // Exchange entities
+                newCitizen.updateEntityIfNecessary();
+                data.getEntity().ifPresent(e -> e.remove(Entity.RemovalReason.DISCARDED));
 
-                    // Exchange entities
-                    newCitizen.updateEntityIfNecessary();
-                    data.getEntity().ifPresent(e -> e.remove(Entity.RemovalReason.DISCARDED));
+                if (data.hasCustomTexture())
+                {
+                    MessageUtils.format(MESSAGE_RECRUITMENT_SUCCESS_CUSTOM, data.getName()).sendTo(colony).forAllPlayers();
+                }
+                else
+                {
+                    MessageUtils.format(MESSAGE_RECRUITMENT_SUCCESS, data.getName()).sendTo(colony).forAllPlayers();
+                }
 
-                    if (data.hasCustomTexture())
-                    {
-                        MessageUtils.format(MESSAGE_RECRUITMENT_SUCCESS_CUSTOM, data.getName()).sendTo(colony).forAllPlayers();
-                    }
-                    else
-                    {
-                        MessageUtils.format(MESSAGE_RECRUITMENT_SUCCESS, data.getName()).sendTo(colony).forAllPlayers();
-                    }
-
-                    IMinecoloniesAPI.getInstance()
-                      .getEventBus()
-                      .post(new CitizenAddedModEvent(newCitizen, CitizenAddedModEvent.CitizenAddedSource.HIRED));
+                IMinecoloniesAPI.getInstance()
+                    .getEventBus()
+                    .post(new CitizenAddedModEvent(newCitizen, CitizenAddedModEvent.CitizenAddedSource.HIRED));
             }
             else
             {
