@@ -1098,9 +1098,6 @@
     "item": "minecolonies:scroll_highlight"
   },
   {
-    "item": "minecolonies:scroll_tp"
-  },
-  {
     "checkednbtkeys": [
       {
         "key": "Enchantments"

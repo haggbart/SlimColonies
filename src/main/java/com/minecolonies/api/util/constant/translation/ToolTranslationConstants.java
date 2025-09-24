@@ -40,13 +40,13 @@ public class ToolTranslationConstants
     public static final String TOOL_TYPE_LIGHTER     = "com.minecolonies.coremod.tooltype.lighter";
 
     @NonNls
-    public static final String TOOL_RALLY_BANNER_ACTIVATED   = "item.minecolonies.banner_rally_guards.activated";
+    public static final String TOOL_RALLY_BANNER_ACTIVATED      = "item.minecolonies.banner_rally_guards.activated";
     @NonNls
-    public static final String TOOL_RALLY_BANNER_DEACTIVATED = "item.minecolonies.banner_rally_guards.deactivated";
+    public static final String TOOL_RALLY_BANNER_DEACTIVATED    = "item.minecolonies.banner_rally_guards.deactivated";
     @NonNls
-    public static final String TOOL_RALLY_BANNER_NO_GUARDS   = "item.minecolonies.banner_rally_guards.activated.noguards";
+    public static final String TOOL_RALLY_BANNER_NO_GUARDS      = "item.minecolonies.banner_rally_guards.activated.noguards";
     @NonNls
-    public static final String TOOL_RALLY_BANNER_NEEDS_RESEARCH   = "item.minecolonies.banner_rally_guards.activated.needsresearch";
+    public static final String TOOL_RALLY_BANNER_NEEDS_RESEARCH = "item.minecolonies.banner_rally_guards.activated.needsresearch";
 
     @NonNls
     public static final String TOOL_GENERIC_SCROLL_HIGHLIGHT_DESCRIPTION = "item.minecolonies.scroll_highlight.tip";
@@ -58,19 +58,13 @@ public class ToolTranslationConstants
     @NonNls
     public static final String TOOL_COLONY_TELEPORT_SCROLL_COLONY_NAME      = "item.minecolonies.scroll.colony.tip";
     @NonNls
-    public static final String TOOL_COLONY_TELEPORT_SCROLL_DESCRIPTION      = "item.minecolonies.scroll_tp.tip";
-    @NonNls
     public static final String TOOL_COLONY_TELEPORT_AREA_SCROLL_DESCRIPTION = "item.minecolonies.scroll_area_tp.tip";
-
     @NonNls
-    public static final String TOOL_GUARD_SCROLL_NO_GUARD_BUILDING = "minecolonies.scroll.noguardbuilding";
-
+    public static final String TOOL_BEEHIVE_SCEPTER_ADD_HIVE                = "item.minecolonies.scepterbeekeeper.addhive";
     @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_ADD_HIVE    = "item.minecolonies.scepterbeekeeper.addhive";
+    public static final String TOOL_BEEHIVE_SCEPTER_REMOVE_HIVE             = "item.minecolonies.scepterbeekeeper.removehive";
     @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_REMOVE_HIVE = "item.minecolonies.scepterbeekeeper.removehive";
-    @NonNls
-    public static final String TOOL_BEEHIVE_SCEPTER_MAX_HIVES   = "item.minecolonies.scepterbeekeeper.maxhives";
+    public static final String TOOL_BEEHIVE_SCEPTER_MAX_HIVES               = "item.minecolonies.scepterbeekeeper.maxhives";
 
     @NonNls
     public static final String TOOL_GUARD_SCEPTER_ADD_GUARD_TARGET            = "com.minecolonies.coremod.job.guard.toolclickguard";

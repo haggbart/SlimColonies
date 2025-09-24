@@ -67,8 +67,6 @@ public final class ModItemsInitializer
 
         ModItems.adventureToken = new ItemAdventureToken(new Item.Properties());
 
-        ModItems.scrollColonyTP = new ItemScrollColonyTP(new Item.Properties().stacksTo(16));
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_tp"), ModItems.scrollColonyTP);
 
         ModItems.scrollColonyAreaTP = new ItemScrollColonyAreaTP(new Item.Properties().stacksTo(16));
         registry.register(new ResourceLocation(Constants.MOD_ID, "scroll_area_tp"), ModItems.scrollColonyAreaTP);
