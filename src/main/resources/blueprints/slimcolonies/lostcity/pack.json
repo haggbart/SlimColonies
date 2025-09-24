@@ -1,0 +1,16 @@
+{
+  "icon": "lostcity.png",
+  "name": "Lost Mesa City",
+  "authors": [
+    "Raycoms",
+    "John Reiher",
+    "SomeAddons"
+  ],
+  "desc": "Resurrect the Ruins of the Lost City and restore the Empire to its lost Glory!",
+  "mods": [
+    "structurize",
+    "slimcolonies"
+  ],
+  "version": "1",
+  "pack-format": "1"
+}

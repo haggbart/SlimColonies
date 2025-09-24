@@ -10,14 +10,14 @@ import com.ldtteam.structurize.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.client.gui.AbstractWindowSkeleton;
 import com.ldtteam.structurize.client.gui.WindowExtendedBuildTool;
 import com.ldtteam.structurize.storage.rendering.RenderingCache;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.items.ItemScanAnalyzer;
-import no.monopixel.slimcolonies.core.util.SchemAnalyzerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.core.items.ItemScanAnalyzer;
+import no.monopixel.slimcolonies.core.util.SchemAnalyzerUtil;
 
 import java.util.*;
 
@@ -360,7 +360,7 @@ public class WindowSchematicAnalyzer extends AbstractWindowSkeleton
         if (next.blueprint.getFileName() != null && next.blueprint.getFilePath() != null)
         {
             final String[] split = next.blueprint.getFileName().split("/");
-            name = next.blueprint.getFilePath().toString().replace("blueprints/minecolonies/", "") + "/" + split[split.length - 1];
+            name = next.blueprint.getFilePath().toString().replace("blueprints/slimcolonies/", "") + "/" + split[split.length - 1];
         }
         name = name.replace(".blueprint", "");
         parent.findPaneOfTypeByID(BUTTON_VIEW_CURRENT, ButtonVanilla.class).setText(Component.literal(name));
