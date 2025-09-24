@@ -1,0 +1,42 @@
+{
+  "name": "slimcolonies:medieval_spruce/terminators",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:medieval_spruce/terminator_01",
+        "processors": "slimcolonies:medieval_spruce/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:medieval_spruce/terminator_02",
+        "processors": "slimcolonies:medieval_spruce/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:medieval_spruce/terminator_03",
+        "processors": "slimcolonies:medieval_spruce/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:medieval_spruce/terminator_04",
+        "processors": "slimcolonies:medieval_spruce/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}

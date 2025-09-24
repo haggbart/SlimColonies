@@ -1,0 +1,147 @@
+{
+  "name": "slimcolonies:caledonia/buildings",
+  "fallback": "slimcolonies:caledonia/terminators",
+  "elements": [
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:caledonia/builder1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+		    "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:caledonia/builder2",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:caledonia/cook1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "slimcolonies:caledonia/courier1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:caledonia/farm1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:caledonia/field",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:caledonia/forester1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:caledonia/forester2",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 12,
+      "element": {
+        "location": "slimcolonies:caledonia/guardtower1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:caledonia/guardtower2",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 20,
+      "element": {
+        "location": "slimcolonies:caledonia/house1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "slimcolonies:caledonia/house2",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 8,
+      "element": {
+        "location": "slimcolonies:caledonia/mine1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 7,
+      "element": {
+        "location": "slimcolonies:caledonia/tavern1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "slimcolonies:caledonia/warehouse1",
+        "processors": "slimcolonies:caledonia/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      }
+    }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "connected=false": {
+      "model": "slimcolonies:block/colonysign"
+    },
+    "connected=true": {
+      "model": "slimcolonies:block/colonysign2"
+    }
+  }
+}

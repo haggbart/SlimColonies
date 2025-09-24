@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "slimcolonies:block/blockhutgatehouse",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "slimcolonies:block/blockhutgatehouse",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "slimcolonies:block/blockhutgatehouse",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "slimcolonies:block/blockhutgatehouse",
+      "y": 270
+    }
+  }
+}

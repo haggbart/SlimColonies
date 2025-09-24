@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "slimcolonies:block/blockpostbox",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "slimcolonies:block/blockpostbox",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "slimcolonies:block/blockpostbox",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "slimcolonies:block/blockpostbox",
+      "y": 180
+    }
+  }
+}

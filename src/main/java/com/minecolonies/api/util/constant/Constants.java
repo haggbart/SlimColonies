@@ -10,7 +10,7 @@ import net.minecraft.world.phys.AABB;
  */
 public final class Constants
 {
-    public static final String MOD_ID                           = "minecolonies";
+    public static final String MOD_ID                           = "slimcolonies";
     public static final int    ROTATE_0_TIMES                   = 0;
     public static final int    ROTATE_ONCE                      = 1;
     public static final int    ROTATE_TWICE                     = 2;
