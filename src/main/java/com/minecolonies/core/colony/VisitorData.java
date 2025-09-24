@@ -20,20 +20,9 @@ import static com.minecolonies.api.util.constant.SchematicTagConstants.TAG_SITTI
 public class VisitorData extends CitizenData implements IVisitorData
 {
     /**
-     * Recruit nbt tag
-     */
-    private static final String TAG_RECRUIT_COST = "rcost";
-    private static final String TAG_RECRUIT_COST_QTY = "rcostqty";
-
-    /**
      * The position the citizen is sitting at
      */
     private BlockPos sittingPosition = BlockPos.ZERO;
-
-    /**
-     * The recruitment level, used for stats/equipment and costs
-     */
-    private ItemStack recruitCost = ItemStack.EMPTY;
 
     /**
      * Create a CitizenData given an ID. Used as a super-constructor or during loading.
@@ -50,10 +39,6 @@ public class VisitorData extends CitizenData implements IVisitorData
     public CompoundTag serializeNBT()
     {
         CompoundTag compoundNBT = super.serializeNBT();
-        CompoundTag item = new CompoundTag();
-        recruitCost.save(item);
-        compoundNBT.put(TAG_RECRUIT_COST, item);
-        compoundNBT.putInt(TAG_RECRUIT_COST_QTY, recruitCost.getCount());
         BlockPosUtil.write(compoundNBT, TAG_SITTING, sittingPosition);
         return compoundNBT;
     }
@@ -63,21 +48,8 @@ public class VisitorData extends CitizenData implements IVisitorData
     {
         super.deserializeNBT(nbtTagCompound);
         sittingPosition = BlockPosUtil.read(nbtTagCompound, TAG_SITTING);
-        recruitCost = ItemStack.of(nbtTagCompound.getCompound(TAG_RECRUIT_COST));
-        recruitCost.setCount(nbtTagCompound.getInt(TAG_RECRUIT_COST_QTY));
     }
 
-    @Override
-    public void setRecruitCosts(final ItemStack item)
-    {
-        this.recruitCost = item;
-    }
-
-    @Override
-    public ItemStack getRecruitCost()
-    {
-        return recruitCost;
-    }
 
     /**
      * Loads this citizen data from nbt
@@ -97,8 +69,6 @@ public class VisitorData extends CitizenData implements IVisitorData
     public void serializeViewNetworkData(@NotNull final FriendlyByteBuf buf)
     {
         super.serializeViewNetworkData(buf);
-        buf.writeItem(recruitCost);
-        buf.writeInt(recruitCost.getCount());
     }
 
     @Override

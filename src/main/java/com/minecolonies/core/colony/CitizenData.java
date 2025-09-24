@@ -513,12 +513,8 @@ public class CitizenData implements ICitizenData
 
         saturation = MAX_SATURATION;
 
-        int levelCap = 10; // Default level cap without happiness
-        if (colony.getCitizenManager().getCitizens().size() < IMinecoloniesAPI.getInstance().getConfig().getServer().initialCitizenAmount.get())
-        {
-            levelCap = Math.max(5, levelCap);
-        }
-        citizenSkillHandler.init(levelCap);
+        // Initialize skills with random levels 1-9
+        citizenSkillHandler.init(10);
 
         markDirty(0);
     }

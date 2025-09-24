@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -19,11 +18,6 @@ import java.util.Map;
  */
 public class VisitorDataView extends CitizenDataView implements IVisitorViewData
 {
-    /**
-     * The recruitment costs
-     */
-    private ItemStack recruitmentCosts;
-
     /**
      * Cached player info for custom texture.
      */
@@ -44,14 +38,6 @@ public class VisitorDataView extends CitizenDataView implements IVisitorViewData
     public void deserialize(@NotNull final FriendlyByteBuf buf)
     {
         super.deserialize(buf);
-        recruitmentCosts = buf.readItem();
-        recruitmentCosts.setCount(buf.readInt());
-    }
-
-    @Override
-    public ItemStack getRecruitCost()
-    {
-        return recruitmentCosts;
     }
 
     @Override

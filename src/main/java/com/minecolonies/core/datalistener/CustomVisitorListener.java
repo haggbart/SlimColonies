@@ -242,10 +242,6 @@ public class CustomVisitorListener extends SimpleJsonResourceReloadListener
                 visitorData.setSuffix(citizenSuffix);
             }
 
-            if (recruitCost != null)
-            {
-                visitorData.setRecruitCosts(recruitCost);
-            }
 
             if (storykey != null)
             {
