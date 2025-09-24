@@ -1,11 +1,8 @@
 package com.minecolonies.core.colony.interactionhandling;
 
 import com.ldtteam.blockui.PaneBuilders;
-import com.ldtteam.blockui.controls.ButtonImage;
-import com.ldtteam.blockui.controls.ItemIcon;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.BOWindow;
-import com.ldtteam.blockui.views.Box;
 import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.colony.*;
 import com.minecolonies.api.colony.buildings.IBuilding;
@@ -14,7 +11,6 @@ import com.minecolonies.api.colony.interactionhandling.IChatPriority;
 import com.minecolonies.api.colony.interactionhandling.IInteractionResponseHandler;
 import com.minecolonies.api.colony.interactionhandling.ModInteractionResponseHandlers;
 import com.minecolonies.api.eventbus.events.colony.citizens.CitizenAddedModEvent;
-import com.minecolonies.api.util.InventoryUtils;
 import com.minecolonies.api.util.MessageUtils;
 import com.minecolonies.api.util.StatsUtil;
 import com.minecolonies.api.util.Tuple;
@@ -23,10 +19,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.wrapper.InvWrapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,19 +29,12 @@ import static com.minecolonies.api.util.constant.StatisticsConstants.VISITORS_AB
 import static com.minecolonies.api.util.constant.StatisticsConstants.VISITORS_RECRUITED;
 import static com.minecolonies.api.util.constant.TranslationConstants.*;
 import static com.minecolonies.api.util.constant.WindowConstants.CHAT_LABEL_ID;
-import static com.minecolonies.api.util.constant.WindowConstants.RESPONSE_BOX_ID;
-import static com.minecolonies.core.client.gui.WindowInteraction.BUTTON_RESPONSE_ID;
 
 /**
  * Interaction for recruiting visitors
  */
 public class RecruitmentInteraction extends ServerCitizenInteraction
 {
-    /**
-     * The icon NBT tag
-     */
-    private static final String RECRUITMENT_ICON = "recruitIcon";
-
     /**
      * The icon's res location which is displayed for this interaction
      */
@@ -97,13 +84,8 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
     @OnlyIn(Dist.CLIENT)
     public void onWindowOpened(final BOWindow window, final ICitizenDataView dataView)
     {
-        final ButtonImage recruitButton = window.findPaneOfTypeByID(BUTTON_RESPONSE_ID + 2, ButtonImage.class);
-        final Box group = window.findPaneOfTypeByID(RESPONSE_BOX_ID, Box.class);
-
-
-        if (recruitButton != null && dataView instanceof IVisitorViewData visitorViewData)
+        if (dataView instanceof IVisitorViewData)
         {
-            final ItemStack recruitCost = visitorViewData.getRecruitCost();
             final IColonyView colony = (IColonyView) dataView.getColony();
 
             window.findPaneOfTypeByID(CHAT_LABEL_ID, Text.class).setText(PaneBuilders.textBuilder()
@@ -111,21 +93,10 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
                 .append(this.getInquiry())
                 .emptyLines(1)
                 .appendNL(Component.translatable(
-                    colony.getCitizens().size() < colony.getCitizenCountLimit() ? "com.minecolonies.coremod.gui.chat.recruitcost"
-                        : "com.minecolonies.coremod.gui.chat.nospacerecruit",
-                    recruitCost.getCount() + " " + recruitCost.getHoverName().getString()))
+                    colony.getCitizens().size() < colony.getCitizenCountLimit() ? "com.minecolonies.coremod.gui.chat.recruit.free"
+                        : "com.minecolonies.coremod.gui.chat.nospacerecruit.free"))
                 .appendNL(Component.literal(""))
                 .getText());
-
-            int iconPosX = recruitButton.getX() + recruitButton.getWidth() - 28;
-            int iconPosY = recruitButton.getY() + recruitButton.getHeight() - 18;
-            ItemIcon icon = new ItemIcon();
-            icon.setID(RECRUITMENT_ICON);
-            icon.setSize(15, 15);
-            group.addChild(icon);
-            icon.setItem(recruitCost);
-            icon.setPosition(iconPosX, iconPosY);
-            icon.setVisible(true);
         }
     }
 
@@ -133,21 +104,7 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
     @OnlyIn(Dist.CLIENT)
     public boolean onClientResponseTriggered(final int responseId, final Player player, final ICitizenDataView data, final BOWindow window)
     {
-        final Component response = getPossibleResponses().get(responseId);
-        // Validate recruitment before returning true
-        if (response.equals(recruitAnswer.getA()) && data instanceof IVisitorViewData)
-        {
-            if (player.isCreative() || InventoryUtils.getItemCountInItemHandler(new InvWrapper(player.getInventory()), ((IVisitorViewData) data).getRecruitCost().getItem())
-                  >= ((IVisitorViewData) data).getRecruitCost().getCount())
-            {
-                return super.onClientResponseTriggered(responseId, player, data, window);
-            }
-            else
-            {
-                MessageUtils.format(WARNING_RECRUITMENT_INSUFFICIENT_ITEMS).sendTo(player);
-            }
-        }
-        return true;
+        return super.onClientResponseTriggered(responseId, player, data, window);
     }
 
     @Override
@@ -159,10 +116,6 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
             IColony colony = data.getColony();
             if (colony.getCitizenManager().getCurrentCitizenCount() < colony.getCitizenManager().getPotentialMaxCitizens())
             {
-                if (player.isCreative() || InventoryUtils.attemptReduceStackInItemHandler(new InvWrapper(player.getInventory()),
-                  ((IVisitorData) data).getRecruitCost(),
-                  ((IVisitorData) data).getRecruitCost().getCount(), true, true))
-                {
                     // Recruits visitor as new citizen and respawns entity
                     colony.getVisitorManager().removeCivilian(data);
                     data.setHomeBuilding(null);
@@ -203,7 +156,6 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
                     IMinecoloniesAPI.getInstance()
                       .getEventBus()
                       .post(new CitizenAddedModEvent(newCitizen, CitizenAddedModEvent.CitizenAddedSource.HIRED));
-                }
             }
             else
             {

@@ -18,11 +18,9 @@ import com.minecolonies.core.colony.buildings.views.LivingBuildingView;
 import com.minecolonies.core.colony.eventhooks.citizenEvents.VisitorSpawnedEvent;
 import com.minecolonies.core.colony.interactionhandling.RecruitmentInteraction;
 import com.minecolonies.core.datalistener.CustomVisitorListener;
-import com.minecolonies.core.datalistener.RecruitmentItemsListener;
 import com.minecolonies.core.network.messages.client.colony.PlayMusicAtPosMessage;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.ListTag;
@@ -181,20 +179,12 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
     @Nullable
     public IVisitorData spawnVisitor()
     {
-        final RecruitmentItemsListener.RecruitCost cost = RecruitmentItemsListener.getRandomRecruitCost(building.getBuildingLevel());
-        if (cost == null)
-        {
-            return null;
-        }
-
         final IVisitorData newCitizen = (IVisitorData) building.getColony().getVisitorManager().createAndRegisterCivilianData();
         newCitizen.setBedPos(building.getPosition());
         newCitizen.setHomeBuilding(building);
-        newCitizen.getCitizenSkillHandler().init(cost.recruitLevel());
-
-        final ItemStack recruitCostItem = cost.recruitItem().copy();
-        recruitCostItem.setCount(Math.min(cost.recruitItem().getMaxStackSize(), recruitCostItem.getCount() + MathUtils.RANDOM.nextInt(3)));
-        newCitizen.setRecruitCosts(recruitCostItem);
+        // Initialize skills - same as initial citizens at level 1, better at higher levels
+        // Level 1: 1-9, Level 2: 1-11, Level 3: 1-13, Level 4: 1-15, Level 5: 1-17
+        newCitizen.getCitizenSkillHandler().init(8 + building.getBuildingLevel() * 2);
 
         BlockPos spawnPos;
         final BlockPos gatePos = building.getColony().getBuildingManager().getRandomBuilding(b -> b.getBuildingType() == ModBuildings.gateHouse.get());
@@ -229,10 +219,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
         }
 
         building.getColony().getVisitorManager().spawnOrCreateCivilian(newCitizen, building.getColony().getWorld(), spawnPos, true);
-        if (newCitizen.getEntity().isPresent())
-        {
-            newCitizen.getEntity().get().setItemSlot(EquipmentSlot.FEET, cost.boots());
-        }
         building.getColony().getEventDescriptionManager().addEventDescription(new VisitorSpawnedEvent(spawnPos, newCitizen.getName()));
 
         StatsUtil.trackStat(building, NEW_VISITORS, 1);
