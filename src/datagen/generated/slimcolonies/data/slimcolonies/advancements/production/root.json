@@ -12,7 +12,7 @@
     "announce_to_chat": false,
     "background": "structurize:textures/block/cactus/cactus_planks.png",
     "description": {
-      "translate": "advancements.minecolonies.root.production.description"
+      "translate": "advancements.slimcolonies.root.production.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "advancements.minecolonies.root.production.title"
+      "translate": "advancements.slimcolonies.root.production.title"
     }
   },
   "requirements": [

@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/start_builder",
+  "parent": "slimcolonies:slimcolonies/start_builder",
   "criteria": {
     "add_recipe_torch": {
       "conditions": {
@@ -18,7 +18,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.building_add_recipe_torch.description"
+      "translate": "advancements.slimcolonies.building_add_recipe_torch.description"
     },
     "frame": "task",
     "hidden": false,
@@ -27,7 +27,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.building_add_recipe_torch.title"
+      "translate": "advancements.slimcolonies.building_add_recipe_torch.title"
     }
   },
   "requirements": [

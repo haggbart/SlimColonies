@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/citizen_eat_food_first",
+  "parent": "slimcolonies:slimcolonies/citizen_eat_food_first",
   "criteria": {
     "citizen_eat_rotten_flesh": {
       "conditions": {
@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.citizen_eat_food_rotten_flesh.description"
+      "translate": "advancements.slimcolonies.citizen_eat_food_rotten_flesh.description"
     },
     "frame": "task",
     "hidden": true,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.citizen_eat_food_rotten_flesh.title"
+      "translate": "advancements.slimcolonies.citizen_eat_food_rotten_flesh.title"
     }
   },
   "requirements": [

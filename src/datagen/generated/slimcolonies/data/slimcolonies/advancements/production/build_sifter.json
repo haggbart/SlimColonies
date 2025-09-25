@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.sifter.description"
+      "translate": "advancements.slimcolonies.build.sifter.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.sifter.title"
+      "translate": "advancements.slimcolonies.build.sifter.title"
     }
   },
   "requirements": [

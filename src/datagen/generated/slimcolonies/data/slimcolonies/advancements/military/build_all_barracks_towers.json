@@ -9,7 +9,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.all_towers.description"
+      "translate": "advancements.slimcolonies.build.all_towers.description"
     },
     "frame": "goal",
     "hidden": false,
@@ -18,7 +18,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.all_towers.title"
+      "translate": "advancements.slimcolonies.build.all_towers.title"
     }
   },
   "requirements": [

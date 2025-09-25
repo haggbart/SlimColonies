@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/place_townhall",
+  "parent": "slimcolonies:slimcolonies/place_townhall",
   "criteria": {
     "click_gui_button_close": {
       "conditions": {
@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.check_out_guide.description"
+      "translate": "advancements.slimcolonies.check_out_guide.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.check_out_guide.title"
+      "translate": "advancements.slimcolonies.check_out_guide.title"
     }
   },
   "requirements": [

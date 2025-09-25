@@ -9,7 +9,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.minecolonies.root.description"
+      "translate": "advancements.slimcolonies.root.description"
     },
     "frame": "task",
     "hidden": false,
@@ -18,7 +18,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "advancements.minecolonies.root.title"
+      "translate": "advancements.slimcolonies.root.title"
     }
   },
   "requirements": [

@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/citizen_resurrect",
+  "parent": "slimcolonies:slimcolonies/citizen_resurrect",
   "criteria": {
     "totem": {
       "conditions": {},
@@ -9,7 +9,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.undertaker.totem.description"
+      "translate": "advancements.slimcolonies.undertaker.totem.description"
     },
     "frame": "task",
     "hidden": false,
@@ -18,7 +18,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.undertaker.totem.title"
+      "translate": "advancements.slimcolonies.undertaker.totem.title"
     }
   },
   "requirements": [

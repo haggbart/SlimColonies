@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.miner.description"
+      "translate": "advancements.slimcolonies.build.miner.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.miner.title"
+      "translate": "advancements.slimcolonies.build.miner.title"
     }
   },
   "requirements": [

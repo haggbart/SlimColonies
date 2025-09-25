@@ -1,15 +1,15 @@
 {
-  "parent": "slimcolonies:minecolonies/citizen_bury",
+  "parent": "slimcolonies:slimcolonies/build_tavern",
   "criteria": {
-    "resurrected": {
+    "buried": {
       "conditions": {},
-      "trigger": "slimcolonies:citizen_resurrect"
+      "trigger": "slimcolonies:citizen_bury"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.citizen.resurrect.description"
+      "translate": "advancements.slimcolonies.citizen.bury.description"
     },
     "frame": "task",
     "hidden": false,
@@ -18,12 +18,12 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.citizen.resurrect.title"
+      "translate": "advancements.slimcolonies.citizen.bury.title"
     }
   },
   "requirements": [
     [
-      "resurrected"
+      "buried"
     ]
   ],
   "sends_telemetry_event": true

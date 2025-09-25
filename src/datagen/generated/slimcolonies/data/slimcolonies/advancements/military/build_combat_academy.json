@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.combat_academy.description"
+      "translate": "advancements.slimcolonies.build.combat_academy.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.combat_academy.title"
+      "translate": "advancements.slimcolonies.build.combat_academy.title"
     }
   },
   "requirements": [

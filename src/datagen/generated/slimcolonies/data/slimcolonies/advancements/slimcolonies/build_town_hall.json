@@ -1,9 +1,9 @@
 {
-  "parent": "slimcolonies:minecolonies/build_builder",
+  "parent": "slimcolonies:slimcolonies/build_builder",
   "criteria": {
-    "mysticalsite": {
+    "town_hall": {
       "conditions": {
-        "hut_name": "mysticalsite",
+        "hut_name": "townhall",
         "level": 1
       },
       "trigger": "slimcolonies:complete_build_request"
@@ -12,21 +12,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.mysticalsite.description"
+      "translate": "advancements.slimcolonies.build.town_hall.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "slimcolonies:blockhutmysticalsite"
+      "item": "slimcolonies:blockhuttownhall"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.mysticalsite.title"
+      "translate": "advancements.slimcolonies.build.town_hall.title"
     }
   },
   "requirements": [
     [
-      "mysticalsite"
+      "town_hall"
     ]
   ],
   "sends_telemetry_event": true

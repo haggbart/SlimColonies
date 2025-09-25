@@ -83,7 +83,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.building_add_recipe_door.description"
+      "translate": "advancements.slimcolonies.building_add_recipe_door.description"
     },
     "frame": "task",
     "hidden": false,
@@ -92,7 +92,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.building_add_recipe_door.title"
+      "translate": "advancements.slimcolonies.building_add_recipe_door.title"
     }
   },
   "requirements": [
