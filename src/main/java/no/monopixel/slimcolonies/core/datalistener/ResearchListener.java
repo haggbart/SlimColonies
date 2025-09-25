@@ -38,9 +38,9 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
      * Generator functions for default parsed values.
      */
     private static final Function<ResourceLocation, String> DEFAULT_RESEARCH_NAME          =
-        (effectId) -> String.format("com.%s.research.%s.name", effectId.getNamespace(), effectId.getPath().replaceAll("[ /]", "."));
+        (effectId) -> String.format("no.monopixel.%s.research.%s.name", effectId.getNamespace(), effectId.getPath().replaceAll("[ /]", "."));
     private static final Function<ResourceLocation, String> DEFAULT_RESEARCH_EFFECT_NAME   =
-        (effectId) -> String.format("com.%s.research.%s.description", effectId.getNamespace(), effectId.getPath().replaceAll("[ /]", "."));
+        (effectId) -> String.format("no.monopixel.%s.research.%s.description", effectId.getNamespace(), effectId.getPath().replaceAll("[ /]", "."));
     private static final Supplier<JsonArray>                DEFAULT_RESEARCH_EFFECT_LEVELS = () -> {
         final JsonArray defaultArray = new JsonArray();
         defaultArray.add(1);

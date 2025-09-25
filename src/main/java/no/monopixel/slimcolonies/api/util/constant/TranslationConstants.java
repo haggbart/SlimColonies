@@ -265,7 +265,7 @@ public final class TranslationConstants
     @NonNls
     public static final String RECIPE_STATUS                                                        = "no.monopixel.slimcolonies.coremod.gui.workerhuts.recipestatus";
     @NonNls
-    public static final String RACK                                                                 = "block.slimcolonies.blockminecoloniesrack";
+    public static final String RACK                                                                 = "block.slimcolonies.blockslimcoloniesrack";
     @NonNls
     public static final String RESEARCH_AVAILABLE                                                   = "no.monopixel.slimcolonies.coremod.research.available";
     @NonNls
