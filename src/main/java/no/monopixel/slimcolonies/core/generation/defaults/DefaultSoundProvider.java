@@ -43,7 +43,7 @@ public class DefaultSoundProvider implements DataProvider
                                    .resolve("main")
                                    .resolve("resources")
                                    .resolve("assets")
-                                   .resolve("minecolonies")
+                                   .resolve(Constants.MOD_ID)
                                    .resolve("sounds")
                                    .resolve("mob")
                                    .resolve("citizen")
