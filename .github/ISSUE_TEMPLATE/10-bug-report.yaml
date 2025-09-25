@@ -1,6 +1,6 @@
 name: Bug Report
 description: If you have a reproducible in-game issue
-labels: [Bug]
+labels: [ Bug ]
 body:
   - type: checkboxes
     attributes:
@@ -11,23 +11,20 @@ body:
           required: true
   - type: checkboxes
     attributes:
-      label: Are you using the latest MineColonies Version?
+      label: Are you using the latest SlimColonies Version?
       description: |
         Please check to see if any newer version fixes the issue you're experiencing.
-        [List of all MineColonies versions](https://www.curseforge.com/minecraft/mc-mods/minecolonies/files/all)
-        [List of all Structurize versions](https://www.curseforge.com/minecraft/mc-mods/structurize/files/all)
-        [List of all BlockUI versions](https://www.curseforge.com/minecraft/mc-mods/blockui/files/all)
       options:
         - label: |
-            I am running the latest **beta/release** version of MineColonies for my Minecraft version.
+            I am running the latest **beta/release** version of SlimColonies for my Minecraft version.
             I am also running the latest versions of other mods that are part of my problem.
           required: true
   - type: checkboxes
     attributes:
-      label: Did you check on the Wiki? or ask on Discord?
-      description: Please check on our [wiki](https://wiki.minecolonies.ldtteam.com/) or ask on [discord](https://discord.minecolonies.com/) if your issue is covered there.
+      label: Did you check existing issues?
+      description: Please check if your issue has already been reported.
       options:
-        - label: I checked the MineColonies Wiki and made sure my issue is not covered there. Or I was sent from discord to open an issue here.
+        - label: I checked existing issues and made sure my issue is not already reported.
           required: true
   - type: checkboxes
     attributes:
@@ -39,32 +36,23 @@ body:
     id: mc_version
     attributes:
       label: Minecraft Version
-      options: ["1.20", "1.21"]
+      options: [ "1.20" ]
     validations:
       required: true
   - type: input
     attributes:
-      label: MineColonies Version
-      description: Exact MineColonies version either from file name or in-game mod list.
-      placeholder: 1.xx.xx-XXXX
-    validations:
-      required: true
-  - type: input
-    attributes:
-      label: Structurize Version
-      description: Structurize Version
+      label: SlimColonies Version
+      description: Exact SlimColonies version either from file name or in-game mod list.
       placeholder: 1.xx.xx-XXXX
     validations:
       required: true
   - type: textarea
     attributes:
-      label: Related Mods and their Versions
-      description: Potential mod versions that may interact.
+      label: Mod Environment
+      description: Please list your Forge version and any mods that might be relevant to the issue.
       placeholder: |
-        1. Forge Version:
-        2. BlockUI Version:
-        3. Domum Ornamentum Version:
-        4. ....
+        Forge Version:
+        Other relevant mods:
     validations:
       required: false
   - type: textarea

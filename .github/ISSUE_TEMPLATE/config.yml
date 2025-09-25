@@ -1,21 +1,9 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Support Requests and Anything Else
-    about: Visit our discord
-    url: https://discord.minecolonies.com
-  - name: MineColonies Feature Request
-    about: Please follow the given templates
-    url: https://github.com/ldtteam/minecolonies-features/issues/new/choose
-  - name: Schematic Issue - If a schematic contains an error
-    about: Issue listing all recent schematic issues
-    url: https://github.com/ldtteam/minecolonies/issues/5006
-  - name: Mod Compatibility - If MineColonies does not work well with other mods	
-    about: Issue listing all requested/implemented mod compatibilities
-    url: https://github.com/ldtteam/minecolonies/issues/4510
-  - name: Structurize Bug Tracker
-    about: Please follow the given template
-    url: https://github.com/ldtteam/structurize/issues/new/choose
-  - name: Wiki Issue
-    about: Please follow the given templates
-    url: https://github.com/ldtteam/MinecoloniesWiki/issues/new/choose
+  - name: SlimColonies Feature Request
+    about: Please open a regular issue with your feature request
+    url: https://github.com/haggbart/SlimColonies/issues/new
+  - name: Original MineColonies Project
+    about: Visit the original MineColonies project
+    url: https://github.com/ldtteam/minecolonies
     
