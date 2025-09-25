@@ -1,1 +1,13 @@
-apply from: 'https://raw.githubusercontent.com/ldtteam/OperaPublicaCreator/main/gradle/mod.gradle'
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:6.0.36"
+        classpath 'org.parchmentmc:librarian:1.+'
+    }
+}
+
+apply from: 'gradle/local-build.gradle'
