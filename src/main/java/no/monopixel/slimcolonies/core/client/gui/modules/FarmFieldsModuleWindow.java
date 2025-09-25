@@ -2,29 +2,25 @@ package no.monopixel.slimcolonies.core.client.gui.modules;
 
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
-import com.ldtteam.blockui.controls.AbstractTextBuilder;
-import com.ldtteam.blockui.controls.Button;
-import com.ldtteam.blockui.controls.ButtonImage;
-import com.ldtteam.blockui.controls.Image;
-import com.ldtteam.blockui.controls.ItemIcon;
-import com.ldtteam.blockui.controls.Text;
+import com.ldtteam.blockui.controls.*;
 import com.ldtteam.blockui.views.ScrollingList;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil.DirectionResult;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.client.gui.AbstractModuleWindow;
-import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.FieldsModuleView;
-import no.monopixel.slimcolonies.core.colony.buildingextensions.FarmField;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil.DirectionResult;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.client.gui.AbstractModuleWindow;
+import no.monopixel.slimcolonies.core.colony.buildingextensions.FarmField;
+import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.FieldsModuleView;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.*;
+import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.FIELD_LIST_LABEL_DISTANCE;
+import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.FIELD_LIST_LABEL_FIELD_COUNT;
 
 /**
  * BOWindow for the fields tab in huts.
@@ -79,22 +75,22 @@ public class FarmFieldsModuleWindow extends AbstractModuleWindow
     /**
      * Texture of the assign button when it's on.
      */
-    private static final String TEXTURE_ASSIGN_ON_NORMAL = "minecolonies:textures/gui/builderhut/builder_button_mini_check.png";
+    private static final String TEXTURE_ASSIGN_ON_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini_check.png";
 
     /**
      * Texture of the assign button when it's on and disabled.
      */
-    private static final String TEXTURE_ASSIGN_ON_DISABLED = "minecolonies:textures/gui/builderhut/builder_button_mini_disabled_check.png";
+    private static final String TEXTURE_ASSIGN_ON_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled_check.png";
 
     /**
      * Texture of the assign button when it's off.
      */
-    private static final String TEXTURE_ASSIGN_OFF_NORMAL = "minecolonies:textures/gui/builderhut/builder_button_mini.png";
+    private static final String TEXTURE_ASSIGN_OFF_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini.png";
 
     /**
      * Texture of the assign button when it's off and disabled.
      */
-    private static final String TEXTURE_ASSIGN_OFF_DISABLED = "minecolonies:textures/gui/builderhut/builder_button_mini_disabled.png";
+    private static final String TEXTURE_ASSIGN_OFF_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled.png";
 
     /**
      * The field module view.
@@ -157,9 +153,9 @@ public class FarmFieldsModuleWindow extends AbstractModuleWindow
     private void updateUI()
     {
         findPaneOfTypeByID(TAG_BUTTON_ASSIGNMENT_MODE, Button.class)
-          .setText(Component.translatable(moduleView.assignFieldManually() ? COM_MINECOLONIES_COREMOD_GUI_HIRING_ON : COM_MINECOLONIES_COREMOD_GUI_HIRING_OFF));
+            .setText(Component.translatable(moduleView.assignFieldManually() ? COM_MINECOLONIES_COREMOD_GUI_HIRING_ON : COM_MINECOLONIES_COREMOD_GUI_HIRING_OFF));
         findPaneOfTypeByID(TAG_FIELD_COUNT, Text.class)
-          .setText(Component.translatable(FIELD_LIST_LABEL_FIELD_COUNT, moduleView.getOwnedFields().size(), moduleView.getMaxFieldCount()));
+            .setText(Component.translatable(FIELD_LIST_LABEL_FIELD_COUNT, moduleView.getOwnedFields().size(), moduleView.getMaxFieldCount()));
     }
 
     @Override
@@ -200,7 +196,8 @@ public class FarmFieldsModuleWindow extends AbstractModuleWindow
                 final String distance = Integer.toString(field.getSqDistance(buildingView));
                 final DirectionResult direction = BlockPosUtil.calcDirection(buildingView.getPosition(), field.getPosition());
 
-                final Component directionText = switch (direction) {
+                final Component directionText = switch (direction)
+                {
                     case UP, DOWN -> direction.getLongText();
                     default -> Component.translatable(FIELD_LIST_LABEL_DISTANCE, Component.literal(distance + "m"), direction.getShortText());
                 };
@@ -229,9 +226,9 @@ public class FarmFieldsModuleWindow extends AbstractModuleWindow
                         if (warningTooltip != null && moduleView.assignFieldManually())
                         {
                             PaneBuilders.tooltipBuilder()
-                              .append(warningTooltip.withStyle(ChatFormatting.RED))
-                              .hoverPane(assignButton)
-                              .build();
+                                .append(warningTooltip.withStyle(ChatFormatting.RED))
+                                .hoverPane(assignButton)
+                                .build();
                         }
                     }
                 }

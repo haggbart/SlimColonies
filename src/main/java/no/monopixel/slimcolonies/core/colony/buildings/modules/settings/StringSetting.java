@@ -3,6 +3,10 @@ package no.monopixel.slimcolonies.core.colony.buildings.modules.settings;
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.views.BOWindow;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISetting;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingKey;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingsModuleView;
@@ -10,10 +14,6 @@ import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.IStringSe
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.MathUtils;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,27 +89,27 @@ public class StringSetting implements IStringSetting<String>
     @Override
     public ResourceLocation getLayoutItem()
     {
-        return new ResourceLocation("minecolonies:gui/layouthuts/layoutstringsetting.xml");
+        return new ResourceLocation("slimcolonies:gui/layouthuts/layoutstringsetting.xml");
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void setupHandler(
-      final ISettingKey<?> key,
-      final Pane pane,
-      final ISettingsModuleView settingsModuleView,
-      final IBuildingView building, final BOWindow window)
+        final ISettingKey<?> key,
+        final Pane pane,
+        final ISettingsModuleView settingsModuleView,
+        final IBuildingView building, final BOWindow window)
     {
         pane.findPaneOfTypeByID("trigger", ButtonImage.class).setHandler(button -> settingsModuleView.trigger(key));
     }
 
     @Override
     public void render(
-      final ISettingKey<?> key,
-      final Pane pane,
-      final ISettingsModuleView settingsModuleView,
-      final IBuildingView building,
-      final BOWindow window)
+        final ISettingKey<?> key,
+        final Pane pane,
+        final ISettingsModuleView settingsModuleView,
+        final IBuildingView building,
+        final BOWindow window)
     {
         int buttonWidth = MathUtils.clamp(getButtonWidth(settingsModuleView), 0, MAX_BUTTON_WIDTH);
         ButtonImage triggerButton = pane.findPaneOfTypeByID("trigger", ButtonImage.class);

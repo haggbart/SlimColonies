@@ -5307,13 +5307,13 @@
     "item": "slimcolonies:blockhutwarehouse"
   },
   {
-    "item": "slimcolonies:blockminecoloniesnamedgrave"
-  },
-  {
     "item": "slimcolonies:blockpostbox"
   },
   {
     "item": "slimcolonies:blockslimcoloniesgrave"
+  },
+  {
+    "item": "slimcolonies:blockslimcoloniesnamedgrave"
   },
   {
     "checkednbtkeys": [

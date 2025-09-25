@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 /**
  * Implementation for the ArmorMaterial interface, so we can add custom armor types.
  */
-public class MineColoniesArmorMaterial implements ArmorMaterial
+public class SlimColoniesArmorMaterial implements ArmorMaterial
 {
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(Type.BOOTS, 13);
@@ -34,15 +34,15 @@ public class MineColoniesArmorMaterial implements ArmorMaterial
     private final float                       knockbackResistance;
     private final LazyLoadedValue<Ingredient> repairIngredient;
 
-    public MineColoniesArmorMaterial(
-      final String name,
-      final int durabilityMultiplier,
-      final Map<Type, Integer> protectionFunctionForType,
-      final int enchantmentValue,
-      final SoundEvent sound,
-      final float toughness,
-      final float knockbackResistance,
-      final Supplier<Ingredient> repairIngredient)
+    public SlimColoniesArmorMaterial(
+        final String name,
+        final int durabilityMultiplier,
+        final Map<Type, Integer> protectionFunctionForType,
+        final int enchantmentValue,
+        final SoundEvent sound,
+        final float toughness,
+        final float knockbackResistance,
+        final Supplier<Ingredient> repairIngredient)
     {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;

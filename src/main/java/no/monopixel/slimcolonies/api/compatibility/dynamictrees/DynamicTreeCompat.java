@@ -151,7 +151,7 @@ public final class DynamicTreeCompat extends DynamicTreeProxy
             if (fake == null)
             {
                 fakePlayers.put(dim, new FakePlayer((ServerLevel) world,
-                    new GameProfile(UUID.randomUUID(), "minecolonies_LumberjackFake")));
+                    new GameProfile(UUID.randomUUID(), "slimcolonies_LumberjackFake")));
                 fake = fakePlayers.get(dim);
             }
 

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ItemBuildGoggles extends ArmorItem
 {
-    public static final ArmorMaterial GOGGLES = new MineColoniesArmorMaterial("minecolonies:build_goggles", 2, Util.make(new EnumMap<>(Type.class), map -> {
+    public static final ArmorMaterial GOGGLES = new SlimColoniesArmorMaterial("slimcolonies:build_goggles", 2, Util.make(new EnumMap<>(Type.class), map -> {
         map.put(Type.BOOTS, 0);
         map.put(Type.LEGGINGS, 0);
         map.put(Type.CHESTPLATE, 0);

@@ -3,14 +3,14 @@ package no.monopixel.slimcolonies.core.colony.buildings.modules.settings;
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.views.BOWindow;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISetting;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingKey;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingsModuleView;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISetting;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingKey;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingsModuleView;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.OFF;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.ON;
@@ -76,27 +76,27 @@ public class BoolSetting implements ISetting<Boolean>
     @Override
     public ResourceLocation getLayoutItem()
     {
-        return new ResourceLocation("minecolonies:gui/layouthuts/layoutboolsetting.xml");
+        return new ResourceLocation("slimcolonies:gui/layouthuts/layoutboolsetting.xml");
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void setupHandler(
-      final ISettingKey<?> key,
-      final Pane pane,
-      final ISettingsModuleView settingsModuleView,
-      final IBuildingView building, final BOWindow window)
+        final ISettingKey<?> key,
+        final Pane pane,
+        final ISettingsModuleView settingsModuleView,
+        final IBuildingView building, final BOWindow window)
     {
         pane.findPaneOfTypeByID("trigger", ButtonImage.class).setHandler(button -> settingsModuleView.trigger(key));
     }
 
     @Override
     public void render(
-      final ISettingKey<?> key,
-      final Pane pane,
-      final ISettingsModuleView settingsModuleView,
-      final IBuildingView building,
-      final BOWindow window)
+        final ISettingKey<?> key,
+        final Pane pane,
+        final ISettingsModuleView settingsModuleView,
+        final IBuildingView building,
+        final BOWindow window)
     {
         ButtonImage triggerButton = pane.findPaneOfTypeByID("trigger", ButtonImage.class);
         triggerButton.setEnabled(isActive(settingsModuleView));

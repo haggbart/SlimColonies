@@ -4,18 +4,18 @@ import com.ldtteam.blockui.Loader;
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.View;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyListMessage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyListMessage;
 
 /**
  * Represents a colony by size, returns the used image corresponding for each size.
  */
 public enum ColonySize
 {
-    SMALL("minecolonies:gui/map/colonysmall.xml", 25),
-    MEDIUM("minecolonies:gui/map/colonymedium.xml", 75),
-    LARGE("minecolonies:gui/map/colonylarge.xml", 5000);
+    SMALL("slimcolonies:gui/map/colonysmall.xml", 25),
+    MEDIUM("slimcolonies:gui/map/colonymedium.xml", 75),
+    LARGE("slimcolonies:gui/map/colonylarge.xml", 5000);
 
     private final String imagePath;
     private final int    maxCitizens;
