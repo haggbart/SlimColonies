@@ -53,7 +53,7 @@ public class BlockSlimColoniesGrave extends AbstractBlockSlimColoniesGrave<Block
     /**
      * This blocks name.
      */
-    private static final String BLOCK_NAME = "blockminecoloniesgrave";
+    private static final String BLOCK_NAME = "blockslimcoloniesgrave";
 
     /**
      * The resistance this block has.
