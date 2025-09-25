@@ -1,14 +1,16 @@
 package no.monopixel.slimcolonies.core.client.gui.townhall;
 
 import com.ldtteam.blockui.Pane;
-import com.ldtteam.blockui.PaneBuilders;
-import com.ldtteam.blockui.controls.AbstractTextBuilder;
 import com.ldtteam.blockui.controls.Button;
 import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.DropDownList;
 import com.ldtteam.structurize.client.gui.WindowSwitchPack;
 import com.ldtteam.structurize.storage.StructurePacks;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.client.gui.WindowBannerPicker;
 import no.monopixel.slimcolonies.core.client.gui.map.WindowColonyMap;
@@ -17,21 +19,8 @@ import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyNameS
 import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyStructureStyleMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyTextureStyleMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.TeamColonyColorChangeMessage;
-import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.ConfirmLinkScreen;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSocketFactory;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -45,10 +34,6 @@ import static no.monopixel.slimcolonies.core.event.TextureReloadListener.TEXTURE
  */
 public class WindowMainPage extends AbstractWindowTownHall
 {
-    /**
-     * Is the special feature unlocked.
-     */
-    private static AtomicBoolean isFeatureUnlocked = new AtomicBoolean(false);
 
     /**
      * Drop down list for style.
@@ -97,7 +82,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         registerButton(BUTTON_CHANGE_SPEC, this::doNothing);
         registerButton(BUTTON_RENAME, this::renameClicked);
         registerButton(BUTTON_TOWNHALLMAP, this::mapButtonClicked);
-        registerButton(BUTTON_PATREON, this::patreonClicked);
 
         registerButton(BUTTON_COLONY_SWITCH_STYLE, this::switchPack);
 
@@ -111,8 +95,6 @@ public class WindowMainPage extends AbstractWindowTownHall
 
         this.nameStyleDropDownList.setSelectedIndex(building.getColony().getNameFileIds().indexOf(building.getColony().getNameStyle()));
         this.initialNamePackIndex = nameStyleDropDownList.getSelectedIndex();
-
-        checkFeatureUnlock();
     }
 
     /**
@@ -237,7 +219,7 @@ public class WindowMainPage extends AbstractWindowTownHall
      */
     private void openBannerPicker(@NotNull final Button button)
     {
-        Screen window = new WindowBannerPicker(building.getColony(), this, isFeatureUnlocked);
+        Screen window = new WindowBannerPicker(building.getColony(), this, new AtomicBoolean(true));
         Minecraft.getInstance().setScreen(window);
     }
 
@@ -257,107 +239,28 @@ public class WindowMainPage extends AbstractWindowTownHall
         final Pane namePane = findPaneByID(DROPDOWN_NAME_ID);
         final Pane resetButton = findPaneByID(BUTTON_RESET_TEXTURE);
         final boolean isOwner = building.getColony().getPermissions().getOwner().equals(Minecraft.getInstance().player.getUUID());
-        if (isFeatureUnlocked.get() && isOwner)
+        if (isOwner)
         {
-            findPaneByID(BUTTON_PATREON).hide();
             textPane.enable();
             namePane.enable();
             textPane.show();
-            resetButton.hide();
-        }
-        else
-        {
-            findPaneByID(BUTTON_PATREON).show();
-            textPane.disable();
-            namePane.disable();
 
             if (!building.getColony().getTextureStyleId().equals("default"))
             {
                 resetButton.show();
-                textPane.hide();
             }
             else
             {
-                textPane.show();
+                resetButton.hide();
             }
-
-            final AbstractTextBuilder.TooltipBuilder textPaneToolTipBuilder =
-                PaneBuilders.tooltipBuilder().hoverPane(textPane).append(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.textures"))
-                    .paragraphBreak()
-                    .appendNL(Component.empty())
-                    .appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon"))
-                    .paragraphBreak();
-
-
-            final AbstractTextBuilder.TooltipBuilder namePaneToolTipBuilder = PaneBuilders.tooltipBuilder().hoverPane(namePane)
-                .append(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.names")).paragraphBreak()
-                .appendNL(Component.empty())
-                .appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon")).paragraphBreak();
-
-            if (isFeatureUnlocked.get() && !isOwner)
-            {
-                textPaneToolTipBuilder.appendNL(Component.empty());
-                namePaneToolTipBuilder.appendNL(Component.empty());
-                textPaneToolTipBuilder.appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.needs_owner"));
-                namePaneToolTipBuilder.appendNL(Component.translatable("no.monopixel.slimcolonies.core.townhall.patreon.needs_owner"));
-            }
-            textPaneToolTipBuilder.build();
-            namePaneToolTipBuilder.build();
         }
-    }
-
-    /**
-     * Check if the feature is unlocked through the patreon API.
-     */
-    public void checkFeatureUnlock()
-    {
-        if (isFeatureUnlocked.get())
+        else
         {
-            return;
+            textPane.disable();
+            namePane.disable();
+            textPane.show();
+            resetButton.hide();
         }
-        final String player = Minecraft.getInstance().player.getStringUUID();
-        new Thread(() -> {
-            try
-            {
-                final SSLSocketFactory sslsocketfactory = HttpsURLConnection.getDefaultSSLSocketFactory();
-                final URL url = new URL("https://auth.minecolonies.com/api/minecraft/" + player + "/features");
-                final HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-
-                conn.setSSLSocketFactory(sslsocketfactory);
-
-                final InputStream responseBody = conn.getInputStream();
-                final BufferedReader reader = new BufferedReader(new InputStreamReader(responseBody));
-
-                String inputLine;
-                final StringBuilder response = new StringBuilder();
-
-                while ((inputLine = reader.readLine()) != null)
-                {
-                    response.append(inputLine);
-                }
-                reader.close();
-                isFeatureUnlocked.set(Boolean.parseBoolean(response.toString()));
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    /**
-     * On Patreon button clicked. Open website link to patreon.
-     */
-    private void patreonClicked()
-    {
-        Minecraft.getInstance().setScreen(new ConfirmLinkScreen((check) -> {
-            if (check)
-            {
-                Util.getPlatform().openUri("https://www.patreon.com/Minecolonies");
-            }
-
-            Minecraft.getInstance().setScreen(this.screen);
-        }, "https://www.patreon.com/Minecolonies", true));
     }
 
     @Override

@@ -49,8 +49,6 @@
             disabled="slimcolonies:textures/gui/builderhut/builder_button_medium_disabled.png"
             textcolor="black"/>
 
-    <button id="patreon" size="120 19" pos="288 133" source="slimcolonies:textures/gui/patreonwidget.png"
-            label="$(no.monopixel.slimcolonies.coremod.gui.townhall.patreon)" tooltip="$(no.monopixel.slimcolonies.coremod.gui.townhall.patreon.hover)"/>
 
 
     <text label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picktexturestyle)" pos="269 168" size="148 11" color="black"/>
