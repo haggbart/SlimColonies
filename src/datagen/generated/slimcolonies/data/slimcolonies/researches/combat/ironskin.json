@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/armordurabilitymultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:chainmail_helmet",
+  "parentResearch": "slimcolonies:combat/boiledleather",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:townhall",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3
+}

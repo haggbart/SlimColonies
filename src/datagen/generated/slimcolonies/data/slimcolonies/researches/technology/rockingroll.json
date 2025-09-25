@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutcrusher",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutcrusher",
+  "parentResearch": "slimcolonies:technology/stonecake",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:stonemason",
+      "level": 1
+    }
+  ],
+  "researchLevel": 2
+}

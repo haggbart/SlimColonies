@@ -1,0 +1,13 @@
+{
+  "type": "slimcolonies:composting",
+  "input": [
+    {
+      "type": "slimcolonies:food",
+      "min-saturation": 1.0
+    },
+    {
+      "tag": "slimcolonies:compostables_rich"
+    }
+  ],
+  "strength": 8
+}

@@ -1,0 +1,192 @@
+{
+  "name": "slimcolonies:desertoasis/buildings",
+  "fallback": "slimcolonies:desertoasis/roads",
+  "elements": [
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:desertoasis/builder1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+		    "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/builder2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:desertoasis/restaurant1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:desertoasis/farm1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "slimcolonies:desertoasis/farm2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 8,
+      "element": {
+        "location": "slimcolonies:desertoasis/courier1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:desertoasis/forester1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/forester2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/tavern1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 12,
+      "element": {
+        "location": "slimcolonies:desertoasis/guardtower1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/guardtower2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:desertoasis/residenceluxuryblue1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/residenceluxuryblue2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:desertoasis/residenceluxuryred1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/residenceluxuryred2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "slimcolonies:desertoasis/residenceluxuryblue1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/residenceluxuryblue2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 8,
+      "element": {
+        "location": "slimcolonies:desertoasis/mine1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:desertoasis/mine2",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "slimcolonies:desertoasis/warehouse1",
+        "processors": "slimcolonies:desertoasis/placeholder_replacement",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      }
+    }
+ ]
+}

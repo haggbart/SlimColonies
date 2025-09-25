@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutstonemason",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutstonemason",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 3
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 4,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.stonecake.subtitle"
+}

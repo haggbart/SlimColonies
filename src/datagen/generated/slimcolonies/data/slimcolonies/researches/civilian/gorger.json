@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/saturationmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/saturation2.png",
+  "parentResearch": "slimcolonies:civilian/gourmand",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:cook",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.gorger.subtitle"
+}

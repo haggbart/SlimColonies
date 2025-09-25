@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/healingsaturationlimitaddition",
+      "level": 5
+    }
+  ],
+  "icon": "minecraft:experience_bottle",
+  "parentResearch": "slimcolonies:civilian/fortitude",
+  "researchLevel": 6
+}

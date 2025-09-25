@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/archerarmormultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "minecraft:diamond_boots",
+  "parentResearch": "slimcolonies:combat/improvedevasion",
+  "researchLevel": 6,
+  "subtitle": "no.monopixel.slimcolonies.research.combat.agilearcher.subtitle"
+}

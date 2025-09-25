@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/archerdamageaddition",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:bow",
+  "parentResearch": "slimcolonies:combat/preciseshot",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:archery",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3
+}

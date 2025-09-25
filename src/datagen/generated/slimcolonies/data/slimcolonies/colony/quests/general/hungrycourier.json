@@ -1,0 +1,122 @@
+{
+  "max-occurrences": 10,
+  "name": "slimcolonies.quests.general.hungrycourier",
+  "objectives": [
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.general.hungrycourier.obj0.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.general.hungrycourier.obj0.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:dialogue",
+                  "options": [
+                    {
+                      "answer": "slimcolonies.quests.general.hungrycourier.obj0.answer0.reply.answer0.reply.answer0",
+                      "result": {
+                        "type": "slimcolonies:advanceobjective",
+                        "go-to": 1
+                      }
+                    }
+                  ],
+                  "text": "slimcolonies.quests.general.hungrycourier.obj0.answer0.reply.answer0.reply"
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.general.hungrycourier.obj0.answer0.reply.answer1",
+                "result": {
+                  "type": "slimcolonies:dialogue",
+                  "options": [
+                    {
+                      "answer": "slimcolonies.quests.general.hungrycourier.obj0.answer0.reply.answer1.reply.answer0",
+                      "result": {
+                        "type": "slimcolonies:return"
+                      }
+                    }
+                  ],
+                  "text": "slimcolonies.quests.general.hungrycourier.obj0.answer0.reply.answer1.reply"
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.general.hungrycourier.obj0.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.general.hungrycourier.obj0.answer1",
+          "result": {
+            "type": "slimcolonies:cancel"
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.general.hungrycourier.obj0"
+    },
+    {
+      "type": "slimcolonies:delivery",
+      "details": {
+        "item": "minecraft:baked_potato",
+        "next-objective": 2,
+        "qty": 1,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.general.hungrycourier.obj2.answer0",
+          "result": {
+            "type": "slimcolonies:advanceobjective",
+            "go-to": 3
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.general.hungrycourier.obj2",
+      "unlocks-rewards": [
+        0,
+        1
+      ]
+    }
+  ],
+  "parents": [],
+  "rewards": [
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "minecraft:gold_ingot",
+        "qty": 1
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "type": "slimcolonies:random",
+      "rarity": 50000000
+    },
+    {
+      "type": "slimcolonies:state",
+      "state": {
+        "match": {
+          "type": "slimcolonies:warehouse",
+          "level": 3
+        },
+        "path": "buildingManager/buildings"
+      }
+    },
+    {
+      "type": "slimcolonies:citizen",
+      "state": {
+        "match": {
+          "job": {
+            "type": "slimcolonies:deliveryman"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/podzolchancemultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:podzol",
+  "parentResearch": "slimcolonies:technology/podzolchance",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:composter",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.podzolchance2.subtitle"
+}

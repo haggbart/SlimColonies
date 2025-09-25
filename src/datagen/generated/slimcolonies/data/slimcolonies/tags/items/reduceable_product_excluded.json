@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:glowstone",
+    "slimcolonies:bread_dough",
+    "slimcolonies:cookie_dough",
+    "slimcolonies:raw_pumpkin_pie",
+    "slimcolonies:cake_batter",
+    "#forge:stone",
+    "#forge:cobblestone",
+    "#forge:gravel",
+    "#forge:sand",
+    "#forge:ingots",
+    "#slimcolonies:storage_blocks"
+  ]
+}

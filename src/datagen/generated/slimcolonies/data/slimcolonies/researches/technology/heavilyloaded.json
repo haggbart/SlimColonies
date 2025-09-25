@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/citizeninvslotsaddition",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:blue_shulker_box",
+  "no-reset": true,
+  "parentResearch": "slimcolonies:technology/loaded",
+  "researchLevel": 6
+}

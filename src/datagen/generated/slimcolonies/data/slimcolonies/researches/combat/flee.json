@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/fleeingspeedaddition",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:feather:3",
+  "parentResearch": "slimcolonies:combat/evade",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 12
+    }
+  ],
+  "researchLevel": 5,
+  "subtitle": "no.monopixel.slimcolonies.research.combat.flee.subtitle"
+}

@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/workingdayhaddition",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:clock:1",
+  "parentResearch": "slimcolonies:civilian/circus",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 2
+    }
+  ],
+  "researchLevel": 3,
+  "sortOrder": 2,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.nightowl.subtitle"
+}

@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleearmormultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:iron_chestplate",
+  "parentResearch": "slimcolonies:combat/parry",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:combatacademy",
+      "level": 1
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.combat.riposte.subtitle"
+}

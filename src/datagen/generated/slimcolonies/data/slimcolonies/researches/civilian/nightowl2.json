@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/workingdayhaddition",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:clock:2",
+  "parentResearch": "slimcolonies:civilian/nightowl",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:townhall",
+      "level": 3
+    }
+  ],
+  "researchLevel": 4,
+  "sortOrder": 2,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.nightowl2.subtitle"
+}

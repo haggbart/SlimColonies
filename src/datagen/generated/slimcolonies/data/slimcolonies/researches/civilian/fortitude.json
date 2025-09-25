@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/healingsaturationlimitaddition",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:honey_bottle",
+  "parentResearch": "slimcolonies:civilian/vitality",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:cook",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

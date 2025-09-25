@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/regenerationmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/regeneration5.png",
+  "parentResearch": "slimcolonies:civilian/compress",
+  "researchLevel": 6
+}

@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutfletcher",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutfletcher",
+  "parentResearch": "slimcolonies:technology/woodwork",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:sawmill",
+      "level": 1
+    }
+  ],
+  "researchLevel": 2
+}

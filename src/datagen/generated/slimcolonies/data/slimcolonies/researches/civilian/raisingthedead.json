@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/usetotemunlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:totem_of_undying",
+  "parentResearch": "slimcolonies:civilian/resurrectchance2",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:graveyard",
+      "level": 5
+    }
+  ],
+  "researchLevel": 4,
+  "sortOrder": 1,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.raisingthedead.subtitle"
+}

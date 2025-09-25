@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockattacksmultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:iron_ingot",
+  "parentResearch": "slimcolonies:combat/improvedswords",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:combatacademy",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.combat.squiretraining.subtitle"
+}

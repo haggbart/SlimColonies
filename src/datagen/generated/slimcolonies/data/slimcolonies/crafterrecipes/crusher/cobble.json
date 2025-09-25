@@ -1,0 +1,14 @@
+{
+  "type": "recipe",
+  "crafter": "crusher_custom",
+  "inputs": [
+    {
+      "count": 2,
+      "item": "minecraft:tuff"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "not-research-id": "slimcolonies:effects/crushing11unlock",
+  "research-id": "slimcolonies:effects/knowledgeofthedepthsunlock",
+  "result": "minecraft:cobblestone"
+}

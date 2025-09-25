@@ -1,0 +1,33 @@
+{
+  "parent": "slimcolonies:minecolonies/place_townhall",
+  "criteria": {
+    "click_gui_button_close": {
+      "conditions": {
+        "button_id": "confirm",
+        "window_resource_location": "slimcolonies:gui/windowhutguide.xml"
+      },
+      "trigger": "slimcolonies:click_gui_button"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.check_out_guide.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockhutbuilder"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.check_out_guide.title"
+    }
+  },
+  "requirements": [
+    [
+      "click_gui_button_close"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

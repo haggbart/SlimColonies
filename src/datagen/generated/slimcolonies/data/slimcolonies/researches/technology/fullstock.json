@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/minimumstockmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:ender_chest",
+  "parentResearch": "slimcolonies:technology/capacity",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.fullstock.subtitle"
+}

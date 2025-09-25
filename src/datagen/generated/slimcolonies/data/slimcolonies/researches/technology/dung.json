@@ -1,0 +1,23 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/farmingmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:bone_meal",
+  "parentResearch": "slimcolonies:technology/bonemeal",
+  "requirements": [
+    {
+      "type": "slimcolonies:alternate-building",
+      "alternate-buildings": [
+        "slimcolonies:farmer",
+        "slimcolonies:composter"
+      ],
+      "level": 4
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.dung.subtitle"
+}

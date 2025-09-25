@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockattacksmultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:iron_bars",
+  "parentResearch": "slimcolonies:combat/knighttraining",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:combatacademy",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

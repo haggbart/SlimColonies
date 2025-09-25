@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/guardcrit",
+      "level": 1
+    }
+  ],
+  "exclusiveChildResearch": true,
+  "icon": "minecraft:iron_sword",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:guardtower",
+      "level": 1
+    }
+  ],
+  "researchLevel": 1
+}

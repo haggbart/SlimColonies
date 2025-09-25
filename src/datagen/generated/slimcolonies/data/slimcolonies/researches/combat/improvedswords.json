@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutcombatacademy",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutcombatacademy",
+  "parentResearch": "slimcolonies:combat/tactictraining",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:barracks",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2,
+  "subtitle": "no.monopixel.slimcolonies.research.combat.improvedswords.subtitle"
+}

@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/levelingmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "minecraft:experience_bottle:5",
+  "parentResearch": "slimcolonies:civilian/reflective",
+  "researchLevel": 6,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.academic.subtitle"
+}

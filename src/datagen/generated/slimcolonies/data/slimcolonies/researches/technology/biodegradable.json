@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutcomposter",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutcomposter",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:farmer",
+      "level": 3
+    }
+  ],
+  "researchLevel": 1,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.biodegradable.subtitle"
+}

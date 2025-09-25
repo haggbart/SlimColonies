@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleedamageaddition",
+      "level": 5
+    }
+  ],
+  "icon": "minecraft:diamond_sword",
+  "parentResearch": "slimcolonies:combat/mightycleave",
+  "researchLevel": 6
+}

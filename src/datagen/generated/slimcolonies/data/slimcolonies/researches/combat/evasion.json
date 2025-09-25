@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/archerarmormultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:iron_boots",
+  "parentResearch": "slimcolonies:combat/improveddodge",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:smeltery",
+      "level": 3
+    }
+  ],
+  "researchLevel": 4,
+  "subtitle": "no.monopixel.slimcolonies.research.combat.evasion.subtitle"
+}

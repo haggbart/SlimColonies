@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/walkingmultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/speed1.png",
+  "parentResearch": "slimcolonies:civilian/keen",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:townhall",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.haste.subtitle"
+}

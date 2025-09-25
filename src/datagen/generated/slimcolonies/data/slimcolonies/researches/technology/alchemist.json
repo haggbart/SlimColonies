@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutalchemist",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutalchemist",
+  "parentResearch": "slimcolonies:technology/opennether",
+  "researchLevel": 2,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.alchemist.subtitle"
+}

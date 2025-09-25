@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "slimcolonies:block/largequarry",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "slimcolonies:block/largequarry",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "slimcolonies:block/largequarry",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "slimcolonies:block/largequarry",
+      "y": 0
+    }
+  }
+}

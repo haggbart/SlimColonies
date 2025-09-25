@@ -1,0 +1,124 @@
+{
+  "name": "Upgrade the Shed!",
+  "max-occurrences": 1,
+  "parents": [
+    "slimcolonies:tutorial/builder2"
+  ],
+  "triggers": [
+    {
+      "type": "slimcolonies:citizen",
+      "state": {
+        "notmatch": {
+          "finavquests": [
+            "slimcolonies:tutorial/builder2"
+          ]
+        }
+      }
+    },
+    {
+      "type": "slimcolonies:citizen",
+      "state": {}
+    }
+  ],
+  "triggerOrder": "1 || 2",
+  "objectives": [
+    {
+      "type": "slimcolonies:dialogue",
+      "target": 0,
+      "text": "Now that you got a level 2 builder the next logical step is upgrading your residences. Residences house 1 citizen per housing level up to five citizens at level five.",
+      "options": [
+        {
+          "answer": "Sounds exciting! What do you want me to do?.",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "text": "Upgrade two of your residences to level 2 and come back to me later then!",
+            "options": [
+              {
+                "answer": "On it!",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 1
+                }
+              },
+              {
+                "answer": "Already done!",
+                "result": {
+                  "type": "slimcolonies:dialogue",
+                  "text": "Excellent. I'll leave you be for now then. Make sure to check on your quest log regularly.",
+                  "options": [
+                    {
+                      "answer": "Noted!",
+                      "result": {
+                        "type": "slimcolonies:advanceobjective",
+                        "go-to": 10
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "answer": "Not right now. I will come back to you later!",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        },
+        {
+          "answer": "Already done!",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "text": "Excellent. I'll leave you be for now then. Make sure to check on your quest log regularly.",
+            "options": [
+              {
+                "answer": "Noted!",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 10
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "slimcolonies:buildbuilding",
+      "details": {
+        "type": "slimcolonies:residence",
+        "count-existing": true,
+        "lvl": 2,
+        "qty": 2,
+        "target": 0,
+        "next-objective": 2
+      }
+    },
+    {
+      "unlocks-rewards": [
+        0
+      ],
+      "type": "slimcolonies:dialogue",
+      "target": 0,
+      "text": "Amazing! This is the best way to attract new citizens to your colony! Not only that! Citizens are also considerably happier in higher residence tiers! Here I found these racks earlier. I'm sure they will come in handy!",
+      "options": [
+        {
+          "answer": "Thank you. Bye!",
+          "result": {
+            "type": "slimcolonies:advanceobjective",
+            "go-to": 5
+          }
+        }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "slimcolonies:blockslimcoloniesrack",
+        "qty": 8
+      }
+    }
+  ]
+}

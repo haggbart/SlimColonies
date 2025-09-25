@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/gravedecaybonus",
+      "level": 2
+    }
+  ],
+  "icon": "slimcolonies:blockslimcoloniesgrave",
+  "parentResearch": "slimcolonies:civilian/gravedecaybonus1",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:graveyard",
+      "level": 5
+    }
+  ],
+  "researchLevel": 3,
+  "sortOrder": 2,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.gravedecaybonus2.subtitle"
+}

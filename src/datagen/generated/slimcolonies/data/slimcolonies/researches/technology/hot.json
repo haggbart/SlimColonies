@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutsmeltery",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutsmeltery",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 2
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 6
+}

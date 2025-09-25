@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 75,
+  "experience": 0.0475,
+  "ingredient": {
+    "item": "slimcolonies:cookie_dough"
+  },
+  "result": "minecraft:cookie"
+}

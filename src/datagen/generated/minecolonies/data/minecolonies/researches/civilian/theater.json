@@ -1,7 +1,0 @@
-{
-  "branch": "minecolonies:civilian",
-  "icon": "minecolonies:textures/icons/research/happy5.png",
-  "parentResearch": "minecolonies:civilian/opera",
-  "researchLevel": 6,
-  "subtitle": "com.minecolonies.research.civilian.theater.subtitle"
-}

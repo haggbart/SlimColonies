@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/growthmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/childgrowth5.png",
+  "parentResearch": "slimcolonies:civilian/growth",
+  "researchLevel": 6,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.beanstalk.subtitle"
+}

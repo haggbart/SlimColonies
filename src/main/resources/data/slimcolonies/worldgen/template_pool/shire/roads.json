@@ -1,0 +1,69 @@
+{
+  "name": "slimcolonies:shire/roads",
+  "fallback": "slimcolonies:shire/buildings",
+  "elements": [
+    {
+      "weight": 5,
+      "element": {
+        "location": "slimcolonies:shire/intersection",
+        "processors": "slimcolonies:shire/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 6,
+      "element": {
+        "location": "slimcolonies:shire/long",
+        "processors": "slimcolonies:shire/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "location": "slimcolonies:shire/large",
+        "processors": "slimcolonies:shire/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 6,
+      "element": {
+        "location": "slimcolonies:shire/short",
+        "processors": "slimcolonies:shire/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 6,
+      "element": {
+        "location": "slimcolonies:shire/small",
+        "processors": "slimcolonies:shire/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 6,
+      "element": {
+        "location": "slimcolonies:shire/tjunction",
+        "processors": "slimcolonies:shire/street",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "slimcolonies:shire/parkway",
+        "processors": "slimcolonies:shire/decoration",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
+        size="190 244">
+    <image source="slimcolonies:textures/gui/builderhut/builder_paper.png" size="190 244"/>
+    <text size="164 11" pos="13 32" textalign="MIDDLE" color="black"
+          label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.workerassigned)"/>
+
+    <list id="workers" size="164 30" pos="13 43">
+        <view size="100% 11">
+            <box size="100% 11" linewidth="0">
+                <text id="workerName" size="100% 11" pos="0 0" textalign="MIDDLE" color="black"/>
+            </box>
+        </view>
+    </list>
+
+    <button id="hire" size="129 17" pos="30 74" color="black"
+            source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.manage)"/>
+    <button id="recall" size="129 17" pos="30 92" color="black"
+            source="slimcolonies:textures/gui/builderhut/builder_button_medium_large.png"
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.recall)"/>
+    <text id="text" size="150 45" pos="30 120" color="black" text="$(no.monopixel.slimcolonies.coremod.gui.quarry.desc)"/>
+</window>

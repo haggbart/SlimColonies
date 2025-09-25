@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutlibrary",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutlibrary",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:residence",
+      "level": 3
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 2
+}

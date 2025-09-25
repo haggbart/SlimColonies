@@ -1,0 +1,32 @@
+{
+  "parent": "slimcolonies:minecolonies/colony_population_50",
+  "criteria": {
+    "population_75": {
+      "conditions": {
+        "population_count": 75
+      },
+      "trigger": "slimcolonies:colony_population"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.colony_population_75.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:emerald"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.colony_population_75.title"
+    }
+  },
+  "requirements": [
+    [
+      "population_75"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

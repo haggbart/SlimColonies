@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/citizeninvslotsaddition",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:red_shulker_box",
+  "no-reset": true,
+  "parentResearch": "slimcolonies:technology/deeppockets",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

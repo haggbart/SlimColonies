@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/resurrectchanceaddition",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutgraveyard",
+  "parentResearch": "slimcolonies:civilian/remembrance",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:graveyard",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 1,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.resurrectchance1.subtitle"
+}

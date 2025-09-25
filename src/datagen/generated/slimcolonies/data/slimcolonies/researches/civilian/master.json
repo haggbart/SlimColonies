@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/teachingmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/xpgain4.png",
+  "parentResearch": "slimcolonies:civilian/bachelor",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.master.subtitle"
+}

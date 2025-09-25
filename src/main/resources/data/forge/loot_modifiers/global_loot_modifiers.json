@@ -1,7 +1,7 @@
 {
   "entries": [
-    "minecolonies:supplycamp_loot",
-    "minecolonies:supplyship_loot"
+    "slimcolonies:supplycamp_loot",
+    "slimcolonies:supplyship_loot"
   ],
   "replace": false
 }

@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/doublearrowsmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:blaze_rod",
+  "parentResearch": "slimcolonies:combat/rapidshot",
+  "researchLevel": 6
+}

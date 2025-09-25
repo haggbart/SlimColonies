@@ -1,7 +1,0 @@
-{
-  "parent": "minecolonies:block/digsite",
-  "textures": {
-    "0": "item/diamond_pickaxe",
-    "4": "block/iron_block"
-	}
-}

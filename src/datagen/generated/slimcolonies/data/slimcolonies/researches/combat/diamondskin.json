@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/armordurabilitymultiplier",
+      "level": 6
+    }
+  ],
+  "icon": "minecraft:diamond_helmet",
+  "parentResearch": "slimcolonies:combat/steelarmor",
+  "researchLevel": 6
+}

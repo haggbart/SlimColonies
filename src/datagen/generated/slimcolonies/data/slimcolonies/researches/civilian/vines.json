@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/vinesunlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:vine",
+  "parentResearch": "slimcolonies:civilian/keen",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:residence",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 5,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.vines.subtitle"
+}

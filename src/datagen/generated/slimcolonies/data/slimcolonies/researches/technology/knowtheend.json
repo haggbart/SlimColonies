@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/knowledgeoftheendunlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:chorus_fruit",
+  "parentResearch": "slimcolonies:technology/theflintstones",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:baker",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.knowtheend.subtitle"
+}

@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/plantationsea",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:kelp",
+  "parentResearch": "slimcolonies:technology/letitgrow",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:plantation",
+      "level": 2
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.takingdivinglessons.subtitle"
+}

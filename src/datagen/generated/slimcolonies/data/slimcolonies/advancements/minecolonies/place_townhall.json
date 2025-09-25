@@ -1,0 +1,32 @@
+{
+  "parent": "slimcolonies:minecolonies/root",
+  "criteria": {
+    "build_tool_place_town_hall": {
+      "conditions": {
+        "hut_name": "townhall"
+      },
+      "trigger": "slimcolonies:structure_placed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.place_townhall.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockhuttownhall"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.place_townhall.title"
+    }
+  },
+  "requirements": [
+    [
+      "build_tool_place_town_hall"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

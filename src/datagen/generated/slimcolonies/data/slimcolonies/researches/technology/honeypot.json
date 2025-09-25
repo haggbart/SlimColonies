@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/beekeep2unlock",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:honeycomb",
+  "parentResearch": "slimcolonies:technology/rainbowheaven",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:beekeeper",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.honeypot.subtitle"
+}

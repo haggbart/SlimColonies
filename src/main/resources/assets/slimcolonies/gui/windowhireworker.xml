@@ -1,0 +1,43 @@
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/1.20.1/src/main/resources/assets/blockui/gui/block_ui.xsd"
+>
+    <image source="slimcolonies:textures/gui/builderhut/builder_paper_wide2.png" size="400 244"/>
+
+    <text id="jobLabel" size="100% 11" pos="0 15" textalign="MIDDLE" color="black"/>
+    <list id="unemployed" size="375 135" pos="20 48">
+        <view size="100% 35">
+            <gradient gradientstart="430265344" gradientend="430265344" size="100% 100%"/>
+            <text id="citizen" size="175 12" pos="5 0" color="blue"/>
+            <text id="distance" size="300 8" pos="2 10" color="black" textscale="0.8"/>
+            <text id="attributes" size="300 16" pos="2 18" color="black" textscale="0.7"/>
+
+            <button id="done" size="44 10" pos="200 2" color="black"
+                    source="slimcolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                    label="$(no.monopixel.slimcolonies.coremod.gui.hiring.buttonhire)" textscale="0.8"/>
+            <button id="fire" size="44 10" pos="200 2" color="black"
+                    source="slimcolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                    label="$(no.monopixel.slimcolonies.coremod.gui.hiring.buttonfire)" textscale="0.8"/>
+
+            <button id="pause" size="44 10" pos="250 2" color="black"
+                    source="slimcolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                    label="" textscale="0.8"/>
+
+            <button id="restart" size="44 10" pos="300 2" color="black"
+                    source="slimcolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                    label="$(no.monopixel.slimcolonies.coremod.gui.hiring.restart)" textscale="0.8"/>
+        </view>
+    </list>
+
+    <text id="buildingHireMode" size="200 11" pos="20 189" color="black" label="$(no.monopixel.slimcolonies.coremod.gui.buildinghiremode)"/>
+    <button id="mode" size="169 17" pos="150 187" color="black"
+            source="slimcolonies:textures/gui/builderhut/builder_button_large.png"
+            label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.manage)"/>
+
+    <text id="showEmployedLabel" size="120 11" pos="20 210" color="black" label="$(no.monopixel.slimcolonies.coremod.gui.showemployed)"/>
+
+    <button id="showEmployed" color="black" pos="200 208" size="29 17" label="$(gui.no)"
+            source="slimcolonies:textures/gui/builderhut/builder_button_very_small.png"/>
+
+    <button id="cancel" size="14 15" pos="375 10"
+            source="slimcolonies:textures/gui/button_x.png" color="black"/>
+</window>

@@ -1,0 +1,33 @@
+{
+  "parent": "slimcolonies:production/build_composter",
+  "criteria": {
+    "florist": {
+      "conditions": {
+        "hut_name": "florist",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.build.florist.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockhutflorist"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.build.florist.title"
+    }
+  },
+  "requirements": [
+    [
+      "florist"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/citizeninvslotsaddition",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:pink_shulker_box",
+  "no-reset": true,
+  "parentResearch": "slimcolonies:technology/cheatsheet",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 4
+    }
+  ],
+  "researchLevel": 4,
+  "sortOrder": 2
+}

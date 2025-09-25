@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "slimcolonies:barrel_block"
+    },
+    "T": {
+      "item": "structurize:sceptergold"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "XTX",
+    "XBX",
+    "XXX"
+  ],
+  "result": {
+    "item": "slimcolonies:blockhutcomposter"
+  },
+  "show_notification": true
+}

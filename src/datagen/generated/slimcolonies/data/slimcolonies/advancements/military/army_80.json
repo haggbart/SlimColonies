@@ -1,0 +1,33 @@
+{
+  "parent": "slimcolonies:military/army_30",
+  "criteria": {
+    "population_5": {
+      "conditions": {
+        "population_count": 80
+      },
+      "trigger": "slimcolonies:army_population"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.army_80.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:diamond_sword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.army_80.title"
+    }
+  },
+  "requirements": [
+    [
+      "population_5"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

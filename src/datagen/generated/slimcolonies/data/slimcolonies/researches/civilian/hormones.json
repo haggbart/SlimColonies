@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/growthmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/childgrowth2.png",
+  "parentResearch": "slimcolonies:civilian/nurture",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:school",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.hormones.subtitle"
+}

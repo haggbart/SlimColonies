@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/healingsaturationlimitaddition",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:potion",
+  "parentResearch": "slimcolonies:civilian/resistance",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:cook",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3
+}

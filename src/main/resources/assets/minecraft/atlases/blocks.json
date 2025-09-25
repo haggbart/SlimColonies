@@ -26,11 +26,11 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "minecolonies:gui/builderhut/builder_paper"
+      "resource": "slimcolonies:gui/builderhut/builder_paper"
     },
     {
       "type": "minecraft:single",
-      "resource": "minecolonies:gui/builderhut/builder_paper_sketch_block"
+      "resource": "slimcolonies:gui/builderhut/builder_paper_sketch_block"
     }
   ]
 }

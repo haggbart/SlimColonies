@@ -1,0 +1,14 @@
+{
+  "icon": "icon.png",
+  "name": "Pagoda",
+  "authors": [
+    "Thaylar"
+  ],
+  "desc": "Construct your Pagoda Empire and take over all the Cherry Blossom Biomes you can find!",
+  "mods": [
+    "structurize",
+    "slimcolonies"
+  ],
+  "version": "1",
+  "pack-format": "1"
+}

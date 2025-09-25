@@ -1,0 +1,25 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/plantationnether",
+      "level": 1
+    }
+  ],
+  "icon": "minecraft:crimson_fungus",
+  "parentResearch": "slimcolonies:technology/croprotation",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:plantation",
+      "level": 3
+    },
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:netherworker",
+      "level": 3
+    }
+  ],
+  "researchLevel": 4,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.gargamel.subtitle"
+}

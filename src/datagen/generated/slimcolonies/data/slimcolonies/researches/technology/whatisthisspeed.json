@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockbreakspeedmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:comparator",
+  "parentResearch": "slimcolonies:technology/heavymachinery",
+  "researchLevel": 5,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.whatisthisspeed.subtitle"
+}

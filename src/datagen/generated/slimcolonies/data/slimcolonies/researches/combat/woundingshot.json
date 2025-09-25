@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/archerdamageaddition",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:spectral_arrow",
+  "parentResearch": "slimcolonies:combat/piercingshot",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:barracks",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

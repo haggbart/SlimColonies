@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleearmormultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "minecraft:diamond_chestplate",
+  "parentResearch": "slimcolonies:combat/provost",
+  "researchLevel": 6
+}

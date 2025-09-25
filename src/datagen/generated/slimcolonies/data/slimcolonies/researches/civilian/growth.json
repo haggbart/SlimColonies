@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/growthmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/childgrowth4.png",
+  "parentResearch": "slimcolonies:civilian/puberty",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

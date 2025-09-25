@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockbreakspeedmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:redstone_torch",
+  "parentResearch": "slimcolonies:technology/isthisredstone",
+  "researchLevel": 3,
+  "subtitle": "no.monopixel.slimcolonies.research.technology.redstonepowered.subtitle"
+}

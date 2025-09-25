@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutgraveyard",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutgraveyard",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:townhall",
+      "level": 2
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 6,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.remembrance.subtitle"
+}

@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/saturationmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/saturation4.png",
+  "parentResearch": "slimcolonies:civilian/stuffer",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:cook",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

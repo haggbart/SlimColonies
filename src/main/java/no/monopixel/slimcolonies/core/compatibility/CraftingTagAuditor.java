@@ -1,0 +1,618 @@
+package no.monopixel.slimcolonies.core.compatibility;
+
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.storage.LevelResource;
+import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
+import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
+import no.monopixel.slimcolonies.api.compatibility.ICompatibilityManager;
+import no.monopixel.slimcolonies.api.crafting.CompostRecipe;
+import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
+import no.monopixel.slimcolonies.api.crafting.ModCraftingTypes;
+import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.util.FoodUtils;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.AnimalHerdingModule;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.SimpleCraftingModule;
+import no.monopixel.slimcolonies.core.colony.crafting.*;
+import no.monopixel.slimcolonies.core.compatibility.jei.JEIPlugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+
+import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.FULL_SATURATION;
+import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
+
+/**
+ * This class analyzes the current crafting tags and generates a CSV file reporting on which items can be crafted by
+ * which crafter, as a way to verify that all intended items are covered by the appropriate crafters (or not).  It
+ * also produces another file that just contains all tags for each item, both to check the crafting tags themselves
+ * and to help pick appropriate tags to add to the crafting tags if something is missing.
+ * <p>
+ * The logic of evaluating recipes closely resembles {@link JEIPlugin}, but
+ * we want this to happen server-side without depending on anything from that.
+ */
+public class CraftingTagAuditor
+{
+    /**
+     * Run the auditor to generate the output file.
+     *
+     * @param server              the current Minecraft server
+     * @param customRecipeManager the custom recipe manager (mainly used for loot checks)
+     */
+    public static void doRecipeAudit(
+        @NotNull final MinecraftServer server,
+        @NotNull final CustomRecipeManager customRecipeManager)
+    {
+        createFile("item tag audit", server, "tag_item_audit.csv", writer -> doItemTagAudit(writer, server));
+        createFile("block tag audit", server, "tag_block_audit.csv", writer -> doBlockTagAudit(writer, server));
+        createFile("path block audit", server, "tag_path_audit.csv", writer -> doPathBlockTagAudit(writer, server));
+        createFile("biome tag audit", server, "tag_biome_audit.csv", writer -> doBiomeTagAudit(writer, server));
+        createFile("recipe audit", server, "recipe_audit.csv", writer -> doRecipeAudit(writer, server, customRecipeManager));
+        createFile("domum audit", server, "domum_audit.csv", writer -> doDomumAudit(writer, server));
+        createFile("tools audit", server, "tools_audit.csv", writer -> doToolsAudit(writer, server));
+        createFile("food audit", server, "food_audit.csv", writer -> doFoodAudit(writer, server));
+        createFile("compost audit", server, "compost_audit.csv", writer -> doCompostAudit(writer, server));
+    }
+
+    private static boolean createFile(
+        @NotNull final String description,
+        @NotNull final MinecraftServer server,
+        @NotNull final String filename,
+        @NotNull final Writeable generator)
+    {
+        final Path outputPath = server.getWorldPath(LevelResource.ROOT).resolve(MOD_ID).resolve(filename);
+
+        Log.getLogger().info("Beginning " + description + "...");
+        try
+        {
+            Files.createDirectories(outputPath.getParent());
+            try (final BufferedWriter writer = Files.newBufferedWriter(outputPath))
+            {
+                generator.write(writer);
+            }
+
+            Log.getLogger().info("Completed " + description + "; written to " + outputPath);
+            return true;
+        }
+        catch (final Throwable ex)
+        {
+            Log.getLogger().error("Failed to write " + description + " to " + outputPath, ex);
+            return false;
+        }
+    }
+
+    @FunctionalInterface
+    private interface Writeable
+    {
+        void write(@NotNull BufferedWriter writer) throws IOException;
+    }
+
+    private static List<ItemStack> getAllItems()
+    {
+        final ICompatibilityManager compatibility = IColonyManager.getInstance().getCompatibilityManager();
+        final List<ItemStack> items = new ArrayList<>(compatibility.getListOfAllItems());
+        items.sort(Comparator.comparing(stack -> ForgeRegistries.ITEMS.getKey(stack.getItem()).toString()));
+        return items;
+    }
+
+    private static void doItemTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        writeItemHeaders(writer);
+        writer.write(",tags...");
+        writer.newLine();
+
+        for (final ItemStack item : getAllItems())
+        {
+            writeItemData(writer, item);
+
+            item.getTags()
+                .map(t -> t.location().toString())
+                .sorted()
+                .forEach(t ->
+                {
+                    try
+                    {
+                        writer.write(',');
+                        writer.write(t);
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                });
+            writer.newLine();
+        }
+    }
+
+    private static void doBlockTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        writer.write("block,name,tags...");
+        writer.newLine();
+
+        for (final Map.Entry<ResourceKey<Block>, Block> entry : ForgeRegistries.BLOCKS.getEntries())
+        {
+            writer.write(entry.getKey().location().toString());
+            writer.write(',');
+            writer.write('"');
+            writer.write(Component.translatable(entry.getValue().getDescriptionId()).getString().replace("\"", "\"\""));
+            writer.write('"');
+            ForgeRegistries.BLOCKS.tags().getReverseTag(entry.getValue()).ifPresent(tags ->
+            {
+                tags.getTagKeys()
+                    .map(t -> t.location().toString())
+                    .sorted()
+                    .forEach(t ->
+                    {
+                        try
+                        {
+                            writer.write(',');
+                            writer.write(t);
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
+            });
+            writer.newLine();
+        }
+    }
+
+    private static void doPathBlockTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        writer.write("block,name,path,climbable,dangerous");
+        writer.newLine();
+
+        for (final Map.Entry<ResourceKey<Block>, Block> entry : ForgeRegistries.BLOCKS.getEntries())
+        {
+            writer.write(entry.getKey().location().toString());
+            writer.write(',');
+            writer.write('"');
+            writer.write(Component.translatable(entry.getValue().getDescriptionId()).getString().replace("\"", "\"\""));
+            writer.write('"');
+            writer.write(',');
+            if (entry.getValue().defaultBlockState().is(ModTags.pathingBlocks))
+            {
+                writer.write("path");
+            }
+            writer.write(',');
+            if (entry.getValue().defaultBlockState().is(ModTags.freeClimbBlocks))
+            {
+                writer.write("climb");
+            }
+            writer.write(',');
+            if (entry.getValue().defaultBlockState().is(ModTags.dangerousBlocks))
+            {
+                writer.write("danger");
+            }
+            writer.newLine();
+        }
+    }
+
+    private static void doBiomeTagAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        writer.write("biome,name,tags...");
+        writer.newLine();
+
+        final Registry<Biome> biomes = server.registryAccess().registry(Registries.BIOME).orElse(null);
+        if (biomes == null)
+        {
+            return;
+        }
+
+        for (final ResourceLocation id : biomes.keySet().stream().sorted().toList())
+        {
+            writer.write(id.toString());
+            writer.write(',');
+            writer.write('"');
+            writer.write(Component.translatable(id.toLanguageKey("biome")).getString().replace("\"", "\"\""));
+            writer.write('"');
+            biomes.getHolder(ResourceKey.create(biomes.key(), id)).ifPresent(holder ->
+                holder.tags()
+                    .map(t -> t.location().toString())
+                    .sorted()
+                    .forEach(t ->
+                    {
+                        try
+                        {
+                            writer.write(',');
+                            writer.write(t);
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }));
+            writer.newLine();
+        }
+    }
+
+    private static void doRecipeAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server,
+        @NotNull final CustomRecipeManager customRecipeManager) throws IOException
+    {
+        final Map<CraftingType, List<IGenericRecipe>> vanillaRecipesMap =
+            RecipeAnalyzer.buildVanillaRecipesMap(server.getRecipeManager(), server.overworld());
+        final List<Animal> animals = RecipeAnalyzer.createAnimals(server.overworld());
+        final List<ICraftingBuildingModule> crafters = getCraftingModules()
+            .stream()
+            .sorted(Comparator.comparing((ICraftingBuildingModule m) -> m instanceof SimpleCraftingModule).reversed()
+                .thenComparing(ICraftingBuildingModule::getCustomRecipeKey))
+            .toList();  // sort the simple modules first (2x2 crafting, personal only)
+        final List<AnimalHerdingModule> herders = getHerdingModules();
+        final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap = new HashMap<>();
+
+        // initially map every vanilla craftable
+        for (final List<IGenericRecipe> recipeList : vanillaRecipesMap.values())
+        {
+            for (final IGenericRecipe recipe : recipeList)
+            {
+                add(customRecipeManager, craftingMap, null, recipe);
+            }
+        }
+
+        writeItemHeaders(writer);
+        writer.write(",player");
+        for (final ICraftingBuildingModule crafter : crafters)
+        {
+            writer.write(',');
+            writer.write(crafter.getCustomRecipeKey());
+
+            final List<IGenericRecipe> recipes = RecipeAnalyzer.findRecipes(vanillaRecipesMap, crafter, server.overworld());
+            for (final IGenericRecipe recipe : recipes)
+            {
+                add(customRecipeManager, craftingMap, crafter, recipe);
+            }
+        }
+        for (final AnimalHerdingModule herder : herders)
+        {
+            writer.write(',');
+            writer.write(herder.getHerdingJob().getJobRegistryEntry().getKey().getPath());
+
+            final List<IGenericRecipe> recipes = RecipeAnalyzer.findRecipes(animals, herder);
+            for (final IGenericRecipe recipe : recipes)
+            {
+                add(customRecipeManager, craftingMap, herder, recipe);
+            }
+        }
+        writer.newLine();
+
+        for (final ItemStack item : getAllItems())
+        {
+            writeItemData(writer, item);
+
+            final Map<Object, List<IGenericRecipe>> crafterMap =
+                craftingMap.getOrDefault(new ItemStorage(item, true, false), Collections.emptyMap());
+
+            writeCrafterValue(writer, crafterMap, null);
+            for (final ICraftingBuildingModule crafter : crafters)
+            {
+                writeCrafterValue(writer, crafterMap, crafter);
+            }
+            for (final AnimalHerdingModule herder : herders)
+            {
+                writeCrafterValue(writer, crafterMap, herder);
+            }
+            writer.newLine();
+        }
+    }
+
+    private static void doDomumAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        final List<IGenericRecipe> cutterRecipes = new ArrayList<>(ModCraftingTypes.ARCHITECTS_CUTTER.get().findRecipes(server.getRecipeManager(), server.overworld()));
+        cutterRecipes.sort(Comparator.comparing(r -> ForgeRegistries.ITEMS.getKey(r.getPrimaryOutput().getItem()).toString()));
+        final List<ICraftingBuildingModule> crafters = getCraftingModules()
+            .stream()
+            .filter(m -> m.canLearn(ModCraftingTypes.ARCHITECTS_CUTTER.get()))
+            .sorted(Comparator.comparing(ICraftingBuildingModule::getCustomRecipeKey))
+            .toList();
+
+        writer.write("type,");
+        writeItemHeaders(writer);
+        for (final ICraftingBuildingModule crafter : crafters)
+        {
+            writer.write(',');
+            writer.write(crafter.getCustomRecipeKey());
+        }
+        writer.newLine();
+
+        for (final IGenericRecipe recipe : cutterRecipes)
+        {
+            boolean first = true;
+
+            final List<ItemStack> allSkins = recipe.getInputs().stream()
+                .flatMap(Collection::stream)
+                .map(ItemStorage::new)
+                .distinct()
+                .sorted(Comparator.comparing(s -> ForgeRegistries.ITEMS.getKey(s.getItem()).toString()))
+                .map(ItemStorage::getItemStack)
+                .toList();
+            for (final ItemStack skin : allSkins)
+            {
+                if (first)
+                {
+                    writeItemStack(writer, recipe.getPrimaryOutput());
+                    first = false;
+                }
+                writer.write(',');
+
+                writeItemData(writer, skin);
+
+                for (final ICraftingBuildingModule crafter : crafters)
+                {
+                    writer.write(crafter.getIngredientValidator().test(skin).orElse(false) ? ",1" : ",");
+                }
+
+                writer.newLine();
+            }
+        }
+    }
+
+    private static void doToolsAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        final List<ToolUsage> toolUsages = ToolsAnalyzer.findTools();
+
+        writeItemHeaders(writer);
+        for (final ToolUsage tool : toolUsages)
+        {
+            writer.write(',');
+            writer.write(tool.tool().getRegistryName().toString());
+        }
+        writer.newLine();
+
+        for (final ItemStack item : getAllItems())
+        {
+            writeItemData(writer, item);
+
+            for (final ToolUsage tool : toolUsages)
+            {
+                writer.write(',');
+                for (int level = 0; level < tool.toolLevels().size(); ++level)
+                {
+                    final List<ItemStack> stacks = tool.toolLevels().get(level);
+                    if (ItemStackUtils.compareItemStackListIgnoreStackSize(stacks, item, false, true))
+                    {
+                        writer.write(Integer.toString(level));
+                        break;
+                    }
+                }
+            }
+
+            writer.newLine();
+        }
+    }
+
+    private static void doFoodAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        writeItemHeaders(writer);
+        writer.write(",nutrition,maxlevel,tier,foodvalue,fullhealth");
+        writer.newLine();
+
+        for (final ItemStack item : getAllItems())
+        {
+            if (!ItemStackUtils.ISFOOD.test(item))
+            {
+                continue;
+            }
+
+            final FoodProperties properties = item.getItem().getFoodProperties(item, null);
+            if (properties == null)
+            {
+                continue;
+            }
+
+            writeItemData(writer, item);
+
+            writer.write(',');
+            writer.write(Integer.toString(properties.getNutrition()));
+            writer.write(',');
+            // Building level requirement removed - all food can be eaten at any level
+            writer.write("0");
+            writer.write(',');
+            // Food tier system removed - all food is now equal
+            writer.write("1");
+            writer.write(',');
+            writer.write(Double.toString(FoodUtils.getFoodValue(item, properties, 0)));
+            writer.write(',');
+            writer.write(Double.toString(FULL_SATURATION / FoodUtils.getFoodValue(item, properties, 0)));
+            writer.newLine();
+        }
+    }
+
+    private static void doCompostAudit(
+        @NotNull final BufferedWriter writer,
+        @NotNull final MinecraftServer server) throws IOException
+    {
+        writeItemHeaders(writer);
+        writer.write(",vanilla,mcol");
+        writer.newLine();
+
+        final Map<Item, CompostRecipe> compostRecipes = IColonyManager.getInstance().getCompatibilityManager().getCopyOfCompostRecipes();
+
+        for (final ItemStack item : getAllItems())
+        {
+            writeItemData(writer, item);
+            writer.write(",");
+
+            final float vanilla = ComposterBlock.COMPOSTABLES.getFloat(item.getItem());
+            if (vanilla > 0.0f)
+            {
+                writer.write(String.valueOf(vanilla));
+            }
+
+            writer.write(",");
+
+            final CompostRecipe compostRecipe = compostRecipes.get(item.getItem());
+            if (compostRecipe != null)
+            {
+                writer.write(String.valueOf(compostRecipe.getStrength()));
+            }
+
+            writer.newLine();
+        }
+    }
+
+    private static void writeItemHeaders(@NotNull final BufferedWriter writer) throws IOException
+    {
+        writer.write("item,name");
+    }
+
+    private static void writeItemData(
+        @NotNull final BufferedWriter writer,
+        @NotNull final ItemStack stack) throws IOException
+    {
+        writeItemStack(writer, stack);
+        writer.write(",\"");
+        writer.write(stack.getDisplayName().getString().replace("\"", "\"\""));
+        writer.write('"');
+    }
+
+    private static void writeItemStack(
+        @NotNull final BufferedWriter writer,
+        @NotNull final ItemStack stack) throws IOException
+    {
+        writer.write('"');
+        writer.write(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
+        if (stack.hasTag() && !stack.isDamageableItem())
+        {
+            writer.write(stack.getTag().toString().replace("\"", "\"\""));
+        }
+        writer.write('"');
+    }
+
+    private static void writeCrafterValue(
+        @NotNull final BufferedWriter writer,
+        @NotNull final Map<Object, List<IGenericRecipe>> crafterMap,
+        @Nullable final Object crafter) throws IOException
+    {
+        writer.write(',');
+
+        final List<IGenericRecipe> recipeList = crafterMap.getOrDefault(crafter, Collections.emptyList());
+        if (!recipeList.isEmpty())
+        {
+            writer.write(Integer.toString(recipeList.size()));
+        }
+    }
+
+    private static void add(
+        @NotNull final CustomRecipeManager customRecipeManager,
+        @NotNull final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap,
+        @Nullable final Object crafter,
+        @NotNull final IGenericRecipe recipe)
+    {
+        for (final ItemStack stack : recipe.getAllMultiOutputs())
+        {
+            add(craftingMap, crafter, recipe, stack);
+        }
+
+        if (recipe.getLootTable() != null)
+        {
+            for (final LootTableAnalyzer.LootDrop drop : customRecipeManager.getLootDrops(recipe.getLootTable()))
+            {
+                for (ItemStack stack : drop.getItemStacks())
+                {
+                    add(craftingMap, crafter, recipe, stack);
+                }
+            }
+        }
+    }
+
+    private static void add(
+        @NotNull final Map<ItemStorage, Map<Object, List<IGenericRecipe>>> craftingMap,
+        @Nullable final Object crafter,
+        @NotNull final IGenericRecipe recipe,
+        @NotNull final ItemStack stack)
+    {
+        craftingMap
+            .computeIfAbsent(new ItemStorage(stack, true, false), s -> new HashMap<>())
+            .computeIfAbsent(crafter, c -> new ArrayList<>())
+            .add(recipe);
+    }
+
+    private static List<ICraftingBuildingModule> getCraftingModules()
+    {
+        final List<ICraftingBuildingModule> modules = new ArrayList<>();
+
+        for (final String producerKey : BuildingEntry.getALlModuleProducers().keySet())
+        {
+            final var module = BuildingEntry.produceModuleWithoutBuilding(producerKey);
+
+            if (module == null)
+            {
+                continue;
+            }
+
+            if (module instanceof ICraftingBuildingModule crafting)
+            {
+                modules.add(crafting);
+            }
+        }
+
+        return modules;
+    }
+
+    private static List<AnimalHerdingModule> getHerdingModules()
+    {
+        final List<AnimalHerdingModule> modules = new ArrayList<>();
+
+        for (final BuildingEntry building : IMinecoloniesAPI.getInstance().getBuildingRegistry())
+        {
+          /*  for (final Supplier<IBuildingModule> producer : building.getModuleProducers())
+            {
+                final IBuildingModule module = producer.get();
+
+                if (module instanceof AnimalHerdingModule herding)
+                {
+                    modules.add(herding);
+                }
+            }*/
+        }
+
+        return modules;
+    }
+
+    private CraftingTagAuditor()
+    {
+        /*
+         * Intentionally left empty.
+         */
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#slimcolonies:dyer_product",
+    "#slimcolonies:mechanic_product",
+    "#slimcolonies:sawmill_product",
+    "#slimcolonies:stonemason_product",
+    "minecraft:firework_star",
+    "minecraft:glistering_melon_slice",
+    "minecraft:bow",
+    "minecraft:crossbow"
+  ]
+}

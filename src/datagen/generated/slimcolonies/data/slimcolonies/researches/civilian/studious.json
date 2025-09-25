@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/levelingmultiplier",
+      "level": 2
+    }
+  ],
+  "icon": "minecraft:experience_bottle:2",
+  "parentResearch": "slimcolonies:civilian/diligent",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 3
+    }
+  ],
+  "researchLevel": 3
+}

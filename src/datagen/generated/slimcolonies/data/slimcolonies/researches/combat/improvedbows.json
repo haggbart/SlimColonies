@@ -1,0 +1,21 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/blockhutarchery",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:blockhutarchery",
+  "parentResearch": "slimcolonies:combat/tactictraining",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:barracks",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2,
+  "sortOrder": 2,
+  "subtitle": "no.monopixel.slimcolonies.research.combat.improvedbows.subtitle"
+}

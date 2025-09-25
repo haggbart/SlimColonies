@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/tooldurabilitymultiplier",
+      "level": 3
+    }
+  ],
+  "icon": "minecraft:iron_pickaxe",
+  "parentResearch": "slimcolonies:technology/hardened",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:blacksmith",
+      "level": 3
+    }
+  ],
+  "researchLevel": 4
+}

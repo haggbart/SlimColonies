@@ -1,0 +1,204 @@
+{
+  "max-occurrences": 1,
+  "name": "slimcolonies.quests.tutorial.warehouse",
+  "objectives": [
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.warehouse.obj0.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.warehouse.obj0.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 1
+                }
+              },
+              {
+                "answer": "slimcolonies.quests.tutorial.warehouse.obj0.answer0.reply.answer1",
+                "result": {
+                  "type": "slimcolonies:dialogue",
+                  "options": [
+                    {
+                      "answer": "slimcolonies.quests.tutorial.warehouse.obj0.answer0.reply.answer1.reply.answer0",
+                      "result": {
+                        "type": "slimcolonies:advanceobjective",
+                        "go-to": 10
+                      }
+                    }
+                  ],
+                  "text": "slimcolonies.quests.tutorial.warehouse.obj0.answer0.reply.answer1.reply"
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.warehouse.obj0.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.warehouse.obj0.answer1",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.warehouse.obj0.answer2",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.warehouse.obj0.answer2.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 10
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.warehouse.obj0.answer2.reply"
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.warehouse.obj0"
+    },
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.warehouse.obj1.answer0",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.warehouse.obj1.answer0.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 1
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.warehouse.obj1.answer0.reply"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.warehouse.obj1.answer1",
+          "result": {
+            "type": "slimcolonies:return"
+          }
+        },
+        {
+          "answer": "slimcolonies.quests.tutorial.warehouse.obj1.answer2",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "options": [
+              {
+                "answer": "slimcolonies.quests.tutorial.warehouse.obj1.answer2.reply.answer0",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": 2
+                }
+              }
+            ],
+            "text": "slimcolonies.quests.tutorial.warehouse.obj1.answer2.reply"
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.warehouse.obj1"
+    },
+    {
+      "type": "slimcolonies:buildbuilding",
+      "details": {
+        "type": "slimcolonies:warehouse",
+        "count-existing": true,
+        "lvl": 1,
+        "next-objective": 3,
+        "qty": 1,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:buildbuilding",
+      "details": {
+        "type": "slimcolonies:deliveryman",
+        "count-existing": true,
+        "lvl": 1,
+        "next-objective": 4,
+        "qty": 1,
+        "target": 0
+      }
+    },
+    {
+      "type": "slimcolonies:dialogue",
+      "options": [
+        {
+          "answer": "slimcolonies.quests.tutorial.warehouse.obj4.answer0",
+          "result": {
+            "type": "slimcolonies:advanceobjective",
+            "go-to": 5
+          }
+        }
+      ],
+      "target": 0,
+      "text": "slimcolonies.quests.tutorial.warehouse.obj4",
+      "unlocks-rewards": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "parents": [
+    "slimcolonies:tutorial/housing2"
+  ],
+  "rewards": [
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "minecraft:stone_pickaxe",
+        "qty": 2
+      }
+    },
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "minecraft:stone_axe",
+        "qty": 2
+      }
+    },
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "minecraft:stone_shovel",
+        "qty": 2
+      }
+    },
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "minecraft:stone_hoe",
+        "qty": 2
+      }
+    }
+  ],
+  "triggerOrder": "1 || 2",
+  "triggers": [
+    {
+      "type": "slimcolonies:citizen",
+      "state": {
+        "notmatch": {
+          "finavquests": [
+            "slimcolonies:tutorial/housing2"
+          ]
+        }
+      }
+    },
+    {
+      "type": "slimcolonies:citizen",
+      "state": {}
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/regenerationmultiplier",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/regeneration1.png",
+  "parentResearch": "slimcolonies:civilian/stamina",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:library",
+      "level": 2
+    }
+  ],
+  "researchLevel": 2
+}

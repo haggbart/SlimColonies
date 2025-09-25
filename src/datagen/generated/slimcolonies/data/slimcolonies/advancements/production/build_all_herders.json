@@ -1,0 +1,73 @@
+{
+  "parent": "slimcolonies:production/build_farmer",
+  "criteria": {
+    "chickens": {
+      "conditions": {
+        "hut_name": "chickenherder",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    },
+    "cows": {
+      "conditions": {
+        "hut_name": "cowboy",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    },
+    "pigs": {
+      "conditions": {
+        "hut_name": "swineherder",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    },
+    "rabbits": {
+      "conditions": {
+        "hut_name": "rabbithutch",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    },
+    "sheep": {
+      "conditions": {
+        "hut_name": "shepherd",
+        "level": 1
+      },
+      "trigger": "slimcolonies:complete_build_request"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.build.herders.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockhutshepherd"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.build.herders.title"
+    }
+  },
+  "requirements": [
+    [
+      "sheep"
+    ],
+    [
+      "cows"
+    ],
+    [
+      "chickens"
+    ],
+    [
+      "pigs"
+    ],
+    [
+      "rabbits"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:combat",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/meleedamageaddition",
+      "level": 4
+    }
+  ],
+  "icon": "minecraft:golden_sword",
+  "parentResearch": "slimcolonies:combat/cleave",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:barracks",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5
+}

@@ -1,0 +1,13 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/saturationmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/saturation5.png",
+  "parentResearch": "slimcolonies:civilian/epicure",
+  "researchLevel": 6,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.glutton.subtitle"
+}

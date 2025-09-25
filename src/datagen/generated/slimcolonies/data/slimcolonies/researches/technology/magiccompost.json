@@ -1,0 +1,12 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/farmingmultiplier",
+      "level": 5
+    }
+  ],
+  "icon": "slimcolonies:barrel_block",
+  "parentResearch": "slimcolonies:technology/fertilizer",
+  "researchLevel": 6
+}

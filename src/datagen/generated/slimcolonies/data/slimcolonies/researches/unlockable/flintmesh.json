@@ -1,0 +1,22 @@
+{
+  "autostart": true,
+  "branch": "slimcolonies:unlockable",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/sifterflintunlock",
+      "level": 1
+    }
+  ],
+  "hidden": true,
+  "icon": "slimcolonies:sifter_mesh_string",
+  "instant": true,
+  "parentResearch": "slimcolonies:unlockable/stringmesh",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:sifter",
+      "level": 3
+    }
+  ],
+  "researchLevel": 2
+}

@@ -1,0 +1,51 @@
+{
+  "parent": "slimcolonies:production/build_delivery_person",
+  "criteria": {
+    "postbox": {
+      "conditions": {
+        "location": [
+          {
+            "block": "slimcolonies:blockpostbox",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "stash": {
+      "conditions": {
+        "location": [
+          {
+            "block": "slimcolonies:blockstash",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.minecolonies.post_and_stash.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "slimcolonies:blockpostbox"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.minecolonies.post_and_stash.title"
+    }
+  },
+  "requirements": [
+    [
+      "postbox"
+    ],
+    [
+      "stash"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

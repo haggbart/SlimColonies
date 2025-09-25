@@ -1,0 +1,20 @@
+{
+  "branch": "slimcolonies:civilian",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/walkingmultiplier",
+      "level": 4
+    }
+  ],
+  "icon": "slimcolonies:textures/icons/research/speed3.png",
+  "parentResearch": "slimcolonies:civilian/agile",
+  "requirements": [
+    {
+      "type": "slimcolonies:single-building",
+      "building": "slimcolonies:townhall",
+      "level": 5
+    }
+  ],
+  "researchLevel": 5,
+  "subtitle": "no.monopixel.slimcolonies.research.civilian.swift.subtitle"
+}
