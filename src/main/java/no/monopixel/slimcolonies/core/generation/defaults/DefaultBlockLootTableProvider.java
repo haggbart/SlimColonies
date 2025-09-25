@@ -1,10 +1,5 @@
 package no.monopixel.slimcolonies.core.generation.defaults;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.loot.ModLootConditions;
-import no.monopixel.slimcolonies.core.blocks.BlockMinecoloniesRack;
-import no.monopixel.slimcolonies.core.generation.SimpleLootTableProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +16,11 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.loot.ModLootConditions;
+import no.monopixel.slimcolonies.core.blocks.BlockSlimColoniesRack;
+import no.monopixel.slimcolonies.core.generation.SimpleLootTableProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -60,12 +60,11 @@ public class DefaultBlockLootTableProvider extends SimpleLootTableProvider
         saveBlock(ModBlocks.blockIronGate, registrar);
         saveBlock(ModBlocks.blockWoodenGate, registrar);
         saveBlock(ModBlocks.blockCompostedDirt, registrar,
-          lootPool -> lootPool.add(AlternativesEntry.alternatives()
-                                     .otherwise(LootItem.lootTableItem(ModBlocks.blockCompostedDirt)
-                                                  .when(ModLootConditions.HAS_SILK_TOUCH))
-                                     .otherwise(LootItem.lootTableItem(Blocks.DIRT)
-                                                  .when(ExplosionCondition.survivesExplosion()))));
-
+            lootPool -> lootPool.add(AlternativesEntry.alternatives()
+                .otherwise(LootItem.lootTableItem(ModBlocks.blockCompostedDirt)
+                    .when(ModLootConditions.HAS_SILK_TOUCH))
+                .otherwise(LootItem.lootTableItem(Blocks.DIRT)
+                    .when(ExplosionCondition.survivesExplosion()))));
 
 
         // intentionally no drops -- creative only
@@ -117,7 +116,7 @@ public class DefaultBlockLootTableProvider extends SimpleLootTableProvider
     private void saveBlock(@NotNull final Block block, @NotNull final LootTableRegistrar registrar)
     {
         final LootPoolSingletonContainer.Builder<?> item = LootItem.lootTableItem(block);
-        if (block instanceof AbstractBlockHut || block instanceof BlockMinecoloniesRack)
+        if (block instanceof AbstractBlockHut || block instanceof BlockSlimColoniesRack)
         {
             item.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY));
         }
@@ -131,7 +130,7 @@ public class DefaultBlockLootTableProvider extends SimpleLootTableProvider
         if (location != null)
         {
             final ResourceLocation id = new ResourceLocation(location.getNamespace(),
-              "blocks/" + location.getPath());
+                "blocks/" + location.getPath());
 
             final Builder lootPoolbuilder = LootPool.lootPool();
             lootPoolConfigurer.accept(lootPoolbuilder);
@@ -145,12 +144,12 @@ public class DefaultBlockLootTableProvider extends SimpleLootTableProvider
         if (location != null)
         {
             registrar.register(new ResourceLocation(location.getNamespace(), "blocks/" + location.getPath()), LootContextParamSets.BLOCK,
-              LootTable.lootTable().withPool(LootPool.lootPool()
-                                               .add(LootItem.lootTableItem(block))
-                                               .apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
-                                               .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Patterns", "BlockEntityTag.Patterns").copy("id", "BlockEntityTag.id"))
-                                               .when(ExplosionCondition.survivesExplosion())
-              ));
+                LootTable.lootTable().withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
+                    .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Patterns", "BlockEntityTag.Patterns").copy("id", "BlockEntityTag.id"))
+                    .when(ExplosionCondition.survivesExplosion())
+                ));
         }
     }
 }

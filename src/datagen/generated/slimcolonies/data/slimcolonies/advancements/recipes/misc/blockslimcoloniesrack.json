@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slimcolonies:blockminecoloniesrack"
+        "recipe": "slimcolonies:blockslimcoloniesrack"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "slimcolonies:blockminecoloniesrack"
+      "slimcolonies:blockslimcoloniesrack"
     ]
   },
   "sends_telemetry_event": false

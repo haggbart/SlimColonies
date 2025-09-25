@@ -78,7 +78,7 @@ public final class ModBlocks
      * Utility blocks.
      */
     public static AbstractBlockMinecoloniesConstructionTape<? extends AbstractBlockMinecoloniesConstructionTape<?>> blockConstructionTape;
-    public static AbstractBlockMinecoloniesRack<? extends AbstractBlockMinecoloniesRack<?>>                         blockRack;
+    public static AbstractBlockSlimColoniesRack<? extends AbstractBlockSlimColoniesRack<?>>                         blockRack;
     public static AbstractBlockMinecoloniesGrave<? extends AbstractBlockMinecoloniesGrave<?>>                       blockGrave;
     public static AbstractBlockMinecoloniesNamedGrave<? extends AbstractBlockMinecoloniesNamedGrave<?>>             blockNamedGrave;
     public static AbstractBlockMinecolonies<? extends AbstractBlockMinecolonies<?>>                                 blockWayPoint;
@@ -161,5 +161,4 @@ public final class ModBlocks
             //blockLargeQuarry
         };
     }
-
 }

@@ -1,6 +1,6 @@
 {
   "branch": "slimcolonies:civilian",
-  "icon": "minecolonies:textures/icons/research/happy1.png",
+  "icon": "slimcolonies:textures/icons/research/happy1.png",
   "parentResearch": "slimcolonies:civilian/firstaid",
   "requirements": [
     {

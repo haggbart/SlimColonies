@@ -6,7 +6,7 @@
       "level": 6
     }
   ],
-  "icon": "minecolonies:textures/icons/research/hp6.png",
+  "icon": "slimcolonies:textures/icons/research/hp6.png",
   "parentResearch": "slimcolonies:civilian/guardianangel",
   "researchLevel": 6
 }

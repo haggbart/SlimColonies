@@ -1,18 +1,18 @@
 package no.monopixel.slimcolonies.core.client.gui.containers;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesRack;
-import no.monopixel.slimcolonies.api.blocks.types.RackType;
-import no.monopixel.slimcolonies.api.inventory.container.ContainerRack;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesRack;
+import no.monopixel.slimcolonies.api.blocks.types.RackType;
+import no.monopixel.slimcolonies.api.inventory.container.ContainerRack;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.InventoryConstants.*;
@@ -70,7 +70,7 @@ public class WindowRack extends AbstractContainerScreen<ContainerRack>
         super(container, playerInventory, iTextComponent);
         if (container.neighborRack != null)
         {
-            if (container.rack.getBlockState().getValue(AbstractBlockMinecoloniesRack.VARIANT) != RackType.NO_RENDER)
+            if (container.rack.getBlockState().getValue(AbstractBlockSlimColoniesRack.VARIANT) != RackType.NO_RENDER)
             {
                 this.jointChestInventory = new CombinedInvWrapper(container.rack.getInventory(), container.neighborRack.getInventory());
             }
@@ -119,7 +119,7 @@ public class WindowRack extends AbstractContainerScreen<ContainerRack>
             final int rowsHeight = this.inventoryRows * PLAYER_INVENTORY_OFFSET_EACH + PLAYER_INVENTORY_OFFSET_EACH - 1;
             stack.blit(loc, this.leftPos, this.topPos, 0, 0, this.imageWidth, rowsHeight, TEXTURE_SIZE, TEXTURE_SIZE);
             stack.blit(loc, this.leftPos, this.topPos + rowsHeight, 0,
-              TEXTURE_OFFSET, this.imageWidth, TEXTURE_HEIGHT, TEXTURE_SIZE, TEXTURE_SIZE);
+                TEXTURE_OFFSET, this.imageWidth, TEXTURE_HEIGHT, TEXTURE_SIZE, TEXTURE_SIZE);
         }
         else
         {

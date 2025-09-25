@@ -6,7 +6,7 @@
       "level": 3
     }
   ],
-  "icon": "minecolonies:textures/icons/research/speed2.png",
+  "icon": "slimcolonies:textures/icons/research/speed2.png",
   "parentResearch": "slimcolonies:civilian/nimble",
   "requirements": [
     {

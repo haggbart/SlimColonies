@@ -17,7 +17,7 @@
     },
     {
       "type": "slimcolonies:citizen",
-      "state": { }
+      "state": {}
     }
   ],
   "triggerOrder": "1 || 2",
@@ -95,7 +95,9 @@
       }
     },
     {
-      "unlocks-rewards": [0],
+      "unlocks-rewards": [
+        0
+      ],
       "type": "slimcolonies:dialogue",
       "target": 0,
       "text": "Amazing! This is the best way to attract new citizens to your colony! Not only that! Citizens are also considerably happier in higher residence tiers! Here I found these racks earlier. I'm sure they will come in handy!",
@@ -114,7 +116,7 @@
     {
       "type": "slimcolonies:item",
       "details": {
-        "item": "slimcolonies:blockminecoloniesrack",
+        "item": "slimcolonies:blockslimcoloniesrack",
         "qty": 8
       }
     }

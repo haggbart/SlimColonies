@@ -17,11 +17,11 @@
               "source": "block_entity"
             }
           ],
-          "name": "slimcolonies:blockminecoloniesrack"
+          "name": "slimcolonies:blockslimcoloniesrack"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "slimcolonies:blocks/blockminecoloniesrack"
+  "random_sequence": "slimcolonies:blocks/blockslimcoloniesrack"
 }

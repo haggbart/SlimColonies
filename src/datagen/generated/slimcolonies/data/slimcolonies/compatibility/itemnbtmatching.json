@@ -5313,15 +5313,15 @@
     "item": "slimcolonies:blockminecoloniesnamedgrave"
   },
   {
+    "item": "slimcolonies:blockpostbox"
+  },
+  {
     "checkednbtkeys": [
       {
         "key": "textureData"
       }
     ],
-    "item": "slimcolonies:blockminecoloniesrack"
-  },
-  {
-    "item": "slimcolonies:blockpostbox"
+    "item": "slimcolonies:blockslimcoloniesrack"
   },
   {
     "item": "slimcolonies:blockstash"

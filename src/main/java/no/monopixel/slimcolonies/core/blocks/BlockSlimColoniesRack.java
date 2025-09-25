@@ -2,15 +2,6 @@ package no.monopixel.slimcolonies.core.blocks;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesRack;
-import no.monopixel.slimcolonies.api.blocks.types.RackType;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -41,6 +32,15 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.network.NetworkHooks;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesRack;
+import no.monopixel.slimcolonies.api.blocks.types.RackType;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.permissions.Action;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
+import no.monopixel.slimcolonies.api.util.InventoryUtils;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -50,7 +50,7 @@ import java.util.stream.Collectors;
 /**
  * Block for the shelves of the warehouse.
  */
-public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMinecoloniesRack> implements IMateriallyTexturedBlock
+public class BlockSlimColoniesRack extends AbstractBlockSlimColoniesRack<BlockSlimColoniesRack> implements IMateriallyTexturedBlock
 {
     /**
      * Normal translation we use.
@@ -71,7 +71,7 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
     /**
      * This blocks name.
      */
-    private static final String BLOCK_NAME = "blockminecoloniesrack";
+    private static final String BLOCK_NAME = "blockslimcoloniesrack";
 
     /**
      * The resistance this block has.
@@ -83,7 +83,7 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
      */
     private static final VoxelShape SHAPE = Shapes.box(0.1, 0.1, 0.1, 0.9, 0.9, 0.9);
 
-    public BlockMinecoloniesRack()
+    public BlockSlimColoniesRack()
     {
         super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(VARIANT, RackType.EMPTY));
@@ -153,12 +153,12 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
     @Override
     @NotNull
     public BlockState updateShape(
-      @NotNull final BlockState state,
-      @NotNull final Direction dir,
-      final BlockState neighbourState,
-      @NotNull final LevelAccessor level,
-      @NotNull final BlockPos pos,
-      @NotNull final BlockPos neighbourPos)
+        @NotNull final BlockState state,
+        @NotNull final Direction dir,
+        final BlockState neighbourState,
+        @NotNull final LevelAccessor level,
+        @NotNull final BlockPos pos,
+        @NotNull final BlockPos neighbourPos)
     {
         if (state.getBlock() != this || pos.subtract(neighbourPos).getY() != 0)
         {
@@ -197,10 +197,10 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
             boolean isEmpty = hereRack.isEmpty() && neighborRack.isEmpty();
 
             level.setBlock(neighbourPos,
-              neighbourState.setValue(FACING, BY_NORMAL.get(neighbourPos.subtract(pos).asLong()).getOpposite()).setValue(VARIANT, RackType.NO_RENDER),
-              1);
+                neighbourState.setValue(FACING, BY_NORMAL.get(neighbourPos.subtract(pos).asLong()).getOpposite()).setValue(VARIANT, RackType.NO_RENDER),
+                1);
             return state.setValue(VARIANT, isEmpty ? RackType.EMPTY_DOUBLE : RackType.FULL_DOUBLE)
-                     .setValue(FACING, BY_NORMAL.get(neighbourPos.subtract(pos).asLong()));
+                .setValue(FACING, BY_NORMAL.get(neighbourPos.subtract(pos).asLong()));
         }
 
         // Validate double variant
@@ -234,25 +234,25 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
 
     @Override
     public InteractionResult use(
-      final BlockState state,
-      final Level worldIn,
-      final BlockPos pos,
-      final Player player,
-      final InteractionHand hand,
-      final BlockHitResult ray)
+        final BlockState state,
+        final Level worldIn,
+        final BlockPos pos,
+        final Player player,
+        final InteractionHand hand,
+        final BlockHitResult ray)
     {
         final IColony colony = IColonyManager.getInstance().getColonyByPosFromWorld(worldIn, pos);
         final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if ((colony == null || colony.getPermissions().hasPermission(player, Action.ACCESS_HUTS))
-              && tileEntity instanceof TileEntityRack)
+            && tileEntity instanceof TileEntityRack)
         {
             final TileEntityRack rack = (TileEntityRack) tileEntity;
             if (!worldIn.isClientSide)
             {
                 NetworkHooks.openScreen((ServerPlayer) player,
-                  rack,
-                  buf -> buf.writeBlockPos(rack.getBlockPos()).writeBlockPos(rack.getOtherChest() == null ? BlockPos.ZERO : rack.getOtherChest().getBlockPos()));
+                    rack,
+                    buf -> buf.writeBlockPos(rack.getBlockPos()).writeBlockPos(rack.getOtherChest() == null ? BlockPos.ZERO : rack.getOtherChest().getBlockPos()));
             }
             return InteractionResult.SUCCESS;
         }
@@ -290,10 +290,10 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
             {
                 TileEntityRack tileEntityRack = (TileEntityRack) tileEntity;
                 InventoryUtils.dropItemHandler(tileEntityRack.getInventory(),
-                  worldIn,
-                  tileEntityRack.getBlockPos().getX(),
-                  tileEntityRack.getBlockPos().getY(),
-                  tileEntityRack.getBlockPos().getZ());
+                    worldIn,
+                    tileEntityRack.getBlockPos().getX(),
+                    tileEntityRack.getBlockPos().getY(),
+                    tileEntityRack.getBlockPos().getZ());
                 worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 

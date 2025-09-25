@@ -6,7 +6,7 @@
       "level": 4
     }
   ],
-  "icon": "minecolonies:textures/icons/research/saturation4.png",
+  "icon": "slimcolonies:textures/icons/research/saturation4.png",
   "parentResearch": "slimcolonies:civilian/stuffer",
   "requirements": [
     {

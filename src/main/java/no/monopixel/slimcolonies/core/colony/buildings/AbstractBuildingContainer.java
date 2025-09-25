@@ -1,14 +1,6 @@
 package no.monopixel.slimcolonies.core.colony.buildings;
 
 import com.ldtteam.structurize.storage.StructurePacks;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuildingContainer;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
-import no.monopixel.slimcolonies.core.blocks.BlockMinecoloniesRack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -25,6 +17,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuildingContainer;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
+import no.monopixel.slimcolonies.core.blocks.BlockSlimColoniesRack;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -139,7 +139,8 @@ public abstract class AbstractBuildingContainer extends AbstractSchematicProvide
     @Override
     public List<BlockPos> getContainers()
     {
-        final List<BlockPos> list = new ArrayList<>(containerList);;
+        final List<BlockPos> list = new ArrayList<>(containerList);
+        ;
         list.add(this.getPosition());
         return list;
     }
@@ -169,7 +170,7 @@ public abstract class AbstractBuildingContainer extends AbstractSchematicProvide
                 }
             }
         }
-        else if (block instanceof BlockMinecoloniesRack)
+        else if (block instanceof BlockSlimColoniesRack)
         {
             addContainerPosition(pos);
             final BlockEntity entity = world.getBlockEntity(pos);
@@ -182,6 +183,7 @@ public abstract class AbstractBuildingContainer extends AbstractSchematicProvide
 
     /**
      * Gets the list of tags, and finds the first location registered there.
+     *
      * @param tagName the name of the tag to query
      * @return the BlockPos, or null if not found
      */

@@ -6,7 +6,7 @@
       "level": 4
     }
   ],
-  "icon": "minecolonies:textures/icons/research/speed3.png",
+  "icon": "slimcolonies:textures/icons/research/speed3.png",
   "parentResearch": "slimcolonies:civilian/agile",
   "requirements": [
     {

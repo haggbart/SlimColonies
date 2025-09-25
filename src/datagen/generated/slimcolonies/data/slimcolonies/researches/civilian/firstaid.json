@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "minecolonies:textures/icons/research/hp1.png",
+  "icon": "slimcolonies:textures/icons/research/hp1.png",
   "requirements": [
     {
       "type": "slimcolonies:single-building",

@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "slimcolonies:blockminecoloniesrack",
+  "icon": "slimcolonies:blockslimcoloniesrack",
   "parentResearch": "slimcolonies:technology/memoryaid",
   "requirements": [
     {

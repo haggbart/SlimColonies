@@ -99,7 +99,7 @@
     {
       "type": "slimcolonies:item",
       "details": {
-        "item": "slimcolonies:blockminecoloniesrack",
+        "item": "slimcolonies:blockslimcoloniesrack",
         "qty": 8
       }
     }

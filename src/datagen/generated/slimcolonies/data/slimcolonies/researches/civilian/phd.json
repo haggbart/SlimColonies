@@ -6,7 +6,7 @@
       "level": 5
     }
   ],
-  "icon": "minecolonies:textures/icons/research/xpgain5.png",
+  "icon": "slimcolonies:textures/icons/research/xpgain5.png",
   "parentResearch": "slimcolonies:civilian/master",
   "researchLevel": 6,
   "subtitle": "no.monopixel.slimcolonies.research.civilian.phd.subtitle"

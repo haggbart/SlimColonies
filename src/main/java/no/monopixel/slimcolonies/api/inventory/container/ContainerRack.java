@@ -1,10 +1,5 @@
 package no.monopixel.slimcolonies.api.inventory.container;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesRack;
-import no.monopixel.slimcolonies.api.blocks.types.RackType;
-import no.monopixel.slimcolonies.api.inventory.ModContainers;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,6 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesRack;
+import no.monopixel.slimcolonies.api.blocks.types.RackType;
+import no.monopixel.slimcolonies.api.inventory.ModContainers;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.InventoryConstants.*;
@@ -79,7 +79,7 @@ public class ContainerRack extends AbstractContainerMenu
 
         if (neighborRack != null)
         {
-            if (abstractTileEntityRack.getBlockState().getValue(AbstractBlockMinecoloniesRack.VARIANT) != RackType.NO_RENDER)
+            if (abstractTileEntityRack.getBlockState().getValue(AbstractBlockSlimColoniesRack.VARIANT) != RackType.NO_RENDER)
             {
                 this.inventory = new CombinedInvWrapper(abstractTileEntityRack.getInventory(), neighborRack.getInventory());
             }
@@ -109,9 +109,9 @@ public class ContainerRack extends AbstractContainerMenu
                 if (index < size)
                 {
                     this.addSlot(
-                      new SlotItemHandler(inventory, index,
-                        INVENTORY_BAR_SIZE + k * PLAYER_INVENTORY_OFFSET_EACH,
-                        PLAYER_INVENTORY_OFFSET_EACH + j * PLAYER_INVENTORY_OFFSET_EACH));
+                        new SlotItemHandler(inventory, index,
+                            INVENTORY_BAR_SIZE + k * PLAYER_INVENTORY_OFFSET_EACH,
+                            PLAYER_INVENTORY_OFFSET_EACH + j * PLAYER_INVENTORY_OFFSET_EACH));
                     index++;
                 }
             }
@@ -125,11 +125,11 @@ public class ContainerRack extends AbstractContainerMenu
             for (int j = 0; j < INVENTORY_COLUMNS; j++)
             {
                 addSlot(new Slot(
-                  inv,
-                  j + i * INVENTORY_COLUMNS + INVENTORY_COLUMNS,
-                  PLAYER_INVENTORY_INITIAL_X_OFFSET + j * PLAYER_INVENTORY_OFFSET_EACH,
-                  PLAYER_INVENTORY_INITIAL_Y_OFFSET + extraOffset + PLAYER_INVENTORY_OFFSET_EACH * Math.min(this.inventorySize, INVENTORY_BAR_SIZE)
-                    + i * PLAYER_INVENTORY_OFFSET_EACH
+                    inv,
+                    j + i * INVENTORY_COLUMNS + INVENTORY_COLUMNS,
+                    PLAYER_INVENTORY_INITIAL_X_OFFSET + j * PLAYER_INVENTORY_OFFSET_EACH,
+                    PLAYER_INVENTORY_INITIAL_Y_OFFSET + extraOffset + PLAYER_INVENTORY_OFFSET_EACH * Math.min(this.inventorySize, INVENTORY_BAR_SIZE)
+                        + i * PLAYER_INVENTORY_OFFSET_EACH
                 ));
             }
         }
@@ -137,10 +137,10 @@ public class ContainerRack extends AbstractContainerMenu
         for (i = 0; i < INVENTORY_COLUMNS; i++)
         {
             addSlot(new Slot(
-              inv, i,
-              PLAYER_INVENTORY_INITIAL_X_OFFSET + i * PLAYER_INVENTORY_OFFSET_EACH,
-              PLAYER_INVENTORY_HOTBAR_OFFSET + extraOffset + PLAYER_INVENTORY_OFFSET_EACH * Math.min(this.inventorySize,
-                INVENTORY_BAR_SIZE)
+                inv, i,
+                PLAYER_INVENTORY_INITIAL_X_OFFSET + i * PLAYER_INVENTORY_OFFSET_EACH,
+                PLAYER_INVENTORY_HOTBAR_OFFSET + extraOffset + PLAYER_INVENTORY_OFFSET_EACH * Math.min(this.inventorySize,
+                    INVENTORY_BAR_SIZE)
             ));
         }
     }
@@ -212,7 +212,7 @@ public class ContainerRack extends AbstractContainerMenu
     protected boolean moveItemStackTo(final ItemStack stack, final int startIndex, final int endIndex, final boolean reverseDirection)
     {
         final ItemStack before = stack.copy();
-        final boolean merge =  super.moveItemStackTo(stack, startIndex, endIndex, reverseDirection);
+        final boolean merge = super.moveItemStackTo(stack, startIndex, endIndex, reverseDirection);
         if (merge)
         {
             this.updateRacks(before);
@@ -222,6 +222,7 @@ public class ContainerRack extends AbstractContainerMenu
 
     /**
      * Update the racks (combined inv and warehouse).
+     *
      * @param stack the stack to set.
      */
     private void updateRacks(final ItemStack stack)

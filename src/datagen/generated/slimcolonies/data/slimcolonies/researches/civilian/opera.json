@@ -1,6 +1,6 @@
 {
   "branch": "slimcolonies:civilian",
-  "icon": "minecolonies:textures/icons/research/happy4.png",
+  "icon": "slimcolonies:textures/icons/research/happy4.png",
   "parentResearch": "slimcolonies:civilian/spectacle",
   "requirements": [
     {

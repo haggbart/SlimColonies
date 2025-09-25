@@ -6,7 +6,7 @@
       "level": 3
     }
   ],
-  "icon": "minecolonies:textures/icons/research/regeneration3.png",
+  "icon": "slimcolonies:textures/icons/research/regeneration3.png",
   "parentResearch": "slimcolonies:civilian/healingcream",
   "requirements": [
     {

@@ -1,16 +1,16 @@
 package no.monopixel.slimcolonies.api.blocks.types;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesRack;
 import net.minecraft.util.StringRepresentable;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesRack;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Defines the types of Racks that the {@link AbstractBlockMinecoloniesRack} supports.
+ * Defines the types of Racks that the {@link AbstractBlockSlimColoniesRack} supports.
  */
 public enum RackType implements StringRepresentable
 {
     EMPTY("blockrackemptysingle", "emptysingle", false),
-    FULL( "blockrackfullsingle", "fullsingle", false),
+    FULL("blockrackfullsingle", "fullsingle", false),
     EMPTY_DOUBLE("blockrackempty", "empty", true),
     FULL_DOUBLE("blockrackfull", "full", true),
     NO_RENDER("blockrackair", "dontrender", true);

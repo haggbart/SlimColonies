@@ -6,7 +6,7 @@
       "level": 5
     }
   ],
-  "icon": "minecolonies:textures/icons/research/hp5.png",
+  "icon": "slimcolonies:textures/icons/research/hp5.png",
   "parentResearch": "slimcolonies:civilian/lifesaver2",
   "requirements": [
     {

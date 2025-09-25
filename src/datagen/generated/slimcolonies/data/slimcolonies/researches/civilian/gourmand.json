@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "minecolonies:textures/icons/research/saturation1.png",
+  "icon": "slimcolonies:textures/icons/research/saturation1.png",
   "parentResearch": "slimcolonies:civilian/firstaid",
   "requirements": [
     {

@@ -16,7 +16,7 @@ import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuildi
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityWareHouse;
 import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
-import no.monopixel.slimcolonies.core.blocks.BlockMinecoloniesRack;
+import no.monopixel.slimcolonies.core.blocks.BlockSlimColoniesRack;
 import no.monopixel.slimcolonies.core.client.gui.WindowHutMinPlaceholder;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.CourierAssignmentModule;
@@ -121,7 +121,7 @@ public class BuildingWareHouse extends AbstractBuilding implements IWareHouse
     @Override
     public void registerBlockPosition(@NotNull final Block block, @NotNull final BlockPos pos, @NotNull final Level world)
     {
-        if (block instanceof BlockMinecoloniesRack)
+        if (block instanceof BlockSlimColoniesRack)
         {
             final BlockEntity entity = world.getBlockEntity(pos);
             if (entity instanceof TileEntityRack)

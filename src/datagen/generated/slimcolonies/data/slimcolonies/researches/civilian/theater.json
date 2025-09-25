@@ -1,6 +1,6 @@
 {
   "branch": "slimcolonies:civilian",
-  "icon": "minecolonies:textures/icons/research/happy5.png",
+  "icon": "slimcolonies:textures/icons/research/happy5.png",
   "parentResearch": "slimcolonies:civilian/opera",
   "researchLevel": 6,
   "subtitle": "no.monopixel.slimcolonies.research.civilian.theater.subtitle"

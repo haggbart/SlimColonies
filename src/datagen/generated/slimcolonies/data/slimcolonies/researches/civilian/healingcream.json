@@ -6,7 +6,7 @@
       "level": 2
     }
   ],
-  "icon": "minecolonies:textures/icons/research/regeneration2.png",
+  "icon": "slimcolonies:textures/icons/research/regeneration2.png",
   "parentResearch": "slimcolonies:civilian/bandaid",
   "requirements": [
     {

@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "minecolonies:textures/icons/research/xpgain1.png",
+  "icon": "slimcolonies:textures/icons/research/xpgain1.png",
   "parentResearch": "slimcolonies:civilian/higherlearning",
   "requirements": [
     {
