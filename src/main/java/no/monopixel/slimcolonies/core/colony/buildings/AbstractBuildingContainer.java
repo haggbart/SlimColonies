@@ -152,7 +152,7 @@ public abstract class AbstractBuildingContainer extends AbstractSchematicProvide
     }
 
     @Override
-    @SuppressWarnings("squid:S1172")
+    
     public void registerBlockPosition(@NotNull final Block block, @NotNull final BlockPos pos, @NotNull final Level world)
     {
         if (block instanceof AbstractBlockHut)

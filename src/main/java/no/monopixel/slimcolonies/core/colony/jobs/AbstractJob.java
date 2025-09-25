@@ -39,15 +39,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_JOB_TYPE;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.CLASSES_SHOULD_NOT_ACCESS_STATIC_MEMBERS_OF_THEIR_OWN_SUBCLASSES_DURING_INITIALIZATION;
 
 /**
  * Basic job information.
  * <p>
- * Suppressing Sonar Rule squid:S2390 This rule does "Classes should not access static members of their own subclasses during initialization" But in this case the rule does not
  * apply because We are only mapping classes and that is reasonable
  */
-@SuppressWarnings(CLASSES_SHOULD_NOT_ACCESS_STATIC_MEMBERS_OF_THEIR_OWN_SUBCLASSES_DURING_INITIALIZATION)
+
 public abstract class AbstractJob<AI extends AbstractAISkeleton<J> & ITickingStateAI, J extends AbstractJob<AI, J>> implements IJob<AI>
 {
     private static final String TAG_ASYNC_REQUESTS = "asyncRequests";

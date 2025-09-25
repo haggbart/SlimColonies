@@ -590,7 +590,7 @@ public class CitizenDataView implements ICitizenDataView
         return id;
     }
 
-    @SuppressWarnings(Suppression.TOO_MANY_RETURNS)
+    
     @Override
     public boolean equals(final Object o)
     {

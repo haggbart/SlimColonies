@@ -18,7 +18,7 @@ import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingMo
  * Gate house building.
  *
  */
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public class BuildingGateHouse extends AbstractBuildingGuards
 {
 

@@ -15,7 +15,6 @@ import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNCHECKED;
 
 /**
  * Data structure for storing colonies, optimized for performance.
@@ -119,7 +118,7 @@ public final class ColonyList<T extends IColony> implements Iterable<T>
      * @return The Colony associated with the provided id.
      */
     @Nullable
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     public T get(final int index)
     {
         if (index < 1 || index >= list.length)

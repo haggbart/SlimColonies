@@ -79,7 +79,7 @@ import static no.monopixel.slimcolonies.core.MineColonies.getConfig;
 /**
  * This class describes a colony and contains all the data and methods for manipulating a Colony.
  */
-@SuppressWarnings({Suppression.BIG_CLASS, Suppression.SPLIT_CLASS})
+
 public class Colony implements IColony
 {
     /**
@@ -332,7 +332,7 @@ public class Colony implements IColony
      * @param w  The world the colony exists in.
      * @param c  The center of the colony (location of Town Hall).
      */
-    @SuppressWarnings("squid:S2637")
+    
     Colony(final int id, @Nullable final Level w, final BlockPos c)
     {
         this(id, w);

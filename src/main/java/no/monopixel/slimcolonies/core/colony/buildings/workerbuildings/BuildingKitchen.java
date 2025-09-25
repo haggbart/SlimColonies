@@ -23,14 +23,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.OVERRIDE_EQUALS;
 import static no.monopixel.slimcolonies.api.util.constant.TagConstants.CRAFTING_COOK;
 import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.CHEF_WORK;
 
 /**
  * Class of the kitchen building.
  */
-@SuppressWarnings(OVERRIDE_EQUALS)
+
 public class BuildingKitchen extends AbstractBuilding
 {
     /**

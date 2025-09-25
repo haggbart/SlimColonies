@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.GENERIC_WILDCARD;
 
 public interface IBuildingView extends IRequester, IModuleContainerView
 {
@@ -187,7 +186,7 @@ public interface IBuildingView extends IRequester, IModuleContainerView
 
     Map<Integer, Collection<IToken<?>>> getOpenRequestsByCitizen();
 
-    @SuppressWarnings(GENERIC_WILDCARD)
+    @SuppressWarnings("unchecked")
     <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfType(@NotNull ICitizenDataView citizenData, Class<R> requestType);
 
     ImmutableList<IRequest<?>> getOpenRequests(@NotNull ICitizenDataView data);
@@ -201,7 +200,7 @@ public interface IBuildingView extends IRequester, IModuleContainerView
      */
     IColonyView getColony();
 
-    @SuppressWarnings(GENERIC_WILDCARD)
+    @SuppressWarnings("unchecked")
     <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfTypeFiltered(
       @NotNull ICitizenDataView citizenData,
       Class<R> requestType,

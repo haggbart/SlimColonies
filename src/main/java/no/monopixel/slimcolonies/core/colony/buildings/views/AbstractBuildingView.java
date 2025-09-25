@@ -38,8 +38,6 @@ import java.util.stream.Collectors;
 
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.NO_WORK_ORDER;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_RS_BUILDING_DATASTORE;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.GENERIC_WILDCARD;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNCHECKED;
 
 /**
  * The AbstractBuilding View is the client-side representation of a AbstractBuilding. Views contain the AbstractBuilding's data that is relevant to a Client, in a more
@@ -470,7 +468,7 @@ public abstract class AbstractBuildingView implements IBuildingView
     }
 
     @Override
-    @SuppressWarnings({GENERIC_WILDCARD, UNCHECKED})
+    @SuppressWarnings({"unchecked"})
     public <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfType(@NotNull final ICitizenDataView citizenData, final Class<R> requestType)
     {
         return ImmutableList.copyOf(getOpenRequests(citizenData).stream()
@@ -526,7 +524,7 @@ public abstract class AbstractBuildingView implements IBuildingView
     }
 
     @Override
-    @SuppressWarnings({GENERIC_WILDCARD, UNCHECKED})
+    @SuppressWarnings({"unchecked"})
     public <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfTypeFiltered(
       @NotNull final ICitizenDataView citizenData,
       final Class<R> requestType,

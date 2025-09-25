@@ -129,7 +129,7 @@ public class EntityLocation implements ILocation
         return entityRef instanceof Player ? (Player) entityRef : null;
     }
 
-    @SuppressWarnings("squid:S2972")
+    
     /**
      * We have this class the way it is for a reason.
      */
@@ -142,7 +142,7 @@ public class EntityLocation implements ILocation
 
         @NotNull
         @Override
-        @SuppressWarnings("squid:LeftCurlyBraceStartLineCheck")
+        
         /**
          * Moving the curly braces really makes the code hard to read.
          */
@@ -153,7 +153,7 @@ public class EntityLocation implements ILocation
 
         @NotNull
         @Override
-        @SuppressWarnings("squid:LeftCurlyBraceStartLineCheck")
+        
         /**
          * Moving the curly braces really makes the code hard to read.
          */

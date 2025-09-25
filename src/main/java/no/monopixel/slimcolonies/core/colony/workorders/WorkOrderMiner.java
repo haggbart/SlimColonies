@@ -17,7 +17,6 @@ import java.util.function.Consumer;
 
 import static no.monopixel.slimcolonies.api.util.constant.Constants.STORAGE_STYLE;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_POS;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED;
 /**
  * A work order that the build can take to build mine.
  */
@@ -100,7 +99,7 @@ public class WorkOrderMiner extends AbstractWorkOrder
      * @param level       the level of that work hut.
      * @return true if the citizen may accept this work order.
      */
-    @SuppressWarnings(UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED)
+    
     @Override
     public boolean canBuildIgnoringDistance(@NotNull IBuilding building,final BlockPos position, final int level)
     {

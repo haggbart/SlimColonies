@@ -88,8 +88,6 @@ import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.CONS
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.NO_WORK_ORDER;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.GENERIC_WILDCARD;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNCHECKED;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 
 /**
@@ -98,7 +96,7 @@ import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*
  * We suppress the warning which warns you about referencing child classes in the parent because that's how we register the instances of the childClasses to their views and
  * blocks.
  */
-@SuppressWarnings({"squid:S2390", "PMD.ExcessiveClassLength"})
+@SuppressWarnings("PMD.ExcessiveClassLength")
 public abstract class AbstractBuilding extends AbstractBuildingContainer
 {
     /**
@@ -1467,7 +1465,7 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     }
 
     @Override
-    @SuppressWarnings({GENERIC_WILDCARD, UNCHECKED})
+    @SuppressWarnings({"unchecked"})
     public <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfType(
         final int citizenId,
         final TypeToken<R> requestType)
@@ -1574,7 +1572,7 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     }
 
     @Override
-    @SuppressWarnings({GENERIC_WILDCARD, UNCHECKED})
+    @SuppressWarnings({"unchecked"})
     public <R> ImmutableList<IRequest<? extends R>> getCompletedRequestsOfType(@NotNull final ICitizenData citizenData, final TypeToken<R> requestType)
     {
         return ImmutableList.copyOf(getCompletedRequestsOfCitizenOrBuilding(citizenData).stream()
@@ -1584,7 +1582,7 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     }
 
     @Override
-    @SuppressWarnings({GENERIC_WILDCARD, UNCHECKED})
+    @SuppressWarnings({"unchecked"})
     public <R> ImmutableList<IRequest<? extends R>> getCompletedRequestsOfTypeFiltered(
         @NotNull final ICitizenData citizenData,
         final TypeToken<R> requestType,
@@ -1659,7 +1657,7 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
      * @param stack the stack.
      */
     @Override
-    @SuppressWarnings("squid:S135")
+    
     public void overruleNextOpenRequestWithStack(@NotNull final ItemStack stack)
     {
         if (ItemStackUtils.isEmpty(stack))
@@ -1741,7 +1739,7 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     }
 
     @Override
-    @SuppressWarnings({GENERIC_WILDCARD, UNCHECKED})
+    @SuppressWarnings({"unchecked"})
     public <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfTypeFiltered(
         @NotNull final ICitizenData citizenData,
         final TypeToken<R> requestType,

@@ -14,7 +14,7 @@ import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWork
 /**
  * Abstract class for all training AIs.
  */
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public abstract class AbstractEntityAITraining<J extends AbstractJob<?, J>, B extends AbstractBuilding> extends AbstractEntityAIInteract<J, B>
 {
     /**

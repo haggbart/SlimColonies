@@ -25,7 +25,7 @@ import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.TICKS
 import static no.monopixel.slimcolonies.api.util.constant.GuardConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.LEVELS_GAINED;
 
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public class EntityAICombatTraining extends AbstractEntityAITraining<JobCombatTraining, BuildingCombatAcademy>
 {
     /**

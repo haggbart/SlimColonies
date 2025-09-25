@@ -75,7 +75,7 @@ public final class StandardFactoryController implements IFactoryController
      * <p>
      * We suppress warning squid:S2583 which makes sure that no null checks are executed on notnull fields. In this case it makes sense since we need to make sure.
      */
-    @SuppressWarnings("squid:S2583")
+    
     private StandardFactoryController()
     {
         if (INSTANCE != null)
@@ -106,7 +106,7 @@ public final class StandardFactoryController implements IFactoryController
         return INSTANCE;
     }
 
-    @SuppressWarnings(Suppression.UNCHECKED)
+    
     @Override
     public <INPUT, OUTPUT> IFactory<INPUT, OUTPUT> getFactoryForIO(@NotNull final TypeToken<? extends INPUT> inputClass, @NotNull final TypeToken<? extends OUTPUT> outputClass)
       throws IllegalArgumentException
@@ -258,7 +258,7 @@ public final class StandardFactoryController implements IFactoryController
     }
 
     @Override
-    @SuppressWarnings(Suppression.UNCHECKED)
+    
     public <OUTPUT> CompoundTag serialize(@NotNull final OUTPUT object) throws IllegalArgumentException
     {
         final CompoundTag compound = new CompoundTag();

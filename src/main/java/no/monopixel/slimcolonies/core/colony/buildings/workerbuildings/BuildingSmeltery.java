@@ -30,12 +30,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.OVERRIDE_EQUALS;
 
 /**
  * Class of the smeltery building.
  */
-@SuppressWarnings(OVERRIDE_EQUALS)
+
 public class BuildingSmeltery extends AbstractBuilding
 {
     /**

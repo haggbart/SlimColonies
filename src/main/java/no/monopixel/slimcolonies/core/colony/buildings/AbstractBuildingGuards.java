@@ -46,7 +46,6 @@ import static no.monopixel.slimcolonies.core.util.ServerUtils.getPlayerFromUUID;
 /**
  * Abstract class for Guard huts.
  */
-@SuppressWarnings({"squid:MaximumInheritanceDepth", "squid:S1448"})
 public abstract class AbstractBuildingGuards extends AbstractBuilding implements IGuardBuilding
 {
     /**

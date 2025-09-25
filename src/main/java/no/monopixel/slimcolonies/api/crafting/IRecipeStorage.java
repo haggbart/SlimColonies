@@ -25,7 +25,6 @@ import java.util.function.Predicate;
 public interface IRecipeStorage
 {
     /**
-     * Get the list of input items. Suppressing Sonar Rule Squid:S2384 The rule thinks we should return a copy of the list and not the list itself. But in this case the rule does
      * not apply because the list is an unmodifiable list already
      *
      * @return the list.

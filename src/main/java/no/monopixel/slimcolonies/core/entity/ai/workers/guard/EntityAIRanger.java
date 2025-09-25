@@ -19,7 +19,7 @@ import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.ARCH
 /**
  * Ranger AI class, which deals with equipment and movement specifics
  */
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public class EntityAIRanger extends AbstractEntityAIGuard<JobRanger, AbstractBuildingGuards>
 {
     public static final String RENDER_META_ARROW = "arrow";

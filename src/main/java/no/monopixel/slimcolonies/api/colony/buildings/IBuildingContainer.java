@@ -74,7 +74,7 @@ public interface IBuildingContainer extends ISchematicProvider, ICapabilityProvi
      * @param pos   of the block
      * @param world world to register it at.
      */
-    @SuppressWarnings("squid:S1172")
+    
     void registerBlockPosition(@NotNull Block block, @NotNull BlockPos pos, @NotNull Level world);
 
     /**

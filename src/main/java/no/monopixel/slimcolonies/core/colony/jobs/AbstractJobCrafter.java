@@ -23,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNCHECKED;
 
 /**
  * Class of the crafter job.
@@ -170,7 +169,7 @@ public abstract class AbstractJobCrafter<AI extends AbstractEntityAIBasic<J, ? e
      * @param <R> the request type.
      * @return {@link IRequest} of the current Task.
      */
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     public <R extends PublicCrafting> IRequest<R> getCurrentTask()
     {
         if (getTaskQueueFromDataStore().isEmpty())

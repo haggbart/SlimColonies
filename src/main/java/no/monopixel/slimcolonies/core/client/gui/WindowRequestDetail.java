@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.EXCEPTION_HANDLERS_SHOULD_PRESERVE_THE_ORIGINAL_EXCEPTIONS;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 import static no.monopixel.slimcolonies.core.colony.requestsystem.requests.AbstractRequest.MISSING;
 
@@ -183,7 +182,7 @@ public class WindowRequestDetail extends BOWindow implements ButtonHandler
 
             findPaneOfTypeByID(RESOLVER, Text.class).setText(Component.literal("Resolver: " + resolver.getRequesterDisplayName(colony.getRequestManager(), request).getString()));
         }
-        catch (@SuppressWarnings(EXCEPTION_HANDLERS_SHOULD_PRESERVE_THE_ORIGINAL_EXCEPTIONS) final IllegalArgumentException e)
+        catch ( final IllegalArgumentException e)
         {
             /*
              * Do nothing we just need to know if it has a resolver or not.

@@ -9,7 +9,6 @@ import no.monopixel.slimcolonies.core.entity.ai.workers.util.ConstructionTapeHel
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.MESSAGE_NEW_DECORATION_REQUEST;
 
 /**
@@ -74,7 +73,7 @@ public class WorkOrderDecoration extends AbstractWorkOrder
      * @param building which could build it or not
      * @return true if he is able to.
      */
-    @SuppressWarnings(UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED)
+    
     public boolean canBuild(final IBuilding building)
     {
         return building instanceof BuildingBuilder && building.getBuildingLevel() > 0;
@@ -87,7 +86,7 @@ public class WorkOrderDecoration extends AbstractWorkOrder
      * @param level    level of the builders hut.
      * @return true if so.
      */
-    @SuppressWarnings(UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED)
+    
     public boolean canBuildIgnoringDistance(@NotNull IBuilding building, final BlockPos position, final int level)
     {
         return level > 0;

@@ -17,7 +17,7 @@ import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.SHIE
 /**
  * Knight AI, which deals with gear specifics
  */
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public class EntityAIKnight extends AbstractEntityAIGuard<JobKnight, AbstractBuildingGuards>
 {
     public EntityAIKnight(@NotNull final JobKnight job)
