@@ -1,9 +1,9 @@
 {
-  "parent": "slimcolonies:minecolonies/build_tavern",
+  "parent": "slimcolonies:slimcolonies/fulfill_request",
   "criteria": {
-    "citizens_hut": {
+    "builders_hut": {
       "conditions": {
-        "hut_name": "residence",
+        "hut_name": "builder",
         "level": 1
       },
       "trigger": "slimcolonies:complete_build_request"
@@ -12,21 +12,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.citizen.description"
+      "translate": "advancements.slimcolonies.build.builder.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "slimcolonies:blockhutcitizen"
+      "item": "slimcolonies:blockhutbuilder"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.citizen.title"
+      "translate": "advancements.slimcolonies.build.builder.title"
     }
   },
   "requirements": [
     [
-      "citizens_hut"
+      "builders_hut"
     ]
   ],
   "sends_telemetry_event": true

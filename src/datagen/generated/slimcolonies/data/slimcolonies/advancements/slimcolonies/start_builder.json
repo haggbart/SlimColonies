@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/place_townhall",
+  "parent": "slimcolonies:slimcolonies/place_townhall",
   "criteria": {
     "builder_request": {
       "conditions": {
@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.create_build_request_1_builder.description"
+      "translate": "advancements.slimcolonies.create_build_request_1_builder.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.create_build_request_1_builder.title"
+      "translate": "advancements.slimcolonies.create_build_request_1_builder.title"
     }
   },
   "requirements": [

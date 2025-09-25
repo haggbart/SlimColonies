@@ -8,11 +8,11 @@ import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.controls.TextField;
 import com.ldtteam.blockui.views.BOWindow;
 import com.ldtteam.blockui.views.ScrollingList;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.Log;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +33,6 @@ public class WindowSelectRes extends AbstractWindowSkeleton
      */
     private static final String BUTTON_DONE   = "done";
     private static final String BUTTON_CANCEL = "cancel";
-    private static final String INPUT_NAME    = "name";
     private static final int    WHITE         = Color.getByName("white", 0);
 
     /**
@@ -49,7 +48,7 @@ public class WindowSelectRes extends AbstractWindowSkeleton
     /**
      * Predicate to test for.
      */
-    private final Predicate<ItemStack>           test;
+    private final Predicate<ItemStack> test;
 
     /**
      * The consumer that receives the block quantity.
@@ -74,7 +73,7 @@ public class WindowSelectRes extends AbstractWindowSkeleton
      */
     public WindowSelectRes(final BOWindow origin, final Predicate<ItemStack> test, final BiConsumer<ItemStack, Integer> consumer, final boolean displayQty)
     {
-        super("minecolonies:gui/windowselectres.xml", origin);
+        super("slimcolonies:gui/windowselectres.xml", origin);
         this.resourceList = this.findPaneOfTypeByID("resources", ScrollingList.class);
         registerButton(BUTTON_DONE, this::doneClicked);
         registerButton(BUTTON_CANCEL, this::cancelClicked);
@@ -157,8 +156,8 @@ public class WindowSelectRes extends AbstractWindowSkeleton
         for (final ItemStack stack : ItemStackUtils.allItemsPlusInventory(Minecraft.getInstance().player))
         {
             if (test.test(stack) && (this.filter.isEmpty()
-                                       || stack.getDescriptionId().toLowerCase(Locale.US).contains(this.filter.toLowerCase(Locale.US))
-                                       || stack.getHoverName().getString().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US))))
+                || stack.getDescriptionId().toLowerCase(Locale.US).contains(this.filter.toLowerCase(Locale.US))
+                || stack.getHoverName().getString().toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US))))
             {
                 this.allItems.add(stack);
             }

@@ -4,15 +4,15 @@ import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
 import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.views.BOWindow;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingKey;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingsModuleView;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class GuardTaskSetting extends StringSettingWithDesc
     @Override
     public ResourceLocation getLayoutItem()
     {
-        return new ResourceLocation("minecolonies:gui/layouthuts/layoutguardtasksetting.xml");
+        return new ResourceLocation("slimcolonies:gui/layouthuts/layoutguardtasksetting.xml");
     }
 
     @Override

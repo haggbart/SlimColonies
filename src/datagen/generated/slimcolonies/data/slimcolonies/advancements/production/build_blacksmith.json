@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.blacksmith.description"
+      "translate": "advancements.slimcolonies.build.blacksmith.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.blacksmith.title"
+      "translate": "advancements.slimcolonies.build.blacksmith.title"
     }
   },
   "requirements": [

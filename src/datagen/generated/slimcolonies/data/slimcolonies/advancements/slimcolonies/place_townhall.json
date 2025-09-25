@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/root",
+  "parent": "slimcolonies:slimcolonies/root",
   "criteria": {
     "build_tool_place_town_hall": {
       "conditions": {
@@ -11,7 +11,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.place_townhall.description"
+      "translate": "advancements.slimcolonies.place_townhall.description"
     },
     "frame": "task",
     "hidden": false,
@@ -20,7 +20,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.place_townhall.title"
+      "translate": "advancements.slimcolonies.place_townhall.title"
     }
   },
   "requirements": [

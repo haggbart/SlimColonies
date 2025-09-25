@@ -1,15 +1,15 @@
 package no.monopixel.slimcolonies.core.client.gui.huts;
 
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.client.gui.AbstractWindowWorkerModuleBuilding;
-import no.monopixel.slimcolonies.core.client.gui.WindowHutGuide;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBuilder;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.client.gui.AbstractWindowWorkerModuleBuilding;
+import no.monopixel.slimcolonies.core.client.gui.WindowHutGuide;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBuilder;
 
-import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
+import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.HUT_BUILDER_RESOURCE_SUFFIX;
 
 /**
  * BOWindow for the builder hut.
@@ -20,7 +20,7 @@ public class WindowHutBuilderModule extends AbstractWindowWorkerModuleBuilding<B
      * The advancement location.
      */
 
-    private static final ResourceLocation GUIDE_ADVANCEMENT = new ResourceLocation(Constants.MOD_ID, "minecolonies/check_out_guide");
+    private static final ResourceLocation GUIDE_ADVANCEMENT = new ResourceLocation(Constants.MOD_ID, "slimcolonies/check_out_guide");
 
     /**
      * If the guide should be attempted to be opened.

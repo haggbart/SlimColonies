@@ -309,7 +309,7 @@ public final class StandardRequests
         @Override
         public ResourceLocation getDisplayIcon()
         {
-            return new ResourceLocation("minecolonies:textures/gui/citizen/delivery.png");
+            return new ResourceLocation("slimcolonies:textures/gui/citizen/delivery.png");
         }
     }
 
@@ -353,7 +353,7 @@ public final class StandardRequests
         public ResourceLocation getDisplayIcon()
         {
             // This can be just the delivery icon. For the user, it's no big deal.
-            return new ResourceLocation("minecolonies:textures/gui/citizen/delivery.png");
+            return new ResourceLocation("slimcolonies:textures/gui/citizen/delivery.png");
         }
 
         @Override
@@ -524,7 +524,7 @@ public final class StandardRequests
         @Override
         protected String getDisplayIconFile()
         {
-            return "minecolonies:textures/gui/citizen/crafting_public.png";
+            return "slimcolonies:textures/gui/citizen/crafting_public.png";
         }
     }
 
@@ -559,7 +559,7 @@ public final class StandardRequests
         @Override
         protected String getDisplayIconFile()
         {
-            return "minecolonies:textures/gui/citizen/crafting_public.png";
+            return "slimcolonies:textures/gui/citizen/crafting_public.png";
         }
     }
 

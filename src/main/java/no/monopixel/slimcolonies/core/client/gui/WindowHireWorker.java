@@ -8,6 +8,12 @@ import com.ldtteam.blockui.controls.Button;
 import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.ScrollingList;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.buildings.HiringMode;
@@ -25,12 +31,6 @@ import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenSkil
 import no.monopixel.slimcolonies.core.network.messages.server.colony.citizen.PauseCitizenMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.citizen.RestartCitizenMessage;
 import no.monopixel.slimcolonies.core.util.BuildingUtils;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -516,7 +516,7 @@ public class WindowHireWorker extends AbstractWindowSkeleton
             final JobEntry entry = hireModule.getJobEntry();
 
             final ButtonImage jobButton = new ButtonImage();
-            jobButton.setImage(new ResourceLocation("minecolonies:textures/gui/builderhut/builder_button_medium.png"), false);
+            jobButton.setImage(new ResourceLocation("slimcolonies:textures/gui/builderhut/builder_button_medium.png"), false);
             jobButton.setPosition(xOffset, 30);
             if (!hireModule.getAssignedCitizens().isEmpty())
             {

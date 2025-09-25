@@ -7,21 +7,22 @@ import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.DropDownList;
 import com.ldtteam.blockui.views.ScrollingList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.IStatisticsManager;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.client.gui.AbstractModuleWindow;
 import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.BuildingStatisticsModuleView;
 import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.MinerLevelManagementModuleView;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.PARTIAL_STATS_MODIFIER_NAME;
+import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.DROPDOWN_INTERVAL_ID;
 
 /**
  * BOWindow for the miner hut.
@@ -41,22 +42,22 @@ public class WindowStatsModule extends AbstractModuleWindow
     /**
      * Texture of the assign button when it's on.
      */
-    private static final String TEXTURE_ASSIGN_ON_NORMAL = "minecolonies:textures/gui/builderhut/builder_button_mini_check.png";
+    private static final String TEXTURE_ASSIGN_ON_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini_check.png";
 
     /**
      * Texture of the assign button when it's on and disabled.
      */
-    private static final String TEXTURE_ASSIGN_ON_DISABLED = "minecolonies:textures/gui/builderhut/builder_button_mini_disabled_check.png";
+    private static final String TEXTURE_ASSIGN_ON_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled_check.png";
 
     /**
      * Texture of the assign button when it's off.
      */
-    private static final String TEXTURE_ASSIGN_OFF_NORMAL = "minecolonies:textures/gui/builderhut/builder_button_mini.png";
+    private static final String TEXTURE_ASSIGN_OFF_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini.png";
 
     /**
      * Texture of the assign button when it's off and disabled.
      */
-    private static final String TEXTURE_ASSIGN_OFF_DISABLED = "minecolonies:textures/gui/builderhut/builder_button_mini_disabled.png";
+    private static final String TEXTURE_ASSIGN_OFF_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled.png";
     static
     {
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.yesterday", 1);

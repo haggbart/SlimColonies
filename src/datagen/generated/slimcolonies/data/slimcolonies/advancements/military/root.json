@@ -12,7 +12,7 @@
     "announce_to_chat": false,
     "background": "minecraft:textures/block/stone_bricks.png",
     "description": {
-      "translate": "advancements.minecolonies.root.military.description"
+      "translate": "advancements.slimcolonies.root.military.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.root.military.title"
+      "translate": "advancements.slimcolonies.root.military.title"
     }
   },
   "requirements": [

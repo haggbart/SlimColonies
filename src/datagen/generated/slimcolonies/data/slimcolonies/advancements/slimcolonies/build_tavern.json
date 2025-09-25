@@ -1,9 +1,9 @@
 {
-  "parent": "slimcolonies:minecolonies/build_builder",
+  "parent": "slimcolonies:slimcolonies/build_builder",
   "criteria": {
-    "guard_tower": {
+    "tavern": {
       "conditions": {
-        "hut_name": "guardtower",
+        "hut_name": "tavern",
         "level": 1
       },
       "trigger": "slimcolonies:complete_build_request"
@@ -12,21 +12,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.guard_tower.description"
+      "translate": "advancements.slimcolonies.build.tavern.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "slimcolonies:blockhutguardtower"
+      "item": "slimcolonies:blockhuttavern"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.guard_tower.title"
+      "translate": "advancements.slimcolonies.build.tavern.title"
     }
   },
   "requirements": [
     [
-      "guard_tower"
+      "tavern"
     ]
   ],
   "sends_telemetry_event": true

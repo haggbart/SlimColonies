@@ -9,6 +9,15 @@ import com.ldtteam.blockui.views.Box;
 import com.ldtteam.blockui.views.View;
 import com.ldtteam.blockui.views.ZoomDragView;
 import com.ldtteam.structurize.util.LanguageHandler;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import no.monopixel.slimcolonies.api.client.render.modeltype.ISimpleModelType;
 import no.monopixel.slimcolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
@@ -33,31 +42,17 @@ import no.monopixel.slimcolonies.core.colony.requestsystem.locations.StaticLocat
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyListMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.OpenInventoryMessage;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import static net.minecraft.client.gui.Gui.GUI_ICONS_LOCATION;
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.COLOR_TEXT_FULFILLED;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.LOW_SATURATION;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COLONYMAP_PLAYER_RESOLVED_REQUESTS;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COLONYMAP_PLAYER_RESOLVED_REQUESTS_COUNT;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 import static no.monopixel.slimcolonies.core.client.gui.questlog.Constants.HIGHLIGHT_QUEST_LOG_TRACKER_DURATION;
-import static net.minecraft.client.gui.Gui.GUI_ICONS_LOCATION;
 
 public class WindowColonyMap extends AbstractWindowSkeleton
 {
@@ -495,7 +490,7 @@ public class WindowColonyMap extends AbstractWindowSkeleton
             if (playerResolvedRequests.size() > 0)
             {
                 statusImage = new Image();
-                statusImage.setImage(new ResourceLocation("minecolonies:textures/icons/information.png"), false);
+                statusImage.setImage(new ResourceLocation("slimcolonies:textures/icons/information.png"), false);
                 statusImage.setSize(6, 6);
                 final BlockPos uiPos = worldPosToUIPos(buildingView.getPosition());
                 statusImage.setPosition(uiPos.getX() - 4, uiPos.getY() - 4);

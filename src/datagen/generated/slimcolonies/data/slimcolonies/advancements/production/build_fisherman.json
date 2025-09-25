@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.build.fisherman.description"
+      "translate": "advancements.slimcolonies.build.fisherman.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.build.fisherman.title"
+      "translate": "advancements.slimcolonies.build.fisherman.title"
     }
   },
   "requirements": [

@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/colony_population_10",
+  "parent": "slimcolonies:slimcolonies/colony_population_10",
   "criteria": {
     "population_25": {
       "conditions": {
@@ -11,7 +11,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.colony_population_25.description"
+      "translate": "advancements.slimcolonies.colony_population_25.description"
     },
     "frame": "goal",
     "hidden": false,
@@ -20,7 +20,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.colony_population_25.title"
+      "translate": "advancements.slimcolonies.colony_population_25.title"
     }
   },
   "requirements": [

@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/start_builder",
+  "parent": "slimcolonies:slimcolonies/start_builder",
   "criteria": {
     "click_gui_button_fulfill": {
       "conditions": {
@@ -19,7 +19,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.click_gui_button_fulfill.description"
+      "translate": "advancements.slimcolonies.click_gui_button_fulfill.description"
     },
     "frame": "task",
     "hidden": false,
@@ -28,7 +28,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.click_gui_button_fulfill.title"
+      "translate": "advancements.slimcolonies.click_gui_button_fulfill.title"
     }
   },
   "requirements": [

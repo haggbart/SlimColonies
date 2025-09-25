@@ -27,7 +27,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.post_and_stash.description"
+      "translate": "advancements.slimcolonies.post_and_stash.description"
     },
     "frame": "task",
     "hidden": false,
@@ -36,7 +36,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.post_and_stash.title"
+      "translate": "advancements.slimcolonies.post_and_stash.title"
     }
   },
   "requirements": [

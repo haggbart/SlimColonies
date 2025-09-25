@@ -12,9 +12,6 @@ import com.ldtteam.structurize.network.messages.SaveScanMessage;
 import com.ldtteam.structurize.storage.rendering.types.BoxPreviewData;
 import com.ldtteam.structurize.util.BlockInfo;
 import com.ldtteam.structurize.util.ScanToolData;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
-import no.monopixel.slimcolonies.core.network.messages.client.SaveStructureNBTMessage;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -42,6 +39,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
+import no.monopixel.slimcolonies.core.network.messages.client.SaveStructureNBTMessage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -114,10 +114,10 @@ public class ScanCommand extends AbstractCommand
      * @param saveEntities whether to scan in entities
      */
     public static void saveStructure(
-      final Level world,
-      final Player player,
-      final ScanToolData.Slot slot,
-      final boolean saveEntities)
+        final Level world,
+        final Player player,
+        final ScanToolData.Slot slot,
+        final boolean saveEntities)
     {
         if (slot.getBox().getAnchor().isPresent())
         {
@@ -149,7 +149,7 @@ public class ScanCommand extends AbstractCommand
 
         if (!fileName.contains(".blueprint"))
         {
-            fileName+= ".blueprint";
+            fileName += ".blueprint";
         }
 
         final String[] split = fileName.split("/");
@@ -157,13 +157,14 @@ public class ScanCommand extends AbstractCommand
 
         final BlockPos zero = new BlockPos(box.minX(), box.minY(), box.minZ());
         final Blueprint
-          bp = BlueprintUtil.createBlueprint(world, zero, saveEntities, (short) box.getXSpan(), (short) box.getYSpan(), (short) box.getZSpan(), fileName, slot.getBox().getAnchor());
+            bp =
+            BlueprintUtil.createBlueprint(world, zero, saveEntities, (short) box.getXSpan(), (short) box.getYSpan(), (short) box.getZSpan(), fileName, slot.getBox().getAnchor());
 
         if (slot.getBox().getAnchor().isEmpty() && bp.getPrimaryBlockOffset().equals(new BlockPos(bp.getSizeX() / 2, 0, bp.getSizeZ() / 2)))
         {
             final List<BlockInfo> list = bp.getBlockInfoAsList().stream()
-                                           .filter(blockInfo -> blockInfo.hasTileEntityData() && blockInfo.getTileEntityData().contains(TAG_BLUEPRINTDATA))
-                                           .collect(Collectors.toList());
+                .filter(blockInfo -> blockInfo.hasTileEntityData() && blockInfo.getTileEntityData().contains(TAG_BLUEPRINTDATA))
+                .collect(Collectors.toList());
 
             if (list.size() > 1)
             {
@@ -200,7 +201,7 @@ public class ScanCommand extends AbstractCommand
             final AbstractTileEntityColonyBuilding building = (AbstractTileEntityColonyBuilding) world.getBlockEntity(zero.offset(bp.getPrimaryBlockOffset()));
             building.addTag(new BlockPos(0, 0, 0), "deactivated");
             building.setPackName(style);
-            building.setBlueprintPath(fileName.replace( style + "/", ""));
+            building.setBlueprintPath(fileName.replace(style + "/", ""));
         }
         else
         {
@@ -227,21 +228,21 @@ public class ScanCommand extends AbstractCommand
                     }
                     if (isHut)
                     {
-                        jigsawBlockEntity.setPool(ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation("minecolonies:" + piecesName+ "/roads")));
-                        jigsawBlockEntity.setName(new ResourceLocation("minecolonies:building_entrance"));
-                        jigsawBlockEntity.setTarget(new ResourceLocation("minecolonies:building_entrance"));
+                        jigsawBlockEntity.setPool(ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation("slimcolonies:" + piecesName + "/roads")));
+                        jigsawBlockEntity.setName(new ResourceLocation("slimcolonies:building_entrance"));
+                        jigsawBlockEntity.setTarget(new ResourceLocation("slimcolonies:building_entrance"));
                     }
                     else if (jigsawBlockEntity.getPool().location().getPath().contains("building"))
                     {
-                        jigsawBlockEntity.setPool(ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation("minecolonies:" + piecesName+ "/buildings")));
-                        jigsawBlockEntity.setName(new ResourceLocation("minecolonies:building_entrance"));
-                        jigsawBlockEntity.setTarget(new ResourceLocation("minecolonies:building_entrance"));
+                        jigsawBlockEntity.setPool(ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation("slimcolonies:" + piecesName + "/buildings")));
+                        jigsawBlockEntity.setName(new ResourceLocation("slimcolonies:building_entrance"));
+                        jigsawBlockEntity.setTarget(new ResourceLocation("slimcolonies:building_entrance"));
                     }
                     else
                     {
-                        jigsawBlockEntity.setPool(ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation("minecolonies:" + piecesName+ "/roads")));
-                        jigsawBlockEntity.setName(new ResourceLocation("minecolonies:street"));
-                        jigsawBlockEntity.setTarget(new ResourceLocation("minecolonies:street"));
+                        jigsawBlockEntity.setPool(ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation("slimcolonies:" + piecesName + "/roads")));
+                        jigsawBlockEntity.setName(new ResourceLocation("slimcolonies:street"));
+                        jigsawBlockEntity.setTarget(new ResourceLocation("slimcolonies:street"));
                     }
                 }
                 jigsawBlockEntity.setChanged();
@@ -258,7 +259,9 @@ public class ScanCommand extends AbstractCommand
             final ResourceLocation location = new ResourceLocation(Constants.MOD_ID, fileName.replace(".blueprint", "").replace(" ", "").toLowerCase(Locale.US));
             structuretemplate = structuretemplatemanager.getOrCreate(location);
             structuretemplate.fillFromWorld(world, newZero, new BlockPos(box.getXSpan(), box.getYSpan() - yDif, box.getZSpan()), false, Blocks.STRUCTURE_VOID);
-            no.monopixel.slimcolonies.core.Network.getNetwork().sendToPlayer(new SaveStructureNBTMessage(structuretemplate.save(new CompoundTag()), fileName.replace(".blueprint", ".nbt").toLowerCase(Locale.US)), (ServerPlayer) player);
+            no.monopixel.slimcolonies.core.Network.getNetwork()
+                .sendToPlayer(new SaveStructureNBTMessage(structuretemplate.save(new CompoundTag()), fileName.replace(".blueprint", ".nbt").toLowerCase(Locale.US)),
+                    (ServerPlayer) player);
         }
         catch (final ResourceLocationException resLocEx)
         {
@@ -272,7 +275,13 @@ public class ScanCommand extends AbstractCommand
         }
     }
 
-    private static int execute(final CommandSourceStack source, final BlockPos from, final BlockPos to, final Optional<BlockPos> anchorPos, final GameProfile profile, final String name) throws CommandSyntaxException
+    private static int execute(
+        final CommandSourceStack source,
+        final BlockPos from,
+        final BlockPos to,
+        final Optional<BlockPos> anchorPos,
+        final GameProfile profile,
+        final String name) throws CommandSyntaxException
     {
         @Nullable final Level world = source.getLevel();
         if (source.getEntity() instanceof Player && !source.getPlayerOrException().isCreative())
@@ -351,17 +360,17 @@ public class ScanCommand extends AbstractCommand
     public static LiteralArgumentBuilder<CommandSourceStack> build()
     {
         return newLiteral(NAME)
-                .then(newArgument(POS1, BlockPosArgument.blockPos())
-                        .then(newArgument(POS2, BlockPosArgument.blockPos())
-                                .executes(ScanCommand::onExecute)
-                                .then(newArgument(ANCHOR_POS, BlockPosArgument.blockPos())
-                                        .executes(ScanCommand::onExecuteWithAnchor))
-                                .then(newArgument(PLAYER_NAME, GameProfileArgument.gameProfile())
-                                        .executes(ScanCommand::onExecuteWithPlayerName)
-                                        .then(newArgument(FILE_NAME, StringArgumentType.string())
-                                                .executes(ScanCommand::onExecuteWithPlayerNameAndFileName)
-                                                .then(newArgument(ANCHOR_POS, BlockPosArgument.blockPos())
-                                                        .executes(ScanCommand::onExecuteWithPlayerNameAndFileNameAndAnchorPos))))));
+            .then(newArgument(POS1, BlockPosArgument.blockPos())
+                .then(newArgument(POS2, BlockPosArgument.blockPos())
+                    .executes(ScanCommand::onExecute)
+                    .then(newArgument(ANCHOR_POS, BlockPosArgument.blockPos())
+                        .executes(ScanCommand::onExecuteWithAnchor))
+                    .then(newArgument(PLAYER_NAME, GameProfileArgument.gameProfile())
+                        .executes(ScanCommand::onExecuteWithPlayerName)
+                        .then(newArgument(FILE_NAME, StringArgumentType.string())
+                            .executes(ScanCommand::onExecuteWithPlayerNameAndFileName)
+                            .then(newArgument(ANCHOR_POS, BlockPosArgument.blockPos())
+                                .executes(ScanCommand::onExecuteWithPlayerNameAndFileNameAndAnchorPos))))));
     }
 
     /**
@@ -373,14 +382,14 @@ public class ScanCommand extends AbstractCommand
     @NotNull
     public static String format(@NotNull final ScanToolData.Slot slot)
     {
-        final String name = slot.getName().chars().anyMatch(c -> !StringReader.isAllowedInUnquotedString((char)c))
-                ? StringTag.quoteAndEscape(slot.getName()) : slot.getName();
+        final String name = slot.getName().chars().anyMatch(c -> !StringReader.isAllowedInUnquotedString((char) c))
+            ? StringTag.quoteAndEscape(slot.getName()) : slot.getName();
 
         final StringBuilder builder = new StringBuilder();
         builder.append(String.format("/%s %s %s %s @p %s", MOD_ID, NAME,
-                BlockPosUtil.format(slot.getBox().getPos1()),
-                BlockPosUtil.format(slot.getBox().getPos2()),
-                name));
+            BlockPosUtil.format(slot.getBox().getPos1()),
+            BlockPosUtil.format(slot.getBox().getPos2()),
+            name));
         if (slot.getBox().getAnchor().isPresent() && BlockPosUtil.isInbetween(slot.getBox().getAnchor().get(), slot.getBox().getPos1(), slot.getBox().getPos2()))
         {
             builder.append(' ');

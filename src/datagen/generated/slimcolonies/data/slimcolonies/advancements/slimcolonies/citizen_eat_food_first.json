@@ -1,5 +1,5 @@
 {
-  "parent": "slimcolonies:minecolonies/place_townhall",
+  "parent": "slimcolonies:slimcolonies/place_townhall",
   "criteria": {
     "citizen_eat_anything": {
       "conditions": {},
@@ -9,7 +9,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.citizen_eat_food_first.description"
+      "translate": "advancements.slimcolonies.citizen_eat_food_first.description"
     },
     "frame": "task",
     "hidden": false,
@@ -18,7 +18,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.citizen_eat_food_first.title"
+      "translate": "advancements.slimcolonies.citizen_eat_food_first.title"
     }
   },
   "requirements": [

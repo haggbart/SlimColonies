@@ -1,15 +1,5 @@
 package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesNamedGrave;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.Tuple;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
-import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityGrave;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -19,11 +9,20 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesNamedGrave;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.Tuple;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
+import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityGrave;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-
 
 /**
  * Class which handles the graveyard building.
@@ -100,7 +99,7 @@ public class BuildingGraveyard extends AbstractBuilding
     @Nullable
     public BlockPos getGraveToWorkOn()
     {
-        if(currentGrave != null)
+        if (currentGrave != null)
         {
             if (WorldUtil.isBlockLoaded(colony.getWorld(), currentGrave))
             {
@@ -164,6 +163,7 @@ public class BuildingGraveyard extends AbstractBuilding
 
     /**
      * Get the set of grave positions.
+     *
      * @return the set of positions with their directions.
      */
     public Set<Tuple<BlockPos, Direction>> getGravePositions()
@@ -190,7 +190,7 @@ public class BuildingGraveyard extends AbstractBuilding
         super.registerBlockPosition(state, pos, world);
         if (state.getBlock() == ModBlocks.blockNamedGrave)
         {
-            visualGravePositions.add(new Tuple<>(pos, state.getValue(AbstractBlockMinecoloniesNamedGrave.FACING)));
+            visualGravePositions.add(new Tuple<>(pos, state.getValue(AbstractBlockSlimColoniesNamedGrave.FACING)));
         }
     }
 
@@ -205,7 +205,7 @@ public class BuildingGraveyard extends AbstractBuilding
         }
 
         final List<Tuple<BlockPos, Direction>> availablePos = new ArrayList<Tuple<BlockPos, Direction>>();
-        for(final Tuple<BlockPos, Direction> tuple : visualGravePositions)
+        for (final Tuple<BlockPos, Direction> tuple : visualGravePositions)
         {
             if (getColony().getWorld().getBlockState(tuple.getA()).canBeReplaced())
             {

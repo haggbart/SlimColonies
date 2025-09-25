@@ -6,7 +6,6 @@ import com.ferreusveritas.dynamictrees.block.leaves.DynamicLeavesBlock;
 import com.ferreusveritas.dynamictrees.entity.animation.AnimationConstants;
 import com.ferreusveritas.dynamictrees.item.Seed;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
-import no.monopixel.slimcolonies.api.util.Log;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
+import no.monopixel.slimcolonies.api.util.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -94,11 +94,11 @@ public final class DynamicTreeCompat extends DynamicTreeProxy
      */
     @Override
     public NonNullList<ItemStack> getDropsForLeaf(
-      final LevelAccessor world,
-      final BlockPos pos,
-      final BlockState blockstate,
-      final int fortune,
-      final Block leaf)
+        final LevelAccessor world,
+        final BlockPos pos,
+        final BlockState blockstate,
+        final int fortune,
+        final Block leaf)
     {
         if (leaf instanceof final DynamicLeavesBlock leaves)
         {
@@ -141,7 +141,7 @@ public final class DynamicTreeCompat extends DynamicTreeProxy
 
             if (world.getServer() == null)
             {
-                Log.getLogger().error("Minecolonies:DynamicTreeCompat unexpected null while trying to get World");
+                Log.getLogger().error("SlimColonies:DynamicTreeCompat unexpected null while trying to get World");
                 return;
             }
 
@@ -151,7 +151,7 @@ public final class DynamicTreeCompat extends DynamicTreeProxy
             if (fake == null)
             {
                 fakePlayers.put(dim, new FakePlayer((ServerLevel) world,
-                  new GameProfile(UUID.randomUUID(), "minecolonies_LumberjackFake")));
+                    new GameProfile(UUID.randomUUID(), "slimcolonies_LumberjackFake")));
                 fake = fakePlayers.get(dim);
             }
 

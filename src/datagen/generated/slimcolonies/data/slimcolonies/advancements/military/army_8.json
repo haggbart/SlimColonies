@@ -11,7 +11,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.minecolonies.army_8.description"
+      "translate": "advancements.slimcolonies.army_8.description"
     },
     "frame": "task",
     "hidden": false,
@@ -21,7 +21,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.minecolonies.army_8.title"
+      "translate": "advancements.slimcolonies.army_8.title"
     }
   },
   "requirements": [
