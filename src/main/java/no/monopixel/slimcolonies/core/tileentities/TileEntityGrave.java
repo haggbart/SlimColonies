@@ -1,16 +1,5 @@
 package no.monopixel.slimcolonies.core.tileentities;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesGrave;
-import no.monopixel.slimcolonies.api.blocks.types.GraveType;
-import no.monopixel.slimcolonies.api.colony.GraveData;
-import no.monopixel.slimcolonies.api.crafting.ItemStorage;
-import no.monopixel.slimcolonies.api.inventory.container.ContainerGrave;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityGrave;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +15,17 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesGrave;
+import no.monopixel.slimcolonies.api.blocks.types.GraveType;
+import no.monopixel.slimcolonies.api.colony.GraveData;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
+import no.monopixel.slimcolonies.api.inventory.container.ContainerGrave;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityGrave;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
+import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
+import no.monopixel.slimcolonies.api.util.InventoryUtils;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -114,9 +114,9 @@ public class TileEntityGrave extends AbstractTileEntityGrave
     @Override
     public void updateBlockState()
     {
-        if (level != null && level.getBlockState(worldPosition).getBlock() instanceof AbstractBlockMinecoloniesGrave)
+        if (level != null && level.getBlockState(worldPosition).getBlock() instanceof AbstractBlockSlimColoniesGrave)
         {
-            final BlockState state = level.getBlockState(worldPosition).setValue(AbstractBlockMinecoloniesGrave.VARIANT, decayed ? GraveType.DECAYED : GraveType.DEFAULT);
+            final BlockState state = level.getBlockState(worldPosition).setValue(AbstractBlockSlimColoniesGrave.VARIANT, decayed ? GraveType.DECAYED : GraveType.DEFAULT);
             if (!level.getBlockState(worldPosition).equals(state))
             {
                 level.setBlockAndUpdate(worldPosition, state);
@@ -142,15 +142,18 @@ public class TileEntityGrave extends AbstractTileEntityGrave
     {
         super.load(compound);
 
-        decay_timer         = compound.contains(TAG_DECAY_TIMER) ? compound.getInt(TAG_DECAY_TIMER) : DEFAULT_DECAY_TIMER;
-        decayed             = compound.contains(TAG_DECAYED) ? compound.getBoolean(TAG_DECAYED) :false;
+        decay_timer = compound.contains(TAG_DECAY_TIMER) ? compound.getInt(TAG_DECAY_TIMER) : DEFAULT_DECAY_TIMER;
+        decayed = compound.contains(TAG_DECAYED) ? compound.getBoolean(TAG_DECAYED) : false;
 
         if (compound.contains(TAG_GRAVE_DATA))
         {
             graveData = new GraveData();
             graveData.read(compound.getCompound(TAG_GRAVE_DATA));
         }
-        else graveData = null;
+        else
+        {
+            graveData = null;
+        }
     }
 
     @Override
@@ -161,7 +164,7 @@ public class TileEntityGrave extends AbstractTileEntityGrave
         compound.putInt(TAG_DECAY_TIMER, decay_timer);
         compound.putBoolean(TAG_DECAYED, decayed);
 
-        if(graveData != null)
+        if (graveData != null)
         {
             compound.put(TAG_GRAVE_DATA, graveData.write());
         }

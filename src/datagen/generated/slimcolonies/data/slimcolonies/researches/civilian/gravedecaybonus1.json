@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "slimcolonies:blockminecoloniesgrave",
+  "icon": "slimcolonies:blockslimcoloniesgrave",
   "parentResearch": "slimcolonies:civilian/remembrance",
   "requirements": [
     {

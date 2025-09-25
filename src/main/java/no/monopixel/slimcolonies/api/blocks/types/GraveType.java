@@ -1,10 +1,10 @@
 package no.monopixel.slimcolonies.api.blocks.types;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesGrave;
 import net.minecraft.util.StringRepresentable;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesGrave;
 
 /**
- * Defines the types of Grave that the {@link AbstractBlockMinecoloniesGrave} supports.
+ * Defines the types of Grave that the {@link AbstractBlockSlimColoniesGrave} supports.
  */
 public enum GraveType implements StringRepresentable
 {

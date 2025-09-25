@@ -104,7 +104,7 @@ public final class ModBlocksInitializer
 
         ModBlocks.blockConstructionTape = new BlockConstructionTape().registerBlock(registry);
         ModBlocks.blockRack = new BlockSlimColoniesRack().registerBlock(registry);
-        ModBlocks.blockGrave = new BlockMinecoloniesGrave().registerBlock(registry);
+        ModBlocks.blockGrave = new BlockSlimColoniesGrave().registerBlock(registry);
         ModBlocks.blockNamedGrave = new BlockMinecoloniesNamedGrave().registerBlock(registry);
         ModBlocks.blockWayPoint = new BlockWaypoint().registerBlock(registry);
         ModBlocks.blockPostBox = new BlockPostBox().registerBlock(registry);

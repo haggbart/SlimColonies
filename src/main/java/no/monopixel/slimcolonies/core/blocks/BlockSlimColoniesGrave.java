@@ -1,50 +1,49 @@
 package no.monopixel.slimcolonies.core.blocks;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesGrave;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.network.NetworkHooks;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesGrave;
 import no.monopixel.slimcolonies.api.blocks.types.GraveType;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.permissions.Action;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityGrave;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityGrave;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.items.IItemHandler;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityGrave;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-
 /**
  * Block for the graves
  */
-public class BlockMinecoloniesGrave extends AbstractBlockMinecoloniesGrave<BlockMinecoloniesGrave>
+public class BlockSlimColoniesGrave extends AbstractBlockSlimColoniesGrave<BlockSlimColoniesGrave>
 {
     /**
      * The hardness this block has.
@@ -66,7 +65,7 @@ public class BlockMinecoloniesGrave extends AbstractBlockMinecoloniesGrave<Block
      */
     private static final VoxelShape SHAPE = Shapes.box(0.1, 0.1, 0.1, 0.9, 0.9, 0.9);
 
-    public BlockMinecoloniesGrave()
+    public BlockSlimColoniesGrave()
     {
         super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(VARIANT, GraveType.DEFAULT));
@@ -111,8 +110,8 @@ public class BlockMinecoloniesGrave extends AbstractBlockMinecoloniesGrave<Block
     /**
      * Get the statement ready.
      *
-     * @param state  the state to place.
-     * @param pos    the position.
+     * @param state the state to place.
+     * @param pos   the position.
      * @return the next state.
      */
     public static BlockState getPlacementState(final BlockState state, final BlockPos pos)
@@ -158,25 +157,25 @@ public class BlockMinecoloniesGrave extends AbstractBlockMinecoloniesGrave<Block
 
     @Override
     public InteractionResult use(
-      final BlockState state,
-      final Level worldIn,
-      final BlockPos pos,
-      final Player player,
-      final InteractionHand hand,
-      final BlockHitResult ray)
+        final BlockState state,
+        final Level worldIn,
+        final BlockPos pos,
+        final Player player,
+        final InteractionHand hand,
+        final BlockHitResult ray)
     {
         final IColony colony = IColonyManager.getInstance().getColonyByPosFromWorld(worldIn, pos);
         final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if ((colony == null || colony.getPermissions().hasPermission(player, Action.ACCESS_HUTS))
-              && tileEntity instanceof TileEntityGrave)
+            && tileEntity instanceof TileEntityGrave)
         {
             final TileEntityGrave grave = (TileEntityGrave) tileEntity;
             if (!worldIn.isClientSide)
             {
                 NetworkHooks.openScreen((ServerPlayer) player,
-                  grave,
-                  buf -> buf.writeBlockPos(grave.getBlockPos()));
+                    grave,
+                    buf -> buf.writeBlockPos(grave.getBlockPos()));
             }
             return InteractionResult.SUCCESS;
         }
@@ -225,10 +224,10 @@ public class BlockMinecoloniesGrave extends AbstractBlockMinecoloniesGrave<Block
             {
                 TileEntityGrave tileEntityGrave = (TileEntityGrave) tileEntity;
                 InventoryUtils.dropItemHandler(tileEntityGrave.getInventory(),
-                  worldIn,
-                  tileEntityGrave.getBlockPos().getX(),
-                  tileEntityGrave.getBlockPos().getY(),
-                  tileEntityGrave.getBlockPos().getZ());
+                    worldIn,
+                    tileEntityGrave.getBlockPos().getX(),
+                    tileEntityGrave.getBlockPos().getY(),
+                    tileEntityGrave.getBlockPos().getZ());
                 worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 
