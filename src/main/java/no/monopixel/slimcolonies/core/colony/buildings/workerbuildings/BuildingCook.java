@@ -19,12 +19,11 @@ import java.util.function.Predicate;
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.FUEL_LIST;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.OVERRIDE_EQUALS;
 
 /**
  * Class of the cook building.
  */
-@SuppressWarnings(OVERRIDE_EQUALS)
+
 public class BuildingCook extends AbstractBuilding
 {
     /**

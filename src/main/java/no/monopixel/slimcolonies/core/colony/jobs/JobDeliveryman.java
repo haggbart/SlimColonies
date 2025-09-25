@@ -41,7 +41,6 @@ import java.util.List;
 
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.TAG_ONGOING;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.SKILL_BONUS_ADD;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNCHECKED;
 
 /**
  * Class of the deliveryman job.
@@ -190,7 +189,7 @@ public class JobDeliveryman extends AbstractJob<EntityAIWorkDeliveryman, JobDeli
      *
      * @return {@link IRequest} of the current Task.
      */
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     public IRequest<IDeliverymanRequestable> getCurrentTask()
     {
         IToken<?> request = getTaskQueueFromDataStore().peekFirst();

@@ -51,7 +51,7 @@ public abstract class AbstractRequest<R extends IRequestable> implements IReques
     private       R               result;
     @Nullable
     private       IToken<?>       parent;
-    @SuppressWarnings("squid:S1170")
+    
 
     private       List<ItemStack> deliveries = Lists.newArrayList();
 

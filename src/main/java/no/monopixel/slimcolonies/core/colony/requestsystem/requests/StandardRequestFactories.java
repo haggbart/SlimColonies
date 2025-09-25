@@ -49,7 +49,7 @@ public final class StandardRequestFactories
 
     /// /// --------------------------- NBTConstants --------------------------- \\\\\\
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class ItemStackRequestFactory implements IRequestFactory<Stack, StandardRequests.ItemStackRequest>
     {
         /**
@@ -73,7 +73,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<StandardRequests.ItemStackRequest> getFactoryOutputType()
         {
             return TypeToken.of(StandardRequests.ItemStackRequest.class);
@@ -81,7 +81,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<Stack> getFactoryInputType()
         {
             return TypeToken.of(Stack.class);
@@ -110,7 +110,7 @@ public final class StandardRequestFactories
          */
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public StandardRequests.ItemStackRequest deserialize(@NotNull final IFactoryController controller, @NotNull final CompoundTag nbt)
         {
             return deserializeFromNBT(controller, nbt, Stack::deserialize,
@@ -149,7 +149,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class ItemStackListRequestFactory implements IRequestFactory<StackList, StandardRequests.ItemStackListRequest>
     {
         /**
@@ -173,7 +173,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<StandardRequests.ItemStackListRequest> getFactoryOutputType()
         {
             return TypeToken.of(StandardRequests.ItemStackListRequest.class);
@@ -181,7 +181,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<StackList> getFactoryInputType()
         {
             return TypeToken.of(StackList.class);
@@ -210,7 +210,7 @@ public final class StandardRequestFactories
          */
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public StandardRequests.ItemStackListRequest deserialize(@NotNull final IFactoryController controller, @NotNull final CompoundTag nbt)
         {
             return deserializeFromNBT(controller, nbt, StackList::deserialize,
@@ -247,7 +247,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class ItemTagRequestFactory implements IRequestFactory<RequestTag, StandardRequests.ItemTagRequest>
     {
         /**
@@ -271,7 +271,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<StandardRequests.ItemTagRequest> getFactoryOutputType()
         {
             return TypeToken.of(StandardRequests.ItemTagRequest.class);
@@ -279,7 +279,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<RequestTag> getFactoryInputType()
         {
             return TypeToken.of(RequestTag.class);
@@ -308,7 +308,7 @@ public final class StandardRequestFactories
          */
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public StandardRequests.ItemTagRequest deserialize(@NotNull final IFactoryController controller, @NotNull final CompoundTag nbt)
         {
             return deserializeFromNBT(controller, nbt, RequestTag::deserialize,
@@ -347,13 +347,13 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class DeliveryRequestFactory implements IRequestFactory<Delivery, StandardRequests.DeliveryRequest>
     {
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<StandardRequests.DeliveryRequest> getFactoryOutputType()
         {
             return TypeToken.of(StandardRequests.DeliveryRequest.class);
@@ -361,7 +361,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<Delivery> getFactoryInputType()
         {
             return TypeConstants.DELIVERY;
@@ -390,7 +390,7 @@ public final class StandardRequestFactories
          */
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public StandardRequests.DeliveryRequest deserialize(@NotNull final IFactoryController controller, @NotNull final CompoundTag nbt)
         {
             return deserializeFromNBT(controller, nbt, Delivery::deserialize,
@@ -446,13 +446,13 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class PickupRequestFactory implements IRequestFactory<Pickup, StandardRequests.PickupRequest>
     {
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<StandardRequests.PickupRequest> getFactoryOutputType()
         {
             return TypeToken.of(StandardRequests.PickupRequest.class);
@@ -460,7 +460,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<Pickup> getFactoryInputType()
         {
             return TypeConstants.PICKUP;
@@ -489,7 +489,7 @@ public final class StandardRequestFactories
          */
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public StandardRequests.PickupRequest deserialize(@NotNull final IFactoryController controller, @NotNull final CompoundTag nbt)
         {
             return deserializeFromNBT(controller, nbt, Pickup::deserialize,
@@ -545,7 +545,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static abstract class AbstractCraftingRequestFactory<C extends AbstractCrafting, R extends StandardRequests.AbstractCraftingRequest<C>>
         implements IRequestFactory<C, R>
     {
@@ -634,7 +634,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class PrivateCraftingRequestFactory
         extends StandardRequestFactories.AbstractCraftingRequestFactory<PrivateCrafting, StandardRequests.PrivateCraftingRequest>
     {
@@ -657,7 +657,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class PublicCraftingRequestFactory extends StandardRequestFactories.AbstractCraftingRequestFactory<PublicCrafting, StandardRequests.PublicCraftingRequest>
     {
 
@@ -679,7 +679,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class ToolRequestFactory implements IRequestFactory<Tool, StandardRequests.ToolRequest>
     {
 
@@ -752,7 +752,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class FoodRequestFactory implements IRequestFactory<Food, StandardRequests.FoodRequest>
     {
 
@@ -825,7 +825,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class SmeltableOreRequestFactory implements IRequestFactory<SmeltableOre, StandardRequests.SmeltAbleOreRequest>
     {
 
@@ -898,7 +898,7 @@ public final class StandardRequestFactories
         }
     }
 
-    @SuppressWarnings(Suppression.BIG_CLASS)
+    
     public static final class BurnableRequestFactory implements IRequestFactory<Burnable, StandardRequests.BurnableRequest>
     {
         @Override
@@ -993,7 +993,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<StandardRequests.MinStackRequest> getFactoryOutputType()
         {
             return TypeToken.of(StandardRequests.MinStackRequest.class);
@@ -1001,7 +1001,7 @@ public final class StandardRequestFactories
 
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public TypeToken<MinimumStack> getFactoryInputType()
         {
             return TypeToken.of(MinimumStack.class);
@@ -1030,7 +1030,7 @@ public final class StandardRequestFactories
          */
         @NotNull
         @Override
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE)
+        
         public StandardRequests.MinStackRequest deserialize(@NotNull final IFactoryController controller, @NotNull final CompoundTag nbt)
         {
             return deserializeFromNBT(controller, nbt, MinimumStack::deserialize,
@@ -1171,7 +1171,7 @@ public final class StandardRequestFactories
             childTokens.add(controller.deserialize(childCompound.getCompound(i)));
         }
 
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE) final R request = objectConstructor.construct(requested, token, requester, state);
+         final R request = objectConstructor.construct(requested, token, requester, state);
 
         request.addChildren(childTokens);
 
@@ -1215,7 +1215,7 @@ public final class StandardRequestFactories
             childTokens.add(controller.deserialize(buffer));
         }
 
-        @SuppressWarnings(Suppression.LEFT_CURLY_BRACE) final R request = objectConstructor.construct(requested, token, requester, state);
+         final R request = objectConstructor.construct(requested, token, requester, state);
         request.addChildren(childTokens);
 
         if (buffer.readBoolean())

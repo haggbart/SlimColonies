@@ -34,7 +34,7 @@ import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.AR
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.ARROWS_HIT;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.LEVELS_GAINED;
 
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public class EntityAIArcherTraining extends AbstractEntityAITraining<JobArcherTraining, BuildingArchery>
 {
     /**

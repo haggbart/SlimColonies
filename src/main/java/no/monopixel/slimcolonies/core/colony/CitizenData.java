@@ -76,7 +76,7 @@ import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.M
 /**
  * Extra data for Citizens.
  */
-@SuppressWarnings({Suppression.BIG_CLASS, "PMD.ExcessiveClassLength"})
+@SuppressWarnings("PMD.ExcessiveClassLength")
 public class CitizenData implements ICitizenData
 {
     /**
@@ -463,7 +463,7 @@ public class CitizenData implements ICitizenData
         return id;
     }
 
-    @SuppressWarnings(Suppression.TOO_MANY_RETURNS)
+    
     @Override
     public boolean equals(final Object o)
     {

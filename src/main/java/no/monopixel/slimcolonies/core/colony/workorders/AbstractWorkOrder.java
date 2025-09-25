@@ -32,7 +32,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_STAGE;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED;
 
 /**
  * General information between WorkOrders.
@@ -622,13 +621,12 @@ public abstract class AbstractWorkOrder implements IBuilderWorkOrder
     /**
      * Is this WorkOrder still valid?  If not, it will be deleted.
      * <p>
-     * Suppressing Sonar Rule squid:S1172 This rule does " Unused method parameters should be removed" But in this case extending class may need to use the colony parameter
      *
      * @param colony The colony that owns the Work Order
      * @return True if the WorkOrder is still valid, or False if it should be deleted
      */
     @Override
-    @SuppressWarnings(UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED)
+    
     public boolean isValid(final IColony colony)
     {
         return true;

@@ -200,7 +200,7 @@
         <module name="TodoComment"/>
         <module name="UpperEll"/>
 
-        <!-- Additional SonarQube related rules            -->
+        <!-- Additional rules            -->
         <module name="FileContentsHolder"/>
         <module name="SuppressWarningsHolder"/>
         <module name="AnnotationLocation">

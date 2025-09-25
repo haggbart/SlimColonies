@@ -107,7 +107,7 @@ public class StaticLocation implements ILocation
     /**
      * Internal factory class.
      */
-    @SuppressWarnings("squid:S2972")
+    
     /**
      * We have this class the way it is for a reason.
      */
@@ -121,7 +121,7 @@ public class StaticLocation implements ILocation
 
         @NotNull
         @Override
-        @SuppressWarnings("squid:LeftCurlyBraceStartLineCheck")
+        
         /**
          * Moving the curly braces really makes the code hard to read.
          */
@@ -132,7 +132,7 @@ public class StaticLocation implements ILocation
 
         @NotNull
         @Override
-        @SuppressWarnings("squid:LeftCurlyBraceStartLineCheck")
+        
         /**
          * Moving the curly braces really makes the code hard to read.
          */

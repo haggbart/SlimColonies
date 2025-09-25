@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
  * <p>
  * We disabled the following finals since we are neither able to mark the items as final, nor do we want to provide public accessors.
  */
-@SuppressWarnings({"squid:ClassVariableVisibilityCheck", "squid:S2444", "squid:S1444"})
 public final class ModItems
 {
     public static Item supplyChest;

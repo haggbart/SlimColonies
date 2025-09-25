@@ -22,8 +22,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.RAWTYPES;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNCHECKED;
 
 /**
  * Class used to handle the inner workings of the request system with regards to requests.
@@ -42,7 +40,7 @@ public class RequestHandler implements IRequestHandler
     }
 
     @Override
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     public <Request extends IRequestable> IRequest<Request> createRequest(final IRequester requester, final Request request)
     {
         final IToken<?> token = manager.getTokenHandler().generateNewToken();
@@ -119,7 +117,7 @@ public class RequestHandler implements IRequestHandler
      * @throws IllegalArgumentException is thrown when the request is unknown to this manager.
      */
     @Override
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     public IToken<?> assignRequestDefault(final IRequest<?> request, final Collection<IToken<?>> resolverTokenBlackList)
     {
         //Check if the request is registered
@@ -163,7 +161,7 @@ public class RequestHandler implements IRequestHandler
         IRequestResolver previousResolver = null;
         int previousMetric = Integer.MAX_VALUE;
         @Nullable List<IToken<?>> attemptResult = null;
-        for (@SuppressWarnings(RAWTYPES) final IRequestResolver resolver : resolvers)
+        for (@SuppressWarnings("rawtypes") final IRequestResolver resolver : resolvers)
         {
             //Skip when the resolver is in the blacklist.
             if (resolverTokenBlackList.contains(resolver.getId()) || manager.getResolverHandler().isBeingRemoved(resolver.getId()))
@@ -394,7 +392,7 @@ public class RequestHandler implements IRequestHandler
      * @param token The token of the request that got cancelled or overruled
      */
     @Override
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     public void onRequestOverruled(final IToken<?> token)
     {
         final IRequest<?> request = getRequest(token);
@@ -522,7 +520,7 @@ public class RequestHandler implements IRequestHandler
      * @throws IllegalArgumentException when the request is unknown, not resolved, or cannot be resolved.
      */
     @Override
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     public void resolveRequest(final IRequest<?> request)
     {
         getRequest(request.getId());

@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.MESSAGE_NEW_DECORATION_REQUEST;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED;
 /**
  * A work order that the build can take to build plantation fields.
  */
@@ -73,7 +72,7 @@ public class WorkOrderPlantationField extends AbstractWorkOrder
      * @param level       the level of that work hut.
      * @return true if the citizen may accept this work order.
      */
-    @SuppressWarnings(UNUSED_METHOD_PARAMETERS_SHOULD_BE_REMOVED)
+    
     @Override
     public boolean canBuildIgnoringDistance(final @NotNull IBuilding building, final BlockPos position, final int level)
     {

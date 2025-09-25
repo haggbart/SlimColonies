@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Asherslab
  */
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public class BuildingGuardTower extends AbstractBuildingGuards
 {
 

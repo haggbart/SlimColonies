@@ -33,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.GENERIC_WILDCARD;
 
 public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildingModule>, IRequestResolverProvider, IRequester, ISchematicProvider
 {
@@ -287,7 +286,7 @@ public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildin
 
     <R> boolean hasWorkerOpenRequestsOfType(final int citizenid, TypeToken<R> requestType);
 
-    @SuppressWarnings(GENERIC_WILDCARD)
+    @SuppressWarnings("unchecked")
     <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfType(
       final int citizenid,
       TypeToken<R> requestType);
@@ -303,10 +302,10 @@ public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildin
      */
     Collection<IRequest<?>> getCompletedRequestsOfCitizenOrBuilding(@Nullable ICitizenData data);
 
-    @SuppressWarnings(GENERIC_WILDCARD)
+    @SuppressWarnings("unchecked")
     <R> ImmutableList<IRequest<? extends R>> getCompletedRequestsOfType(@NotNull ICitizenData citizenData, TypeToken<R> requestType);
 
-    @SuppressWarnings(GENERIC_WILDCARD)
+    @SuppressWarnings("unchecked")
     <R> ImmutableList<IRequest<? extends R>> getCompletedRequestsOfTypeFiltered(
       @NotNull ICitizenData citizenData,
       TypeToken<R> requestType,
@@ -327,10 +326,10 @@ public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildin
      *
      * @param stack the stack.
      */
-    @SuppressWarnings("squid:S135")
+    
     void overruleNextOpenRequestWithStack(@NotNull ItemStack stack);
 
-    @SuppressWarnings(GENERIC_WILDCARD)
+    @SuppressWarnings("unchecked")
     <R> ImmutableList<IRequest<? extends R>> getOpenRequestsOfTypeFiltered(
       @NotNull ICitizenData citizenData,
       TypeToken<R> requestType,

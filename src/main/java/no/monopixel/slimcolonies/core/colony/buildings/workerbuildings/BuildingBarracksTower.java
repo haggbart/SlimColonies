@@ -18,7 +18,7 @@ import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.W
 /**
  * Building class for the Barracks Tower.
  */
-@SuppressWarnings("squid:MaximumInheritanceDepth")
+
 public class BuildingBarracksTower extends AbstractBuildingGuards
 {
     ////// --------------------------- NBTConstants --------------------------- \\\\\\
@@ -53,7 +53,7 @@ public class BuildingBarracksTower extends AbstractBuildingGuards
         return SCHEMATIC_NAME;
     }
 
-    @SuppressWarnings("squid:S109")
+    
     @Override
     public int getMaxBuildingLevel()
     {

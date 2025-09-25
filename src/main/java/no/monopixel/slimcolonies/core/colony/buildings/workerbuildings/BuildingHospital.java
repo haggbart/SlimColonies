@@ -27,12 +27,11 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.OVERRIDE_EQUALS;
 
 /**
  * Class of the hospital building.
  */
-@SuppressWarnings(OVERRIDE_EQUALS)
+
 public class BuildingHospital extends AbstractBuilding
 {
     /**

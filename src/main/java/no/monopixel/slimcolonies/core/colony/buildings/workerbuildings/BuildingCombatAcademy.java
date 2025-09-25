@@ -125,7 +125,7 @@ public class BuildingCombatAcademy extends AbstractBuilding
         return SCHEMATIC_NAME;
     }
 
-    @SuppressWarnings("squid:S109")
+    
     @Override
     public int getMaxBuildingLevel()
     {

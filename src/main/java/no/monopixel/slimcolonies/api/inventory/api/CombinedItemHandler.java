@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.UNCHECKED;
 
 /**
  * Abstract class wrapping around multiple IItemHandler.
@@ -104,7 +103,7 @@ public class CombinedItemHandler implements IItemHandlerModifiable, INBTSerializ
         return compound;
     }
 
-    @SuppressWarnings(UNCHECKED)
+    @SuppressWarnings("unchecked")
     @Override
     public void deserializeNBT(final CompoundTag nbt)
     {

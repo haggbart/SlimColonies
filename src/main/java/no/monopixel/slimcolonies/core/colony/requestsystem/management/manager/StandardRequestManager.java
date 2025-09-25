@@ -37,7 +37,6 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import static no.monopixel.slimcolonies.api.util.constant.Suppression.BIG_CLASS;
 
 /**
  * Main class of the request system. Default implementation of the IRequestManager interface.
@@ -45,7 +44,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Suppression.BIG_CLASS;
  * Uses
  */
 
-@SuppressWarnings(BIG_CLASS)
+
 public class StandardRequestManager implements IStandardRequestManager
 {
     /// /---------------------------NBTTags-------------------------\\\\
