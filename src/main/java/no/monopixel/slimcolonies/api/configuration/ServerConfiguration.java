@@ -1,8 +1,8 @@
 package no.monopixel.slimcolonies.api.configuration;
 
+import net.minecraftforge.common.ForgeConfigSpec;
 import no.monopixel.slimcolonies.api.colony.permissions.Explosions;
 import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.List;
 
@@ -135,7 +135,7 @@ public class ServerConfiguration extends AbstractConfiguration
         swapToCategory(builder, "research");
         researchCreativeCompletion = defineBoolean(builder, "researchcreativecompletion", true);
         researchDebugLog = defineBoolean(builder, "researchdebuglog", false);
-        researchResetCost = defineList(builder, "researchresetcost", List.of("minecolonies:ancienttome:1"), s -> s instanceof String);
+        researchResetCost = defineList(builder, "researchresetcost", List.of("slimcolonies:ancienttome:1"), s -> s instanceof String);
 
         swapToCategory(builder, "commands");
 

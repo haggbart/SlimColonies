@@ -654,7 +654,7 @@ public final class WindowConstants
     /**
      * The resourcelocation for green and blue hearts
      */
-    public static final ResourceLocation GREEN_BLUE_ICON = new ResourceLocation("minecolonies:textures/gui/citizen/green_bluehearts.png");
+    public static final ResourceLocation GREEN_BLUE_ICON = new ResourceLocation("slimcolonies:textures/gui/citizen/green_bluehearts.png");
 
     /**
      * X position of the full green heart
@@ -841,12 +841,12 @@ public final class WindowConstants
     /**
      * Source of the female wax location.
      */
-    public static final String FEMALE_SOURCE = "minecolonies:textures/gui/citizen/colonist_wax_female_smaller.png";
+    public static final String FEMALE_SOURCE = "slimcolonies:textures/gui/citizen/colonist_wax_female_smaller.png";
 
     /**
      * Source of the female wax location.
      */
-    public static final String MALE_SOURCE = "minecolonies:textures/gui/citizen/colonist_wax_male_smaller.png";
+    public static final String MALE_SOURCE = "slimcolonies:textures/gui/citizen/colonist_wax_male_smaller.png";
 
     /**
      * Id of the detail button
@@ -1071,7 +1071,7 @@ public final class WindowConstants
     public static final String SECONDARY_SKILL_COM   = "comp2";
     public static final String SECONDARY_SKILL_ADV   = "adverse2";
     public static final String IMAGE_APPENDIX        = "img";
-    public static final String BASE_IMG_SRC          = "minecolonies:textures/entity/skills/small/";
+    public static final String BASE_IMG_SRC          = "slimcolonies:textures/entity/skills/small/";
 
     /**
      * Button prefixes.
