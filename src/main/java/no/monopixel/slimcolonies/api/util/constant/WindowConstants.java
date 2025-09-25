@@ -71,10 +71,6 @@ public final class WindowConstants
      */
     public static final String BUTTON_RENAME = "rename";
 
-    /**
-     * Id of the patreon button in the GUI.
-     */
-    public static final String BUTTON_PATREON = "patreon";
 
     /**
      * Id of the town hall map button in the GUI.
