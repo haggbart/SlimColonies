@@ -2,7 +2,7 @@
 
 **Self-sufficient colonies that actually help you**
 
-SlimColonies is a fork of MineColonies where colonists take care of themselves. Build your colony, assign workers, and get back to playing Minecraft while they handle the rest. No
+SlimColonies is a fork of [MineColonies](https://github.com/ldtteam/minecolonies) where colonists take care of themselves. Build your colony, assign workers, and get back to playing Minecraft while they handle the rest. No
 babysitting, no events, no demands - just helpful NPCs that enhance your world.
 
 ## Philosophy
@@ -68,35 +68,26 @@ SlimColonies removes these pain points and makes sensible behaviors the default,
 
 ## For Users
 
-You can find all our versions on Curseforge:
-
-https://www.curseforge.com/minecraft/mc-mods/minecolonies/files/all
-
-If you want to chat with the developers and join our amazing community:
-
-https://discord.minecolonies.com
-
 ### Creating an Issue
 
-MineColonies crashes every time? Have a suggestion? Found a bug? Create an issue now!
+SlimColonies crashes? Have a suggestion? Found a bug? Create an issue!
 
-1. Make sure your issue hasn't already been answered or fixed. Also think about whether your issue is a valid one before submitting it.
-2. Go to the [issues page](https://github.com/ldtteam/minecolonies/issues).
+1. Make sure your issue hasn't already been answered or fixed.
+2. Go to the [issues page](https://github.com/haggbart/SlimColonies/issues).
 3. Click `New Issue`
-4. Choose which type of issue you want to create.
-5. Fill in the form. Don't leave anything out!
-6. Click `Submit New Issue` and wait for a response!
+4. Fill in the form with details.
+5. Click `Submit New Issue`.
 
 ## For Developers
 
-### Compiling MineColonies
+### Compiling SlimColonies
 
 IMPORTANT: Please report any issues you have, as there might be some problems with the documentation! Also make sure you know EXACTLY what you're doing! It's not our fault if your
 OS crashes, becomes corrupted, etc.
 
 #### Setup Java
 
-The Java JDK is used to compile MineColonies.
+The Java JDK is used to compile SlimColonies.
 
 1. Download and install the Java JDK 17.
     * [Windows](https://adoptopenjdk.net/): Choose OpenJDK 17 (LTS) version and HotSpot JVM, then click the `latest release` button. After the download is complete, open the file,
@@ -123,7 +114,7 @@ If the `javac` command does not work on Windows:
 
 #### Setup Gradle (Optional)
 
-Gradle is used to execute the various build tasks when compiling MineColonies. The version of gradle specified by this project can be found in the
+Gradle is used to execute the various build tasks when compiling SlimColonies. The version of gradle specified by this project can be found in the
 gradle/wrapper/gradle-wapper.properties file.
 
 1. Download and install Gradle.
@@ -144,55 +135,55 @@ gradle/wrapper/gradle-wapper.properties file.
 
 #### Setup Git
 
-Git is used to clone MineColonies and update your local copy.
+Git is used to clone SlimColonies and update your local copy.
 
 1. Download and install Git [here](http://git-scm.com/download/).
 2. *Optional*: Download and install a Git GUI client, such as Gitkraken, SourceTree, GitHub for Windows/Mac, SmartGitHg, TortoiseGit, etc. A nice list is
    available [here](http://git-scm.com/downloads/guis).
 
-#### Setup MineColonies (Command Line)
+#### Setup SlimColonies (Command Line)
 
 This section assumes that you're using the command line version of Git.
 
 1. Open up your command line.
-2. Navigate to a place where you want to download the MineColonies source (e.g., `C:\GitHub\MineColonies\`) by executing `cd [folder location]`. This location is known as
+2. Navigate to a place where you want to download the SlimColonies source (e.g., `C:\GitHub\SlimColonies\`) by executing `cd [folder location]`. This location is known as
    `basefolder` from now on.
-3. Execute `git clone https://github.com/Minecolonies/minecolonies.git`. This will download MineColonies' source into `basefolder`.
+3. Execute `git clone https://github.com/haggbart/SlimColonies.git`. This will download SlimColonies' source into `basefolder`.
 4. Right now, you should have a directory that looks something like this:
 
 ***
 
     basefolder
-	\-MineColonies
-		\-MineColonies' files (should have `build.gradle`)
+	\-SlimColonies
+		\-SlimColonies' files (should have `build.gradle`)
 
 ***
 
-#### Setup MineColonies (GitKraken)
+#### Setup SlimColonies (GitKraken)
 
 If you decide to go with a GUI client like GitKraken:
 
 1. Open GitKraken
 2. Click `File → Clone Repo`
 3. Select GitHub.com and choose a base folder to clone to.
-4. Write MineColonies in the "Repository to Clone" and select the one by ldtteam.
+4. Write SlimColonies in the "Repository to Clone" and select the haggbart repository.
 
 ![](https://i.imgur.com/jVTXyCJ.png)
 
 5. Click 'Clone the Repo'.
 
-#### Compile MineColonies (Command Line)
+#### Compile SlimColonies (Command Line)
 
-1. Navigate to the MineColonies folder and run a `dir` to make sure the `build.gradle` file is where you expect it to be.
-2. Execute `gradlew build`. This first sets up Forge and downloads the necessary libraries to build MineColonies. Be patient, as this may take a while.
+1. Navigate to the SlimColonies folder and run a `dir` to make sure the `build.gradle` file is where you expect it to be.
+2. Execute `gradlew build`. This first sets up Forge and downloads the necessary libraries to build SlimColonies. Be patient, as this may take a while.
     * If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.
     * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
-3. Go to `basefolder\MineColonies\build\libs`.
-    * You should see a `.jar` file named `MineColonies-universal-null.jar`.
+3. Go to `basefolder\SlimColonies\build\libs`.
+    * You should see a `.jar` file named `SlimColonies-universal-null.jar`.
 4. Copy the jar into your Minecraft `mods` folder, and you are done! (`~/.minecraft/mods` on Linux)
 5. Alternatively, you can also run `./gradlew runClient` to start Minecraft with this jar.
 
-#### Compile MineColonies (Intellij)
+#### Compile SlimColonies (Intellij)
 
 1. Right-click the `build.gradle` file (or the background of the folder it's in) and select `Open Folder as Intellij Project`.
 2. Select `Auto Import` and make sure a valid Gradle and JVM are selected.
@@ -202,11 +193,11 @@ If you decide to go with a GUI client like GitKraken:
 3. This will prepare some of the libraries used by Forge.
 4. Click `View → Tool Windows → Gradle`.
 5. In the Gradle view, expand the options to `Tasks → fg_runs`.
-6. Click the small refresh symbol in the upper left of the Gradle view. This sets up Forge and downloads the necessary libraries to build MineColonies.
+6. Click the small refresh symbol in the upper left of the Gradle view. This sets up Forge and downloads the necessary libraries to build SlimColonies.
 7. Execute `genIntellijRuns` and restart Intellij.
 8. You will see a runClient and runServer startup configuration in the dropdown at the top right next to the green "run" button. Select one and press "run".
 9. If it doesn't start and throws a lot of errors, try another refresh. This often does wonders.
-10. If you want to produce a running jar, execute the `build` task. This will result in a runnable jar file in `basefolder\MineColonies\build\libs`.
+10. If you want to produce a running jar, execute the `build` task. This will result in a runnable jar file in `basefolder\SlimColonies\build\libs`.
 
 ##### Troubleshooting
 
