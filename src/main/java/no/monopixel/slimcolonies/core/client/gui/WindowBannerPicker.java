@@ -246,11 +246,6 @@ public class WindowBannerPicker extends Screen
             final PatternButton button = new PatternButton(posX, posY, PATTERN_HEIGHT, patterns.get(i));
             this.addRenderableWidget(button);
 
-            if (!isFeatureUnlocked.get() && patterns.get(i).unwrapKey().get().location().getNamespace().equals(Constants.MOD_ID))
-            {
-                button.setTooltip(Tooltip.create(Component.translatable("no.monopixel.slimcolonies.core.gui.banner.patreon")));
-                button.blocked = true;
-            }
         }
     }
 
@@ -396,14 +391,7 @@ public class WindowBannerPicker extends Screen
 
         List<Pair<Holder<BannerPattern>, DyeColor>> list = new ArrayList<>();
         list.add(new Pair<>(BuiltInRegistries.BANNER_PATTERN.getHolder(BannerPatterns.BASE).get(), DyeColor.GRAY));
-        if (!isFeatureUnlocked.get() && pattern.unwrapKey().get().location().getNamespace().equals(Constants.MOD_ID))
-        {
-            list.add(new Pair<>(pattern, DyeColor.BLACK));
-        }
-        else
-        {
-            list.add(new Pair<>(pattern, DyeColor.WHITE));
-        }
+        list.add(new Pair<>(pattern, DyeColor.WHITE));
 
 
         PoseStack transform = new PoseStack();
