@@ -27,13 +27,6 @@ body:
       options:
         - label: I checked existing issues and made sure my issue is not already reported.
           required: true
-  - type: dropdown
-    id: mc_version
-    attributes:
-      label: Minecraft Version
-      options: ["1.20", "1.21"]
-    validations:
-      required: true
   - type: input
     attributes:
       label: SlimColonies Version
