@@ -29,7 +29,6 @@ import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
 import no.monopixel.slimcolonies.api.colony.permissions.Action;
 import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrder;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
@@ -39,7 +38,6 @@ import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingMiner;
-import no.monopixel.slimcolonies.core.colony.interactionhandling.SimpleNotificationInteraction;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingProgressStage;
 import no.monopixel.slimcolonies.core.network.messages.server.PlayerAssistantBuildRequestMessage;
 import no.monopixel.slimcolonies.core.placementhandlers.SolidPlaceholderPlacementHandler;
@@ -55,11 +53,6 @@ import java.util.List;
 @SuppressWarnings("removal")
 public class ItemAssistantHammer extends AbstractItemMinecolonies
 {
-    /**
-     * The compound tag for the last pos the tool has been clicked.
-     */
-    private static final String TAG_LAST_POS = "lastPos";
-
     private int reach = 1;
 
     /**
@@ -344,18 +337,6 @@ public class ItemAssistantHammer extends AbstractItemMinecolonies
                             for (final ItemStack stack : requiredItem)
                             {
                                 building.getModule(BuildingModules.BUILDING_RESOURCES).reduceNeededResource(stack, 1);
-                            }
-
-                            if (ColonyConstants.rand.nextInt(20) == 0)
-                            {
-                                final var buildingBuilder = colony.getBuildingManager().getBuilding(workOrder.getClaimedBy());
-                                if (buildingBuilder != null)
-                                {
-                                    buildingBuilder.getModule(BuildingModules.BUILDER_WORK).getAssignedCitizen()
-                                        .forEach(citizen -> citizen.triggerInteraction(new SimpleNotificationInteraction(Component.translatable(
-                                            "item.slimcolonies.assistanthammer.happybuilder"),
-                                            ChatPriority.CHITCHAT)));
-                                }
                             }
                         }
 

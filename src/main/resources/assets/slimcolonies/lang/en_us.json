@@ -2220,7 +2220,6 @@
   "item.slimcolonies.assistanthammer_iron": "Iron Builder's Assistant Hammer",
   "item.slimcolonies.assistanthammer_diamond": "Diamond Builder's Assistant Hammer",
   "item.slimcolonies.assistanthammer.reach": "Reach: %d",
-  "item.slimcolonies.assistanthammer.happybuilder": "Thanks a lot for helping me building!",
   "item.slimcolonies.assistanthammer.noitems": "No fitting items in your inventory",
   "item.slimcolonies.assistanthammer.notloaded": "Structure not loaded yet, loading...",
   "item.slimcolonies.assistanthammer.notcleared": "You need to wait until the builder finishes clearing the area",
