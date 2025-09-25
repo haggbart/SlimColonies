@@ -31,7 +31,7 @@ public class WindowSchematicAnalyzer extends AbstractWindowSkeleton
     /**
      * Link to the xml file of the window.
      */
-    private static final String ID = "minecolonies:gui/analyzer/windowanalyze.xml";
+    private static final String ID = "slimcolonies:gui/analyzer/windowanalyze.xml";
 
     /**
      * Xml ID's for analyzer/analyzedisplay.xml

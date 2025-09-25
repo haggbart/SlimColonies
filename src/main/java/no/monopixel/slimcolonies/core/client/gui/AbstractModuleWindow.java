@@ -2,14 +2,14 @@ package no.monopixel.slimcolonies.core.client.gui;
 
 import com.ldtteam.blockui.PaneBuilders;
 import com.ldtteam.blockui.controls.ButtonImage;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModuleView;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.IModuleWindow;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModuleView;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.IModuleWindow;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
 
 import java.util.Locale;
 import java.util.Random;
@@ -27,10 +27,10 @@ public abstract class AbstractModuleWindow extends AbstractWindowSkeleton implem
     protected final IBuildingView buildingView;
 
     /**
-     * Constructor for the window of the the filterable lists.
+     * Constructor for the window of the filterable lists.
      *
-     * @param building   {@link AbstractBuildingView}.
-     * @param res        the resource String.
+     * @param building {@link AbstractBuildingView}.
+     * @param res      the resource String.
      */
     public AbstractModuleWindow(final IBuildingView building, final String res)
     {
@@ -50,17 +50,17 @@ public abstract class AbstractModuleWindow extends AbstractWindowSkeleton implem
             }
         }
 
-            //todo We have to move this to 0 as soon as we're finished with modularization and remove the switch views in favor of a sidenav xml.
+        //todo We have to move this to 0 as soon as we're finished with modularization and remove the switch views in favor of a sidenav xml.
         if (building.getAllModuleViews().size() > 0 && anyVisible)
         {
             final ButtonImage image = new ButtonImage();
-            image.setImage(new ResourceLocation("minecolonies:textures/gui/modules/tab_side" + (random.nextInt(3) + 1) + ".png"), false);
+            image.setImage(new ResourceLocation("slimcolonies:textures/gui/modules/tab_side" + (random.nextInt(3) + 1) + ".png"), false);
             image.setPosition(-20, 10 + offset);
             image.setSize(32, 26);
             image.setHandler(button -> building.getWindow().open());
 
             final ButtonImage iconImage = new ButtonImage();
-            iconImage.setImage(new ResourceLocation("minecolonies:textures/gui/modules/main.png"), false);
+            iconImage.setImage(new ResourceLocation("slimcolonies:textures/gui/modules/main.png"), false);
             iconImage.setID("main");
             iconImage.setPosition(-15, 13 + offset);
             iconImage.setSize(20, 20);
@@ -76,10 +76,13 @@ public abstract class AbstractModuleWindow extends AbstractWindowSkeleton implem
 
         for (IBuildingModuleView view : building.getAllModuleViews())
         {
-            if (!view.isPageVisible()) continue;
+            if (!view.isPageVisible())
+            {
+                continue;
+            }
 
             final ButtonImage image = new ButtonImage();
-            image.setImage(new ResourceLocation("minecolonies:textures/gui/modules/tab_side" + (random.nextInt(3) + 1) + ".png"), false);
+            image.setImage(new ResourceLocation("slimcolonies:textures/gui/modules/tab_side" + (random.nextInt(3) + 1) + ".png"), false);
             image.setPosition(-20, 10 + offset);
             image.setSize(32, 26);
             image.setHandler(button -> {

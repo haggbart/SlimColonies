@@ -80,7 +80,7 @@ public final class ModBlocks
     public static AbstractBlockMinecoloniesConstructionTape<? extends AbstractBlockMinecoloniesConstructionTape<?>> blockConstructionTape;
     public static AbstractBlockSlimColoniesRack<? extends AbstractBlockSlimColoniesRack<?>>                         blockRack;
     public static AbstractBlockSlimColoniesGrave<? extends AbstractBlockSlimColoniesGrave<?>>                       blockGrave;
-    public static AbstractBlockMinecoloniesNamedGrave<? extends AbstractBlockMinecoloniesNamedGrave<?>>             blockNamedGrave;
+    public static AbstractBlockSlimColoniesNamedGrave<? extends AbstractBlockSlimColoniesNamedGrave<?>>             blockNamedGrave;
     public static AbstractBlockMinecolonies<? extends AbstractBlockMinecolonies<?>>                                 blockWayPoint;
     public static AbstractBlockBarrel<? extends AbstractBlockBarrel<?>>                                             blockBarrel;
     public static AbstractBlockMinecoloniesDirectional<? extends AbstractBlockMinecoloniesDirectional<?>>           blockDecorationPlaceholder;

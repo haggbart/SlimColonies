@@ -1,52 +1,51 @@
 package no.monopixel.slimcolonies.core.blocks;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesNamedGrave;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityNamedGrave;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesNamedGrave;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityNamedGrave;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-
-public class BlockMinecoloniesNamedGrave extends AbstractBlockMinecoloniesNamedGrave<BlockMinecoloniesNamedGrave>
+public class BlockSlimColoniesNamedGrave extends AbstractBlockSlimColoniesNamedGrave<BlockSlimColoniesNamedGrave>
 {
     /**
      * The hardness this block has.
      */
-    private static final float  BLOCK_HARDNESS = 5F;
+    private static final float BLOCK_HARDNESS = 5F;
 
     /**
      * This blocks name.
      */
-    private static final String BLOCK_NAME     = "blockminecoloniesnamedgrave";
+    private static final String BLOCK_NAME = "blockslimcoloniesnamedgrave";
 
     /**
      * The resistance this block has.
      */
-    private static final float  RESISTANCE     = 1F;
+    private static final float RESISTANCE = 1F;
 
-    public BlockMinecoloniesNamedGrave()
+    public BlockSlimColoniesNamedGrave()
     {
         super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(BLOCK_HARDNESS, RESISTANCE).noLootTable());
         final BlockState bs = this.defaultBlockState();
@@ -131,7 +130,7 @@ public class BlockMinecoloniesNamedGrave extends AbstractBlockMinecoloniesNamedG
     @Deprecated
     public BlockState rotate(@NotNull final BlockState state, final Rotation rot)
     {
-        return state.setValue(AbstractBlockMinecoloniesNamedGrave.FACING, rot.rotate(state.getValue(AbstractBlockMinecoloniesNamedGrave.FACING)));
+        return state.setValue(AbstractBlockSlimColoniesNamedGrave.FACING, rot.rotate(state.getValue(AbstractBlockSlimColoniesNamedGrave.FACING)));
     }
 
     /**
@@ -142,13 +141,13 @@ public class BlockMinecoloniesNamedGrave extends AbstractBlockMinecoloniesNamedG
     @Deprecated
     public BlockState mirror(@NotNull final BlockState state, final Mirror mirrorIn)
     {
-        return state.rotate(mirrorIn.getRotation(state.getValue(AbstractBlockMinecoloniesNamedGrave.FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(AbstractBlockSlimColoniesNamedGrave.FACING)));
     }
 
     @Override
     public boolean canSurvive(final BlockState state, final LevelReader worldIn, final BlockPos pos)
     {
         return !worldIn.isEmptyBlock(pos.below())
-                 && worldIn.getBlockState(pos.below()).getBlock() != ModBlocks.blockNamedGrave;
+            && worldIn.getBlockState(pos.below()).getBlock() != ModBlocks.blockNamedGrave;
     }
 }
