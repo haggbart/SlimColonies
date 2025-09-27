@@ -53,49 +53,32 @@ public class ModEquipmentTypes
 
         pickaxe = register("pickaxe",
           builder -> builder.setDisplayName(Component.translatable(ToolTranslationConstants.TOOL_TYPE_PICKAXE))
-                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_PICKAXE_ACTIONS) || Compatibility.isTinkersTool(
-                         itemStack,
-                         equipmentType))
+                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_PICKAXE_ACTIONS))
                        .setEquipmentLevel(ModEquipmentTypes::vanillaToolLevel)
                   .build());
 
         shovel = register("shovel",
           builder -> builder.setDisplayName(Component.translatable(ToolTranslationConstants.TOOL_TYPE_SHOVEL))
-                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_SHOVEL_ACTIONS) || Compatibility.isTinkersTool(
-                         itemStack,
-                         equipmentType))
+                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_SHOVEL_ACTIONS))
                        .setEquipmentLevel(ModEquipmentTypes::vanillaToolLevel)
                   .build());
 
         axe = register("axe",
           builder -> builder.setDisplayName(Component.translatable(ToolTranslationConstants.TOOL_TYPE_AXE))
-                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_AXE_ACTIONS) || Compatibility.isTinkersTool(itemStack,
-                         equipmentType))
+                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_AXE_ACTIONS))
                        .setEquipmentLevel(ModEquipmentTypes::vanillaToolLevel)
                   .build());
 
         hoe = register("hoe",
           builder -> builder.setDisplayName(Component.translatable(ToolTranslationConstants.TOOL_TYPE_HOE))
-                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_HOE_ACTIONS) || Compatibility.isTinkersTool(itemStack,
-                         equipmentType))
+                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_HOE_ACTIONS))
                        .setEquipmentLevel(ModEquipmentTypes::vanillaToolLevel)
                   .build());
 
         sword = register("sword",
           builder -> builder.setDisplayName(Component.translatable(ToolTranslationConstants.TOOL_TYPE_SWORD))
-                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_SWORD_ACTIONS) || Compatibility.isTinkersWeapon(
-                         itemStack))
-                       .setEquipmentLevel((itemStack, equipmentType) -> {
-                      if (Compatibility.isTinkersWeapon(itemStack))
-                      {
-                          return Compatibility.getToolLevel(itemStack);
-                      }
-                      else if (itemStack.getItem() instanceof final TieredItem tieredItem)
-                      {
-                          return tieredItem.getTier().getLevel();
-                      }
-                      return -1;
-                  })
+                       .setIsEquipment((itemStack, equipmentType) -> canPerformDefaultActions(itemStack, ToolActions.DEFAULT_SWORD_ACTIONS))
+                       .setEquipmentLevel(ModEquipmentTypes::vanillaToolLevel)
                   .build());
 
         bow = register("bow",
@@ -187,11 +170,7 @@ public class ModEquipmentTypes
      */
     public static int vanillaToolLevel(final ItemStack itemStack, final EquipmentTypeEntry equipmentType)
     {
-        if (Compatibility.isTinkersTool(itemStack, equipmentType))
-        {
-            return Compatibility.getToolLevel(itemStack);
-        }
-        else if (itemStack.getItem() instanceof final TieredItem tieredItem)  // most tools
+        if (itemStack.getItem() instanceof final TieredItem tieredItem)  // most tools
         {
             return tieredItem.getTier().getLevel();
         }

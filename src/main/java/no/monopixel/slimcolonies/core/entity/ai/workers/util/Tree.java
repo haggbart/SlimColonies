@@ -29,7 +29,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
@@ -107,10 +106,6 @@ public class Tree
      */
     private Property<?> variant;
 
-    /**
-     * If the Tree is a Slime Tree.
-     */
-    private boolean slimeTree = false;
 
     /**
      * If the tree is a Nether Tree
@@ -135,7 +130,7 @@ public class Tree
     public Tree(@NotNull final Level world, @NotNull final BlockPos log, @Nullable final IColony colony)
     {
         final BlockState block = BlockPosUtil.getBlockState(world, log);
-        if (block.is(ModTags.tree) || Compatibility.isSlimeBlock(block.getBlock()))
+        if (block.is(ModTags.tree))
         {
             isTree = true;
             woodBlocks = new LinkedList<>();
@@ -150,7 +145,6 @@ public class Tree
 
             stumpLocations = new ArrayList<>();
             woodBlocks.clear();
-            slimeTree = Compatibility.isSlimeBlock(block.getBlock());
             sapling = calcSapling(world);
             if (sapling.is(Tags.Items.MUSHROOMS) || sapling.is(fungi))
             {
@@ -327,7 +321,7 @@ public class Tree
         //Is the first block a log?
         final BlockState state = world.getBlockState(pos);
         final Block block = state.getBlock();
-        if (!state.is(ModTags.tree) && !Compatibility.isSlimeBlock(block))
+        if (!state.is(ModTags.tree))
         {
             return false;
         }
@@ -389,7 +383,7 @@ public class Tree
                 {
                     final BlockPos temp = log.offset(x, y, z);
                     final BlockState block = world.getBlockState(temp);
-                    if ((block.is(ModTags.tree) || Compatibility.isSlimeBlock(block.getBlock())) && !woodenBlocks.contains(temp))
+                    if (block.is(ModTags.tree) && !woodenBlocks.contains(temp))
                     {
                         return getBottomAndTopLog(world, temp, woodenBlocks, bottom, top);
                     }
@@ -514,7 +508,6 @@ public class Tree
 
         tree.topLog = BlockPosUtil.read(compound, TAG_TOP_LOG);
 
-        tree.slimeTree = compound.getBoolean(TAG_IS_SLIME_TREE);
 
         if (compound.contains(TAG_SAPLING))
         {
@@ -690,7 +683,7 @@ public class Tree
                 {
                     final BlockPos temp = log.offset(x, y, z);
                     final BlockState block = BlockPosUtil.getBlockState(world, temp);
-                    if ((block.is(ModTags.tree) || Compatibility.isSlimeBlock(block.getBlock())))
+                    if (block.is(ModTags.tree))
                     {
                         addAndSearch(world, temp, colony);
                     }
@@ -949,7 +942,6 @@ public class Tree
 
         BlockPosUtil.write(compound, TAG_TOP_LOG, topLog);
 
-        compound.putBoolean(TAG_IS_SLIME_TREE, slimeTree);
 
         CompoundTag saplingNBT = new CompoundTag();
         sapling.save(saplingNBT);

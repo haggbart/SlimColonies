@@ -94,9 +94,9 @@ public class BuildingBlacksmith extends AbstractBuilding
                                     ModEquipmentTypes.helmet.get().checkIsEquipment(output) ||
                                     ModEquipmentTypes.chestplate.get().checkIsEquipment(output) ||
                                     ModEquipmentTypes.leggings.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.boots.get().checkIsEquipment(output) ||
+                                    ModEquipmentTypes.boots.get().checkIsEquipment(output)
                                     // deliberately excluding FISHINGROD and FLINT_N_STEEL
-                                    Compatibility.isTinkersWeapon(output)))
+                                    ))
                     .equals(Optional.of(true)))
             {
                 // allow any other tool/armor even if it uses an excluded ingredient
