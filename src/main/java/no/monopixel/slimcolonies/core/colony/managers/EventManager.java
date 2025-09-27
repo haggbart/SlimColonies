@@ -2,17 +2,13 @@ package no.monopixel.slimcolonies.core.colony.managers;
 
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.colonyEvents.IColonyEntitySpawnEvent;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.IColonyEvent;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.IEventManager;
 import no.monopixel.slimcolonies.api.util.Log;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.ResourceLocation;
 
 import org.jetbrains.annotations.NotNull;
@@ -91,74 +87,6 @@ public class EventManager implements IEventManager
         return currentEventID - 1;
     }
 
-    /**
-     * Registers an entity with the given event.
-     *
-     * @param entity  the entity to register.
-     * @param eventID the event id to register it to.
-     */
-    @Override
-    public void registerEntity(@NotNull final Entity entity, final int eventID)
-    {
-        final IColonyEvent event = events.get(eventID);
-        if (!(event instanceof IColonyEntitySpawnEvent))
-        {
-            entity.remove(Entity.RemovalReason.DISCARDED);
-            return;
-        }
-        ((IColonyEntitySpawnEvent) event).registerEntity(entity);
-    }
-
-    /**
-     * Unregisters an entity with the given event
-     *
-     * @param entity  the entity.
-     * @param eventID the id of th eevent.
-     */
-    @Override
-    public void unregisterEntity(@NotNull final Entity entity, final int eventID)
-    {
-        final IColonyEvent event = events.get(eventID);
-        if (event instanceof IColonyEntitySpawnEvent)
-        {
-            ((IColonyEntitySpawnEvent) event).unregisterEntity(entity);
-        }
-    }
-
-    /**
-     * Triggers on entity death(killed by player/environment) of an entity
-     *
-     * @param entity  the entity.
-     * @param eventID the id of the event.
-     */
-    @Override
-    public void onEntityDeath(final LivingEntity entity, final int eventID)
-    {
-        final IColonyEvent event = events.get(eventID);
-        if (event instanceof IColonyEntitySpawnEvent)
-        {
-            ((IColonyEntitySpawnEvent) event).onEntityDeath(entity);
-        }
-    }
-
-    @Override
-    public void onTileEntityBreak(final int eventID, final BlockEntity te)
-    {
-        final IColonyEvent event = events.get(eventID);
-        if (event != null)
-        {
-            event.onTileEntityBreak(te);
-        }
-    }
-
-    @Override
-    public void onNightFall()
-    {
-        for (final IColonyEvent event : events.values())
-        {
-            event.onNightFall();
-        }
-    }
 
     /**
      * Gets an event by its ID

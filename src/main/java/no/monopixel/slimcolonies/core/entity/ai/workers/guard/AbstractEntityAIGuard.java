@@ -67,11 +67,6 @@ public abstract class AbstractEntityAIGuard<J extends AbstractJobGuard<J>, B ext
     private static final int MAX_PATROL_DERIVATION = 80;
 
     /**
-     * How far off patrols are alterated to match a raider attack point, sq dist
-     */
-    public static final int PATROL_DEVIATION_RAID_POINT = 40 * 40;
-
-    /**
      * Max derivation of current position when following..
      */
     private static final int MAX_FOLLOW_DERIVATION = 30;

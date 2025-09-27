@@ -600,7 +600,6 @@ public class Colony implements IColony
         if (isDay && !WorldUtil.isDayTime(world))
         {
             isDay = false;
-            eventManager.onNightFall();
 
             citizenManager.updateCitizenSleep(false);
             eventDescManager.computeNews();

@@ -45,7 +45,6 @@ import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.MO
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.MOB_KILLED;
 import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.STATS_MODULE;
 import static no.monopixel.slimcolonies.core.entity.ai.workers.guard.AbstractEntityAIFight.SPEED_LEVEL_BONUS;
-import static no.monopixel.slimcolonies.core.entity.ai.workers.guard.AbstractEntityAIGuard.PATROL_DEVIATION_RAID_POINT;
 
 /**
  * Knight combat AI
@@ -372,7 +371,7 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
     protected void onTargetChange(final LivingEntity newTarget)
     {
         super.onTargetChange(newTarget);
-        CombatUtils.notifyGuardsOfTarget(user, newTarget, PATROL_DEVIATION_RAID_POINT);
+        CombatUtils.notifyGuardsOfTarget(user, newTarget);
     }
 
     @Override

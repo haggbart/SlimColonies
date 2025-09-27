@@ -114,9 +114,6 @@ public class ClientRegistryHandler
     public static final ModelLayerLocation MALE_ALCHEMIST       = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "male_alchemist"), "male_alchemist");
     public static final ModelLayerLocation FEMALE_ALCHEMIST     = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "female_alchemist"), "female_alchemist");
 
-
-    // All raider model layer locations removed for SlimColonies
-
     public static final ModelLayerLocation SCARECROW = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "scarecrow"), "scarecrow");
 
     public static final ModelLayerLocation CITIZEN = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "citizen"), "citizen");

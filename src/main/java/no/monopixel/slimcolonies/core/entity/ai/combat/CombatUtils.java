@@ -77,7 +77,7 @@ public class CombatUtils
     /**
      * Actions on changing to a new target entity
      */
-    public static void notifyGuardsOfTarget(final AbstractEntityCitizen user, final LivingEntity target, final int callRange)
+    public static void notifyGuardsOfTarget(final AbstractEntityCitizen user, final LivingEntity target)
     {
         for (final ICitizenData citizen : user.getCitizenData().getWorkBuilding().getAllAssignedCitizen())
         {

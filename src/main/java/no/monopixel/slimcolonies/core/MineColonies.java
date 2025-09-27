@@ -12,7 +12,6 @@ import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
@@ -87,16 +86,12 @@ public class MineColonies
         ModResearchRequirementInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeSerializerInitializer.RECIPE_SERIALIZER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeSerializerInitializer.RECIPE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        // ModColonyEventTypeInitializer removed - no raid events in SlimColonies
         ModCraftingTypesInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModJobsInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeTypesInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
-        // RaiderMobUtils removed - no raiders in SlimColonies
         ModSoundEvents.SOUND_EVENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModInteractionsInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModResearchEffectInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
-        // Research no longer uses item costs - disabled cost type registration
-        // ModResearchCostInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModLootConditions.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         SupplyLoot.GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBannerPatterns.BANNER_PATTERNS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -105,7 +100,6 @@ public class MineColonies
         ModQuestInitializer.DEFERRED_REGISTER_TRIGGER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModQuestInitializer.DEFERRED_REGISTER_REWARD.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModQuestInitializer.DEFERRED_REGISTER_ANSWER_RESULT.register(FMLJavaModLoadingContext.get().getModEventBus());
-        // Happiness system removed
 
         ModCreativeTabs.TAB_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
 
@@ -150,8 +144,6 @@ public class MineColonies
         InteractionValidatorInitializer.init();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> MinecoloniesAPIProxy.getInstance().setApiInstance(new ClientMinecoloniesAPIImpl()));
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> MinecoloniesAPIProxy.getInstance().setApiInstance(new CommonMinecoloniesAPIImpl()));
-
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         SurvivalBlueprintHandlers.registerHandler(new SurvivalHandler());
         SurvivalBlueprintHandlers.registerHandler(new SuppliesHandler());

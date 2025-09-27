@@ -3,7 +3,6 @@ package no.monopixel.slimcolonies.api.colony.colonyEvents;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
 
@@ -67,16 +66,4 @@ public interface IColonyEvent extends INBTSerializable<CompoundTag>
      * Actions which are done on the finish/removal of the event.
      */
     default void onFinish() { }
-
-    /**
-     * Called by tileentities relevant to the event on invalidation.
-     *
-     * @param te the broken Tile entity.
-     */
-    default void onTileEntityBreak(final BlockEntity te) { }
-
-    /**
-     * Called on night fall, to execute special day-based logic.
-     */
-    default void onNightFall() { }
 }

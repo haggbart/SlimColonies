@@ -18,9 +18,6 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SpawnerBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -34,7 +31,6 @@ import net.minecraftforge.event.entity.living.LivingConversionEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -86,8 +82,6 @@ import java.util.*;
 import static net.minecraftforge.eventbus.api.EventPriority.HIGHEST;
 import static net.minecraftforge.eventbus.api.EventPriority.LOWEST;
 import static no.monopixel.slimcolonies.api.util.constant.ColonyManagerConstants.NO_COLONY_ID;
-import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_COLONY_ID;
-import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_EVENT_ID;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.translation.BaseGameTranslationConstants.BASE_BED_OCCUPIED;
 
@@ -440,37 +434,6 @@ public class EventHandler
     }
 
     /**
-     * Event called on player block breaks.
-     *
-     * @param event the event.
-     */
-    @SubscribeEvent
-    public static void onBlockBreak(@NotNull final BlockEvent.BreakEvent event)
-    {
-        if (event.getLevel().isClientSide() || !(event.getLevel() instanceof Level))
-        {
-            return;
-        }
-
-        final Level world = (Level) event.getLevel();
-
-        if (event.getState().getBlock() instanceof SpawnerBlock)
-        {
-            final BlockEntity spawner = event.getLevel().getBlockEntity(event.getPos());
-            if (spawner instanceof SpawnerBlockEntity spawnerBE && spawnerBE.getSpawner().nextSpawnData != null)
-            {
-                final IColony colony = IColonyManager.getInstance()
-                    .getColonyByDimension(spawnerBE.getSpawner().nextSpawnData.getEntityToSpawn().getInt(TAG_COLONY_ID),
-                        world.dimension());
-                if (colony != null)
-                {
-                    colony.getEventManager().onTileEntityBreak(spawnerBE.getSpawner().nextSpawnData.getEntityToSpawn().getInt(TAG_EVENT_ID), spawner);
-                }
-            }
-        }
-    }
-
-    /**
      * Event when a player right clicks a block, or right clicks with an item. Event gets cancelled when player has no permission. Event gets cancelled when the player has no
      * permission to place a hut, and tried it.
      *
@@ -546,7 +509,6 @@ public class EventHandler
                     }
                     event.setCanceled(true);
                 }
-                return;
             }
         }
     }

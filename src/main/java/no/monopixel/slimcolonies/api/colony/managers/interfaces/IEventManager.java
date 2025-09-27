@@ -30,43 +30,6 @@ public interface IEventManager
     int getAndTakeNextEventID();
 
     /**
-     * Registers an entity with the given event
-     *
-     * @param entity  entity to register
-     * @param eventID eventID to register on
-     */
-    void registerEntity(@NotNull Entity entity, int eventID);
-
-    /**
-     * Unregisters an entity with the given event
-     *
-     * @param entity  entity to unregister
-     * @param eventID eventID to unregister on
-     */
-    void unregisterEntity(@NotNull Entity entity, int eventID);
-
-    /**
-     * Lets the event know if a certain entity died
-     *
-     * @param entity  entity that died
-     * @param eventID eventID to forward the Death to
-     */
-    void onEntityDeath(LivingEntity entity, int eventID);
-
-    /**
-     * Allows events to react to nightfall, which is always calculated by the colony itself
-     */
-    void onNightFall();
-
-    /**
-     * Forwards a broken tileEntity to the given event, to react to TE breaks. The TE needs to call this on break
-     *
-     * @param eventID ID of the related event
-     * @param te      tileentity to use
-     */
-    void onTileEntityBreak(int eventID, BlockEntity te);
-
-    /**
      * Update function, which is called from the colony every 500 ticks. Used to update event states/remove them if needed. Forwarded to events aswell to allow them tick based
      * logic
      *
