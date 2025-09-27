@@ -2,7 +2,8 @@
 
 **Self-sufficient colonies that actually help you**
 
-SlimColonies is a fork of [MineColonies](https://github.com/ldtteam/minecolonies) where colonists take care of themselves. Build your colony, assign workers, and get back to playing Minecraft while they handle the rest. No
+SlimColonies is a fork of [MineColonies](https://github.com/ldtteam/minecolonies) where colonists take care of themselves. Build your colony, assign workers, and get back to
+playing Minecraft while they handle the rest. No
 babysitting, no events, no demands - just helpful NPCs that enhance your world.
 
 ## Philosophy
@@ -63,9 +64,11 @@ SlimColonies removes these pain points and makes sensible behaviors the default,
 
 - [x] Many other small changes
 
-### 📋 Planned Simplifications
+### 📋 Planned Changes
 
-- [ ] TODO
+- [ ] Add starvation mechanic - citizens should lose health and eventually die when saturation reaches 0
+- [ ] Fix broken name system
+- More...
 
 ## For Users
 
