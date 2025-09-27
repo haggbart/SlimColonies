@@ -3,7 +3,6 @@ package no.monopixel.slimcolonies.core.entity.ai.workers.production.agriculture;
 import com.google.common.reflect.TypeToken;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.StackList;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
@@ -370,11 +369,9 @@ public class EntityAIWorkBeekeeper extends AbstractEntityAIInteract<JobBeekeeper
         {
             CitizenItemUtils.damageItemInHand(worker, InteractionHand.MAIN_HAND, 1);
 
-            for (ItemStack stackItem : Compatibility.getCombsFromHive(hive, world, getHoneycombsPerHarvest()))
-            {
-                StatsUtil.trackStatByStack(building, ITEMS_COLLECTED, stackItem, stackItem.getCount());
-                InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(stackItem, worker.getItemHandlerCitizen());
-            }
+            final ItemStack honeycombStack = new ItemStack(Items.HONEYCOMB, getHoneycombsPerHarvest());
+            StatsUtil.trackStatByStack(building, ITEMS_COLLECTED, honeycombStack, honeycombStack.getCount());
+            InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(honeycombStack, worker.getItemHandlerCitizen());
             world.setBlockAndUpdate(hive, world.getBlockState(hive).setValue(BlockStateProperties.LEVEL_HONEY, 0));
             worker.getCitizenExperienceHandler().addExperience(EXP_PER_HARVEST);
             lastHarvestedBottle = false;
