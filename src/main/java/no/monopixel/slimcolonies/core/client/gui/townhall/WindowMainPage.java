@@ -11,6 +11,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.client.gui.WindowBannerPicker;
 import no.monopixel.slimcolonies.core.client.gui.map.WindowColonyMap;
