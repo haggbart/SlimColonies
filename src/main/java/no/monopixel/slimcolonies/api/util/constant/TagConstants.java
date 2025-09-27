@@ -45,10 +45,6 @@ public final class TagConstants
     public static final ResourceLocation MOB_ATTACK_BLACKLIST      = new ResourceLocation(MOD_ID, "mob_attack_blacklist");
     public static final ResourceLocation IGNORE_NBT                = new ResourceLocation(MOD_ID, "ignore_nbt");
     public static final ResourceLocation ALLOW_INTERACT            = new ResourceLocation(MOD_ID, "allowinteract");
-    public static final ResourceLocation COLD_BIOMES               = new ResourceLocation(MOD_ID, "coldbiomes");
-    public static final ResourceLocation TEMPERATE_BIOMES          = new ResourceLocation(MOD_ID, "temperatebiomes");
-    public static final ResourceLocation HUMID_BIOMES              = new ResourceLocation(MOD_ID, "humidbiomes");
-    public static final ResourceLocation DRY_BIOMES                = new ResourceLocation(MOD_ID, "drybiomes");
     public static final ResourceLocation POISONOUS_FOOD            = new ResourceLocation(MOD_ID, "poisonousfood");
     public static final ResourceLocation RAW_MEAT                  = new ResourceLocation(MOD_ID, "rawmeat");
 
