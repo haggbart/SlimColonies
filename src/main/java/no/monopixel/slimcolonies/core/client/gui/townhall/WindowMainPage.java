@@ -86,49 +86,21 @@ public class WindowMainPage extends AbstractWindowTownHall
         findPaneOfTypeByID(BUTTON_COLONY_SWITCH_STYLE, ButtonImage.class).setText(Component.literal(building.getColony().getStructurePack()));
         registerButton(BUTTON_BANNER_PICKER, this::openBannerPicker);
 
-        initDropDowns();
-
-        this.colorDropDownList.setSelectedIndex(building.getColony().getTeamColonyColor().ordinal());
-        this.initialColorIndex = colorDropDownList.getSelectedIndex();
-
-        this.textureDropDownList.setSelectedIndex(TEXTURE_PACKS.indexOf(building.getColony().getTextureStyleId()));
-        this.initialTextureIndex = textureDropDownList.getSelectedIndex();
-
-        this.nameStyleDropDownList.setSelectedIndex(building.getColony().getNameFileIds().indexOf(building.getColony().getNameStyle()));
-        this.initialNamePackIndex = nameStyleDropDownList.getSelectedIndex();
-
-        registerDropDownHandlers();
-    }
-
-    private void registerDropDownHandlers()
-    {
-        colorDropDownList.setHandler(this::onDropDownListChanged);
-        textureDropDownList.setHandler(this::toggleTexture);
-        nameStyleDropDownList.setHandler(this::toggleNameFile);
+        // Initialize dropdowns inline
+        setupDropDowns();
     }
 
     /**
-     * Switch the structure style pack.
+     * Setup all dropdowns with data providers, initial values, and handlers.
      */
-    private void switchPack()
-    {
-        new WindowSwitchPack(() -> {
-            building.getColony().setStructurePack(StructurePacks.selectedPack.getName());
-            Network.getNetwork().sendToServer(new ColonyStructureStyleMessage(building.getColony(), StructurePacks.selectedPack.getName()));
-            return new WindowMainPage((BuildingTownHall.View) this.building);
-        }).open();
-    }
-
-    /**
-     * Initialise the previous/next and drop down list for style.
-     */
-    private void initDropDowns()
+    private void setupDropDowns()
     {
         colorDropDownList = findPaneOfTypeByID(DROPDOWN_COLOR_ID, DropDownList.class);
-        colorDropDownList.setEnabled(enabled);
+        textureDropDownList = findPaneOfTypeByID(DROPDOWN_TEXT_ID, DropDownList.class);
+        nameStyleDropDownList = findPaneOfTypeByID(DROPDOWN_NAME_ID, DropDownList.class);
 
+        // Setup color dropdown
         final List<ChatFormatting> textColors = Arrays.stream(ChatFormatting.values()).filter(ChatFormatting::isColor).toList();
-
         colorDropDownList.setDataProvider(new DropDownList.DataProvider()
         {
             @Override
@@ -148,8 +120,10 @@ public class WindowMainPage extends AbstractWindowTownHall
                 return "";
             }
         });
+        colorDropDownList.setSelectedIndex(building.getColony().getTeamColonyColor().ordinal());
+        initialColorIndex = colorDropDownList.getSelectedIndex();
 
-        textureDropDownList = findPaneOfTypeByID(DROPDOWN_TEXT_ID, DropDownList.class);
+        // Setup texture dropdown
         textureDropDownList.setDataProvider(new DropDownList.DataProvider()
         {
             @Override
@@ -164,8 +138,10 @@ public class WindowMainPage extends AbstractWindowTownHall
                 return TEXTURE_PACKS.get(index);
             }
         });
+        textureDropDownList.setSelectedIndex(TEXTURE_PACKS.indexOf(building.getColony().getTextureStyleId()));
+        initialTextureIndex = textureDropDownList.getSelectedIndex();
 
-        nameStyleDropDownList = findPaneOfTypeByID(DROPDOWN_NAME_ID, DropDownList.class);
+        // Setup name style dropdown
         nameStyleDropDownList.setDataProvider(new DropDownList.DataProvider()
         {
             @Override
@@ -180,6 +156,24 @@ public class WindowMainPage extends AbstractWindowTownHall
                 return building.getColony().getNameFileIds().get(index);
             }
         });
+        nameStyleDropDownList.setSelectedIndex(building.getColony().getNameFileIds().indexOf(building.getColony().getNameStyle()));
+        initialNamePackIndex = nameStyleDropDownList.getSelectedIndex();
+
+        colorDropDownList.setHandler(this::onDropDownListChanged);
+        textureDropDownList.setHandler(this::toggleTexture);
+        nameStyleDropDownList.setHandler(this::toggleNameFile);
+    }
+
+    /**
+     * Switch the structure style pack.
+     */
+    private void switchPack()
+    {
+        new WindowSwitchPack(() -> {
+            building.getColony().setStructurePack(StructurePacks.selectedPack.getName());
+            Network.getNetwork().sendToServer(new ColonyStructureStyleMessage(building.getColony(), StructurePacks.selectedPack.getName()));
+            return new WindowMainPage((BuildingTownHall.View) this.building);
+        }).open();
     }
 
     /**

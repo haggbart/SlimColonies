@@ -46,7 +46,6 @@
             size="86 17"
             pos="337 105"
             source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
-            disabled="slimcolonies:textures/gui/builderhut/builder_button_medium_disabled.png"
             textcolor="black"/>
 
     <text label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picknamestyle)" pos="269 133" size="148 11" color="black"/>
@@ -56,11 +55,9 @@
               maxContentHeight="120"
               dropDownSize="86 120"
               source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
-              disabled="slimcolonies:textures/gui/builderhut/builder_button_medium_disabled.png"
               textcolor="black"
               scrollbarOffset="9 0"
-              dropfixx="30"
-              enabled="false">
+              dropfixx="30">
         <view size="100% 15">
             <button id="button" size="86 17" pos="0 0" source="slimcolonies:textures/gui/builderhut/builder_button_medium.png" textcolor="black"/>
         </view>
@@ -73,11 +70,9 @@
               maxContentHeight="75"
               dropDownSize="86 55"
               source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
-              disabled="slimcolonies:textures/gui/builderhut/builder_button_medium_disabled.png"
               textcolor="black"
               scrollbarOffset="9 0"
-              dropfixx="75"
-              enabled="false">
+              dropfixx="75">
         <view size="100% 15">
             <button id="button" size="86 17" pos="0 0" source="slimcolonies:textures/gui/builderhut/builder_button_medium.png" textcolor="black"/>
         </view>
