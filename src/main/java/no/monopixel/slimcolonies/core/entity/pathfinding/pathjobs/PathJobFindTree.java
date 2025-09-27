@@ -40,7 +40,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
      * Position we want to search towards
      */
     private final BlockPos searchTowards;
-    private final int      dyntreesize;
 
     /**
      * Box restriction area
@@ -56,7 +55,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
      * @param range       maximum path range.
      * @param treesToCut  the trees the lj is supposed to cut.
      * @param entity      the entity.
-     * @param dyntreesize the radius a dynamic tree must have
      * @param colony      the colony.
      */
     public PathJobFindTree(
@@ -65,7 +63,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
       final BlockPos home,
       final int range,
       final List<ItemStorage> treesToCut,
-      final int dyntreesize,
       final IColony colony,
       final Mob entity)
     {
@@ -73,7 +70,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
         this.excludedTrees = treesToCut;
         this.colony = colony;
         this.searchTowards = home;
-        this.dyntreesize = dyntreesize;
     }
 
     /**
@@ -84,7 +80,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
      * @param startRestriction start of the restricted area.
      * @param endRestriction   end of the restricted area.
      * @param excludedTrees    the trees the lj is not supposed to cut.
-     * @param dyntreesize      the radius a dynamic tree must have
      * @param entity           the entity.
      * @param colony           the colony.
      */
@@ -95,7 +90,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
       final BlockPos endRestriction,
       final BlockPos furthestRestriction,
       final List<ItemStorage> excludedTrees,
-      final int dyntreesize,
       final IColony colony,
       final Mob entity)
     {
@@ -117,7 +111,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
 
         this.excludedTrees = excludedTrees;
         this.colony = colony;
-        this.dyntreesize = dyntreesize;
 
         this.searchTowards = BlockPos.containing(restrictionBox.getCenter());
     }
@@ -170,7 +163,7 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
 
     private boolean isTree(final BlockPos pos)
     {
-        if (Tree.checkTree(world, pos, excludedTrees, dyntreesize) && Tree.checkIfInColony(pos, colony, world, restrictionBox != null))
+        if (Tree.checkTree(world, pos, excludedTrees) && Tree.checkIfInColony(pos, colony, world, restrictionBox != null))
         {
             getResult().treeLocation = pos.immutable();
             return true;
@@ -226,6 +219,6 @@ public class PathJobFindTree extends AbstractPathJob implements ISearchPathJob
 
     private boolean isLeafLike(@NotNull final BlockState block)
     {
-        return block.is(BlockTags.LEAVES) || Compatibility.isDynamicTrunkShell(block.getBlock()) || block.is(ModTags.hugeMushroomBlocks);
+        return block.is(BlockTags.LEAVES) || block.is(ModTags.hugeMushroomBlocks);
     }
 }

@@ -20,7 +20,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractCraftingB
 import no.monopixel.slimcolonies.core.colony.buildings.modules.ItemListModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.WorkerBuildingModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BoolSetting;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.DynamicTreesSetting;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.SettingKey;
 import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
 import net.minecraft.core.BlockPos;
@@ -56,7 +55,6 @@ public class BuildingLumberjack extends AbstractBuilding
     public static final ISettingKey<BoolSetting> REPLANT = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "replant"));
     public static final ISettingKey<BoolSetting> RESTRICT = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "restrict"));
     public static final ISettingKey<BoolSetting> DEFOLIATE = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "defoliate"));
-    public static final ISettingKey<DynamicTreesSetting> DYNAMIC_TREES_SIZE = new SettingKey<>(DynamicTreesSetting.class, new ResourceLocation(Constants.MOD_ID, "dynamictreeharvestsize"));
 
     /**
      * NBT tag for lj restriction start

@@ -704,7 +704,7 @@ public final class ItemStackUtils
             return false;
         }
 
-        return stack.is(ItemTags.SAPLINGS) || stack.is(Tags.Items.MUSHROOMS) || stack.is(fungi) || Compatibility.isDynamicTreeSapling(stack);
+        return stack.is(ItemTags.SAPLINGS) || stack.is(Tags.Items.MUSHROOMS) || stack.is(fungi);
     }
 
     /**

@@ -83,9 +83,3 @@ mandatory = false
 versionRange = "[${jmapVersion},)"
 ordering = "NONE"
 side = "BOTH"
-[[dependencies.slimcolonies]]
-modId = "dynamictrees"
-mandatory = false
-versionRange = "[${dynamicTreesVersion},)"
-ordering = "NONE"
-side = "BOTH"

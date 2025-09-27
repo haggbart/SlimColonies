@@ -152,7 +152,6 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
         final BlockPos endRestriction,
         final double speed,
         final List<ItemStorage> excludedTrees,
-        final int dyntreesize,
         final IColony colony);
 
     /**
@@ -163,7 +162,7 @@ public abstract class AbstractAdvancedPathNavigate extends GroundPathNavigation
      * @param excludedTrees the trees which should be cut.
      * @return the result of the search.
      */
-    public abstract TreePathResult walkToTree(final int range, final double speed, final List<ItemStorage> excludedTrees, final int dyntreesize, final IColony colony);
+    public abstract TreePathResult walkToTree(final int range, final double speed, final List<ItemStorage> excludedTrees, final IColony colony);
 
     /**
      * Get the pathing options
