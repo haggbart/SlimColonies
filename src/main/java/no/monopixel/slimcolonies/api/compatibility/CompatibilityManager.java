@@ -113,16 +113,6 @@ public class CompatibilityManager implements ICompatibilityManager
     private ImmutableSet<ItemStorage> beekeeperflowers = ImmutableSet.of();
 
     /**
-     * List of lucky oreBlocks which get dropped by the miner.
-     */
-    private final Map<Integer, List<ItemStorage>> luckyOres = new HashMap<>();
-
-    /**
-     * Random obj.
-     */
-    private static final Random random = new Random();
-
-    /**
      * List of all blocks.
      */
     private static ImmutableList<ItemStack> allItems = ImmutableList.of();
