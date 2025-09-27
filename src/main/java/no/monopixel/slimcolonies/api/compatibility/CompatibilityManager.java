@@ -31,7 +31,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
-import no.monopixel.slimcolonies.api.compatibility.resourcefulbees.ResourcefulBeesCompat;
 import no.monopixel.slimcolonies.api.compatibility.tinkers.SlimeTreeCheck;
 import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolHelper;
 import no.monopixel.slimcolonies.api.crafting.CompostRecipe;
@@ -755,10 +754,6 @@ public class CompatibilityManager implements ICompatibilityManager
      */
     private void discoverModCompat()
     {
-        if (ModList.get().isLoaded("resourcefulbees"))
-        {
-            Compatibility.beeHiveCompat = new ResourcefulBeesCompat();
-        }
         if (ModList.get().isLoaded("tconstruct"))
         {
             Compatibility.tinkersCompat = new TinkersToolHelper();

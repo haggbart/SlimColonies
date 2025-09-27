@@ -1,17 +1,12 @@
 package no.monopixel.slimcolonies.api.compatibility;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import no.monopixel.slimcolonies.api.compatibility.resourcefulbees.IBeehiveCompat;
 import no.monopixel.slimcolonies.api.compatibility.tinkers.SlimeTreeProxy;
 import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolProxy;
 import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * This class is to store the methods that call the methods to check for miscellaneous compatibility problems.
@@ -25,7 +20,6 @@ public final class Compatibility
     }
 
     public static IJeiProxy        jeiProxy           = new IJeiProxy() {};
-    public static IBeehiveCompat   beeHiveCompat      = new IBeehiveCompat() {};
     public static SlimeTreeProxy   tinkersSlimeCompat = new SlimeTreeProxy();
     public static TinkersToolProxy tinkersCompat      = new TinkersToolProxy();
 
@@ -71,16 +65,4 @@ public final class Compatibility
         return tinkersCompat.getToolLevel(stack);
     }
 
-    /**
-     * Get comps from a hive at the given position
-     *
-     * @param pos    TE pos
-     * @param world  world
-     * @param amount comb amount
-     * @return list of drops
-     */
-    public static List<ItemStack> getCombsFromHive(BlockPos pos, Level world, int amount)
-    {
-        return beeHiveCompat.getCombsFromHive(pos, world, amount);
-    }
 }
