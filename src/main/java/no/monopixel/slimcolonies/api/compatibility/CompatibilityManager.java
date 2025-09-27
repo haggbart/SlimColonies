@@ -31,7 +31,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
-import no.monopixel.slimcolonies.api.compatibility.dynamictrees.DynamicTreeCompat;
 import no.monopixel.slimcolonies.api.compatibility.resourcefulbees.ResourcefulBeesCompat;
 import no.monopixel.slimcolonies.api.compatibility.tinkers.SlimeTreeCheck;
 import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolHelper;
@@ -774,10 +773,6 @@ public class CompatibilityManager implements ICompatibilityManager
         {
             Compatibility.tinkersCompat = new TinkersToolHelper();
             Compatibility.tinkersSlimeCompat = new SlimeTreeCheck();
-        }
-        if (ModList.get().isLoaded("dynamictrees"))
-        {
-            Compatibility.dynamicTreesCompat = new DynamicTreeCompat();
         }
     }
 

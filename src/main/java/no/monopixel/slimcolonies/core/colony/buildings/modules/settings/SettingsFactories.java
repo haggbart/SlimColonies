@@ -525,29 +525,6 @@ public class SettingsFactories
         }
     }
 
-    public static class DynamicTreesSettingFactory extends AbstractIntSettingFactory<DynamicTreesSetting>
-    {
-
-        @NotNull
-        @Override
-        public DynamicTreesSetting getNewInstance(int def, int current)
-        {
-            return new DynamicTreesSetting(def, current);
-        }
-
-        @NotNull
-        @Override
-        public TypeToken<DynamicTreesSetting> getFactoryOutputType()
-        {
-            return TypeToken.of(DynamicTreesSetting.class);
-        }
-
-        @Override
-        public short getSerializationId()
-        {
-            return SerializationIdentifierConstants.DYNAMIC_TREES_SETTINGS_ID;
-        }
-    }
 
     /**
      * Specific factory for the beekeeper collection setting.

@@ -52,10 +52,6 @@ import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
  */
 public class Tree
 {
-    /**
-     * Radius propertyname for dynamic trees, used to check growth status
-     */
-    private static final String DYNAMICTREERADIUS = "radius";
 
     /**
      * Number of leaves necessary for a tree to be recognized.
@@ -117,10 +113,6 @@ public class Tree
      */
     private boolean slimeTree = false;
 
-    /**
-     * If the tree is a Dynamic Tree
-     */
-    private boolean dynamicTree = false;
 
     /**
      * If the tree is a Nether Tree
@@ -145,7 +137,7 @@ public class Tree
     public Tree(@NotNull final Level world, @NotNull final BlockPos log, @Nullable final IColony colony)
     {
         final BlockState block = BlockPosUtil.getBlockState(world, log);
-        if (block.is(ModTags.tree) || Compatibility.isSlimeBlock(block.getBlock()) || Compatibility.isDynamicBlock(block.getBlock()))
+        if (block.is(ModTags.tree) || Compatibility.isSlimeBlock(block.getBlock()))
         {
             isTree = true;
             woodBlocks = new LinkedList<>();
@@ -158,7 +150,6 @@ public class Tree
 
             checkTree(world, topLog);
 
-            dynamicTree = Compatibility.isDynamicBlock(block.getBlock());
             stumpLocations = new ArrayList<>();
             woodBlocks.clear();
             slimeTree = Compatibility.isSlimeBlock(block.getBlock());
@@ -234,31 +225,16 @@ public class Tree
         BlockState blockState = world.getBlockState(pos);
         final Block block = blockState.getBlock();
 
-        if (blockState.is(BlockTags.LEAVES) || Compatibility.isDynamicLeaf(block) || blockState.is(ModTags.hugeMushroomBlocks))
+        if (blockState.is(BlockTags.LEAVES) || blockState.is(ModTags.hugeMushroomBlocks))
         {
             NonNullList<ItemStack> list = NonNullList.create();
 
             if (checkFitsBase)
             {
                 // Check if the tree's base log variant fits the leaf
-                if (Compatibility.isDynamicLeaf(block))
-                {
-                    if (!isDynamicTree() || !Compatibility.isDynamicFamilyFitting(pos, location, world))
-                    {
-                        return null;
-                    }
-                }
             }
 
-            // Dynamic trees is using a custom Drops function
-            if (Compatibility.isDynamicLeaf(block))
-            {
-                list = Compatibility.getDropsForDynamicLeaf(world, pos, blockState, A_LOT_OF_LUCK, block);
-            }
-            else
-            {
-                list.addAll(getSaplingsForLeaf((ServerLevel) world, pos));
-            }
+            list.addAll(getSaplingsForLeaf((ServerLevel) world, pos));
 
             for (final ItemStack stack : list)
             {
@@ -346,26 +322,18 @@ public class Tree
      * @param world         the world.
      * @param pos           The coordinates.
      * @param treesToNotCut the trees the lumberjack is not supposed to cut.
-     * @param dyntreesize   the radius a dynamic tree must have in order to get cut down.
      * @return true if the log is part of a tree.
      */
-    public static boolean checkTree(@NotNull final LevelReader world, final BlockPos pos, final List<ItemStorage> treesToNotCut, final int dyntreesize)
+    public static boolean checkTree(@NotNull final LevelReader world, final BlockPos pos, final List<ItemStorage> treesToNotCut)
     {
         //Is the first block a log?
         final BlockState state = world.getBlockState(pos);
         final Block block = state.getBlock();
-        if (!state.is(ModTags.tree) && !Compatibility.isSlimeBlock(block) && !Compatibility.isDynamicBlock(block))
+        if (!state.is(ModTags.tree) && !Compatibility.isSlimeBlock(block))
         {
             return false;
         }
 
-        // Only harvest nearly fully grown dynamic trees(8 max)
-        if (Compatibility.isDynamicBlock(block)
-              && BlockStateUtils.getPropertyByNameFromState(state, DYNAMICTREERADIUS) != null
-              && ((Integer) state.getValue(BlockStateUtils.getPropertyByNameFromState(state, DYNAMICTREERADIUS)) < dyntreesize))
-        {
-            return false;
-        }
 
         final Tuple<BlockPos, BlockPos> baseAndTOp = getBottomAndTopLog(world, pos, new LinkedList<>(), null, null);
 
@@ -423,7 +391,7 @@ public class Tree
                 {
                     final BlockPos temp = log.offset(x, y, z);
                     final BlockState block = world.getBlockState(temp);
-                    if ((block.is(ModTags.tree) || Compatibility.isSlimeBlock(block.getBlock()) || Compatibility.isDynamicBlock(block.getBlock())) && !woodenBlocks.contains(temp))
+                    if ((block.is(ModTags.tree) || Compatibility.isSlimeBlock(block.getBlock())) && !woodenBlocks.contains(temp))
                     {
                         return getBottomAndTopLog(world, temp, woodenBlocks, bottom, top);
                     }
@@ -448,8 +416,8 @@ public class Tree
         int leafCount = 0;
         int dynamicBonusY = 0;
         final BlockState blockState = world.getBlockState(pos);
-        // Additional leaf search range for dynamic trees, as we start from the baselog
-        if (blockState.is(ModTags.mangroveTree) || Compatibility.isDynamicBlock(blockState.getBlock()))
+        // Additional leaf search range for mangrove trees
+        if (blockState.is(ModTags.mangroveTree))
         {
             dynamicBonusY = 8;
         }
@@ -471,8 +439,7 @@ public class Tree
                         checkedLeaves = true;
 
                         leafCount++;
-                        // Dynamic tree growth is checked by radius instead of leafcount
-                        if (leafCount >= NUMBER_OF_LEAVES || (Compatibility.isDynamicLeaf(block.getBlock())))
+                        if (leafCount >= NUMBER_OF_LEAVES)
                         {
                             return true;
                         }
@@ -550,7 +517,6 @@ public class Tree
         tree.topLog = BlockPosUtil.read(compound, TAG_TOP_LOG);
 
         tree.slimeTree = compound.getBoolean(TAG_IS_SLIME_TREE);
-        tree.dynamicTree = compound.getBoolean(TAG_DYNAMIC_TREE);
 
         if (compound.contains(TAG_SAPLING))
         {
@@ -717,8 +683,8 @@ public class Tree
 
         woodBlocks.add(log);
 
-        // Only add the base to a dynamic tree
-        if (Compatibility.isDynamicBlock(BlockPosUtil.getBlock(world, log)))
+        // Skip adding base log for certain tree types
+        if (false) // Dynamic tree check removed
         {
             return;
         }
@@ -897,13 +863,6 @@ public class Tree
         return slimeTree;
     }
 
-    /**
-     * @return if tree is dynamic tree
-     */
-    public boolean isDynamicTree()
-    {
-        return dynamicTree;
-    }
 
     /**
      * @return if tree is nether tree
@@ -1008,7 +967,6 @@ public class Tree
         BlockPosUtil.write(compound, TAG_TOP_LOG, topLog);
 
         compound.putBoolean(TAG_IS_SLIME_TREE, slimeTree);
-        compound.putBoolean(TAG_DYNAMIC_TREE, dynamicTree);
 
         CompoundTag saplingNBT = new CompoundTag();
         sapling.save(saplingNBT);
@@ -1051,8 +1009,8 @@ public class Tree
             return false;
         }
 
-        // Dynamic trees are never part of buildings
-        if (allowInsideBuilding || Compatibility.isDynamicBlock(world.getBlockState(pos).getBlock()))
+        // Check if tree is allowed inside buildings
+        if (allowInsideBuilding)
         {
             return true;
         }

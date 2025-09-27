@@ -1283,8 +1283,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             return true;
         }
 
-        return damageSource.typeHolder().is(DamageTypes.IN_WALL) && citizenSleepHandler.isAsleep()
-            || Compatibility.isDynTreePresent() && damageSource.typeHolder().is(Compatibility.getDynamicTreeDamage()) || this.isInvulnerable();
+        return damageSource.typeHolder().is(DamageTypes.IN_WALL) && citizenSleepHandler.isAsleep() || this.isInvulnerable();
     }
 
     /**

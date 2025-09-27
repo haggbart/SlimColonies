@@ -416,7 +416,6 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
                         endPos,
                         1.0D,
                         building.getModuleMatching(ItemListModule.class, m -> m.getId().equals(SAPLINGS_LIST)).getList(),
-                        building.getSetting(BuildingLumberjack.DYNAMIC_TREES_SIZE).getValue(),
                         worker.getCitizenColonyHandler().getColonyOrRegister());
             }
             else
@@ -425,7 +424,6 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
                     .walkToTree(SEARCH_RANGE + searchIncrement,
                         1.0D,
                         building.getModuleMatching(ItemListModule.class, m -> m.getId().equals(SAPLINGS_LIST)).getList(),
-                        building.getSetting(BuildingLumberjack.DYNAMIC_TREES_SIZE).getValue(),
                         worker.getCitizenColonyHandler().getColonyOrRegister());
             }
             return getState();
@@ -571,31 +569,9 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
             //take first log from queue
             final BlockPos log = job.getTree().peekNextLog();
 
-            if (job.getTree().isDynamicTree())
+            if (!mineBlock(log, workFrom))
             {
-                // Dynamic Trees handles drops/tool dmg upon tree break, so those are set to false here
-                if (!mineBlock(log, workFrom, false, false, Compatibility.getDynamicTreeBreakAction(
-                    world,
-                    log,
-                    worker.getItemInHand(InteractionHand.MAIN_HAND),
-                    worker.blockPosition())))
-                {
-                    return getState();
-                }
-                // Successfully mined Dynamic tree, count as 6 actions done(1+5)
-                for (int i = 0; i < 6; i++)
-                {
-                    this.incrementActionsDone();
-                }
-                // Wait 5 sec for falling trees(dyn tree feature)/drops
-                setDelay(100);
-            }
-            else
-            {
-                if (!mineBlock(log, workFrom))
-                {
-                    return getState();
-                }
+                return getState();
             }
             job.getTree().pollNextLog();
             worker.decreaseSaturationForContinuousAction();
@@ -846,29 +822,16 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
             final ItemStack stack = getInventory().getStackInSlot(saplingSlot);
             CitizenItemUtils.setHeldItem(worker, InteractionHand.MAIN_HAND, saplingSlot);
 
-            if (job.getTree().isDynamicTree() && Compatibility.isDynamicTreeSapling(stack))
-            {
-                Compatibility.plantDynamicSapling(world, location, stack);
-                getInventory().extractItem(saplingSlot, 1, false);
-                worker.swing(worker.getUsedItemHand());
-                timeWaited = 0;
-                incrementActionsDoneAndDecSaturation();
-                setDelay(TIMEOUT_DELAY);
-                return true;
-            }
-            else
-            {
-                final Block block = ((BlockItem) stack.getItem()).getBlock();
-                placeSaplings(saplingSlot, stack, block);
+            final Block block = ((BlockItem) stack.getItem()).getBlock();
+            placeSaplings(saplingSlot, stack, block);
 
-                final SoundType soundType = block.getSoundType(world.getBlockState(location), world, location, worker);
-                world.playSound(null,
-                    this.worker.blockPosition(),
-                    soundType.getPlaceSound(),
-                    SoundSource.BLOCKS,
-                    (soundType.getVolume() + 1.0F) * 0.5F,
-                    soundType.getPitch() * 0.8F);
-            }
+            final SoundType soundType = block.getSoundType(world.getBlockState(location), world, location, worker);
+            world.playSound(null,
+                this.worker.blockPosition(),
+                soundType.getPlaceSound(),
+                SoundSource.BLOCKS,
+                (soundType.getVolume() + 1.0F) * 0.5F,
+                soundType.getPitch() * 0.8F);
 
             worker.swing(worker.getUsedItemHand());
         }
