@@ -607,7 +607,7 @@ public class CitizenData implements ICitizenData
 
         if (female)
         {
-            firstName = getRandomElement(rand, nameFile.femalefirstNames);
+            firstName = getRandomElement(rand, nameFile.femaleFirstNames);
         }
         else
         {
@@ -721,7 +721,7 @@ public class CitizenData implements ICitizenData
 
         if (female)
         {
-            firstName = getRandomElement(rand, nameFile.femalefirstNames);
+            firstName = getRandomElement(rand, nameFile.femaleFirstNames);
         }
         else
         {

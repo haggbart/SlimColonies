@@ -46,44 +46,36 @@
             size="86 17"
             pos="337 105"
             source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
-            disabled="slimcolonies:textures/gui/builderhut/builder_button_medium_disabled.png"
             textcolor="black"/>
 
+    <text label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picknamestyle)" pos="269 133" size="148 11" color="black"/>
+    <dropdown id="nameStylePicker"
+              size="86 17"
+              pos="337 130"
+              maxContentHeight="120"
+              dropDownSize="86 120"
+              source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
+              textcolor="black"
+              scrollbarOffset="9 0"
+              dropfixx="30">
+        <view size="100% 15">
+            <button id="button" size="86 17" pos="0 0" source="slimcolonies:textures/gui/builderhut/builder_button_medium.png" textcolor="black"/>
+        </view>
+    </dropdown>
 
-
-    <text label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picktexturestyle)" pos="269 168" size="148 11" color="black"/>
+    <text label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picktexturestyle)" pos="269 158" size="148 11" color="black"/>
     <dropdown id="textureStylePicker"
               size="86 17"
-              pos="337 165"
+              pos="337 155"
               maxContentHeight="75"
               dropDownSize="86 55"
               source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
-              disabled="slimcolonies:textures/gui/builderhut/builder_button_medium_disabled.png"
               textcolor="black"
               scrollbarOffset="9 0"
-              dropfixx="75"
-              enabled="false">
+              dropfixx="75">
         <view size="100% 15">
             <button id="button" size="86 17" pos="0 0" source="slimcolonies:textures/gui/builderhut/builder_button_medium.png" textcolor="black"/>
         </view>
     </dropdown>
-    <button id="resettexture" size="86 17" pos="337 165" source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
-            visible="false" textcolor="black" text="$(no.monopixel.slimcolonies.gui.reset)"/>
 
-    <text label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picknamestyle)" pos="269 193" size="148 11" color="black"/>
-    <dropdown id="nameStylePicker"
-              size="86 17"
-              pos="337 190"
-              maxContentHeight="30"
-              dropDownSize="86 30"
-              source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"
-              disabled="slimcolonies:textures/gui/builderhut/builder_button_medium_disabled.png"
-              textcolor="black"
-              scrollbarOffset="9 0"
-              dropfixx="30"
-              enabled="false">
-        <view size="100% 15">
-            <button id="button" size="86 17" pos="0 0" source="slimcolonies:textures/gui/builderhut/builder_button_medium.png" textcolor="black"/>
-        </view>
-    </dropdown>
 </window>

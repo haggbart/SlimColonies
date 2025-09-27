@@ -36,7 +36,7 @@ public class CitizenNameFile
     /**
      * List of female first names.
      */
-    public List<String> femalefirstNames;
+    public List<String> femaleFirstNames;
 
     /**
      * List of surnames.
@@ -61,7 +61,7 @@ public class CitizenNameFile
         this.parts = parts;
         this.order = order;
         this.maleFirstNames = maleFirstNames;
-        this.femalefirstNames = femaleFirstNames;
+        this.femaleFirstNames = femaleFirstNames;
         this.surnames = surnames;
     }
 }
