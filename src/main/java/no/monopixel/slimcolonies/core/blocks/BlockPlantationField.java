@@ -202,7 +202,6 @@ public class BlockPlantationField extends AbstractBlockMinecoloniesHorizontal<Bl
                     {
                         plantationField.setWorkingPositions(validPositions);
                         colony.getBuildingManager().addBuildingExtension(plantationField);
-                        colony.getBuildingManager().addLeisureSite(pos);
                     }
                     else
                     {
@@ -248,7 +247,6 @@ public class BlockPlantationField extends AbstractBlockMinecoloniesHorizontal<Bl
                     for (BuildingExtensionEntry plantationFieldType : plantationField.getPlantationFieldTypes())
                     {
                         colony.getBuildingManager().removeBuildingExtension(field -> field.getBuildingExtensionType().equals(plantationFieldType) && field.getPosition().equals(pos));
-                        colony.getBuildingManager().removeLeisureSite(pos);
                     }
                 }
             }

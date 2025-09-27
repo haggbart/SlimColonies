@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import static com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE.TAG_BLUEPRINTDATA;
 import static com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE.TAG_SCHEMATIC_NAME;
 import static no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockMinecoloniesConstructionTape.WATERLOGGED;
-import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.LEISURE;
 
 /**
  * Creates a decoration controller block.
@@ -189,15 +188,6 @@ public class BlockDecorationController extends AbstractBlockMinecoloniesDirectio
             return;
         }
 
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-        if (tileEntity instanceof TileEntityDecorationController && ((TileEntityDecorationController) tileEntity).getPositionedTags().getOrDefault(BlockPos.ZERO, new ArrayList<>()).contains(LEISURE))
-        {
-            @Nullable final IColony colony = IColonyManager.getInstance().getColonyByPosFromWorld(worldIn, pos);
-            if (colony != null)
-            {
-                colony.getBuildingManager().addLeisureSite(pos);
-            }
-        }
     }
 
     @Override
