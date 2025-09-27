@@ -1,6 +1,5 @@
 package no.monopixel.slimcolonies.core.colony.managers;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -37,13 +36,14 @@ import no.monopixel.slimcolonies.core.colony.buildings.BuildingMysticalSite;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingExtensionsModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.*;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBarracks;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingWareHouse;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.ConstructionTapeHelper;
 import no.monopixel.slimcolonies.core.event.QuestObjectiveEventHandler;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingExtensionsUpdateMessage;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingViewMessage;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewRemoveBuildingMessage;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityDecorationController;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,7 +77,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
      * The warehouse building position. Initially null.
      */
     private final List<IMysticalSite> mysticalSites = new ArrayList<>();
-
 
     /**
      * The townhall of the colony.
@@ -231,7 +230,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
 
         // Building extensions
         compound.put(TAG_BUILDING_EXTENSIONS, buildingExtensions.values().stream().map(BuildingExtensionDataManager::extensionToCompound).collect(NBTUtils.toListNBT()));
-
     }
 
     @Override
@@ -315,8 +313,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         return null;
     }
 
-
-
     @Nullable
     @Override
     public IBuilding getFirstBuildingMatching(final Predicate<IBuilding> predicate)
@@ -330,7 +326,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         }
         return null;
     }
-
 
     @Nullable
     @Override

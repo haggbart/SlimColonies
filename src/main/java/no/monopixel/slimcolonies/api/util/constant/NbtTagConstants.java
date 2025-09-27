@@ -38,7 +38,6 @@ public final class NbtTagConstants
     public static final String TAG_COLONIES              = "colonies";
     public static final String TAG_COLONY_MANAGER        = "colonymanager";
     public static final String TAG_FIELDS                = "fields";
-    public static final String TAG_LEISURE               = "leisureSites";
     public static final String TAG_COMPATABILITY_MANAGER = "compatabilityManager";
     public static final String TAG_SAP_LEAF              = "tagSapLeaves";
     public static final String TAG_BLOCK                 = "block";

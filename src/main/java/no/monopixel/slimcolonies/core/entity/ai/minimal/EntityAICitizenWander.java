@@ -8,8 +8,6 @@ import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 
-import static no.monopixel.slimcolonies.api.util.constant.Constants.DEFAULT_SPEED;
-
 /**
  * Entity action to wander randomly around.
  */
@@ -42,18 +40,16 @@ public class EntityAICitizenWander implements IStateAI
 
     private IState decide()
     {
-        if (!canUse())
+        if (canUse())
         {
-            return CitizenAIState.IDLE;
+            EntityNavigationUtils.walkToRandomPos(citizen, 10, this.speed);
         }
-
-        EntityNavigationUtils.walkToRandomPos(citizen, 10, this.speed);
         return CitizenAIState.IDLE;
     }
 
     public boolean canUse()
     {
         return citizen.getNavigation().isDone() && !citizen.isBaby()
-                 && !(citizen.getCitizenData().getJob() instanceof AbstractJobGuard);
+            && !(citizen.getCitizenData().getJob() instanceof AbstractJobGuard);
     }
 }

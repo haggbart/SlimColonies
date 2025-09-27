@@ -41,7 +41,6 @@ import no.monopixel.slimcolonies.api.quests.IQuestDeliveryObjective;
 import no.monopixel.slimcolonies.api.quests.IQuestInstance;
 import no.monopixel.slimcolonies.api.quests.IQuestManager;
 import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.constant.Suppression;
 import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
@@ -333,7 +332,6 @@ public class CitizenData implements ICitizenData
      */
     private UUID textureUUID;
 
-
     /**
      * Create a CitizenData given an ID. Used as a super-constructor or during loading.
      *
@@ -459,7 +457,6 @@ public class CitizenData implements ICitizenData
         return id;
     }
 
-    
     @Override
     public boolean equals(final Object o)
     {
@@ -2062,5 +2059,4 @@ public class CitizenData implements ICitizenData
 
         return null;
     }
-
 }
