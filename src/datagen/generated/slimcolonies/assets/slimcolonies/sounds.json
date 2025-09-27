@@ -134690,16 +134690,5 @@
         "stream": false
       }
     ]
-  },
-  "tile.tavern.tavern_theme": {
-    "category": "music",
-    "sounds": [
-      {
-        "attenuation_distance": 23,
-        "comment": "Credits to Darren Curtis - Fireside Tales",
-        "name": "slimcolonies:tile/tavern/tavern_theme",
-        "stream": true
-      }
-    ]
   }
 }

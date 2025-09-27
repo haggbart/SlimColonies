@@ -100,12 +100,6 @@ public class DefaultSoundProvider implements DataProvider
 
         sounds.add("mob.citizen.snore", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of(Constants.MOD_ID + ":mob/citizen/snore")));
 
-        JsonObject tavernProperties = getDefaultProperties();
-        tavernProperties.addProperty("attenuation_distance", 23);
-        tavernProperties.addProperty("stream", true);
-        tavernProperties.addProperty("comment", "Credits to Darren Curtis - Fireside Tales");
-        sounds.add("tile.tavern.tavern_theme", createSoundJson("music", tavernProperties, ImmutableList.of(Constants.MOD_ID + ":tile/tavern/tavern_theme")));
-
         sounds.add("tile.sawmill.saw", createSoundJson("neutral", getDefaultProperties(), ImmutableList.of(Constants.MOD_ID + ":tile/sawmill/saw")));
 
 
@@ -132,16 +126,5 @@ public class DefaultSoundProvider implements DataProvider
         JsonObject properties = new JsonObject();
         properties.addProperty("stream", false);
         return properties;
-    }
-
-    private void addMusic(String category, boolean stream, String... ids)
-    {
-        for (String id : ids)
-        {
-            JsonObject obj = new JsonObject();
-            obj.addProperty("stream", stream);
-            obj.addProperty("relative", true);
-            sounds.add(id, createSoundJson(category, obj, ImmutableList.of(Constants.MOD_ID+":"+id.replace(".", "/"))));
-        }
     }
 }

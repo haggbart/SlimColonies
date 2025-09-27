@@ -220,7 +220,6 @@ public class NetworkChannel
         registerMessage(++idx, VanillaParticleMessage.class, VanillaParticleMessage::new);
         registerMessage(++idx, StopMusicMessage.class, StopMusicMessage::new);
         registerMessage(++idx, PlayAudioMessage.class, PlayAudioMessage::new);
-        registerMessage(++idx, PlayMusicAtPosMessage.class, PlayMusicAtPosMessage::new);
         registerMessage(++idx, ColonyVisitorViewDataMessage.class, ColonyVisitorViewDataMessage::new);
         registerMessage(++idx, SyncPathMessage.class, SyncPathMessage::new);
         registerMessage(++idx, SyncPathReachedMessage.class, SyncPathReachedMessage::new);
