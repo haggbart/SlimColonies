@@ -7,8 +7,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
@@ -18,17 +16,14 @@ import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.*;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.stat.IStat;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
-import no.monopixel.slimcolonies.api.sounds.TavernSounds;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.MathUtils;
 import no.monopixel.slimcolonies.api.util.StatsUtil;
-import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.client.gui.huts.WindowHutLiving;
 import no.monopixel.slimcolonies.core.colony.buildings.views.LivingBuildingView;
 import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.VisitorSpawnedEvent;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.RecruitmentInteraction;
 import no.monopixel.slimcolonies.core.datalistener.CustomVisitorListener;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.PlayMusicAtPosMessage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,11 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateConstants.MAX_TICKRATE;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.MAX_STORY;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TAG_COMPOUND;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_VISITORS;
-import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_WORK;
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.NEW_VISITORS;
 
@@ -54,16 +47,7 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
      */
     public static final String TAG_VISITOR_ID = "visitor";
 
-    /**
-     * Music interval
-     */
-    private static final int    TWENTY_MINUTES  = 20 * 60 * 20;
     private static final String TAG_NOVISITTIME = "novisit";
-
-    /**
-     * Cooldown for the music, to not play it too much/not overlap with itself
-     */
-    private int musicCooldown = 0;
 
     /**
      * List of additional citizens
@@ -74,11 +58,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
      * List of sitting positions for this building
      */
     private final List<BlockPos> sitPositions = new ArrayList<>();
-
-    /**
-     * List of work positions for this building
-     */
-    private final List<BlockPos> workPositions = new ArrayList<>();
 
     private boolean initTags = false;
 
@@ -99,48 +78,8 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
     }
 
     @Override
-    public void onPlayerEnterBuilding(final Player player)
-    {
-        if (musicCooldown <= 0 && building.getBuildingLevel() > 0 && !building.getColony().isDay())
-        {
-            int count = 0;
-            BlockPos avg = BlockPos.ZERO;
-            for (final Integer id : externalCitizens)
-            {
-                final IVisitorData data = building.getColony().getVisitorManager().getVisitor(id);
-                if (data != null)
-                {
-                    if (!data.getSittingPosition().equals(BlockPos.ZERO))
-                    {
-                        count++;
-                        avg = avg.offset(data.getSittingPosition());
-                    }
-                }
-            }
-
-            if (count < 2)
-            {
-                return;
-            }
-
-            avg = new BlockPos(avg.getX() / count, avg.getY() / count, avg.getZ() / count);
-            final PlayMusicAtPosMessage message = new PlayMusicAtPosMessage(TavernSounds.tavernTheme, avg, building.getColony().getWorld(), 0.7f, 1.0f);
-            for (final ServerPlayer curPlayer : building.getColony().getPackageManager().getCloseSubscribers())
-            {
-                Network.getNetwork().sendToPlayer(message, curPlayer);
-            }
-            musicCooldown = TWENTY_MINUTES;
-        }
-    }
-
-    @Override
     public void onColonyTick(@NotNull final IColony colony)
     {
-        if (musicCooldown > 0)
-        {
-            musicCooldown -= MAX_TICKRATE;
-        }
-
         externalCitizens.removeIf(id -> colony.getVisitorManager().getVisitor(id) == null);
 
         if (noVisitorTime > 0)
@@ -311,20 +250,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
     }
 
     /**
-     * Get a random work position
-     *
-     * @return a random work pos
-     */
-    public BlockPos getWorkPos()
-    {
-        if (!getWorkPositions().isEmpty())
-        {
-            return workPositions.get(building.getColony().getWorld().random.nextInt(workPositions.size()));
-        }
-        return null;
-    }
-
-    /**
      * Get the list of sitting positions
      *
      * @return sit pos list
@@ -333,17 +258,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
     {
         initTagPositions();
         return sitPositions;
-    }
-
-    /**
-     * Get the list of work positions
-     *
-     * @return work pos list
-     */
-    private List<BlockPos> getWorkPositions()
-    {
-        initTagPositions();
-        return workPositions;
     }
 
     /**
@@ -373,11 +287,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
                 if (entry.getValue().contains(TAG_SIT_OUT))
                 {
                     sitPositions.add(entry.getKey());
-                }
-
-                if (entry.getValue().contains(TAG_WORK))
-                {
-                    workPositions.add(entry.getKey());
                 }
             }
         }

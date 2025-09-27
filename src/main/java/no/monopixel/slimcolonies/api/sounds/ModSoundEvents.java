@@ -94,9 +94,6 @@ public final class ModSoundEvents
         }
         CITIZEN_SOUND_EVENTS.put("child", map);
 
-        SOUND_EVENTS.register(TavernSounds.tavernTheme.getLocation().getPath(), () -> TavernSounds.tavernTheme);
-
-
         SAW = ModSoundEvents.getSoundID("tile.sawmill.saw");
         SOUND_EVENTS.register(SAW.getLocation().getPath(), () -> SAW);
 
