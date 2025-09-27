@@ -26,7 +26,6 @@ import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.IDeliverable;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.StackList;
-import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolHelper;
 import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.entity.ai.JobStatus;
@@ -425,9 +424,9 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                                     {
                                         damageToDo += ((SwordItem) sword.getItem()).getDamage();
                                     }
-                                    else
+                                    else if (sword.getItem() instanceof TieredItem tieredItem)
                                     {
-                                        damageToDo += TinkersToolHelper.getDamage(sword);
+                                        damageToDo += tieredItem.getTier().getAttackDamageBonus();
                                     }
                                     damageToDo += EnchantmentHelper.getDamageBonus(sword, mob.getMobType()) / 2.5;
                                     if (doDamage)

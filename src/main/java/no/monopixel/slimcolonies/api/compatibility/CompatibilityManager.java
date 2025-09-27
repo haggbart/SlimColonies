@@ -26,13 +26,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
-import no.monopixel.slimcolonies.api.compatibility.tinkers.SlimeTreeCheck;
-import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolHelper;
 import no.monopixel.slimcolonies.api.crafting.CompostRecipe;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.crafting.registry.ModRecipeSerializer;
@@ -754,11 +751,7 @@ public class CompatibilityManager implements ICompatibilityManager
      */
     private void discoverModCompat()
     {
-        if (ModList.get().isLoaded("tconstruct"))
-        {
-            Compatibility.tinkersCompat = new TinkersToolHelper();
-            Compatibility.tinkersSlimeCompat = new SlimeTreeCheck();
-        }
+        // No mod compatibility currently supported
     }
 
     @Override

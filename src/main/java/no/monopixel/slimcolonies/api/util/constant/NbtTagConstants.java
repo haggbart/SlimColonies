@@ -444,7 +444,6 @@ public final class NbtTagConstants
     /**
      * Lumberjack/Tree Tags for NBT
      */
-    public static final String TAG_IS_SLIME_TREE    = "slimeTree";
     public static final String TAG_SAPLING          = "treesapling";
     public static final String TAG_LOGS             = "Logs";
     public static final String TAG_STUMPS           = "Stumps";

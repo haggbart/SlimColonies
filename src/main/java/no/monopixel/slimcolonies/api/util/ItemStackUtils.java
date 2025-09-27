@@ -399,7 +399,7 @@ public final class ItemStackUtils
      */
     public static boolean doesItemServeAsWeapon(@NotNull final ItemStack stack)
     {
-        return stack.getItem() instanceof SwordItem || stack.getItem() instanceof DiggerItem || Compatibility.isTinkersWeapon(stack);
+        return stack.getItem() instanceof SwordItem || stack.getItem() instanceof DiggerItem;
     }
 
     /**

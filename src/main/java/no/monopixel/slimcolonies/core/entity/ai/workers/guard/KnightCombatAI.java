@@ -1,6 +1,7 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.guard;
 
-import no.monopixel.slimcolonies.api.compatibility.tinkers.TinkersToolHelper;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.TieredItem;
 import no.monopixel.slimcolonies.api.entity.ai.combat.CombatAIStates;
 import no.monopixel.slimcolonies.api.entity.ai.combat.threat.IThreatTableEntity;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
@@ -262,9 +263,9 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
             {
                 addDmg += ((SwordItem) heldItem.getItem()).getDamage() + BASE_PHYSICAL_DAMAGE;
             }
-            else
+            else if (heldItem.getItem() instanceof TieredItem tieredItem)
             {
-                addDmg += TinkersToolHelper.getDamage(heldItem);
+                addDmg += tieredItem.getTier().getAttackDamageBonus() + BASE_PHYSICAL_DAMAGE;
             }
             addDmg += EnchantmentHelper.getDamageBonus(heldItem, target.getMobType()) / 2.5;
         }
