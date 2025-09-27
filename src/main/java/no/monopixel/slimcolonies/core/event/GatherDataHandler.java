@@ -41,7 +41,6 @@ public class GatherDataHandler
         generator.addProvider(event.includeServer(), new DefaultDamageTagsProvider(generator.getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DefaultResearchProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new DefaultRecipeProvider(generator.getPackOutput()));
-        generator.addProvider(event.includeServer(), new DefaultBiomeTagsProvider(generator.getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DefaultLuckyOreLootProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new DefaultRecruitmentItemsProvider(generator.getPackOutput()));
 

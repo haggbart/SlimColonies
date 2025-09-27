@@ -56,7 +56,6 @@ import no.monopixel.slimcolonies.core.placementhandlers.main.SuppliesHandler;
 import no.monopixel.slimcolonies.core.placementhandlers.main.SurvivalHandler;
 import no.monopixel.slimcolonies.core.recipes.FoodIngredient;
 import no.monopixel.slimcolonies.core.recipes.PlantIngredient;
-import no.monopixel.slimcolonies.core.structures.MineColoniesStructures;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -153,7 +152,6 @@ public class MineColonies
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> MinecoloniesAPIProxy.getInstance().setApiInstance(new CommonMinecoloniesAPIImpl()));
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        MineColoniesStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
 
         SurvivalBlueprintHandlers.registerHandler(new SurvivalHandler());
         SurvivalBlueprintHandlers.registerHandler(new SuppliesHandler());
