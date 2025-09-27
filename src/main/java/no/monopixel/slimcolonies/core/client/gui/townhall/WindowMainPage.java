@@ -11,7 +11,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.client.gui.WindowBannerPicker;
 import no.monopixel.slimcolonies.core.client.gui.map.WindowColonyMap;
@@ -51,14 +50,13 @@ public class WindowMainPage extends AbstractWindowTownHall
      */
     private DropDownList nameStyleDropDownList;
 
+    private int initialColorIndex;
+
     /**
      * The initial texture index.
      */
     private int initialTextureIndex;
 
-    /**
-     * The initial texture index.
-     */
     private int initialNamePackIndex;
 
     /**
@@ -74,7 +72,6 @@ public class WindowMainPage extends AbstractWindowTownHall
     public WindowMainPage(final BuildingTownHall.View building)
     {
         super(building, "layoutactions.xml");
-        initDropDowns();
 
         title = findPaneOfTypeByID(LABEL_BUILDING_NAME, Text.class);
         findPaneOfTypeByID("actions1", Button.class).setText(Component.translatable(building.getBuildingDisplayName())
@@ -88,14 +85,26 @@ public class WindowMainPage extends AbstractWindowTownHall
 
         findPaneOfTypeByID(BUTTON_COLONY_SWITCH_STYLE, ButtonImage.class).setText(Component.literal(building.getColony().getStructurePack()));
         registerButton(BUTTON_BANNER_PICKER, this::openBannerPicker);
-        registerButton(BUTTON_RESET_TEXTURE, this::resetTextureStyle);
+
+        initDropDowns();
 
         this.colorDropDownList.setSelectedIndex(building.getColony().getTeamColonyColor().ordinal());
+        this.initialColorIndex = colorDropDownList.getSelectedIndex();
+
         this.textureDropDownList.setSelectedIndex(TEXTURE_PACKS.indexOf(building.getColony().getTextureStyleId()));
         this.initialTextureIndex = textureDropDownList.getSelectedIndex();
 
         this.nameStyleDropDownList.setSelectedIndex(building.getColony().getNameFileIds().indexOf(building.getColony().getNameStyle()));
         this.initialNamePackIndex = nameStyleDropDownList.getSelectedIndex();
+
+        registerDropDownHandlers();
+    }
+
+    private void registerDropDownHandlers()
+    {
+        colorDropDownList.setHandler(this::onDropDownListChanged);
+        textureDropDownList.setHandler(this::toggleTexture);
+        nameStyleDropDownList.setHandler(this::toggleNameFile);
     }
 
     /**
@@ -115,10 +124,8 @@ public class WindowMainPage extends AbstractWindowTownHall
      */
     private void initDropDowns()
     {
-        findPaneOfTypeByID(DROPDOWN_COLOR_ID, DropDownList.class).setEnabled(enabled);
-
         colorDropDownList = findPaneOfTypeByID(DROPDOWN_COLOR_ID, DropDownList.class);
-        colorDropDownList.setHandler(this::onDropDownListChanged);
+        colorDropDownList.setEnabled(enabled);
 
         final List<ChatFormatting> textColors = Arrays.stream(ChatFormatting.values()).filter(ChatFormatting::isColor).toList();
 
@@ -143,7 +150,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         });
 
         textureDropDownList = findPaneOfTypeByID(DROPDOWN_TEXT_ID, DropDownList.class);
-        textureDropDownList.setHandler(this::toggleTexture);
         textureDropDownList.setDataProvider(new DropDownList.DataProvider()
         {
             @Override
@@ -160,7 +166,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         });
 
         nameStyleDropDownList = findPaneOfTypeByID(DROPDOWN_NAME_ID, DropDownList.class);
-        nameStyleDropDownList.setHandler(this::toggleNameFile);
         nameStyleDropDownList.setDataProvider(new DropDownList.DataProvider()
         {
             @Override
@@ -210,7 +215,10 @@ public class WindowMainPage extends AbstractWindowTownHall
      */
     private void onDropDownListChanged(final DropDownList dropDownList)
     {
-        Network.getNetwork().sendToServer(new TeamColonyColorChangeMessage(dropDownList.getSelectedIndex(), building));
+        if (dropDownList.getSelectedIndex() != initialColorIndex)
+        {
+            Network.getNetwork().sendToServer(new TeamColonyColorChangeMessage(dropDownList.getSelectedIndex(), building));
+        }
     }
 
     /**
@@ -224,43 +232,24 @@ public class WindowMainPage extends AbstractWindowTownHall
         Minecraft.getInstance().setScreen(window);
     }
 
-    /**
-     * Reset the texture style.
-     */
-    private void resetTextureStyle()
-    {
-        Network.getNetwork().sendToServer(new ColonyTextureStyleMessage(building.getColony(), TEXTURE_PACKS.get(0)));
-    }
-
     @Override
     public void onUpdate()
     {
         super.onUpdate();
         final Pane textPane = findPaneByID(DROPDOWN_TEXT_ID);
         final Pane namePane = findPaneByID(DROPDOWN_NAME_ID);
-        final Pane resetButton = findPaneByID(BUTTON_RESET_TEXTURE);
         final boolean isOwner = building.getColony().getPermissions().getOwner().equals(Minecraft.getInstance().player.getUUID());
         if (isOwner)
         {
             textPane.enable();
             namePane.enable();
             textPane.show();
-
-            if (!building.getColony().getTextureStyleId().equals("default"))
-            {
-                resetButton.show();
-            }
-            else
-            {
-                resetButton.hide();
-            }
         }
         else
         {
             textPane.disable();
             namePane.disable();
             textPane.show();
-            resetButton.hide();
         }
     }
 
