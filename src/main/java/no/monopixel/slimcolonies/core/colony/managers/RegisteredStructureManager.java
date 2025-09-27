@@ -78,10 +78,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
      */
     private final List<IMysticalSite> mysticalSites = new ArrayList<>();
 
-    /**
-     * List of leisure sites.
-     */
-    private ImmutableList<BlockPos> leisureSites = ImmutableList.of();
 
     /**
      * The townhall of the colony.
@@ -164,20 +160,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
             }
         }
 
-        if (compound.contains(TAG_LEISURE))
-        {
-            final ListTag leisureTagList = compound.getList(TAG_LEISURE, Tag.TAG_COMPOUND);
-            final List<BlockPos> leisureSitesList = new ArrayList<>();
-            for (int i = 0; i < leisureTagList.size(); ++i)
-            {
-                final BlockPos pos = BlockPosUtil.read(leisureTagList.getCompound(i), TAG_POS);
-                if (!leisureSitesList.contains(pos))
-                {
-                    leisureSitesList.add(pos);
-                }
-            }
-            leisureSites = ImmutableList.copyOf(leisureSitesList);
-        }
 
         // Ensure building extensions are still tied to an appropriate building
         for (final IBuildingExtension extension : buildingExtensions.values())
@@ -250,15 +232,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         // Building extensions
         compound.put(TAG_BUILDING_EXTENSIONS, buildingExtensions.values().stream().map(BuildingExtensionDataManager::extensionToCompound).collect(NBTUtils.toListNBT()));
 
-        // Leisure sites
-        @NotNull final ListTag leisureTagList = new ListTag();
-        for (@NotNull final BlockPos pos : leisureSites)
-        {
-            @NotNull final CompoundTag leisureCompound = new CompoundTag();
-            BlockPosUtil.write(leisureCompound, TAG_POS, pos);
-            leisureTagList.add(leisureCompound);
-        }
-        compound.put(TAG_LEISURE, leisureTagList);
     }
 
     @Override
@@ -321,13 +294,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
             markBuildingExtensionsDirty();
         }
 
-        for (@NotNull final BlockPos pos : leisureSites)
-        {
-            if (WorldUtil.isBlockLoaded(colony.getWorld(), pos) && (!(colony.getWorld().getBlockEntity(pos) instanceof TileEntityDecorationController)))
-            {
-                removeLeisureSite(pos);
-            }
-        }
 
         if (!removedBuildings.isEmpty() && removedBuildings.size() >= buildings.values().size())
         {
@@ -349,65 +315,7 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         return null;
     }
 
-    @Override
-    public List<BlockPos> getLeisureSites()
-    {
-        return leisureSites;
-    }
 
-    @Override
-    public BlockPos getRandomLeisureSite()
-    {
-        final boolean isRaining = colony.getWorld().isRaining();
-
-        BlockPos building = null;
-        final int randomDist = RANDOM.nextInt(4);
-        if (randomDist < 1)
-        {
-            building = townHall != null && townHall.getBuildingLevel() >= 3 ? townHall.getPosition() : null;
-            if (building != null)
-            {
-                return building;
-            }
-        }
-
-        if (randomDist < 2)
-        {
-            if (!isRaining && RANDOM.nextBoolean())
-            {
-                building = getRandomBuilding(b -> b instanceof BuildingMysticalSite && b.getBuildingLevel() >= 1);
-            }
-            else if (RANDOM.nextBoolean())
-            {
-                building = getRandomBuilding(b -> b instanceof BuildingLibrary && b.getBuildingLevel() >= 1);
-            }
-            else
-            {
-                building = getRandomBuilding(b -> b instanceof BuildingUniversity && b.getBuildingLevel() >= 1);
-            }
-        }
-
-        if (building != null)
-        {
-            return building;
-        }
-
-        if (randomDist < 3 || (isRaining && (townHall == null || townHall.getBuildingLevel() < 1)))
-        {
-            building = getRandomBuilding(b -> b.hasModule(BuildingModules.TAVERN_VISITOR) && b.getBuildingLevel() >= 1);
-            if (building != null)
-            {
-                return building;
-            }
-        }
-
-        if (isRaining)
-        {
-            return townHall == null ? null : townHall.getPosition();
-        }
-
-        return leisureSites.isEmpty() ? null : leisureSites.get(RANDOM.nextInt(leisureSites.size()));
-    }
 
     @Nullable
     @Override
@@ -423,29 +331,6 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
         return null;
     }
 
-    @Override
-    public void addLeisureSite(final BlockPos pos)
-    {
-        final List<BlockPos> tempList = new ArrayList<>(leisureSites);
-        if (!tempList.contains(pos))
-        {
-            tempList.add(pos);
-            this.leisureSites = ImmutableList.copyOf(tempList);
-            markBuildingsDirty();
-        }
-    }
-
-    @Override
-    public void removeLeisureSite(final BlockPos pos)
-    {
-        if (leisureSites.contains(pos))
-        {
-            final List<BlockPos> tempList = new ArrayList<>(leisureSites);
-            tempList.remove(pos);
-            this.leisureSites = ImmutableList.copyOf(tempList);
-            markBuildingsDirty();
-        }
-    }
 
     @Nullable
     @Override

@@ -79,12 +79,6 @@ public interface IRegisteredStructureManager
      */
     IBuilding getBuilding(BlockPos pos);
 
-    /**
-     * Get the leisure site positions.
-     *
-     * @return the list.
-     */
-    List<BlockPos> getLeisureSites();
 
     /**
      * Get the first building matching the conditions.
@@ -95,19 +89,6 @@ public interface IRegisteredStructureManager
     @Nullable
     IBuilding getFirstBuildingMatching(final Predicate<IBuilding> predicate);
 
-    /**
-     * Register a new leisure site.
-     *
-     * @param pos the position of it.
-     */
-    void addLeisureSite(BlockPos pos);
-
-    /**
-     * Remove a leisure site.
-     *
-     * @param pos the position of it.
-     */
-    void removeLeisureSite(BlockPos pos);
 
     /**
      * Get the closest warehouse relative to a position.
@@ -322,12 +303,6 @@ public interface IRegisteredStructureManager
      */
     void onBuildingUpgradeComplete(@Nullable IBuilding building, int level);
 
-    /**
-     * Get a random leisure site to go to.
-     *
-     * @return the position of it.
-     */
-    BlockPos getRandomLeisureSite();
 
     /**
      * Get all the building extensions.

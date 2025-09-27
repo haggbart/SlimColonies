@@ -260,7 +260,6 @@ public class ColonyPermissionEventHandler
             {
                 return;
             }
-            colony.getBuildingManager().removeLeisureSite(event.getPos());
         }
         else
         {
