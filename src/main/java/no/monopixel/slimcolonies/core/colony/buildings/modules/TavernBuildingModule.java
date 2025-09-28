@@ -19,6 +19,7 @@ import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.MathUtils;
 import no.monopixel.slimcolonies.api.util.StatsUtil;
+import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.client.gui.huts.WindowHutLiving;
 import no.monopixel.slimcolonies.core.colony.buildings.views.LivingBuildingView;
 import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.VisitorSpawnedEvent;
@@ -54,9 +55,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
      */
     private final List<Integer> externalCitizens = new ArrayList<>();
 
-    /**
-     * List of sitting positions for this building
-     */
     private final List<BlockPos> sitPositions = new ArrayList<>();
 
     private boolean initTags = false;
@@ -65,6 +63,8 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
      * Penalty for not spawning visitors after a death
      */
     private int noVisitorTime = 10000;
+
+    private final int maxVisitorsConfig = MineColonies.getConfig().getServer().maxVisitorsPerTavern.get();
 
     @Override
     public IStat<Integer> getMaxInhabitants()
@@ -87,7 +87,7 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
             noVisitorTime -= 500;
         }
 
-        if (building.getBuildingLevel() > 0 && externalCitizens.size() < 3 * building.getBuildingLevel() && noVisitorTime <= 0)
+        if (building.getBuildingLevel() > 0 && externalCitizens.size() < getMaxVisitors() && noVisitorTime <= 0)
         {
             spawnVisitorInternal();
             noVisitorTime = colony.getWorld().getRandom().nextInt(3000)
@@ -249,11 +249,6 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
         return externalCitizens;
     }
 
-    /**
-     * Get the list of sitting positions
-     *
-     * @return sit pos list
-     */
     private List<BlockPos> getSitPositions()
     {
         initTagPositions();
@@ -311,6 +306,11 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
     public void setNoVisitorTime(final int noVisitorTime)
     {
         this.noVisitorTime = noVisitorTime;
+    }
+
+    private int getMaxVisitors()
+    {
+        return Math.min(3 * building.getBuildingLevel(), maxVisitorsConfig);
     }
 
     /**

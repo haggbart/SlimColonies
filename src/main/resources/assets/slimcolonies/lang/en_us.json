@@ -108,6 +108,8 @@
   "slimcolonies.config.suggestbuildtoolplacement.comment": "Suggest build tool usage when trying to place a building without the build tool.",
   "slimcolonies.config.foodmodifier": "Food Modifier",
   "slimcolonies.config.foodmodifier.comment": "Food consumption modifier.",
+  "slimcolonies.config.maxvisitorspertavern": "Max Visitors per Tavern",
+  "slimcolonies.config.maxvisitorspertavern.comment": "Caps visitor spawning at taverns (normally 3 per building level). Only affects new spawns; existing visitors stay until they leave.",
   "slimcolonies.config.canplayerusertpcommand": "Can Players Use the RTP Command",
   "slimcolonies.config.canplayerusertpcommand.comment": "Should players be allowed to use the /mc rtp command?",
   "slimcolonies.config.canplayerusecolonytpcommand": "Can Players Use the Colony TP Command",
