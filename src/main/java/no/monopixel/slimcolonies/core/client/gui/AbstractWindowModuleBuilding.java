@@ -2,11 +2,6 @@ package no.monopixel.slimcolonies.core.client.gui;
 
 import com.ldtteam.blockui.controls.Button;
 import com.ldtteam.blockui.controls.Text;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
-import no.monopixel.slimcolonies.core.network.messages.server.colony.OpenInventoryMessage;
-import no.monopixel.slimcolonies.core.network.messages.server.colony.building.BuildRequestMessage;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
@@ -14,6 +9,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.sounds.SoundEvents;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
+import no.monopixel.slimcolonies.core.network.messages.server.colony.OpenInventoryMessage;
+import no.monopixel.slimcolonies.core.network.messages.server.colony.building.BuildRequestMessage;
 
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
@@ -191,5 +191,6 @@ public abstract class AbstractWindowModuleBuilding<B extends IBuildingView> exte
             final MutableComponent componentWithLevel = component.append(" ").append(String.valueOf(buildingView.getBuildingLevel()));
             title.setText(componentWithLevel);
         }
+        updateButtonBuild(building);
     }
 }
