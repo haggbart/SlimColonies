@@ -13,6 +13,7 @@ import no.monopixel.slimcolonies.core.colony.jobs.views.DmanJobView;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("removal")
 public final class ModJobsInitializer
 {
     public final static DeferredRegister<JobEntry> DEFERRED_REGISTER = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "jobs"), Constants.MOD_ID);

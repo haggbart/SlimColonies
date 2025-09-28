@@ -49,6 +49,7 @@ import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingMo
 /**
  * Cook AI class.
  */
+@SuppressWarnings("removal")
 public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, BuildingCook>
 {
     /**
@@ -232,11 +233,6 @@ public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, Build
             return getState();
         }
 
-        if (citizenData.getHomeBuilding() != null && citizenData.getHomeBuilding().getBuildingLevelEquivalent() > building.getBuildingLevel() + 1)
-        {
-            worker.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(POOR_RESTAURANT_INTERACTION), ChatPriority.BLOCKING));
-        }
-
         String foodName = worker.getInventoryCitizen().getStackInSlot(foodSlot).getDescriptionId();
         int qty = (int) (Math.max(1.0,
             (FULL_SATURATION - citizen.getCitizenData().getSaturation()) / FoodUtils.getFoodValue(worker.getInventoryCitizen().getStackInSlot(foodSlot), citizen)));
@@ -362,13 +358,10 @@ public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, Build
         playerToServe.addAll(playerList);
         final RestaurantMenuModule module = worker.getCitizenData().getWorkBuilding().getModule(RESTAURANT_MENU);
 
-        if (building.getBuildingLevel() >= 3)
+        // Inform player about menu configuration if it's empty
+        if (module.getMenu().isEmpty())
         {
-            // Custom food tier requirement removed - all food is now valid
-            if (module.getMenu().isEmpty())
-            {
-                worker.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(POOR_MENU_INTERACTION), ChatPriority.BLOCKING));
-            }
+            worker.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(POOR_MENU_INTERACTION), ChatPriority.BLOCKING));
         }
 
         for (final EntityCitizen citizen : WorldUtil.getEntitiesWithinBuilding(world, EntityCitizen.class, building, null))

@@ -2228,7 +2228,7 @@
   "no.monopixel.slimcolonies.core.menu.title": "Menu",
   "no.monopixel.slimcolonies.core.food_list.title": "Food Options",
   "no.monopixel.slimcolonies.core.menu.warning": "Select the Food Citizens will eat at this Restaurant",
-  "no.monopixel.slimcolonies.core.restaurant.poormenu": "The restaurant menu is lacking variety and is unlikely to satisfy citizens. Please consider adding more Minecolonies food options.",
+  "no.monopixel.slimcolonies.core.restaurant.poormenu": "The restaurant menu is empty! Please add food items to the menu so I know what to serve to citizens.",
   "no.monopixel.slimcolonies.core.restaurant.poorrestaurant": "My restaurant needs an upgrade to meet the expectations of my guests. It currently falls short of their standards!",
   "no.monopixel.slimcolonies.core.event.summary.citizen.grownup": "%d kid(s) grew up",
   "no.monopixel.slimcolonies.core.event.summary.citizen.died": "%d citizen(s) died",

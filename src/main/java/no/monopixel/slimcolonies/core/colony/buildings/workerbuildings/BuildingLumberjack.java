@@ -1,5 +1,19 @@
 package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
@@ -22,20 +36,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.WorkerBuildingMod
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BoolSetting;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.SettingKey;
 import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -47,13 +47,14 @@ import static no.monopixel.slimcolonies.core.entity.ai.workers.production.Entity
 /**
  * The lumberjacks building.
  */
+@SuppressWarnings("removal")
 public class BuildingLumberjack extends AbstractBuilding
 {
     /**
      * Replant setting.
      */
-    public static final ISettingKey<BoolSetting> REPLANT = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "replant"));
-    public static final ISettingKey<BoolSetting> RESTRICT = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "restrict"));
+    public static final ISettingKey<BoolSetting> REPLANT   = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "replant"));
+    public static final ISettingKey<BoolSetting> RESTRICT  = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "restrict"));
     public static final ISettingKey<BoolSetting> DEFOLIATE = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "defoliate"));
 
     /**
@@ -79,12 +80,12 @@ public class BuildingLumberjack extends AbstractBuilding
     /**
      * The maximum upgrade of the building.
      */
-    private static final int    MAX_BUILDING_LEVEL = 5;
+    private static final int MAX_BUILDING_LEVEL = 5;
 
     /**
      * The job description.
      */
-    private static final String LUMBERJACK         = "lumberjack";
+    private static final String LUMBERJACK = "lumberjack";
 
     /**
      * A list of all planted nether trees
@@ -109,7 +110,6 @@ public class BuildingLumberjack extends AbstractBuilding
         keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.axe.get()), new Tuple<>(1, true));
         keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.shears.get()), new Tuple<>(1, true));
     }
-
 
     @Override
     public Map<Predicate<ItemStack>, Tuple<Integer, Boolean>> getRequiredItemsAndAmount()
@@ -363,7 +363,7 @@ public class BuildingLumberjack extends AbstractBuilding
      */
     public static class View extends AbstractBuildingView
     {
-        private boolean restrict;
+        private boolean  restrict;
         private BlockPos startRestriction;
         private BlockPos endRestriction;
 

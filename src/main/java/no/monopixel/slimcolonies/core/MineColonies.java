@@ -61,6 +61,7 @@ import java.util.function.Consumer;
 
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.*;
 
+@SuppressWarnings("removal")
 @Mod(Constants.MOD_ID)
 public class MineColonies
 {

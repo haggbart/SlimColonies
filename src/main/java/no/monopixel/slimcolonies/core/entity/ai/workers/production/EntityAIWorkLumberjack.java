@@ -19,7 +19,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.Tags;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
 import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
@@ -60,6 +59,7 @@ import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingMo
 /**
  * The lumberjack AI class.
  */
+@SuppressWarnings("removal")
 public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberjack, BuildingLumberjack>
 {
     /**
