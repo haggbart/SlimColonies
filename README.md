@@ -67,7 +67,7 @@ SlimColonies removes these pain points and makes sensible behaviors the default,
 ### 📋 Planned Changes
 
 - [ ] Add starvation mechanic - citizens should lose health and eventually die when saturation reaches 0
-- [ ] Fix broken name system
+- [ ] Improve compatibility with Farmer's Delight
 - More...
 
 ## For Users
