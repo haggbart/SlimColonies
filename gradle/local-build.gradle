@@ -5,10 +5,6 @@ apply plugin: 'java-library'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'idea'
 
-// Parchment for better parameter names (optional but useful)
-if (project.hasProperty('enableParchment') && project.enableParchment.toBoolean()) {
-    apply plugin: 'org.parchmentmc.librarian.forgegradle'
-}
 
 // Basic project info
 group = project.modGroup
@@ -96,7 +92,6 @@ minecraft {
 
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
-    maven { url = 'https://maven.parchmentmc.org' }
     maven { url = 'https://maven.blamejared.com' } // JEI
     maven { url = 'https://jm.gserv.me/repository/maven-public/' } // JourneyMap
     maven { url = 'https://ldtteam.jfrog.io/artifactory/ldtteam/' } // MineColonies dependencies
