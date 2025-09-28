@@ -128,12 +128,6 @@ public interface IColonyView extends IColony
     @NotNull
     Map<UUID, ColonyPlayer> getPlayers();
 
-    /**
-     * Returns the maximum amount of total citizen beds in the colony.
-     *
-     * @return maximum amount of citizens.
-     */
-    int getCitizenCount();
 
     /**
      * Returns the maximum amount of citizen slots in the colony considering beds and guard towers
@@ -291,12 +285,6 @@ public interface IColonyView extends IColony
      */
     void addPlayer(String player);
 
-    /**
-     * Remove player from colony permissions.
-     *
-     * @param player the UUID of the player to remove.
-     */
-    void removePlayer(UUID player);
 
 
     @Override

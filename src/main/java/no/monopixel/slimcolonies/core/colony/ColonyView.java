@@ -116,10 +116,6 @@ public final class ColonyView implements IColonyView
     @Nullable
     private ITownHallView townHall;
 
-    /**
-     * The max citizen count.
-     */
-    private int citizenCount = 0;
 
     /**
      * The max citizen count considering guard towers.
@@ -264,7 +260,6 @@ public final class ColonyView implements IColonyView
         buf.writeUtf(colony.getDimension().location().toString());
         buf.writeBlockPos(colony.getCenter());
         //  Citizenry
-        buf.writeInt(colony.getCitizenManager().getMaxCitizens());
         buf.writeInt(colony.getCitizenManager().getPotentialMaxCitizens());
 
         final Set<Block> freeBlocks = colony.getFreeBlocks();
@@ -628,11 +623,6 @@ public final class ColonyView implements IColonyView
      *
      * @return maximum amount of citizens.
      */
-    @Override
-    public int getCitizenCount()
-    {
-        return citizenCount;
-    }
 
     @Override
     public int getCitizenCountLimit()
@@ -704,7 +694,6 @@ public final class ColonyView implements IColonyView
         dimensionId = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(buf.readUtf(32767)));
         center = buf.readBlockPos();
         //  Citizenry
-        citizenCount = buf.readInt();
         citizenCountWithEmptyGuardTowers = buf.readInt();
 
         if (isNewSubscription)
@@ -1010,16 +999,6 @@ public final class ColonyView implements IColonyView
         Network.getNetwork().sendToServer(new PermissionsMessage.AddPlayer(this, player));
     }
 
-    /**
-     * Remove player from colony permissions.
-     *
-     * @param player the UUID of the player to remove.
-     */
-    @Override
-    public void removePlayer(final UUID player)
-    {
-        Network.getNetwork().sendToServer(new PermissionsMessage.RemovePlayer(this, player));
-    }
 
     @Override
     public BlockPos getCenter()
