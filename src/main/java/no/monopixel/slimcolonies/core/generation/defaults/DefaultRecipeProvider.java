@@ -623,13 +623,5 @@ public class DefaultRecipeProvider extends RecipeProvider
         // Large bottle recipes removed - using vanilla containers instead
 
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.colonyMap)
-            .pattern("XXX")
-            .pattern("XTX")
-            .pattern("XXX")
-            .define('X', Items.MAP)
-            .define('T', buildTool.get())
-            .unlockedBy("has_build_tool", has(buildTool.get()))
-            .save(consumer);
     }
 }

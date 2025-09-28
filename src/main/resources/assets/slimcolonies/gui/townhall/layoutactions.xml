@@ -15,8 +15,6 @@
     <button id="build" size="129 17" pos="110 97" textcolor="black"
             label="🔨🔨🔨🔨$(no.monopixel.slimcolonies.coremod.gui.townhall.build)" source="slimcolonies:textures/gui/builderhut/builder_button_medium_large_build.png"/>
 
-    <button id="map" size="129 17" pos="110 116" textcolor="black"
-            label="$(no.monopixel.slimcolonies.coremod.gui.townHall.map)" source="slimcolonies:textures/gui/builderhut/builder_button_medium_large_map.png"/>
 
 
     <!-- Visual Changes, Right Side -->

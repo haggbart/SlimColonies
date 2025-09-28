@@ -63,7 +63,6 @@ public final class ModCreativeTabs
             output.accept(ModItems.buildGoggles);
             output.accept(ModItems.scanAnalyzer);
             output.accept(ModItems.questLog);
-            output.accept(ModItems.colonyMap);
 
             output.accept(ModItems.irongate);
             output.accept(ModItems.woodgate);

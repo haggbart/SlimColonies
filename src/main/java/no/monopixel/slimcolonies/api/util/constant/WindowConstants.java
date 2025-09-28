@@ -72,10 +72,6 @@ public final class WindowConstants
     public static final String BUTTON_RENAME = "rename";
 
 
-    /**
-     * Id of the town hall map button in the GUI.
-     */
-    public static final String BUTTON_TOWNHALLMAP = "map";
 
     /**
      * Id of the add player button in the GUI.

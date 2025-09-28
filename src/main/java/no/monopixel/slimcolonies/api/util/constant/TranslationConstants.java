@@ -495,10 +495,6 @@ public final class TranslationConstants
     @NonNls
     public static final String PACK_DESC                                                            = "no.monopixel.slimcolonies.coremod.gui.colony.packdesc";
     @NonNls
-    public static final String COM_MINECOLONIES_MAP_NEED_COLONY                                     = "no.monopixel.slimcolonies.core.item.colonymap.needcolony";
-    @NonNls
-    public static final String COM_MINECOLONIES_MAP_COLONY_SET                                      = "no.monopixel.slimcolonies.core.item.colonymap.registered";
-    @NonNls
     public static final String COM_MINECOLONIES_SIGN_COLONY_SET                                     = "no.monopixel.slimcolonies.core.item.sign.registered";
     @NonNls
     public static final String COM_MINECOLONIES_SIGN_TOO_FAR                                        = "no.monopixel.slimcolonies.core.item.sign.toofar";
@@ -632,10 +628,6 @@ public final class TranslationConstants
     @NonNls
     public static final String MESSAGE_INFO_PLAYER_INVENTORY_FULL_HOTBAR_INSERT = "no.monopixel.slimcolonies.coremod.playerinvfull.hotbarinsert";
 
-    @NonNls
-    public static final String COLONYMAP_PLAYER_RESOLVED_REQUESTS       = "no.monopixel.slimcolonies.core.item.colonymap.playerresolvedrequests";
-    @NonNls
-    public static final String COLONYMAP_PLAYER_RESOLVED_REQUESTS_COUNT = "no.monopixel.slimcolonies.core.item.colonymap.playerresolvedrequests.count";
 
     //</editor-fold>
 
