@@ -13,7 +13,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.client.gui.WindowBannerPicker;
-import no.monopixel.slimcolonies.core.client.gui.map.WindowColonyMap;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyNameStyleMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyStructureStyleMessage;
@@ -79,7 +78,6 @@ public class WindowMainPage extends AbstractWindowTownHall
 
         registerButton(BUTTON_CHANGE_SPEC, this::doNothing);
         registerButton(BUTTON_RENAME, this::renameClicked);
-        registerButton(BUTTON_TOWNHALLMAP, this::mapButtonClicked);
 
         registerButton(BUTTON_COLONY_SWITCH_STYLE, this::switchPack);
 
@@ -263,13 +261,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         new WindowTownHallNameEntry(building.getColony()).open();
     }
 
-    /**
-     * Opens the map on button clicked
-     */
-    private void mapButtonClicked()
-    {
-        new WindowColonyMap(true, building).open();
-    }
 
     @Override
     protected String getWindowId()

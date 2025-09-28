@@ -77,7 +77,6 @@ public final class ModItemsInitializer
 
         ModItems.buildGoggles = new ItemBuildGoggles("build_goggles", new Item.Properties());
         ModItems.scanAnalyzer = new ItemScanAnalyzer("scan_analyzer", new Item.Properties());
-        ModItems.colonyMap = new ItemColonyMap(new Item.Properties());
 
 
         // Only keeping basic dough items - all other food items removed
@@ -99,7 +98,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
         registry.register(new ResourceLocation(Constants.MOD_ID, "questlog"), ModItems.questLog);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "colonymap"), ModItems.colonyMap);
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "bread_dough"), ModItems.breadDough);
         registry.register(new ResourceLocation(Constants.MOD_ID, "cookie_dough"), ModItems.cookieDough);

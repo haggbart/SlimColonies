@@ -215,7 +215,6 @@ public class ClientRegistryHandler
     @SubscribeEvent
     public static void onRegisterItemDecorations(final RegisterItemDecorationsEvent event)
     {
-        event.register(ModItems.colonyMap, new ColonyMapDecorator());
         event.register(ModItems.clipboard, new ClipBoardDecorator());
     }
 

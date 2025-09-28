@@ -4,7 +4,6 @@ import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.network.IMessage;
 import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.client.gui.map.WindowColonyMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
@@ -76,7 +75,7 @@ public class ColonyListMessage implements IMessage
     {
         if (!isLogicalServer)
         {
-            WindowColonyMap.setColonies(colonyInfo);
+            // Map functionality removed
         }
         else if (ctxIn.getSender() != null)
         {
