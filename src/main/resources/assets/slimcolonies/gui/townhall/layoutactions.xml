@@ -61,7 +61,8 @@
         </view>
     </dropdown>
 
-    <text label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picktexturestyle)" pos="269 158" size="148 11" color="black"/>
+    <!-- Citizen texture style picker - disabled since only "default" pack exists
+    <text id="textureStyleLabel" label="$(no.monopixel.slimcolonies.coremod.gui.townhall.picktexturestyle)" pos="269 158" size="148 11" color="black"/>
     <dropdown id="textureStylePicker"
               size="86 17"
               pos="337 155"
@@ -75,5 +76,6 @@
             <button id="button" size="86 17" pos="0 0" source="slimcolonies:textures/gui/builderhut/builder_button_medium.png" textcolor="black"/>
         </view>
     </dropdown>
+    -->
 
 </window>

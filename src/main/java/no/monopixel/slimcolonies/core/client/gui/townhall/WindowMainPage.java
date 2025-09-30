@@ -16,7 +16,6 @@ import no.monopixel.slimcolonies.core.client.gui.WindowBannerPicker;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyNameStyleMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyStructureStyleMessage;
-import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyTextureStyleMessage;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.TeamColonyColorChangeMessage;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +25,6 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
-import static no.monopixel.slimcolonies.core.event.TextureReloadListener.TEXTURE_PACKS;
 
 /**
  * BOWindow for the town hall.
@@ -40,21 +38,11 @@ public class WindowMainPage extends AbstractWindowTownHall
     private DropDownList colorDropDownList;
 
     /**
-     * Drop down list for style.
-     */
-    private DropDownList textureDropDownList;
-
-    /**
      * Drop down list for name style.
      */
     private DropDownList nameStyleDropDownList;
 
     private int initialColorIndex;
-
-    /**
-     * The initial texture index.
-     */
-    private int initialTextureIndex;
 
     private int initialNamePackIndex;
 
@@ -94,7 +82,6 @@ public class WindowMainPage extends AbstractWindowTownHall
     private void setupDropDowns()
     {
         colorDropDownList = findPaneOfTypeByID(DROPDOWN_COLOR_ID, DropDownList.class);
-        textureDropDownList = findPaneOfTypeByID(DROPDOWN_TEXT_ID, DropDownList.class);
         nameStyleDropDownList = findPaneOfTypeByID(DROPDOWN_NAME_ID, DropDownList.class);
 
         // Setup color dropdown
@@ -121,24 +108,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         colorDropDownList.setSelectedIndex(building.getColony().getTeamColonyColor().ordinal());
         initialColorIndex = colorDropDownList.getSelectedIndex();
 
-        // Setup texture dropdown
-        textureDropDownList.setDataProvider(new DropDownList.DataProvider()
-        {
-            @Override
-            public int getElementCount()
-            {
-                return TEXTURE_PACKS.size();
-            }
-
-            @Override
-            public String getLabel(final int index)
-            {
-                return TEXTURE_PACKS.get(index);
-            }
-        });
-        textureDropDownList.setSelectedIndex(TEXTURE_PACKS.indexOf(building.getColony().getTextureStyleId()));
-        initialTextureIndex = textureDropDownList.getSelectedIndex();
-
         // Setup name style dropdown
         nameStyleDropDownList.setDataProvider(new DropDownList.DataProvider()
         {
@@ -158,7 +127,6 @@ public class WindowMainPage extends AbstractWindowTownHall
         initialNamePackIndex = nameStyleDropDownList.getSelectedIndex();
 
         colorDropDownList.setHandler(this::onDropDownListChanged);
-        textureDropDownList.setHandler(this::toggleTexture);
         nameStyleDropDownList.setHandler(this::toggleNameFile);
     }
 
@@ -175,20 +143,7 @@ public class WindowMainPage extends AbstractWindowTownHall
     }
 
     /**
-     * Toggle the dropdownlist with the selected index to change the texture of the colonists.
-     *
-     * @param dropDownList the toggle dropdown list.
-     */
-    private void toggleTexture(final DropDownList dropDownList)
-    {
-        if (dropDownList.getSelectedIndex() != initialTextureIndex)
-        {
-            Network.getNetwork().sendToServer(new ColonyTextureStyleMessage(building.getColony(), TEXTURE_PACKS.get(dropDownList.getSelectedIndex())));
-        }
-    }
-
-    /**
-     * Toggle the dropdownlist with the selected index to change the texture of the colonists.
+     * Toggle the dropdownlist with the selected index to change the name style of the colonists.
      *
      * @param dropDownList the toggle dropdown list.
      */
@@ -228,20 +183,15 @@ public class WindowMainPage extends AbstractWindowTownHall
     public void onUpdate()
     {
         super.onUpdate();
-        final Pane textPane = findPaneByID(DROPDOWN_TEXT_ID);
         final Pane namePane = findPaneByID(DROPDOWN_NAME_ID);
         final boolean isOwner = building.getColony().getPermissions().getOwner().equals(Minecraft.getInstance().player.getUUID());
         if (isOwner)
         {
-            textPane.enable();
             namePane.enable();
-            textPane.show();
         }
         else
         {
-            textPane.disable();
             namePane.disable();
-            textPane.show();
         }
     }
 
@@ -260,7 +210,6 @@ public class WindowMainPage extends AbstractWindowTownHall
     {
         new WindowTownHallNameEntry(building.getColony()).open();
     }
-
 
     @Override
     protected String getWindowId()
