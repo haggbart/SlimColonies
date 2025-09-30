@@ -228,20 +228,15 @@ public class WindowMainPage extends AbstractWindowTownHall
     public void onUpdate()
     {
         super.onUpdate();
-        final Pane textPane = findPaneByID(DROPDOWN_TEXT_ID);
         final Pane namePane = findPaneByID(DROPDOWN_NAME_ID);
         final boolean isOwner = building.getColony().getPermissions().getOwner().equals(Minecraft.getInstance().player.getUUID());
         if (isOwner)
         {
-            textPane.enable();
             namePane.enable();
-            textPane.show();
         }
         else
         {
-            textPane.disable();
             namePane.disable();
-            textPane.show();
         }
     }
 
@@ -260,7 +255,6 @@ public class WindowMainPage extends AbstractWindowTownHall
     {
         new WindowTownHallNameEntry(building.getColony()).open();
     }
-
 
     @Override
     protected String getWindowId()
