@@ -1,7 +1,6 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers;
 
 import com.ldtteam.structurize.blocks.schematic.BlockFluidSubstitution;
-import com.ldtteam.structurize.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.placement.BlockPlacementResult;
 import com.ldtteam.structurize.placement.StructurePhasePlacementResult;
 import com.ldtteam.structurize.placement.StructurePlacer;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.util.TriPredicate;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.blocks.ModBlocks;
@@ -249,7 +247,6 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
         incrementActionsDoneAndDecSaturation();
         executeSpecificCompleteActions();
         worker.getCitizenExperienceHandler().addExperience(XP_EACH_BUILDING);
-        fillItemsList();
         resetCurrentStructure();
         return IDLE;
     }
@@ -308,7 +305,6 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
     {
         if (structurePlacer.getB().getStage() == null)
         {
-            fillItemsList();
             resetCurrentStructure();
             return IDLE;
         }
@@ -879,24 +875,6 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
     }
 
     /**
-     * Fill the list of the item positions to gather.
-     */
-    @Override
-    public void fillItemsList()
-    {
-        //TODO: Make the cleanup a proper building stage in the future.
-        // Search by sections instead of huge AABB all at once.
-        if (!structurePlacer.getB().hasBluePrint())
-        {
-            return;
-        }
-        final Blueprint blueprint = structurePlacer.getB().getBluePrint();
-
-        final BlockPos leftCorner = structurePlacer.getB().getWorldPos().subtract(blueprint.getPrimaryBlockOffset());
-        searchForItems(new AABB(leftCorner, leftCorner.offset(blueprint.getSizeX(), blueprint.getSizeY(), blueprint.getSizeZ())));
-    }
-
-    /**
      * Calculates the working position.
      * <p>
      * Takes a min distance from width and length.
@@ -929,16 +907,6 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
             || BlockUtils.isWater(block)
             || block.is(BlockTags.LEAVES)
             || block.getBlock() == ModBlocks.blockDecorationPlaceholder;
-    }
-
-    /**
-     * Let childs overwrite this if necessary.
-     *
-     * @return true if so.
-     */
-    protected boolean isAlreadyCleared()
-    {
-        return false;
     }
 
     /**

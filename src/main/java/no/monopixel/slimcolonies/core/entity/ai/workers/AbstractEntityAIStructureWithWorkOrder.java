@@ -501,18 +501,6 @@ public abstract class AbstractEntityAIStructureWithWorkOrder<J extends AbstractJ
     }
 
     @Override
-    protected boolean isAlreadyCleared()
-    {
-        return job.getWorkOrder() != null && job.getWorkOrder().isCleared();
-    }
-
-    /**
-     * Check how much of a certain stuck is actually required.
-     *
-     * @param stack the stack to check.
-     * @return the new stack with the correct amount.
-     */
-    @Override
     @Nullable
     public ItemStack getTotalAmount(@Nullable final ItemStack stack)
     {
