@@ -27,7 +27,7 @@ public class WorkOrderBuilding extends AbstractWorkOrder
     /**
      * Maximum distance a builder can have from the building site.
      */
-    private static final double MAX_DISTANCE_SQ = 100 * 100;
+    private static final double MAX_DISTANCE_SQ = 500 * 500;
 
     /**
      * The custom name of the building.
