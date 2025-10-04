@@ -175,7 +175,7 @@ public class WindowMainPage extends AbstractWindowTownHall
      */
     private void openBannerPicker(@NotNull final Button button)
     {
-        Screen window = new WindowBannerPicker(building.getColony(), this, new AtomicBoolean(true));
+        Screen window = new WindowBannerPicker(building.getColony(), this);
         Minecraft.getInstance().setScreen(window);
     }
 
