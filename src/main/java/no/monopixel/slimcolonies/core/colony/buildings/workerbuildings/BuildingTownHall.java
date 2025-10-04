@@ -147,7 +147,6 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
     {
         super.serializeToView(buf, fullSync);
 
-        buf.writeBoolean(MineColonies.getConfig().getServer().canPlayerUseAllyTHTeleport.get());
         buf.writeInt(permissionEvents.size());
         for (final PermissionEvent event : permissionEvents)
         {
@@ -229,11 +228,6 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
         private ImmutableList<IColonyEventDescription> colonyEvents = ImmutableList.of();
 
         /**
-         * If the player is allowed to do townHall teleport.
-         */
-        private boolean canPlayerUseTP = false;
-
-        /**
          * List of mapdata.
          */
         private List<MapItemSavedData> mapDataList = new ArrayList<>();
@@ -261,7 +255,6 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
         {
             super.deserialize(buf);
 
-            canPlayerUseTP = buf.readBoolean();
             final int permissionEventsSize = buf.readInt();
             permissionEvents.clear();
             for (int i = 0; i < permissionEventsSize; i++)
@@ -306,12 +299,6 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
         public List<IColonyEventDescription> getColonyEvents()
         {
             return colonyEvents;
-        }
-
-        @Override
-        public boolean canPlayerUseTP()
-        {
-            return canPlayerUseTP;
         }
 
         /**

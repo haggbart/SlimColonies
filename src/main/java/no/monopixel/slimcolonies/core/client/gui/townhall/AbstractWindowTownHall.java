@@ -21,7 +21,6 @@ public abstract class AbstractWindowTownHall extends AbstractWindowModuleBuildin
     public static final int RED       = Color.getByName("red", 0);
     public static final int DARKGREEN = Color.getByName("darkgreen", 0);
     public static final int ORANGE    = Color.getByName("orange", 0);
-    public static final int YELLOW = Color.getByName("yellow", 0);
 
     /**
      * Constructor for the town hall window.
@@ -38,7 +37,6 @@ public abstract class AbstractWindowTownHall extends AbstractWindowModuleBuildin
         registerButton(BUTTON_CITIZENS, () -> new WindowCitizenPage(townHall).open());
         registerButton(BUTTON_STATS, () -> new WindowStatsPage(townHall).open());
         registerButton(BUTTON_SETTINGS, () -> new WindowSettings(townHall).open());
-        registerButton(BUTTON_ALLIANCE, () -> new WindowAlliancePage(townHall).open());
 
         findPaneOfTypeByID(getWindowId() + "0", Image.class).hide();
         findPaneOfTypeByID(getWindowId(), ButtonImage.class).hide();

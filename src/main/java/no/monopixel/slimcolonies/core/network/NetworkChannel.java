@@ -152,7 +152,6 @@ public class NetworkChannel
         registerMessage(++idx, ColonyViewRemoveMessage.class, ColonyViewRemoveMessage::new);
         registerMessage(++idx, GiveToolMessage.class, GiveToolMessage::new);
         registerMessage(++idx, ColonyAbandonOwnMessage.class, ColonyAbandonOwnMessage::new);
-        registerMessage(++idx, TriggerConnectionEventMessage.class, TriggerConnectionEventMessage::new);
 
         registerMessage(++idx, AssignUnassignMessage.class, AssignUnassignMessage::new);
         registerMessage(++idx, OpenCraftingGUIMessage.class, OpenCraftingGUIMessage::new);
@@ -177,7 +176,6 @@ public class NetworkChannel
         registerMessage(++idx, BuildingHiringModeMessage.class, BuildingHiringModeMessage::new);
         registerMessage(++idx, DecorationBuildRequestMessage.class, DecorationBuildRequestMessage::new);
         registerMessage(++idx, DirectPlaceMessage.class, DirectPlaceMessage::new);
-        registerMessage(++idx, TeleportToColonyMessage.class, TeleportToColonyMessage::new);
         registerMessage(++idx, EnchanterWorkerSetMessage.class, EnchanterWorkerSetMessage::new);
         registerMessage(++idx, InteractionResponse.class, InteractionResponse::new);
         registerMessage(++idx, TryResearchMessage.class, TryResearchMessage::new);

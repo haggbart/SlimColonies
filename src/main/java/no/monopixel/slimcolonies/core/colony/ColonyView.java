@@ -26,7 +26,6 @@ import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtensio
 import no.monopixel.slimcolonies.api.colony.buildings.registry.IBuildingDataManager;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.buildings.workerbuildings.ITownHallView;
-import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
 import no.monopixel.slimcolonies.api.colony.permissions.ColonyPlayer;
 import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
@@ -48,7 +47,6 @@ import no.monopixel.slimcolonies.core.client.render.worldevent.ColonyBlueprintRe
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
-import no.monopixel.slimcolonies.core.colony.managers.ColonyConnectionManager;
 import no.monopixel.slimcolonies.core.colony.managers.ResearchManager;
 import no.monopixel.slimcolonies.core.colony.managers.StatisticsManager;
 import no.monopixel.slimcolonies.core.colony.managers.TravellingManager;
@@ -115,7 +113,6 @@ public final class ColonyView implements IColonyView
     //  Buildings
     @Nullable
     private ITownHallView townHall;
-
 
     /**
      * The max citizen count considering guard towers.
@@ -991,7 +988,6 @@ public final class ColonyView implements IColonyView
     {
         Network.getNetwork().sendToServer(new PermissionsMessage.AddPlayer(this, player));
     }
-
 
     @Override
     public BlockPos getCenter()

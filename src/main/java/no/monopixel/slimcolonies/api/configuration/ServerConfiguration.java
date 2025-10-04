@@ -45,7 +45,6 @@ public class ServerConfiguration extends AbstractConfiguration
 
     public final ForgeConfigSpec.BooleanValue canPlayerUseRTPCommand;
     public final ForgeConfigSpec.BooleanValue canPlayerUseColonyTPCommand;
-    public final ForgeConfigSpec.BooleanValue canPlayerUseAllyTHTeleport;
     public final ForgeConfigSpec.BooleanValue canPlayerUseHomeTPCommand;
     public final ForgeConfigSpec.BooleanValue canPlayerUseShowColonyInfoCommand;
     public final ForgeConfigSpec.BooleanValue canPlayerUseKillCitizensCommand;
@@ -143,7 +142,6 @@ public class ServerConfiguration extends AbstractConfiguration
 
         canPlayerUseRTPCommand = defineBoolean(builder, "canplayerusertpcommand", false);
         canPlayerUseColonyTPCommand = defineBoolean(builder, "canplayerusecolonytpcommand", false);
-        canPlayerUseAllyTHTeleport = defineBoolean(builder, "canplayeruseallytownhallteleport", true);
         canPlayerUseHomeTPCommand = defineBoolean(builder, "canplayerusehometpcommand", false);
         canPlayerUseShowColonyInfoCommand = defineBoolean(builder, "canplayeruseshowcolonyinfocommand", true);
         canPlayerUseKillCitizensCommand = defineBoolean(builder, "canplayerusekillcitizenscommand", false);
