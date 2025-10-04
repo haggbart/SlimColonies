@@ -185,11 +185,6 @@ public class Colony implements IColony
     private final TravellingManager travellingManager = new TravellingManager(this);
 
     /**
-     * Connection manager of the colony.
-     */
-    private final ColonyConnectionManager connectionManager = new ColonyConnectionManager(this);
-
-    /**
      * The Positions which players can freely interact.
      */
     private ImmutableSet<BlockPos> freePositions = ImmutableSet.of();
@@ -838,11 +833,6 @@ public class Colony implements IColony
         {
             this.travellingManager.deserializeNBT(compound.getCompound(NbtTagConstants.TAG_TRAVELLING_DATA));
         }
-
-        if (compound.contains(NbtTagConstants.TAG_CONNECTION_MANAGER))
-        {
-            this.connectionManager.deserializeNBT(compound.getCompound(NbtTagConstants.TAG_CONNECTION_MANAGER));
-        }
     }
 
     /**
@@ -952,7 +942,6 @@ public class Colony implements IColony
         compound.put(BuildingModules.TOWNHALL_SETTINGS.key, settings);
 
         compound.put(TAG_TRAVELLING_DATA, travellingManager.serializeNBT());
-        compound.put(TAG_CONNECTION_MANAGER, connectionManager.serializeNBT());
 
         this.colonyTag = compound;
 
@@ -1147,11 +1136,6 @@ public class Colony implements IColony
              * This should not be a problem for minecolonies as long as we take care to do nothing in that moment.
              */
             return;
-        }
-
-        if (!event.level.isClientSide && (event.level.getGameTime() + id) % 20 == 0)
-        {
-            connectionManager.tick();
         }
 
         colonyStateMachine.tick();
@@ -1579,12 +1563,6 @@ public class Colony implements IColony
     public TravellingManager getTravellingManager()
     {
         return travellingManager;
-    }
-
-    @Override
-    public IColonyConnectionManager getConnectionManager()
-    {
-        return connectionManager;
     }
 
     /**

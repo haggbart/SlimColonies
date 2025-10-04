@@ -213,11 +213,6 @@ public final class ColonyView implements IColonyView
     private final TravellingManager travellingManager = new TravellingManager(this);
 
     /**
-     * Client side connection manager.
-     */
-    private final IColonyConnectionManager connectionManager = new ColonyConnectionManager(this);
-
-    /**
      * Day in the colony.
      */
     private int day;
@@ -354,7 +349,6 @@ public final class ColonyView implements IColonyView
         colony.getQuestManager().serialize(buf, hasNewSubscribers);
         buf.writeInt(colony.getDay());
         buf.writeNbt(colony.getTravellingManager().serializeNBT());
-        colony.getConnectionManager().serializeToView(buf);
     }
 
     /**
@@ -777,7 +771,6 @@ public final class ColonyView implements IColonyView
         this.questManager.deserialize(buf);
         this.day = buf.readInt();
         this.travellingManager.deserializeNBT(buf.readNbt());
-        this.connectionManager.deserializeFromView(buf);
         return null;
     }
 
@@ -1347,12 +1340,6 @@ public final class ColonyView implements IColonyView
     public ITravellingManager getTravellingManager()
     {
         return travellingManager;
-    }
-
-    @Override
-    public IColonyConnectionManager getConnectionManager()
-    {
-        return connectionManager;
     }
 
     @Override
