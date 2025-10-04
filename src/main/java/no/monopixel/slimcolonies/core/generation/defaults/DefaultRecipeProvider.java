@@ -220,7 +220,7 @@ public class DefaultRecipeProvider extends RecipeProvider
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.trowel)
             .pattern("III")
-            .pattern("IBL")
+            .pattern("IBI")
             .pattern(" S ")
             .define('I', Tags.Items.INGOTS_IRON)
             .define('B', buildTool.get())

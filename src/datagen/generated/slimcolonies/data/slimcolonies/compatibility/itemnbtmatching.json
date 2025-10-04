@@ -5115,39 +5115,6 @@
     "item": "slimcolonies:ancienttome"
   },
   {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "slimcolonies:assistanthammer_diamond"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "slimcolonies:assistanthammer_gold"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "slimcolonies:assistanthammer_iron"
-  },
-  {
     "item": "slimcolonies:barrel_block"
   },
   {
@@ -5450,6 +5417,9 @@
   },
   {
     "item": "slimcolonies:supplychestdeployer"
+  },
+  {
+    "item": "slimcolonies:trowel"
   },
   {
     "item": "structurize:blockfluidsubstitution"

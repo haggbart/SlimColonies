@@ -20,7 +20,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slimcolonies:assistanthammer_gold"
+        "recipe": "slimcolonies:trowel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -33,7 +33,7 @@
   ],
   "rewards": {
     "recipes": [
-      "slimcolonies:assistanthammer_gold"
+      "slimcolonies:trowel"
     ]
   },
   "sends_telemetry_event": false
