@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 

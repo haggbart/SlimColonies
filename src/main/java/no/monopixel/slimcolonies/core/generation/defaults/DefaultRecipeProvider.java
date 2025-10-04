@@ -218,7 +218,7 @@ public class DefaultRecipeProvider extends RecipeProvider
 //                .unlockedBy("has_items", hasAllOf(buildTool.get(), ModBlocks.blockHutMiner))
 //                .save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.trowel)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.assistantAxe)
             .pattern("III")
             .pattern("IBI")
             .pattern(" S ")

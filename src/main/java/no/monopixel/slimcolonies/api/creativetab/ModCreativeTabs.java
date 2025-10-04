@@ -48,7 +48,7 @@ public final class ModCreativeTabs
             output.accept(ModItems.scepterLumberjack);
             output.accept(ModItems.permTool);
             output.accept(ModItems.scepterGuard);
-            output.accept(ModItems.trowel);
+            output.accept(ModItems.assistantAxe);
             output.accept(ModItems.scepterBeekeeper);
 
 

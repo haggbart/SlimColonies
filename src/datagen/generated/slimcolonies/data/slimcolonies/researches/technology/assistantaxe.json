@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "slimcolonies:trowel",
+  "icon": "slimcolonies:assistantaxe",
   "parentResearch": "slimcolonies:technology/hittingiron",
   "requirements": [
     {

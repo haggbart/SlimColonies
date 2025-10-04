@@ -12,7 +12,7 @@ public final class ModItems
     public static Item supplyChest;
     public static Item permTool;
     public static Item scepterGuard;
-    public static Item trowel;
+    public static Item assistantAxe;
     public static Item supplyCamp;
     public static Item ancientTome;
     public static Item scepterLumberjack;

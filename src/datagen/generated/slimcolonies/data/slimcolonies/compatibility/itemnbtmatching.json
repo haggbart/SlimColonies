@@ -5115,6 +5115,9 @@
     "item": "slimcolonies:ancienttome"
   },
   {
+    "item": "slimcolonies:assistantaxe"
+  },
+  {
     "item": "slimcolonies:barrel_block"
   },
   {
@@ -5417,9 +5420,6 @@
   },
   {
     "item": "slimcolonies:supplychestdeployer"
-  },
-  {
-    "item": "slimcolonies:trowel"
   },
   {
     "item": "structurize:blockfluidsubstitution"

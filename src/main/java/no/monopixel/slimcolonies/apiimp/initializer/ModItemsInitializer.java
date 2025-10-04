@@ -47,7 +47,7 @@ public final class ModItemsInitializer
         ModItems.supplyChest = new ItemSupplyChestDeployer(new Item.Properties());
         ModItems.permTool = new ItemScepterPermission(new Item.Properties());
         ModItems.scepterGuard = new ItemScepterGuard(new Item.Properties());
-        ModItems.trowel = new ItemAssistantHammer("trowel", new Item.Properties(), 2);
+        ModItems.assistantAxe = new ItemAssistantHammer("assistantaxe", new Item.Properties(), 2);
         ModItems.supplyCamp = new ItemSupplyCampDeployer(new Item.Properties());
         ModItems.ancientTome = new ItemAncientTome(new Item.Properties());
         ModItems.clipboard = new ItemClipboard(new Item.Properties());
@@ -85,7 +85,7 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "scan_analyzer"), ModItems.scanAnalyzer);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterpermission"), ModItems.permTool);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterguard"), ModItems.scepterGuard);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "trowel"), ModItems.trowel);
+        registry.register(new ResourceLocation(Constants.MOD_ID, "assistantaxe"), ModItems.assistantAxe);
         registry.register(new ResourceLocation(Constants.MOD_ID, "supplycampdeployer"), ModItems.supplyCamp);
         registry.register(new ResourceLocation(Constants.MOD_ID, "ancienttome"), ModItems.ancientTome);
         registry.register(new ResourceLocation(Constants.MOD_ID, "clipboard"), ModItems.clipboard);

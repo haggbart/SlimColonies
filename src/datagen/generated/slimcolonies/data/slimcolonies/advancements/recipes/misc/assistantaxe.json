@@ -20,7 +20,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slimcolonies:trowel"
+        "recipe": "slimcolonies:assistantaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -33,7 +33,7 @@
   ],
   "rewards": {
     "recipes": [
-      "slimcolonies:trowel"
+      "slimcolonies:assistantaxe"
     ]
   },
   "sends_telemetry_event": false
