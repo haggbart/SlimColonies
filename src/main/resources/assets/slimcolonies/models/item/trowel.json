@@ -1,7 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "slimcolonies:item/assistanthammer/diamond"
+    "layer0": "slimcolonies:item/trowel"
   },
   "display": {
     "thirdperson": {

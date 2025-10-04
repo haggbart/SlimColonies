@@ -106,7 +106,7 @@ public class ItemAssistantHammer extends AbstractItemMinecolonies
                 final BuildAttemptResult buildAttemptResult = tryBuildingBlockNearby(player, view, workOrder, interactPos, handlers);
                 if (buildAttemptResult.areBlocksToBuildNearby() && !buildAttemptResult.didTryBuilding())
                 {
-                    player.displayClientMessage(Component.translatable("item.slimcolonies.assistanthammer.noitems"), true);
+                    player.displayClientMessage(Component.translatable("item.slimcolonies.trowel.noitems"), true);
                 }
 
                 break;
@@ -115,7 +115,7 @@ public class ItemAssistantHammer extends AbstractItemMinecolonies
 
         if (unclaimed)
         {
-            player.displayClientMessage(Component.translatable("item.slimcolonies.assistanthammer.onlyactive"), true);
+            player.displayClientMessage(Component.translatable("item.slimcolonies.trowel.onlyactive"), true);
         }
     }
 
@@ -134,7 +134,7 @@ public class ItemAssistantHammer extends AbstractItemMinecolonies
             final BuildingProgressStage stage = workOrder.getStage();
             if (stage == BuildingProgressStage.CLEAR || stage == BuildingProgressStage.CLEAR_NON_SOLIDS)
             {
-                player.displayClientMessage(Component.translatable("item.slimcolonies.assistanthammer.notcleared"), true);
+                player.displayClientMessage(Component.translatable("item.slimcolonies.trowel.notcleared"), true);
                 player.inventoryMenu.broadcastFullState();
                 return;
             }
@@ -143,7 +143,7 @@ public class ItemAssistantHammer extends AbstractItemMinecolonies
             if (workOrder.getBlueprint() == null)
             {
                 workOrder.loadBlueprint(player.level(), b -> {});
-                player.displayClientMessage(Component.translatable("item.slimcolonies.assistanthammer.notloaded"), true);
+                player.displayClientMessage(Component.translatable("item.slimcolonies.trowel.notloaded"), true);
                 player.inventoryMenu.broadcastFullState();
                 return;
             }
@@ -161,14 +161,11 @@ public class ItemAssistantHammer extends AbstractItemMinecolonies
             final BuildAttemptResult buildAttemptResult = tryBuildingBlockNearby(player, colony, workOrder, interactPos, handlers);
             if (buildAttemptResult.areBlocksToBuildNearby() && !buildAttemptResult.didTryBuilding())
             {
-                player.displayClientMessage(Component.translatable("item.slimcolonies.assistanthammer.noitems"), true);
+                player.displayClientMessage(Component.translatable("item.slimcolonies.trowel.noitems"), true);
                 player.inventoryMenu.broadcastFullState();
             }
 
-            if (buildAttemptResult.areBlocksToBuildNearby() && buildAttemptResult.didTryBuilding() && !player.isCreative())
-            {
-                player.getMainHandItem().hurtAndBreak(player.getMainHandItem().getItem().damageItem(player.getMainHandItem(), 1, player, s -> {}), player, s -> {});
-            }
+            // Trowel has no durability - infinite uses
         }
     }
 
@@ -394,7 +391,7 @@ public class ItemAssistantHammer extends AbstractItemMinecolonies
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltipList, TooltipFlag flag)
     {
-        tooltipList.add(Component.translatable("item.slimcolonies.assistanthammer.reach", reach).withStyle(ChatFormatting.BLUE));
-        tooltipList.add(Component.translatable("item.slimcolonies.assistanthammer.desc").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
+        tooltipList.add(Component.translatable("item.slimcolonies.trowel.reach", reach).withStyle(ChatFormatting.BLUE));
+        tooltipList.add(Component.translatable("item.slimcolonies.trowel.desc").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
     }
 }

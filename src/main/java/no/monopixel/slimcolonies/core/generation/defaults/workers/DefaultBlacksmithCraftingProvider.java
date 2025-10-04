@@ -51,23 +51,7 @@ public class DefaultBlacksmithCraftingProvider extends CustomRecipeProvider
         netherite(consumer, Items.DIAMOND_LEGGINGS, Items.NETHERITE_LEGGINGS);
         netherite(consumer, Items.DIAMOND_BOOTS, Items.NETHERITE_BOOTS);
 
-        CustomRecipeBuilder.create(BLACKSMITH, MODULE_CRAFTING,
-                ForgeRegistries.ITEMS.getKey(ModItems.assistantHammer_Iron).getPath())
-            .inputs(List.of(new ItemStorage(new ItemStack(Items.IRON_INGOT, 5)),
-                new ItemStorage(new ItemStack(Items.STICK))))
-            .result(new ItemStack(ModItems.assistantHammer_Iron))
-            .minResearchId(ResearchConstants.BUILDERS_ASSISTANT_HAMMER)
-            .showTooltip(true)
-            .build(consumer);
-
-        CustomRecipeBuilder.create(BLACKSMITH, MODULE_CRAFTING,
-                ForgeRegistries.ITEMS.getKey(ModItems.assistantHammer_Diamond).getPath())
-            .inputs(List.of(new ItemStorage(new ItemStack(Items.DIAMOND, 5)),
-                new ItemStorage(new ItemStack(Items.STICK))))
-            .result(new ItemStack(ModItems.assistantHammer_Diamond))
-            .minResearchId(ResearchConstants.BUILDERS_ASSISTANT_HAMMER)
-            .showTooltip(true)
-            .build(consumer);
+        // Trowel recipe removed - crafted via regular crafting table instead
     }
 
     private void netherite(@NotNull final Consumer<FinishedRecipe> consumer,

@@ -1,0 +1,5 @@
+TODO: Create 16x16 pixel art texture for trowel
+- Should look like a mason's trowel (flat triangular blade with handle)
+- Simple design, similar style to vanilla Minecraft tools
+- Use iron/gray colors for blade, brown for wooden handle
+- For now, we could use a vanilla item texture as placeholder (stick, iron ingot, etc.)

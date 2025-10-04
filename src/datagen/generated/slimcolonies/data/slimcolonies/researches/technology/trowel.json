@@ -1,0 +1,19 @@
+{
+  "branch": "slimcolonies:technology",
+  "effects": [
+    {
+      "id": "slimcolonies:effects/assistanthammerunlock",
+      "level": 1
+    }
+  ],
+  "icon": "slimcolonies:trowel",
+  "parentResearch": "slimcolonies:technology/hittingiron",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:blacksmith",
+      "level": 1
+    }
+  ],
+  "researchLevel": 2
+}
