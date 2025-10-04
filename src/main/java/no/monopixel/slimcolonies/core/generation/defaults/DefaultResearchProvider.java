@@ -1462,9 +1462,9 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.MINER_ID), 3)
             .addEffect(ModBuildings.blacksmith.get().getBuildingBlock(), 1)
             .addToList(r);
-        new Research(new ResourceLocation(Constants.MOD_ID, "technology/assistanthammers"), TECH).setParentResearch(hittingIron)
-            .setTranslatedName("Professional Assistant")
-            .setIcon(ModItems.assistantHammer_Diamond)
+        new Research(new ResourceLocation(Constants.MOD_ID, "technology/assistantaxe"), TECH).setParentResearch(hittingIron)
+            .setTranslatedName("Assistant Axe")
+            .setIcon(ModItems.assistantAxe)
             .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.BLACKSMITH_ID), 1)
             .addEffect(ResearchConstants.BUILDERS_ASSISTANT_HAMMER, 1)
             .addToList(r);

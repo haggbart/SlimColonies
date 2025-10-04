@@ -116,7 +116,6 @@ public final class ModBlocksInitializer
         ModBlocks.blockColonyWallBanner = new BlockColonyFlagWallBanner().registerBlock(registry);
         ModBlocks.blockIronGate = new BlockGate(IRON_GATE, 10f, 6, 8).registerBlock(registry);
         ModBlocks.blockWoodenGate = new BlockGate(WOODEN_GATE, 7f, 6, 5).registerBlock(registry);
-        ModBlocks.blockColonySign = new BlockColonySign().registerBlock(registry);
 
         // Crops removed for simplification
 
@@ -205,7 +204,6 @@ public final class ModBlocksInitializer
         ModBlocks.blockStash.registerBlockItem(registry, new Item.Properties());
         ModBlocks.blockDecorationPlaceholder.registerBlockItem(registry, new Item.Properties());
         ModBlocks.blockCompostedDirt.registerBlockItem(registry, new Item.Properties());
-        ModBlocks.blockColonySign.registerBlockItem(registry, new Item.Properties());
 
         // Crop items removed for simplification
 

@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 
@@ -175,7 +174,7 @@ public class WindowMainPage extends AbstractWindowTownHall
      */
     private void openBannerPicker(@NotNull final Button button)
     {
-        Screen window = new WindowBannerPicker(building.getColony(), this, new AtomicBoolean(true));
+        Screen window = new WindowBannerPicker(building.getColony(), this);
         Minecraft.getInstance().setScreen(window);
     }
 

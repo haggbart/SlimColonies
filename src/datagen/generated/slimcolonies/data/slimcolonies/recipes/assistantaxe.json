@@ -5,20 +5,20 @@
     "B": {
       "item": "structurize:sceptergold"
     },
-    "G": {
-      "tag": "forge:ingots/gold"
+    "I": {
+      "tag": "forge:ingots/iron"
     },
     "S": {
       "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "GGG",
-    "GBG",
+    "III",
+    "IBI",
     " S "
   ],
   "result": {
-    "item": "slimcolonies:assistanthammer_gold"
+    "item": "slimcolonies:assistantaxe"
   },
   "show_notification": true
 }

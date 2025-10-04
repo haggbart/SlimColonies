@@ -6,7 +6,7 @@
       "level": 1
     }
   ],
-  "icon": "slimcolonies:assistanthammer_diamond",
+  "icon": "slimcolonies:assistantaxe",
   "parentResearch": "slimcolonies:technology/hittingiron",
   "requirements": [
     {

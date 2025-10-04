@@ -21,11 +21,4 @@ public interface ITownHallView extends IBuildingView
      * @return a copy of the list of events.
      */
     List<IColonyEventDescription> getColonyEvents();
-
-    /**
-     * Check if the player can use the teleport command.
-     *
-     * @return true if so.
-     */
-    boolean canPlayerUseTP();
 }

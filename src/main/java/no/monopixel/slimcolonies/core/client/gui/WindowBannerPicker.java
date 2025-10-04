@@ -1,45 +1,42 @@
 package no.monopixel.slimcolonies.core.client.gui;
 
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.client.gui.townhall.AbstractWindowTownHall;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.MultiBufferSource;
-import com.mojang.blaze3d.platform.Lighting;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BannerRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.entity.BannerPattern;
-import net.minecraft.world.level.block.entity.BannerBlockEntity;
-import net.minecraft.util.Mth;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.entity.BannerBlockEntity;
+import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BannerPatterns;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.core.client.gui.townhall.AbstractWindowTownHall;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-import static no.monopixel.slimcolonies.api.util.constant.translation.BaseGameTranslationConstants.BASE_GUI_DONE;
 import static net.minecraft.client.gui.components.Button.DEFAULT_NARRATION;
+import static no.monopixel.slimcolonies.api.util.constant.translation.BaseGameTranslationConstants.BASE_GUI_DONE;
 
 /**
  * A custom rendered Screen (i.e. not blockui) that renders a picker for the banners,
@@ -133,11 +130,6 @@ public class WindowBannerPicker extends Screen
     private final ModelPart modelRender;
 
     /**
-     * Local reference of feature unlocked flag.
-     */
-    private final AtomicBoolean isFeatureUnlocked;
-
-    /**
      * The currently selected palette color.
      */
     private ColorPalette colors;
@@ -158,11 +150,10 @@ public class WindowBannerPicker extends Screen
     private int scrollRow = 0;
 
     /**
-     * @param colony            the colony to make the flag for
-     * @param hallWindow        the calling town hall window to return to
-     * @param isFeatureUnlocked
+     * @param colony     the colony to make the flag for
+     * @param hallWindow the calling town hall window to return to
      */
-    public WindowBannerPicker(IColonyView colony, AbstractWindowTownHall hallWindow, final AtomicBoolean isFeatureUnlocked)
+    public WindowBannerPicker(IColonyView colony, AbstractWindowTownHall hallWindow)
     {
         super(Component.literal("Flag"));
 
@@ -182,7 +173,6 @@ public class WindowBannerPicker extends Screen
 
         this.patterns = BuiltInRegistries.BANNER_PATTERN.holders().collect(Collectors.toCollection(LinkedList::new));
         this.patterns.removeAll(exclusion);
-        this.isFeatureUnlocked = isFeatureUnlocked;
 
         // Fetch the patterns as a List and not ListNBT
         this.layers = BannerBlockEntity.createPatterns(DyeColor.WHITE, colony.getColonyFlag());
@@ -245,7 +235,6 @@ public class WindowBannerPicker extends Screen
 
             final PatternButton button = new PatternButton(posX, posY, PATTERN_HEIGHT, patterns.get(i));
             this.addRenderableWidget(button);
-
         }
     }
 

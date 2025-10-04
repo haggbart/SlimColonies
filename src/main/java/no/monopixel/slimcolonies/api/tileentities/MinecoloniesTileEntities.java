@@ -32,6 +32,4 @@ public class MinecoloniesTileEntities
     public static RegistryObject<BlockEntityType<TileEntityStash>> STASH;
 
     public static RegistryObject<BlockEntityType<TileEntityColonyFlag>> COLONY_FLAG;
-
-    public static RegistryObject<BlockEntityType<TileEntityColonySign>> COLONY_SIGN;
 }

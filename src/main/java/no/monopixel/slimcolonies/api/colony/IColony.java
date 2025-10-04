@@ -15,7 +15,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.event.TickEvent;
-import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
 import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
 import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
@@ -252,13 +251,6 @@ public interface IColony
      * @return the travelling manager.
      */
     ITravellingManager getTravellingManager();
-
-    /**
-     * Get the connection manager of the colony.
-     *
-     * @return the connection manager.
-     */
-    IColonyConnectionManager getConnectionManager();
 
     /**
      * Add a visiting player.

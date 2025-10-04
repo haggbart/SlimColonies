@@ -1,6 +1,5 @@
 package no.monopixel.slimcolonies.core.colony;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.ldtteam.structurize.util.BlockUtils;
 import net.minecraft.ChatFormatting;
@@ -30,7 +29,6 @@ import no.monopixel.slimcolonies.api.colony.*;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ISettingsModule;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
-import no.monopixel.slimcolonies.api.colony.connections.IColonyConnectionManager;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.*;
 import no.monopixel.slimcolonies.api.colony.permissions.Action;
 import no.monopixel.slimcolonies.api.colony.permissions.Rank;
@@ -47,7 +45,6 @@ import no.monopixel.slimcolonies.api.research.IResearchManager;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.api.util.constant.NbtTagConstants;
-import no.monopixel.slimcolonies.api.util.constant.Suppression;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.SettingsModule;
@@ -183,11 +180,6 @@ public class Colony implements IColony
      * Traveling manager of the colony.
      */
     private final TravellingManager travellingManager = new TravellingManager(this);
-
-    /**
-     * Connection manager of the colony.
-     */
-    private final ColonyConnectionManager connectionManager = new ColonyConnectionManager(this);
 
     /**
      * The Positions which players can freely interact.
@@ -332,7 +324,7 @@ public class Colony implements IColony
      * @param w  The world the colony exists in.
      * @param c  The center of the colony (location of Town Hall).
      */
-    
+
     Colony(final int id, @Nullable final Level w, final BlockPos c)
     {
         this(id, w);
@@ -838,11 +830,6 @@ public class Colony implements IColony
         {
             this.travellingManager.deserializeNBT(compound.getCompound(NbtTagConstants.TAG_TRAVELLING_DATA));
         }
-
-        if (compound.contains(NbtTagConstants.TAG_CONNECTION_MANAGER))
-        {
-            this.connectionManager.deserializeNBT(compound.getCompound(NbtTagConstants.TAG_CONNECTION_MANAGER));
-        }
     }
 
     /**
@@ -952,7 +939,6 @@ public class Colony implements IColony
         compound.put(BuildingModules.TOWNHALL_SETTINGS.key, settings);
 
         compound.put(TAG_TRAVELLING_DATA, travellingManager.serializeNBT());
-        compound.put(TAG_CONNECTION_MANAGER, connectionManager.serializeNBT());
 
         this.colonyTag = compound;
 
@@ -1147,11 +1133,6 @@ public class Colony implements IColony
              * This should not be a problem for minecolonies as long as we take care to do nothing in that moment.
              */
             return;
-        }
-
-        if (!event.level.isClientSide && (event.level.getGameTime() + id) % 20 == 0)
-        {
-            connectionManager.tick();
         }
 
         colonyStateMachine.tick();
@@ -1579,22 +1560,6 @@ public class Colony implements IColony
     public TravellingManager getTravellingManager()
     {
         return travellingManager;
-    }
-
-    @Override
-    public IColonyConnectionManager getConnectionManager()
-    {
-        return connectionManager;
-    }
-
-    /**
-     * Get all visiting players.
-     *
-     * @return the list.
-     */
-    public ImmutableList<Player> getVisitingPlayers()
-    {
-        return ImmutableList.copyOf(visitingPlayers);
     }
 
     @Override

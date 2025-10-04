@@ -1,0 +1,4 @@
+TODO: Create 11x16 pixel solid color texture for progress bar
+- Simple blue/gray bar (#6464C8 or similar)
+- This is a repeating texture for loading progress in building browser
+- Can be created with: convert -size 11x16 xc:'#6464C8' progress_block.png

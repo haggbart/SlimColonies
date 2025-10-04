@@ -5115,37 +5115,7 @@
     "item": "slimcolonies:ancienttome"
   },
   {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "slimcolonies:assistanthammer_diamond"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "slimcolonies:assistanthammer_gold"
-  },
-  {
-    "checkednbtkeys": [
-      {
-        "key": "Enchantments"
-      },
-      {
-        "key": "RepairCost"
-      }
-    ],
-    "item": "slimcolonies:assistanthammer_iron"
+    "item": "slimcolonies:assistantaxe"
   },
   {
     "item": "slimcolonies:barrel_block"

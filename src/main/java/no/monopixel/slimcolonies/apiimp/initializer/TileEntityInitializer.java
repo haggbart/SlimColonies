@@ -48,8 +48,5 @@ public class TileEntityInitializer
 
         MinecoloniesTileEntities.COLONY_FLAG = BLOCK_ENTITIES.register("colony_flag",
             () -> BlockEntityType.Builder.of(TileEntityColonyFlag::new, ModBlocks.blockColonyBanner, ModBlocks.blockColonyWallBanner).build(null));
-
-        MinecoloniesTileEntities.COLONY_SIGN =
-            BLOCK_ENTITIES.register("colonysign", () -> BlockEntityType.Builder.of(TileEntityColonySign::new, ModBlocks.blockColonySign).build(null));
     }
 }

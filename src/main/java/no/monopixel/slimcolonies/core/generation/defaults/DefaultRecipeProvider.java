@@ -218,11 +218,11 @@ public class DefaultRecipeProvider extends RecipeProvider
 //                .unlockedBy("has_items", hasAllOf(buildTool.get(), ModBlocks.blockHutMiner))
 //                .save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.assistantHammer_Gold)
-            .pattern("GGG")
-            .pattern("GBG")
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.assistantAxe)
+            .pattern("III")
+            .pattern("IBI")
             .pattern(" S ")
-            .define('G', Tags.Items.INGOTS_GOLD)
+            .define('I', Tags.Items.INGOTS_IRON)
             .define('B', buildTool.get())
             .define('S', Items.STICK)
             .unlockedBy("has_items", hasAllOf(buildTool.get(), ModBlocks.blockHutBuilder))

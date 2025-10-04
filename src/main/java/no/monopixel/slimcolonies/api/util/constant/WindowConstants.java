@@ -32,11 +32,6 @@ public final class WindowConstants
     public static final String BUTTON_ACTIONS = "actions";
 
     /**
-     * Id of the alliance button in the GUI.
-     */
-    public static final String BUTTON_ALLIANCE = "alliances";
-
-    /**
      * Id of the settings button in the GUI.
      */
     public static final String BUTTON_SETTINGS = "settings";
