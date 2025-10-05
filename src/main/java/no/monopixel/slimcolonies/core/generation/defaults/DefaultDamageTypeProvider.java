@@ -33,12 +33,12 @@ public class DefaultDamageTypeProvider extends JsonCodecProvider<DamageType>
                 Map.entry(DamageSourceKeys.DESPAWN.location(), damage("despawn")),
                 Map.entry(DamageSourceKeys.NETHER.location(), damage("nether")),
 
-                Map.entry(DamageSourceKeys.GUARD.location(), damage("entity.minecolonies.guard")),
-                Map.entry(DamageSourceKeys.GUARD_PVP.location(), damage("entity.minecolonies.guardpvp")),
-                Map.entry(DamageSourceKeys.SLAP.location(), damage("entity.minecolonies.slap")),
-                Map.entry(DamageSourceKeys.STUCK_DAMAGE.location(), damage("entity.minecolonies.stuckdamage")),
-                Map.entry(DamageSourceKeys.TRAINING.location(), damage("entity.minecolonies.training")),
-                Map.entry(DamageSourceKeys.WAKEY.location(), damage("entity.minecolonies.wakeywakey")),
+                Map.entry(DamageSourceKeys.GUARD.location(), damage("entity.slimcolonies.guard")),
+                Map.entry(DamageSourceKeys.GUARD_PVP.location(), damage("entity.slimcolonies.guardpvp")),
+                Map.entry(DamageSourceKeys.SLAP.location(), damage("entity.slimcolonies.slap")),
+                Map.entry(DamageSourceKeys.STUCK_DAMAGE.location(), damage("entity.slimcolonies.stuckdamage")),
+                Map.entry(DamageSourceKeys.TRAINING.location(), damage("entity.slimcolonies.training")),
+                Map.entry(DamageSourceKeys.WAKEY.location(), damage("entity.slimcolonies.wakeywakey")),
 
                 Map.entry(DamageSourceKeys.VISITOR.location(), entityDamage(ModEntities.VISITOR))
           );

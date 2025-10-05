@@ -240,9 +240,9 @@ public class WindowBuildingBrowser extends AbstractWindowSkeleton
         // to reduce total search time, kick work off to several worker threads (currently 4 threads ~= 5s on a decent CPU and slow disk)
         final ExecutorService packPool = Executors.newFixedThreadPool(WORKER_THREADS, runnable ->
         {
-            final Thread thread = new Thread(runnable, "Minecolonies Building Browser Worker");
+            final Thread thread = new Thread(runnable, "SlimColonies Building Browser Worker");
             thread.setDaemon(true);
-            thread.setUncaughtExceptionHandler((thread1, throwable) -> Log.getLogger().error("Minecolonies Building Browser errored! ", throwable));
+            thread.setUncaughtExceptionHandler((thread1, throwable) -> Log.getLogger().error("SlimColonies Building Browser errored! ", throwable));
             return thread;
         });
         totalProgress = StructurePacks.getPackMetas().size();
