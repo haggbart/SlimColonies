@@ -1,6 +1,18 @@
 package no.monopixel.slimcolonies.core.colony;
 
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
@@ -14,21 +26,8 @@ import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenSkil
 import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.api.util.constant.Suppression;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.ServerCitizenInteraction;
 import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenSkillHandler;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,13 +58,13 @@ public class CitizenDataView implements ICitizenDataView
     /**
      * Attributes.
      */
-    private final int     id;
+    private final int         id;
     private final IColonyView colonyView;
-    protected     int     entityId;
-    protected     String  name;
-    protected     boolean female;
-    protected     boolean paused;
-    protected     boolean isChild;
+    protected     int         entityId;
+    protected     String      name;
+    protected     boolean     female;
+    protected     boolean     paused;
+    protected     boolean     isChild;
 
     private IJobView jobView;
 
@@ -78,7 +77,6 @@ public class CitizenDataView implements ICitizenDataView
      * Placeholder skills.
      */
     private double saturation;
-
 
     /**
      * The position of the guard.
@@ -115,7 +113,6 @@ public class CitizenDataView implements ICitizenDataView
      */
     private final CitizenSkillHandler citizenSkillHandler;
 
-
     /**
      * The citizens status icon
      */
@@ -124,7 +121,8 @@ public class CitizenDataView implements ICitizenDataView
     /**
      * The current location of interest.
      */
-    @Nullable private BlockPos statusPosition;
+    @Nullable
+    private BlockPos statusPosition;
 
     /**
      * Parents of the citizen.
@@ -160,7 +158,6 @@ public class CitizenDataView implements ICitizenDataView
      * Texture UUID.
      */
     protected UUID textureUUID;
-
 
     /**
      * Set View id.
@@ -269,7 +266,6 @@ public class CitizenDataView implements ICitizenDataView
         return colonyId;
     }
 
-
     @Override
     public double getSaturation()
     {
@@ -343,7 +339,7 @@ public class CitizenDataView implements ICitizenDataView
         {
             final CompoundTag compoundNBT = buf.readNbt();
             final ServerCitizenInteraction handler =
-              (ServerCitizenInteraction) MinecoloniesAPIProxy.getInstance().getInteractionResponseHandlerDataManager().createFrom(this, compoundNBT);
+                (ServerCitizenInteraction) SlimColoniesAPIProxy.getInstance().getInteractionResponseHandlerDataManager().createFrom(this, compoundNBT);
             citizenChatOptions.put(handler.getInquiry(), handler);
         }
 
@@ -499,7 +495,6 @@ public class CitizenDataView implements ICitizenDataView
         return citizenSkillHandler;
     }
 
-
     @Override
     public ResourceLocation getStatusIcon()
     {
@@ -590,7 +585,6 @@ public class CitizenDataView implements ICitizenDataView
         return id;
     }
 
-    
     @Override
     public boolean equals(final Object o)
     {
@@ -613,5 +607,4 @@ public class CitizenDataView implements ICitizenDataView
     {
         return getInventory().getArmorInSlot(equipmentSlot);
     }
-
 }

@@ -1,21 +1,5 @@
 package no.monopixel.slimcolonies.core.items;
 
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrderView;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.client.gui.WindowResourceList;
-import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.BuildingResourcesModuleView;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBuilder;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingWareHouse;
-import no.monopixel.slimcolonies.core.network.messages.server.ResourceScrollSaveWarehouseSnapshotMessage;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityWareHouse;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -34,6 +18,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrderView;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.MessageUtils;
+import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.client.gui.WindowResourceList;
+import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.BuildingResourcesModuleView;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBuilder;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingWareHouse;
+import no.monopixel.slimcolonies.core.network.messages.server.ResourceScrollSaveWarehouseSnapshotMessage;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityWareHouse;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +47,7 @@ import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*
 /**
  * Class describing the resource scroll item.
  */
-public class ItemResourceScroll extends AbstractItemMinecolonies
+public class ItemResourceScroll extends AbstractItemSlimColonies
 {
     /**
      * Sets the name, creative tab, and registers the resource scroll item.
@@ -93,7 +93,7 @@ public class ItemResourceScroll extends AbstractItemMinecolonies
                     {
                         final CompoundTag warehouseSnapshotCompound = compound.getCompound(TAG_WAREHOUSE_SNAPSHOT);
                         warehouseSnapshot = warehouseSnapshotCompound.getAllKeys().stream()
-                                              .collect(Collectors.toMap(k -> k, warehouseSnapshotCompound::getInt));
+                            .collect(Collectors.toMap(k -> k, warehouseSnapshotCompound::getInt));
                     }
                 }
 
@@ -120,10 +120,10 @@ public class ItemResourceScroll extends AbstractItemMinecolonies
     private static String getWorkOrderHash(final IBuildingView buildingView)
     {
         final Optional<IWorkOrderView> currentWorkOrder = buildingView.getColony()
-                                                            .getWorkOrders()
-                                                            .stream()
-                                                            .filter(o -> o.getClaimedBy().equals(buildingView.getID()))
-                                                            .max(Comparator.comparingInt(IWorkOrderView::getPriority));
+            .getWorkOrders()
+            .stream()
+            .filter(o -> o.getClaimedBy().equals(buildingView.getID()))
+            .max(Comparator.comparingInt(IWorkOrderView::getPriority));
         if (currentWorkOrder.isEmpty())
         {
             return "";
@@ -181,10 +181,10 @@ public class ItemResourceScroll extends AbstractItemMinecolonies
      */
     @Nullable
     private static ItemResourceScroll.WarehouseSnapshot gatherWarehouseSnapshot(
-      final IBuildingView buildingView,
-      final BlockPos warehouseBlockPos,
-      final String hash,
-      final Player player)
+        final IBuildingView buildingView,
+        final BlockPos warehouseBlockPos,
+        final String hash,
+        final Player player)
     {
         final IBuildingView warehouse = buildingView.getColony().getBuilding(warehouseBlockPos);
 
@@ -287,9 +287,9 @@ public class ItemResourceScroll extends AbstractItemMinecolonies
     @Override
     @NotNull
     public InteractionResultHolder<ItemStack> use(
-      final Level worldIn,
-      final Player playerIn,
-      final InteractionHand hand)
+        final Level worldIn,
+        final Player playerIn,
+        final InteractionHand hand)
     {
         final ItemStack clipboard = playerIn.getItemInHand(hand);
 
@@ -326,8 +326,8 @@ public class ItemResourceScroll extends AbstractItemMinecolonies
             {
                 String name = builderBuildingView.getWorkerName();
                 tooltip.add(name != null && !name.trim().isEmpty()
-                              ? Component.literal(ChatFormatting.DARK_PURPLE + name)
-                              : Component.translatable(COM_MINECOLONIES_SCROLL_BUILDING_NO_WORKER));
+                    ? Component.literal(ChatFormatting.DARK_PURPLE + name)
+                    : Component.translatable(COM_MINECOLONIES_SCROLL_BUILDING_NO_WORKER));
             }
         }
     }
@@ -338,7 +338,9 @@ public class ItemResourceScroll extends AbstractItemMinecolonies
      * @param snapshot the snapshot data.
      * @param hash     the work order hash for comparison between work orders.
      */
-    private record WarehouseSnapshot(Map<String, Integer> snapshot, String hash)
+    private record WarehouseSnapshot(
+        Map<String, Integer> snapshot,
+        String hash)
     {
     }
 }

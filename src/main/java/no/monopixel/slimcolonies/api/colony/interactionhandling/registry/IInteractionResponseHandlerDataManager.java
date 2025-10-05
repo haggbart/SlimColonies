@@ -1,9 +1,9 @@
 package no.monopixel.slimcolonies.api.colony.interactionhandling.registry;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import net.minecraft.nbt.CompoundTag;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.ICitizen;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.IInteractionResponseHandler;
-import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +15,7 @@ public interface IInteractionResponseHandlerDataManager
 
     static IInteractionResponseHandlerDataManager getInstance()
     {
-        return IMinecoloniesAPI.getInstance().getInteractionResponseHandlerDataManager();
+        return ISlimColoniesAPI.getInstance().getInteractionResponseHandlerDataManager();
     }
 
     /**

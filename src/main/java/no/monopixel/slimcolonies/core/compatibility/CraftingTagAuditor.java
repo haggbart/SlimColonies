@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.registries.ForgeRegistries;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
@@ -593,7 +593,7 @@ public class CraftingTagAuditor
     {
         final List<AnimalHerdingModule> modules = new ArrayList<>();
 
-        for (final BuildingEntry building : IMinecoloniesAPI.getInstance().getBuildingRegistry())
+        for (final BuildingEntry building : ISlimColoniesAPI.getInstance().getBuildingRegistry())
         {
           /*  for (final Supplier<IBuildingModule> producer : building.getModuleProducers())
             {

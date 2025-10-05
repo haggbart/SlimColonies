@@ -1,13 +1,13 @@
 package no.monopixel.slimcolonies.api.colony.buildingextensions.registry;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
-import no.monopixel.slimcolonies.api.colony.buildingextensions.modules.IBuildingExtensionModule;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
+import no.monopixel.slimcolonies.api.colony.buildingextensions.modules.IBuildingExtensionModule;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class BuildingExtensionRegistries
      */
     public static IForgeRegistry<BuildingExtensionEntry> getBuildingExtensionRegistry()
     {
-        return IMinecoloniesAPI.getInstance().getBuildingExtensionRegistry();
+        return ISlimColoniesAPI.getInstance().getBuildingExtensionRegistry();
     }
 
     /**
@@ -78,9 +78,9 @@ public class BuildingExtensionRegistries
          * Default internal constructor.
          */
         private BuildingExtensionEntry(
-          final ResourceLocation registryName,
-          final BiFunction<BuildingExtensionEntry, BlockPos, IBuildingExtension> extensionProducer,
-          final List<Function<IBuildingExtension, IBuildingExtensionModule>> extensionModuleProducers)
+            final ResourceLocation registryName,
+            final BiFunction<BuildingExtensionEntry, BlockPos, IBuildingExtension> extensionProducer,
+            final List<Function<IBuildingExtension, IBuildingExtensionModule>> extensionModuleProducers)
         {
             this.registryName = registryName;
             this.extensionProducer = extensionProducer;

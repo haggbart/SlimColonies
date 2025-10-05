@@ -1,6 +1,7 @@
 package no.monopixel.slimcolonies.core.colony.managers;
 
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import net.minecraft.core.BlockPos;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.advancements.AdvancementTriggers;
 import no.monopixel.slimcolonies.api.colony.ICitizen;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
@@ -14,7 +15,6 @@ import no.monopixel.slimcolonies.core.colony.Colony;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
 import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.CitizenBornEvent;
 import no.monopixel.slimcolonies.core.util.AdvancementUtils;
-import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class ReproductionManager implements IReproductionManager
     /**
      * Min necessary citizens for reproduction.
      */
-    private static final int MIN_SIZE_FOR_REPRO   = 2;
+    private static final int MIN_SIZE_FOR_REPRO = 2;
 
     /**
      * The timer counting ticks to the next time creating a child
@@ -63,6 +63,7 @@ public class ReproductionManager implements IReproductionManager
 
     /**
      * Create a new reproduction manager.
+     *
      * @param colony the colony to spawn kids for.
      */
     public ReproductionManager(final Colony colony)
@@ -74,9 +75,10 @@ public class ReproductionManager implements IReproductionManager
     @Override
     public void onColonyTick(@NotNull final IColony colony)
     {
-        if ( (childCreationTimer -= MAX_TICKRATE) <= 0)
+        if ((childCreationTimer -= MAX_TICKRATE) <= 0)
         {
-            childCreationTimer = (MIN_TIME_BEFORE_SPAWNTRY + random.nextInt(CHILD_SPAWN_INTERVAL)) * (colony.getCitizenManager().getCurrentCitizenCount() / Math.max(4, colony.getCitizenManager().getMaxCitizens()));
+            childCreationTimer = (MIN_TIME_BEFORE_SPAWNTRY + random.nextInt(CHILD_SPAWN_INTERVAL)) * (colony.getCitizenManager().getCurrentCitizenCount() / Math.max(4,
+                colony.getCitizenManager().getMaxCitizens()));
             trySpawnChild();
         }
     }
@@ -88,7 +90,9 @@ public class ReproductionManager implements IReproductionManager
     public void trySpawnChild()
     {
         // Spawn a child when adults are present
-        if (colony.canMoveIn() && colony.getCitizenManager().getCurrentCitizenCount() < colony.getCitizenManager().getMaxCitizens() && colony.getCitizenManager().getCurrentCitizenCount() >= Math.min(MIN_SIZE_FOR_REPRO, MinecoloniesAPIProxy.getInstance().getConfig().getServer().initialCitizenAmount.get()))
+        if (colony.canMoveIn() && colony.getCitizenManager().getCurrentCitizenCount() < colony.getCitizenManager().getMaxCitizens()
+            && colony.getCitizenManager().getCurrentCitizenCount() >= Math.min(MIN_SIZE_FOR_REPRO,
+            SlimColoniesAPIProxy.getInstance().getConfig().getServer().initialCitizenAmount.get()))
         {
             if (!checkForBioParents())
             {
@@ -131,7 +135,9 @@ public class ReproductionManager implements IReproductionManager
                     }
                     else
                     {
-                        final BlockPos altPos = colony.getBuildingManager().getRandomBuilding(b -> b.hasModule(LivingBuildingModule.class) && !b.getPosition().equals(newHome.getPosition()) && BlockPosUtil.getDistance2D(b.getPosition(), newHome.getPosition()) < 50);
+                        final BlockPos altPos = colony.getBuildingManager()
+                            .getRandomBuilding(b -> b.hasModule(LivingBuildingModule.class) && !b.getPosition().equals(newHome.getPosition())
+                                && BlockPosUtil.getDistance2D(b.getPosition(), newHome.getPosition()) < 50);
                         if (altPos != null)
                         {
                             final IBuilding building = colony.getBuildingManager().getBuilding(altPos);
@@ -220,6 +226,7 @@ public class ReproductionManager implements IReproductionManager
     /**
      * Check if there are potential biological parents in the colony.
      * (At least one male/female citizen).
+     *
      * @return true if so.
      */
     private boolean checkForBioParents()

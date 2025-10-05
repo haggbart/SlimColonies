@@ -1,14 +1,14 @@
 package no.monopixel.slimcolonies.core.network.messages.client;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.network.IMessage;
-import no.monopixel.slimcolonies.api.util.Log;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.network.IMessage;
+import no.monopixel.slimcolonies.api.util.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +37,7 @@ public class UpdateClientWithCompatibilityMessage implements IMessage
         super();
 
         this.buffer = new FriendlyByteBuf(Unpooled.buffer());
-        IMinecoloniesAPI.getInstance().getColonyManager().getCompatibilityManager().serialize(this.buffer);
+        ISlimColoniesAPI.getInstance().getColonyManager().getCompatibilityManager().serialize(this.buffer);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class UpdateClientWithCompatibilityMessage implements IMessage
         final ClientLevel world = Minecraft.getInstance().level;
         try
         {
-            IMinecoloniesAPI.getInstance().getColonyManager().getCompatibilityManager().deserialize(this.buffer, world);
+            ISlimColoniesAPI.getInstance().getColonyManager().getCompatibilityManager().deserialize(this.buffer, world);
         }
         catch (Exception e)
         {

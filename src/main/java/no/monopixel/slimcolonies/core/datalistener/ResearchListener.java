@@ -7,8 +7,8 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.profiling.ProfilerFiller;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.research.IGlobalResearchTree;
 import no.monopixel.slimcolonies.api.research.IResearchRequirement;
 import no.monopixel.slimcolonies.api.research.ModResearchRequirements;
@@ -256,7 +256,7 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
             // Cancel removed individual researches first, to save parsing time.
             if (removeResearches.contains(researchId))
             {
-                if (MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
+                if (SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
                 {
                     Log.getLogger().info("{} was removed by data pack.", researchId);
                 }
@@ -274,7 +274,7 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
             // Now that we've confirmed a branch exists at all, cancel the add if it's from a removed branch.
             else if (removeBranches.contains(new ResourceLocation(researchJson.get(RESEARCH_BRANCH_PROP).getAsString())))
             {
-                if (MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
+                if (SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
                 {
                     Log.getLogger().info("{} was removed, as its branch had been removed by data pack.", researchId);
                 }
@@ -330,7 +330,7 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
                 continue;
             }
 
-            final ModResearchRequirements.ResearchRequirementEntry researchRequirementEntry = IMinecoloniesAPI.getInstance().getResearchRequirementRegistry().getValue(type);
+            final ModResearchRequirements.ResearchRequirementEntry researchRequirementEntry = ISlimColoniesAPI.getInstance().getResearchRequirementRegistry().getValue(type);
             if (researchRequirementEntry != null)
             {
                 try
@@ -522,7 +522,7 @@ public class ResearchListener extends SimpleJsonResourceReloadListener
      */
     private IGlobalResearchTree calcResearchTree(final Map<ResourceLocation, GlobalResearch> researchMap)
     {
-        final IGlobalResearchTree researchTree = MinecoloniesAPIProxy.getInstance().getGlobalResearchTree();
+        final IGlobalResearchTree researchTree = SlimColoniesAPIProxy.getInstance().getGlobalResearchTree();
         // The research tree should be reset on world unload, but certain events and disconnects break that.  Do it here, too.
         researchTree.reset();
 

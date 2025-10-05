@@ -1,17 +1,6 @@
 package no.monopixel.slimcolonies.core.blocks;
 
 import com.ldtteam.structurize.blocks.interfaces.IAnchorBlock;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesHorizontal;
-import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries.BuildingExtensionEntry;
-import no.monopixel.slimcolonies.api.entity.ai.workers.util.IBuilderUndestroyable;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.client.gui.WindowPlantationField;
-import no.monopixel.slimcolonies.core.colony.buildingextensions.PlantationField;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityPlantationField;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +23,17 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesHorizontal;
+import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries.BuildingExtensionEntry;
+import no.monopixel.slimcolonies.api.entity.ai.workers.util.IBuilderUndestroyable;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.client.gui.WindowPlantationField;
+import no.monopixel.slimcolonies.core.colony.buildingextensions.PlantationField;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityPlantationField;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -43,7 +43,8 @@ import java.util.Map;
 /**
  * Block class for the plantation field block.
  */
-public class BlockPlantationField extends AbstractBlockMinecoloniesHorizontal<BlockPlantationField> implements IBuilderUndestroyable, IAnchorBlock, IBuildingBrowsableBlock, EntityBlock
+public class BlockPlantationField extends AbstractBlockSlimColoniesHorizontal<BlockPlantationField>
+    implements IBuilderUndestroyable, IAnchorBlock, IBuildingBrowsableBlock, EntityBlock
 {
     /**
      * If the block is mirrored.
@@ -107,12 +108,12 @@ public class BlockPlantationField extends AbstractBlockMinecoloniesHorizontal<Bl
 
     @Override
     public InteractionResult use(
-      final BlockState state,
-      final Level worldIn,
-      final BlockPos pos,
-      final Player player,
-      final InteractionHand hand,
-      final BlockHitResult ray)
+        final BlockState state,
+        final Level worldIn,
+        final BlockPos pos,
+        final Player player,
+        final InteractionHand hand,
+        final BlockHitResult ray)
     {
         // If this is the client side, open the plantation field GUI
         if (worldIn.isClientSide)
@@ -144,12 +145,12 @@ public class BlockPlantationField extends AbstractBlockMinecoloniesHorizontal<Bl
             return SHAPES.get(dir);
         }
         VoxelShape shape = Shapes.box(
-          0D + (dir.getStepX() > 0 ? 0.5 : 0),
-          0D,
-          0D + (dir.getStepZ() > 0 ? 0.5 : 0),
-          1D - (dir.getStepX() < 0 ? 0.5 : 0),
-          0.625D,
-          1D - (dir.getStepZ() < 0 ? 0.5 : 0)
+            0D + (dir.getStepX() > 0 ? 0.5 : 0),
+            0D,
+            0D + (dir.getStepZ() > 0 ? 0.5 : 0),
+            1D - (dir.getStepX() < 0 ? 0.5 : 0),
+            0.625D,
+            1D - (dir.getStepZ() < 0 ? 0.5 : 0)
         );
         SHAPES.put(dir, shape);
         return shape;
@@ -246,7 +247,8 @@ public class BlockPlantationField extends AbstractBlockMinecoloniesHorizontal<Bl
                 {
                     for (BuildingExtensionEntry plantationFieldType : plantationField.getPlantationFieldTypes())
                     {
-                        colony.getBuildingManager().removeBuildingExtension(field -> field.getBuildingExtensionType().equals(plantationFieldType) && field.getPosition().equals(pos));
+                        colony.getBuildingManager()
+                            .removeBuildingExtension(field -> field.getBuildingExtensionType().equals(plantationFieldType) && field.getPosition().equals(pos));
                     }
                 }
             }

@@ -1,10 +1,5 @@
 package no.monopixel.slimcolonies.api.colony;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.api.compatibility.ICompatibilityManager;
-import no.monopixel.slimcolonies.api.crafting.IRecipeManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -12,6 +7,11 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.api.compatibility.ICompatibilityManager;
+import no.monopixel.slimcolonies.api.crafting.IRecipeManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,7 +23,7 @@ public interface IColonyManager
 
     static IColonyManager getInstance()
     {
-        return IMinecoloniesAPI.getInstance().getColonyManager();
+        return ISlimColoniesAPI.getInstance().getColonyManager();
     }
 
     /**
@@ -432,6 +432,7 @@ public interface IColonyManager
 
     /**
      * Open the new reactivation window.
+     *
      * @param pos the pos to open it at.
      */
     void openReactivationWindow(final BlockPos pos);

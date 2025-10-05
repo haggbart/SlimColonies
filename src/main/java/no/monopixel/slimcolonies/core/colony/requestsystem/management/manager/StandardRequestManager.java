@@ -5,7 +5,7 @@ import com.google.common.reflect.TypeToken;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
 import no.monopixel.slimcolonies.api.colony.requestsystem.data.*;
@@ -37,13 +37,11 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-
 /**
  * Main class of the request system. Default implementation of the IRequestManager interface.
  * <p>
  * Uses
  */
-
 
 public class StandardRequestManager implements IStandardRequestManager
 {
@@ -121,7 +119,7 @@ public class StandardRequestManager implements IStandardRequestManager
     private void setup()
     {
         dataStoreManager = StandardFactoryController.getInstance().getNewInstance(TypeConstants.DATA_STORE_MANAGER);
-        enableLogging = IMinecoloniesAPI.getInstance().getConfig().getCommon().rsEnableDebugLogging.get();
+        enableLogging = ISlimColoniesAPI.getInstance().getConfig().getCommon().rsEnableDebugLogging.get();
 
         requestIdentitiesDataStoreId = registerDataStore(TypeConstants.REQUEST_IDENTITIES_DATA_STORE);
         requestResolverIdentitiesDataStoreId = registerDataStore(TypeConstants.REQUEST_RESOLVER_IDENTITIES_DATA_STORE);

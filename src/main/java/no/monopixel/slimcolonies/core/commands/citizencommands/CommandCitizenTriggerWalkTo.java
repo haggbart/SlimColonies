@@ -1,5 +1,15 @@
 package no.monopixel.slimcolonies.core.commands.citizencommands;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.coordinates.Coordinates;
+import net.minecraft.commands.arguments.coordinates.Vec3Argument;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
@@ -11,17 +21,7 @@ import no.monopixel.slimcolonies.core.commands.commandTypes.IMCColonyOfficerComm
 import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.context.CommandContext;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.coordinates.Coordinates;
-import net.minecraft.commands.arguments.coordinates.Vec3Argument;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,7 +97,7 @@ public class CommandCitizenTriggerWalkTo implements IMCColonyOfficerCommand
                         return ((EntityCitizen) entityCitizen).getCitizenAI().getState();
                     }
 
-                    ((MinecoloniesAdvancedPathNavigate) entityCitizen.getNavigation()).setPauseTicks(100);
+                    ((SlimColoniesAdvancedPathNavigate) entityCitizen.getNavigation()).setPauseTicks(100);
                     walkingPosMap.remove(uuid);
                     return ((EntityCitizen) entityCitizen).getCitizenAI().getState();
                 })

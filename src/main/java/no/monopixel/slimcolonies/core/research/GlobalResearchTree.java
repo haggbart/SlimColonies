@@ -1,26 +1,22 @@
 package no.monopixel.slimcolonies.core.research;
 
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import io.netty.buffer.Unpooled;
+import net.minecraft.nbt.TagParser;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.network.IMessage;
-import no.monopixel.slimcolonies.api.research.IGlobalResearch;
-import no.monopixel.slimcolonies.api.research.IGlobalResearchBranch;
-import no.monopixel.slimcolonies.api.research.IGlobalResearchTree;
-import no.monopixel.slimcolonies.api.research.IResearchRequirement;
-import no.monopixel.slimcolonies.api.research.IResearchEffect;
+import no.monopixel.slimcolonies.api.research.*;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.Network;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import io.netty.buffer.Unpooled;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.TagParser;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,15 +54,15 @@ public class GlobalResearchTree implements IGlobalResearchTree
     private final Map<ResourceLocation, Set<IGlobalResearch>> researchEffectsIds = new HashMap<>();
 
     @Override
-    public IGlobalResearch getResearch(final ResourceLocation branch, final ResourceLocation id) { return researchTree.get(branch).get(id); }
+    public IGlobalResearch getResearch(final ResourceLocation branch, final ResourceLocation id) {return researchTree.get(branch).get(id);}
 
     @Nullable
     @Override
     public IGlobalResearch getResearch(final ResourceLocation id)
     {
-        for(final Map.Entry<ResourceLocation, Map<ResourceLocation, IGlobalResearch>> branch: researchTree.entrySet())
+        for (final Map.Entry<ResourceLocation, Map<ResourceLocation, IGlobalResearch>> branch : researchTree.entrySet())
         {
-            if(branch.getValue().containsKey(id))
+            if (branch.getValue().containsKey(id))
             {
                 return branch.getValue().get(id);
             }
@@ -83,9 +79,9 @@ public class GlobalResearchTree implements IGlobalResearchTree
     @Override
     public boolean hasResearch(final ResourceLocation id)
     {
-        for(final Map.Entry<ResourceLocation, Map<ResourceLocation, IGlobalResearch>> branch: researchTree.entrySet())
+        for (final Map.Entry<ResourceLocation, Map<ResourceLocation, IGlobalResearch>> branch : researchTree.entrySet())
         {
-            if(branch.getValue().containsKey(id))
+            if (branch.getValue().containsKey(id))
             {
                 return true;
             }
@@ -124,7 +120,7 @@ public class GlobalResearchTree implements IGlobalResearchTree
         }
         if (research.isAutostart())
         {
-           autostartResearch.add(research);
+            autostartResearch.add(research);
         }
     }
 
@@ -155,7 +151,7 @@ public class GlobalResearchTree implements IGlobalResearchTree
     @Override
     public IGlobalResearchBranch getBranchData(final ResourceLocation id)
     {
-        if(branchDatas.containsKey(id))
+        if (branchDatas.containsKey(id))
         {
             return branchDatas.get(id);
         }
@@ -173,16 +169,16 @@ public class GlobalResearchTree implements IGlobalResearchTree
             return Collections.emptyList();
         }
         return researchTree.get(branch).values().stream().filter(research -> research.getParent() == null)
-                 .sorted(Comparator.comparing(IGlobalResearch::getId))
-                 .map(IGlobalResearch::getId).collect(Collectors.toList());
+            .sorted(Comparator.comparing(IGlobalResearch::getId))
+            .map(IGlobalResearch::getId).collect(Collectors.toList());
     }
 
     @Override
     public void reset()
     {
-        for(ResourceLocation reset : reloadableResearch)
+        for (ResourceLocation reset : reloadableResearch)
         {
-            for(Map.Entry<ResourceLocation, Map<ResourceLocation, IGlobalResearch>> branch : researchTree.entrySet())
+            for (Map.Entry<ResourceLocation, Map<ResourceLocation, IGlobalResearch>> branch : researchTree.entrySet())
             {
                 branch.getValue().remove(reset);
             }
@@ -234,16 +230,16 @@ public class GlobalResearchTree implements IGlobalResearchTree
     public void serializeNetworkData(final FriendlyByteBuf buf)
     {
         buf.writeVarInt(researchTree.size());
-        for(final Map<ResourceLocation, IGlobalResearch> branch : researchTree.values())
+        for (final Map<ResourceLocation, IGlobalResearch> branch : researchTree.values())
         {
             buf.writeVarInt(branch.size());
-            for(final IGlobalResearch research : branch.values())
+            for (final IGlobalResearch research : branch.values())
             {
                 StandardFactoryController.getInstance().serialize(buf, research);
             }
         }
         // Lastly, we'll send the branch identifiers.
-        for(Map.Entry<ResourceLocation, IGlobalResearchBranch> branch : branchDatas.entrySet())
+        for (Map.Entry<ResourceLocation, IGlobalResearchBranch> branch : branchDatas.entrySet())
         {
             buf.writeResourceLocation(branch.getKey());
             buf.writeNbt(branch.getValue().writeToNBT());
@@ -258,7 +254,7 @@ public class GlobalResearchTree implements IGlobalResearchTree
         researchEffectsIds.clear();
         for (int branchNum = buf.readVarInt(); branchNum > 0; branchNum--)
         {
-            for(int researchNum = buf.readVarInt(); researchNum > 0; researchNum--)
+            for (int researchNum = buf.readVarInt(); researchNum > 0; researchNum--)
             {
                 final IGlobalResearch newResearch = StandardFactoryController.getInstance().deserialize(buf);
                 addResearch(newResearch.getBranch(), newResearch, true);
@@ -275,7 +271,7 @@ public class GlobalResearchTree implements IGlobalResearchTree
     @Override
     public List<IResearchEffect> getEffectsForResearch(@NotNull final ResourceLocation id)
     {
-        for(final ResourceLocation branch: this.getBranches())
+        for (final ResourceLocation branch : this.getBranches())
         {
             final IGlobalResearch r = this.getResearch(branch, id);
             if (r != null)
@@ -296,20 +292,20 @@ public class GlobalResearchTree implements IGlobalResearchTree
     public List<ItemStorage> getResearchResetCosts()
     {
         List<ItemStorage> outputList = new ArrayList<>();
-        for (String itemId : MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchResetCost.get())
+        for (String itemId : SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchResetCost.get())
         {
             final int tagIndex = itemId.indexOf("{");
             final String tag = tagIndex > 0 ? itemId.substring(tagIndex) : null;
             itemId = tagIndex > 0 ? itemId.substring(0, tagIndex) : itemId;
             String[] split = itemId.split(":");
-            if(split.length != 2)
+            if (split.length != 2)
             {
-                if(split.length == 1)
+                if (split.length == 1)
                 {
-                    final String[] tempArray ={"minecraft", split[0]};
+                    final String[] tempArray = {"minecraft", split[0]};
                     split = tempArray;
                 }
-                else if(split.length > 3)
+                else if (split.length > 3)
                 {
                     Log.getLogger().error("Unable to parse Research Reset Cost definition: " + itemId);
                 }

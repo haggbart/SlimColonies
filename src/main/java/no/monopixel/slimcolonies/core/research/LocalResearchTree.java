@@ -7,7 +7,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
 import no.monopixel.slimcolonies.api.research.*;
@@ -144,7 +144,7 @@ public class LocalResearchTree implements ILocalResearchTree
             if (player.isCreative())
             {
                 research.startResearch(colony.getResearchManager().getResearchTree());
-                if (MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get())
+                if (SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get())
                 {
                     colony.getResearchManager()
                         .getResearchTree()
@@ -179,7 +179,7 @@ public class LocalResearchTree implements ILocalResearchTree
         {
             if (player.isCreative())
             {
-                if (MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get())
+                if (SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get())
                 {
                     colony.getResearchManager()
                         .getResearchTree()
@@ -312,7 +312,7 @@ public class LocalResearchTree implements ILocalResearchTree
             .map(researchCompound -> (ILocalResearch) StandardFactoryController.getInstance().deserialize(researchCompound))
             .forEach(research -> {
                 /// region Updated ID helper.
-                if (!MinecoloniesAPIProxy.getInstance().getGlobalResearchTree().hasResearch(research.getBranch(), research.getId()))
+                if (!SlimColoniesAPIProxy.getInstance().getGlobalResearchTree().hasResearch(research.getBranch(), research.getId()))
                 {
                     if (research.getBranch().getNamespace().contains("minecraft"))
                     {
@@ -325,7 +325,7 @@ public class LocalResearchTree implements ILocalResearchTree
                     }
                     else
                     {
-                        if (MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
+                        if (SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
                         {
                             Log.getLogger().warn("Research " + research.getId() + " was in colony save file, but was not in CompatMap.");
                         }
@@ -337,9 +337,9 @@ public class LocalResearchTree implements ILocalResearchTree
                 {
                     // Even after correction, we do still need to check for presence; it's possible for someone to have old save data and remove the research,
                     // or to have a different research that was in a now-removed data pack.  But those will get just thrown away.
-                    if (MinecoloniesAPIProxy.getInstance().getGlobalResearchTree().hasResearch(research.getBranch(), research.getId()))
+                    if (SlimColoniesAPIProxy.getInstance().getGlobalResearchTree().hasResearch(research.getBranch(), research.getId()))
                     {
-                        for (final IResearchEffect effect : MinecoloniesAPIProxy.getInstance()
+                        for (final IResearchEffect effect : SlimColoniesAPIProxy.getInstance()
                             .getGlobalResearchTree()
                             .getResearch(research.getBranch(), research.getId())
                             .getEffects())
@@ -349,7 +349,7 @@ public class LocalResearchTree implements ILocalResearchTree
                     }
                     else
                     {
-                        if (MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
+                        if (SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchDebugLog.get())
                         {
                             Log.getLogger()
                                 .warn(

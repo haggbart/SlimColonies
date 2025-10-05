@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 
-public interface IBlockMinecolonies<B extends IBlockMinecolonies<B>>
+public interface IBlockSlimColonies<B extends IBlockSlimColonies<B>>
 {
     /**
      * Registery block at gameregistry.
@@ -25,6 +25,7 @@ public interface IBlockMinecolonies<B extends IBlockMinecolonies<B>>
 
     /**
      * Get the registry name of the block.
+     *
      * @return the registry name.
      */
     ResourceLocation getRegistryName();

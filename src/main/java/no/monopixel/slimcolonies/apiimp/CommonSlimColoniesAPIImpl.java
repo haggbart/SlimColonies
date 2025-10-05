@@ -4,7 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataManager;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
@@ -46,7 +46,7 @@ import no.monopixel.slimcolonies.core.research.GlobalResearchTree;
 import no.monopixel.slimcolonies.core.util.FurnaceRecipes;
 import org.jetbrains.annotations.NotNull;
 
-public class CommonMinecoloniesAPIImpl implements IMinecoloniesAPI
+public class CommonSlimColoniesAPIImpl implements ISlimColoniesAPI
 {
     private final  IColonyManager                                                     colonyManager          = new ColonyManager();
     private final  ICitizenDataManager                                                citizenDataManager     = new CitizenDataManager();

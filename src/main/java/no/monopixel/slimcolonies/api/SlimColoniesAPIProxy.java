@@ -1,13 +1,15 @@
 package no.monopixel.slimcolonies.api;
 
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.NewRegistryEvent;
 import no.monopixel.slimcolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataManager;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries.BuildingExtensionEntry;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.IBuildingDataManager;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
-import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries.BuildingExtensionEntry;
 import no.monopixel.slimcolonies.api.colony.guardtype.GuardType;
 import no.monopixel.slimcolonies.api.colony.guardtype.registry.IGuardTypeDataManager;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.registry.IInteractionResponseHandlerDataManager;
@@ -18,7 +20,6 @@ import no.monopixel.slimcolonies.api.compatibility.IFurnaceRecipes;
 import no.monopixel.slimcolonies.api.configuration.Configuration;
 import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
 import no.monopixel.slimcolonies.api.crafting.registry.RecipeTypeEntry;
-// Happiness imports removed
 import no.monopixel.slimcolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
 import no.monopixel.slimcolonies.api.eventbus.EventBus;
@@ -26,25 +27,23 @@ import no.monopixel.slimcolonies.api.quests.registries.QuestRegistries;
 import no.monopixel.slimcolonies.api.research.IGlobalResearchTree;
 import no.monopixel.slimcolonies.api.research.ModResearchEffects;
 import no.monopixel.slimcolonies.api.research.ModResearchRequirements;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.NewRegistryEvent;
 
-public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
+public final class SlimColoniesAPIProxy implements ISlimColoniesAPI
 {
-    private static final MinecoloniesAPIProxy ourInstance = new MinecoloniesAPIProxy();
+    private static final SlimColoniesAPIProxy ourInstance = new SlimColoniesAPIProxy();
 
-    private IMinecoloniesAPI apiInstance;
+    private ISlimColoniesAPI apiInstance;
 
-    public static MinecoloniesAPIProxy getInstance()
+    public static SlimColoniesAPIProxy getInstance()
     {
         return ourInstance;
     }
 
-    private MinecoloniesAPIProxy()
+    private SlimColoniesAPIProxy()
     {
     }
 
-    public void setApiInstance(final IMinecoloniesAPI apiInstance)
+    public void setApiInstance(final ISlimColoniesAPI apiInstance)
     {
         this.apiInstance = apiInstance;
     }
@@ -60,7 +59,6 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
     {
         return apiInstance.getCitizenDataManager();
     }
-
 
     @Override
     public IPathNavigateRegistry getPathNavigateRegistry()
@@ -201,8 +199,6 @@ public final class MinecoloniesAPIProxy implements IMinecoloniesAPI
     {
         return apiInstance.getQuestDialogueAnswerRegistry();
     }
-
-    // Happiness registry methods removed
 
     @Override
     public void onRegistryNewRegistry(final NewRegistryEvent event)

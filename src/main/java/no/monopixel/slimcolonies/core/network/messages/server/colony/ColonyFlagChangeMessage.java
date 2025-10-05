@@ -1,15 +1,15 @@
 package no.monopixel.slimcolonies.core.network.messages.server.colony;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyFlagChangedModEvent;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.client.gui.WindowBannerPicker;
 import no.monopixel.slimcolonies.core.network.messages.server.AbstractColonyServerMessage;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_BANNER_PATTERNS;
 
@@ -45,7 +45,7 @@ public class ColonyFlagChangeMessage extends AbstractColonyServerMessage
     protected void onExecute(NetworkEvent.Context ctxIn, boolean isLogicalServer, IColony colony)
     {
         colony.setColonyFlag(patterns);
-        IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyFlagChangedModEvent(colony));
+        ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyFlagChangedModEvent(colony));
     }
 
     @Override

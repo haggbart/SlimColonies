@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
@@ -422,7 +422,7 @@ public class CustomRecipe
             filter = parseArrayOrStringFilter(filterJson, true);
         }
 
-        final boolean logStatus = IMinecoloniesAPI.getInstance().getConfig().getServer().auditCraftingTags.get();
+        final boolean logStatus = ISlimColoniesAPI.getInstance().getConfig().getServer().auditCraftingTags.get();
 
         for (final Item item : ForgeRegistries.ITEMS.tags().getTag(ItemTags.create(tagId)))
         {

@@ -1,10 +1,10 @@
 package no.monopixel.slimcolonies.core.entity.pathfinding.registry;
 
 import com.google.common.collect.Maps;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.AbstractAdvancedPathNavigate;
-import no.monopixel.slimcolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
 import net.minecraft.world.entity.Mob;
+import no.monopixel.slimcolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.AbstractAdvancedPathNavigate;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,13 +15,13 @@ import java.util.function.Predicate;
 
 public class PathNavigateRegistry implements IPathNavigateRegistry
 {
-    private static final Function<Mob, AbstractAdvancedPathNavigate> DEFAULT = (entityLiving -> new MinecoloniesAdvancedPathNavigate(entityLiving, entityLiving.level));
+    private static final Function<Mob, AbstractAdvancedPathNavigate> DEFAULT = (entityLiving -> new SlimColoniesAdvancedPathNavigate(entityLiving, entityLiving.level));
 
     private final Map<Predicate<Mob>, Function<Mob, AbstractAdvancedPathNavigate>> registry = Maps.newLinkedHashMap();
 
     @Override
     public IPathNavigateRegistry registerNewPathNavigate(
-      final Predicate<Mob> selectionPredicate, final Function<Mob, AbstractAdvancedPathNavigate> navigateProducer)
+        final Predicate<Mob> selectionPredicate, final Function<Mob, AbstractAdvancedPathNavigate> navigateProducer)
     {
         registry.put(selectionPredicate, navigateProducer);
         return this;

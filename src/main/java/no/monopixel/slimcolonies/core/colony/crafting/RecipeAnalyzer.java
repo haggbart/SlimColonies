@@ -1,14 +1,6 @@
 package no.monopixel.slimcolonies.core.colony.crafting;
 
 import com.google.common.collect.ImmutableMap;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
-import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
-import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
-import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.AnimalHerdingModule;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,6 +8,14 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
+import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
+import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
+import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.AnimalHerdingModule;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -31,15 +31,16 @@ public final class RecipeAnalyzer
      * Build a map of all potentially learnable vanilla recipes, converted to {@link IGenericRecipe}.
      *
      * @param recipeManager the vanilla recipe manager
-     * @param world the world, if available (some recipes need it)
+     * @param world         the world, if available (some recipes need it)
      * @return the recipe map
      */
-    public static Map<CraftingType, List<IGenericRecipe>> buildVanillaRecipesMap(@NotNull final RecipeManager recipeManager,
-                                                                                 @NotNull final Level world)
+    public static Map<CraftingType, List<IGenericRecipe>> buildVanillaRecipesMap(
+        @NotNull final RecipeManager recipeManager,
+        @NotNull final Level world)
     {
         final ImmutableMap.Builder<CraftingType, List<IGenericRecipe>> builder = ImmutableMap.builder();
 
-        for (final CraftingType type : MinecoloniesAPIProxy.getInstance().getCraftingTypeRegistry().getValues())
+        for (final CraftingType type : SlimColoniesAPIProxy.getInstance().getCraftingTypeRegistry().getValues())
         {
             final List<IGenericRecipe> recipes = type.findRecipes(recipeManager, world);
             builder.put(type, recipes);
@@ -51,14 +52,15 @@ public final class RecipeAnalyzer
     /**
      * Find all recipes for a given crafter.
      *
-     * @param vanilla vanilla recipes map.
+     * @param vanilla  vanilla recipes map.
      * @param crafting crafting module.
      * @return list of recipes
      */
     @NotNull
-    public static List<IGenericRecipe> findRecipes(@NotNull final Map<CraftingType, List<IGenericRecipe>> vanilla,
-                                                   @NotNull final ICraftingBuildingModule crafting,
-                                                   @NotNull final Level world)
+    public static List<IGenericRecipe> findRecipes(
+        @NotNull final Map<CraftingType, List<IGenericRecipe>> vanilla,
+        @NotNull final ICraftingBuildingModule crafting,
+        @NotNull final Level world)
     {
         final List<IGenericRecipe> recipes = new ArrayList<>();
 
@@ -87,9 +89,9 @@ public final class RecipeAnalyzer
                 // this is a multi-output recipe; assume it replaces a bunch of vanilla
                 // recipes we already added above
                 recipes.removeIf(r -> ItemStackUtils.isNotEmpty(r.getPrimaryOutput()) &&
-                        ItemStackUtils.compareItemStacksIgnoreStackSize(recipeStorage.getPrimaryOutput(), r.getPrimaryOutput()));
+                    ItemStackUtils.compareItemStacksIgnoreStackSize(recipeStorage.getPrimaryOutput(), r.getPrimaryOutput()));
                 recipes.removeIf(r -> recipeStorage.getAlternateOutputs().stream()
-                        .anyMatch(s -> ItemStackUtils.compareItemStacksIgnoreStackSize(s, r.getPrimaryOutput())));
+                    .anyMatch(s -> ItemStackUtils.compareItemStacksIgnoreStackSize(s, r.getPrimaryOutput())));
             }
             recipes.add(GenericRecipeUtils.create(customRecipe, recipeStorage));
         }
@@ -112,7 +114,10 @@ public final class RecipeAnalyzer
 
         for (final EntityType<?> entityType : ForgeRegistries.ENTITY_TYPES.getValues())
         {
-            if (entityType.getCategory() != MobCategory.CREATURE) { continue; }
+            if (entityType.getCategory() != MobCategory.CREATURE)
+            {
+                continue;
+            }
 
             try
             {
@@ -139,8 +144,9 @@ public final class RecipeAnalyzer
      * @param module  the herding module
      * @return recipes for that module
      */
-    public static List<IGenericRecipe> findRecipes(@NotNull final List<Animal> animals,
-                                                   @NotNull final AnimalHerdingModule module)
+    public static List<IGenericRecipe> findRecipes(
+        @NotNull final List<Animal> animals,
+        @NotNull final AnimalHerdingModule module)
     {
         final List<IGenericRecipe> recipes = new ArrayList<>();
 

@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
@@ -112,7 +112,7 @@ public class ResearchManager implements IResearchManager
     public ResearchManager(IColony colony)
     {
         this.colony = colony;
-        autoStartResearch.addAll(MinecoloniesAPIProxy.getInstance().getGlobalResearchTree().getAutostartResearches());
+        autoStartResearch.addAll(SlimColoniesAPIProxy.getInstance().getGlobalResearchTree().getAutostartResearches());
         this.tree = new LocalResearchTree(colony);
     }
 
@@ -215,7 +215,7 @@ public class ResearchManager implements IResearchManager
             }
         }
         tree.addResearch(research.getBranch(), new LocalResearch(research.getId(), research.getBranch(), research.getDepth()));
-        if (research.isInstant() || (creativePlayer && MinecoloniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get()))
+        if (research.isInstant() || (creativePlayer && SlimColoniesAPIProxy.getInstance().getConfig().getServer().researchCreativeCompletion.get()))
         {
             ILocalResearch localResearch = tree.getResearch(research.getBranch(), research.getId());
             localResearch.setProgress(IGlobalResearchTree.getInstance().getBranchData(research.getBranch()).getBaseTime(research.getDepth()));

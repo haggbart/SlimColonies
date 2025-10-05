@@ -20,7 +20,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockMinecoloniesConstructionTape;
+import no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockSlimColoniesConstructionTape;
 import no.monopixel.slimcolonies.api.entity.pathfinding.IDynamicHeuristicNavigator;
 import no.monopixel.slimcolonies.api.entity.pathfinding.IPathJob;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
@@ -1378,7 +1378,7 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
                 else
                 {
                     return pathingOptions.canEnterDoors() && (block.getBlock() instanceof DoorBlock || block.getBlock() instanceof FenceGateBlock)
-                        || block.getBlock() instanceof AbstractBlockMinecoloniesConstructionTape
+                        || block.getBlock() instanceof AbstractBlockSlimColoniesConstructionTape
                         || block.getBlock() instanceof PressurePlateBlock
                         || block.getBlock() instanceof BlockDecorationController
                         || block.getBlock() instanceof SignBlock

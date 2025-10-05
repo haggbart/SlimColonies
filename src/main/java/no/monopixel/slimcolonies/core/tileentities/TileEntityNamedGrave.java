@@ -1,10 +1,10 @@
 package no.monopixel.slimcolonies.core.tileentities;
 
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityNamedGrave;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityNamedGrave;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
 
 /**
  * Represent a TileEntity that will be built by a graveyard undertaker in a graveyard to honor a dead citizen
@@ -16,7 +16,7 @@ public class TileEntityNamedGrave extends AbstractTileEntityNamedGrave
      */
     public TileEntityNamedGrave(final BlockPos pos, final BlockState state)
     {
-        this(MinecoloniesTileEntities.NAMED_GRAVE.get(), pos, state);
+        this(SlimColoniesTileEntities.NAMED_GRAVE.get(), pos, state);
     }
 
     /**

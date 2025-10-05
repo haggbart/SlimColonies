@@ -5,26 +5,6 @@ import com.ldtteam.structurize.storage.StructurePackMeta;
 import com.ldtteam.structurize.storage.StructurePacks;
 import com.ldtteam.structurize.util.BlockInfo;
 import com.ldtteam.structurize.util.RotationMirror;
-import no.monopixel.slimcolonies.api.blocks.AbstractColonyBlock;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuildingContainer;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.api.compatibility.newstruct.BlueprintMapping;
-import no.monopixel.slimcolonies.api.inventory.api.CombinedItemHandler;
-import no.monopixel.slimcolonies.api.inventory.container.ContainerBuildingInventory;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
-import no.monopixel.slimcolonies.api.tileentities.ITickable;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -50,6 +30,26 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.blocks.AbstractColonyBlock;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuildingContainer;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.api.colony.permissions.Action;
+import no.monopixel.slimcolonies.api.compatibility.newstruct.BlueprintMapping;
+import no.monopixel.slimcolonies.api.inventory.api.CombinedItemHandler;
+import no.monopixel.slimcolonies.api.inventory.container.ContainerBuildingInventory;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
+import no.monopixel.slimcolonies.api.tileentities.ITickable;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -128,7 +128,7 @@ public class TileEntityColonyBuilding extends AbstractTileEntityColonyBuilding i
      */
     public TileEntityColonyBuilding(final BlockPos pos, final BlockState state)
     {
-        this(MinecoloniesTileEntities.BUILDING.get(), pos, state);
+        this(SlimColoniesTileEntities.BUILDING.get(), pos, state);
     }
 
     /**
@@ -382,7 +382,7 @@ public class TileEntityColonyBuilding extends AbstractTileEntityColonyBuilding i
             {
                 final String level = this.getSchematicName().substring(this.getSchematicName().length() - 1);
                 path = BlueprintMapping.getPathMapping(compound.getString(TAG_STYLE), this.getSchematicName().substring(0, this.getSchematicName().length() - 1)) + level
-                         + ".blueprint";
+                    + ".blueprint";
             }
         }
         else
@@ -486,7 +486,7 @@ public class TileEntityColonyBuilding extends AbstractTileEntityColonyBuilding i
                                 int i;
                                 for (i = 0; i < Math.min(lines.size(), 3); i++)
                                 {
-                                    signText = signText.setMessage(i,  Component.literal(lines.get(i).getString()));
+                                    signText = signText.setMessage(i, Component.literal(lines.get(i).getString()));
                                 }
 
                                 signText = signText.setMessage(i, Component.literal(buildingView.getBuildingLevel() + ""));

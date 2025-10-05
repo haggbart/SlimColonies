@@ -6,7 +6,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.AbstractBuildingModule;
@@ -132,7 +132,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
                 }
                 ItemStack requestStack = originalStack;
                 ItemStack rawStack = ItemStack.EMPTY;
-                if (canCook && MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getFirstSmeltingRecipeByResult(menuItem) instanceof RecipeStorage recipeStorage)
+                if (canCook && SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getFirstSmeltingRecipeByResult(menuItem) instanceof RecipeStorage recipeStorage)
                 {
                     // Smelting Recipes only got 1 input. Request sometimes the input if this is a smeltable.
                     rawStack = recipeStorage.getInput().get(0).getItemStack().copy();
@@ -204,7 +204,7 @@ public class RestaurantMenuModule extends AbstractBuildingModule implements IPer
             consumer.accept(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, menuItem.getItemStack(), false, true),
                 menuItem.getItemStack().getMaxStackSize() * getExpectedStock(),
                 false);
-            if (canCook && MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getFirstSmeltingRecipeByResult(menuItem) instanceof RecipeStorage recipeStorage)
+            if (canCook && SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getFirstSmeltingRecipeByResult(menuItem) instanceof RecipeStorage recipeStorage)
             {
                 final ItemStack smeltStack = recipeStorage.getInput().get(0).getItemStack();
                 consumer.accept(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, smeltStack, false, true), smeltStack.getMaxStackSize() * getExpectedStock(), false);

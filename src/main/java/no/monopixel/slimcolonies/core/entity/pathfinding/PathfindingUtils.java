@@ -3,12 +3,6 @@ package no.monopixel.slimcolonies.core.entity.pathfinding;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import com.ldtteam.domumornamentum.block.decorative.PanelBlock;
 import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
-import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import no.monopixel.slimcolonies.api.util.ShapeUtil;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.entity.pathfinding.world.CachingBlockLookup;
-import no.monopixel.slimcolonies.core.network.messages.client.SyncPathReachedMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,6 +21,12 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockSlimColoniesDefault;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.util.ShapeUtil;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.entity.pathfinding.world.CachingBlockLookup;
+import no.monopixel.slimcolonies.core.network.messages.client.SyncPathReachedMessage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -164,7 +164,7 @@ public class PathfindingUtils
                 bs = level.getBlockState(pos);
             }
         }
-        else if (b instanceof FenceBlock || b instanceof WallBlock || b instanceof AbstractBlockMinecoloniesDefault || (bs.blocksMotion() && !canStandInSolidBlock(bs)))
+        else if (b instanceof FenceBlock || b instanceof WallBlock || b instanceof AbstractBlockSlimColoniesDefault || (bs.blocksMotion() && !canStandInSolidBlock(bs)))
         {
             final VoxelShape shape = bs.getCollisionShape(level, pos);
             if (shape.isEmpty())

@@ -49,7 +49,7 @@ import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
 import no.monopixel.slimcolonies.api.colony.permissions.Action;
 import no.monopixel.slimcolonies.api.entity.ModEntities;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity;
+import no.monopixel.slimcolonies.api.entity.other.AbstractFastSlimColoniesEntity;
 import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
@@ -65,7 +65,7 @@ import no.monopixel.slimcolonies.core.colony.interactionhandling.RecruitmentInte
 import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
 import no.monopixel.slimcolonies.core.commands.EntryPoint;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesChunkCapabilityProvider;
+import no.monopixel.slimcolonies.core.event.capabilityproviders.SlimColoniesChunkCapabilityProvider;
 import no.monopixel.slimcolonies.core.event.capabilityproviders.SlimColoniesWorldCapabilityProvider;
 import no.monopixel.slimcolonies.core.event.capabilityproviders.SlimColoniesWorldColonyManagerCapabilityProvider;
 import no.monopixel.slimcolonies.core.network.messages.client.OpenSuggestionWindowMessage;
@@ -114,13 +114,13 @@ public class EventHandler
             if (SlimColonies.getConfig().getServer().mobAttackCitizens.get() && event.getEntity() instanceof Mob && event.getEntity() instanceof Enemy && !(event.getEntity()
                 .getType()
                 .is(ModTags.mobAttackBlacklist))
-                && !(event.getEntity() instanceof AbstractFastMinecoloniesEntity))
+                && !(event.getEntity() instanceof AbstractFastSlimColoniesEntity))
             {
                 ((Mob) event.getEntity()).targetSelector.addGoal(6,
                     new NearestAttackableTargetGoal<>((Mob) event.getEntity(), EntityCitizen.class, true, citizen -> !citizen.isInvisible()));
             }
 
-            if (event.getEntity() instanceof AbstractFastMinecoloniesEntity && ((ServerLevel) event.getLevel()).getEntity(event.getEntity().getUUID()) != null)
+            if (event.getEntity() instanceof AbstractFastSlimColoniesEntity && ((ServerLevel) event.getLevel()).getEntity(event.getEntity().getUUID()) != null)
             {
                 event.setCanceled(true);
             }
@@ -141,7 +141,7 @@ public class EventHandler
     @SubscribeEvent
     public static void onAttachingCapabilitiesChunk(@NotNull final AttachCapabilitiesEvent<LevelChunk> event)
     {
-        event.addCapability(new ResourceLocation(Constants.MOD_ID, "closecolony"), new MinecoloniesChunkCapabilityProvider());
+        event.addCapability(new ResourceLocation(Constants.MOD_ID, "closecolony"), new SlimColoniesChunkCapabilityProvider());
     }
 
     /**

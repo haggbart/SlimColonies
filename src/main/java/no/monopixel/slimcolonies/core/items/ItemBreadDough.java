@@ -5,7 +5,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
 /**
  * Class handling Bread Dough.
  */
-public class ItemBreadDough extends AbstractItemMinecolonies
+public class ItemBreadDough extends AbstractItemSlimColonies
 {
     /**
      * Sets the name, creative tab, and registers the Bread Dough item.

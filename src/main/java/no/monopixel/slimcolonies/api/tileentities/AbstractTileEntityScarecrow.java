@@ -1,9 +1,9 @@
 package no.monopixel.slimcolonies.api.tileentities;
 
-import no.monopixel.slimcolonies.api.colony.IColony;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.colony.IColony;
 
 /**
  * The abstract implementation for farmer field tile entities.
@@ -15,7 +15,7 @@ public abstract class AbstractTileEntityScarecrow extends BlockEntity
      */
     protected AbstractTileEntityScarecrow(final BlockPos pos, final BlockState state)
     {
-        super(MinecoloniesTileEntities.SCARECROW.get(), pos, state);
+        super(SlimColoniesTileEntities.SCARECROW.get(), pos, state);
     }
 
     /**

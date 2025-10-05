@@ -1,9 +1,5 @@
 package no.monopixel.slimcolonies.api.blocks.decorative;
 
-import no.monopixel.slimcolonies.api.blocks.interfaces.IBlockMinecolonies;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyFlag;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +16,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.IForgeRegistry;
+import no.monopixel.slimcolonies.api.blocks.interfaces.IBlockSlimColonies;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyFlag;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -27,9 +27,9 @@ import javax.annotation.Nullable;
 /**
  * Represents the common functions of both the wall and floor colony flag banner blocks
  */
-public abstract class AbstractColonyFlagBanner<B extends AbstractColonyFlagBanner<B>> extends AbstractBannerBlock implements IBlockMinecolonies<AbstractColonyFlagBanner<B>>
+public abstract class AbstractColonyFlagBanner<B extends AbstractColonyFlagBanner<B>> extends AbstractBannerBlock implements IBlockSlimColonies<AbstractColonyFlagBanner<B>>
 {
-    public static final String REGISTRY_NAME = "colony_banner";
+    public static final String REGISTRY_NAME      = "colony_banner";
     public static final String REGISTRY_NAME_WALL = "colony_wall_banner";
 
     public AbstractColonyFlagBanner()
@@ -37,7 +37,7 @@ public abstract class AbstractColonyFlagBanner<B extends AbstractColonyFlagBanne
         super(
             DyeColor.WHITE,
             Properties.of().mapColor(MapColor.WOOD)
-              .sound(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .noCollission()
                 .strength(1F)
                 .sound(SoundType.WOOD)
@@ -85,11 +85,11 @@ public abstract class AbstractColonyFlagBanner<B extends AbstractColonyFlagBanne
         {
             if (worldIn instanceof ClientLevel)
             {
-                ((TileEntityColonyFlag)tileentity).getItemClient();
+                ((TileEntityColonyFlag) tileentity).getItemClient();
             }
             else
             {
-                ((TileEntityColonyFlag)tileentity).getItemServer();
+                ((TileEntityColonyFlag) tileentity).getItemServer();
             }
         }
         return super.getCloneItemStack(worldIn, pos, state);

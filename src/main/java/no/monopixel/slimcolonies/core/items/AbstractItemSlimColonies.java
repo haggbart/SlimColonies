@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 /**
  * Handles simple things that all items need.
  */
-public abstract class AbstractItemMinecolonies extends Item
+public abstract class AbstractItemSlimColonies extends Item
 {
     /**
      * The name of the item.
@@ -18,7 +18,7 @@ public abstract class AbstractItemMinecolonies extends Item
      * @param name       The name of this item
      * @param properties the properties.
      */
-    public AbstractItemMinecolonies(final String name, final Item.Properties properties)
+    public AbstractItemSlimColonies(final String name, final Item.Properties properties)
     {
         super(properties);
         this.name = name;

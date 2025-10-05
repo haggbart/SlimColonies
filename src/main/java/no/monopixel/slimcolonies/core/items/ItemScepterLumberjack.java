@@ -1,5 +1,14 @@
 package no.monopixel.slimcolonies.core.items;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
@@ -10,15 +19,6 @@ import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingLumberjack;
 import no.monopixel.slimcolonies.core.entity.ai.workers.production.EntityAIWorkLumberjack;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,12 +33,12 @@ import static no.monopixel.slimcolonies.api.util.constant.translation.ToolTransl
 /**
  * Lumberjack Scepter Item class. Used to give tasks to Lumberjacks.
  */
-public class ItemScepterLumberjack extends AbstractItemMinecolonies implements IBlockOverlayItem
+public class ItemScepterLumberjack extends AbstractItemSlimColonies implements IBlockOverlayItem
 {
-    private static final int RED_OVERLAY = 0xFFFF0000;
-    private static final int GREEN_OVERLAY = 0xFF00FF00;
+    private static final int    RED_OVERLAY = 0xFFFF0000;
+    private static final int    GREEN_OVERLAY = 0xFF00FF00;
     private static final String NBT_START_POS = Constants.MOD_ID + ":" + "start_pos";
-    private static final String NBT_END_POS   = Constants.MOD_ID + ":" + "end_pos";
+    private static final String NBT_END_POS = Constants.MOD_ID + ":" + "end_pos";
 
     /**
      * LumberjackScepter constructor. Sets max stack to 1, like other tools.
@@ -80,7 +80,8 @@ public class ItemScepterLumberjack extends AbstractItemMinecolonies implements I
         return false;
     }
 
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
+    public float getDestroySpeed(ItemStack stack, BlockState state)
+    {
         return 3.4028235E38F;
     }
 
@@ -151,7 +152,9 @@ public class ItemScepterLumberjack extends AbstractItemMinecolonies implements I
         return Collections.emptyList();
     }
 
-    private record Box(@Nullable BlockPos anchor, @Nullable Tuple<BlockPos, BlockPos> corners) { }
+    private record Box(
+        @Nullable BlockPos anchor,
+        @Nullable Tuple<BlockPos, BlockPos> corners) {}
 
     @NotNull
     private Box getBox(@NotNull final Level world, final CompoundTag compound)
@@ -182,8 +185,9 @@ public class ItemScepterLumberjack extends AbstractItemMinecolonies implements I
     }
 
     @NotNull
-    private Box getBox(@NotNull final Level world, final int colonyId, @NotNull final BlockPos pos,
-                       @Nullable final BlockPos start, @Nullable final BlockPos end)
+    private Box getBox(
+        @NotNull final Level world, final int colonyId, @NotNull final BlockPos pos,
+        @Nullable final BlockPos start, @Nullable final BlockPos end)
     {
         final IColonyView colony = IColonyManager.getInstance().getColonyView(colonyId, world.dimension());
 

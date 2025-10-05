@@ -22,7 +22,7 @@ import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.inventory.container.ContainerGrave;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityGrave;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
@@ -57,7 +57,7 @@ public class TileEntityGrave extends AbstractTileEntityGrave
 
     public TileEntityGrave(final BlockPos pos, final BlockState state)
     {
-        super(MinecoloniesTileEntities.GRAVE.get(), pos, state);
+        super(SlimColoniesTileEntities.GRAVE.get(), pos, state);
     }
 
     /**

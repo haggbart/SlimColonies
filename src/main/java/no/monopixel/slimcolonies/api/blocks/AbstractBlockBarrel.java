@@ -1,15 +1,15 @@
 package no.monopixel.slimcolonies.api.blocks;
 
-import no.monopixel.slimcolonies.api.blocks.interfaces.ITickableBlockMinecolonies;
-import no.monopixel.slimcolonies.api.blocks.types.BarrelType;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityBarrel;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import no.monopixel.slimcolonies.api.blocks.interfaces.ITickableBlockSlimColonies;
+import no.monopixel.slimcolonies.api.blocks.types.BarrelType;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityBarrel;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractBlockBarrel<B extends AbstractBlockBarrel<B>> extends AbstractBlockMinecoloniesHorizontal<B> implements ITickableBlockMinecolonies
+public abstract class AbstractBlockBarrel<B extends AbstractBlockBarrel<B>> extends AbstractBlockSlimColoniesHorizontal<B> implements ITickableBlockSlimColonies
 {
     public static final EnumProperty<BarrelType> VARIANT = EnumProperty.create("variant", BarrelType.class);
 

@@ -32,8 +32,8 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
@@ -114,7 +114,7 @@ public class ClientEventHandler
         }
 
         final ResourceLocation soundLocation = event.getSound().getLocation();
-        if (!MinecoloniesAPIProxy.getInstance().getConfig().getClient().citizenVoices.get()
+        if (!SlimColoniesAPIProxy.getInstance().getConfig().getClient().citizenVoices.get()
             && soundLocation.getNamespace().equals(Constants.MOD_ID)
             && soundLocation.getPath().startsWith(CITIZEN_SOUND_EVENT_PREFIX)
         )
@@ -139,10 +139,10 @@ public class ClientEventHandler
 
         final ItemStack stack = event.getItemStack();
 
-        IColony colony = IMinecoloniesAPI.getInstance().getColonyManager().getIColony(event.getEntity().level, event.getEntity().blockPosition());
+        IColony colony = ISlimColoniesAPI.getInstance().getColonyManager().getIColony(event.getEntity().level, event.getEntity().blockPosition());
         if (colony == null)
         {
-            colony = IMinecoloniesAPI.getInstance().getColonyManager().getIColonyByOwner(event.getEntity().level, event.getEntity());
+            colony = ISlimColoniesAPI.getInstance().getColonyManager().getIColonyByOwner(event.getEntity().level, event.getEntity());
         }
         handleCrafterRecipeTooltips(colony, event.getToolTip(), stack.getItem());
         if (stack.getItem() instanceof BlockItem)
@@ -236,14 +236,14 @@ public class ClientEventHandler
             for (final ResourceLocation id : rec.getRequiredResearchIds())
             {
                 final Set<IGlobalResearch> researches;
-                if (IMinecoloniesAPI.getInstance().getGlobalResearchTree().hasResearch(id))
+                if (ISlimColoniesAPI.getInstance().getGlobalResearchTree().hasResearch(id))
                 {
                     researches = new HashSet<>();
-                    researches.add(IMinecoloniesAPI.getInstance().getGlobalResearchTree().getResearch(id));
+                    researches.add(ISlimColoniesAPI.getInstance().getGlobalResearchTree().getResearch(id));
                 }
                 else
                 {
-                    researches = IMinecoloniesAPI.getInstance().getGlobalResearchTree().getResearchForEffect(id);
+                    researches = ISlimColoniesAPI.getInstance().getGlobalResearchTree().getResearchForEffect(id);
                 }
                 if (researches != null)
                 {
@@ -323,7 +323,7 @@ public class ClientEventHandler
     private static Map<String, BuildingEntry> buildCrafterToBuildingMap()
     {
         final ImmutableMap.Builder<String, BuildingEntry> builder = new ImmutableMap.Builder<>();
-        for (final BuildingEntry building : IMinecoloniesAPI.getInstance().getBuildingRegistry())
+        for (final BuildingEntry building : ISlimColoniesAPI.getInstance().getBuildingRegistry())
         {
             for (final BuildingEntry.ModuleProducer moduleProducer : building.getModuleProducers())
             {
@@ -356,7 +356,7 @@ public class ClientEventHandler
         {
             return;
         }
-        if (MinecoloniesAPIProxy.getInstance().getGlobalResearchTree().getResearchForEffect(effectId) != null)
+        if (SlimColoniesAPIProxy.getInstance().getGlobalResearchTree().getResearchForEffect(effectId) != null)
         {
             tooltip.add(Component.translatable(TranslationConstants.HUT_NEEDS_RESEARCH_TOOLTIP_1, block.getName()));
             tooltip.add(Component.translatable(TranslationConstants.HUT_NEEDS_RESEARCH_TOOLTIP_2, block.getName()));
@@ -423,7 +423,7 @@ public class ClientEventHandler
 
             if (block instanceof IBuildingBrowsableBlock browsable && browsable.shouldBrowseBuildings(event))
             {
-                MinecoloniesAPIProxy.getInstance().getBuildingDataManager().openBuildingBrowser(block);
+                SlimColoniesAPIProxy.getInstance().getBuildingDataManager().openBuildingBrowser(block);
 
                 event.setCanceled(true);
                 event.setCancellationResult(InteractionResult.SUCCESS);

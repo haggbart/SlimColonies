@@ -28,7 +28,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
 import no.monopixel.slimcolonies.api.crafting.CompostRecipe;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
@@ -469,7 +469,7 @@ public class CompatibilityManager implements ICompatibilityManager
     {
         if (isMineableOre(stack) || stack.is(ModTags.raw_ore) || stack.is(ModTags.breakable_ore))
         {
-            ItemStack smeltingResult = MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack);
+            ItemStack smeltingResult = SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack);
             return stack.is(ModTags.breakable_ore) || !smeltingResult.isEmpty();
         }
 
@@ -635,7 +635,7 @@ public class CompatibilityManager implements ICompatibilityManager
             {
                 oreBlocks.add(((BlockItem) stack.getItem()).getBlock());
             }
-            if (!MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack).isEmpty())
+            if (!SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack).isEmpty())
             {
                 smeltableOres.add(new ItemStorage(stack));
             }

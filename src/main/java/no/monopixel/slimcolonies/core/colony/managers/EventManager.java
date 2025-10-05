@@ -1,16 +1,15 @@
 package no.monopixel.slimcolonies.core.colony.managers;
 
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.IColonyEvent;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.IEventManager;
 import no.monopixel.slimcolonies.api.util.Log;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.resources.ResourceLocation;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -29,9 +28,9 @@ public class EventManager implements IEventManager
     /**
      * NBT tags
      */
-    private static final String TAG_EVENT_ID        = "event_currentID";
-    private static final String TAG_EVENT_MANAGER   = "event_manager";
-    private static final String TAG_EVENT_LIST      = "events_list";
+    private static final String TAG_EVENT_ID      = "event_currentID";
+    private static final String TAG_EVENT_MANAGER = "event_manager";
+    private static final String TAG_EVENT_LIST    = "events_list";
 
     /**
      * The current event ID this colony is at, unique for each event
@@ -86,7 +85,6 @@ public class EventManager implements IEventManager
         colony.markDirty();
         return currentEventID - 1;
     }
-
 
     /**
      * Gets an event by its ID
@@ -153,7 +151,7 @@ public class EventManager implements IEventManager
                 final CompoundTag tagCompound = (CompoundTag) base;
                 final ResourceLocation eventTypeID = new ResourceLocation(MOD_ID, tagCompound.getString(TAG_NAME));
 
-                final ColonyEventTypeRegistryEntry registryEntry = MinecoloniesAPIProxy.getInstance().getColonyEventRegistry().getValue(eventTypeID);
+                final ColonyEventTypeRegistryEntry registryEntry = SlimColoniesAPIProxy.getInstance().getColonyEventRegistry().getValue(eventTypeID);
                 if (registryEntry == null)
                 {
                     Log.getLogger().warn("Event is missing registryEntry!:" + eventTypeID.getPath());
@@ -184,5 +182,4 @@ public class EventManager implements IEventManager
         eventManagerNBT.put(TAG_EVENT_LIST, eventListNBT);
         compound.put(TAG_EVENT_MANAGER, eventManagerNBT);
     }
-
 }

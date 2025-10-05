@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
@@ -187,7 +187,7 @@ public class CreateColonyMessage implements IMessage
                     .sendTo(sender);
             }
 
-            IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyCreatedModEvent(createdColony));
+            ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyCreatedModEvent(createdColony));
             Network.getNetwork().sendToPlayer(new OpenBuildingUIMessage(building), sender);
             return;
         }

@@ -1,9 +1,5 @@
 package no.monopixel.slimcolonies.core.entity.ai.minimal;
 
-import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
-import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -20,6 +16,10 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import no.monopixel.slimcolonies.api.entity.other.AbstractFastSlimColoniesEntity;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
+import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -61,7 +61,7 @@ public class EntityAIInteractToggleAble extends Goal
     /**
      * Our citizen.
      */
-    protected AbstractFastMinecoloniesEntity entity;
+    protected AbstractFastSlimColoniesEntity entity;
 
     /**
      * Map of positions and initial state
@@ -93,7 +93,7 @@ public class EntityAIInteractToggleAble extends Goal
      */
     private final int offSet;
 
-    public EntityAIInteractToggleAble(@NotNull final AbstractFastMinecoloniesEntity entityIn, final ToggleAble... toggleAbles)
+    public EntityAIInteractToggleAble(@NotNull final AbstractFastSlimColoniesEntity entityIn, final ToggleAble... toggleAbles)
     {
         super();
         this.entity = entityIn;
@@ -276,7 +276,7 @@ public class EntityAIInteractToggleAble extends Goal
                         // Check if the next pathing node is below
                         final Node nextPoint = path.getNode(i + 1);
                         if ((pos.getX() == nextPoint.x && pos.getY() > nextPoint.y && pos.getZ() == nextPoint.z) ||
-                              entity.getY() - pos.getY() > 1)
+                            entity.getY() - pos.getY() > 1)
                         {
                             toggleAblePositions.put(pos, entity.level.getBlockState(pos).getValue(BlockStateProperties.OPEN));
                         }

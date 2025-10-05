@@ -1,17 +1,17 @@
 package no.monopixel.slimcolonies.api.colony.buildings.registry;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 
 /**
  * Helper manager to analyse and process the registry for {@link BuildingEntry}.
@@ -21,7 +21,7 @@ public interface IBuildingDataManager
 
     static IBuildingDataManager getInstance()
     {
-        return IMinecoloniesAPI.getInstance().getBuildingDataManager();
+        return ISlimColoniesAPI.getInstance().getBuildingDataManager();
     }
 
     /**

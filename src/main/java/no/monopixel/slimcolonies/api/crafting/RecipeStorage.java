@@ -2,17 +2,6 @@ package no.monopixel.slimcolonies.api.crafting;
 
 import com.google.common.collect.ImmutableList;
 import com.ldtteam.structurize.items.ModItems;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
-import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
-import no.monopixel.slimcolonies.api.crafting.registry.RecipeTypeEntry;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.Item;
@@ -25,6 +14,17 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.IForgeRegistry;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
+import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
+import no.monopixel.slimcolonies.api.crafting.registry.RecipeTypeEntry;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
+import no.monopixel.slimcolonies.api.util.InventoryUtils;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,7 +56,8 @@ public class RecipeStorage implements IRecipeStorage
     private final List<ItemStorage> input;
 
     @NotNull
-    private final List<ItemStorage> cleanedInput = new ArrayList<>();;
+    private final List<ItemStorage> cleanedInput = new ArrayList<>();
+    ;
 
     /**
      * Primary output generated for the recipe.
@@ -74,13 +75,15 @@ public class RecipeStorage implements IRecipeStorage
      * Secondary outputs generated for the recipe.
      */
     @NotNull
-    private final List<ItemStack> secondaryOutputs = new ArrayList<>();;
+    private final List<ItemStack> secondaryOutputs = new ArrayList<>();
+    ;
 
     /**
      * Tools not consumed but damanged for the recipe.
      */
     @NotNull
-    private final List<ItemStack> tools = new ArrayList<>();;
+    private final List<ItemStack> tools = new ArrayList<>();
+    ;
 
     /**
      * The intermediate required for the recipe (e.g furnace).
@@ -121,27 +124,31 @@ public class RecipeStorage implements IRecipeStorage
      * The loot parameter set definition
      */
     public static final LootContextParamSet recipeLootParameters = (new LootContextParamSet.Builder())
-                .required(LootContextParams.ORIGIN)
-                .required(LootContextParams.THIS_ENTITY)
-                .required(LootContextParams.TOOL)
-                .optional(LootContextParams.DAMAGE_SOURCE)
-                .optional(LootContextParams.KILLER_ENTITY)
-                .optional(LootContextParams.DIRECT_KILLER_ENTITY)
-                .build();
+        .required(LootContextParams.ORIGIN)
+        .required(LootContextParams.THIS_ENTITY)
+        .required(LootContextParams.TOOL)
+        .optional(LootContextParams.DAMAGE_SOURCE)
+        .optional(LootContextParams.KILLER_ENTITY)
+        .optional(LootContextParams.DIRECT_KILLER_ENTITY)
+        .build();
 
     public static class Builder
     {
-        private ResourceLocation recipeType = null;
-        private ResourceLocation recipeSource = null;
-        @NotNull private List<ItemStorage> input = List.of();
-        @NotNull private ItemStack primaryOutput = ItemStack.EMPTY;
-        @NotNull private List<ItemStack> alternateOutputs = List.of();
-        @NotNull private List<ItemStack> secondaryOutputs = List.of();
-        private Block intermediate = Blocks.AIR;
-        private int gridSize = 1;
-        private IToken<?> token = null;
-        private ResourceLocation lootTable = null;
-        private EquipmentTypeEntry requiredTool = ModEquipmentTypes.none.get();
+        private ResourceLocation   recipeType       = null;
+        private ResourceLocation   recipeSource     = null;
+        @NotNull
+        private List<ItemStorage>  input            = List.of();
+        @NotNull
+        private ItemStack          primaryOutput    = ItemStack.EMPTY;
+        @NotNull
+        private List<ItemStack>    alternateOutputs = List.of();
+        @NotNull
+        private List<ItemStack>    secondaryOutputs = List.of();
+        private Block              intermediate     = Blocks.AIR;
+        private int                gridSize         = 1;
+        private IToken<?>          token            = null;
+        private ResourceLocation   lootTable        = null;
+        private EquipmentTypeEntry requiredTool     = ModEquipmentTypes.none.get();
 
         /**
          * Default constructor.
@@ -152,6 +159,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Construct from existing recipe.
+         *
          * @param recipe a recipe to use as a base.
          */
         public Builder(@NotNull final IRecipeStorage recipe)
@@ -171,6 +179,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the recipe type.
+         *
          * @param type What type of recipe this is. (ie: minecolonies:classic)
          * @return this
          */
@@ -182,6 +191,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the recipe id.
+         *
          * @param id the source of this recipe (ie: minecolonies:crafter/recipename, "player name", "improvement", etc)
          * @return this
          */
@@ -193,6 +203,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the recipe inputs.
+         *
          * @param inputs the list of input items (required for the recipe).
          * @return this
          */
@@ -204,6 +215,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the recipe primary output.
+         *
          * @param output the primary output of the recipe.
          * @return this
          */
@@ -215,6 +227,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set alternative outputs (one-of with the primary output).
+         *
          * @param outputs List of alternate outputs for a multi-output recipe
          * @return this
          */
@@ -226,6 +239,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the secondary outputs (in addition to the primary output).
+         *
          * @param outputs List of secondary outputs for a recipe. this includes containers, etc.
          * @return this
          */
@@ -237,6 +251,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the intermediate crafting block.
+         *
          * @param intermediate the intermediate to use (e.g furnace).
          * @return this
          */
@@ -248,6 +263,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the crafting grid size (e.g. 3 for 3x3 grid).
+         *
          * @param gridSize the required grid size to make it.
          * @return this
          */
@@ -259,6 +275,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the token.
+         *
          * @param token the token of the storage.
          */
         public Builder withToken(@Nullable final IToken<?> token)
@@ -269,6 +286,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the loot table.
+         *
          * @param lootTable Loot table to use for possible alternate outputs
          * @return this
          */
@@ -280,6 +298,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Set the required crafting tool
+         *
          * @param tool the tool needed to craft (in addition to anything in the recipe itself)
          * @return this
          */
@@ -291,6 +310,7 @@ public class RecipeStorage implements IRecipeStorage
 
         /**
          * Build the recipe.
+         *
          * @return the recipe.
          */
         public RecipeStorage build()
@@ -301,6 +321,7 @@ public class RecipeStorage implements IRecipeStorage
 
     /**
      * Start building a RecipeStorage.
+     *
      * @return the builder.
      */
     public static Builder builder()
@@ -310,6 +331,7 @@ public class RecipeStorage implements IRecipeStorage
 
     /**
      * Start building a RecipeStorage.
+     *
      * @param recipe a recipe to use as a base.
      * @return the builder.
      */
@@ -334,8 +356,8 @@ public class RecipeStorage implements IRecipeStorage
         this.requiredTool = builder.requiredTool;
 
         final ResourceLocation type = builder.recipeType != null ? builder.recipeType
-                : builder.alternateOutputs.isEmpty() ? ModRecipeTypes.CLASSIC_ID : ModRecipeTypes.MULTI_OUTPUT_ID;
-        final IForgeRegistry<RecipeTypeEntry> recipeTypes = MinecoloniesAPIProxy.getInstance().getRecipeTypeRegistry();
+            : builder.alternateOutputs.isEmpty() ? ModRecipeTypes.CLASSIC_ID : ModRecipeTypes.MULTI_OUTPUT_ID;
+        final IForgeRegistry<RecipeTypeEntry> recipeTypes = SlimColoniesAPIProxy.getInstance().getRecipeTypeRegistry();
         this.recipeType = recipeTypes.getValue(type).getHandlerProducer().apply(this);
 
         this.processInputsAndTools(builder.secondaryOutputs);
@@ -343,6 +365,7 @@ public class RecipeStorage implements IRecipeStorage
 
     /**
      * Process the input and tools and alter things accordingly.
+     *
      * @param secOutputs the secondary outputs coming from the constructor.
      */
     private void processInputsAndTools(@Nullable final List<ItemStack> secOutputs)
@@ -390,15 +413,16 @@ public class RecipeStorage implements IRecipeStorage
             }
 
             ItemStorage storage = inputItem.copy();
-            if (items.contains(storage) )
+            if (items.contains(storage))
             {
                 final int index = items.indexOf(storage);
                 ItemStorage tempStorage = items.remove(index);
                 tempStorage.setAmount(tempStorage.getAmount() + storage.getAmount());
-                if(!tempStorage.matchDefinitionEquals(storage))
+                if (!tempStorage.matchDefinitionEquals(storage))
                 {
                     int amount = tempStorage.getAmount();
-                    tempStorage = new ItemStorage(tempStorage.getItemStack(), tempStorage.ignoreDamageValue() || storage.ignoreDamageValue(), tempStorage.ignoreNBT() || storage.ignoreNBT());
+                    tempStorage =
+                        new ItemStorage(tempStorage.getItemStack(), tempStorage.ignoreDamageValue() || storage.ignoreDamageValue(), tempStorage.ignoreNBT() || storage.ignoreNBT());
                     tempStorage.setAmount(amount);
                 }
                 storage = tempStorage;
@@ -453,9 +477,9 @@ public class RecipeStorage implements IRecipeStorage
         {
             final ItemStack stack = storage.getItemStack();
             final int availableCount = InventoryUtils.getItemCountInItemHandlers(
-              ImmutableList.copyOf(inventories),
-              itemStack -> !ItemStackUtils.isEmpty(itemStack)
-                             && ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()));
+                ImmutableList.copyOf(inventories),
+                itemStack -> !ItemStackUtils.isEmpty(itemStack)
+                    && ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()));
 
             if (!canFulfillItemStorage(qty, existingRequirements, availableCount, storage))
             {
@@ -466,7 +490,11 @@ public class RecipeStorage implements IRecipeStorage
     }
 
     @Override
-    public boolean canFullFillRecipe(final int qty, final Map<ItemStorage, Integer> existingRequirements, @NotNull final List<IItemHandler> citizen, @NotNull final IBuilding building)
+    public boolean canFullFillRecipe(
+        final int qty,
+        final Map<ItemStorage, Integer> existingRequirements,
+        @NotNull final List<IItemHandler> citizen,
+        @NotNull final IBuilding building)
     {
         final List<ItemStorage> items = getCleanedInput();
 
@@ -474,9 +502,10 @@ public class RecipeStorage implements IRecipeStorage
         {
             final ItemStack stack = storage.getItemStack();
             final int availableCount = InventoryUtils.getItemCountInItemHandlers(citizen,
-              itemStack -> !ItemStackUtils.isEmpty(itemStack)
-                             && ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()))
-                                         + InventoryUtils.getCountFromBuilding(building, storage);;
+                itemStack -> !ItemStackUtils.isEmpty(itemStack)
+                    && ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()))
+                + InventoryUtils.getCountFromBuilding(building, storage);
+            ;
 
             if (!canFulfillItemStorage(qty, existingRequirements, availableCount, storage))
             {
@@ -488,19 +517,20 @@ public class RecipeStorage implements IRecipeStorage
 
     /**
      * Check if the available qty matches the quantity we need.
-     * @param qty the number of recipe iterations.
+     *
+     * @param qty                  the number of recipe iterations.
      * @param existingRequirements the existing requirements to skip.
-     * @param availableCount the available count.
-     * @param storage the storage to check.
+     * @param availableCount       the available count.
+     * @param storage              the storage to check.
      * @return true if can fulfill, else false.
      */
     private boolean canFulfillItemStorage(final int qty, final Map<ItemStorage, Integer> existingRequirements, int availableCount, final ItemStorage storage)
     {
         final ItemStack stack = storage.getItemStack();
         final int neededCount;
-        if(!secondaryOutputs.isEmpty() || !tools.isEmpty())
+        if (!secondaryOutputs.isEmpty() || !tools.isEmpty())
         {
-            if(!ItemStackUtils.compareItemStackListIgnoreStackSize(this.getCraftingToolsAndSecondaryOutputs(), stack, false, !storage.ignoreNBT()))
+            if (!ItemStackUtils.compareItemStackListIgnoreStackSize(this.getCraftingToolsAndSecondaryOutputs(), stack, false, !storage.ignoreNBT()))
             {
                 neededCount = storage.getAmount() * qty;
             }
@@ -512,7 +542,7 @@ public class RecipeStorage implements IRecipeStorage
         else
         {
             final ItemStack container = stack.getCraftingRemainingItem();
-            if(ItemStackUtils.isEmpty(container) || !ItemStackUtils.compareItemStacksIgnoreStackSize(stack, container, false, !storage.ignoreNBT()))
+            if (ItemStackUtils.isEmpty(container) || !ItemStackUtils.compareItemStacksIgnoreStackSize(stack, container, false, !storage.ignoreNBT()))
             {
                 neededCount = storage.getAmount() * qty;
             }
@@ -540,32 +570,33 @@ public class RecipeStorage implements IRecipeStorage
         final RecipeStorage that = (RecipeStorage) o;
 
         if (gridSize != that.gridSize
-              || cleanedInput.size() != that.cleanedInput.size()
-              || alternateOutputs.size() != that.alternateOutputs.size()
-              || secondaryOutputs.size() != that.secondaryOutputs.size()
-              || requiredTool != that.requiredTool
-              || tools.size() != that.tools.size()
-              || !Objects.equals(this.recipeSource, that.recipeSource)
-              || !Objects.equals(this.lootTable, that.lootTable)
-              || !this.recipeType.getId().equals(that.recipeType.getId())
-              || !ItemStackUtils.compareItemStacksIgnoreStackSize(primaryOutput, that.primaryOutput, false, true))
+            || cleanedInput.size() != that.cleanedInput.size()
+            || alternateOutputs.size() != that.alternateOutputs.size()
+            || secondaryOutputs.size() != that.secondaryOutputs.size()
+            || requiredTool != that.requiredTool
+            || tools.size() != that.tools.size()
+            || !Objects.equals(this.recipeSource, that.recipeSource)
+            || !Objects.equals(this.lootTable, that.lootTable)
+            || !this.recipeType.getId().equals(that.recipeType.getId())
+            || !ItemStackUtils.compareItemStacksIgnoreStackSize(primaryOutput, that.primaryOutput, false, true))
         {
             return false;
         }
 
         for (int i = 0; i < cleanedInput.size(); i++)
         {
-            if(!cleanedInput.get(i).equals(that.cleanedInput.get(i)) || !cleanedInput.get(i).matchDefinitionEquals(that.cleanedInput.get(i)) || cleanedInput.get(i).getAmount() != that.cleanedInput.get(i).getAmount())
+            if (!cleanedInput.get(i).equals(that.cleanedInput.get(i)) || !cleanedInput.get(i).matchDefinitionEquals(that.cleanedInput.get(i))
+                || cleanedInput.get(i).getAmount() != that.cleanedInput.get(i).getAmount())
             {
                 return false;
             }
         }
 
-        for(int i = 0; i< alternateOutputs.size(); i++)
+        for (int i = 0; i < alternateOutputs.size(); i++)
         {
             final ItemStack left = alternateOutputs.get(i);
             final ItemStack right = that.alternateOutputs.get(i);
-            if(!ItemStackUtils.compareItemStacksIgnoreStackSize(left, right, false, true) || left.getCount() != right.getCount())
+            if (!ItemStackUtils.compareItemStacksIgnoreStackSize(left, right, false, true) || left.getCount() != right.getCount())
             {
                 return false;
             }
@@ -597,17 +628,17 @@ public class RecipeStorage implements IRecipeStorage
     @Override
     public int hashCode()
     {
-        if(hash == 0)
+        if (hash == 0)
         {
             hash = Objects.hash(cleanedInput,
-            primaryOutput.getItem(),
-            primaryOutput.getCount(),
-            intermediate,
-            gridSize,
-            requiredTool,
-            hashableItemStackList(alternateOutputs),
-            hashableItemStackList(secondaryOutputs),
-            hashableItemStackList(tools));
+                primaryOutput.getItem(),
+                primaryOutput.getCount(),
+                intermediate,
+                gridSize,
+                requiredTool,
+                hashableItemStackList(alternateOutputs),
+                hashableItemStackList(secondaryOutputs),
+                hashableItemStackList(tools));
         }
 
         return hash;
@@ -615,13 +646,14 @@ public class RecipeStorage implements IRecipeStorage
 
     /**
      * Convert a list of itemstacks into something hashable
+     *
      * @param items List of item stacks to convert
      * @return hashtable of items and counts
      */
     private Map<Item, Integer> hashableItemStackList(List<ItemStack> items)
     {
         Map<Item, Integer> hashableList = new HashMap<>();
-        for(ItemStack item: items)
+        for (ItemStack item : items)
         {
             hashableList.put(item.getItem(), item.getCount());
         }
@@ -638,7 +670,7 @@ public class RecipeStorage implements IRecipeStorage
     {
         final List<ItemStack> resultStacks = new ArrayList<>();
         //Calculate space needed by the secondary outputs, but only if there is a primary output.
-        if(!secondaryOutputs.isEmpty() && !ItemStackUtils.isEmpty(getPrimaryOutput()))
+        if (!secondaryOutputs.isEmpty() && !ItemStackUtils.isEmpty(getPrimaryOutput()))
         {
             resultStacks.addAll(secondaryOutputs);
         }
@@ -672,7 +704,7 @@ public class RecipeStorage implements IRecipeStorage
     /**
      * Check for space, remove items, and insert crafted items, returning a copy of the crafted items.
      *
-     * @param context loot context
+     * @param context  loot context
      * @param handlers the handlers to use
      * @return copy of the crafted items if successful, null on failure
      */
@@ -700,13 +732,13 @@ public class RecipeStorage implements IRecipeStorage
             {
                 boolean isTool = ItemStackUtils.compareItemStackListIgnoreStackSize(tools, stack, false, !storage.ignoreNBT());
                 int slotOfStack =
-                  InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(handler, itemStack ->
-                          ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()) &&
-                                  (!isTool || !stack.isDamageableItem() || ItemStackUtils.getDurability(itemStack) > 0));
+                    InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(handler, itemStack ->
+                        ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()) &&
+                            (!isTool || !stack.isDamageableItem() || ItemStackUtils.getDurability(itemStack) > 0));
 
                 while (slotOfStack != -1 && amountNeeded > 0)
                 {
-                    if(citizen != null && isTool)
+                    if (citizen != null && isTool)
                     {
                         if (stack.isDamageableItem())
                         {
@@ -715,7 +747,9 @@ public class RecipeStorage implements IRecipeStorage
                             {
                                 // The 4 parameter inner call from forge is for adding a callback to alter the damage caused,
                                 // but unlike its description does not actually damage the item(despite the same function name). So used to just calculate the damage.
-                                toDamage.hurtAndBreak(toDamage.getItem().damageItem(stack, 1, citizen, item -> item.broadcastBreakEvent(InteractionHand.MAIN_HAND)), citizen, item -> item.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+                                toDamage.hurtAndBreak(toDamage.getItem().damageItem(stack, 1, citizen, item -> item.broadcastBreakEvent(InteractionHand.MAIN_HAND)),
+                                    citizen,
+                                    item -> item.broadcastBreakEvent(InteractionHand.MAIN_HAND));
                             }
                             if (!ItemStackUtils.isEmpty(toDamage))
                             {
@@ -741,7 +775,7 @@ public class RecipeStorage implements IRecipeStorage
                         if (amountNeeded > 0)
                         {
                             slotOfStack = InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(handler,
-                            itemStack -> !ItemStackUtils.isEmpty(itemStack) && ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()));
+                                itemStack -> !ItemStackUtils.isEmpty(itemStack) && ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, false, !storage.ignoreNBT()));
                         }
                     }
                 }
@@ -778,10 +812,10 @@ public class RecipeStorage implements IRecipeStorage
         final List<ItemStack> resultStacks = new ArrayList<>();
         final List<ItemStack> secondaryStacks = new ArrayList<>();
 
-        if(!ItemStackUtils.isEmpty(outputStack))
+        if (!ItemStackUtils.isEmpty(outputStack))
         {
             resultStacks.add(outputStack.copy());
-            if(doInsert)
+            if (doInsert)
             {
                 for (final IItemHandler handler : handlers)
                 {
@@ -799,13 +833,13 @@ public class RecipeStorage implements IRecipeStorage
             loot = context.getLevel().getServer().getLootData().getLootTable(lootTable);
         }
 
-        if(loot != null && context != null)
+        if (loot != null && context != null)
         {
             secondaryStacks.addAll(loot.getRandomItems(context));
         }
 
         resultStacks.addAll(secondaryStacks.stream().map(ItemStack::copy).collect(Collectors.toList()));
-        if(doInsert)
+        if (doInsert)
         {
             for (final ItemStack stack : secondaryStacks)
             {
@@ -826,23 +860,23 @@ public class RecipeStorage implements IRecipeStorage
     public RecipeStorage getClassicForMultiOutput(final ItemStack requiredOutput)
     {
         return RecipeStorage.builder(this)
-                .withPrimaryOutput(requiredOutput)
-                .withAlternateOutputs(List.of())
-                .withRecipeType(ModRecipeTypes.CLASSIC_ID)
-                .build();
+            .withPrimaryOutput(requiredOutput)
+            .withAlternateOutputs(List.of())
+            .withRecipeType(ModRecipeTypes.CLASSIC_ID)
+            .build();
     }
 
     @Override
     public RecipeStorage getClassicForMultiOutput(final Predicate<ItemStack> stackPredicate)
     {
-        if(!getPrimaryOutput().isEmpty() && stackPredicate.test(getPrimaryOutput()))
+        if (!getPrimaryOutput().isEmpty() && stackPredicate.test(getPrimaryOutput()))
         {
             return getClassicForMultiOutput(getPrimaryOutput());
         }
 
-        for(final ItemStack item : alternateOutputs)
+        for (final ItemStack item : alternateOutputs)
         {
-            if(stackPredicate.test(item))
+            if (stackPredicate.test(item))
             {
                 return getClassicForMultiOutput(item);
             }

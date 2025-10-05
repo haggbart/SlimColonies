@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
@@ -494,7 +494,7 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
             colony.getCitizenManager().calculateMaxCitizens();
             colony.getPackageManager().updateSubscribers();
 
-            IMinecoloniesAPI.getInstance().getEventBus().post(new BuildingAddedModEvent(building));
+            ISlimColoniesAPI.getInstance().getEventBus().post(new BuildingAddedModEvent(building));
 
             return building;
         }
@@ -553,7 +553,7 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
 
         colony.getCitizenManager().calculateMaxCitizens();
 
-        IMinecoloniesAPI.getInstance().getEventBus().post(new BuildingRemovedModEvent(building));
+        ISlimColoniesAPI.getInstance().getEventBus().post(new BuildingRemovedModEvent(building));
     }
 
     @Override

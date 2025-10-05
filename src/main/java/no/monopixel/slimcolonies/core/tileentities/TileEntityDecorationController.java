@@ -3,12 +3,6 @@ package no.monopixel.slimcolonies.core.tileentities;
 import com.ldtteam.structurize.api.util.IRotatableBlockEntity;
 import com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE;
 import com.ldtteam.structurize.storage.StructurePacks;
-import no.monopixel.slimcolonies.api.compatibility.newstruct.BlueprintMapping;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.Utils;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
-import no.monopixel.slimcolonies.core.util.BuildingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -18,6 +12,12 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.compatibility.newstruct.BlueprintMapping;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.Utils;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
+import no.monopixel.slimcolonies.core.util.BuildingUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,8 +56,8 @@ public class TileEntityDecorationController extends BlockEntity implements IBlue
     /**
      * The used rotation/mirror.
      */
-    private int cachedRotation = -1;
-    private boolean isMirrored = false;
+    private int     cachedRotation = -1;
+    private boolean isMirrored     = false;
 
     /**
      * Map of block positions relative to TE pos and string tags
@@ -66,7 +66,7 @@ public class TileEntityDecorationController extends BlockEntity implements IBlue
 
     public TileEntityDecorationController(final BlockPos pos, final BlockState state)
     {
-        super(MinecoloniesTileEntities.DECO_CONTROLLER.get(), pos, state);
+        super(SlimColoniesTileEntities.DECO_CONTROLLER.get(), pos, state);
     }
 
     @Override
@@ -225,15 +225,15 @@ public class TileEntityDecorationController extends BlockEntity implements IBlue
         this.schematicPath = compound.getCompound(TAG_BLUEPRINTDATA).getString(TAG_PATH);
 
         // the rest of this is backwards compat code that can be removed at some point (maybe even now)
-        if(compound.contains(TAG_PATH) && StringUtils.isEmpty(this.schematicPath))
+        if (compound.contains(TAG_PATH) && StringUtils.isEmpty(this.schematicPath))
         {
             this.schematicPath = compound.getString(TAG_PATH);
         }
-        if(compound.contains(TAG_PACK) && StringUtils.isEmpty(this.packName))
+        if (compound.contains(TAG_PACK) && StringUtils.isEmpty(this.packName))
         {
             this.packName = compound.getString(TAG_PACK);
         }
-        if(compound.contains(TAG_NAME) && StringUtils.isEmpty(this.schematicName))
+        if (compound.contains(TAG_NAME) && StringUtils.isEmpty(this.schematicName))
         {
             this.schematicName = compound.getString(TAG_NAME);
             if (this.schematicPath == null || this.schematicPath.isEmpty())
@@ -318,6 +318,7 @@ public class TileEntityDecorationController extends BlockEntity implements IBlue
 
     /**
      * Get the rotation of the controller.
+     *
      * @return the placed rotation.
      */
     public Rotation getRotation()
@@ -331,6 +332,7 @@ public class TileEntityDecorationController extends BlockEntity implements IBlue
 
     /**
      * Get the mirroring setting of the controller.
+     *
      * @return true if mirrored.
      */
     public boolean getMirror()

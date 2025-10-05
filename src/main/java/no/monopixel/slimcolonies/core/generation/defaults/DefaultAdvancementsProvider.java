@@ -375,7 +375,7 @@ public class DefaultAdvancementsProvider extends ForgeAdvancementProvider
                 new BuildingAddRecipeCriterionInstance(item(Items.JUNGLE_DOOR), 3))
             .addCriterion("add_recipe_acacia_door",
                 new BuildingAddRecipeCriterionInstance(item(Items.ACACIA_DOOR), 3))
-            .save(consumer, new ResourceLocation(MOD_ID, "minecolonies/building_add_recipe_door"), fileHelper);
+            .save(consumer, new ResourceLocation(MOD_ID, GROUP + "building_add_recipe_door"), fileHelper);
 
         // --- farming ---
 

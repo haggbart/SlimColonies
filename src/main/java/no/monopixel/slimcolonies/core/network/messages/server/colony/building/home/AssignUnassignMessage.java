@@ -1,6 +1,8 @@
 package no.monopixel.slimcolonies.core.network.messages.server.colony.building.home;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
@@ -10,8 +12,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractAssignedC
 import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.WorkerBuildingModule;
 import no.monopixel.slimcolonies.core.network.messages.server.AbstractBuildingServerMessage;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -48,7 +48,7 @@ public class AssignUnassignMessage extends AbstractBuildingServerMessage<Default
      * @param building  view of the building to read data from
      * @param assign    assign or unassigning the citizens
      * @param citizenID the id of the citizen to fill the job.
-     * @param entry the job entry.
+     * @param entry     the job entry.
      */
     public AssignUnassignMessage(@NotNull final IBuildingView building, final boolean assign, final int citizenID, final JobEntry entry)
     {
@@ -91,7 +91,7 @@ public class AssignUnassignMessage extends AbstractBuildingServerMessage<Default
         else
         {
             buf.writeBoolean(true);
-            buf.writeRegistryId(IMinecoloniesAPI.getInstance().getJobRegistry(), jobEntry);
+            buf.writeRegistryId(ISlimColoniesAPI.getInstance().getJobRegistry(), jobEntry);
         }
     }
 
@@ -103,7 +103,7 @@ public class AssignUnassignMessage extends AbstractBuildingServerMessage<Default
 
     @Override
     public void onExecute(
-      final NetworkEvent.Context ctxIn, final boolean isLogicalServer, final IColony colony, final DefaultBuildingInstance building)
+        final NetworkEvent.Context ctxIn, final boolean isLogicalServer, final IColony colony, final DefaultBuildingInstance building)
     {
         final ICitizenData citizen = colony.getCitizenManager().getCivilian(citizenID);
         final AbstractAssignedCitizenModule module;

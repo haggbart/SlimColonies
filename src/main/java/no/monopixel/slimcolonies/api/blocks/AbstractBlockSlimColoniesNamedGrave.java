@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 /**
  * Abstract class for minecolonies named graves.
  */
-public abstract class AbstractBlockSlimColoniesNamedGrave<B extends AbstractBlockSlimColoniesNamedGrave<B>> extends AbstractBlockMinecolonies<B> implements EntityBlock
+public abstract class AbstractBlockSlimColoniesNamedGrave<B extends AbstractBlockSlimColoniesNamedGrave<B>> extends AbstractBlockSlimColonies<B> implements EntityBlock
 {
     /**
      * The direction the block is facing.

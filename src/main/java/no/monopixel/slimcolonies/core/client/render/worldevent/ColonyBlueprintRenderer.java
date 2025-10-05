@@ -10,7 +10,15 @@ import com.ldtteam.structurize.storage.rendering.RenderingCache;
 import com.ldtteam.structurize.storage.rendering.types.BlueprintPreviewData;
 import com.ldtteam.structurize.storage.rendering.types.BoxPreviewData;
 import com.ldtteam.structurize.util.RotationMirror;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.phys.AABB;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.client.ModKeyMappings;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
@@ -25,14 +33,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingM
 import no.monopixel.slimcolonies.core.colony.workorders.view.WorkOrderBuildingView;
 import no.monopixel.slimcolonies.core.items.ItemAssistantHammer;
 import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -380,7 +380,7 @@ public class ColonyBlueprintRenderer
         public boolean isEnabled(final WorldEventContext ctx)
         {
             return RenderingCache.hasBlueprint("blueprint") &&
-                MinecoloniesAPIProxy.getInstance().getConfig().getClient().neighborbuildingrendering.get() &&
+                SlimColoniesAPIProxy.getInstance().getConfig().getClient().neighborbuildingrendering.get() &&
                 ctx.mainHandItem.getItem() == buildTool.get();
         }
 
@@ -401,7 +401,7 @@ public class ColonyBlueprintRenderer
             }
             final BlockPos zeroPos = activePosition.subtract(blueprint.getPrimaryBlockOffset());
             final AABB blueprintAABB = new AABB(zeroPos, zeroPos.offset(blueprint.getSizeX() - 1, blueprint.getSizeY() - 1, blueprint.getSizeZ() - 1))
-                .inflate(2 + MinecoloniesAPIProxy.getInstance().getConfig().getClient().neighborbuildingrange.get());
+                .inflate(2 + SlimColoniesAPIProxy.getInstance().getConfig().getClient().neighborbuildingrange.get());
 
             for (final IBuildingView buildingView : ctx.nearestColony.getBuildings())
             {
@@ -454,7 +454,7 @@ public class ColonyBlueprintRenderer
         public Map<BlockPos, PendingRenderData> getDesiredBlueprints(final WorldEventContext ctx)
         {
             // ideally we'd check based on the bounding box, but we don't know that until we load the blueprints
-            final double range = MathUtils.square(MinecoloniesAPIProxy.getInstance().getConfig().getClient().buildgogglerange.get());
+            final double range = MathUtils.square(SlimColoniesAPIProxy.getInstance().getConfig().getClient().buildgogglerange.get());
 
             // show work orders
             final Map<BlockPos, PendingRenderData> desired = new HashMap<>();

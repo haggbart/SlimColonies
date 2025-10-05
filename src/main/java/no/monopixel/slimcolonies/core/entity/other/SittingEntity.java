@@ -1,9 +1,5 @@
 package no.monopixel.slimcolonies.core.entity.other;
 
-import no.monopixel.slimcolonies.api.entity.ModEntities;
-import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity;
-import no.monopixel.slimcolonies.api.util.EntityUtils;
-import no.monopixel.slimcolonies.api.util.LookHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -20,10 +16,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
+import no.monopixel.slimcolonies.api.entity.ModEntities;
+import no.monopixel.slimcolonies.api.entity.other.AbstractFastSlimColoniesEntity;
+import no.monopixel.slimcolonies.api.util.EntityUtils;
+import no.monopixel.slimcolonies.api.util.LookHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.List;
 
 /**
  * Entity used to sit on, for animation purposes.
@@ -192,7 +191,8 @@ public class SittingEntity extends Entity
 
     /**
      * Check if the sitting position at the location is already occupied.
-     * @param pos the world pos to check.
+     *
+     * @param pos   the world pos to check.
      * @param world the world it is in.
      * @return true if sitting pos is occupied.
      */
@@ -249,7 +249,7 @@ public class SittingEntity extends Entity
         entity.level.addFreshEntity(sittingEntity);
         entity.startRiding(sittingEntity);
 
-        if (state.getBlock() instanceof StairBlock && entity instanceof AbstractFastMinecoloniesEntity abstractFastMinecoloniesEntity)
+        if (state.getBlock() instanceof StairBlock && entity instanceof AbstractFastSlimColoniesEntity abstractFastMinecoloniesEntity)
         {
             final BlockPos lookAt = pos.relative(state.getValue(StairBlock.FACING).getOpposite()).above();
             final LookHandler lookHandler = (LookHandler) abstractFastMinecoloniesEntity.getLookControl();

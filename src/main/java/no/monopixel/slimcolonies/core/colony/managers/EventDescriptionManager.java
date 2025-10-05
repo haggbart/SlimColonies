@@ -1,21 +1,20 @@
 package no.monopixel.slimcolonies.core.colony.managers;
 
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.descriptions.IColonyEventDescription;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.IEventDescriptionManager;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayDeque;
@@ -88,7 +87,7 @@ public class EventDescriptionManager implements IEventDescriptionManager
             final CompoundTag eventCompound = (CompoundTag) event;
             final ResourceLocation eventTypeID = new ResourceLocation(MOD_ID, eventCompound.getString(TAG_NAME));
 
-            final ColonyEventDescriptionTypeRegistryEntry registryEntry = MinecoloniesAPIProxy.getInstance().getColonyEventDescriptionRegistry().getValue(eventTypeID);
+            final ColonyEventDescriptionTypeRegistryEntry registryEntry = SlimColoniesAPIProxy.getInstance().getColonyEventDescriptionRegistry().getValue(eventTypeID);
             if (registryEntry == null)
             {
                 Log.getLogger().warn("Event is missing registryEntry!:" + eventTypeID.getPath());

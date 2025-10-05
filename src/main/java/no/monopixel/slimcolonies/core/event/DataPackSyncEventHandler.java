@@ -9,7 +9,7 @@ import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.research.IGlobalResearchTree;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.SlimColonies;
@@ -51,7 +51,7 @@ public class DataPackSyncEventHandler
         private static void discoverCompatLists(@NotNull final MinecraftServer server)
         {
             FurnaceRecipes.getInstance().loadRecipes(server.getRecipeManager(), server.overworld());
-            IMinecoloniesAPI.getInstance().getColonyManager().getCompatibilityManager().discover(server.getRecipeManager(), server.overworld());
+            ISlimColoniesAPI.getInstance().getColonyManager().getCompatibilityManager().discover(server.getRecipeManager(), server.overworld());
             CustomRecipeManager.getInstance().resolveTemplates();
             CustomRecipeManager.getInstance().buildLootData(server.getLootData(), server.overworld());
         }
