@@ -33,7 +33,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * Class used to represent a recipe in minecolonies.
+ * Class used to represent a recipe in slimcolonies.
  */
 public class RecipeStorage implements IRecipeStorage
 {
@@ -180,7 +180,7 @@ public class RecipeStorage implements IRecipeStorage
         /**
          * Set the recipe type.
          *
-         * @param type What type of recipe this is. (ie: minecolonies:classic)
+         * @param type What type of recipe this is. (ie: slimcolonies:classic)
          * @return this
          */
         public Builder withRecipeType(@Nullable final ResourceLocation type)
@@ -192,7 +192,7 @@ public class RecipeStorage implements IRecipeStorage
         /**
          * Set the recipe id.
          *
-         * @param id the source of this recipe (ie: minecolonies:crafter/recipename, "player name", "improvement", etc)
+         * @param id the source of this recipe (ie: slimcolonies:crafter/recipename, "player name", "improvement", etc)
          * @return this
          */
         public Builder withRecipeId(@Nullable final ResourceLocation id)

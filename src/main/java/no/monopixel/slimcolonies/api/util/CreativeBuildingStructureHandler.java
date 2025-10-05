@@ -10,12 +10,6 @@ import com.ldtteam.structurize.placement.structure.CreativeStructureHandler;
 import com.ldtteam.structurize.placement.structure.IStructureHandler;
 import com.ldtteam.structurize.storage.StructurePacks;
 import com.ldtteam.structurize.util.PlacementSettings;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
-import no.monopixel.slimcolonies.core.entity.ai.workers.util.ConstructionTapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -29,6 +23,12 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
+import no.monopixel.slimcolonies.core.entity.ai.workers.util.ConstructionTapeHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +40,7 @@ import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_NA
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_PACK;
 
 /**
- * Minecolonies specific creative structure handler. Main difference related to registering blocks to colonies.
+ * SlimColonies specific creative structure handler. Main difference related to registering blocks to colonies.
  */
 @SuppressWarnings("removal")
 public final class CreativeBuildingStructureHandler extends CreativeStructureHandler
@@ -51,7 +51,7 @@ public final class CreativeBuildingStructureHandler extends CreativeStructureHan
     private IBuilding building;
 
     /**
-     * The minecolonies specific creative structure placer.
+     * The slimcolonies specific creative structure placer.
      *
      * @param world          the world.
      * @param pos            the pos it is placed at.
@@ -66,7 +66,7 @@ public final class CreativeBuildingStructureHandler extends CreativeStructureHan
     }
 
     /**
-     * The minecolonies specific creative structure placer.
+     * The slimcolonies specific creative structure placer.
      *
      * @param world          the world.
      * @param pos            the pos it is placed at.

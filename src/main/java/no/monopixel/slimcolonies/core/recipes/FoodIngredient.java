@@ -27,18 +27,18 @@ import static no.monopixel.slimcolonies.api.util.ItemStackUtils.ISFOOD;
  *
  * // any food item at all
  * {
- *     "type": "minecolonies:food"
+ *     "type": "slimcolonies:food"
  * }
  *
  * // any food with at least 4 healing points (inclusive)
  * {
- *     "type": "minecolonies:food",
+ *     "type": "slimcolonies:food",
  *     "min-healing": 4
  * }
  *
  * // any food with less than 1.0 saturation points (not including 1.0 itself)
  * {
- *     "type": "minecolonies:food",
+ *     "type": "slimcolonies:food",
  *     "max-saturation": 1.0
  * }
  *

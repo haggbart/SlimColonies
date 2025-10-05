@@ -22,7 +22,7 @@ import java.util.List;
 public class LoadOnlyStructureHandler extends CreativeStructureHandler
 {
     /**
-     * The minecolonies specific creative structure placer.
+     * The slimcolonies specific creative structure placer.
      *
      * @param world          the world.
      * @param pos            the pos it is placed at.

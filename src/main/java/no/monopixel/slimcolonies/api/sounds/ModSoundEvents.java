@@ -1,14 +1,17 @@
 package no.monopixel.slimcolonies.api.sounds;
 
-import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
-import no.monopixel.slimcolonies.api.util.Tuple;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.registries.DeferredRegister;
+import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
+import no.monopixel.slimcolonies.api.util.Tuple;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Registering of sound events for our colony.
@@ -63,9 +66,9 @@ public final class ModSoundEvents
                 for (int i = 1; i <= 4; i++)
                 {
                     final SoundEvent maleSoundEvent =
-                      ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + job.getPath() + ".male" + i + "." + event.getId());
+                        ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + job.getPath() + ".male" + i + "." + event.getId());
                     final SoundEvent femaleSoundEvent =
-                      ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + job.getPath() + ".female" + i + "." + event.getId());
+                        ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + job.getPath() + ".female" + i + "." + event.getId());
 
                     SOUND_EVENTS.register(maleSoundEvent.getLocation().getPath(), () -> maleSoundEvent);
                     SOUND_EVENTS.register(femaleSoundEvent.getLocation().getPath(), () -> femaleSoundEvent);
@@ -83,9 +86,9 @@ public final class ModSoundEvents
             for (int i = 1; i <= 2; i++)
             {
                 final SoundEvent maleSoundEvent =
-                        ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + "child.male" + i + "." + event.getId());
+                    ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + "child.male" + i + "." + event.getId());
                 final SoundEvent femaleSoundEvent =
-                        ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + "child.female" + i + "." + event.getId());
+                    ModSoundEvents.getSoundID(CITIZEN_SOUND_EVENT_PREFIX + "child.female" + i + "." + event.getId());
 
                 individualSounds.add(new Tuple<>(maleSoundEvent, femaleSoundEvent));
                 individualSounds.add(new Tuple<>(maleSoundEvent, femaleSoundEvent));
@@ -101,11 +104,10 @@ public final class ModSoundEvents
         // All raid sounds removed for SlimColonies
 
     }
-
     /**
      * Register a {@link SoundEvent}.
      *
-     * @param soundName The SoundEvent's name without the minecolonies prefix
+     * @param soundName The SoundEvent's name without the slimcolonies prefix
      * @return The SoundEvent
      */
     public static SoundEvent getSoundID(final String soundName)

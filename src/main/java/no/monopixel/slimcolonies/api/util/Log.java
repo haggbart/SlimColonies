@@ -25,7 +25,7 @@ public final class Log
     }
 
     /**
-     * Getter for the minecolonies Logger.
+     * Getter for the Logger.
      *
      * @return the logger.
      */

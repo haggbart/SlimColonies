@@ -1,7 +1,7 @@
 package no.monopixel.slimcolonies.api.research;
 
 /**
- * Different Research Branch types, along with descriptions of their behaviors.  Primarily related to display rendering internal to Minecolonies,
+ * Different Research Branch types, along with descriptions of their behaviors. Primarily related to display rendering internal to SlimColonies,
  * or to implementations for AbstractResearchProvider.
  */
 public enum ResearchBranchType
@@ -31,8 +31,9 @@ public enum ResearchBranchType
 
     /**
      * Get the matching enum from a string.  If no matching string is found, defaults to DEFAULT
-     * @param tag  The string representation of the BranchType
-     * @return     The enum value.
+     *
+     * @param tag The string representation of the BranchType
+     * @return The enum value.
      */
     public static ResearchBranchType valueOfTag(final String tag)
     {

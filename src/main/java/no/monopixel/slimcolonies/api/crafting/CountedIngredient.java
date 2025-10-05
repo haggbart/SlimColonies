@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * An ingredient that can be used in a vanilla recipe to require more than one item in a particular input slot.
  *
  * {
- *     "type": "minecolonies:counted",
+ *     "type": "slimcolonies:counted",
  *     "item": {
  *         "item": "minecraft:cobblestone"  // could be a tag or something else
  *     },

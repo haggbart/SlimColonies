@@ -883,7 +883,7 @@ public abstract class AbstractResearchProvider implements DataProvider
         }
 
         /**
-         * The sorting order of the research branches within the Minecolonies University Window.
+         * The sorting order of the research branches within the University Window.
          * Higher numbers will appear lower on the list.  Defaults to 0, accepts negative numbers.
          * Builtin branches should be separated by large ranges, to allow possible inserts by third parties.
          *
