@@ -1,110 +1,87 @@
 # SlimColonies [![Join Discord](https://img.shields.io/discord/1420924294841499800?label=Discord&logo=discord)](https://discord.gg/bfKpMTTuFt)
 
-**Self-sufficient colonies that actually help you**
+**Colonists do their work, you do yours**
 
-SlimColonies is a fork of [MineColonies](https://www.curseforge.com/minecraft/mc-mods/minecolonies) where colonists take care of themselves. Build your colony, assign workers, and get back to playing Minecraft while they handle the rest. No babysitting, no events.
+SlimColonies is a fork of [MineColonies](https://www.curseforge.com/minecraft/mc-mods/minecolonies) where colonists take care of themselves. Build your colony, assign workers, and
+everyone gets back to what they're doing.
 
 ## Philosophy
 
-SlimColonies is for players who want colony automation without city management gameplay. MineColonies offers deep colony simulation for those who enjoy that. SlimColonies takes a different path: your colonists are helpers who work without needing constant attention.
+MineColonies and SlimColonies serve different purposes. MineColonies offers deep colony simulation when that's what you're looking for. SlimColonies is for when you want to work
+alongside your colonists without managing them.
 
-The simplified approach feels more vanilla and fits naturally with other mods and modpacks. It doesn't try to be its own game within a game. Just helpful automation that lets you focus on what you want to do while your colonists build beautiful cities and structures.
+This matters most in complex modpacks. When you're already deep in GregTech or juggling multiple demanding mods, SlimColonies lets everyone focus on their own work. It feels more
+vanilla and fits naturally alongside other content. Colonists do their thing, you do yours, and you help each other grow the colony together.
 
-## ❓ What Makes Colonies "Demanding"?
+## Why SlimColonies?
 
-Many features in the original MineColonies require constant player intervention or force unnecessary complexity:
+**Set it and forget it**: Efficient behaviors are default. No research to unlock basic functionality, no separate progression systems to manage.
 
-**📚 Research-Gated Basic Functionality**: Simple quality-of-life features like efficient ordering (25% threshold) were locked behind research, causing couriers to spam small orders and waste time instead of working properly by default.
+**Modpack friendly**: Works alongside complex mods without competing for your attention. No happiness tracking, disease management, or raid events.
 
-**😩 Arbitrary Management Systems**: Happiness, diseases, and raids created busywork that pulled players away from actually building and exploring to babysit their colonists.
+**Automation first**: Visitor recruitment is free, couriers work efficiently from day one, and workers don't need hand-holding.
 
-**⚙️ Overcomplicated Progression**: Basic worker efficiency was tied to research requirements and item costs, making colonies feel like a chore to maintain rather than helpful automation.
+## Development Status
 
-SlimColonies removes these pain points and makes sensible behaviors the default, so your colonists work intelligently from day one without requiring a PhD in colony management.
+Active development with tens of thousands of lines already removed.
 
-## 🏗️ Development Status
+## What's Different
 
-**Active development** with tens of thousands of lines of code already removed and ongoing tweaks.
+### Removed Systems
 
-## Simplification Progress
+* Happiness, raids, diseases, mercenaries
+* Custom farmland, crops, foods, and recipes
+* Druid guards and various weapons
+* Scrolls
 
-### Major System Removals
+### Default Behaviors (no research needed)
 
-*   Removed happiness system
-*   Removed raid system
-*   Removed disease system
-*   Removed mercenary system
-*   Removed custom farmland and crops
-*   Removed custom foods and recipes
-*   Removed druid guard type
-*   Simplify guard mechanics
+* Max crafting recipe capacity
+* 25% threshold ordering (couriers batch efficiently)
+* Trample prevention
+* No research item costs
 
-### Research & Progression Simplification
+### Other Changes
 
-*   Removed unnecessary quests that should be default (moved to default behavior)
-*   Removed trample prevention research
-*   Removed research item cost requirements
-*   Removed crafting recipe capacity research requirements (max capacity by default)
-*   Removed minimum order quantity research (25% threshold ordering now default)
-
-### Minor Changes & Quality of Life
-
-*   Simplified food mechanic
-*   Removed working in rain mechanic
-*   Removed various weapons
-*   Removed courier building level carrying capacity restrictions
-*   Simplified visitor recruitment (no cost)
-*   Removed scrolls
+* Simplified food and guard mechanics
+* No working-in-rain restrictions
+* No courier carrying capacity limits
+* Free visitor recruitment
 
 ## For Users
 
 ### Creating an Issue
 
-SlimColonies crashes? Have a suggestion? Found a bug? Create an issue!
+Found a bug or have a suggestion?
 
-1. Make sure your issue hasn't already been answered or fixed.
-2. Go to the [issues page](https://github.com/haggbart/SlimColonies/issues).
-3. Click `New Issue`
-4. Fill in the form with details.
-5. Click `Submit New Issue`.
+1. Check if it's already reported
+2. Go to [issues page](https://github.com/haggbart/SlimColonies/issues)
+3. Click `New Issue` and fill in details
 
 ## For Developers
 
 ### IntelliJ Setup
 
 1. Install [Java JDK 17](https://adoptopenjdk.net/)
-2. Clone the repository: `git clone https://github.com/haggbart/SlimColonies.git`
-3. Open the project folder in IntelliJ (right-click `build.gradle` → `Open Folder as IntelliJ Project`)
-4. When prompted, select `Auto Import` and ensure a valid Gradle and JVM are selected
-5. Refresh Gradle (click the refresh icon in the Gradle tool window)
+2. Clone: `git clone https://github.com/haggbart/SlimColonies.git`
+3. Open project folder in IntelliJ (right-click `build.gradle` → `Open Folder as IntelliJ Project`)
+4. Select `Auto Import` and ensure valid Gradle/JVM
+5. Refresh Gradle
 
-If Gradle synchronization fails:
-- Check `File → Project Structure → Project → Project SDK` is set to JDK 17
-- Check `File → Settings → Build, Execution, Deployment → Build Tools → Gradle → Gradle JVM` is set to JDK 17
+**If sync fails:** Check that both Project SDK and Gradle JVM are set to JDK 17 in settings.
 
 ### Development Workflow
 
-1. Make code changes
-2. Build the project: `./gradlew build`
-3. Regenerate data files (if needed): `./gradlew runData`
-4. Test in-game: `./gradlew runClient`
-
-### Troubleshooting
-
-- If Gradle tasks fail due to memory issues, adjust settings in `~/.gradle/gradle.properties`
-- If libraries can't be resolved after branch changes, refresh Gradle again
+1. Make changes
+2. Build: `./gradlew build`
+3. Regenerate data (if needed): `./gradlew runData`
+4. Test: `./gradlew runClient`
 
 ### Contributing
 
-#### Submitting a PR
+Found a bug or optimization? Want to help?
 
-Found a bug in our code? Think you can make it more efficient? Want to help in general? Great!
-
-1. If you haven't already, create a GitHub account.
-2. Click the `Fork` icon located at the top right.
-3. Make your changes and commit them.
-    * If you're making changes locally, you'll have to do `git commit -a` and `git push` in your command line (or with GitKraken stage the changes, commit them, and push them
-      first).
-4. Click `Pull Request` in the middle.
-5. Click 'New pull request' to create a pull request for this comparison, enter your PR's title, and create a detailed description telling us what you changed.
-6. Click `Create pull request` and wait for feedback!
+1. Fork the repo
+2. Make your changes and commit
+3. Click `Pull Request` and describe your changes
+4. Submit and wait for feedback!
