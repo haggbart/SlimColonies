@@ -88,7 +88,7 @@ public final class BackUpHelper
         try (FileOutputStream fos = new FileOutputStream(getBackupSaveLocation(new Date())))
         {
             @NotNull final File saveDir =
-                new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
+                new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
             final ZipOutputStream zos = new ZipOutputStream(fos);
 
             for (final ResourceKey<Level> dimensionType : net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().levels.keySet())
@@ -180,7 +180,7 @@ public final class BackUpHelper
             @Nullable final CompoundTag data = BackUpHelper.loadNBTFromPath(file);
             if (data != null)
             {
-                Log.getLogger().info("Loading Minecolonies colony manager Backup Data");
+                Log.getLogger().info("Loading SlimColonies colony manager Backup Data");
                 IColonyManager.getInstance().read(data);
                 Log.getLogger().info("Backup Load Complete");
             }
@@ -196,7 +196,7 @@ public final class BackUpHelper
      */
     public static void loadMissingColonies()
     {
-        @NotNull final File saveDir = new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
+        @NotNull final File saveDir = new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
 
         for (final ResourceKey<Level> dimensionType : ServerLifecycleHooks.getCurrentServer().levels.keySet())
         {
@@ -223,17 +223,17 @@ public final class BackUpHelper
     }
 
     /**
-     * Get save location for Minecolonies backup data, from the world/save directory.
+     * Get save location for SlimColonies backup data, from the world/save directory.
      *
      * @param date the current time.
-     * @return Save file for minecolonies.
+     * @return Save file for slimcolonies.
      */
     @NotNull
     private static File getBackupSaveLocation(final Date date)
     {
         @NotNull final File saveDir =
-            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
-        return new File(saveDir, String.format(FILENAME_MINECOLONIES_BACKUP, new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(date)));
+            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
+        return new File(saveDir, String.format(FILENAME_SLIMCOLONIES_BACKUP, new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(date)));
     }
 
     /**
@@ -273,15 +273,15 @@ public final class BackUpHelper
     }
 
     /**
-     * Get save location for Minecolonies data, from the world/save directory.
+     * Get save location for SlimColonies data, from the world/save directory.
      *
-     * @return Save file for minecolonies.
+     * @return Save file for slimcolonies.
      */
     @NotNull
     public static File getSaveLocation()
     {
-        @NotNull final File saveDir = new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
-        return new File(saveDir, FILENAME_MINECOLONIES);
+        @NotNull final File saveDir = new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
+        return new File(saveDir, FILENAME_SLIMCOLONIES);
     }
 
     /**
@@ -339,7 +339,7 @@ public final class BackUpHelper
         @NotNull final File file = getSaveLocation();
         saveNBTToPath(file, compound);
         @NotNull final File saveDir =
-            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
+            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
         for (final IColony colony : IColonyManager.getInstance().getAllColonies())
         {
             final CompoundTag colonyCompound = new CompoundTag();
@@ -357,7 +357,7 @@ public final class BackUpHelper
     public static void markColonyDeleted(final int colonyID, final ResourceKey<Level> dimensionID)
     {
         @NotNull final File saveDir =
-            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
+            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
         final File toDelete = new File(saveDir, getFolderForDimension(dimensionID.location()) + String.format(FILENAME_COLONY, colonyID));
         if (toDelete.exists())
         {
@@ -377,7 +377,7 @@ public final class BackUpHelper
     public static void loadAllBackups()
     {
         @NotNull final File saveDir =
-            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
+            new File(net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
 
         ServerLifecycleHooks.getCurrentServer().levels.keySet().forEach(dimensionType -> {
             for (int i = 1; i <= IColonyManager.getInstance().getTopColonyId() + 1; i++)
@@ -412,7 +412,7 @@ public final class BackUpHelper
      */
     public static void loadColonyBackup(final int colonyId, final ResourceKey<Level> dimension, boolean loadDeleted, boolean claimChunks)
     {
-        @NotNull final File saveDir = new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_MINECOLONIES_PATH);
+        @NotNull final File saveDir = new File(ServerLifecycleHooks.getCurrentServer().getWorldPath(LevelResource.ROOT).toFile(), FILENAME_SLIMCOLONIES_PATH);
         @NotNull final File backupFile = new File(saveDir, getFolderForDimension(dimension.location()) + String.format(FILENAME_COLONY, colonyId));
         CompoundTag compound = loadNBTFromPath(backupFile);
         if (compound == null)
@@ -491,8 +491,8 @@ public final class BackUpHelper
         final File minecraftDir = new File(topworldDir.getAbsolutePath().replace(topworldDir.getPath(), ""));
 
         final String worldname = topworldDir.getParent().replace("." + File.separator, "");
-        final String minecoloniesZipDir = worldname + File.separator + "minecolonies";
-        final File saveDir = new File(topworldDir, FILENAME_MINECOLONIES_PATH);
+        final String minecoloniesZipDir = worldname + File.separator + "slimcolonies";
+        final File saveDir = new File(topworldDir, FILENAME_SLIMCOLONIES_PATH);
         try (FileOutputStream fos = new FileOutputStream(new File(saveDir, String.format(FILENAME_EXPORT, colony.getID()))))
         {
             final ZipOutputStream zos = new ZipOutputStream(fos);
@@ -587,10 +587,10 @@ public final class BackUpHelper
             }
 
             // Save config
-            final File config = new File(topworldDir, "serverconfig" + File.separator + "minecolonies-server.toml");
+            final File config = new File(topworldDir, "serverconfig" + File.separator + "slimcolonies-server.toml");
             if (config.exists())
             {
-                addFileToZipWithPath(worldname + File.separator + "serverconfig" + File.separator + "minecolonies-server.toml", zos, config);
+                addFileToZipWithPath(worldname + File.separator + "serverconfig" + File.separator + "slimcolonies-server.toml", zos, config);
             }
 
             // Mod list

@@ -29,8 +29,8 @@ import net.minecraft.ChatFormatting;
  */
 public class CommandCitizenList implements IMCColonyOfficerCommand
 {
-    private static final String LIST_COMMAND_SUGGESTED         = "/minecolonies citizens list %d %d";
-    private static final String COMMAND_CITIZEN_INFO_SUGGESTED = "/minecolonies citizens info %d %d";
+    private static final String LIST_COMMAND_SUGGESTED         = "/slimcolonies citizens list %d %d";
+    private static final String COMMAND_CITIZEN_INFO_SUGGESTED = "/slimcolonies citizens info %d %d";
 
     private static final int CITIZENS_ON_PAGE = 9;
 

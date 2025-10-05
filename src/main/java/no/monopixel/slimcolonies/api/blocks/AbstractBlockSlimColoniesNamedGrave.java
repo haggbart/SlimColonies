@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 
 /**
- * Abstract class for minecolonies named graves.
+ * Abstract class for slimcolonies named graves.
  */
 public abstract class AbstractBlockSlimColoniesNamedGrave<B extends AbstractBlockSlimColoniesNamedGrave<B>> extends AbstractBlockSlimColonies<B> implements EntityBlock
 {

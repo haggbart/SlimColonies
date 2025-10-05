@@ -695,7 +695,7 @@ public class CompatibilityManager implements ICompatibilityManager
     }
 
     /**
-     * Create complete list of plantable items, from the "minecolonies:florist_flowers" tag, for the Florist.
+     * Create complete list of plantable items, from the "slimcolonies:florist_flowers" tag, for the Florist.
      */
     private void discoverPlantables(final ItemStack stack)
     {

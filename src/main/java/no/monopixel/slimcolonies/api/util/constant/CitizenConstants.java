@@ -181,7 +181,7 @@ public final class CitizenConstants
     /**
      * The Guard Building health modifier Name
      */
-    public static final String GUARD_HEALTH_MOD_BUILDING_NAME = "MinecoloniesGuardBuildingHP";
+    public static final String GUARD_HEALTH_MOD_BUILDING_NAME = "SlimColoniesGuardBuildingHP";
 
     /**
      * The Research health modifier name.
@@ -196,12 +196,12 @@ public final class CitizenConstants
     /**
      * The Config guard health modifier name
      */
-    public static final String GUARD_HEALTH_MOD_CONFIG_NAME = "MinecoloniesGuardConfigHP";
+    public static final String GUARD_HEALTH_MOD_CONFIG_NAME = "SlimColoniesGuardConfigHP";
 
     /**
      * The guard's level based health bonus mod's name
      */
-    public static final String GUARD_HEALTH_MOD_LEVEL_NAME = "MinecoloniesGuardLevelHealth";
+    public static final String GUARD_HEALTH_MOD_LEVEL_NAME = "SlimColoniesGuardLevelHealth";
 
     /**
      * At this stack size or smaller the chance to dump is 50%.

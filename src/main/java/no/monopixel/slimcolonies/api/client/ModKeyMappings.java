@@ -12,12 +12,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ModKeyMappings
 {
-    private static final String CATEGORY = "key.minecolonies.categories.general";
+    private static final String CATEGORY = "key.slimcolonies.categories.general";
 
     /**
      * Toggle
      */
-    public static final Lazy<KeyMapping> TOGGLE_GOGGLES = Lazy.of(() -> new KeyMapping("key.minecolonies.toggle_goggles",
+    public static final Lazy<KeyMapping> TOGGLE_GOGGLES = Lazy.of(() -> new KeyMapping("key.slimcolonies.toggle_goggles",
             KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY));
 
     /**

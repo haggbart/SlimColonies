@@ -1,5 +1,6 @@
 package no.monopixel.slimcolonies.api.advancements;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import no.monopixel.slimcolonies.api.advancements.all_towers.AllTowersTrigger;
 import no.monopixel.slimcolonies.api.advancements.army_population.ArmyPopulationTrigger;
 import no.monopixel.slimcolonies.api.advancements.building_add_recipe.BuildingAddRecipeTrigger;
@@ -16,10 +17,9 @@ import no.monopixel.slimcolonies.api.advancements.open_gui_window.OpenGuiWindowT
 import no.monopixel.slimcolonies.api.advancements.place_structure.PlaceStructureTrigger;
 import no.monopixel.slimcolonies.api.advancements.place_supply.PlaceSupplyTrigger;
 import no.monopixel.slimcolonies.api.advancements.undertaker_totem.UndertakerTotemTrigger;
-import net.minecraft.advancements.CriteriaTriggers;
 
 /**
- * The collection of advancement triggers for minecolonies.
+ * The collection of advancement triggers.
  * Each trigger may correspond to multiple advancements.
  */
 public class AdvancementTriggers

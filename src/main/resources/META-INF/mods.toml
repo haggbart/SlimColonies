@@ -32,7 +32,7 @@ credits = "Thanks to the original MineColonies team for their amazing work!" #op
 authors = "monopixel" #optional
 # The description text for the mod (multi-line!) (#mandatory)
 description = '''
-SlimColonies is a streamlined fork of MineColonies designed to be less demanding and more approachable. This simplified version retains the core colony simulation experience while removing complex mechanics that can overwhelm new players. Build and manage your colony with reduced babysitting!
+Self-sufficient colonies that actually help you. A MineColonies fork where colonists take care of themselves. Build your colony, assign workers, and get back to playing Minecraft. No babysitting, no events.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.slimcolonies]] #optional

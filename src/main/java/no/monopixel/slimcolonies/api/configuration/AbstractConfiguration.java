@@ -10,10 +10,10 @@ import java.util.function.Predicate;
 // TODO: add needs world restart helper
 public abstract class AbstractConfiguration
 {
-    private final static String BOOLEAN_DEFAULT_KEY = "minecolonies.config.default.boolean";
-    private final static String INT_DEFAULT_KEY     = "minecolonies.config.default.int";
-    private final static String LONG_DEFAULT_KEY    = "minecolonies.config.default.long";
-    private final static String DOUBLE_DEFAULT_KEY  = "minecolonies.config.default.double";
+    private final static String BOOLEAN_DEFAULT_KEY = "slimcolonies.config.default.boolean";
+    private final static String INT_DEFAULT_KEY     = "slimcolonies.config.default.int";
+    private final static String LONG_DEFAULT_KEY    = "slimcolonies.config.default.long";
+    private final static String DOUBLE_DEFAULT_KEY  = "slimcolonies.config.default.double";
 
     protected void createCategory(final Builder builder, final String key)
     {

@@ -1,11 +1,5 @@
 package no.monopixel.slimcolonies.core.commands.generalcommands;
 
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.permissions.Rank;
-import no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslationConstants;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCOPCommand;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -18,6 +12,12 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.permissions.Rank;
+import no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslationConstants;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCOPCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +26,17 @@ import static no.monopixel.slimcolonies.core.commands.CommandArgumentNames.PLAYE
 
 public class CommandGetRanks implements IMCOPCommand
 {
-    private static final String COLONY_INFO_TEXT       = "ID: %s  Name: %s  Rank: %s";
-    private static final String COORDINATES_TEXT       = "Coordinates: ";
-    private static final String COORDINATES_XYZ         = "x=%s y=%s z=%s";
-    private static final String RANKS_COMMAND_SUGGESTED = "/minecolonies ranks ";
+    private static final String COLONY_INFO_TEXT        = "ID: %s  Name: %s  Rank: %s";
+    private static final String RANKS_COMMAND_SUGGESTED = "/slimcolonies ranks ";
     private static final String PAGE_TOP_LEFT           = "   ------------------ page ";
-    private static final String PAGE_TOP_RIGHT         = " ------------------";
-    private static final String PAGE_TOP_MIDDLE        = " of ";
-    private static final String PREV_PAGE              = " <- prev";
-    private static final String NEXT_PAGE              = "next -> ";
-    private static final String PAGE_LINE              = " ----------------";
-    private static final String PAGE_LINE_DIVIDER      = " | ";
-    private static final int    COLONIES_ON_PAGE       = 10;
-    private static final String START_PAGE_ARG         = "startpage";
+    private static final String PAGE_TOP_RIGHT          = " ------------------";
+    private static final String PAGE_TOP_MIDDLE         = " of ";
+    private static final String PREV_PAGE               = " <- prev";
+    private static final String NEXT_PAGE               = "next -> ";
+    private static final String PAGE_LINE               = " ----------------";
+    private static final String PAGE_LINE_DIVIDER       = " | ";
+    private static final int    COLONIES_ON_PAGE        = 10;
+    private static final String START_PAGE_ARG          = "startpage";
 
     @Override
     public int onExecute(final CommandContext<CommandSourceStack> context)

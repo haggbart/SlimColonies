@@ -25,8 +25,8 @@ public class CommandListColonies implements IMCCommand
     private static final String ID_AND_NAME_TEXT       = "ID: %s  Name: %s";
     private static final String COORDINATES_TEXT       = "Coordinates: ";
     private static final String COORDINATES_XYZ        = "x=%s y=%s z=%s";
-    private static final String LIST_COMMAND_SUGGESTED = "/minecolonies colony list ";
-    private static final String TELEPORT_COMMAND       = "/minecolonies colony teleport ";
+    private static final String LIST_COMMAND_SUGGESTED = "/slimcolonies colony list ";
+    private static final String TELEPORT_COMMAND       = "/slimcolonies colony teleport ";
     private static final String PAGE_TOP_LEFT          = "   ------------------ page ";
     private static final String PAGE_TOP_RIGHT         = " ------------------";
     private static final String PAGE_TOP_MIDDLE        = " of ";
@@ -34,7 +34,7 @@ public class CommandListColonies implements IMCCommand
     private static final String NEXT_PAGE              = "next -> ";
     private static final String PAGE_LINE              = " ----------------";
     private static final String PAGE_LINE_DIVIDER      = " | ";
-    private static final String COMMAND_COLONY_INFO    = "/minecolonies colony info %d";
+    private static final String COMMAND_COLONY_INFO    = "/slimcolonies colony info %d";
     private static final int    COLONIES_ON_PAGE       = 9;
     public static final  String START_PAGE_ARG         = "startpage";
 

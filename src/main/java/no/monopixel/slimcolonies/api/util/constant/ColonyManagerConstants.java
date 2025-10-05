@@ -11,19 +11,19 @@ public final class ColonyManagerConstants
     public static final String TAG_DISTANCE = "dist";
 
     /**
-     * The file name of the minecolonies path.
+     * The file name of the slimcolonies path.
      */
-    public static final String FILENAME_MINECOLONIES_PATH = "minecolonies";
+    public static final String FILENAME_SLIMCOLONIES_PATH = "slimcolonies";
 
     /**
-     * The file name of the minecolonies.
+     * The file name of the slimcolonies.
      */
-    public static final String FILENAME_MINECOLONIES = "colonies.dat";
+    public static final String FILENAME_SLIMCOLONIES = "colonies.dat";
 
     /**
-     * The file name pattern of the minecolonies backup.
+     * The file name pattern of the slimcolonies backup.
      */
-    public static final String FILENAME_MINECOLONIES_BACKUP = "colonies-%s.zip";
+    public static final String FILENAME_SLIMCOLONIES_BACKUP = "colonies-%s.zip";
 
     /**
      * Printed text if world capability couldn't be found.

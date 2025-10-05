@@ -51,7 +51,7 @@ import static com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataPro
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 
 /**
- * Base class for all Minecolonies Hut Blocks. Hut Blocks are the base blocks for Minecolonies buildings.
+ * Base class for all Hut Blocks. Hut Blocks are the base blocks for buildings.
  * Extending this class enables all the blueprint functionalities.
  */
 @SuppressWarnings({"PMD.ExcessiveImports", "removal"})
