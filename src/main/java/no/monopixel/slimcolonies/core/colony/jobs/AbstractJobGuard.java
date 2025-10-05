@@ -1,14 +1,14 @@
 package no.monopixel.slimcolonies.core.colony.jobs;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
 import no.monopixel.slimcolonies.core.entity.ai.workers.guard.AbstractEntityAIGuard;
 import no.monopixel.slimcolonies.core.util.AttributeModifierUtils;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.GUARD_SLEEP;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.GUARD_HEALTH_MOD_BUILDING_NAME;
@@ -77,7 +77,7 @@ public abstract class AbstractJobGuard<J extends AbstractJobGuard<J>> extends Ab
                 new AttributeModifier(GUARD_HEALTH_MOD_BUILDING_NAME, ((AbstractBuildingGuards) workBuilding).getBonusHealth(), AttributeModifier.Operation.ADDITION));
             AttributeModifierUtils.addHealthModifier(citizen,
                 new AttributeModifier(GUARD_HEALTH_MOD_CONFIG_NAME,
-                    MineColonies.getConfig().getServer().guardHealthMult.get() - 1.0,
+                    SlimColonies.getConfig().getServer().guardHealthMult.get() - 1.0,
                     AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
     }

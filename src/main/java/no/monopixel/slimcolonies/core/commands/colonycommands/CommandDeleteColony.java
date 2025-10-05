@@ -1,12 +1,5 @@
 package no.monopixel.slimcolonies.core.commands.colonycommands;
 
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslationConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCColonyOfficerCommand;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
-import no.monopixel.slimcolonies.core.util.BackUpHelper;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -25,6 +18,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslationConstants;
+import no.monopixel.slimcolonies.core.SlimColonies;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCColonyOfficerCommand;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
+import no.monopixel.slimcolonies.core.util.BackUpHelper;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -52,12 +52,12 @@ public class CommandDeleteColony implements IMCColonyOfficerCommand
     public LiteralArgumentBuilder<CommandSourceStack> build()
     {
         return IMCCommand.newLiteral(getName())
-                 .then(IMCCommand.newArgument(COLONYID_ARG, IntegerArgumentType.integer(1))
-                         .executes(this::executeGuidedBuildingAsk)
-                         .then(IMCCommand.newArgument(DELETE_BUILDINGS_ARG, DeleteBuildingsArgumentType.argument())
-                                 .executes(this::executeGuidedConfirm)
-                                 .then(IMCCommand.newArgument(CONFIRM_ARG, BoolArgumentType.bool())
-                                         .executes(this::checkPreConditionAndExecute))));
+            .then(IMCCommand.newArgument(COLONYID_ARG, IntegerArgumentType.integer(1))
+                .executes(this::executeGuidedBuildingAsk)
+                .then(IMCCommand.newArgument(DELETE_BUILDINGS_ARG, DeleteBuildingsArgumentType.argument())
+                    .executes(this::executeGuidedConfirm)
+                    .then(IMCCommand.newArgument(CONFIRM_ARG, BoolArgumentType.bool())
+                        .executes(this::checkPreConditionAndExecute))));
     }
 
     /**
@@ -97,19 +97,19 @@ public class CommandDeleteColony implements IMCColonyOfficerCommand
         }
 
         final Style keepButtonStyle = Style.EMPTY
-                                        .withBold(true)
-                                        .withColor(ChatFormatting.DARK_GREEN)
-                                        .withClickEvent(createClickEvent(context, false));
+            .withBold(true)
+            .withColor(ChatFormatting.DARK_GREEN)
+            .withClickEvent(createClickEvent(context, false));
 
         final Style deleteButtonStyle = Style.EMPTY
-                                          .withBold(true)
-                                          .withColor(ChatFormatting.DARK_RED)
-                                          .withClickEvent(createClickEvent(context, true));
+            .withBold(true)
+            .withColor(ChatFormatting.DARK_RED)
+            .withClickEvent(createClickEvent(context, true));
 
         final Component keepButton = braceButtonComponent(Component.translatable(COMMAND_COLONY_DELETE_CONFIRM_BUILDING_KEEP).setStyle(keepButtonStyle));
         final Component deleteButton = braceButtonComponent(Component.translatable(COMMAND_COLONY_DELETE_CONFIRM_BUILDING_DELETE).setStyle(deleteButtonStyle));
 
-        final TranslatableContents contents = new TranslatableContents(COMMAND_COLONY_DELETE_CONFIRM_BUILDING, null, new Component[] { keepButton, deleteButton });
+        final TranslatableContents contents = new TranslatableContents(COMMAND_COLONY_DELETE_CONFIRM_BUILDING, null, new Component[] {keepButton, deleteButton});
         context.getSource().sendSuccess(() -> MutableComponent.create(contents).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)), true);
         return 1;
     }
@@ -128,9 +128,9 @@ public class CommandDeleteColony implements IMCColonyOfficerCommand
         }
 
         final Style buttonStyle = Style.EMPTY
-                                    .withBold(true)
-                                    .withColor(ChatFormatting.DARK_RED)
-                                    .withClickEvent(createClickEvent(context, true));
+            .withBold(true)
+            .withColor(ChatFormatting.DARK_RED)
+            .withClickEvent(createClickEvent(context, true));
         final Component confirmButton = braceButtonComponent(Component.translatable(COMMAND_COLONY_DELETE_CONFIRM_FINAL_HERE).setStyle(buttonStyle));
 
         Component deleteBuildingsComponent = Component.empty();
@@ -139,7 +139,7 @@ public class CommandDeleteColony implements IMCColonyOfficerCommand
             deleteBuildingsComponent = Component.translatable(COMMAND_COLONY_DELETE_CONFIRM_FINAL_BUILDING).append(" ").setStyle(Style.EMPTY.withBold(true));
         }
 
-        final TranslatableContents contents = new TranslatableContents(COMMAND_COLONY_DELETE_CONFIRM_FINAL, null, new Component[] { deleteBuildingsComponent, confirmButton });
+        final TranslatableContents contents = new TranslatableContents(COMMAND_COLONY_DELETE_CONFIRM_FINAL, null, new Component[] {deleteBuildingsComponent, confirmButton});
         context.getSource().sendSuccess(() -> MutableComponent.create(contents).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)), true);
         return 1;
     }
@@ -147,7 +147,7 @@ public class CommandDeleteColony implements IMCColonyOfficerCommand
     @Override
     public boolean checkPreCondition(final CommandContext<CommandSourceStack> context)
     {
-        if (!context.getSource().hasPermission(OP_PERM_LEVEL) && !MineColonies.getConfig().getServer().canPlayerUseDeleteColonyCommand.get())
+        if (!context.getSource().hasPermission(OP_PERM_LEVEL) && !SlimColonies.getConfig().getServer().canPlayerUseDeleteColonyCommand.get())
         {
             context.getSource().sendSuccess(() -> Component.translatable(CommandTranslationConstants.COMMAND_DISABLED_IN_CONFIG), true);
             return false;
@@ -196,7 +196,7 @@ public class CommandDeleteColony implements IMCColonyOfficerCommand
         static
         {
             ArgumentTypeInfos.registerByClass(CommandDeleteColony.DeleteBuildingsArgumentType.class,
-              SingletonArgumentInfo.contextFree(CommandDeleteColony.DeleteBuildingsArgumentType::argument));
+                SingletonArgumentInfo.contextFree(CommandDeleteColony.DeleteBuildingsArgumentType::argument));
         }
         public static DeleteBuildingsArgumentType argument()
         {

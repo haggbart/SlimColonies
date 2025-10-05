@@ -1,20 +1,20 @@
 package no.monopixel.slimcolonies.core.loot;
 
 import com.google.common.base.Suppliers;
-import no.monopixel.slimcolonies.core.MineColonies;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -28,13 +28,14 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
  */
 public class SupplyLoot extends LootModifier
 {
-    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> GLM = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
-    public static final Supplier<Codec<SupplyLoot>> SHIP_CODEC = Suppliers.memoize(() -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, (co) -> new SupplyLoot(co, false))));
-    public static final Supplier<Codec<SupplyLoot>> CAMP_CODEC = Suppliers.memoize(() -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, (co) -> new SupplyLoot(co, true))));
+    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> GLM        = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
+    public static final Supplier<Codec<SupplyLoot>>                            SHIP_CODEC =
+        Suppliers.memoize(() -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, (co) -> new SupplyLoot(co, false))));
+    public static final Supplier<Codec<SupplyLoot>>                            CAMP_CODEC =
+        Suppliers.memoize(() -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, (co) -> new SupplyLoot(co, true))));
 
     public static final RegistryObject<Codec<SupplyLoot>> SUPPLYSHIP_LOOT = GLM.register("supplyship_loot", SupplyLoot.SHIP_CODEC);
     public static final RegistryObject<Codec<SupplyLoot>> SUPPLYCAMP_LOOT = GLM.register("supplycamp_loot", SupplyLoot.CAMP_CODEC);
-
 
     /**
      * Resource locations, path and names must fit the existing json file.
@@ -60,7 +61,7 @@ public class SupplyLoot extends LootModifier
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext lootContext)
     {
-        if (MineColonies.getConfig().getCommon().generateSupplyLoot.get() && !lootContext.getQueriedLootTableId().getNamespace().equals(MOD_ID))
+        if (SlimColonies.getConfig().getCommon().generateSupplyLoot.get() && !lootContext.getQueriedLootTableId().getNamespace().equals(MOD_ID))
         {
             if (camp)
             {

@@ -24,8 +24,8 @@ import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.eventbus.events.colony.citizens.CitizenAddedModEvent;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.CitizenData;
 import no.monopixel.slimcolonies.core.colony.Colony;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractAssignedCitizenModule;
@@ -494,13 +494,13 @@ public class CitizenManager implements ICitizenManager
     @Override
     public int getMaxCitizens()
     {
-        return (int) Math.max(1, Math.min(maxCitizens, Math.min(maxCitizensFromResearch(), MineColonies.getConfig().getServer().maxCitizenPerColony.get())));
+        return (int) Math.max(1, Math.min(maxCitizens, Math.min(maxCitizensFromResearch(), SlimColonies.getConfig().getServer().maxCitizenPerColony.get())));
     }
 
     @Override
     public int getPotentialMaxCitizens()
     {
-        return (int) Math.max(1, Math.min(potentialMaxCitizens, Math.min(maxCitizensFromResearch(), MineColonies.getConfig().getServer().maxCitizenPerColony.get())));
+        return (int) Math.max(1, Math.min(potentialMaxCitizens, Math.min(maxCitizensFromResearch(), SlimColonies.getConfig().getServer().maxCitizenPerColony.get())));
     }
 
     @Override
@@ -509,11 +509,11 @@ public class CitizenManager implements ICitizenManager
         if (MinecoloniesAPIProxy.getInstance().getGlobalResearchTree().hasResearchEffect(CITIZEN_CAP))
         {
             final int max = Math.max(CitizenConstants.CITIZEN_LIMIT_DEFAULT, (int) colony.getResearchManager().getResearchEffects().getEffectStrength(CITIZEN_CAP));
-            return Math.min(max, MineColonies.getConfig().getServer().maxCitizenPerColony.get());
+            return Math.min(max, SlimColonies.getConfig().getServer().maxCitizenPerColony.get());
         }
         else
         {
-            return MineColonies.getConfig().getServer().maxCitizenPerColony.get();
+            return SlimColonies.getConfig().getServer().maxCitizenPerColony.get();
         }
     }
 
@@ -564,7 +564,7 @@ public class CitizenManager implements ICitizenManager
         }
 
         //  Spawn initial Citizens
-        if (colony.canMoveIn() && colony.hasTownHall() && getCitizens().size() < MineColonies.getConfig().getServer().initialCitizenAmount.get())
+        if (colony.canMoveIn() && colony.hasTownHall() && getCitizens().size() < SlimColonies.getConfig().getServer().initialCitizenAmount.get())
         {
             respawnInterval -= 500 + (SECONDS_A_MINUTE * colony.getBuildingManager().getTownHall().getBuildingLevel());
 

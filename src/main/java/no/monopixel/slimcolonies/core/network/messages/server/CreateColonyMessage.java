@@ -1,19 +1,6 @@
 package no.monopixel.slimcolonies.core.network.messages.server;
 
 import com.ldtteam.structurize.storage.StructurePacks;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyCreatedModEvent;
-import no.monopixel.slimcolonies.api.network.IMessage;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.OpenBuildingUIMessage;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
-import no.monopixel.slimcolonies.core.MineColonies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +9,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyCreatedModEvent;
+import no.monopixel.slimcolonies.api.network.IMessage;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.MessageUtils;
+import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.OpenBuildingUIMessage;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -119,8 +119,8 @@ public class CreateColonyMessage implements IMessage
         if (!(tileEntity instanceof TileEntityColonyBuilding))
         {
             MessageUtils.format(WARNING_TOWN_HALL_NO_TILE_ENTITY)
-              .withPriority(MessagePriority.DANGER)
-              .sendTo(sender);
+                .withPriority(MessagePriority.DANGER)
+                .sendTo(sender);
             return;
         }
 
@@ -144,19 +144,19 @@ public class CreateColonyMessage implements IMessage
         hut.setBlueprintPath(pathName);
 
         final double spawnDistance = Math.sqrt(BlockPosUtil.getDistanceSquared2D(townHall, ((ServerLevel) world).getSharedSpawnPos()));
-        if (spawnDistance < MineColonies.getConfig().getServer().minDistanceFromWorldSpawn.get())
+        if (spawnDistance < SlimColonies.getConfig().getServer().minDistanceFromWorldSpawn.get())
         {
             if (!world.isClientSide)
             {
-                MessageUtils.format(CANT_PLACE_COLONY_TOO_CLOSE_TO_SPAWN, MineColonies.getConfig().getServer().minDistanceFromWorldSpawn.get() - spawnDistance).sendTo(sender);
+                MessageUtils.format(CANT_PLACE_COLONY_TOO_CLOSE_TO_SPAWN, SlimColonies.getConfig().getServer().minDistanceFromWorldSpawn.get() - spawnDistance).sendTo(sender);
             }
             return;
         }
-        else if (spawnDistance > MineColonies.getConfig().getServer().maxDistanceFromWorldSpawn.get())
+        else if (spawnDistance > SlimColonies.getConfig().getServer().maxDistanceFromWorldSpawn.get())
         {
             if (!world.isClientSide)
             {
-                MessageUtils.format(CANT_PLACE_COLONY_TOO_FAR_FROM_SPAWN, spawnDistance - MineColonies.getConfig().getServer().maxDistanceFromWorldSpawn.get()).sendTo(sender);
+                MessageUtils.format(CANT_PLACE_COLONY_TOO_FAR_FROM_SPAWN, spawnDistance - SlimColonies.getConfig().getServer().maxDistanceFromWorldSpawn.get()).sendTo(sender);
             }
             return;
         }
@@ -177,14 +177,14 @@ public class CreateColonyMessage implements IMessage
             if (reactivate)
             {
                 MessageUtils.format(MESSAGE_COLONY_REACTIVATED, colonyName)
-                  .withPriority(MessagePriority.IMPORTANT)
-                  .sendTo(sender);
+                    .withPriority(MessagePriority.IMPORTANT)
+                    .sendTo(sender);
             }
             else
             {
                 MessageUtils.format(MESSAGE_COLONY_FOUNDED)
-                  .withPriority(MessagePriority.IMPORTANT)
-                  .sendTo(sender);
+                    .withPriority(MessagePriority.IMPORTANT)
+                    .sendTo(sender);
             }
 
             IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyCreatedModEvent(createdColony));
@@ -195,7 +195,7 @@ public class CreateColonyMessage implements IMessage
         ownedColony.getPackageManager().sendColonyViewPackets();
         ownedColony.getPackageManager().sendPermissionsPackets();
         MessageUtils.format(WARNING_COLONY_FOUNDING_FAILED)
-          .withPriority(MessagePriority.DANGER)
-          .sendTo(sender);
+            .withPriority(MessagePriority.DANGER)
+            .sendTo(sender);
     }
 }

@@ -53,8 +53,8 @@ import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity
 import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.blocks.BlockScarecrow;
 import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTownHall;
 import no.monopixel.slimcolonies.core.client.render.RenderBipedCitizen;
@@ -66,8 +66,8 @@ import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
 import no.monopixel.slimcolonies.core.commands.EntryPoint;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesChunkCapabilityProvider;
-import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesWorldCapabilityProvider;
-import no.monopixel.slimcolonies.core.event.capabilityproviders.MinecoloniesWorldColonyManagerCapabilityProvider;
+import no.monopixel.slimcolonies.core.event.capabilityproviders.SlimColoniesWorldCapabilityProvider;
+import no.monopixel.slimcolonies.core.event.capabilityproviders.SlimColoniesWorldColonyManagerCapabilityProvider;
 import no.monopixel.slimcolonies.core.network.messages.client.OpenSuggestionWindowMessage;
 import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkCapabilityMessage;
 import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkRangeCapabilityMessage;
@@ -111,7 +111,7 @@ public class EventHandler
     {
         if (!event.getLevel().isClientSide())
         {
-            if (MineColonies.getConfig().getServer().mobAttackCitizens.get() && event.getEntity() instanceof Mob && event.getEntity() instanceof Enemy && !(event.getEntity()
+            if (SlimColonies.getConfig().getServer().mobAttackCitizens.get() && event.getEntity() instanceof Mob && event.getEntity() instanceof Enemy && !(event.getEntity()
                 .getType()
                 .is(ModTags.mobAttackBlacklist))
                 && !(event.getEntity() instanceof AbstractFastMinecoloniesEntity))
@@ -152,9 +152,9 @@ public class EventHandler
     @SubscribeEvent
     public static void onAttachingCapabilitiesWorld(@NotNull final AttachCapabilitiesEvent<Level> event)
     {
-        event.addCapability(new ResourceLocation(Constants.MOD_ID, "chunkupdate"), new MinecoloniesWorldCapabilityProvider());
+        event.addCapability(new ResourceLocation(Constants.MOD_ID, "chunkupdate"), new SlimColoniesWorldCapabilityProvider());
         event.addCapability(new ResourceLocation(Constants.MOD_ID, "colonymanager"),
-            new MinecoloniesWorldColonyManagerCapabilityProvider(event.getObject().dimension() == Level.OVERWORLD));
+            new SlimColoniesWorldColonyManagerCapabilityProvider(event.getObject().dimension() == Level.OVERWORLD));
     }
 
     /**
@@ -407,7 +407,7 @@ public class EventHandler
      */
     public static void onEnteringChunkEntity(@NotNull final EntityCitizen entityCitizen, final ChunkPos newChunkPos)
     {
-        if (MineColonies.getConfig().getServer().pvp_mode.get() && newChunkPos != null)
+        if (SlimColonies.getConfig().getServer().pvp_mode.get() && newChunkPos != null)
         {
             if (entityCitizen.level == null || !WorldUtil.isEntityChunkLoaded(entityCitizen.level, new ChunkPos(newChunkPos.x, newChunkPos.z)))
             {
@@ -560,7 +560,7 @@ public class EventHandler
      */
     public static boolean onBlockHutPlaced(@NotNull final Level world, @NotNull final Player player, final Block block, final BlockPos pos)
     {
-        if (!MineColonies.getConfig().getServer().allowOtherDimColonies.get() && !WorldUtil.isOverworldType(world))
+        if (!SlimColonies.getConfig().getServer().allowOtherDimColonies.get() && !WorldUtil.isOverworldType(world))
         {
             MessageUtils.format(CANT_PLACE_COLONY_IN_OTHER_DIM).sendTo(player);
             return false;
@@ -619,7 +619,7 @@ public class EventHandler
 
         // Global events
         // Halloween ghost mode
-        if (event.getLevel().isClientSide() && MineColonies.getConfig().getClient().holidayFeatures.get() &&
+        if (event.getLevel().isClientSide() && SlimColonies.getConfig().getClient().holidayFeatures.get() &&
             (LocalDateTime.now().getDayOfMonth() == 31 && LocalDateTime.now().getMonth() == Month.OCTOBER
                 || LocalDateTime.now().getDayOfMonth() == 1 && LocalDateTime.now().getMonth() == Month.NOVEMBER
                 || LocalDateTime.now().getDayOfMonth() == 2 && LocalDateTime.now().getMonth() == Month.NOVEMBER))
@@ -628,7 +628,7 @@ public class EventHandler
             RenderBipedCitizen.isItGhostTime = false;
         }
         // April 1st mode
-        if (event.getLevel().isClientSide() && MineColonies.getConfig().getClient().holidayFeatures.get() &&
+        if (event.getLevel().isClientSide() && SlimColonies.getConfig().getClient().holidayFeatures.get() &&
             LocalDateTime.now().getDayOfMonth() == 1 && LocalDateTime.now().getMonth() == Month.APRIL)
         {
             CitizenModel.isItApril1st = true;

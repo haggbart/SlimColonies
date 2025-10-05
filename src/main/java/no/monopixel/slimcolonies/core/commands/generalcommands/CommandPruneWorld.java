@@ -1,9 +1,5 @@
 package no.monopixel.slimcolonies.core.commands.generalcommands;
 
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.core.colony.IColonyManagerCapability;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCOPCommand;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -13,13 +9,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.LevelResource;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.core.colony.IColonyManagerCapability;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCOPCommand;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import static no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslationConstants.COMMAND_PRUNE_WORLD_WARNING;
-import static no.monopixel.slimcolonies.core.MineColonies.COLONY_MANAGER_CAP;
+import static no.monopixel.slimcolonies.core.SlimColonies.COLONY_MANAGER_CAP;
 
 /**
  * Command for pruning world region files to colonies
@@ -168,9 +168,9 @@ public class CommandPruneWorld implements IMCOPCommand
     public LiteralArgumentBuilder<CommandSourceStack> build()
     {
         return IMCCommand.newLiteral(getName())
-                 .then(IMCCommand.newArgument(COMMAND_STAGE, IntegerArgumentType.integer(1))
-                         .executes(this::executeWithPage)
-                         .then(IMCCommand.newArgument(RADIUS_ARG, IntegerArgumentType.integer(100, 5000)).executes(this::executeWithPage)))
-                 .executes(this::checkPreConditionAndExecute);
+            .then(IMCCommand.newArgument(COMMAND_STAGE, IntegerArgumentType.integer(1))
+                .executes(this::executeWithPage)
+                .then(IMCCommand.newArgument(RADIUS_ARG, IntegerArgumentType.integer(100, 5000)).executes(this::executeWithPage)))
+            .executes(this::checkPreConditionAndExecute);
     }
 }

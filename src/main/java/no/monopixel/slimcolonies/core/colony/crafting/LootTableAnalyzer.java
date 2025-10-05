@@ -37,7 +37,7 @@ import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_EN
  * constraints with how loot tables are stored this can only produce an approximation of a
  * subset of possible loot results.  Good enough to be indicative but that's all.
  * Currently it only supports a very limited set of conditions and properties; just enough
- * for current usage by MineColonies recipes.  If tables are extended with additional
+ * for current usage by SlimColonies recipes.  If tables are extended with additional
  * conditions or properties then this would have to be adjusted to cope as well.
  */
 public final class LootTableAnalyzer

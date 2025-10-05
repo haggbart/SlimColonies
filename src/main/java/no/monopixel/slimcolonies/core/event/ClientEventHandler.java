@@ -2,35 +2,6 @@ package no.monopixel.slimcolonies.core.event;
 
 import com.google.common.collect.ImmutableMap;
 import com.ldtteam.structurize.items.ModItems;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
-import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
-import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModule;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
-import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.api.crafting.ItemStorage;
-import no.monopixel.slimcolonies.api.research.IGlobalResearch;
-import no.monopixel.slimcolonies.api.util.FoodUtils;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
-import no.monopixel.slimcolonies.core.client.gui.WindowBuildingBrowser;
-import no.monopixel.slimcolonies.core.client.gui.containers.WindowCitizenInventory;
-import no.monopixel.slimcolonies.core.client.render.worldevent.ColonyBorderRenderer;
-import no.monopixel.slimcolonies.core.client.render.worldevent.WorldEventContext;
-import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipe;
-import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
-import no.monopixel.slimcolonies.core.util.DomumOrnamentumUtils;
-import no.monopixel.slimcolonies.core.util.SchemAnalyzerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -61,6 +32,35 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
+import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
+import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModule;
+import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
+import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
+import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
+import no.monopixel.slimcolonies.api.research.IGlobalResearch;
+import no.monopixel.slimcolonies.api.util.FoodUtils;
+import no.monopixel.slimcolonies.api.util.InventoryUtils;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
+import no.monopixel.slimcolonies.core.client.gui.WindowBuildingBrowser;
+import no.monopixel.slimcolonies.core.client.gui.containers.WindowCitizenInventory;
+import no.monopixel.slimcolonies.core.client.render.worldevent.ColonyBorderRenderer;
+import no.monopixel.slimcolonies.core.client.render.worldevent.WorldEventContext;
+import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipe;
+import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
+import no.monopixel.slimcolonies.core.util.DomumOrnamentumUtils;
+import no.monopixel.slimcolonies.core.util.SchemAnalyzerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -338,7 +338,7 @@ public class ClientEventHandler
     }
 
     /**
-     * Display research-related information on MineColonies Building hut blocks.
+     * Display research-related information on Building hut blocks.
      * While this test can handle other non-hut blocks, research can only currently effect AbstractHutBlocks.
      *
      * @param colony  The colony to check against, if one is present.

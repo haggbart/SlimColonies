@@ -42,7 +42,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
     private static final ResourceLocation UNLOCK = new ResourceLocation(Constants.MOD_ID, "unlockable");
 
     /**
-     * Get a list of all research branches. Conventions: these are not mandatory, and their inclusion simply fixes capitalization and sorting. MineColonies should fully populate new branches
+     * Get a list of all research branches. Conventions: these are not mandatory, and their inclusion simply fixes capitalization and sorting. SlimColonies should fully populate new branches
      * for clarity; other data pack makers may not want to do so.  Branch Sort Order should be separated by large values, to allow possible third-party inserts between existing branches.
      * Only use setBranchType for non-default styled branches, and use {@link ResearchBranchType} to do so.
      *

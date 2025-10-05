@@ -34,8 +34,8 @@ import no.monopixel.slimcolonies.api.inventory.container.ContainerCitizenInvento
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
 import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.client.gui.WindowInteraction;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.TavernBuildingModule;
@@ -130,7 +130,7 @@ public class VisitorCitizen extends AbstractEntityCitizen
 
         this.moveControl = new MovementHandler(this);
         this.setPersistenceRequired();
-        this.setCustomNameVisible(MineColonies.getConfig().getServer().alwaysRenderNameTag.get());
+        this.setCustomNameVisible(SlimColonies.getConfig().getServer().alwaysRenderNameTag.get());
         initTasks();
     }
 
@@ -526,7 +526,7 @@ public class VisitorCitizen extends AbstractEntityCitizen
             citizenColonyHandler.registerWithColony(citizenColonyHandler.getColonyId(), citizenId);
             if (tickCount % 500 == 0)
             {
-                this.setCustomNameVisible(MineColonies.getConfig().getServer().alwaysRenderNameTag.get());
+                this.setCustomNameVisible(SlimColonies.getConfig().getServer().alwaysRenderNameTag.get());
             }
         }
     }

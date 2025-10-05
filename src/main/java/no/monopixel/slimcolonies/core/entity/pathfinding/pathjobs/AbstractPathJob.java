@@ -27,8 +27,8 @@ import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.ShapeUtil;
 import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.blocks.BlockDecorationController;
 import no.monopixel.slimcolonies.core.entity.pathfinding.*;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
@@ -1165,7 +1165,7 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
             }
 
             final PathPointExtended p = new PathPointExtended(pos);
-            if (railsLength >= MineColonies.getConfig().getServer().minimumRailsToPath.get())
+            if (railsLength >= SlimColonies.getConfig().getServer().minimumRailsToPath.get())
             {
                 p.setOnRails(node.isOnRails());
                 if (p.isOnRails() && (!node.parent.isOnRails() || node.parent.parent == null))
@@ -1689,7 +1689,7 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
         {
             addNodeToDebug(node);
 
-            if (MineColonies.getConfig().getServer().pathfindingDebugVerbosity.get() == DEBUG_VERBOSITY_FULL)
+            if (SlimColonies.getConfig().getServer().pathfindingDebugVerbosity.get() == DEBUG_VERBOSITY_FULL)
             {
                 Log.getLogger().info(String.format("Examining node [%d,%d,%d] ; c=%f ; h=%f",
                     node.x, node.y, node.z, node.getCost(), node.getHeuristic()));
@@ -1738,7 +1738,7 @@ public abstract class AbstractPathJob implements Callable<Path>, IPathJob
     {
         if (debugDrawEnabled)
         {
-            if (MineColonies.getConfig().getServer().pathfindingDebugVerbosity.get() > DEBUG_VERBOSITY_NONE)
+            if (SlimColonies.getConfig().getServer().pathfindingDebugVerbosity.get() > DEBUG_VERBOSITY_NONE)
             {
                 Log.getLogger().info("Path found:");
 

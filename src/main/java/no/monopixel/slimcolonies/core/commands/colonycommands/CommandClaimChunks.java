@@ -1,13 +1,5 @@
 package no.monopixel.slimcolonies.core.commands.colonycommands;
 
-import no.monopixel.slimcolonies.api.colony.IChunkmanagerCapability;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslationConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
-import no.monopixel.slimcolonies.core.commands.commandTypes.IMCOPCommand;
-import no.monopixel.slimcolonies.core.util.ChunkDataHelper;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -15,10 +7,18 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import no.monopixel.slimcolonies.api.colony.IChunkmanagerCapability;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.MessageUtils;
+import no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslationConstants;
+import no.monopixel.slimcolonies.core.SlimColonies;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
+import no.monopixel.slimcolonies.core.commands.commandTypes.IMCOPCommand;
+import no.monopixel.slimcolonies.core.util.ChunkDataHelper;
 
 import static no.monopixel.slimcolonies.api.util.constant.ColonyManagerConstants.UNABLE_TO_FIND_WORLD_CAP_TEXT;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.CHUNKS_TO_CLAIM_THRESHOLD;
-import static no.monopixel.slimcolonies.core.MineColonies.CHUNK_STORAGE_UPDATE_CAP;
+import static no.monopixel.slimcolonies.core.SlimColonies.CHUNK_STORAGE_UPDATE_CAP;
 import static no.monopixel.slimcolonies.core.commands.CommandArgumentNames.*;
 
 public class CommandClaimChunks implements IMCOPCommand
@@ -43,7 +43,7 @@ public class CommandClaimChunks implements IMCOPCommand
 
         // Range
         final int range = IntegerArgumentType.getInteger(context, RANGE_ARG);
-        if (range > MineColonies.getConfig().getServer().maxColonySize.get())
+        if (range > SlimColonies.getConfig().getServer().maxColonySize.get())
         {
             MessageUtils.format(CommandTranslationConstants.COMMAND_CLAIM_TOO_LARGE, colonyID).sendTo((Player) sender);
             return 0;
@@ -89,8 +89,8 @@ public class CommandClaimChunks implements IMCOPCommand
     public LiteralArgumentBuilder<CommandSourceStack> build()
     {
         return IMCCommand.newLiteral(getName())
-                 .then(IMCCommand.newArgument(COLONYID_ARG, IntegerArgumentType.integer(1))
-                         .then(IMCCommand.newArgument(RANGE_ARG, IntegerArgumentType.integer(0, 10))
-                                 .then(IMCCommand.newArgument(ADD_ARG, BoolArgumentType.bool()).executes(this::checkPreConditionAndExecute))));
+            .then(IMCCommand.newArgument(COLONYID_ARG, IntegerArgumentType.integer(1))
+                .then(IMCCommand.newArgument(RANGE_ARG, IntegerArgumentType.integer(0, 10))
+                    .then(IMCCommand.newArgument(ADD_ARG, BoolArgumentType.bool()).executes(this::checkPreConditionAndExecute))));
     }
 }

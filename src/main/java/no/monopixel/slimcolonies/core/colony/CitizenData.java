@@ -41,8 +41,8 @@ import no.monopixel.slimcolonies.api.quests.IQuestDeliveryObjective;
 import no.monopixel.slimcolonies.api.quests.IQuestInstance;
 import no.monopixel.slimcolonies.api.quests.IQuestManager;
 import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.QuestDeliveryInteraction;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.QuestDialogueInteraction;
@@ -1126,7 +1126,7 @@ public class CitizenData implements ICitizenData
     {
         if (colony != null && colony.isActive())
         {
-            this.saturation = Math.max(MIN_SATURATION, this.saturation - Math.abs(extraSaturation * MineColonies.getConfig().getServer().foodModifier.get()));
+            this.saturation = Math.max(MIN_SATURATION, this.saturation - Math.abs(extraSaturation * SlimColonies.getConfig().getServer().foodModifier.get()));
             this.justAte = false;
         }
     }

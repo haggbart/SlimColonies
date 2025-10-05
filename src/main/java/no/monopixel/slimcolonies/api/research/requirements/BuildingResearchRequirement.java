@@ -73,7 +73,7 @@ public class BuildingResearchRequirement implements IResearchRequirement
 
     /**
      * Attempts to parse a resource location from a given key. If the key is not already a valid resource location,
-     * it is assumed to be a namespaced key within the MineColonies mod, and is converted to a valid resource location accordingly.
+     * it is assumed to be a namespaced key within the SlimColonies mod, and is converted to a valid resource location accordingly.
      *
      * @param key the key to parse.
      * @return the parsed resource location.

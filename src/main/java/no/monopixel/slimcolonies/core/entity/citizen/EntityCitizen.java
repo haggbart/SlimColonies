@@ -51,7 +51,6 @@ import no.monopixel.slimcolonies.api.colony.permissions.Action;
 import no.monopixel.slimcolonies.api.colony.permissions.IPermissions;
 import no.monopixel.slimcolonies.api.colony.requestsystem.StandardFactoryController;
 import no.monopixel.slimcolonies.api.colony.requestsystem.location.ILocation;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
 import no.monopixel.slimcolonies.api.entity.CustomGoalSelector;
 import no.monopixel.slimcolonies.api.entity.ai.combat.threat.IThreatTableEntity;
 import no.monopixel.slimcolonies.api.entity.ai.combat.threat.ThreatTable;
@@ -77,8 +76,8 @@ import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.MessageUtils.MessagePriority;
 import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
 import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.client.gui.WindowInteraction;
 import no.monopixel.slimcolonies.core.colony.Colony;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
@@ -250,7 +249,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         this.combatTracker = new CitizenCombatTracker(this);
         this.moveControl = new MovementHandler(this);
         this.setPersistenceRequired();
-        this.setCustomNameVisible(MineColonies.getConfig().getServer().alwaysRenderNameTag.get());
+        this.setCustomNameVisible(SlimColonies.getConfig().getServer().alwaysRenderNameTag.get());
 
         entityStateController.addTransition(new TickingTransition<>(EntityState.INIT, () -> true, this::initialize, 40));
 
@@ -327,7 +326,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     /**
      * because that would remove the readability.
      */
-    
+
     private void initTasks()
     {
         new CitizenAI(this);
@@ -427,7 +426,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         }
 
         final ItemStack usedStack = player.getItemInHand(hand);
-        if (MineColonies.getConfig().getServer().enableInDevelopmentFeatures.get() &&
+        if (SlimColonies.getConfig().getServer().enableInDevelopmentFeatures.get() &&
             usedStack.getItem() instanceof BlockItem && ((BlockItem) usedStack.getItem()).getBlock() instanceof AbstractBlockHut<?>)
         {
             final BuildingEntry entry = ((AbstractBlockHut<?>) ((BlockItem) usedStack.getItem()).getBlock()).getBuildingEntry();
@@ -776,7 +775,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
      */
     private boolean updateVisualData()
     {
-        this.setCustomNameVisible(MineColonies.getConfig().getServer().alwaysRenderNameTag.get());
+        this.setCustomNameVisible(SlimColonies.getConfig().getServer().alwaysRenderNameTag.get());
 
         if (!citizenColonyHandler.getColonyOrRegister().getTextureStyleId().equals(getEntityData().get(DATA_STYLE)))
         {
@@ -932,7 +931,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
 
         //Display some debug info always available while testing
         //Will help track down some hard to find bugs (Pathfinding etc.)
-        if (citizenJobHandler.getColonyJob() != null && MineColonies.getConfig().getServer().enableInDevelopmentFeatures.get())
+        if (citizenJobHandler.getColonyJob() != null && SlimColonies.getConfig().getServer().enableInDevelopmentFeatures.get())
         {
             super.setCustomName(Component.literal(
                 citizenData.getName() + "[" + citizenJobHandler.getColonyJob().getNameTagDescription() + "]"));

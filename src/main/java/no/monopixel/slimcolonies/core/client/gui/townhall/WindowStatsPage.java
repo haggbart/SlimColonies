@@ -2,28 +2,27 @@ package no.monopixel.slimcolonies.core.client.gui.townhall;
 
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
-import com.ldtteam.blockui.controls.*;
+import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.DropDownList;
 import com.ldtteam.blockui.views.ScrollingList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.CombinedHiringLimitModuleView;
 import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.WorkerBuildingModuleView;
 import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.CITIZEN_CAP;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_CHILDS;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 
 /**
@@ -87,11 +86,11 @@ public class WindowStatsPage extends AbstractWindowTownHall
         {
             final int max =
                 Math.max(CitizenConstants.CITIZEN_LIMIT_DEFAULT, (int) this.building.getColony().getResearchManager().getResearchEffects().getEffectStrength(CITIZEN_CAP));
-            citizensCap = Math.min(max, MineColonies.getConfig().getServer().maxCitizenPerColony.get());
+            citizensCap = Math.min(max, SlimColonies.getConfig().getServer().maxCitizenPerColony.get());
         }
         else
         {
-            citizensCap = MineColonies.getConfig().getServer().maxCitizenPerColony.get();
+            citizensCap = SlimColonies.getConfig().getServer().maxCitizenPerColony.get();
         }
 
         final Text totalCitizenLabel = findPaneOfTypeByID(TOTAL_CITIZENS_LABEL, Text.class);
@@ -110,7 +109,7 @@ public class WindowStatsPage extends AbstractWindowTownHall
         }
         else
         {
-            if (citizensCap < MineColonies.getConfig().getServer().maxCitizenPerColony.get())
+            if (citizensCap < SlimColonies.getConfig().getServer().maxCitizenPerColony.get())
             {
                 hoverText.add(Component.translatable(WARNING_POPULATION_RESEARCH_LIMITED, this.building.getColony().getName()));
             }

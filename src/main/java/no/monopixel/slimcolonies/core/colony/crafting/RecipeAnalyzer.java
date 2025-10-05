@@ -78,7 +78,7 @@ public final class RecipeAnalyzer
             }
         }
 
-        // custom MineColonies additional recipes
+        // custom SlimColonies additional recipes
         for (final CustomRecipe customRecipe : CustomRecipeManager.getInstance().getRecipes(crafting.getCustomRecipeKey()))
         {
             final IRecipeStorage recipeStorage = customRecipe.getRecipeStorage();

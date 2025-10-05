@@ -1,5 +1,10 @@
 package no.monopixel.slimcolonies.core.network.messages.server.colony.citizen;
 
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.network.NetworkEvent;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColony;
@@ -8,13 +13,8 @@ import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.network.messages.server.AbstractColonyServerMessage;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -122,7 +122,7 @@ public class TransferItemsToCitizenRequestMessage extends AbstractColonyServerMe
         else
         {
             amountToTake = Math.min(quantity,
-              InventoryUtils.getItemCountInItemHandler(new InvWrapper(player.getInventory()), stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, itemStack)));
+                InventoryUtils.getItemCountInItemHandler(new InvWrapper(player.getInventory()), stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, itemStack)));
         }
 
         final List<ItemStack> itemsToPut = new ArrayList<>();
@@ -139,7 +139,7 @@ public class TransferItemsToCitizenRequestMessage extends AbstractColonyServerMe
 
         final AbstractEntityCitizen citizen = optionalEntityCitizen.get();
 
-        if (!isCreative && MineColonies.getConfig().getServer().debugInventories.get())
+        if (!isCreative && SlimColonies.getConfig().getServer().debugInventories.get())
         {
             previousContent = InventoryUtils.getAllItemsForProviders(citizen.getInventoryCitizen(), new InvWrapper(player.getInventory()));
         }
@@ -162,13 +162,14 @@ public class TransferItemsToCitizenRequestMessage extends AbstractColonyServerMe
             while (amountToRemoveFromPlayer > 0)
             {
                 final int slot =
-                  InventoryUtils.findFirstSlotInItemHandlerWith(new InvWrapper(player.getInventory()), stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, itemStack));
+                    InventoryUtils.findFirstSlotInItemHandlerWith(new InvWrapper(player.getInventory()),
+                        stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, itemStack));
                 final ItemStack itemsTaken = player.getInventory().removeItem(slot, amountToRemoveFromPlayer);
                 amountToRemoveFromPlayer -= ItemStackUtils.getSize(itemsTaken);
             }
         }
 
-        if (!isCreative && previousContent != null && MineColonies.getConfig().getServer().debugInventories.get())
+        if (!isCreative && previousContent != null && SlimColonies.getConfig().getServer().debugInventories.get())
         {
             InventoryUtils.doStorageSetsMatch(previousContent, InventoryUtils.getAllItemsForProviders(citizen.getInventoryCitizen(), new InvWrapper(player.getInventory())), true);
         }

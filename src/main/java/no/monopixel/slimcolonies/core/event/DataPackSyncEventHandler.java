@@ -1,14 +1,5 @@
 package no.monopixel.slimcolonies.core.event;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.research.IGlobalResearchTree;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
-import no.monopixel.slimcolonies.core.compatibility.CraftingTagAuditor;
-import no.monopixel.slimcolonies.core.datalistener.QuestJsonListener;
-import no.monopixel.slimcolonies.core.network.messages.client.UpdateClientWithCompatibilityMessage;
-import no.monopixel.slimcolonies.core.util.FurnaceRecipes;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.server.IntegratedServer;
@@ -18,22 +9,31 @@ import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.research.IGlobalResearchTree;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
+import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
+import no.monopixel.slimcolonies.core.compatibility.CraftingTagAuditor;
+import no.monopixel.slimcolonies.core.datalistener.QuestJsonListener;
+import no.monopixel.slimcolonies.core.network.messages.client.UpdateClientWithCompatibilityMessage;
+import no.monopixel.slimcolonies.core.util.FurnaceRecipes;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Handles synching of custom datapack and compatibility data from server to client (and initial population
  * for the server in both single-player and dedicated).
- *
+ * <p>
  * As of Forge 36.2.4, at least, events happen in this order:
- *
+ * <p>
  * For Single Player, on startup:
- *  -- JsonReloadListeners, TagsUpdatedEvent, FMLServerAboutToStart, FMLServerStarted, OnDatapackSyncEvent, RecipesUpdatedEvent
+ * -- JsonReloadListeners, TagsUpdatedEvent, FMLServerAboutToStart, FMLServerStarted, OnDatapackSyncEvent, RecipesUpdatedEvent
  * For Dedicated Server, on startup:
- *  -- JsonReloadListeners, TagsUpdatedEvent, FMLServerAboutToStart, FMLServerStarted
+ * -- JsonReloadListeners, TagsUpdatedEvent, FMLServerAboutToStart, FMLServerStarted
  * For Remote Client, on login:
- *  -- OnDatapackSyncEvent [server], PlayerLoggedInEvent [server], RecipesUpdatedEvent [client], TagsUpdatedEvent [client]
+ * -- OnDatapackSyncEvent [server], PlayerLoggedInEvent [server], RecipesUpdatedEvent [client], TagsUpdatedEvent [client]
  * On /reload:
- *  -- JsonReloadListeners, TagsUpdatedEvent [server], OnDatapackSyncEvent [server], TagsUpdatedEvent [remote client], RecipesUpdatedEvent [client]
+ * -- JsonReloadListeners, TagsUpdatedEvent [server], OnDatapackSyncEvent [server], TagsUpdatedEvent [remote client], RecipesUpdatedEvent [client]
  */
 public class DataPackSyncEventHandler
 {
@@ -62,8 +62,9 @@ public class DataPackSyncEventHandler
          * @param player    the player to send the sync packets to.
          * @param compatMsg a cached copy of this message, to avoid rebuilding it for each player.
          */
-        private static void sendPackets(@NotNull final ServerPlayer player,
-                                        @NotNull final UpdateClientWithCompatibilityMessage compatMsg)
+        private static void sendPackets(
+            @NotNull final ServerPlayer player,
+            @NotNull final UpdateClientWithCompatibilityMessage compatMsg)
         {
             Network.getNetwork().sendToPlayer(compatMsg, player);
             CustomRecipeManager.getInstance().sendCustomRecipeManagerPackets(player);
@@ -105,8 +106,8 @@ public class DataPackSyncEventHandler
                 sendPackets(event.getPlayer(), new UpdateClientWithCompatibilityMessage(true));
             }
 
-            if (MineColonies.getConfig().getServer().auditCraftingTags.get() &&
-                    (event.getPlayer() == null || event.getPlayerList().getPlayers().isEmpty()))
+            if (SlimColonies.getConfig().getServer().auditCraftingTags.get() &&
+                (event.getPlayer() == null || event.getPlayerList().getPlayers().isEmpty()))
             {
                 CraftingTagAuditor.doRecipeAudit(server, recipeManager);
             }

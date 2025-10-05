@@ -12,8 +12,8 @@ import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.IColonyTagCapability;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.IColonyManagerCapability;
 import no.monopixel.slimcolonies.core.network.messages.client.UpdateChunkCapabilityMessage;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +22,7 @@ import static no.monopixel.slimcolonies.api.colony.IColony.CLOSE_COLONY_CAP;
 import static no.monopixel.slimcolonies.api.util.constant.ColonyManagerConstants.UNABLE_TO_FIND_WORLD_CAP_TEXT;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.BLOCKS_PER_CHUNK;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COLONY_SIZE_CHANGE;
-import static no.monopixel.slimcolonies.core.MineColonies.*;
+import static no.monopixel.slimcolonies.core.SlimColonies.*;
 
 /**
  * Class to take care of chunk data helper.
@@ -48,7 +48,7 @@ public final class ChunkDataHelper
     public static void loadChunk(final LevelChunk chunk, final Level world)
     {
         // If colony is farther away from a capability then this times the default colony distance it will delete the capability.
-        final int distanceToDelete = MineColonies.getConfig().getServer().maxColonySize.get() * BLOCKS_PER_CHUNK * 2 * 5;
+        final int distanceToDelete = SlimColonies.getConfig().getServer().maxColonySize.get() * BLOCKS_PER_CHUNK * 2 * 5;
 
         final IChunkmanagerCapability chunkManager = world.getCapability(CHUNK_STORAGE_UPDATE_CAP, null).resolve().orElse(null);
         if (chunkManager == null)
