@@ -1,43 +1,42 @@
 package no.monopixel.slimcolonies.core.items;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.Level;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_COLONY_ID;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-
 /**
  * Scroll items base class, does colony registering/checks.
  */
-public abstract class AbstractItemScroll extends AbstractItemMinecolonies
+public abstract class AbstractItemScroll extends AbstractItemSlimColonies
 {
-    public static final String TAG_COLONY_DIM = "colony_dim";
-    public static final String TAG_BUILDING_POS = "building_pos";
+    public static final String TAG_COLONY_DIM         = "colony_dim";
+    public static final String TAG_BUILDING_POS       = "building_pos";
     public static final String TAG_CACHED_COLONY_NAME = "cached_colony_name";
 
-    public static final int    FAIL_RESPONSES_TOTAL = 10;
+    public static final int FAIL_RESPONSES_TOTAL = 10;
 
     /**
      * Sets the name, creative tab, and registers the item.
@@ -167,7 +166,8 @@ public abstract class AbstractItemScroll extends AbstractItemMinecolonies
             return null;
         }
 
-        return IColonyManager.getInstance().getColonyByDimension(stack.getTag().getInt(TAG_COLONY_ID), ResourceKey.create(Registries.DIMENSION, new ResourceLocation(stack.getTag().getString(TAG_COLONY_DIM))));
+        return IColonyManager.getInstance()
+            .getColonyByDimension(stack.getTag().getInt(TAG_COLONY_ID), ResourceKey.create(Registries.DIMENSION, new ResourceLocation(stack.getTag().getString(TAG_COLONY_DIM))));
     }
 
     /**
@@ -183,6 +183,7 @@ public abstract class AbstractItemScroll extends AbstractItemMinecolonies
             return null;
         }
 
-        return IColonyManager.getInstance().getColonyView(stack.getTag().getInt(TAG_COLONY_ID), ResourceKey.create(Registries.DIMENSION, new ResourceLocation(stack.getTag().getString(TAG_COLONY_DIM))));
+        return IColonyManager.getInstance()
+            .getColonyView(stack.getTag().getInt(TAG_COLONY_ID), ResourceKey.create(Registries.DIMENSION, new ResourceLocation(stack.getTag().getString(TAG_COLONY_DIM))));
     }
 }

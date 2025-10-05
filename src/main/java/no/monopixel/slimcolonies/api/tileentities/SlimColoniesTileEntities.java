@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.RegistryObject;
 import no.monopixel.slimcolonies.core.tileentities.*;
 
-public class MinecoloniesTileEntities
+public class SlimColoniesTileEntities
 {
     public static RegistryObject<BlockEntityType<? extends AbstractTileEntityScarecrow>> SCARECROW;
 

@@ -38,7 +38,7 @@ import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.C
 /**
  * Class to handle the placement of the supplychest and with it the supplycamp.
  */
-public class ItemSupplyCampDeployer extends AbstractItemMinecolonies implements ISupplyItem
+public class ItemSupplyCampDeployer extends AbstractItemSlimColonies implements ISupplyItem
 {
     /**
      * Creates a new supplycamp deployer. The item is not stackable.

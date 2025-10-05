@@ -32,7 +32,7 @@ import no.monopixel.slimcolonies.core.entity.other.CustomArrowEntity;
 import no.monopixel.slimcolonies.core.entity.pathfinding.PathfindingUtils;
 import no.monopixel.slimcolonies.core.entity.pathfinding.PathingOptions;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobCanSee;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveAwayFromLocation;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveToLocation;
@@ -306,19 +306,19 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
                 (int) 7.0,
                 (int) user.getAttribute(Attributes.FOLLOW_RANGE).getValue(),
                 user);
-            final PathResult pathResult = ((MinecoloniesAdvancedPathNavigate) user.getNavigation()).setPathJob(job, null, getCombatMovementSpeed(), true);
+            final PathResult pathResult = ((SlimColoniesAdvancedPathNavigate) user.getNavigation()).setPathJob(job, null, getCombatMovementSpeed(), true);
             job.setPathingOptions(combatPathingOptions);
             return pathResult;
         }
         else if (BlockPosUtil.getDistance2D(target.blockPosition(), user.blockPosition()) >= 20)
         {
             final PathJobMoveToLocation job = new PathJobMoveToLocation(user.level, PathfindingUtils.prepareStart(user), target.blockPosition(), 200, user);
-            final PathResult pathResult = ((MinecoloniesAdvancedPathNavigate) user.getNavigation()).setPathJob(job, null, getCombatMovementSpeed(), true);
+            final PathResult pathResult = ((SlimColoniesAdvancedPathNavigate) user.getNavigation()).setPathJob(job, null, getCombatMovementSpeed(), true);
             job.setPathingOptions(combatPathingOptions);
             return pathResult;
         }
         final PathJobCanSee job = new PathJobCanSee(user, target, user.level, ((AbstractBuildingGuards) user.getCitizenData().getWorkBuilding()).getGuardPos(user), 40);
-        final PathResult pathResult = ((MinecoloniesAdvancedPathNavigate) user.getNavigation()).setPathJob(job, null, getCombatMovementSpeed(), true);
+        final PathResult pathResult = ((SlimColoniesAdvancedPathNavigate) user.getNavigation()).setPathJob(job, null, getCombatMovementSpeed(), true);
         job.setPathingOptions(combatPathingOptions);
         return pathResult;
     }

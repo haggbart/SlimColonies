@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import no.monopixel.slimcolonies.api.blocks.types.GraveType;
 
-public abstract class AbstractBlockSlimColoniesGrave<B extends AbstractBlockSlimColoniesGrave<B>> extends AbstractBlockMinecolonies<B> implements EntityBlock
+public abstract class AbstractBlockSlimColoniesGrave<B extends AbstractBlockSlimColoniesGrave<B>> extends AbstractBlockSlimColonies<B> implements EntityBlock
 {
     public static final EnumProperty<GraveType> VARIANT = EnumProperty.create("variant", GraveType.class);
 

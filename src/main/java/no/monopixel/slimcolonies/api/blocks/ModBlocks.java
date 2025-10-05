@@ -1,9 +1,9 @@
 package no.monopixel.slimcolonies.api.blocks;
 
 import no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockGate;
-import no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockMinecoloniesConstructionTape;
+import no.monopixel.slimcolonies.api.blocks.decorative.AbstractBlockSlimColoniesConstructionTape;
 import no.monopixel.slimcolonies.api.blocks.decorative.AbstractColonyFlagBanner;
-import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
+import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockSlimColoniesDefault;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -76,16 +76,16 @@ public final class ModBlocks
     /**
      * Utility blocks.
      */
-    public static AbstractBlockMinecoloniesConstructionTape<? extends AbstractBlockMinecoloniesConstructionTape<?>> blockConstructionTape;
+    public static AbstractBlockSlimColoniesConstructionTape<? extends AbstractBlockSlimColoniesConstructionTape<?>> blockConstructionTape;
     public static AbstractBlockSlimColoniesRack<? extends AbstractBlockSlimColoniesRack<?>>                         blockRack;
     public static AbstractBlockSlimColoniesGrave<? extends AbstractBlockSlimColoniesGrave<?>>                       blockGrave;
     public static AbstractBlockSlimColoniesNamedGrave<? extends AbstractBlockSlimColoniesNamedGrave<?>>             blockNamedGrave;
-    public static AbstractBlockMinecolonies<? extends AbstractBlockMinecolonies<?>>                                 blockWayPoint;
+    public static AbstractBlockSlimColonies<? extends AbstractBlockSlimColonies<?>>                                 blockWayPoint;
     public static AbstractBlockBarrel<? extends AbstractBlockBarrel<?>>                                             blockBarrel;
-    public static AbstractBlockMinecoloniesDirectional<? extends AbstractBlockMinecoloniesDirectional<?>>           blockDecorationPlaceholder;
-    public static AbstractBlockMinecoloniesDefault<? extends AbstractBlockMinecoloniesDefault<?>>                   blockScarecrow;
-    public static AbstractBlockMinecoloniesHorizontal<? extends AbstractBlockMinecoloniesHorizontal<?>>             blockPlantationField;
-    public static AbstractBlockMinecolonies<? extends AbstractBlockMinecolonies<?>>                                 blockCompostedDirt;
+    public static AbstractBlockSlimColoniesDirectional<? extends AbstractBlockSlimColoniesDirectional<?>>           blockDecorationPlaceholder;
+    public static AbstractBlockSlimColoniesDefault<? extends AbstractBlockSlimColoniesDefault<?>>                   blockScarecrow;
+    public static AbstractBlockSlimColoniesHorizontal<? extends AbstractBlockSlimColoniesHorizontal<?>>             blockPlantationField;
+    public static AbstractBlockSlimColonies<? extends AbstractBlockSlimColonies<?>>                                 blockCompostedDirt;
     public static AbstractColonyFlagBanner<? extends AbstractColonyFlagBanner<?>>                                   blockColonyBanner;
     public static AbstractColonyFlagBanner<? extends AbstractColonyFlagBanner<?>>                                   blockColonyWallBanner;
     public static AbstractBlockGate                                                                                 blockIronGate;

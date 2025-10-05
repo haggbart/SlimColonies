@@ -1,13 +1,13 @@
 package no.monopixel.slimcolonies.api.colony.jobs.registry;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.jobs.IJob;
 import no.monopixel.slimcolonies.api.colony.jobs.IJobView;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +16,7 @@ public interface IJobDataManager
 
     static IJobDataManager getInstance()
     {
-        return IMinecoloniesAPI.getInstance().getJobDataManager();
+        return ISlimColoniesAPI.getInstance().getJobDataManager();
     }
 
     /**
@@ -31,9 +31,10 @@ public interface IJobDataManager
 
     /**
      * Create a job view from the saved network buffer.
-     * @param colony the colony.
+     *
+     * @param colony          the colony.
      * @param citizenDataView the the citizen data view..
-     * @param networkBuffer the buffer/
+     * @param networkBuffer   the buffer/
      * @return the new job view.
      */
     IJobView createViewFrom(final IColonyView colony, final ICitizenDataView citizenDataView, final FriendlyByteBuf networkBuffer);

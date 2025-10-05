@@ -1,13 +1,13 @@
 package no.monopixel.slimcolonies.core.network.messages.server.colony;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyTeamColorChangedModEvent;
 import no.monopixel.slimcolonies.core.network.messages.server.AbstractColonyServerMessage;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.ChatFormatting;
-import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -67,6 +67,6 @@ public class TeamColonyColorChangeMessage extends AbstractColonyServerMessage
     protected void onExecute(final NetworkEvent.Context ctxIn, final boolean isLogicalServer, final IColony colony)
     {
         colony.setColonyColor(ChatFormatting.values()[colorOrdinal]);
-        IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyTeamColorChangedModEvent(colony));
+        ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyTeamColorChangedModEvent(colony));
     }
 }

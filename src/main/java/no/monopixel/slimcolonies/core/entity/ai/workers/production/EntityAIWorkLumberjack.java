@@ -36,7 +36,7 @@ import no.monopixel.slimcolonies.core.colony.jobs.JobLumberjack;
 import no.monopixel.slimcolonies.core.entity.ai.workers.crafting.AbstractEntityAICrafting;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.Tree;
 import no.monopixel.slimcolonies.core.entity.pathfinding.PathfindingUtils;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveToWithPassable;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.TreePathResult;
@@ -642,7 +642,7 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
 
         if (pathToTree == null || !pathToTree.isInProgress())
         {
-            pathToTree = ((MinecoloniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(new PathJobMoveToWithPassable(world,
+            pathToTree = ((SlimColoniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(new PathJobMoveToWithPassable(world,
                 PathfindingUtils.prepareStart(worker),
                 workFrom,
                 SEARCH_RANGE,

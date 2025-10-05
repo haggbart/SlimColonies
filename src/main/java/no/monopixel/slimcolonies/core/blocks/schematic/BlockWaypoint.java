@@ -1,15 +1,15 @@
 package no.monopixel.slimcolonies.core.blocks.schematic;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecolonies;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColonies;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 
 /**
  * This block is a waypoint, which makes citizens path to it.
  */
-public class BlockWaypoint extends AbstractBlockMinecolonies<BlockWaypoint>
+public class BlockWaypoint extends AbstractBlockSlimColonies<BlockWaypoint>
 {
     /**
      * The hardness this block has.

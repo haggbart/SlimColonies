@@ -1,8 +1,5 @@
 package no.monopixel.slimcolonies.api.inventory.container;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.inventory.ModContainers;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -18,6 +15,9 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.inventory.ModContainers;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -77,7 +77,7 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
         this.moduleId = moduleId;
         this.furnaceInventory = new IItemHandlerModifiable()
         {
-            ItemStack input = ItemStack.EMPTY;
+            ItemStack input  = ItemStack.EMPTY;
             ItemStack output = ItemStack.EMPTY;
 
             @Override
@@ -150,7 +150,7 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
             {
                 if (slot == 0)
                 {
-                    return !IMinecoloniesAPI.getInstance().getFurnaceRecipes().getSmeltingResult(stack).isEmpty();
+                    return !ISlimColoniesAPI.getInstance().getFurnaceRecipes().getSmeltingResult(stack).isEmpty();
                 }
                 else
                 {
@@ -198,10 +198,10 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
             for (int j = 0; j < INVENTORY_COLUMNS; j++)
             {
                 addSlot(new Slot(
-                  playerInventory,
-                  j + i * INVENTORY_COLUMNS + INVENTORY_COLUMNS,
-                  PLAYER_INVENTORY_INITIAL_X_OFFSET + j * PLAYER_INVENTORY_OFFSET_EACH,
-                  PLAYER_INVENTORY_INITIAL_Y_OFFSET_CRAFTING + i * PLAYER_INVENTORY_OFFSET_EACH
+                    playerInventory,
+                    j + i * INVENTORY_COLUMNS + INVENTORY_COLUMNS,
+                    PLAYER_INVENTORY_INITIAL_X_OFFSET + j * PLAYER_INVENTORY_OFFSET_EACH,
+                    PLAYER_INVENTORY_INITIAL_Y_OFFSET_CRAFTING + i * PLAYER_INVENTORY_OFFSET_EACH
                 ));
             }
         }
@@ -209,9 +209,9 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
         for (i = 0; i < INVENTORY_COLUMNS; i++)
         {
             addSlot(new Slot(
-              playerInventory, i,
-              PLAYER_INVENTORY_INITIAL_X_OFFSET + i * PLAYER_INVENTORY_OFFSET_EACH,
-              PLAYER_INVENTORY_HOTBAR_OFFSET_CRAFTING
+                playerInventory, i,
+                PLAYER_INVENTORY_INITIAL_X_OFFSET + i * PLAYER_INVENTORY_OFFSET_EACH,
+                PLAYER_INVENTORY_HOTBAR_OFFSET_CRAFTING
             ));
         }
     }
@@ -223,8 +223,8 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
         {
             // 1 is shift-click
             if (mode == ClickType.PICKUP
-                  || mode == ClickType.PICKUP_ALL
-                  || mode == ClickType.SWAP)
+                || mode == ClickType.PICKUP_ALL
+                || mode == ClickType.SWAP)
             {
                 final Slot slot = this.slots.get(slotId);
                 handleSlotClick(slot, this.getCarried());
@@ -280,7 +280,7 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
         if (!playerInventory.player.level().isClientSide)
         {
             final ServerPlayer player = (ServerPlayer) playerInventory.player;
-            final ItemStack result = IMinecoloniesAPI.getInstance().getFurnaceRecipes().getSmeltingResult(furnaceInventory.getStackInSlot(0));
+            final ItemStack result = ISlimColoniesAPI.getInstance().getFurnaceRecipes().getSmeltingResult(furnaceInventory.getStackInSlot(0));
 
             this.furnaceInventory.insertItem(1, result, false);
             player.connection.send(new ClientboundContainerSetSlotPacket(this.containerId, 0, 1, result));
@@ -324,8 +324,8 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
                 }
             }
             else if ((index < TOTAL_SLOTS_FURNACE
-                        && !this.moveItemStackTo(itemstack1, FURNACE_SLOTS, HOTBAR_START, false))
-                       || !this.moveItemStackTo(itemstack1, FURNACE_SLOTS, TOTAL_SLOTS_FURNACE, false))
+                && !this.moveItemStackTo(itemstack1, FURNACE_SLOTS, HOTBAR_START, false))
+                || !this.moveItemStackTo(itemstack1, FURNACE_SLOTS, TOTAL_SLOTS_FURNACE, false))
             {
                 return ItemStack.EMPTY;
             }
@@ -383,6 +383,7 @@ public class ContainerCraftingFurnace extends AbstractContainerMenu
 
     /**
      * Get the module if of the container.
+     *
      * @return the module id.
      */
     public int getModuleId()

@@ -1,14 +1,14 @@
 package no.monopixel.slimcolonies.core.entity.ai.minimal;
 
-import no.monopixel.slimcolonies.api.util.CompatibilityUtils;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
-import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobEscapeWater;
-import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import no.monopixel.slimcolonies.api.util.CompatibilityUtils;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
+import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobEscapeWater;
+import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
 
 /**
  * Custom float goal, which bumps less(only every 3 ticks) and does trigger escape pathfinding underwater
@@ -30,7 +30,7 @@ public class EntityAIFloat extends FloatGoal
         super(mob);
         owner = mob;
 
-        if (!(mob.getNavigation() instanceof MinecoloniesAdvancedPathNavigate))
+        if (!(mob.getNavigation() instanceof SlimColoniesAdvancedPathNavigate))
         {
             Log.getLogger().error("Unsupported entity for EntityAIFloat goal:" + mob);
         }
@@ -51,17 +51,17 @@ public class EntityAIFloat extends FloatGoal
             }
             if (waterPathing == null || !waterPathing.isInProgress())
             {
-                if (owner.getNavigation() instanceof MinecoloniesAdvancedPathNavigate nav)
+                if (owner.getNavigation() instanceof SlimColoniesAdvancedPathNavigate nav)
                 {
                     nav.setPauseTicks(0);
                     nav.stop();
 
                     waterPathing = nav.setPathJob(
-                      new PathJobEscapeWater(CompatibilityUtils.getWorldFromEntity(owner),
-                        owner.blockPosition(),
-                        (int) owner.getAttribute(Attributes.FOLLOW_RANGE).getValue() * 5,
-                        owner),
-                      null, 1.0, false);
+                        new PathJobEscapeWater(CompatibilityUtils.getWorldFromEntity(owner),
+                            owner.blockPosition(),
+                            (int) owner.getAttribute(Attributes.FOLLOW_RANGE).getValue() * 5,
+                            owner),
+                        null, 1.0, false);
                     nav.setPauseTicks(20 * 15);
                 }
             }
@@ -71,7 +71,7 @@ public class EntityAIFloat extends FloatGoal
             if (waterPathing != null)
             {
                 waterPathing = null;
-                if (owner.getNavigation() instanceof MinecoloniesAdvancedPathNavigate nav)
+                if (owner.getNavigation() instanceof SlimColoniesAdvancedPathNavigate nav)
                 {
                     nav.setPauseTicks(0);
                 }

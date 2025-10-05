@@ -7,7 +7,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.requestsystem.factory.FactoryVoidInput;
 import no.monopixel.slimcolonies.api.colony.requestsystem.factory.IFactoryController;
 import no.monopixel.slimcolonies.api.research.*;
@@ -131,12 +131,12 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
 
         // Research no longer uses costs - skip cost deserialization
         NBTUtils.streamCompound(nbt.getList(TAG_REQS, Tag.TAG_COMPOUND))
-            .forEach(compound -> research.addRequirement(Objects.requireNonNull(IMinecoloniesAPI.getInstance()
+            .forEach(compound -> research.addRequirement(Objects.requireNonNull(ISlimColoniesAPI.getInstance()
                 .getResearchRequirementRegistry()
                 .getValue(ResourceLocation.tryParse(compound.getString(TAG_REQ_TYPE)))).readFromNBT(compound.getCompound(TAG_REQ_ITEM))));
 
         NBTUtils.streamCompound(nbt.getList(TAG_EFFECTS, Tag.TAG_COMPOUND))
-            .forEach(compound -> research.addEffect(Objects.requireNonNull(IMinecoloniesAPI.getInstance().getResearchEffectRegistry()
+            .forEach(compound -> research.addEffect(Objects.requireNonNull(ISlimColoniesAPI.getInstance().getResearchEffectRegistry()
                 .getValue(ResourceLocation.tryParse(compound.getString(TAG_EFFECT_TYPE)))).readFromNBT(compound.getCompound(TAG_EFFECT_ITEM))));
 
         NBTUtils.streamCompound(nbt.getList(TAG_CHILDS, Tag.TAG_COMPOUND)).forEach(compound -> research.addChild(new ResourceLocation(compound.getString(TAG_RESEARCH_CHILD))));
@@ -166,13 +166,13 @@ public class GlobalResearchFactory implements IGlobalResearchFactory
         packetBuffer.writeVarInt(input.getResearchRequirements().size());
         for (IResearchRequirement req : input.getResearchRequirements())
         {
-            packetBuffer.writeRegistryId(IMinecoloniesAPI.getInstance().getResearchRequirementRegistry(), req.getRegistryEntry());
+            packetBuffer.writeRegistryId(ISlimColoniesAPI.getInstance().getResearchRequirementRegistry(), req.getRegistryEntry());
             packetBuffer.writeNbt(req.writeToNBT());
         }
         packetBuffer.writeVarInt(input.getEffects().size());
         for (IResearchEffect effect : input.getEffects())
         {
-            packetBuffer.writeRegistryId(IMinecoloniesAPI.getInstance().getResearchEffectRegistry(), effect.getRegistryEntry());
+            packetBuffer.writeRegistryId(ISlimColoniesAPI.getInstance().getResearchEffectRegistry(), effect.getRegistryEntry());
             packetBuffer.writeNbt(effect.writeToNBT());
         }
         packetBuffer.writeVarInt(input.getChildren().size());

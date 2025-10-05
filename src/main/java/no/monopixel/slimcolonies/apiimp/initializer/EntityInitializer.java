@@ -10,7 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegisterEvent;
 import no.monopixel.slimcolonies.api.entity.ModEntities;
-import no.monopixel.slimcolonies.api.entity.other.MinecoloniesMinecart;
+import no.monopixel.slimcolonies.api.entity.other.SlimColoniesMinecart;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.entity.other.CustomArrowEntity;
@@ -60,7 +60,7 @@ public class EntityInitializer
                     .sized(0F, 0.5F));
 
             ModEntities.MINECART = build(registry, "mcminecart",
-                EntityType.Builder.of(MinecoloniesMinecart::new, MobCategory.MISC)
+                EntityType.Builder.of(SlimColoniesMinecart::new, MobCategory.MISC)
                     .setTrackingRange(ENTITY_TRACKING_RANGE)
                     .setUpdateInterval(ENTITY_UPDATE_FREQUENCY)
                     .sized(0.98F, 0.7F));

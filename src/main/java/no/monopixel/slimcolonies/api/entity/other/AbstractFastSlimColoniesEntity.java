@@ -1,9 +1,5 @@
 package no.monopixel.slimcolonies.api.entity.other;
 
-import no.monopixel.slimcolonies.api.entity.pathfinding.IStuckHandlerEntity;
-import no.monopixel.slimcolonies.api.util.EntityUtils;
-import no.monopixel.slimcolonies.api.util.LookHandler;
-import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,6 +13,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.ITeleporter;
+import no.monopixel.slimcolonies.api.entity.pathfinding.IStuckHandlerEntity;
+import no.monopixel.slimcolonies.api.util.EntityUtils;
+import no.monopixel.slimcolonies.api.util.LookHandler;
+import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Special abstract minecolonies mob that overrides laggy vanilla behaviour.
  */
-public abstract class AbstractFastMinecoloniesEntity extends PathfinderMob implements IStuckHandlerEntity
+public abstract class AbstractFastSlimColoniesEntity extends PathfinderMob implements IStuckHandlerEntity
 {
     /**
      * Whether this entity can be stuck for stuckhandling
@@ -69,7 +69,7 @@ public abstract class AbstractFastMinecoloniesEntity extends PathfinderMob imple
      * @param type    from type.
      * @param worldIn the world.
      */
-    protected AbstractFastMinecoloniesEntity(final EntityType<? extends PathfinderMob> type, final Level worldIn)
+    protected AbstractFastSlimColoniesEntity(final EntityType<? extends PathfinderMob> type, final Level worldIn)
     {
         super(type, worldIn);
         lookControl = new LookHandler(this);
@@ -356,7 +356,7 @@ public abstract class AbstractFastMinecoloniesEntity extends PathfinderMob imple
     @Override
     public boolean hurt(final DamageSource dmgSource, final float dmg)
     {
-        if (dmgSource.getEntity() instanceof AbstractFastMinecoloniesEntity otherFastMinecolEntity && otherFastMinecolEntity.getTeamId() == getTeamId())
+        if (dmgSource.getEntity() instanceof AbstractFastSlimColoniesEntity otherFastMinecolEntity && otherFastMinecolEntity.getTeamId() == getTeamId())
         {
             return false;
         }
@@ -366,6 +366,7 @@ public abstract class AbstractFastMinecoloniesEntity extends PathfinderMob imple
     /**
      * Get the team name of this entity.
      * todo sam make colony ids unique across dimensions.
+     *
      * @return the team name.
      */
     public abstract int getTeamId();

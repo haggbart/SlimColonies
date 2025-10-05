@@ -5,7 +5,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
 /**
  * Class handling Cookie Dough.
  */
-public class ItemCookieDough extends AbstractItemMinecolonies
+public class ItemCookieDough extends AbstractItemSlimColonies
 {
     /**
      * Sets the name, creative tab, and registers the Cookie Dough item.

@@ -13,8 +13,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.CitizenNameFile;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
@@ -981,7 +981,7 @@ public class CitizenData implements ICitizenData
 
         if (!onLoad)
         {
-            IMinecoloniesAPI.getInstance().getEventBus().post(new CitizenJobChangedModEvent(this, Optional.ofNullable(oldJob).map(IJob::getJobRegistryEntry).orElse(null)));
+            ISlimColoniesAPI.getInstance().getEventBus().post(new CitizenJobChangedModEvent(this, Optional.ofNullable(oldJob).map(IJob::getJobRegistryEntry).orElse(null)));
         }
 
         markDirty(0);
@@ -1449,7 +1449,7 @@ public class CitizenData implements ICitizenData
                 try
                 {
                     final ServerCitizenInteraction handler =
-                        (ServerCitizenInteraction) MinecoloniesAPIProxy.getInstance()
+                        (ServerCitizenInteraction) SlimColoniesAPIProxy.getInstance()
                             .getInteractionResponseHandlerDataManager()
                             .createFrom(this, handlerTagList.getCompound(i).getCompound(TAG_CHAT_OPTION));
                     citizenChatOptions.put(handler.getId(), handler);

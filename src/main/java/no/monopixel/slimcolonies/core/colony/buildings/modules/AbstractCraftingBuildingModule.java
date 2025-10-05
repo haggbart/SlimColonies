@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.items.IItemHandler;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
@@ -264,7 +264,7 @@ public abstract class AbstractCraftingBuildingModule extends AbstractBuildingMod
         if (jobEntry != null)
         {
             buf.writeBoolean(true);
-            buf.writeRegistryId(IMinecoloniesAPI.getInstance().getJobRegistry(), jobEntry);
+            buf.writeRegistryId(ISlimColoniesAPI.getInstance().getJobRegistry(), jobEntry);
         }
         else
         {
@@ -275,7 +275,7 @@ public abstract class AbstractCraftingBuildingModule extends AbstractBuildingMod
         buf.writeVarInt(craftingTypes.size());
         for (final CraftingType type : craftingTypes)
         {
-            buf.writeRegistryIdUnsafe(MinecoloniesAPIProxy.getInstance().getCraftingTypeRegistry(), type);
+            buf.writeRegistryIdUnsafe(SlimColoniesAPIProxy.getInstance().getCraftingTypeRegistry(), type);
         }
 
         buf.writeBoolean(recipesDirty || fullSync);

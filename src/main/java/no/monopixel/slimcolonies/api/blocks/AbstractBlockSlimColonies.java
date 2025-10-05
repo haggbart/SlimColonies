@@ -1,15 +1,14 @@
 package no.monopixel.slimcolonies.api.blocks;
 
-import no.monopixel.slimcolonies.api.blocks.interfaces.IBlockMinecolonies;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraftforge.registries.IForgeRegistry;
+import no.monopixel.slimcolonies.api.blocks.interfaces.IBlockSlimColonies;
 
-public abstract class AbstractBlockMinecoloniesDirectional<B extends AbstractBlockMinecoloniesDirectional<B>> extends DirectionalBlock implements IBlockMinecolonies<B>
+public abstract class AbstractBlockSlimColonies<B extends AbstractBlockSlimColonies<B>> extends Block implements IBlockSlimColonies<B>
 {
-    public AbstractBlockMinecoloniesDirectional(final Properties properties)
+    public AbstractBlockSlimColonies(final Properties properties)
     {
         super(properties);
     }

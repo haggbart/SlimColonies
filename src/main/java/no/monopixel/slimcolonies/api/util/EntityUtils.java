@@ -1,11 +1,6 @@
 package no.monopixel.slimcolonies.api.util;
 
 import com.ldtteam.structurize.util.BlockUtils;
-import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import no.monopixel.slimcolonies.core.entity.pathfinding.PathfindingUtils;
-import no.monopixel.slimcolonies.core.entity.pathfinding.SurfaceType;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -18,6 +13,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
+import no.monopixel.slimcolonies.api.entity.other.AbstractFastSlimColoniesEntity;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.core.entity.pathfinding.PathfindingUtils;
+import no.monopixel.slimcolonies.core.entity.pathfinding.SurfaceType;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,8 +26,8 @@ import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static no.monopixel.slimcolonies.api.util.BlockPosUtil.HORIZONTAL_DIRS;
 import static net.minecraft.world.entity.EntitySelector.NO_SPECTATORS;
+import static no.monopixel.slimcolonies.api.util.BlockPosUtil.HORIZONTAL_DIRS;
 
 /**
  * Entity related utilities.
@@ -98,8 +98,8 @@ public final class EntityUtils
     public static List<Entity> getEntitiesFromID(@NotNull final Level world, @NotNull final List<Integer> ids)
     {
         return ids.stream()
-                 .map(world::getEntity)
-                 .collect(Collectors.toList());
+            .map(world::getEntity)
+            .collect(Collectors.toList());
     }
 
     /**
@@ -191,12 +191,11 @@ public final class EntityUtils
         });
     }
 
-
     /**
      * Checks if the blocks above that point are all of the specified block types and that there is a solid block to stand on.
      *
-     * @param world the world we check on.
-     * @param pos the position.
+     * @param world  the world we check on.
+     * @param pos    the position.
      * @param height the number of blocks above to check.
      * @return true if all blocks are of that type.
      */
@@ -212,7 +211,7 @@ public final class EntityUtils
         }
 
         return SurfaceType.getSurfaceType(world, world.getBlockState(pos.below()), pos.below()) == SurfaceType.WALKABLE
-         || SurfaceType.getSurfaceType(world, world.getBlockState(pos.below(2)), pos.below(2)) == SurfaceType.WALKABLE;
+            || SurfaceType.getSurfaceType(world, world.getBlockState(pos.below(2)), pos.below(2)) == SurfaceType.WALKABLE;
     }
 
     // TODO: Move out movement stuff
@@ -234,16 +233,16 @@ public final class EntityUtils
     /**
      * Sets the movement of the entity to specific point. Returns true if direction is set, otherwise false.
      *
-     * @param living Entity to move
-     * @param x      x-coordinate
-     * @param y      y-coordinate
-     * @param z      z-coordinate
-     * @param speedFactor  Speedfactor to modify base speed with
+     * @param living      Entity to move
+     * @param x           x-coordinate
+     * @param y           y-coordinate
+     * @param z           z-coordinate
+     * @param speedFactor Speedfactor to modify base speed with
      * @return true if arrived
      */
     public static boolean tryMoveLivingToXYZ(@NotNull final Mob living, final int x, final int y, final int z, final double speedFactor)
     {
-        if (living instanceof AbstractFastMinecoloniesEntity entity)
+        if (living instanceof AbstractFastSlimColoniesEntity entity)
         {
             return EntityNavigationUtils.walkToPos(entity, new BlockPos(x, y, z), 4, true, speedFactor);
         }
@@ -269,7 +268,7 @@ public final class EntityUtils
 
         if (!isLivingAtSite(entity, x, y, z, TELEPORT_RANGE))
         {
-            BlockPos spawnPoint = getSpawnPoint(entity.getCommandSenderWorld(), new BlockPos(x,y,z));
+            BlockPos spawnPoint = getSpawnPoint(entity.getCommandSenderWorld(), new BlockPos(x, y, z));
 
             if (spawnPoint == null)
             {
@@ -277,11 +276,11 @@ public final class EntityUtils
             }
 
             entity.moveTo(
-              spawnPoint.getX() + MIDDLE_BLOCK_OFFSET,
-              spawnPoint.getY(),
-              spawnPoint.getZ() + MIDDLE_BLOCK_OFFSET,
-              entity.getYRot(),
-              entity.getXRot());
+                spawnPoint.getX() + MIDDLE_BLOCK_OFFSET,
+                spawnPoint.getY(),
+                spawnPoint.getZ() + MIDDLE_BLOCK_OFFSET,
+                entity.getYRot(),
+                entity.getXRot());
             return true;
         }
 
@@ -317,6 +316,7 @@ public final class EntityUtils
 
     /**
      * Entity pushable by predicate. Cheaper version compared to mojank.
+     *
      * @return The predicate.
      */
     public static Predicate<Entity> pushableBy()

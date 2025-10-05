@@ -1,17 +1,17 @@
 package no.monopixel.slimcolonies.core.recipes;
 
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
-import no.monopixel.slimcolonies.api.compatibility.ICompatibilityManager;
-import no.monopixel.slimcolonies.api.crafting.GenericRecipe;
-import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
-import no.monopixel.slimcolonies.api.crafting.ModCraftingTypes;
-import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
+import no.monopixel.slimcolonies.api.compatibility.ICompatibilityManager;
+import no.monopixel.slimcolonies.api.crafting.GenericRecipe;
+import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
+import no.monopixel.slimcolonies.api.crafting.ModCraftingTypes;
+import no.monopixel.slimcolonies.api.crafting.registry.CraftingType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,16 +34,16 @@ public class BrewingCraftingType extends CraftingType
     public List<IGenericRecipe> findRecipes(@NotNull RecipeManager recipeManager, @Nullable Level world)
     {
         final List<IGenericRecipe> recipes = new ArrayList<>();
-        final ICompatibilityManager compatibilityManager = MinecoloniesAPIProxy.getInstance().getColonyManager().getCompatibilityManager();
+        final ICompatibilityManager compatibilityManager = SlimColoniesAPIProxy.getInstance().getColonyManager().getCompatibilityManager();
 
         for (final IBrewingRecipe recipe : BrewingRecipeRegistry.getRecipes())
         {
             final List<ItemStack> inputs = compatibilityManager.getListOfAllItems().stream()
-                    .filter(recipe::isInput)
-                    .collect(Collectors.toList());
+                .filter(recipe::isInput)
+                .collect(Collectors.toList());
             final List<ItemStack> ingredients = compatibilityManager.getListOfAllItems().stream()
-                    .filter(recipe::isIngredient)
-                    .collect(Collectors.toList());
+                .filter(recipe::isIngredient)
+                .collect(Collectors.toList());
 
             for (final ItemStack input : inputs)
             {
@@ -58,10 +58,10 @@ public class BrewingCraftingType extends CraftingType
                         actualOutput.setCount(3);
 
                         recipes.add(GenericRecipe.builder()
-                                .withOutput(actualOutput)
-                                .withInputs(List.of(List.of(ingredient), List.of(actualInput)))
-                                .withIntermediate(Blocks.BREWING_STAND)
-                                .build());
+                            .withOutput(actualOutput)
+                            .withInputs(List.of(List.of(ingredient), List.of(actualInput)))
+                            .withIntermediate(Blocks.BREWING_STAND)
+                            .build());
                     }
                 }
             }

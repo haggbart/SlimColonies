@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
@@ -130,7 +130,7 @@ public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, Build
         //Only return true if the item isn't queued for a recipe.
         return ItemStackUtils.ISCOOKABLE.test(stack) && building.getModule(RESTAURANT_MENU)
             .getMenu()
-            .contains(new ItemStorage(MinecoloniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack)));
+            .contains(new ItemStorage(SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack)));
     }
 
     @Override

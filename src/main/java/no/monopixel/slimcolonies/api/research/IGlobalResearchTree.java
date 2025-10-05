@@ -1,12 +1,12 @@
 package no.monopixel.slimcolonies.api.research;
 
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.crafting.ItemStorage;
-import no.monopixel.slimcolonies.api.network.IMessage;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
+import no.monopixel.slimcolonies.api.network.IMessage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,7 +25,7 @@ public interface IGlobalResearchTree
      */
     static IGlobalResearchTree getInstance()
     {
-        return MinecoloniesAPIProxy.getInstance().getGlobalResearchTree();
+        return SlimColoniesAPIProxy.getInstance().getGlobalResearchTree();
     }
 
     /**
@@ -41,7 +41,8 @@ public interface IGlobalResearchTree
     /**
      * Get the first research with a given id, on any branch.
      * Avoid using when branch is available.
-     * @param id       the id of the research.
+     *
+     * @param id the id of the research.
      * @return the first matching IGlobalResearch object.
      */
     @Nullable
@@ -49,7 +50,8 @@ public interface IGlobalResearchTree
 
     /**
      * Get an effect id for a particular research
-     * @param id    the id of the research.
+     *
+     * @param id the id of the research.
      * @return the effect id
      */
     List<IResearchEffect> getEffectsForResearch(final @NotNull ResourceLocation id);
@@ -66,7 +68,7 @@ public interface IGlobalResearchTree
     /**
      * Check if a research exists, by id.
      *
-     * @param id     the id of the research.
+     * @param id the id of the research.
      * @return true if the research exists, false if it does not.
      */
     boolean hasResearch(final ResourceLocation id);
@@ -74,16 +76,17 @@ public interface IGlobalResearchTree
     /**
      * Add a research to the tree.
      *
-     * @param research the research to add.
-     * @param branch   the branch of the research.
-     * @param isDynamic  true if reloaded with world events (ie data packs, onWorldLoad), false if assigned statically once.
+     * @param research  the research to add.
+     * @param branch    the branch of the research.
+     * @param isDynamic true if reloaded with world events (ie data packs, onWorldLoad), false if assigned statically once.
      */
     void addResearch(final ResourceLocation branch, final IGlobalResearch research, final boolean isDynamic);
 
     /**
      * Add data for a research branch, used to contain translation texts, research speed, and other properties.
-     * @param branchId    the branch Id.
-     * @param branchData  the data.
+     *
+     * @param branchId   the branch Id.
+     * @param branchData the data.
      */
     void addBranchData(final ResourceLocation branchId, final IGlobalResearchBranch branchData);
 
@@ -97,7 +100,7 @@ public interface IGlobalResearchTree
     /**
      * Get the specific GlobalResearchBranch data for a specific branch id.
      *
-     * @param branchId  the branch of the research
+     * @param branchId the branch of the research
      */
     IGlobalResearchBranch getBranchData(final ResourceLocation branchId);
 
@@ -117,26 +120,30 @@ public interface IGlobalResearchTree
     /**
      * Get the list of researches that are intended to start automatically
      * once their requirements are met.
+     *
      * @return the list of research.
      */
     Set<IGlobalResearch> getAutostartResearches();
 
     /**
      * Validates and gets the list of research reset costs, if any are set, from their configuration values.
+     *
      * @return the list of items in ItemStorage format.
      */
     List<ItemStorage> getResearchResetCosts();
 
     /**
      * Checks if a specific research effect has been registered, whether or not it is unlocked.
-     * @param id   the effect's identifier.
+     *
+     * @param id the effect's identifier.
      * @return true if present, false if not registered.
      */
     boolean hasResearchEffect(final ResourceLocation id);
 
     /**
      * Gets all research for a given research effect id, if any are present.
-     * @param id   the effect's identifier.
+     *
+     * @param id the effect's identifier.
      * @return The set of researches for the effect, or null if no research has this effect.
      */
     @Nullable
@@ -144,24 +151,27 @@ public interface IGlobalResearchTree
 
     /**
      * Checks if the research requirements are completed, for a given colony.
-     * @param requirements   the research requirements.
-     * @param colony         the colony to test against.
-     * @return               true if complete.
+     *
+     * @param requirements the research requirements.
+     * @param colony       the colony to test against.
+     * @return true if complete.
      */
     boolean isResearchRequirementsFulfilled(final List<IResearchRequirement> requirements, final IColony colony);
 
     /**
      * Handle messages in the client from the server describing the Global Research Tree.
      * Only used for remote clients.
-     * @param buf       the buffer of received network data.
+     *
+     * @param buf the buffer of received network data.
      */
     IMessage handleGlobalResearchTreeMessage(final FriendlyByteBuf buf);
 
     /**
      * Sends messages to the client from the server describing the Global Research Tree.
      * Only used for dedicated servers.
-     * @param player        the player to send the message
-     *                      all players should be updated on a data pack reload.
+     *
+     * @param player the player to send the message
+     *               all players should be updated on a data pack reload.
      */
     void sendGlobalResearchTreePackets(final ServerPlayer player);
 }

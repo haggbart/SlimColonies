@@ -1,16 +1,6 @@
 package no.monopixel.slimcolonies.core.entity.pathfinding.navigation;
 
 import com.ldtteam.structurize.util.BlockUtils;
-import no.monopixel.slimcolonies.api.entity.ai.workers.util.IBuilderUndestroyable;
-import no.monopixel.slimcolonies.api.entity.pathfinding.IMinecoloniesNavigator;
-import no.monopixel.slimcolonies.api.entity.pathfinding.IStuckHandler;
-import no.monopixel.slimcolonies.api.entity.pathfinding.IStuckHandlerEntity;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.DamageSourceKeys;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
-import no.monopixel.slimcolonies.core.entity.pathfinding.SurfaceType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Mob;
@@ -23,6 +13,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import no.monopixel.slimcolonies.api.entity.ai.workers.util.IBuilderUndestroyable;
+import no.monopixel.slimcolonies.api.entity.pathfinding.IMinecoloniesNavigator;
+import no.monopixel.slimcolonies.api.entity.pathfinding.IStuckHandler;
+import no.monopixel.slimcolonies.api.entity.pathfinding.IStuckHandlerEntity;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.DamageSourceKeys;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
+import no.monopixel.slimcolonies.core.entity.pathfinding.SurfaceType;
 
 import java.util.Objects;
 import java.util.Random;
@@ -294,9 +294,9 @@ public class PathingStuckHandler<NAV extends PathNavigation & IMinecoloniesNavig
         if (canTeleportGoal && desired != null && desired != BlockPos.ZERO)
         {
             final BlockPos tpPos = BlockPosUtil.findAround(world, desired, 10, 10,
-              (posworld, pos) -> SurfaceType.getSurfaceType(posworld, posworld.getBlockState(pos.below()), pos.below()) == SurfaceType.WALKABLE
-                                   && SurfaceType.getSurfaceType(posworld, posworld.getBlockState(pos), pos) == SurfaceType.DROPABLE
-                                   && SurfaceType.getSurfaceType(posworld, posworld.getBlockState(pos.above()), pos.above()) == SurfaceType.DROPABLE);
+                (posworld, pos) -> SurfaceType.getSurfaceType(posworld, posworld.getBlockState(pos.below()), pos.below()) == SurfaceType.WALKABLE
+                    && SurfaceType.getSurfaceType(posworld, posworld.getBlockState(pos), pos) == SurfaceType.DROPABLE
+                    && SurfaceType.getSurfaceType(posworld, posworld.getBlockState(pos.above()), pos.above()) == SurfaceType.DROPABLE);
             if (tpPos != null)
             {
                 entity.teleportTo(tpPos.getX() + 0.5, tpPos.getY(), tpPos.getZ() + 0.5);
@@ -317,8 +317,8 @@ public class PathingStuckHandler<NAV extends PathNavigation & IMinecoloniesNavig
             for (int i = 1; i <= completeStuckBlockBreakRange; i++)
             {
                 if (!world.isEmptyBlock(BlockPos.containing(entity.position()).relative(facing, i)) || !world.isEmptyBlock(BlockPos.containing(entity.position())
-                  .relative(facing, i)
-                  .above()))
+                    .relative(facing, i)
+                    .above()))
                 {
                     breakBlocksAhead(world, BlockPos.containing(entity.position()).relative(facing, i - 1), facing);
                     break;
@@ -369,7 +369,7 @@ public class PathingStuckHandler<NAV extends PathNavigation & IMinecoloniesNavig
 
             final int range = ColonyConstants.rand.nextInt(20) + 20;
             navigator.setPauseTicks(0);
-            ((MinecoloniesAdvancedPathNavigate) navigator).walkTowards(navigator.getOurEntity().blockPosition().relative(movingAwayDir, 40), range, 1.0f);
+            ((SlimColoniesAdvancedPathNavigate) navigator).walkTowards(navigator.getOurEntity().blockPosition().relative(movingAwayDir, 40), range, 1.0f);
             movingAwayDir = movingAwayDir.getClockWise();
             navigator.setPauseTicks(range * TICKS_PER_BLOCK);
             delayToNextUnstuckAction = (int) (range * TICKS_PER_BLOCK * 1.5);
@@ -594,7 +594,7 @@ public class PathingStuckHandler<NAV extends PathNavigation & IMinecoloniesNavig
     {
         final BlockState state = world.getBlockState(pos);
         if ((canBreakBlocks || state.canBeReplaced() || state.isAir()) && state.getBlock() != Blocks.LADDER && !(state.getBlock() instanceof IBuilderUndestroyable) && !state.is(
-          ModTags.indestructible))
+            ModTags.indestructible))
         {
             for (final Direction dir : HORIZONTAL_DIRS)
             {

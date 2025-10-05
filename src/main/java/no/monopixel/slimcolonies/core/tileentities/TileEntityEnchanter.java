@@ -1,12 +1,12 @@
 package no.monopixel.slimcolonies.core.tileentities;
 
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
 
 import java.util.Random;
 
@@ -34,7 +34,7 @@ public class TileEntityEnchanter extends TileEntityColonyBuilding
      */
     public TileEntityEnchanter(final BlockPos pos, final BlockState state)
     {
-        this(MinecoloniesTileEntities.ENCHANTER.get(), pos, state);
+        this(SlimColoniesTileEntities.ENCHANTER.get(), pos, state);
     }
 
     /**
@@ -59,7 +59,11 @@ public class TileEntityEnchanter extends TileEntityColonyBuilding
 
         this.bookSpreadPrev = this.bookSpread;
         this.bookRotationPrev = this.bookRotation;
-        Player player = this.level.getNearestPlayer(((float) this.worldPosition.getX() + 0.5F), ((float) this.worldPosition.getY() + 0.5F), ((float) this.worldPosition.getZ() + 0.5F), 3.0D, false);
+        Player player = this.level.getNearestPlayer(((float) this.worldPosition.getX() + 0.5F),
+            ((float) this.worldPosition.getY() + 0.5F),
+            ((float) this.worldPosition.getZ() + 0.5F),
+            3.0D,
+            false);
         if (player != null)
         {
             double playerXPos = player.getX() - (double) ((float) this.worldPosition.getX() + 0.5F);

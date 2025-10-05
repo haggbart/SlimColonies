@@ -22,7 +22,7 @@ import no.monopixel.slimcolonies.api.client.render.modeltype.CitizenModel;
 import no.monopixel.slimcolonies.api.crafting.registry.ModRecipeSerializer;
 import no.monopixel.slimcolonies.api.entity.ModEntities;
 import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.client.model.*;
 import no.monopixel.slimcolonies.core.client.render.*;
@@ -235,12 +235,12 @@ public class ClientRegistryHandler
         event.registerEntityRenderer(ModEntities.SITTINGENTITY, RenderSitting::new);
         event.registerEntityRenderer(ModEntities.MINECART, (context) -> new MinecartRenderer<>(context, ModelLayers.MINECART));
 
-        event.registerBlockEntityRenderer(MinecoloniesTileEntities.BUILDING.get(), EmptyTileEntitySpecialRenderer::new);
-        event.registerBlockEntityRenderer(MinecoloniesTileEntities.SCARECROW.get(), TileEntityScarecrowRenderer::new);
-        event.registerBlockEntityRenderer(MinecoloniesTileEntities.ENCHANTER.get(), TileEntityEnchanterRenderer::new);
-        event.registerBlockEntityRenderer(MinecoloniesTileEntities.COLONY_FLAG.get(), TileEntityColonyFlagRenderer::new);
-        event.registerBlockEntityRenderer(MinecoloniesTileEntities.NAMED_GRAVE.get(), TileEntityNamedGraveRenderer::new);
-        event.registerBlockEntityRenderer(MinecoloniesTileEntities.DECO_CONTROLLER.get(), TileEntityDecoControllerRenderer::new);
+        event.registerBlockEntityRenderer(SlimColoniesTileEntities.BUILDING.get(), EmptyTileEntitySpecialRenderer::new);
+        event.registerBlockEntityRenderer(SlimColoniesTileEntities.SCARECROW.get(), TileEntityScarecrowRenderer::new);
+        event.registerBlockEntityRenderer(SlimColoniesTileEntities.ENCHANTER.get(), TileEntityEnchanterRenderer::new);
+        event.registerBlockEntityRenderer(SlimColoniesTileEntities.COLONY_FLAG.get(), TileEntityColonyFlagRenderer::new);
+        event.registerBlockEntityRenderer(SlimColoniesTileEntities.NAMED_GRAVE.get(), TileEntityNamedGraveRenderer::new);
+        event.registerBlockEntityRenderer(SlimColoniesTileEntities.DECO_CONTROLLER.get(), TileEntityDecoControllerRenderer::new);
 
         Arrays.stream(ModBlocks.getHuts())
             .forEach(hut -> ItemBlockRenderTypes.setRenderLayer(hut, renderType -> renderType.equals(RenderType.cutout()) || renderType.equals(RenderType.solid())));

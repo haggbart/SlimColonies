@@ -13,7 +13,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.LevelChunk;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.util.MutableChunkPos;
@@ -132,7 +132,7 @@ public class ColonyBorderRenderer
     {
         final MutableChunkPos mutableChunkPos = new MutableChunkPos(0, 0);
         final Map<Integer, Color> colonyColours = new HashMap<>();
-        final boolean useColonyColour = IMinecoloniesAPI.getInstance().getConfig().getClient().colonyteamborders.get();
+        final boolean useColonyColour = ISlimColoniesAPI.getInstance().getConfig().getClient().colonyteamborders.get();
 
         bufferbuilder.begin(WorldRenderMacros.LINES.mode(), WorldRenderMacros.LINES.format());
         mapToDraw.forEach((chunkPos, colonyId) -> {
@@ -154,7 +154,7 @@ public class ColonyBorderRenderer
             {
                 final Color colour = colonyColours.computeIfAbsent(colonyId, id ->
                 {
-                    final IColonyView colony = IMinecoloniesAPI.getInstance().getColonyManager().getColonyView(id, Minecraft.getInstance().level.dimension());
+                    final IColonyView colony = ISlimColoniesAPI.getInstance().getColonyManager().getColonyView(id, Minecraft.getInstance().level.dimension());
                     final ChatFormatting team = colony != null ? colony.getTeamColonyColor() : id == playerColonyId ? ChatFormatting.WHITE : ChatFormatting.RED;
                     return new Color(team.getColor());
                 });

@@ -1,19 +1,19 @@
 package no.monopixel.slimcolonies.core.tileentities;
 
 import com.ldtteam.structurize.util.BlockUtils;
-import no.monopixel.slimcolonies.api.tileentities.ITickable;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
-import net.minecraft.world.level.block.AirBlock;
-import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.tileentities.ITickable;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
+import no.monopixel.slimcolonies.api.util.WorldUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -61,7 +61,7 @@ public class TileEntityCompostedDirt extends BlockEntity implements ITickable
      */
     public TileEntityCompostedDirt(final BlockPos pos, final BlockState state)
     {
-        super(MinecoloniesTileEntities.COMPOSTED_DIRT.get(), pos, state);
+        super(SlimColoniesTileEntities.COMPOSTED_DIRT.get(), pos, state);
     }
 
     @Override
@@ -91,9 +91,9 @@ public class TileEntityCompostedDirt extends BlockEntity implements ITickable
         if (this.composted)
         {
             ((ServerLevel) worldIn).sendParticles(
-              ParticleTypes.HAPPY_VILLAGER, this.getBlockPos().getX() + 0.5,
-              this.getBlockPos().getY() + 1, this.getBlockPos().getZ() + 0.5,
-              1, 0.2, 0, 0.2, 0);
+                ParticleTypes.HAPPY_VILLAGER, this.getBlockPos().getX() + 0.5,
+                this.getBlockPos().getY() + 1, this.getBlockPos().getZ() + 0.5,
+                1, 0.2, 0, 0.2, 0);
         }
 
         if (random.nextDouble() * 100 <= this.percentage)
@@ -105,7 +105,10 @@ public class TileEntityCompostedDirt extends BlockEntity implements ITickable
                 {
                     if (((BlockItem) flower.getItem()).getBlock() instanceof DoublePlantBlock)
                     {
-                        ((DoublePlantBlock) ((BlockItem) flower.getItem()).getBlock()).placeAt(worldIn, ((BlockItem) flower.getItem()).getBlock().defaultBlockState(), position, UPDATE_FLAG);
+                        ((DoublePlantBlock) ((BlockItem) flower.getItem()).getBlock()).placeAt(worldIn,
+                            ((BlockItem) flower.getItem()).getBlock().defaultBlockState(),
+                            position,
+                            UPDATE_FLAG);
                     }
                     else
                     {

@@ -1,11 +1,5 @@
 package no.monopixel.slimcolonies.core.items;
 
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
-import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
-import no.monopixel.slimcolonies.core.client.gui.questlog.WindowQuestLog;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -17,6 +11,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.util.MessageUtils;
+import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
+import no.monopixel.slimcolonies.core.client.gui.questlog.WindowQuestLog;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
@@ -25,7 +25,7 @@ import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.C
 /**
  * Class describing the quest log item.
  */
-public class ItemQuestLog extends AbstractItemMinecolonies
+public class ItemQuestLog extends AbstractItemSlimColonies
 {
     /**
      * Tag of the colony.
@@ -78,9 +78,9 @@ public class ItemQuestLog extends AbstractItemMinecolonies
     @Override
     @NotNull
     public InteractionResultHolder<ItemStack> use(
-      final Level worldIn,
-      final Player playerIn,
-      final InteractionHand hand)
+        final Level worldIn,
+        final Player playerIn,
+        final InteractionHand hand)
     {
         final ItemStack questLog = playerIn.getItemInHand(hand);
 

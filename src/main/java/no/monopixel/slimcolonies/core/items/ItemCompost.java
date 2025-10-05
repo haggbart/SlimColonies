@@ -1,6 +1,5 @@
 package no.monopixel.slimcolonies.core.items;
 
-import no.monopixel.slimcolonies.api.util.constant.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -9,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 import org.jetbrains.annotations.NotNull;
 
 import static net.minecraft.world.item.BoneMealItem.applyBonemeal;
@@ -16,7 +16,7 @@ import static net.minecraft.world.item.BoneMealItem.applyBonemeal;
 /**
  * Class used to handle the compost item.
  */
-public class ItemCompost extends AbstractItemMinecolonies
+public class ItemCompost extends AbstractItemSlimColonies
 {
 
     /***

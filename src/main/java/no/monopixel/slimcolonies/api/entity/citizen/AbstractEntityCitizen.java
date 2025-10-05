@@ -38,7 +38,7 @@ import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IState;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.*;
-import no.monopixel.slimcolonies.api.entity.other.MinecoloniesMinecart;
+import no.monopixel.slimcolonies.api.entity.other.SlimColoniesMinecart;
 import no.monopixel.slimcolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
 import no.monopixel.slimcolonies.api.sounds.EventType;
@@ -385,7 +385,7 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
             return;
         }
 
-        if (this.vehicle instanceof MinecoloniesMinecart)
+        if (this.vehicle instanceof SlimColoniesMinecart)
         {
             return;
         }
@@ -416,7 +416,7 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
     @Override
     public boolean isPushable()
     {
-        if (this.vehicle instanceof MinecoloniesMinecart)
+        if (this.vehicle instanceof SlimColoniesMinecart)
         {
             return false;
         }

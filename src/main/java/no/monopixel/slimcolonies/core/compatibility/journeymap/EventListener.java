@@ -1,15 +1,5 @@
 package no.monopixel.slimcolonies.core.compatibility.journeymap;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.core.event.ClientChunkUpdatedEvent;
-import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyViewUpdatedModEvent;
-import no.monopixel.slimcolonies.api.colony.jobs.IJob;
-import no.monopixel.slimcolonies.api.colony.jobs.registry.IJobRegistry;
-import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
-import no.monopixel.slimcolonies.core.entity.visitor.VisitorCitizen;
 import journeymap.client.api.display.Context;
 import journeymap.client.api.event.forge.EntityRadarUpdateEvent;
 import journeymap.client.api.model.WrappedEntity;
@@ -29,6 +19,16 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.colony.jobs.IJob;
+import no.monopixel.slimcolonies.api.colony.jobs.registry.IJobRegistry;
+import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyViewUpdatedModEvent;
+import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
+import no.monopixel.slimcolonies.core.entity.visitor.VisitorCitizen;
+import no.monopixel.slimcolonies.core.event.ClientChunkUpdatedEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -50,7 +50,7 @@ public class EventListener
         this.jmap = jmap;
 
         MinecraftForge.EVENT_BUS.register(this);
-        IMinecoloniesAPI.getInstance().getEventBus().subscribe(ColonyViewUpdatedModEvent.class, this::onColonyViewUpdated);
+        ISlimColoniesAPI.getInstance().getEventBus().subscribe(ColonyViewUpdatedModEvent.class, this::onColonyViewUpdated);
     }
 
     @SubscribeEvent
@@ -63,7 +63,10 @@ public class EventListener
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onChunkLoaded(@NotNull final ChunkEvent.Load event)
     {
-        if (!event.getLevel().isClientSide()) return;
+        if (!event.getLevel().isClientSide())
+        {
+            return;
+        }
 
         if (event.getLevel() instanceof Level)
         {
@@ -117,16 +120,16 @@ public class EventListener
                 final IJob<?> job = jobEntry == null ? null : jobEntry.produceJob(null);
 
                 if (job instanceof AbstractJobGuard
-                        ? !JourneymapOptions.getShowGuards(this.jmap.getOptions())
-                        : !JourneymapOptions.getShowCitizens(this.jmap.getOptions()))
+                    ? !JourneymapOptions.getShowGuards(this.jmap.getOptions())
+                    : !JourneymapOptions.getShowCitizens(this.jmap.getOptions()))
                 {
                     wrapper.setDisable(true);
                     return;
                 }
 
                 jobName = Component.translatable(jobEntry == null
-                        ? PARTIAL_JOURNEY_MAP_INFO + "unemployed"
-                        : jobEntry.getTranslationKey());
+                    ? PARTIAL_JOURNEY_MAP_INFO + "unemployed"
+                    : jobEntry.getTranslationKey());
             }
 
             if (JourneymapOptions.getShowColonistTooltip(this.jmap.getOptions()))
@@ -139,8 +142,8 @@ public class EventListener
             }
 
             final boolean showName = event.getActiveUiState().ui.equals(Context.UI.Minimap)
-                    ? JourneymapOptions.getShowColonistNameMinimap(this.jmap.getOptions())
-                    : JourneymapOptions.getShowColonistNameFullscreen(this.jmap.getOptions());
+                ? JourneymapOptions.getShowColonistNameMinimap(this.jmap.getOptions())
+                : JourneymapOptions.getShowColonistNameFullscreen(this.jmap.getOptions());
 
             if (!showName)
             {
@@ -157,7 +160,10 @@ public class EventListener
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onClientTick(@NotNull final TickEvent.ClientTickEvent event)
     {
-        if (event.phase != TickEvent.Phase.END) return;
+        if (event.phase != TickEvent.Phase.END)
+        {
+            return;
+        }
 
         final Level world = Minecraft.getInstance().level;
         if (world != null)

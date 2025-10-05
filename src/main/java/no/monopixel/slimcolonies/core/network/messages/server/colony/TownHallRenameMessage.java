@@ -1,12 +1,12 @@
 package no.monopixel.slimcolonies.core.network.messages.server.colony;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyNameChangedModEvent;
 import no.monopixel.slimcolonies.core.network.messages.server.AbstractColonyServerMessage;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -55,6 +55,6 @@ public class TownHallRenameMessage extends AbstractColonyServerMessage
     {
         name = (name.length() <= MAX_NAME_LENGTH) ? name : name.substring(0, SUBSTRING_LENGTH);
         colony.setName(name);
-        IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyNameChangedModEvent(colony));
+        ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyNameChangedModEvent(colony));
     }
 }

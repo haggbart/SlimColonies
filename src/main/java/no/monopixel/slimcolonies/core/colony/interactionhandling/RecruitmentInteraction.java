@@ -8,7 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.*;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
@@ -138,7 +138,7 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
                     MessageUtils.format(MESSAGE_RECRUITMENT_SUCCESS, data.getName()).sendTo(colony).forAllPlayers();
                 }
 
-                IMinecoloniesAPI.getInstance()
+                ISlimColoniesAPI.getInstance()
                     .getEventBus()
                     .post(new CitizenAddedModEvent(newCitizen, CitizenAddedModEvent.CitizenAddedSource.HIRED));
             }

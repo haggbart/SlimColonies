@@ -1,6 +1,15 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.builder;
 
 import com.ldtteam.structurize.placement.StructurePlacer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrder;
@@ -18,18 +27,9 @@ import no.monopixel.slimcolonies.core.colony.workorders.WorkOrderBuilding;
 import no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIStructureWithWorkOrder;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingProgressStage;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingStructureHandler;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveCloseToXNearY;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.HoverEvent;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
@@ -217,7 +217,7 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
                     job.getWorkOrder().getLocation(),
                     4,
                     worker);
-                gotoPath = ((MinecoloniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(pathJob, currentBlock, 1.0, false);
+                gotoPath = ((SlimColoniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(pathJob, currentBlock, 1.0, false);
                 pathJob.getPathingOptions().dropCost = 200;
                 pathJob.extraNodes = 0;
             }
@@ -240,7 +240,7 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
         if (!walkToSafePos(workFrom))
         {
             // Something might have changed, new wall and we can't reach the position anymore. Reset workfrom if stuck.
-            if (worker.getNavigation() instanceof MinecoloniesAdvancedPathNavigate pathNavigate && pathNavigate.getStuckHandler().getStuckLevel() > 0)
+            if (worker.getNavigation() instanceof SlimColoniesAdvancedPathNavigate pathNavigate && pathNavigate.getStuckHandler().getStuckLevel() > 0)
             {
                 workFrom = null;
             }

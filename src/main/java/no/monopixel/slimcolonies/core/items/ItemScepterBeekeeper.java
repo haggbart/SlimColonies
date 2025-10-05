@@ -1,16 +1,5 @@
 package no.monopixel.slimcolonies.core.items;
 
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.items.IBlockOverlayItem;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.api.util.SoundUtils;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBeekeeper;
-import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingViewMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,6 +11,17 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.phys.AABB;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.IColonyView;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.items.IBlockOverlayItem;
+import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.MessageUtils;
+import no.monopixel.slimcolonies.api.util.SoundUtils;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBeekeeper;
+import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewBuildingViewMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -36,9 +36,9 @@ import static no.monopixel.slimcolonies.api.util.constant.translation.ToolTransl
 /**
  * Beekeeper Scepter Item class. Used to give tasks to Beekeeper.
  */
-public class ItemScepterBeekeeper extends AbstractItemMinecolonies implements IBlockOverlayItem
+public class ItemScepterBeekeeper extends AbstractItemSlimColonies implements IBlockOverlayItem
 {
-    private static final int RED_OVERLAY = 0xFFFF0000;
+    private static final int RED_OVERLAY    = 0xFFFF0000;
     private static final int YELLOW_OVERLAY = 0xFFFFFF00;
 
     /**

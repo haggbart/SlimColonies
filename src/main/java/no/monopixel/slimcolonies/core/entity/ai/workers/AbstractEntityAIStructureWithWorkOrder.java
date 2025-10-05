@@ -9,7 +9,7 @@ import com.ldtteam.structurize.util.PlacementSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.workorders.IBuilderWorkOrder;
@@ -457,7 +457,7 @@ public abstract class AbstractEntityAIStructureWithWorkOrder<J extends AbstractJ
                             building.setDeconstructed();
                             break;
                     }
-                    IMinecoloniesAPI.getInstance().getEventBus().post(new BuildingConstructionModEvent(building, workOrderBuilding));
+                    ISlimColoniesAPI.getInstance().getEventBus().post(new BuildingConstructionModEvent(building, workOrderBuilding));
                 }
             }
         }

@@ -1,7 +1,10 @@
 package no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.factory;
 
 import com.google.common.reflect.TypeToken;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.IJobRegistry;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
 import no.monopixel.slimcolonies.api.colony.requestsystem.factory.IFactoryController;
@@ -11,19 +14,16 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
 import no.monopixel.slimcolonies.api.util.constant.SerializationIdentifierConstants;
 import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
 import no.monopixel.slimcolonies.core.colony.requestsystem.resolvers.PublicWorkerCraftingRequestResolver;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 
 public class PublicWorkerCraftingRequestResolverFactory implements IRequestResolverFactory<PublicWorkerCraftingRequestResolver>
 {
-    ////// --------------------------- NBTConstants --------------------------- \\\\\\
+    /// /// --------------------------- NBTConstants --------------------------- \\\\\\
     private static final String NBT_TOKEN    = "Token";
     private static final String NBT_LOCATION = "Location";
-    private static final String NBT_JOB = "Job";
+    private static final String NBT_JOB      = "Job";
 
-    ////// --------------------------- NBTConstants --------------------------- \\\\\\
+    /// /// --------------------------- NBTConstants --------------------------- \\\\\\
 
     @NotNull
     @Override
@@ -42,9 +42,9 @@ public class PublicWorkerCraftingRequestResolverFactory implements IRequestResol
     @NotNull
     @Override
     public PublicWorkerCraftingRequestResolver getNewInstance(
-      @NotNull final IFactoryController factoryController,
-      @NotNull final ILocation iLocation,
-      @NotNull final Object... context)
+        @NotNull final IFactoryController factoryController,
+        @NotNull final ILocation iLocation,
+        @NotNull final Object... context)
     {
         return new PublicWorkerCraftingRequestResolver(iLocation, factoryController.getNewInstance(TypeConstants.ITOKEN), (JobEntry) context[0]);
     }
@@ -77,7 +77,7 @@ public class PublicWorkerCraftingRequestResolverFactory implements IRequestResol
     {
         controller.serialize(packetBuffer, input.getId());
         controller.serialize(packetBuffer, input.getLocation());
-        packetBuffer.writeRegistryId(IMinecoloniesAPI.getInstance().getJobRegistry(), input.getJobEntry());
+        packetBuffer.writeRegistryId(ISlimColoniesAPI.getInstance().getJobRegistry(), input.getJobEntry());
     }
 
     @Override

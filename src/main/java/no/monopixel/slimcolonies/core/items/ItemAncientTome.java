@@ -9,7 +9,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
 /**
  * Class describing the Ancient Tome item.
  */
-public class ItemAncientTome extends AbstractItemMinecolonies
+public class ItemAncientTome extends AbstractItemSlimColonies
 {
     /**
      * Sets the name, creative tab, and registers the Ancient Tome item.

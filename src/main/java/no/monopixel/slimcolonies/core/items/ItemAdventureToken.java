@@ -17,10 +17,11 @@ import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_EN
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_NAME_GUI;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI;
 
-public class ItemAdventureToken extends AbstractItemMinecolonies
+public class ItemAdventureToken extends AbstractItemSlimColonies
 {
     /**
      * This item is purely for matching, and carrying data in Tags
+     *
      * @param properties
      */
     public ItemAdventureToken(Properties properties)
@@ -31,7 +32,7 @@ public class ItemAdventureToken extends AbstractItemMinecolonies
     @Override
     public Component getName(ItemStack stack)
     {
-        if(stack.hasTag() && stack.getTag().contains(TAG_ENTITY_TYPE))
+        if (stack.hasTag() && stack.getTag().contains(TAG_ENTITY_TYPE))
         {
             EntityType<?> mobType = EntityType.byString(stack.getTag().getString(TAG_ENTITY_TYPE)).orElse(EntityType.ZOMBIE);
             return Component.translatable(COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_NAME_GUI, mobType.getDescription());
@@ -42,7 +43,7 @@ public class ItemAdventureToken extends AbstractItemMinecolonies
 
     @Override
     public void appendHoverText(
-    @NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
+        @NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
     {
         final MutableComponent guiHint = Component.translatable(COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI);
         guiHint.setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY));

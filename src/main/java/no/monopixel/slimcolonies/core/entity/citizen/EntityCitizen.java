@@ -41,7 +41,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.colony.*;
 import no.monopixel.slimcolonies.api.colony.buildings.IGuardBuilding;
@@ -1587,7 +1587,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
                 Component.literal(damageSource.getLocalizedDeathMessage(this).getString()).getString().replaceFirst(this.getDisplayName().getString(), "Citizen");
             citizenColonyHandler.getColonyOrRegister().getEventDescriptionManager().addEventDescription(new CitizenDiedEvent(blockPosition(), citizenData.getName(), deathCause));
 
-            IMinecoloniesAPI.getInstance().getEventBus().post(new CitizenDiedModEvent(citizenData, damageSource));
+            ISlimColoniesAPI.getInstance().getEventBus().post(new CitizenDiedModEvent(citizenData, damageSource));
         }
         super.die(damageSource);
     }
@@ -1596,7 +1596,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     public void remove(final @NotNull RemovalReason reason)
     {
         super.remove(reason);
-        IMinecoloniesAPI.getInstance().getEventBus().post(new CitizenRemovedModEvent(citizenColonyHandler.getColony(), citizenId, reason));
+        ISlimColoniesAPI.getInstance().getEventBus().post(new CitizenRemovedModEvent(citizenColonyHandler.getColony(), citizenId, reason));
     }
 
     /**

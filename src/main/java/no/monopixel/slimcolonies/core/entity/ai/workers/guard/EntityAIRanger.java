@@ -1,16 +1,16 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.guard;
 
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
 import no.monopixel.slimcolonies.core.colony.jobs.JobRanger;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobWalkRandomEdge;
-import net.minecraft.world.item.ArrowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.IDLE;
@@ -51,9 +51,9 @@ public class EntityAIRanger extends AbstractEntityAIGuard<JobRanger, AbstractBui
         {
             // Pickup arrows and request arrows
             InventoryUtils.transferXOfFirstSlotInProviderWithIntoNextFreeSlotInItemHandler(building,
-              item -> item.getItem() instanceof ArrowItem,
-              64,
-              worker.getInventoryCitizen());
+                item -> item.getItem() instanceof ArrowItem,
+                64,
+                worker.getInventoryCitizen());
 
             if (InventoryUtils.getItemCountInItemHandler(worker.getInventoryCitizen(), item -> item.getItem() instanceof ArrowItem) < 16)
             {
@@ -75,9 +75,9 @@ public class EntityAIRanger extends AbstractEntityAIGuard<JobRanger, AbstractBui
             || Math.abs(buildingGuards.getGuardPos(worker).getY() - worker.blockPosition().getY()) > 3)
         {
             // Moves the ranger randomly to close edges, for better vision to mobs
-            ((MinecoloniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(new PathJobWalkRandomEdge(world, buildingGuards.getGuardPos(worker), 20, worker),
-              null,
-              1.0, true);
+            ((SlimColoniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(new PathJobWalkRandomEdge(world, buildingGuards.getGuardPos(worker), 20, worker),
+                null,
+                1.0, true);
         }
     }
 }

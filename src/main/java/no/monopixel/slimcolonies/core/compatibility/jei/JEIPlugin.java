@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.blocks.ModBlocks;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
@@ -99,7 +99,7 @@ public class JEIPlugin implements IModPlugin
         registration.addRecipeCategories(new FloristRecipeCategory(guiHelper));
 
         categories.clear();
-        for (final BuildingEntry building : IMinecoloniesAPI.getInstance().getBuildingRegistry())
+        for (final BuildingEntry building : ISlimColoniesAPI.getInstance().getBuildingRegistry())
         {
             final Map<JobEntry, GenericRecipeCategory> craftingCategories = new HashMap<>();
 

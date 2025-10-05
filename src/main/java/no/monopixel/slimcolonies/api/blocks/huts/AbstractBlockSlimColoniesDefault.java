@@ -1,14 +1,14 @@
 package no.monopixel.slimcolonies.api.blocks.huts;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractBlockMinecoloniesContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraftforge.registries.IForgeRegistry;
+import no.monopixel.slimcolonies.api.blocks.AbstractBlockSlimColoniesContainer;
 
-public abstract class AbstractBlockMinecoloniesDefault<B extends AbstractBlockMinecoloniesDefault<B>> extends AbstractBlockMinecoloniesContainer<B>
+public abstract class AbstractBlockSlimColoniesDefault<B extends AbstractBlockSlimColoniesDefault<B>> extends AbstractBlockSlimColoniesContainer<B>
 {
     /**
      * The position it faces.
@@ -43,7 +43,7 @@ public abstract class AbstractBlockMinecoloniesDefault<B extends AbstractBlockMi
      */
     public static final String            REGISTRY_NAME    = "blockhutfield";
 
-    public AbstractBlockMinecoloniesDefault(final Properties properties)
+    public AbstractBlockSlimColoniesDefault(final Properties properties)
     {
         super(properties);
     }

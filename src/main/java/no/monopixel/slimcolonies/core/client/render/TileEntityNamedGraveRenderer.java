@@ -1,25 +1,26 @@
 package no.monopixel.slimcolonies.core.client.render;
 
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityNamedGrave;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.network.chat.Style;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockSlimColoniesDefault;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityNamedGrave;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class TileEntityNamedGraveRenderer implements BlockEntityRenderer<TileEntityNamedGrave> {
+public class TileEntityNamedGraveRenderer implements BlockEntityRenderer<TileEntityNamedGrave>
+{
 
     /**
      * Basic rotation to achieve a certain direction.
@@ -46,18 +47,23 @@ public class TileEntityNamedGraveRenderer implements BlockEntityRenderer<TileEnt
         super();
     }
 
-
     @Override
-    public void render(@NotNull final TileEntityNamedGrave tileEntity, final float partialTicks, final PoseStack matrixStack, @NotNull final MultiBufferSource buffer, final int combinedLight, final int combinedOverlay)
+    public void render(
+        @NotNull final TileEntityNamedGrave tileEntity,
+        final float partialTicks,
+        final PoseStack matrixStack,
+        @NotNull final MultiBufferSource buffer,
+        final int combinedLight,
+        final int combinedOverlay)
     {
         matrixStack.pushPose();
 
-        if(tileEntity != null)
+        if (tileEntity != null)
         {
             final BlockState state = tileEntity.getLevel().getBlockState(tileEntity.getBlockPos());
             if (state.getBlock() == ModBlocks.blockNamedGrave)
             {
-                final Direction facing = state.getValue(AbstractBlockMinecoloniesDefault.FACING);
+                final Direction facing = state.getValue(AbstractBlockSlimColoniesDefault.FACING);
                 switch (facing)
                 {
                     case NORTH:
@@ -116,7 +122,7 @@ public class TileEntityNamedGraveRenderer implements BlockEntityRenderer<TileEnt
 
             float x = (float) (-fontRenderer.width(iReorderingProcessor) / 2); //render width of text divided by 2
             fontRenderer.drawInBatch(iReorderingProcessor, x, line * 10f,
-              0xdcdcdc00, false, matrixStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, combinedLight);
+                0xdcdcdc00, false, matrixStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, combinedLight);
         }
     }
 

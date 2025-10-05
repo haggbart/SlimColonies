@@ -1,14 +1,5 @@
 package no.monopixel.slimcolonies.core.blocks;
 
-import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
-import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.client.gui.containers.WindowField;
-import no.monopixel.slimcolonies.core.colony.buildingextensions.FarmField;
-import no.monopixel.slimcolonies.core.tileentities.TileEntityScarecrow;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +25,15 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import no.monopixel.slimcolonies.api.blocks.huts.AbstractBlockSlimColoniesDefault;
+import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.BuildingExtensionRegistries;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.client.gui.containers.WindowField;
+import no.monopixel.slimcolonies.core.colony.buildingextensions.FarmField;
+import no.monopixel.slimcolonies.core.tileentities.TileEntityScarecrow;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
  * The net.minecraft.core.Directions, placement and activation.
  */
 @SuppressWarnings("PMD.ExcessiveImports")
-public class BlockScarecrow extends AbstractBlockMinecoloniesDefault<BlockScarecrow> implements EntityBlock, IBuildingBrowsableBlock
+public class BlockScarecrow extends AbstractBlockSlimColoniesDefault<BlockScarecrow> implements EntityBlock, IBuildingBrowsableBlock
 {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
@@ -73,12 +73,12 @@ public class BlockScarecrow extends AbstractBlockMinecoloniesDefault<BlockScarec
 
     @Override
     public InteractionResult use(
-      final BlockState state,
-      final Level worldIn,
-      final BlockPos pos,
-      final Player player,
-      final InteractionHand hand,
-      final BlockHitResult ray)
+        final BlockState state,
+        final Level worldIn,
+        final BlockPos pos,
+        final Player player,
+        final InteractionHand hand,
+        final BlockHitResult ray)
     {
         // If the world is client, open the inventory of the field.
         if (worldIn.isClientSide)
@@ -126,17 +126,17 @@ public class BlockScarecrow extends AbstractBlockMinecoloniesDefault<BlockScarec
 
     @Override
     public VoxelShape getShape(
-      final BlockState state, final BlockGetter worldIn, final BlockPos pos, final CollisionContext context)
+        final BlockState state, final BlockGetter worldIn, final BlockPos pos, final CollisionContext context)
     {
         // Force the different halves to share the same collision space;
         // the user will think it is one big block
         return Shapes.box(
-          (float) START_COLLISION,
-          (float) (BOTTOM_COLLISION - (state.getValue(HALF) == DoubleBlockHalf.UPPER ? 1 : 0)),
-          (float) START_COLLISION,
-          (float) END_COLLISION,
-          (float) (HEIGHT_COLLISION - (state.getValue(HALF) == DoubleBlockHalf.UPPER ? 1 : 0)),
-          (float) END_COLLISION
+            (float) START_COLLISION,
+            (float) (BOTTOM_COLLISION - (state.getValue(HALF) == DoubleBlockHalf.UPPER ? 1 : 0)),
+            (float) START_COLLISION,
+            (float) END_COLLISION,
+            (float) (HEIGHT_COLLISION - (state.getValue(HALF) == DoubleBlockHalf.UPPER ? 1 : 0)),
+            (float) END_COLLISION
         );
     }
 
@@ -218,7 +218,8 @@ public class BlockScarecrow extends AbstractBlockMinecoloniesDefault<BlockScarec
             final IColony colony = IColonyManager.getInstance().getColonyByPosFromWorld(worldIn, pos);
             if (colony != null)
             {
-                colony.getBuildingManager().removeBuildingExtension(field -> field.getBuildingExtensionType().equals(BuildingExtensionRegistries.farmField.get()) && field.getPosition().equals(pos));
+                colony.getBuildingManager()
+                    .removeBuildingExtension(field -> field.getBuildingExtensionType().equals(BuildingExtensionRegistries.farmField.get()) && field.getPosition().equals(pos));
             }
         }
     }

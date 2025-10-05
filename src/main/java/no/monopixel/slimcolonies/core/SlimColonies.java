@@ -21,7 +21,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegisterEvent;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.advancements.AdvancementTriggers;
 import no.monopixel.slimcolonies.api.colony.IChunkmanagerCapability;
 import no.monopixel.slimcolonies.api.colony.IColonyTagCapability;
@@ -38,8 +38,8 @@ import no.monopixel.slimcolonies.api.loot.ModLootConditions;
 import no.monopixel.slimcolonies.api.sounds.ModSoundEvents;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants;
-import no.monopixel.slimcolonies.apiimp.ClientMinecoloniesAPIImpl;
-import no.monopixel.slimcolonies.apiimp.CommonMinecoloniesAPIImpl;
+import no.monopixel.slimcolonies.apiimp.ClientSlimColoniesAPIImpl;
+import no.monopixel.slimcolonies.apiimp.CommonSlimColoniesAPIImpl;
 import no.monopixel.slimcolonies.apiimp.initializer.*;
 import no.monopixel.slimcolonies.core.blocks.BlockPlantationField;
 import no.monopixel.slimcolonies.core.blocks.huts.BlockHutGateHouse;
@@ -140,8 +140,8 @@ public class SlimColonies
         Mod.EventBusSubscriber.Bus.MOD.bus().get().register(ModCreativeTabs.class);
 
         InteractionValidatorInitializer.init();
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> MinecoloniesAPIProxy.getInstance().setApiInstance(new ClientMinecoloniesAPIImpl()));
-        DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> MinecoloniesAPIProxy.getInstance().setApiInstance(new CommonMinecoloniesAPIImpl()));
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> SlimColoniesAPIProxy.getInstance().setApiInstance(new ClientSlimColoniesAPIImpl()));
+        DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> SlimColoniesAPIProxy.getInstance().setApiInstance(new CommonSlimColoniesAPIImpl()));
 
         SurvivalBlueprintHandlers.registerHandler(new SurvivalHandler());
         SurvivalBlueprintHandlers.registerHandler(new SuppliesHandler());
@@ -150,7 +150,7 @@ public class SlimColonies
     @SubscribeEvent
     public static void registerNewRegistries(final NewRegistryEvent event)
     {
-        MinecoloniesAPIProxy.getInstance().onRegistryNewRegistry(event);
+        SlimColoniesAPIProxy.getInstance().onRegistryNewRegistry(event);
     }
 
     /**

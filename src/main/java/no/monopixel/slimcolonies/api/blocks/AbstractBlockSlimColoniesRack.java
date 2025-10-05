@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import no.monopixel.slimcolonies.api.blocks.types.RackType;
 
-public abstract class AbstractBlockSlimColoniesRack<B extends AbstractBlockSlimColoniesRack<B>> extends AbstractBlockMinecolonies<B> implements EntityBlock
+public abstract class AbstractBlockSlimColoniesRack<B extends AbstractBlockSlimColoniesRack<B>> extends AbstractBlockSlimColonies<B> implements EntityBlock
 {
     public static final EnumProperty<RackType> VARIANT = EnumProperty.create("variant", RackType.class);
 

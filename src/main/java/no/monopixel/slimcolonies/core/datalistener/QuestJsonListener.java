@@ -12,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.quests.*;
 import no.monopixel.slimcolonies.api.util.Log;
@@ -130,7 +130,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
 
             try
             {
-                questTriggers.add(IMinecoloniesAPI.getInstance().getQuestTriggerRegistry().getValue(new ResourceLocation(type)).produce(triggerObj));
+                questTriggers.add(ISlimColoniesAPI.getInstance().getQuestTriggerRegistry().getValue(new ResourceLocation(type)).produce(triggerObj));
             }
             catch (final Exception ex)
             {
@@ -145,7 +145,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
             final String type = objectiveObj.get(TYPE).getAsString();
             try
             {
-                questObjectives.add(IMinecoloniesAPI.getInstance().getQuestObjectiveRegistry().getValue(new ResourceLocation(type)).produce(objectiveObj));
+                questObjectives.add(ISlimColoniesAPI.getInstance().getQuestObjectiveRegistry().getValue(new ResourceLocation(type)).produce(objectiveObj));
             }
             catch (final Exception ex)
             {
@@ -188,7 +188,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
             final String type = objectiveObj.get(TYPE).getAsString();
             try
             {
-                questRewards.add(IMinecoloniesAPI.getInstance().getQuestRewardRegistry().getValue(new ResourceLocation(type)).produce(objectiveObj));
+                questRewards.add(ISlimColoniesAPI.getInstance().getQuestRewardRegistry().getValue(new ResourceLocation(type)).produce(objectiveObj));
             }
             catch (final Exception ex)
             {
@@ -459,7 +459,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
 
     public static class ExpressionNode
     {
-        public String expression;
+        public String         expression;
         public ExpressionNode childA;
         public ExpressionNode childB;
         public ExpressionNode parent;

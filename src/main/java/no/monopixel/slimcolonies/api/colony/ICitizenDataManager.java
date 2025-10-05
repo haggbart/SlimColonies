@@ -1,8 +1,8 @@
 package no.monopixel.slimcolonies.api.colony;
 
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -13,7 +13,7 @@ public interface ICitizenDataManager
 
     static ICitizenDataManager getInstance()
     {
-        return IMinecoloniesAPI.getInstance().getCitizenDataManager();
+        return ISlimColoniesAPI.getInstance().getCitizenDataManager();
     }
 
     /**

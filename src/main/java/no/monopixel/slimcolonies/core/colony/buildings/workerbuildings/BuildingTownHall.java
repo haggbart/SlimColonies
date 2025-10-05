@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModule;
@@ -266,7 +266,7 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
             {
                 final ResourceLocation eventTypeID = new ResourceLocation(MOD_ID, buf.readUtf());
 
-                final ColonyEventDescriptionTypeRegistryEntry registryEntry = MinecoloniesAPIProxy.getInstance().getColonyEventDescriptionRegistry().getValue(eventTypeID);
+                final ColonyEventDescriptionTypeRegistryEntry registryEntry = SlimColoniesAPIProxy.getInstance().getColonyEventDescriptionRegistry().getValue(eventTypeID);
                 if (registryEntry == null)
                 {
                     Log.getLogger().warn("Event is missing registryEntry!:" + eventTypeID.getPath());

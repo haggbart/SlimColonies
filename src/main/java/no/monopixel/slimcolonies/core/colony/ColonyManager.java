@@ -12,7 +12,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.server.ServerLifecycleHooks;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
@@ -206,7 +206,7 @@ public final class ColonyManager implements IColonyManager
                 return;
             }
 
-            IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyDeletedModEvent(colony));
+            ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyDeletedModEvent(colony));
             cap.deleteColony(id);
             BackUpHelper.markColonyDeleted(colony.getID(), colony.getDimension());
             colony.getImportantMessageEntityPlayers()
@@ -650,7 +650,7 @@ public final class ColonyManager implements IColonyManager
                 c.onWorldLoad(world);
             }
 
-            IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyManagerLoadedModEvent(this));
+            ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyManagerLoadedModEvent(this));
         }
     }
 
@@ -677,7 +677,7 @@ public final class ColonyManager implements IColonyManager
                 BackUpHelper.backupColonyData();
             }
 
-            IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyManagerUnloadedModEvent(this));
+            ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyManagerUnloadedModEvent(this));
         }
     }
 
@@ -706,7 +706,7 @@ public final class ColonyManager implements IColonyManager
         }
         view.handleColonyViewMessage(colonyData, world, isNewSubscription);
 
-        IMinecoloniesAPI.getInstance().getEventBus().post(new ColonyViewUpdatedModEvent(view));
+        ISlimColoniesAPI.getInstance().getEventBus().post(new ColonyViewUpdatedModEvent(view));
     }
 
     @Override

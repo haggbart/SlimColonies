@@ -30,9 +30,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 /**
- * Special minecolonies minecart that doesn't collide.
+ * Special minecart that doesn't collide.
  */
-public class MinecoloniesMinecart extends Minecart
+public class SlimColoniesMinecart extends Minecart
 {
     /**
      * Railshape matrix.
@@ -62,7 +62,7 @@ public class MinecoloniesMinecart extends Minecart
      * @param type  the entity type.
      * @param world the world.
      */
-    public MinecoloniesMinecart(final EntityType<?> type, final Level world)
+    public SlimColoniesMinecart(final EntityType<?> type, final Level world)
     {
         super(type, world);
     }

@@ -1,14 +1,14 @@
 package no.monopixel.slimcolonies.core.entity.pathfinding.navigation;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Tuple;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.entity.other.AbstractFastMinecoloniesEntity;
+import no.monopixel.slimcolonies.api.entity.other.AbstractFastSlimColoniesEntity;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveAwayFromLocation;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveCloseToXNearY;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveToLocation;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobRandomPos;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Tuple;
 
 public class EntityNavigationUtils
 {
@@ -37,7 +37,7 @@ public class EntityNavigationUtils
      * @return True when arrived
      */
     public static boolean walkCloseToXNearY(
-        final AbstractFastMinecoloniesEntity entity, final BlockPos desiredPosition,
+        final AbstractFastSlimColoniesEntity entity, final BlockPos desiredPosition,
         final BlockPos nearbyPosition,
         final int distToDesired, final boolean safeDestination)
     {
@@ -50,11 +50,11 @@ public class EntityNavigationUtils
      * @return True when arrived
      */
     public static boolean walkCloseToXNearY(
-        final AbstractFastMinecoloniesEntity entity, final BlockPos desiredPosition,
+        final AbstractFastSlimColoniesEntity entity, final BlockPos desiredPosition,
         final BlockPos nearbyPosition,
         final int distToDesired, final boolean safeDestination, final double speedFactor)
     {
-        final MinecoloniesAdvancedPathNavigate nav = ((MinecoloniesAdvancedPathNavigate) entity.getNavigation());
+        final SlimColoniesAdvancedPathNavigate nav = ((SlimColoniesAdvancedPathNavigate) entity.getNavigation());
 
         // Three cases
         // 1. Navigation Finished
@@ -91,7 +91,7 @@ public class EntityNavigationUtils
      * @return True when arrived
      */
     public static boolean walkToPosInBuilding(
-        final AbstractFastMinecoloniesEntity entity, final BlockPos destination, final IBuilding building, final int reachDistance)
+        final AbstractFastSlimColoniesEntity entity, final BlockPos destination, final IBuilding building, final int reachDistance)
     {
         if (building == null)
         {
@@ -111,7 +111,7 @@ public class EntityNavigationUtils
      * @return True when arrived
      */
     public static boolean walkToBuilding(
-        final AbstractFastMinecoloniesEntity entity, final IBuilding building)
+        final AbstractFastSlimColoniesEntity entity, final IBuilding building)
     {
         if (building == null)
         {
@@ -127,7 +127,7 @@ public class EntityNavigationUtils
      * @return True when arrived
      */
     public static boolean walkToPos(
-        final AbstractFastMinecoloniesEntity entity, final BlockPos desiredPosition, final boolean safeDestination)
+        final AbstractFastSlimColoniesEntity entity, final BlockPos desiredPosition, final boolean safeDestination)
     {
         return walkToPos(entity, desiredPosition, BUILDING_REACH_DIST, safeDestination, 1.0);
     }
@@ -138,7 +138,7 @@ public class EntityNavigationUtils
      * @return True when arrived
      */
     public static boolean walkToPos(
-        final AbstractFastMinecoloniesEntity entity, final BlockPos desiredPosition,
+        final AbstractFastSlimColoniesEntity entity, final BlockPos desiredPosition,
         final int distToDesired, final boolean safeDestination)
     {
         return walkToPos(entity, desiredPosition, distToDesired, safeDestination, 1.0);
@@ -150,10 +150,10 @@ public class EntityNavigationUtils
      * @return True when arrived
      */
     public static boolean walkToPos(
-        final AbstractFastMinecoloniesEntity entity, final BlockPos desiredPosition,
+        final AbstractFastSlimColoniesEntity entity, final BlockPos desiredPosition,
         final int distToDesired, final boolean safeDestination, final double speedFactor)
     {
-        final MinecoloniesAdvancedPathNavigate nav = ((MinecoloniesAdvancedPathNavigate) entity.getNavigation());
+        final SlimColoniesAdvancedPathNavigate nav = ((SlimColoniesAdvancedPathNavigate) entity.getNavigation());
 
         boolean isOnRightTask = (nav.getPathResult() != null
             && PathJobMoveToLocation.isJobFor(nav.getPathResult().getJob(), desiredPosition));
@@ -186,9 +186,9 @@ public class EntityNavigationUtils
      *
      * @return True when arrived
      */
-    public static boolean walkAwayFrom(final AbstractFastMinecoloniesEntity entity, final BlockPos avoid, final int distance, final double speed)
+    public static boolean walkAwayFrom(final AbstractFastSlimColoniesEntity entity, final BlockPos avoid, final int distance, final double speed)
     {
-        final MinecoloniesAdvancedPathNavigate nav = ((MinecoloniesAdvancedPathNavigate) entity.getNavigation());
+        final SlimColoniesAdvancedPathNavigate nav = ((SlimColoniesAdvancedPathNavigate) entity.getNavigation());
         boolean isOnRightTask = (nav.getPathResult() != null && PathJobMoveAwayFromLocation.isJobFor(nav.getPathResult().getJob(), distance, avoid));
 
         if (nav.isDone() || !isOnRightTask)
@@ -214,9 +214,9 @@ public class EntityNavigationUtils
      *
      * @return True when arrived
      */
-    public static boolean walkToRandomPos(final AbstractFastMinecoloniesEntity entity, final int range, final double speedFactor)
+    public static boolean walkToRandomPos(final AbstractFastSlimColoniesEntity entity, final int range, final double speedFactor)
     {
-        final MinecoloniesAdvancedPathNavigate nav = ((MinecoloniesAdvancedPathNavigate) entity.getNavigation());
+        final SlimColoniesAdvancedPathNavigate nav = ((SlimColoniesAdvancedPathNavigate) entity.getNavigation());
         boolean isOnRightTask = (nav.getPathResult() != null && nav.getPathResult().getJob() instanceof PathJobRandomPos);
 
         if (nav.isDone() || !isOnRightTask)
@@ -238,9 +238,14 @@ public class EntityNavigationUtils
      *
      * @return True when arrived
      */
-    public static boolean walkToRandomPosWithin(final AbstractFastMinecoloniesEntity entity, final int range, final double speedFactor, final Tuple<BlockPos, BlockPos> corners, final boolean preferInside)
+    public static boolean walkToRandomPosWithin(
+        final AbstractFastSlimColoniesEntity entity,
+        final int range,
+        final double speedFactor,
+        final Tuple<BlockPos, BlockPos> corners,
+        final boolean preferInside)
     {
-        final MinecoloniesAdvancedPathNavigate nav = ((MinecoloniesAdvancedPathNavigate) entity.getNavigation());
+        final SlimColoniesAdvancedPathNavigate nav = ((SlimColoniesAdvancedPathNavigate) entity.getNavigation());
         boolean isOnRightTask = (nav.getPathResult() != null && nav.getPathResult().getJob() instanceof PathJobRandomPos);
 
         if (nav.isDone() || !isOnRightTask)
@@ -262,7 +267,7 @@ public class EntityNavigationUtils
      *
      * @return True when arrived
      */
-    public static boolean walkToRandomPosWithin(final AbstractFastMinecoloniesEntity entity, final int range, final double speedFactor, final Tuple<BlockPos, BlockPos> corners)
+    public static boolean walkToRandomPosWithin(final AbstractFastSlimColoniesEntity entity, final int range, final double speedFactor, final Tuple<BlockPos, BlockPos> corners)
     {
         return walkToRandomPosWithin(entity, range, speedFactor, corners, false);
     }
@@ -272,9 +277,9 @@ public class EntityNavigationUtils
      *
      * @return True when arrived
      */
-    public static boolean walkToRandomPosAround(final AbstractFastMinecoloniesEntity entity, final BlockPos center, final int range, final double speedFactor)
+    public static boolean walkToRandomPosAround(final AbstractFastSlimColoniesEntity entity, final BlockPos center, final int range, final double speedFactor)
     {
-        final MinecoloniesAdvancedPathNavigate nav = ((MinecoloniesAdvancedPathNavigate) entity.getNavigation());
+        final SlimColoniesAdvancedPathNavigate nav = ((SlimColoniesAdvancedPathNavigate) entity.getNavigation());
         boolean isOnRightTask = (nav.getPathResult() != null && PathJobRandomPos.isJobFor(nav.getPathResult().getJob(), center, range));
 
         if (nav.isDone() || !isOnRightTask)

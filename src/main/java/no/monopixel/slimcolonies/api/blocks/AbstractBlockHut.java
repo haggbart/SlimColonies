@@ -27,8 +27,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.registries.IForgeRegistry;
-import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
-import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
+import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
@@ -153,7 +153,7 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
             return requirements;
         }
 
-        if (MinecoloniesAPIProxy.getInstance().getGlobalResearchTree().getResearchForEffect(effectId) != null)
+        if (SlimColoniesAPIProxy.getInstance().getGlobalResearchTree().getResearchForEffect(effectId) != null)
         {
             requirements.add(Component.translatable(TranslationConstants.HUT_NEEDS_RESEARCH_TOOLTIP_1, getName()));
             requirements.add(Component.translatable(TranslationConstants.HUT_NEEDS_RESEARCH_TOOLTIP_2, getName()));
@@ -235,7 +235,7 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
             return true;
         }
 
-        if (!IMinecoloniesAPI.getInstance().getConfig().getServer().blueprintBuildMode.get() && !canPaste(anchor.getBlock(), player, pos))
+        if (!ISlimColoniesAPI.getInstance().getConfig().getServer().blueprintBuildMode.get() && !canPaste(anchor.getBlock(), player, pos))
         {
             return false;
         }
@@ -250,7 +250,7 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Ab
             pack,
             path);
 
-        if (IMinecoloniesAPI.getInstance().getConfig().getServer().blueprintBuildMode.get())
+        if (ISlimColoniesAPI.getInstance().getConfig().getServer().blueprintBuildMode.get())
         {
             return true;
         }

@@ -23,7 +23,7 @@ import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.entity.ModEntities;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.entity.other.MinecoloniesMinecart;
+import no.monopixel.slimcolonies.api.entity.other.SlimColoniesMinecart;
 import no.monopixel.slimcolonies.api.entity.pathfinding.IDynamicHeuristicNavigator;
 import no.monopixel.slimcolonies.api.entity.pathfinding.IMinecoloniesNavigator;
 import no.monopixel.slimcolonies.api.entity.pathfinding.IStuckHandler;
@@ -48,10 +48,10 @@ import static no.monopixel.slimcolonies.core.entity.pathfinding.PathFindingStatu
 import static no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.AbstractPathJob.MAX_NODES;
 
 /**
- * Minecolonies async PathNavigate.
+ * SlimColonies async PathNavigate.
  */
 // TODO: Rework
-public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNavigate implements IDynamicHeuristicNavigator, IMinecoloniesNavigator
+public class SlimColoniesAdvancedPathNavigate extends AbstractAdvancedPathNavigate implements IDynamicHeuristicNavigator, IMinecoloniesNavigator
 {
     private static final double ON_PATH_SPEED_MULTIPLIER = 1.3D;
     public static final  double MIN_Y_DISTANCE           = 0.001;
@@ -74,7 +74,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     /**
      * The stuck handler to use
      */
-    private IStuckHandler<MinecoloniesAdvancedPathNavigate> stuckHandler;
+    private IStuckHandler<SlimColoniesAdvancedPathNavigate> stuckHandler;
 
     /**
      * Whether we did set sneaking
@@ -127,7 +127,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
      * @param entity the ourEntity.
      * @param world  the world it is in.
      */
-    public MinecoloniesAdvancedPathNavigate(@NotNull final Mob entity, final Level world)
+    public SlimColoniesAdvancedPathNavigate(@NotNull final Mob entity, final Level world)
     {
         super(entity, world);
 
@@ -771,13 +771,13 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
                     yOffset = 0.5D;
                 }
 
-                if (mob.vehicle instanceof MinecoloniesMinecart)
+                if (mob.vehicle instanceof SlimColoniesMinecart)
                 {
-                    ((MinecoloniesMinecart) mob.vehicle).setHurtDir(1);
+                    ((SlimColoniesMinecart) mob.vehicle).setHurtDir(1);
                 }
                 else
                 {
-                    MinecoloniesMinecart minecart = ModEntities.MINECART.create(level);
+                    SlimColoniesMinecart minecart = ModEntities.MINECART.create(level);
                     final double x = pEx.x + 0.5D;
                     final double y = pEx.y + 0.625D + yOffset;
                     final double z = pEx.z + 0.5D;
@@ -800,7 +800,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
             spawnedPos = BlockPos.ZERO;
         }
 
-        if (mob.vehicle instanceof MinecoloniesMinecart && pExNext != null)
+        if (mob.vehicle instanceof SlimColoniesMinecart && pExNext != null)
         {
             final BlockPos blockPos = new BlockPos(pEx.x, pEx.y, pEx.z);
             final BlockPos blockPosNext = new BlockPos(pExNext.x, pExNext.y, pExNext.z);
@@ -1210,7 +1210,7 @@ public class MinecoloniesAdvancedPathNavigate extends AbstractAdvancedPathNaviga
     }
 
     @Override
-    public IStuckHandler<MinecoloniesAdvancedPathNavigate> getStuckHandler()
+    public IStuckHandler<SlimColoniesAdvancedPathNavigate> getStuckHandler()
     {
         return stuckHandler;
     }

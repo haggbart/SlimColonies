@@ -40,7 +40,7 @@ import no.monopixel.slimcolonies.api.inventory.api.CombinedItemHandler;
 import no.monopixel.slimcolonies.api.inventory.container.ContainerRack;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
@@ -160,7 +160,7 @@ public class TileEntityRack extends AbstractTileEntityRack implements IMateriall
      */
     public TileEntityRack(final BlockPos pos, final BlockState state)
     {
-        super(MinecoloniesTileEntities.RACK.get(), pos, state);
+        super(SlimColoniesTileEntities.RACK.get(), pos, state);
     }
 
     @Override

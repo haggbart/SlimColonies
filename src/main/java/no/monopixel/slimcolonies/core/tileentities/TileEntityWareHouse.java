@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityRack;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityWareHouse;
-import no.monopixel.slimcolonies.api.tileentities.MinecoloniesTileEntities;
+import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +34,7 @@ public class TileEntityWareHouse extends AbstractTileEntityWareHouse
 
     public TileEntityWareHouse(final BlockPos pos, final BlockState state)
     {
-        super(MinecoloniesTileEntities.WAREHOUSE.get(), pos, state);
+        super(SlimColoniesTileEntities.WAREHOUSE.get(), pos, state);
         inWarehouse = true;
     }
 

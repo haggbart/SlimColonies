@@ -1,10 +1,10 @@
 package no.monopixel.slimcolonies.apiimp;
 
+import net.minecraftforge.registries.NewRegistryEvent;
 import no.monopixel.slimcolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
 import no.monopixel.slimcolonies.core.client.render.modeltype.registry.ModelTypeRegistry;
-import net.minecraftforge.registries.NewRegistryEvent;
 
-public class ClientMinecoloniesAPIImpl extends CommonMinecoloniesAPIImpl
+public class ClientSlimColoniesAPIImpl extends CommonSlimColoniesAPIImpl
 {
     private final IModelTypeRegistry modelTypeRegistry = new ModelTypeRegistry();
 
