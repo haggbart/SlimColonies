@@ -1,5 +1,23 @@
 package no.monopixel.slimcolonies.core.blocks.huts;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
@@ -10,34 +28,16 @@ import no.monopixel.slimcolonies.api.colony.permissions.Action;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.network.messages.server.GetColonyInfoMessage;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.TOWNHALL_BREAKING_DONE_MESSAGE;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.TOWNHALL_BREAKING_DONE_MESSAGE;
 
 /**
  * Hut for the town hall. Sets the working range for the town hall in the constructor
@@ -72,7 +72,7 @@ public class BlockHutTownHall extends AbstractBlockHut<BlockHutTownHall>
     @Override
     public float getDestroyProgress(final BlockState state, @NotNull final Player player, @NotNull final BlockGetter blockReader, @NotNull final BlockPos pos)
     {
-        if (MineColonies.getConfig().getServer().pvp_mode.get() && player.level instanceof ServerLevel)
+        if (SlimColonies.getConfig().getServer().pvp_mode.get() && player.level instanceof ServerLevel)
         {
             final IBuilding building = IColonyManager.getInstance().getBuilding(player.level, pos);
             if (building != null && building.getColony().isCoordInColony(player.level, pos)
@@ -120,12 +120,12 @@ public class BlockHutTownHall extends AbstractBlockHut<BlockHutTownHall>
                 validTownHallBreak = true;
             }
         }
-        else if (!MineColonies.getConfig().getServer().pvp_mode.get())
+        else if (!SlimColonies.getConfig().getServer().pvp_mode.get())
         {
             validTownHallBreak = true;
         }
         final float def = super.getDestroyProgress(state, player, player.level, pos);
-        return MineColonies.getConfig().getServer().pvp_mode.get() ? def / 12 : def;
+        return SlimColonies.getConfig().getServer().pvp_mode.get() ? def / 12 : def;
     }
 
     @Override

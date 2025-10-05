@@ -19,7 +19,7 @@ import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.MathUtils;
 import no.monopixel.slimcolonies.api.util.StatsUtil;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.client.gui.huts.WindowHutLiving;
 import no.monopixel.slimcolonies.core.colony.buildings.views.LivingBuildingView;
 import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.VisitorSpawnedEvent;
@@ -64,7 +64,7 @@ public class TavernBuildingModule extends AbstractBuildingModule implements IDef
      */
     private int noVisitorTime = 10000;
 
-    private final int maxVisitorsConfig = MineColonies.getConfig().getServer().maxVisitorsPerTavern.get();
+    private final int maxVisitorsConfig = SlimColonies.getConfig().getServer().maxVisitorsPerTavern.get();
 
     @Override
     public IStat<Integer> getMaxInhabitants()

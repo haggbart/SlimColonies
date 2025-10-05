@@ -1,7 +1,7 @@
 package no.monopixel.slimcolonies.core.entity.pathfinding;
 
 import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.AbstractPathJob;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +48,8 @@ public final class Pathfinding
     {
         if (executor == null)
         {
-            executor = new ThreadPoolExecutor(1, MineColonies.getConfig().getServer().pathfindingMaxThreadCount.get(), 10, TimeUnit.SECONDS, jobQueue, new MinecoloniesThreadFactory());
+            executor =
+                new ThreadPoolExecutor(1, SlimColonies.getConfig().getServer().pathfindingMaxThreadCount.get(), 10, TimeUnit.SECONDS, jobQueue, new MinecoloniesThreadFactory());
         }
         return executor;
     }

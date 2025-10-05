@@ -26,8 +26,8 @@ import no.monopixel.slimcolonies.api.eventbus.events.colony.buildings.BuildingAd
 import no.monopixel.slimcolonies.api.eventbus.events.colony.buildings.BuildingRemovedModEvent;
 import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTavern;
 import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTownHall;
 import no.monopixel.slimcolonies.core.colony.Colony;
@@ -353,7 +353,7 @@ public class RegisteredStructureManager implements IRegisteredStructureManager
     public boolean keepChunkColonyLoaded(final LevelChunk chunk)
     {
         final Set<BlockPos> capList = ColonyUtils.getAllClaimingBuildings(chunk).get(colony.getID());
-        return capList != null && capList.size() >= MineColonies.getConfig().getServer().colonyLoadStrictness.get();
+        return capList != null && capList.size() >= SlimColonies.getConfig().getServer().colonyLoadStrictness.get();
     }
 
     @Override

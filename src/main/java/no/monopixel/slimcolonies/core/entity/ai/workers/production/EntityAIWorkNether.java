@@ -37,7 +37,7 @@ import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
 import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
 import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.ExpeditionLogModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.expedition.ExpeditionLog;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingNetherWorker;
@@ -414,7 +414,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
 
                                 // Figure out who gets to hit who this round
                                 boolean doDamage = worker.getRandom().nextBoolean();
-                                boolean takeDamage = worker.getRandom().nextBoolean() && MineColonies.getConfig().getServer().netherWorkerTakesDamage.get();
+                                boolean takeDamage = worker.getRandom().nextBoolean() && SlimColonies.getConfig().getServer().netherWorkerTakesDamage.get();
 
                                 // Calculate if the sword still exists, how much damage will be done to the mob
                                 final ItemStack sword = worker.getItemBySlot(EquipmentSlot.MAINHAND);

@@ -1,20 +1,20 @@
 package no.monopixel.slimcolonies.core.event.capabilityproviders;
 
-import no.monopixel.slimcolonies.core.colony.IColonyManagerCapability;
-import net.minecraft.nbt.Tag;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import no.monopixel.slimcolonies.core.colony.IColonyManagerCapability;
 
 import javax.annotation.Nonnull;
 
-import static no.monopixel.slimcolonies.core.MineColonies.COLONY_MANAGER_CAP;
+import static no.monopixel.slimcolonies.core.SlimColonies.COLONY_MANAGER_CAP;
 
 /**
  * Capability provider for the world capability of Minecolonies.
  */
-public class MinecoloniesWorldColonyManagerCapabilityProvider implements ICapabilitySerializable<Tag>
+public class SlimColoniesWorldColonyManagerCapabilityProvider implements ICapabilitySerializable<Tag>
 {
     /**
      * The chunk map capability optional.
@@ -34,7 +34,7 @@ public class MinecoloniesWorldColonyManagerCapabilityProvider implements ICapabi
     /**
      * Constructor of the provider.
      */
-    public MinecoloniesWorldColonyManagerCapabilityProvider(final boolean overworld)
+    public SlimColoniesWorldColonyManagerCapabilityProvider(final boolean overworld)
     {
         this.colonyManager = new IColonyManagerCapability.Impl();
         this.colonyManagerOptional = LazyOptional.of(() -> colonyManager);

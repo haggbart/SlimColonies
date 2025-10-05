@@ -14,7 +14,6 @@ import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -37,7 +36,6 @@ import no.monopixel.slimcolonies.api.items.ModBannerPatterns;
 import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.loot.ModLootConditions;
 import no.monopixel.slimcolonies.api.sounds.ModSoundEvents;
-import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants;
 import no.monopixel.slimcolonies.apiimp.ClientMinecoloniesAPIImpl;
@@ -62,7 +60,7 @@ import java.util.function.Consumer;
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.*;
 
 @Mod(Constants.MOD_ID)
-public class MineColonies
+public class SlimColonies
 {
     public static final Capability<IChunkmanagerCapability> CHUNK_STORAGE_UPDATE_CAP = CapabilityManager.get(new CapabilityToken<>() {});
 
@@ -73,7 +71,7 @@ public class MineColonies
      */
     private static Configuration config;
 
-    public MineColonies()
+    public SlimColonies()
     {
         ModEquipmentTypes.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         TileEntityInitializer.BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -147,8 +145,6 @@ public class MineColonies
 
         SurvivalBlueprintHandlers.registerHandler(new SurvivalHandler());
         SurvivalBlueprintHandlers.registerHandler(new SuppliesHandler());
-
-        logIncompatibilities();
     }
 
     @SubscribeEvent
@@ -221,22 +217,5 @@ public class MineColonies
     public static Configuration getConfig()
     {
         return config;
-    }
-
-    /**
-     * Report known incompatibilities to the log.
-     */
-    private void logIncompatibilities()
-    {
-        if (ModList.get().getModContainerById("minecolonies_tweaks").isPresent())
-        {
-            Log.getLogger().warn("|======================================================================================================================================|");
-            Log.getLogger().warn("|                                                                                                                                      |");
-            Log.getLogger().warn("| Minecolonies has detected an addon mod that alters Minecolonies core code recklessly: 'Tweaks/Compatibility addon for Minecolonies'. |");
-            Log.getLogger().warn("|          Please report any bugs or issues you find directly to the authors of this addon, as the Official Minecolonies Team          |");
-            Log.getLogger().warn("|               will not be able to provide you any support with potential issues that will arise when using this addon.               |");
-            Log.getLogger().warn("|                                                                                                                                      |");
-            Log.getLogger().warn("|======================================================================================================================================|");
-        }
     }
 }

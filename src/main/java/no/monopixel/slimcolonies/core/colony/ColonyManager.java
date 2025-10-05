@@ -1,5 +1,17 @@
 package no.monopixel.slimcolonies.core.colony;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import no.monopixel.slimcolonies.api.IMinecoloniesAPI;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
@@ -21,25 +33,13 @@ import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.ColonyUtils;
 import no.monopixel.slimcolonies.api.util.DamageSourceKeys;
 import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.client.gui.WindowReactivateBuilding;
 import no.monopixel.slimcolonies.core.colony.requestsystem.management.manager.StandardRecipeManager;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewRemoveMessage;
 import no.monopixel.slimcolonies.core.util.BackUpHelper;
 import no.monopixel.slimcolonies.core.util.ChunkDataHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,8 +48,8 @@ import java.util.*;
 import static no.monopixel.slimcolonies.api.util.constant.ColonyManagerConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.BLOCKS_PER_CHUNK;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_COMPATABILITY_MANAGER;
-import static no.monopixel.slimcolonies.core.MineColonies.COLONY_MANAGER_CAP;
-import static no.monopixel.slimcolonies.core.MineColonies.getConfig;
+import static no.monopixel.slimcolonies.core.SlimColonies.COLONY_MANAGER_CAP;
+import static no.monopixel.slimcolonies.core.SlimColonies.getConfig;
 
 /**
  * Singleton class that links colonies to minecraft.
@@ -210,7 +210,7 @@ public final class ColonyManager implements IColonyManager
             cap.deleteColony(id);
             BackUpHelper.markColonyDeleted(colony.getID(), colony.getDimension());
             colony.getImportantMessageEntityPlayers()
-              .forEach(player -> Network.getNetwork().sendToPlayer(new ColonyViewRemoveMessage(colony.getID(), colony.getDimension()), (ServerPlayer) player));
+                .forEach(player -> Network.getNetwork().sendToPlayer(new ColonyViewRemoveMessage(colony.getID(), colony.getDimension()), (ServerPlayer) player));
             Log.getLogger().info("Successfully deleted colony: " + id);
         }
         catch (final RuntimeException e)
@@ -310,7 +310,7 @@ public final class ColonyManager implements IColonyManager
     @Override
     public boolean isFarEnoughFromColonies(@NotNull final Level w, @NotNull final BlockPos pos)
     {
-        final int blockRange = Math.max(MineColonies.getConfig().getServer().minColonyDistance.get(), getConfig().getServer().initialColonySize.get()) << 4;
+        final int blockRange = Math.max(SlimColonies.getConfig().getServer().minColonyDistance.get(), getConfig().getServer().initialColonySize.get()) << 4;
         final IColony closest = getClosestColony(w, pos);
 
         if (closest != null && BlockPosUtil.getDistance(pos, closest.getCenter()) < blockRange)
@@ -319,8 +319,8 @@ public final class ColonyManager implements IColonyManager
         }
 
         return ChunkDataHelper.canClaimChunksInRange(w,
-          pos,
-          getConfig().getServer().initialColonySize.get());
+            pos,
+            getConfig().getServer().initialColonySize.get());
     }
 
     @Override
@@ -683,11 +683,11 @@ public final class ColonyManager implements IColonyManager
 
     @Override
     public void handleColonyViewMessage(
-      final int colonyId,
-      @NotNull final FriendlyByteBuf colonyData,
-      @NotNull final Level world,
-      final boolean isNewSubscription,
-      final ResourceKey<Level> dim)
+        final int colonyId,
+        @NotNull final FriendlyByteBuf colonyData,
+        @NotNull final Level world,
+        final boolean isNewSubscription,
+        final ResourceKey<Level> dim)
     {
         IColonyView view = getColonyView(colonyId, dim);
         if (view == null)

@@ -71,7 +71,7 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.DEFAULT_STYL
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
-import static no.monopixel.slimcolonies.core.MineColonies.getConfig;
+import static no.monopixel.slimcolonies.core.SlimColonies.getConfig;
 
 /**
  * This class describes a colony and contains all the data and methods for manipulating a Colony.

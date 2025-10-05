@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Class to represent the different types of crafting supported by MineColonies
+ * Class to represent the different types of crafting supported by SlimColonies
  */
 public abstract class CraftingType
 {

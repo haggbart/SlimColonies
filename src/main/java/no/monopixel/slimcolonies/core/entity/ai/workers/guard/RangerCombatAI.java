@@ -1,5 +1,16 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.guard;
 
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
 import no.monopixel.slimcolonies.api.entity.citizen.Skill;
 import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
@@ -10,7 +21,7 @@ import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.SoundUtils;
 import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.GuardTaskSetting;
 import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
@@ -27,17 +38,6 @@ import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveAwa
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveToLocation;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
 import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
-import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ArrowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.GuardConstants.*;
@@ -292,7 +292,7 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
             damage *= 1.5;
         }
 
-        return (RANGER_BASE_DMG + damage) * MineColonies.getConfig().getServer().guardDamageMultiplier.get();
+        return (RANGER_BASE_DMG + damage) * SlimColonies.getConfig().getServer().guardDamageMultiplier.get();
     }
 
     @Override

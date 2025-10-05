@@ -1,10 +1,10 @@
 package no.monopixel.slimcolonies.api.client.render.modeltype;
 
-import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.MineColonies;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
@@ -51,7 +51,7 @@ public interface ISimpleModelType extends IModelType
     {
         if (cachedHalloweenStyle == null)
         {
-            if (MineColonies.getConfig().getClient().holidayFeatures.get() &&
+            if (SlimColonies.getConfig().getClient().holidayFeatures.get() &&
                 ((LocalDateTime.now().getDayOfMonth() >= 29 && LocalDateTime.now().getMonth() == Month.OCTOBER)
                     || (LocalDateTime.now().getDayOfMonth() <= 2 && LocalDateTime.now().getMonth() == Month.NOVEMBER)))
             {
@@ -71,7 +71,7 @@ public interface ISimpleModelType extends IModelType
 
         final int moddedTextureId = (entityCitizen.getTextureId() % getNumTextures()) + 1;
         final String textureIdentifier =
-          getName().getPath() + (entityCitizen.isFemale() ? "female" : "male") + moddedTextureId + entityCitizen.getEntityData().get(DATA_TEXTURE_SUFFIX);
+            getName().getPath() + (entityCitizen.isFemale() ? "female" : "male") + moddedTextureId + entityCitizen.getEntityData().get(DATA_TEXTURE_SUFFIX);
         final ResourceLocation modified = new ResourceLocation(Constants.MOD_ID, BASE_FOLDER + style + "/" + textureIdentifier + ".png");
         if (Minecraft.getInstance().getResourceManager().getResource(modified).isPresent())
         {
@@ -91,8 +91,8 @@ public interface ISimpleModelType extends IModelType
 
         final int moddedTextureId = (entityCitizen.getTextureId() % getNumTextures()) + 1;
         final String textureIdentifier =
-          getTextureBase() + (entityCitizen.isFemale() ? "female" : "male") + moddedTextureId + entityCitizen.getEntityData()
-            .get(DATA_TEXTURE_SUFFIX);
+            getTextureBase() + (entityCitizen.isFemale() ? "female" : "male") + moddedTextureId + entityCitizen.getEntityData()
+                .get(DATA_TEXTURE_SUFFIX);
         return new ResourceLocation(Constants.MOD_ID, "textures/entity_icon/citizen/" + style + "/" + textureIdentifier + ".png");
     }
 }

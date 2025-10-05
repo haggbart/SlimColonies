@@ -2,6 +2,15 @@ package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
 import com.google.common.collect.ImmutableList;
 import com.ldtteam.blockui.views.BOWindow;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.MapItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import no.monopixel.slimcolonies.api.MinecoloniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
@@ -14,7 +23,6 @@ import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventDes
 import no.monopixel.slimcolonies.api.colony.permissions.PermissionEvent;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.MineColonies;
 import no.monopixel.slimcolonies.core.client.gui.townhall.WindowMainPage;
 import no.monopixel.slimcolonies.core.colony.Colony;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
@@ -22,15 +30,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BoolSetting;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.SettingKey;
 import no.monopixel.slimcolonies.core.colony.buildings.views.AbstractBuildingView;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MapItem;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -125,7 +124,7 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
     {
         if (module.getProducer() == BuildingModules.TOWNHALL_SETTINGS)
         {
-            super.registerModule(((Colony)colony).getSettings());
+            super.registerModule(((Colony) colony).getSettings());
         }
         else
         {
@@ -210,7 +209,6 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
                 return 0;
         }
     }
-
 
     /**
      * ClientSide representation of the building.
@@ -303,6 +301,7 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
 
         /**
          * Getter for the mapdata.
+         *
          * @return the original list.
          */
         public List<MapItemSavedData> getMapDataList()

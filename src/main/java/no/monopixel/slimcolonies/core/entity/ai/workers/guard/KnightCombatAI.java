@@ -1,29 +1,5 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.guard;
 
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.TieredItem;
-import no.monopixel.slimcolonies.api.entity.ai.combat.CombatAIStates;
-import no.monopixel.slimcolonies.api.entity.ai.combat.threat.IThreatTableEntity;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
-import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
-import no.monopixel.slimcolonies.api.entity.citizen.Skill;
-import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
-import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.util.DamageSourceKeys;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.SoundUtils;
-import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
-import no.monopixel.slimcolonies.core.entity.ai.combat.AttackMoveAI;
-import no.monopixel.slimcolonies.core.entity.ai.combat.CombatUtils;
-import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
-import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
-import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
-import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -41,8 +17,31 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import no.monopixel.slimcolonies.api.entity.ai.combat.CombatAIStates;
+import no.monopixel.slimcolonies.api.entity.ai.combat.threat.IThreatTableEntity;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
+import no.monopixel.slimcolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
+import no.monopixel.slimcolonies.api.entity.citizen.Skill;
+import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.util.DamageSourceKeys;
+import no.monopixel.slimcolonies.api.util.InventoryUtils;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.SoundUtils;
+import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.core.SlimColonies;
+import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
+import no.monopixel.slimcolonies.core.entity.ai.combat.AttackMoveAI;
+import no.monopixel.slimcolonies.core.entity.ai.combat.CombatUtils;
+import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
+import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
+import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
+import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
 
 import java.util.List;
 
@@ -159,7 +158,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
 
         final double damageToBeDealt = getAttackDamage();
         DamageSource source = target.level.damageSources().source(DamageSourceKeys.GUARD, user);
-        if (MineColonies.getConfig().getServer().pvp_mode.get() && target instanceof Player)
+        if (SlimColonies.getConfig().getServer().pvp_mode.get() && target instanceof Player)
         {
             source = target.level.damageSources().source(DamageSourceKeys.GUARD_PVP, user);
         }
@@ -287,7 +286,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
             ((ServerLevel) user.level).getChunkSource().broadcastAndSend(user, new ClientboundAnimatePacket(target, 4));
         }
 
-        return addDmg * MineColonies.getConfig().getServer().guardDamageMultiplier.get();
+        return addDmg * SlimColonies.getConfig().getServer().guardDamageMultiplier.get();
     }
 
     @Override

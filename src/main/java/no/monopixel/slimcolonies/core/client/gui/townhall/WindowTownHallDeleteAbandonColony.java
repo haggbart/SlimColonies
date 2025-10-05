@@ -3,18 +3,18 @@ package no.monopixel.slimcolonies.core.client.gui.townhall;
 import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.controls.Image;
 import com.ldtteam.blockui.controls.Text;
-import no.monopixel.slimcolonies.core.MineColonies;
-import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.client.gui.AbstractWindowSkeleton;
-import no.monopixel.slimcolonies.core.network.messages.server.GetColonyInfoMessage;
-import no.monopixel.slimcolonies.core.network.messages.server.PickupBlockMessage;
-import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyAbandonOwnMessage;
-import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyDeleteOwnMessage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import no.monopixel.slimcolonies.core.Network;
+import no.monopixel.slimcolonies.core.SlimColonies;
+import no.monopixel.slimcolonies.core.client.gui.AbstractWindowSkeleton;
+import no.monopixel.slimcolonies.core.network.messages.server.GetColonyInfoMessage;
+import no.monopixel.slimcolonies.core.network.messages.server.PickupBlockMessage;
+import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyAbandonOwnMessage;
+import no.monopixel.slimcolonies.core.network.messages.server.colony.ColonyDeleteOwnMessage;
 
 import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
@@ -52,7 +52,7 @@ public class WindowTownHallDeleteAbandonColony extends AbstractWindowSkeleton
         registerButton(BUTTON_CONFIRM_DELETE, this::confirmDeleteColony);
         registerButton(BUTTON_CONFIRM_ABANDON, this::confirmAbandonColony);
 
-        if (MineColonies.getConfig().getServer().allowInfiniteColonies.get())
+        if (SlimColonies.getConfig().getServer().allowInfiniteColonies.get())
         {
             this.findPaneOfTypeByID("abandon", ButtonImage.class).show();
             this.findPaneOfTypeByID("warningtext", Text.class)

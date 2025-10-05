@@ -44,7 +44,7 @@ import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.EntityUtils;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.blocks.BlockDecorationController;
 import no.monopixel.slimcolonies.core.blocks.huts.BlockHutTownHall;
 import no.monopixel.slimcolonies.core.colony.Colony;
@@ -102,7 +102,7 @@ public class ColonyPermissionEventHandler
     public void on(final BlockEvent.EntityPlaceEvent event)
     {
         final Action action = event.getPlacedBlock().getBlock() instanceof AbstractBlockHut ? Action.PLACE_HUTS : Action.PLACE_BLOCKS;
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get() && checkBlockEventDenied(event.getLevel(),
+        if (SlimColonies.getConfig().getServer().enableColonyProtection.get() && checkBlockEventDenied(event.getLevel(),
             event.getPos(),
             event.getEntity(),
             event.getPlacedBlock(),
@@ -227,7 +227,7 @@ public class ColonyPermissionEventHandler
                 return;
             }
 
-            if (!MineColonies.getConfig().getServer().enableColonyProtection.get())
+            if (!SlimColonies.getConfig().getServer().enableColonyProtection.get())
             {
                 building.destroy();
                 return;
@@ -249,7 +249,7 @@ public class ColonyPermissionEventHandler
 
             building.destroy();
 
-            if (MineColonies.getConfig().getServer().pvp_mode.get() && event.getState().getBlock() == ModBlocks.blockHutTownHall)
+            if (SlimColonies.getConfig().getServer().pvp_mode.get() && event.getState().getBlock() == ModBlocks.blockHutTownHall)
             {
                 IColonyManager.getInstance().deleteColonyByWorld(building.getColony().getID(), false, event.getPlayer().level);
             }
@@ -272,7 +272,7 @@ public class ColonyPermissionEventHandler
     @SubscribeEvent
     public void on(final ExplosionEvent.Detonate event)
     {
-        if (MineColonies.getConfig().getServer().turnOffExplosionsInColonies.get() == Explosions.DAMAGE_EVERYTHING)
+        if (SlimColonies.getConfig().getServer().turnOffExplosionsInColonies.get() == Explosions.DAMAGE_EVERYTHING)
         {
             return;
         }
@@ -281,7 +281,7 @@ public class ColonyPermissionEventHandler
         final Predicate<BlockPos> getBlocksInColony = pos -> colony.isCoordInColony(eventWorld, pos);
         Predicate<Entity> getEntitiesInColony = entity -> (!(entity instanceof Enemy) || (entity instanceof Llama))
             && colony.isCoordInColony(entity.getCommandSenderWorld(), entity.blockPosition());
-        switch (MineColonies.getConfig().getServer().turnOffExplosionsInColonies.get())
+        switch (SlimColonies.getConfig().getServer().turnOffExplosionsInColonies.get())
         {
             case DAMAGE_NOTHING:
                 // if any entity is in colony -> remove from list
@@ -316,8 +316,8 @@ public class ColonyPermissionEventHandler
     @SubscribeEvent
     public void on(final ExplosionEvent.Start event)
     {
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get()
-            && MineColonies.getConfig().getServer().turnOffExplosionsInColonies.get() == Explosions.DAMAGE_NOTHING
+        if (SlimColonies.getConfig().getServer().enableColonyProtection.get()
+            && SlimColonies.getConfig().getServer().turnOffExplosionsInColonies.get() == Explosions.DAMAGE_NOTHING
             && colony.isCoordInColony(event.getLevel(), BlockPos.containing(event.getExplosion().getPosition())))
         {
             cancelEvent(event, null, colony, Action.EXPLODE, BlockPos.containing(event.getExplosion().getPosition()));
@@ -361,7 +361,7 @@ public class ColonyPermissionEventHandler
                 return;
             }
 
-            if (MineColonies.getConfig().getServer().enableColonyProtection.get())
+            if (SlimColonies.getConfig().getServer().enableColonyProtection.get())
             {
                 if (!perms.hasPermission(event.getEntity(), Action.RIGHTCLICK_BLOCK) && !(block instanceof AirBlock))
                 {
@@ -462,11 +462,11 @@ public class ColonyPermissionEventHandler
         {
             positionToCheck = player.blockPosition();
         }
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get()
+        if (SlimColonies.getConfig().getServer().enableColonyProtection.get()
             && colony.isCoordInColony(player.getCommandSenderWorld(), positionToCheck)
             && !colony.getPermissions().hasPermission(player, action))
         {
-            if (MineColonies.getConfig().getServer().pvp_mode.get() && !world.isClientSide && colony.isValidAttackingPlayer(playerIn))
+            if (SlimColonies.getConfig().getServer().pvp_mode.get() && !world.isClientSide && colony.isValidAttackingPlayer(playerIn))
             {
                 return false;
             }
@@ -597,7 +597,7 @@ public class ColonyPermissionEventHandler
 
         @NotNull final Player player = EntityUtils.getPlayerOfFakePlayer(event.getEntity(), event.getEntity().getCommandSenderWorld());
 
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get()
+        if (SlimColonies.getConfig().getServer().enableColonyProtection.get()
             && colony.isCoordInColony(player.getCommandSenderWorld(), player.blockPosition()))
         {
             final Permissions perms = colony.getPermissions();

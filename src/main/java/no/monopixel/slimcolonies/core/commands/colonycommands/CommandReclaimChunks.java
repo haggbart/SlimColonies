@@ -1,5 +1,11 @@
 package no.monopixel.slimcolonies.core.commands.colonycommands;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import no.monopixel.slimcolonies.api.colony.IChunkmanagerCapability;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
@@ -9,16 +15,10 @@ import no.monopixel.slimcolonies.api.util.constant.translation.CommandTranslatio
 import no.monopixel.slimcolonies.core.commands.commandTypes.IMCCommand;
 import no.monopixel.slimcolonies.core.commands.commandTypes.IMCOPCommand;
 import no.monopixel.slimcolonies.core.util.BackUpHelper;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.context.CommandContext;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 
 import static no.monopixel.slimcolonies.api.util.constant.ColonyManagerConstants.UNABLE_TO_FIND_WORLD_CAP_TEXT;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.CHUNKS_TO_CLAIM_THRESHOLD;
-import static no.monopixel.slimcolonies.core.MineColonies.CHUNK_STORAGE_UPDATE_CAP;
+import static no.monopixel.slimcolonies.core.SlimColonies.CHUNK_STORAGE_UPDATE_CAP;
 import static no.monopixel.slimcolonies.core.commands.CommandArgumentNames.COLONYID_ARG;
 
 public class CommandReclaimChunks implements IMCOPCommand
@@ -72,6 +72,6 @@ public class CommandReclaimChunks implements IMCOPCommand
     public LiteralArgumentBuilder<CommandSourceStack> build()
     {
         return IMCCommand.newLiteral(getName())
-          .then(IMCCommand.newArgument(COLONYID_ARG, IntegerArgumentType.integer(1)).executes(this::checkPreConditionAndExecute));
+            .then(IMCCommand.newArgument(COLONYID_ARG, IntegerArgumentType.integer(1)).executes(this::checkPreConditionAndExecute));
     }
 }

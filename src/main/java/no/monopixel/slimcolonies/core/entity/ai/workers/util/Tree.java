@@ -34,7 +34,7 @@ import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.BlockStateUtils;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.core.MineColonies;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,7 +105,6 @@ public class Tree
      * The wood variant of the Tree. Can change depending on Mod
      */
     private Property<?> variant;
-
 
     /**
      * If the tree is a Nether Tree
@@ -359,7 +358,7 @@ public class Tree
         BlockPos bottom = bottomLog == null ? log : bottomLog;
         BlockPos top = topLog == null ? log : topLog;
 
-        if (woodenBlocks.size() >= MineColonies.getConfig().getServer().maxTreeSize.get())
+        if (woodenBlocks.size() >= SlimColonies.getConfig().getServer().maxTreeSize.get())
         {
             return new Tuple<>(bottom, top);
         }
@@ -635,7 +634,7 @@ public class Tree
      */
     private void addAndSearch(@NotNull final Level world, @NotNull final BlockPos log, @Nullable final IColony colony)
     {
-        if (woodBlocks.size() >= MineColonies.getConfig().getServer().maxTreeSize.get())
+        if (woodBlocks.size() >= SlimColonies.getConfig().getServer().maxTreeSize.get())
         {
             return;
         }
