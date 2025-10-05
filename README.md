@@ -1,74 +1,60 @@
-# SlimColonies
+# SlimColonies [![Join Discord](https://img.shields.io/discord/1420924294841499800?label=Discord&logo=discord)](https://discord.gg/bfKpMTTuFt)
 
 **Self-sufficient colonies that actually help you**
 
-SlimColonies is a fork of [MineColonies](https://github.com/ldtteam/minecolonies) where colonists take care of themselves. Build your colony, assign workers, and get back to
-playing Minecraft while they handle the rest. No
-babysitting, no events, no demands - just helpful NPCs that enhance your world.
+SlimColonies is a fork of [MineColonies](https://www.curseforge.com/minecraft/mc-mods/minecolonies) where colonists take care of themselves. Build your colony, assign workers, and get back to playing Minecraft while they handle the rest. No babysitting, no events.
 
 ## Philosophy
 
-For players who want the automation and assistance of colonies without the city management gameplay. While MineColonies offers deep colony simulation for those who enjoy that
-complexity, here your colonists are self-sufficient helpers who work alongside you without requiring active management.
+SlimColonies is for players who want colony automation without city management gameplay. MineColonies offers deep colony simulation for those who enjoy that. SlimColonies takes a different path: your colonists are helpers who work without needing constant attention.
 
-## What Makes Colonies "Demanding"?
+The simplified approach feels more vanilla and fits naturally with other mods and modpacks. It doesn't try to be its own game within a game. Just helpful automation that lets you focus on what you want to do while your colonists build beautiful cities and structures.
+
+## ❓ What Makes Colonies "Demanding"?
 
 Many features in the original MineColonies require constant player intervention or force unnecessary complexity:
 
-- **Research-Gated Basic Functionality**: Simple quality-of-life features like efficient ordering (25% threshold) were locked behind research, causing couriers to spam small orders
-  and waste time instead of working properly by default.
+**📚 Research-Gated Basic Functionality**: Simple quality-of-life features like efficient ordering (25% threshold) were locked behind research, causing couriers to spam small orders and waste time instead of working properly by default.
 
-- **Arbitrary Management Systems**: Happiness, diseases, and raids created busywork that pulled players away from actually building and exploring to babysit their colonists.
+**😩 Arbitrary Management Systems**: Happiness, diseases, and raids created busywork that pulled players away from actually building and exploring to babysit their colonists.
 
-- **Overcomplicated Progression**: Basic worker efficiency was tied to research requirements and item costs, making colonies feel like a chore to maintain rather than helpful
-  automation.
+**⚙️ Overcomplicated Progression**: Basic worker efficiency was tied to research requirements and item costs, making colonies feel like a chore to maintain rather than helpful automation.
 
 SlimColonies removes these pain points and makes sensible behaviors the default, so your colonists work intelligently from day one without requiring a PhD in colony management.
 
+## 🏗️ Development Status
+
+**Active development** with tens of thousands of lines of code already removed and ongoing tweaks.
+
 ## Simplification Progress
 
-### ✅ Completed
+### Major System Removals
 
-#### Major System Removals
+*   Removed happiness system
+*   Removed raid system
+*   Removed disease system
+*   Removed mercenary system
+*   Removed custom farmland and crops
+*   Removed custom foods and recipes
+*   Removed druid guard type
+*   Simplify guard mechanics
 
-- [x] Removed happiness system
-- [x] Removed raid system
-- [x] Removed disease system
-- [x] Removed mercenary system
-- [x] Removed custom farmland and crops
-- [x] Removed custom foods and recipes
-- [x] Removed druid guard type
-- [x] Simplify guard mechanics
-- [x] Removed custom worldgen system
+### Research & Progression Simplification
 
-#### Research & Progression Simplification
+*   Removed unnecessary quests that should be default (moved to default behavior)
+*   Removed trample prevention research
+*   Removed research item cost requirements
+*   Removed crafting recipe capacity research requirements (max capacity by default)
+*   Removed minimum order quantity research (25% threshold ordering now default)
 
-- [x] Removed unnecessary quests that should be default (moved to default behavior)
-- [x] Removed trample prevention research
-- [x] Removed research item cost requirements
-- [x] Removed crafting recipe capacity research requirements (max capacity by default)
-- [x] Removed minimum order quantity research (25% threshold ordering now default)
+### Minor Changes & Quality of Life
 
-#### Minor Changes & Quality of Life
-
-- [x] Simplified food mechanic
-- [x] Removed working in rain mechanic
-- [x] Removed various weapons
-- [x] Removed courier building level carrying capacity restrictions
-- [x] Remove Scimitar
-- [x] Remove Plate Armor
-- [x] Simplified visitor recruitment (no cost)
-- [x] Removed scrolls
-
-#### Misc & Other
-
-- [x] Many other small changes
-
-### 📋 Planned Changes
-
-- [ ] Add starvation mechanic - citizens should lose health and eventually die when saturation reaches 0
-- [ ] Improve compatibility with Farmer's Delight
-- More...
+*   Simplified food mechanic
+*   Removed working in rain mechanic
+*   Removed various weapons
+*   Removed courier building level carrying capacity restrictions
+*   Simplified visitor recruitment (no cost)
+*   Removed scrolls
 
 ## For Users
 
