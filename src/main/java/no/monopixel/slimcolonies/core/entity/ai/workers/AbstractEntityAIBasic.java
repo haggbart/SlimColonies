@@ -72,7 +72,7 @@ import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWork
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.*;
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.TAG_WORK;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.WORKER_AI_EXCEPTION;
 import static no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIInteract.RENDER_META_WORKING;
 import static no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils.WOKR_IN_BUILDING_DIST;
@@ -1159,7 +1159,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
             if (citizenData != null)
             {
                 citizenData
-                    .triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST),
+                    .triggerInteraction(new StandardInteraction(Component.translatable(COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST),
                         ChatPriority.IMPORTANT));
             }
 

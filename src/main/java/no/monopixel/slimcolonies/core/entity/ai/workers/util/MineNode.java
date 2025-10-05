@@ -144,7 +144,7 @@ public class MineNode
         @NotNull final MineNode node = new MineNode(x, z, parent);
         if (style == NodeType.UNDEFINED)
         {
-            Log.getLogger().error("Minecolonies Node " + x + "," + z + " has an undefined style, please tell the mod author about this");
+            Log.getLogger().error("SlimColonies Node " + x + "," + z + " has an undefined style, please tell the mod author about this");
         }
         node.setStyle(style);
         node.setStatus(status);

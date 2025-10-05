@@ -11,8 +11,8 @@ import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.colony.requestsystem.requestable.deliveryman.AbstractDeliverymanRequestable.getPlayerActionPriority;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP_FAILED;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP_FAILED;
 
 /**
  * Message class which manages the messages to request an immediate pickup
@@ -54,7 +54,7 @@ public class ForcePickupMessage extends AbstractBuildingServerMessage<IBuilding>
     {
         if (building.createPickupRequest(getPlayerActionPriority(true)))
         {
-            MessageUtils.format(COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP).sendTo(ctxIn.getSender());
+            MessageUtils.format(COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP).sendTo(ctxIn.getSender());
             building.markDirty();
         }
         else
@@ -65,7 +65,7 @@ public class ForcePickupMessage extends AbstractBuildingServerMessage<IBuilding>
                 return;
             }
 
-            MessageUtils.format(COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP_FAILED).sendTo(player);
+            MessageUtils.format(COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP_FAILED).sendTo(player);
         }
     }
 }

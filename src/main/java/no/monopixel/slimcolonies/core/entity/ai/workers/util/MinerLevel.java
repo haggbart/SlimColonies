@@ -274,7 +274,7 @@ public class MinerLevel
                 nodeCenterList.add(getNextNodePositionFromNodeWithRotation(tempNode, rotation, ROTATE_THREE_TIMES));
                 break;
             case UNDEFINED:
-                Log.getLogger().error("Minecolonies node: " + node.getX() + ":" + node.getZ() + " style undefined creating children, Please tell the mod authors about this");
+                Log.getLogger().error("SlimColonies node: " + node.getX() + ":" + node.getZ() + " style undefined creating children, Please tell the mod authors about this");
                 return;
             default:
                 return;
@@ -300,7 +300,7 @@ public class MinerLevel
         MineNode I = nodes.get(new Vec2i(tempNode.getX(), tempNode.getZ()));
         if (!tempNode.equals(I))
         {
-            Log.getLogger().warn("Minecolonies node: " + node.getX() + ":" + node.getZ() + " not equal to storage during close, Please tell the mod authors about this");
+            Log.getLogger().warn("SlimColonies node: " + node.getX() + ":" + node.getZ() + " not equal to storage during close, Please tell the mod authors about this");
         }
         tempNode.setStatus(MineNode.NodeStatus.COMPLETED);
         openNodes.removeIf(tempNode::equals);

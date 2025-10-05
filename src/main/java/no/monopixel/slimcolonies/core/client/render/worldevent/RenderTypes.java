@@ -55,7 +55,7 @@ public class RenderTypes
         }
 
         private static final Function<ResourceLocation, RenderType> WORLD_ENTITY_ICON = Util.memoize((p_173202_) -> {
-            return create("minecolonies_entity_icon",
+            return create("slimcolonies_entity_icon",
                 DefaultVertexFormat.POSITION_TEX,
                 VertexFormat.Mode.QUADS,
                 1024,

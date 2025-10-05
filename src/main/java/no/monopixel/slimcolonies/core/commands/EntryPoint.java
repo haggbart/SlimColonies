@@ -76,7 +76,7 @@ public class EntryPoint
             .addNode(new CommandTrackType().build());
 
         /*
-         * Root minecolonies command tree, all subtrees are added here.
+         * Root slimcolonies command tree, all subtrees are added here.
          */
         final CommandTree minecoloniesRoot = new CommandTree(Constants.MOD_ID)
             .addNode(killCommands)
@@ -94,9 +94,9 @@ public class EntryPoint
             .addNode(new CommandPruneWorld().build());
 
         /*
-         * Root minecolonies alias command tree, all subtrees are added here.
+         * Root slimcolonies alias command tree, all subtrees are added here.
          */
-        final CommandTree minecoloniesRootAlias = new CommandTree("mc")
+        final CommandTree minecoloniesRootAlias = new CommandTree("sc")
             .addNode(new CommandEntityTrack().build())
             .addNode(killCommands)
             .addNode(colonyCommands)

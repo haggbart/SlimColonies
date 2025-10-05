@@ -260,7 +260,7 @@ public class ClientEventHandler
 
                     for (IGlobalResearch research : researches)
                     {
-                        toolTip.add(Component.translatable(COM_MINECOLONIES_COREMOD_ITEM_REQUIRES_RESEARCH_TOOLTIP_GUI,
+                        toolTip.add(Component.translatable(COREMOD_ITEM_REQUIRES_RESEARCH_TOOLTIP_GUI,
                             MutableComponent.create(research.getName())).setStyle(Style.EMPTY.withColor(researchFormat)));
                     }
                 }
@@ -279,7 +279,7 @@ public class ClientEventHandler
                 // appear to be an easy way to get the schematic name from a BuildingEntry ... or
                 // unless we can change how colony.hasBuilding uses its parameter...
 
-                final MutableComponent reqLevelText = Component.translatable(COM_MINECOLONIES_COREMOD_ITEM_BUILDLEVEL_TOOLTIP_GUI, craftingBuildingName, minimumLevel);
+                final MutableComponent reqLevelText = Component.translatable(COREMOD_ITEM_BUILDLEVEL_TOOLTIP_GUI, craftingBuildingName, minimumLevel);
                 if (colony != null && colony.hasBuilding(schematicName, minimumLevel, true))
                 {
                     reqLevelText.setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
@@ -292,7 +292,7 @@ public class ClientEventHandler
             }
             else
             {
-                final MutableComponent reqBuildingTxt = Component.translatable(COM_MINECOLONIES_COREMOD_ITEM_AVAILABLE_TOOLTIP_GUI, craftingBuildingName)
+                final MutableComponent reqBuildingTxt = Component.translatable(COREMOD_ITEM_AVAILABLE_TOOLTIP_GUI, craftingBuildingName)
                     .setStyle(Style.EMPTY.withItalic(true).withColor(ChatFormatting.GRAY));
                 toolTip.add(reqBuildingTxt);
             }

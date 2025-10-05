@@ -72,7 +72,7 @@ public final class SortingUtils
         catch (Exception e)
         {
             inv.deserializeNBT(backup);
-            Log.getLogger().warn("Minecolonies warehouse sorting had an error, report it to the mod author.", e);
+            Log.getLogger().warn("SlimColonies warehouse sorting had an error, report it to the mod author.", e);
         }
     }
 

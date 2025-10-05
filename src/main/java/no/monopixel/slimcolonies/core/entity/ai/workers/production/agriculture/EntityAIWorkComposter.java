@@ -37,7 +37,7 @@ import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWork
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.PODZOL_CHANCE;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.DOUBLE;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_COMPOSTER_EMPTYLIST;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_COMPOSTER_EMPTYLIST;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.ITEMS_COMPOSTED;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.PRODUCT_COLLECTED;
 
@@ -397,7 +397,7 @@ public class EntityAIWorkComposter extends AbstractEntityAIInteract<JobComposter
         if (ticksToComplain <= 0)
         {
             ticksToComplain = TICKS_UNTIL_COMPLAIN;
-            MessageUtils.format(COM_MINECOLONIES_COREMOD_ENTITY_COMPOSTER_EMPTYLIST)
+            MessageUtils.format(COREMOD_ENTITY_COMPOSTER_EMPTYLIST)
                 .sendTo(building.getColony()).forAllPlayers();
         }
         else

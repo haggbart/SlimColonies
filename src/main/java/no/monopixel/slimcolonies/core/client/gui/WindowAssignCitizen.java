@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 
 /**
@@ -299,7 +299,7 @@ public class WindowAssignCitizen extends AbstractWindowSkeleton implements Butto
                 }
                 else
                 {
-                    newLivingLabel.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED).append("\n").append(homeString));
+                    newLivingLabel.setText(Component.translatable(COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED).append("\n").append(homeString));
                 }
                 newLivingLabel.setTextWrap(true);
 
@@ -381,7 +381,7 @@ public class WindowAssignCitizen extends AbstractWindowSkeleton implements Butto
                 }
                 else
                 {
-                    newLivingLabel.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED));
+                    newLivingLabel.setText(Component.translatable(COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED));
                 }
 
                 if (((colony.isManualHousing() && building.getHiringMode() == HiringMode.DEFAULT) || (building.getHiringMode() == HiringMode.MANUAL)))

@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_OFFHAND_HELD_ITEM_SLOT;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED;
 
 /**
  * The CitizenDataView is the client-side representation of a CitizenData. Views contain the CitizenData's data that is relevant to a Client, in a more client-friendly form.
@@ -231,7 +231,7 @@ public class CitizenDataView implements ICitizenDataView
     @Override
     public MutableComponent getJobComponent()
     {
-        return job.isEmpty() ? Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED) : Component.translatable(job);
+        return job.isEmpty() ? Component.translatable(COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED) : Component.translatable(job);
     }
 
     @Override

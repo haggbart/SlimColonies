@@ -24,7 +24,7 @@ import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.*;
 
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.BUILDING_FLOWER_LIST;
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.FUEL_LIST;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_HOSTILES;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.HOSTILES;
 import static no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards.HOSTILE_LIST;
 import static no.monopixel.slimcolonies.core.entity.ai.workers.crafting.EntityAIWorkSmelter.ORE_LIST;
 import static no.monopixel.slimcolonies.core.entity.ai.workers.production.EntityAIWorkLumberjack.SAPLINGS_LIST;
@@ -51,7 +51,7 @@ public class BuildingModules
         () -> SettingsModuleView::new);
     public static final BuildingEntry.ModuleProducer<EntityListModule, EntityListModuleView> GUARD_ENTITY_LIST       = new BuildingEntry.ModuleProducer<>("guard_entity_list",
         () -> new EntityListModule(HOSTILE_LIST),
-        () -> () -> new EntityListModuleView(HOSTILE_LIST, COM_MINECOLONIES_HOSTILES, true));
+        () -> () -> new EntityListModuleView(HOSTILE_LIST, HOSTILES, true));
 
     public static final BuildingEntry.ModuleProducer<BuildingStatisticsModule, BuildingStatisticsModuleView> STATS_MODULE = new BuildingEntry.ModuleProducer<>(
         "stats_module", BuildingStatisticsModule::new,

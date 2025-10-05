@@ -404,19 +404,19 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
                     if (targetBuilding.hasModule(WorkerBuildingModule.class))
                     {
                         worker.getCitizenData()
-                            .triggerInteraction(new PosBasedInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_NAMEDCHESTFULL,
+                            .triggerInteraction(new PosBasedInteraction(Component.translatable(COREMOD_JOB_DELIVERYMAN_NAMEDCHESTFULL,
                                 targetBuilding.getFirstModuleOccurance(WorkerBuildingModule.class).getFirstCitizen().getName()),
                                 ChatPriority.IMPORTANT,
-                                Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_CHESTFULL),
+                                Component.translatable(COREMOD_JOB_DELIVERYMAN_CHESTFULL),
                                 targetBuilding.getID()));
                     }
                     else
                     {
                         worker.getCitizenData()
-                            .triggerInteraction(new PosBasedInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_CHESTFULL,
+                            .triggerInteraction(new PosBasedInteraction(Component.translatable(COREMOD_JOB_DELIVERYMAN_CHESTFULL,
                                 Component.literal(" :" + targetBuilding.getSchematicName())),
                                 ChatPriority.IMPORTANT,
-                                Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_CHESTFULL),
+                                Component.translatable(COREMOD_JOB_DELIVERYMAN_CHESTFULL),
                                 targetBuildingLocation.getInDimensionLocation()));
                     }
                 }
@@ -639,7 +639,7 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
         if (worker.getCitizenData() != null)
         {
             worker.getCitizenData()
-                .triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_NOWAREHOUSE),
+                .triggerInteraction(new StandardInteraction(Component.translatable(COREMOD_JOB_DELIVERYMAN_NOWAREHOUSE),
                     ChatPriority.BLOCKING));
         }
         return false;

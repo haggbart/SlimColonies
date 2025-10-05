@@ -40,7 +40,7 @@ import static com.ldtteam.structurize.placement.AbstractBlueprintIterator.NULL_P
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.IDLE;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.*;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_BUILD_START;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_BUILDER_BUILD_START;
 
 /**
  * AI class for the builder. Manages building and repairing buildings.
@@ -136,7 +136,7 @@ public abstract class AbstractEntityAIStructureWithWorkOrder<J extends AbstractJ
                     return IDLE;
                 }
 
-                MessageUtils.forCitizen(worker, COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_BUILD_START, job.getWorkOrder().getDisplayName())
+                MessageUtils.forCitizen(worker, COREMOD_ENTITY_BUILDER_BUILD_START, job.getWorkOrder().getDisplayName())
                     .sendTo(worker.getCitizenColonyHandler().getColonyOrRegister().getMessagePlayerEntities());
 
                 //Don't go through the CLEAR stage for repairs and upgrades
@@ -147,7 +147,7 @@ public abstract class AbstractEntityAIStructureWithWorkOrder<J extends AbstractJ
             }
             else if (!(wo instanceof WorkOrderMiner))
             {
-                MessageUtils.forCitizen(worker, COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_BUILD_START, job.getWorkOrder().getDisplayName())
+                MessageUtils.forCitizen(worker, COREMOD_ENTITY_BUILDER_BUILD_START, job.getWorkOrder().getDisplayName())
                     .sendTo(worker.getCitizenColonyHandler().getColonyOrRegister().getMessagePlayerEntities());
                 ;
             }

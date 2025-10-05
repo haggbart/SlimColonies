@@ -1113,12 +1113,12 @@ public final class WindowConstants
     /**
      * String describing on for the gui.
      */
-    public static final String ON = COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_RETRIEVE_ON;
+    public static final String ON = COREMOD_GUI_WORKERHUTS_RETRIEVE_ON;
 
     /**
      * String describing off for the gui.
      */
-    public static final String OFF = COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_RETRIEVE_OFF;
+    public static final String OFF = COREMOD_GUI_WORKERHUTS_RETRIEVE_OFF;
 
     /**
      * String describing switch for the gui.

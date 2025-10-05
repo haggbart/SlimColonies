@@ -15,7 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_LEVEL_0;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_GUI_WORKERHUTS_LEVEL_0;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.LABEL_HOUSE_ASSIGNED_CITIZENS;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.BUTTON_RECALL;
 
@@ -120,7 +120,7 @@ public class WindowHutLiving extends AbstractWindowModuleBuilding<LivingBuilding
     {
         if (building.getBuildingLevel() == 0)
         {
-            MessageUtils.format(COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_LEVEL_0).sendTo(Minecraft.getInstance().player);
+            MessageUtils.format(COREMOD_GUI_WORKERHUTS_LEVEL_0).sendTo(Minecraft.getInstance().player);
             return;
         }
 

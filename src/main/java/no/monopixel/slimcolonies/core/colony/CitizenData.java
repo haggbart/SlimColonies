@@ -342,7 +342,7 @@ public class CitizenData implements ICitizenData
     {
         this.id = id;
         this.colony = colony;
-        inventory = new InventoryCitizen("Minecolonies Inventory", true, this);
+        inventory = new InventoryCitizen("SlimColonies Inventory", true, this);
         this.citizenMournHandler = new CitizenMournHandler(this);
         this.citizenSkillHandler = new CitizenSkillHandler();
         this.citizenFoodHandler = new CitizenFoodHandler(this);

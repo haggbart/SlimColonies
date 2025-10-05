@@ -14,8 +14,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_ENTITY_TYPE;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_NAME_GUI;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ADVENTURE_TOKEN_NAME_GUI;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI;
 
 public class ItemAdventureToken extends AbstractItemSlimColonies
 {
@@ -35,7 +35,7 @@ public class ItemAdventureToken extends AbstractItemSlimColonies
         if (stack.hasTag() && stack.getTag().contains(TAG_ENTITY_TYPE))
         {
             EntityType<?> mobType = EntityType.byString(stack.getTag().getString(TAG_ENTITY_TYPE)).orElse(EntityType.ZOMBIE);
-            return Component.translatable(COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_NAME_GUI, mobType.getDescription());
+            return Component.translatable(COREMOD_ADVENTURE_TOKEN_NAME_GUI, mobType.getDescription());
         }
 
         return super.getName(stack);
@@ -45,7 +45,7 @@ public class ItemAdventureToken extends AbstractItemSlimColonies
     public void appendHoverText(
         @NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
     {
-        final MutableComponent guiHint = Component.translatable(COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI);
+        final MutableComponent guiHint = Component.translatable(COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI);
         guiHint.setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY));
         tooltip.add(guiHint);
 

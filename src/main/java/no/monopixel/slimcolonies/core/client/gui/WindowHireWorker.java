@@ -434,7 +434,7 @@ public class WindowHireWorker extends AbstractWindowSkeleton
                     }
 
                     isPaused.on();
-                    isPaused.setText(Component.translatable(citizen.isPaused() ? COM_MINECOLONIES_COREMOD_GUI_HIRE_UNPAUSE : COM_MINECOLONIES_COREMOD_GUI_HIRE_PAUSE));
+                    isPaused.setText(Component.translatable(citizen.isPaused() ? COREMOD_GUI_HIRE_UNPAUSE : COREMOD_GUI_HIRE_PAUSE));
                 }
 
                 if (citizen.isPaused())
@@ -472,7 +472,7 @@ public class WindowHireWorker extends AbstractWindowSkeleton
                 }
                 textBuilder.newLine(); // finish the current line
 
-                Component citizenLabelComponent = Component.translatable(citizen.getJob().isEmpty() ? COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED : citizen.getJob())
+                Component citizenLabelComponent = Component.translatable(citizen.getJob().isEmpty() ? COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED : citizen.getJob())
                     .append(": ")
                     .append(citizen.getName());
                 rowPane.findPaneOfTypeByID(CITIZEN_LABEL, Text.class).setText(citizenLabelComponent);

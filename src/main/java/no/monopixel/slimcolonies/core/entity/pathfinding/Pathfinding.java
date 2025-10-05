@@ -31,10 +31,10 @@ public final class Pathfinding
         @Override
         public Thread newThread(@NotNull final Runnable runnable)
         {
-            final Thread thread = new Thread(runnable, "Minecolonies Pathfinding Worker #" + (id++));
+            final Thread thread = new Thread(runnable, "SlimColonies Pathfinding Worker #" + (id++));
             thread.setDaemon(true);
 
-            thread.setUncaughtExceptionHandler((thread1, throwable) -> Log.getLogger().error("Minecolonies Pathfinding Thread errored! ", throwable));
+            thread.setUncaughtExceptionHandler((thread1, throwable) -> Log.getLogger().error("SlimColonies Pathfinding Thread errored! ", throwable));
             return thread;
         }
     }

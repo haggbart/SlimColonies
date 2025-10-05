@@ -30,85 +30,85 @@ public final class TranslationConstants
     @NonNls
     public static final String DIRECTION_EXACT                                                      = "no.monopixel.slimcolonies.coremod.gui.direction.exact";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_BUILD_START                  = "entity.builder.messagebuildstart";
+    public static final String COREMOD_ENTITY_BUILDER_BUILD_START                  = "entity.builder.messagebuildstart";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_BUILD_COMPLETE               = "entity.builder.messagebuildcomplete";
+    public static final String COREMOD_ENTITY_BUILDER_BUILD_COMPLETE               = "entity.builder.messagebuildcomplete";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_REPAIRING_COMPLETE           = "entity.builder.messagerepaircomplete";
+    public static final String COREMOD_ENTITY_BUILDER_REPAIRING_COMPLETE           = "entity.builder.messagerepaircomplete";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_DECONSTRUCTION_COMPLETE      = "entity.builder.messageremovalcomplete";
+    public static final String COREMOD_ENTITY_BUILDER_DECONSTRUCTION_COMPLETE      = "entity.builder.messageremovalcomplete";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_MANUAL_SUFFIX                = "entity.builder.messagebuildmanualfinish";
+    public static final String COREMOD_ENTITY_BUILDER_MANUAL_SUFFIX                = "entity.builder.messagebuildmanualfinish";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP              = "entity.deliveryman.forcepickup";
+    public static final String COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP              = "entity.deliveryman.forcepickup";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP_FAILED       = "entity.deliveryman.forcepickupfailed";
+    public static final String COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP_FAILED       = "entity.deliveryman.forcepickupfailed";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_PRIORITY                 = "no.monopixel.slimcolonies.coremod.gui.workerhuts.deliveryman.priority";
+    public static final String COREMOD_ENTITY_DELIVERYMAN_PRIORITY                 = "no.monopixel.slimcolonies.coremod.gui.workerhuts.deliveryman.priority";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST            = "entity.worker.inventoryfullchestfull";
+    public static final String COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST            = "entity.worker.inventoryfullchestfull";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_CHESTFULL                   = "no.monopixel.slimcolonies.coremod.job.deliveryman.workerchestfull";
+    public static final String COREMOD_JOB_DELIVERYMAN_CHESTFULL                   = "no.monopixel.slimcolonies.coremod.job.deliveryman.workerchestfull";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_NAMEDCHESTFULL              = "no.monopixel.slimcolonies.coremod.job.deliveryman.namedworkerchestfull";
+    public static final String COREMOD_JOB_DELIVERYMAN_NAMEDCHESTFULL              = "no.monopixel.slimcolonies.coremod.job.deliveryman.namedworkerchestfull";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_NOWAREHOUSE                 = "no.monopixel.slimcolonies.coremod.job.deliveryman.nowarehouse";
+    public static final String COREMOD_JOB_DELIVERYMAN_NOWAREHOUSE                 = "no.monopixel.slimcolonies.coremod.job.deliveryman.nowarehouse";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_WAREHOUSE_FULL                              = "no.monopixel.slimcolonies.coremod.warehouse.full";
+    public static final String COREMOD_WAREHOUSE_FULL                              = "no.monopixel.slimcolonies.coremod.warehouse.full";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_WAREHOUSE_FULL_MAX_UPGRADE                  = "no.monopixel.slimcolonies.coremod.warehouse.full.max";
+    public static final String COREMOD_WAREHOUSE_FULL_MAX_UPGRADE                  = "no.monopixel.slimcolonies.coremod.warehouse.full.max";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_WAREHOUSE_FULL_LEVEL5_UPGRADE               = "no.monopixel.slimcolonies.coremod.warehouse.full.level5";
+    public static final String COREMOD_WAREHOUSE_FULL_LEVEL5_UPGRADE               = "no.monopixel.slimcolonies.coremod.warehouse.full.level5";
     @NonNls
     public static final String BAKER_HAS_NO_FURNACES_MESSAGE                                        = "no.monopixel.slimcolonies.coremod.bakery.nofurnace";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN                             = "no.monopixel.slimcolonies.job.deliveryman";
+    public static final String COREMOD_JOB_DELIVERYMAN                             = "no.monopixel.slimcolonies.job.deliveryman";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_HIRING_OFF                              = "no.monopixel.slimcolonies.coremod.gui.hiring.off";
+    public static final String COREMOD_GUI_HIRING_OFF                              = "no.monopixel.slimcolonies.coremod.gui.hiring.off";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_HIRING_ON                               = "no.monopixel.slimcolonies.coremod.gui.hiring.on";
+    public static final String COREMOD_GUI_HIRING_ON                               = "no.monopixel.slimcolonies.coremod.gui.hiring.on";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_RETRIEVE_ON                  = "no.monopixel.slimcolonies.coremod.gui.workerhuts.retrieveon";
+    public static final String COREMOD_GUI_WORKERHUTS_RETRIEVE_ON                  = "no.monopixel.slimcolonies.coremod.gui.workerhuts.retrieveon";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_RETRIEVE_OFF                 = "no.monopixel.slimcolonies.coremod.gui.workerhuts.retrieveoff";
+    public static final String COREMOD_GUI_WORKERHUTS_RETRIEVE_OFF                 = "no.monopixel.slimcolonies.coremod.gui.workerhuts.retrieveoff";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_LEVEL_0                      = "no.monopixel.slimcolonies.coremod.gui.workerhuts.level0";
+    public static final String COREMOD_GUI_WORKERHUTS_LEVEL_0                      = "no.monopixel.slimcolonies.coremod.gui.workerhuts.level0";
     @NonNls
-    public static final String COM_MINECOLONIES_HOSTILES                                            = "no.monopixel.slimcolonies.coremod.gui.workerhuts.hostilelist";
+    public static final String HOSTILES                                            = "no.monopixel.slimcolonies.coremod.gui.workerhuts.hostilelist";
     @NonNls
-    public static final String COM_MINECOLONIES_BUILDING_WAREHOUSE_NAME                             = "no.monopixel.slimcolonies.coremod.buildings.warehouse.name";
+    public static final String BUILDING_WAREHOUSE_NAME                             = "no.monopixel.slimcolonies.coremod.buildings.warehouse.name";
     @NonNls
-    public static final String COM_MINECOLONIES_CLIPBOARD_NEED_COLONY                               = "no.monopixel.slimcolonies.coremod.item.clipboard.needcolony";
+    public static final String CLIPBOARD_NEED_COLONY                               = "no.monopixel.slimcolonies.coremod.item.clipboard.needcolony";
     @NonNls
-    public static final String COM_MINECOLONIES_CLIPBOARD_COLONY_SET                                = "no.monopixel.slimcolonies.coremod.item.clipboard.registered";
+    public static final String CLIPBOARD_COLONY_SET                                = "no.monopixel.slimcolonies.coremod.item.clipboard.registered";
     @NonNls
-    public static final String COM_MINECOLONIES_SCROLL_NO_COLONY                                    = "no.monopixel.slimcolonies.coremod.item.scroll.needcolony";
+    public static final String SCROLL_NO_COLONY                                    = "no.monopixel.slimcolonies.coremod.item.scroll.needcolony";
     @NonNls
-    public static final String COM_MINECOLONIES_SCROLL_BUILDING_SET                                 = "no.monopixel.slimcolonies.coremod.item.scroll.registered";
+    public static final String SCROLL_BUILDING_SET                                 = "no.monopixel.slimcolonies.coremod.item.scroll.registered";
     @NonNls
-    public static final String COM_MINECOLONIES_SCROLL_WRONG_BUILDING                               = "no.monopixel.slimcolonies.coremod.item.scroll.wrong_building";
+    public static final String SCROLL_WRONG_BUILDING                               = "no.monopixel.slimcolonies.coremod.item.scroll.wrong_building";
     @NonNls
-    public static final String COM_MINECOLONIES_SCROLL_WRONG_COLONY                                 = "no.monopixel.slimcolonies.coremod.item.scroll.wrong_colony";
+    public static final String SCROLL_WRONG_COLONY                                 = "no.monopixel.slimcolonies.coremod.item.scroll.wrong_colony";
     @NonNls
-    public static final String COM_MINECOLONIES_SCROLL_BUILDING_NO_WORKER                           = "no.monopixel.slimcolonies.coremod.item.scroll.no_builder";
+    public static final String SCROLL_BUILDING_NO_WORKER                           = "no.monopixel.slimcolonies.coremod.item.scroll.no_builder";
     @NonNls
-    public static final String COM_MINECOLONIES_SCROLL_SNAPSHOT                                     = "no.monopixel.slimcolonies.coremod.item.scroll.snapshot";
+    public static final String SCROLL_SNAPSHOT                                     = "no.monopixel.slimcolonies.coremod.item.scroll.snapshot";
     @NonNls
-    public static final String COM_MINECOLONIES_QUEST_LOG_NEED_COLONY                               = "no.monopixel.slimcolonies.coremod.item.questlog.needcolony";
+    public static final String QUEST_LOG_NEED_COLONY                               = "no.monopixel.slimcolonies.coremod.item.questlog.needcolony";
     @NonNls
-    public static final String COM_MINECOLONIES_QUEST_LOG_COLONY_SET                                = "no.monopixel.slimcolonies.coremod.item.questlog.registered";
+    public static final String QUEST_LOG_COLONY_SET                                = "no.monopixel.slimcolonies.coremod.item.questlog.registered";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI                 = "no.monopixel.slimcolonies.coremod.item.adventure.token.gui";
+    public static final String COREMOD_ADVENTURE_TOKEN_TOOLTIP_GUI                 = "no.monopixel.slimcolonies.coremod.item.adventure.token.gui";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ADVENTURE_TOKEN_NAME_GUI                    = "no.monopixel.slimcolonies.coremod.item.adventure.token.name.gui";
+    public static final String COREMOD_ADVENTURE_TOKEN_NAME_GUI                    = "no.monopixel.slimcolonies.coremod.item.adventure.token.name.gui";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ITEM_AVAILABLE_TOOLTIP_GUI                  = "no.monopixel.slimcolonies.coremod.item.available.gui";
+    public static final String COREMOD_ITEM_AVAILABLE_TOOLTIP_GUI                  = "no.monopixel.slimcolonies.coremod.item.available.gui";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ITEM_BUILDLEVEL_TOOLTIP_GUI                 = "no.monopixel.slimcolonies.coremod.item.buildlevel.gui";
+    public static final String COREMOD_ITEM_BUILDLEVEL_TOOLTIP_GUI                 = "no.monopixel.slimcolonies.coremod.item.buildlevel.gui";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ITEM_REQUIRES_RESEARCH_TOOLTIP_GUI          = "no.monopixel.slimcolonies.coremod.item.requiresresearch.gui";
+    public static final String COREMOD_ITEM_REQUIRES_RESEARCH_TOOLTIP_GUI          = "no.monopixel.slimcolonies.coremod.item.requiresresearch.gui";
     @NonNls
-    public static final String COM_MINECOLONIES_PRIVATE_CRAFTING_RESOLVER_NAME                      = "no.monopixel.slimcolonies.coremod.resolvers.crafter.private";
+    public static final String PRIVATE_CRAFTING_RESOLVER_NAME                      = "no.monopixel.slimcolonies.coremod.resolvers.crafter.private";
     @NonNls
     public static final String ENTERING_COLONY_MESSAGE                                              = "no.monopixel.slimcolonies.coremod.enteringcolony";
     @NonNls
@@ -126,18 +126,18 @@ public final class TranslationConstants
     @NonNls
     public static final String CANT_PLACE_COLONY_TOO_FAR_FROM_SPAWN                                 = "no.monopixel.slimcolonies.core.founding.toofarfromspawn";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT =
+    public static final String COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT =
         "no.monopixel.slimcolonies.coremod.gui.townhall.population.totalcitizens.count";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_CHILDS              = "no.monopixel.slimcolonies.coremod.gui.townhall.population.childs";
+    public static final String COREMOD_GUI_TOWNHALL_POPULATION_CHILDS              = "no.monopixel.slimcolonies.coremod.gui.townhall.population.childs";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_EACH                = "no.monopixel.slimcolonies.coremod.gui.townhall.population.each";
+    public static final String COREMOD_GUI_TOWNHALL_POPULATION_EACH                = "no.monopixel.slimcolonies.coremod.gui.townhall.population.each";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_UNEMPLOYED          = "no.monopixel.slimcolonies.coremod.gui.townhall.population.unemployed";
+    public static final String COREMOD_GUI_TOWNHALL_POPULATION_UNEMPLOYED          = "no.monopixel.slimcolonies.coremod.gui.townhall.population.unemployed";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED             = "no.monopixel.slimcolonies.coremod.gui.townhall.citizens.unemployed";
+    public static final String COREMOD_GUI_TOWNHALL_CITIZEN_UNEMPLOYED             = "no.monopixel.slimcolonies.coremod.gui.townhall.citizens.unemployed";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_COMPOSTER_EMPTYLIST                  = "entity.composter.noitems";
+    public static final String COREMOD_ENTITY_COMPOSTER_EMPTYLIST                  = "entity.composter.noitems";
     @NonNls
     public static final String TOWNHALL_BREAKING_DONE_MESSAGE                                       = "no.monopixel.slimcolonies.coremod.pvp.townhall.broke";
     @NonNls
@@ -147,15 +147,15 @@ public final class TranslationConstants
     @NonNls
     public static final String COLONY_ATTACK_GUARD_GROUP_SIZE_MESSAGE                               = "no.monopixel.slimcolonies.coremod.pvp.attack.guardgroupsize";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_MOURN                                       = "no.monopixel.slimcolonies.coremod.mourning";
+    public static final String COREMOD_MOURN                                       = "no.monopixel.slimcolonies.coremod.mourning";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_HIRE_PAUSE                              = "no.monopixel.slimcolonies.coremod.gui.hiring.buttonpaused";
+    public static final String COREMOD_GUI_HIRE_PAUSE                              = "no.monopixel.slimcolonies.coremod.gui.hiring.buttonpaused";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_GUI_HIRE_UNPAUSE                            = "no.monopixel.slimcolonies.coremod.gui.hiring.buttonunpaused";
+    public static final String COREMOD_GUI_HIRE_UNPAUSE                            = "no.monopixel.slimcolonies.coremod.gui.hiring.buttonunpaused";
     @NonNls
     public static final String UNABLE_TO_ADD_RECIPE_MESSAGE                                         = "no.monopixel.slimcolonies.coremod.recipe.unable";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_BEEKEEPER_NOFLOWERS                         = "no.monopixel.slimcolonies.coremod.beekeeper.noflowers";
+    public static final String COREMOD_BEEKEEPER_NOFLOWERS                         = "no.monopixel.slimcolonies.coremod.beekeeper.noflowers";
     @NonNls
     public static final String FURNACE_USER_NO_FUEL                                                 = "no.monopixel.slimcolonies.coremod.furnaceuser.nofuel";
     @NonNls
@@ -177,7 +177,7 @@ public final class TranslationConstants
     @NonNls
     public static final String SIFTER_NO_MESH                                                       = "no.monopixel.slimcolonies.coremod.sifter.nomesh";
     @NonNls
-    public static final String COM_MINECOLONIES_CANT_TAKE_EQUIPPED                                  = "no.monopixel.slimcolonies.coremod.general.canttakeequipped";
+    public static final String CANT_TAKE_EQUIPPED                                  = "no.monopixel.slimcolonies.coremod.general.canttakeequipped";
     @NonNls
     public static final String TOO_LOW_LEVEL_TO_FILTER_FLORIST                                      = "no.monopixel.slimcolonies.gui.workerhuts.florist.toolow";
     @NonNls
@@ -235,9 +235,9 @@ public final class TranslationConstants
     @NonNls
     public static final String DEMANDS                                                              = "no.monopixel.slimcolonies.coremod.entity.citizen.demands.";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_SLEEPING                     = "no.monopixel.slimcolonies.coremod.entity.citizen.sleeping";
+    public static final String COREMOD_ENTITY_CITIZEN_SLEEPING                     = "no.monopixel.slimcolonies.coremod.entity.citizen.sleeping";
     @NonNls
-    public static final String COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING                     = "no.monopixel.slimcolonies.coremod.entity.citizen.mourning";
+    public static final String COREMOD_ENTITY_CITIZEN_MOURNING                     = "no.monopixel.slimcolonies.coremod.entity.citizen.mourning";
     @NonNls
     public static final String WAREHOUSE_SORTED                                                     = "no.monopixel.slimcolonies.coremod.gui.warehouse.sorted";
     @NonNls
@@ -495,31 +495,31 @@ public final class TranslationConstants
     @NonNls
     public static final String PACK_DESC                                                            = "no.monopixel.slimcolonies.coremod.gui.colony.packdesc";
     @NonNls
-    public static final String COM_MINECOLONIES_SIGN_COLONY_SET                                     = "no.monopixel.slimcolonies.core.item.sign.registered";
+    public static final String SIGN_COLONY_SET                                     = "no.monopixel.slimcolonies.core.item.sign.registered";
     @NonNls
-    public static final String COM_MINECOLONIES_SIGN_TOO_FAR                                        = "no.monopixel.slimcolonies.core.item.sign.toofar";
+    public static final String SIGN_TOO_FAR                                        = "no.monopixel.slimcolonies.core.item.sign.toofar";
     @NonNls
-    public static final String COM_MINECOLONIES_CORE_COLONY_SIGN_TOOLTIP                            = "no.monopixel.slimcolonies.core.item.colonysign.tip";
+    public static final String CORE_COLONY_SIGN_TOOLTIP                            = "no.monopixel.slimcolonies.core.item.colonysign.tip";
     @NonNls
-    public static final String COM_MINECOLONIES_CORE_COLONY_SIGN_TOOLTIP_COLONY                     = "no.monopixel.slimcolonies.core.item.colonysign.tip.colony";
+    public static final String CORE_COLONY_SIGN_TOOLTIP_COLONY                     = "no.monopixel.slimcolonies.core.item.colonysign.tip.colony";
     @NonNls
-    public static final String COM_MINECOLONIES_SIGN_NULL_COLONY                                    = "no.monopixel.slimcolonies.core.item.sign.nullcolony";
+    public static final String SIGN_NULL_COLONY                                    = "no.monopixel.slimcolonies.core.item.sign.nullcolony";
     @NonNls
     public static final String URGENT                                                               = ".urgent";
     @NonNls
-    public static final String COM_MINECOLONIES_SIGN_COLONY_NO_PERM                                 = "no.monopixel.slimcolonies.core.item.sign.noperm";
+    public static final String SIGN_COLONY_NO_PERM                                 = "no.monopixel.slimcolonies.core.item.sign.noperm";
     @NonNls
-    public static final String COM_MINECOLONIES_CONNECTION_FAIL                                     = "no.monopixel.slimcolonies.core.colonyconnection.fail";
+    public static final String CONNECTION_FAIL                                     = "no.monopixel.slimcolonies.core.colonyconnection.fail";
     @NonNls
-    public static final String COM_MINECOLONIES_CONNECTION_SUCCESS                                  = "no.monopixel.slimcolonies.core.colonyconnection.success";
+    public static final String CONNECTION_SUCCESS                                  = "no.monopixel.slimcolonies.core.colonyconnection.success";
     @NonNls
-    public static final String COM_MINECOLONIES_SIGN_MISSING_LINK                                   = "no.monopixel.slimcolonies.core.item.sign.missinglink";
+    public static final String SIGN_MISSING_LINK                                   = "no.monopixel.slimcolonies.core.item.sign.missinglink";
     @NonNls
-    public static final String COM_MINECOLONIES_SIGN_CONNECTED                                      = "no.monopixel.slimcolonies.core.item.sign.connected";
+    public static final String SIGN_CONNECTED                                      = "no.monopixel.slimcolonies.core.item.sign.connected";
     @NonNls
-    public static final String COM_MINECOLONIES_SIGN_DISRUPTED                                      = "no.monopixel.slimcolonies.core.item.sign.disrupted";
+    public static final String SIGN_DISRUPTED                                      = "no.monopixel.slimcolonies.core.item.sign.disrupted";
     @NonNls
-    public static final String COM_MINECOLONIES_CONNECTION_PATH_FAILURE                             = "no.monopixel.slimcolonies.core.colonyconnection.path.failure";
+    public static final String CONNECTION_PATH_FAILURE                             = "no.monopixel.slimcolonies.core.colonyconnection.path.failure";
     //<editor-fold desc="Partial keys">
 
     @NonNls

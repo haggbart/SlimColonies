@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_PRIORITY;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_DELIVERYMAN_PRIORITY;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.*;
 
 /**
@@ -109,7 +109,7 @@ public class WindowHutRequestTaskModule extends AbstractModuleWindow
 
                 if (request.getRequest() instanceof IDeliverymanRequestable)
                 {
-                    rowPane.findPaneOfTypeByID(REQUEST_PRIORITY, Text.class).setText(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_PRIORITY)
+                    rowPane.findPaneOfTypeByID(REQUEST_PRIORITY, Text.class).setText(Component.translatable(COREMOD_ENTITY_DELIVERYMAN_PRIORITY)
                                                                                        .append(String.valueOf(((IDeliverymanRequestable) request.getRequest()).getPriority())));
                 }
 

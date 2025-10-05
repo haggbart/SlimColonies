@@ -39,11 +39,11 @@ public class CommandToggleDebug implements IMCOPCommand
 
         if (enabled)
         {
-            context.getSource().sendSuccess(() -> Component.literal("Enabled minecolonies debugging for:" + profile.getName()).withStyle(ChatFormatting.GREEN), true);
+            context.getSource().sendSuccess(() -> Component.literal("Enabled slimcolonies debugging for:" + profile.getName()).withStyle(ChatFormatting.GREEN), true);
         }
         else
         {
-            context.getSource().sendSuccess(() -> Component.literal("Disabled minecolonies debugging for:" + profile.getName()).withStyle(ChatFormatting.RED), true);
+            context.getSource().sendSuccess(() -> Component.literal("Disabled slimcolonies debugging for:" + profile.getName()).withStyle(ChatFormatting.RED), true);
         }
 
         final ServerPlayer player = context.getSource().getServer().getPlayerList().getPlayer(profile.getId());
@@ -52,12 +52,12 @@ public class CommandToggleDebug implements IMCOPCommand
             if (enabled)
             {
                 Network.getNetwork().sendToPlayer(new DebugEnableMessage(true), player);
-                player.sendSystemMessage(Component.literal("Enabled minecolonies debugging").withStyle(ChatFormatting.GREEN));
+                player.sendSystemMessage(Component.literal("Enabled slimcolonies debugging").withStyle(ChatFormatting.GREEN));
             }
             else
             {
                 Network.getNetwork().sendToPlayer(new DebugEnableMessage(false), player);
-                player.sendSystemMessage(Component.literal("Disabled minecolonies debugging").withStyle(ChatFormatting.RED));
+                player.sendSystemMessage(Component.literal("Disabled slimcolonies debugging").withStyle(ChatFormatting.RED));
             }
         }
 

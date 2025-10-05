@@ -15,8 +15,8 @@ import static no.monopixel.slimcolonies.api.util.constant.translation.CommandTra
 public class CommandHelp implements IMCCommand
 {
 
-    private static final String wikiUrl    = "https://wiki.minecolonies.ldtteam.com";
-    private static final String discordUrl = "https://discord.minecolonies.com";
+    private static final String wikiUrl    = "TBA";
+    private static final String discordUrl = "https://discord.gg/bfKpMTTuFt";
 
     /**
      * What happens when the command is executed

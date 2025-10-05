@@ -305,7 +305,7 @@ public abstract class AbstractWarehouseRequestResolver extends AbstractRequestRe
     @Override
     public MutableComponent getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)
     {
-        return Component.translatable(TranslationConstants.COM_MINECOLONIES_BUILDING_WAREHOUSE_NAME);
+        return Component.translatable(TranslationConstants.BUILDING_WAREHOUSE_NAME);
     }
 
     @Override

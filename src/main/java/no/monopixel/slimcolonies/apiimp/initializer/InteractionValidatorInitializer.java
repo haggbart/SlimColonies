@@ -78,7 +78,7 @@ public class InteractionValidatorInitializer
                 && citizen.getColony().getBuildingManager().getBestBuilding(citizen.getEntity().get(), BuildingCook.class) == null
                 && InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(citizen.getInventory(), ISFOOD) == -1);
 
-        InteractionValidatorRegistry.registerPosBasedPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_CHESTFULL),
+        InteractionValidatorRegistry.registerPosBasedPredicate(Component.translatable(COREMOD_JOB_DELIVERYMAN_CHESTFULL),
             (citizen, pos) ->
             {
                 if (citizen.getJob() instanceof JobDeliveryman)
@@ -99,7 +99,7 @@ public class InteractionValidatorInitializer
                 }
                 return false;
             });
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_JOB_DELIVERYMAN_NOWAREHOUSE),
+        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_JOB_DELIVERYMAN_NOWAREHOUSE),
             cit -> {
                 if (cit.getJob() instanceof JobDeliveryman && cit.getWorkBuilding() != null)
                 {
@@ -115,7 +115,7 @@ public class InteractionValidatorInitializer
             citizen -> citizen.getWorkBuilding() instanceof BuildingMiner && citizen.getJob() instanceof JobMiner && (
                 ((BuildingMiner) citizen.getWorkBuilding()).getCobbleLocation() == null || ((BuildingMiner) citizen.getWorkBuilding()).getLadderLocation() == null));
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST),
+        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_ENTITY_WORKER_INVENTORYFULLCHEST),
             citizen -> citizen.getWorkBuilding() != null && InventoryUtils.isBuildingFull(citizen.getWorkBuilding()));
         InteractionValidatorRegistry.registerPosBasedPredicate(
             Component.translatable(REQUEST_SYSTEM_BUILDING_LEVEL_TOO_LOW), (citizen, pos) ->
@@ -279,15 +279,15 @@ public class InteractionValidatorInitializer
             citizen -> false); // Disabled without happiness tracking
 
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_BEEKEEPER_NOFLOWERS),
+        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_BEEKEEPER_NOFLOWERS),
             citizen -> citizen.getWorkBuilding() instanceof BuildingBeekeeper
                 && ((BuildingBeekeeper) citizen.getWorkBuilding()).getModuleMatching(ItemListModule.class, m -> m.getId().equals(BUILDING_FLOWER_LIST)).getList().isEmpty());
 
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_SLEEPING),
+        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_ENTITY_CITIZEN_SLEEPING),
             citizen -> citizen.getEntity().isPresent() && citizen.isAsleep());
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING),
+        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_ENTITY_CITIZEN_MOURNING),
             citizen -> citizen.getEntity().isPresent() && citizen.getCitizenMournHandler().isMourning());
 
 
