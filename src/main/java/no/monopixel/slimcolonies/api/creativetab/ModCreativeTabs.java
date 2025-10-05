@@ -1,9 +1,5 @@
 package no.monopixel.slimcolonies.api.creativetab;
 
-import no.monopixel.slimcolonies.api.blocks.AbstractColonyBlock;
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -11,9 +7,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import no.monopixel.slimcolonies.api.blocks.AbstractColonyBlock;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 
 /**
- * Class used to handle the creativeTab of minecolonies.
+ * Class used to handle the creativeTab of slimcolonies.
  */
 @Mod.EventBusSubscriber
 public final class ModCreativeTabs

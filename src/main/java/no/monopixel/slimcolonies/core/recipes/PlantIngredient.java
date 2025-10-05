@@ -24,7 +24,7 @@ import java.util.stream.Stream;
  *
  * // any plant item
  * {
- *     "type": "minecolonies:plant"
+ *     "type": "slimcolonies:plant"
  * }
  */
 public class PlantIngredient extends Ingredient
