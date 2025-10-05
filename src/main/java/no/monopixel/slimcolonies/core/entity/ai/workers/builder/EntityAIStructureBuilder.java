@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_MANUAL_SUFFIX;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_BUILDER_MANUAL_SUFFIX;
 
 /**
  * AI class for the builder. Manages building and repairing buildings.
@@ -320,7 +320,7 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
 
         if (showManualSuffix)
         {
-            message.append(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_BUILDER_MANUAL_SUFFIX));
+            message.append(Component.translatable(COREMOD_ENTITY_BUILDER_MANUAL_SUFFIX));
         }
 
         MessageUtils.forCitizen(worker, message).sendTo(worker.getCitizenColonyHandler().getColonyOrRegister().getImportantMessageEntityPlayers());

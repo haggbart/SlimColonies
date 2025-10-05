@@ -26,7 +26,7 @@ import static no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.WORK_LONGER;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.NIGHT;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.HALF_BLOCK;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_SLEEPING;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_CITIZEN_SLEEPING;
 
 /**
  * Handles the sleep of the citizen.
@@ -125,7 +125,7 @@ public class CitizenSleepHandler implements ICitizenSleepHandler
 
         setIsAsleep(true);
 
-        citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_SLEEPING), ChatPriority.HIDDEN));
+        citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COREMOD_ENTITY_CITIZEN_SLEEPING), ChatPriority.HIDDEN));
 
         if (citizen.getCitizenData() != null)
         {

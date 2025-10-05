@@ -11,7 +11,7 @@ import no.monopixel.slimcolonies.api.tileentities.SlimColoniesTileEntities;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
 
 import static no.monopixel.slimcolonies.api.colony.requestsystem.requestable.deliveryman.AbstractDeliverymanRequestable.getPlayerActionPriority;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP;
 
 /**
  * Class which handles the tileEntity for the Stash block.
@@ -66,7 +66,7 @@ public class TileEntityStash extends TileEntityColonyBuilding
                     // Note that createPickupRequest will make sure to only create on request per building.
                     if (!isEmpty() && building != null && building.createPickupRequest(getPlayerActionPriority(true)))
                     {
-                        MessageUtils.format(COM_MINECOLONIES_COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP).sendToClose(getTilePos(), 6, colony.getMessagePlayerEntities());
+                        MessageUtils.format(COREMOD_ENTITY_DELIVERYMAN_FORCEPICKUP).sendToClose(getTilePos(), 6, colony.getMessagePlayerEntities());
                     }
                 }
             }

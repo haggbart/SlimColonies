@@ -101,12 +101,12 @@ public class ItemResourceScroll extends AbstractItemSlimColonies
             }
             else
             {
-                MessageUtils.format(Component.translatable(TranslationConstants.COM_MINECOLONIES_SCROLL_NO_COLONY)).sendTo(player);
+                MessageUtils.format(Component.translatable(TranslationConstants.SCROLL_NO_COLONY)).sendTo(player);
             }
         }
         else
         {
-            MessageUtils.format(Component.translatable(TranslationConstants.COM_MINECOLONIES_SCROLL_NO_COLONY)).sendTo(player);
+            MessageUtils.format(Component.translatable(TranslationConstants.SCROLL_NO_COLONY)).sendTo(player);
         }
     }
 
@@ -144,7 +144,7 @@ public class ItemResourceScroll extends AbstractItemSlimColonies
     {
         if (!compound.contains(TAG_COLONY_ID) || !compound.contains(TAG_BUILDER))
         {
-            MessageUtils.format(COM_MINECOLONIES_SCROLL_NO_COLONY).sendTo(player);
+            MessageUtils.format(SCROLL_NO_COLONY).sendTo(player);
             return;
         }
 
@@ -190,7 +190,7 @@ public class ItemResourceScroll extends AbstractItemSlimColonies
 
         if (warehouse == null)
         {
-            MessageUtils.format(COM_MINECOLONIES_SCROLL_WRONG_COLONY).sendTo(player);
+            MessageUtils.format(SCROLL_WRONG_COLONY).sendTo(player);
             return null;
         }
 
@@ -260,16 +260,16 @@ public class ItemResourceScroll extends AbstractItemSlimColonies
                 compound.putInt(TAG_COLONY_ID, buildingEntity.getColonyId());
                 BlockPosUtil.write(compound, TAG_BUILDER, buildingEntity.getPosition());
 
-                MessageUtils.format(COM_MINECOLONIES_SCROLL_BUILDING_SET, buildingEntity.getColony().getName()).sendTo(ctx.getPlayer());
+                MessageUtils.format(SCROLL_BUILDING_SET, buildingEntity.getColony().getName()).sendTo(ctx.getPlayer());
             }
             else if (buildingEntity.getBuilding() instanceof BuildingWareHouse)
             {
-                MessageUtils.format(COM_MINECOLONIES_SCROLL_SNAPSHOT).sendTo(ctx.getPlayer());
+                MessageUtils.format(SCROLL_SNAPSHOT).sendTo(ctx.getPlayer());
             }
             else if (buildingEntity.getBuilding() != null)
             {
                 final MutableComponent buildingTypeComponent = MessageUtils.format(buildingEntity.getBuilding().getBuildingType().getTranslationKey()).create();
-                MessageUtils.format(COM_MINECOLONIES_SCROLL_WRONG_BUILDING, buildingTypeComponent, buildingEntity.getColony().getName()).sendTo(ctx.getPlayer());
+                MessageUtils.format(SCROLL_WRONG_BUILDING, buildingTypeComponent, buildingEntity.getColony().getName()).sendTo(ctx.getPlayer());
             }
         }
 
@@ -327,7 +327,7 @@ public class ItemResourceScroll extends AbstractItemSlimColonies
                 String name = builderBuildingView.getWorkerName();
                 tooltip.add(name != null && !name.trim().isEmpty()
                     ? Component.literal(ChatFormatting.DARK_PURPLE + name)
-                    : Component.translatable(COM_MINECOLONIES_SCROLL_BUILDING_NO_WORKER));
+                    : Component.translatable(SCROLL_BUILDING_NO_WORKER));
             }
         }
     }

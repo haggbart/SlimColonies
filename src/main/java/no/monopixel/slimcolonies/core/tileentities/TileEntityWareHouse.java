@@ -145,16 +145,16 @@ public class TileEntityWareHouse extends AbstractTileEntityWareHouse
                     {
                         if (getBuilding().getModule(BuildingModules.WAREHOUSE_OPTIONS).getStorageUpgrade() < MAX_STORAGE_UPGRADE)
                         {
-                            MessageUtils.format(COM_MINECOLONIES_COREMOD_WAREHOUSE_FULL_LEVEL5_UPGRADE).sendTo(getColony()).forAllPlayers();
+                            MessageUtils.format(COREMOD_WAREHOUSE_FULL_LEVEL5_UPGRADE).sendTo(getColony()).forAllPlayers();
                         }
                         else
                         {
-                            MessageUtils.format(COM_MINECOLONIES_COREMOD_WAREHOUSE_FULL_MAX_UPGRADE).sendTo(getColony()).forAllPlayers();
+                            MessageUtils.format(COREMOD_WAREHOUSE_FULL_MAX_UPGRADE).sendTo(getColony()).forAllPlayers();
                         }
                     }
                     else
                     {
-                        MessageUtils.format(COM_MINECOLONIES_COREMOD_WAREHOUSE_FULL).sendTo(getColony()).forAllPlayers();
+                        MessageUtils.format(COREMOD_WAREHOUSE_FULL).sendTo(getColony()).forAllPlayers();
                     }
                 }
                 return;

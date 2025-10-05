@@ -143,7 +143,7 @@ public abstract class AbstractWindowWorkerModuleBuilding<B extends IBuildingView
     {
         if (!building.allowsAssignment())
         {
-            MessageUtils.format(COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_LEVEL_0).sendTo(Minecraft.getInstance().player);
+            MessageUtils.format(COREMOD_GUI_WORKERHUTS_LEVEL_0).sendTo(Minecraft.getInstance().player);
             return;
         }
 

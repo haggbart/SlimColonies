@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_LEVEL_0;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_GUI_WORKERHUTS_LEVEL_0;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.BUTTON_RECALL;
 
 /**
@@ -75,7 +75,7 @@ public class SpecialAssignmentModuleWindow extends AbstractModuleWindow
     {
         if (buildingView.getBuildingLevel() == 0)
         {
-            MessageUtils.format(COM_MINECOLONIES_COREMOD_GUI_WORKERHUTS_LEVEL_0).sendTo(Minecraft.getInstance().player);
+            MessageUtils.format(COREMOD_GUI_WORKERHUTS_LEVEL_0).sendTo(Minecraft.getInstance().player);
             return;
         }
 

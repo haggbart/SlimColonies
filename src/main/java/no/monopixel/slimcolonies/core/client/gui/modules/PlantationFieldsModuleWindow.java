@@ -24,8 +24,8 @@ import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.FieldsModuleV
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingPlantation;
 import org.jetbrains.annotations.NotNull;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_GUI_HIRING_OFF;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_GUI_HIRING_ON;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_GUI_HIRING_OFF;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_GUI_HIRING_ON;
 import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.*;
 
 /**
@@ -153,7 +153,7 @@ public class PlantationFieldsModuleWindow extends AbstractModuleWindow
     private void updateUI()
     {
         findPaneOfTypeByID(TAG_BUTTON_ASSIGNMENT_MODE, Button.class)
-            .setText(Component.translatable(moduleView.assignFieldManually() ? COM_MINECOLONIES_COREMOD_GUI_HIRING_ON : COM_MINECOLONIES_COREMOD_GUI_HIRING_OFF));
+            .setText(Component.translatable(moduleView.assignFieldManually() ? COREMOD_GUI_HIRING_ON : COREMOD_GUI_HIRING_OFF));
         findPaneOfTypeByID(TAG_FIELD_COUNT, Text.class)
             .setText(Component.translatable(FIELD_LIST_LABEL_FIELD_COUNT, moduleView.getOwnedFields().size(), moduleView.getMaxFieldCount()));
         findPaneOfTypeByID(TAG_PLANT_COUNT, Text.class)

@@ -30,7 +30,7 @@ import static no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen
 import static no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus.*;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.DEFAULT_SPEED;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_CITIZEN_MOURNING;
 import static no.monopixel.slimcolonies.core.entity.ai.minimal.EntityAIEatTask.RESTAURANT_LIMIT;
 import static no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler.SEEK_DOCTOR_HEALTH;
 
@@ -202,9 +202,9 @@ public class CitizenAI implements IStateAI
         {
             if (lastState != CitizenAIState.MOURN)
             {
-                citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING,
+                citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COREMOD_ENTITY_CITIZEN_MOURNING,
                     citizen.getCitizenData().getCitizenMournHandler().getDeceasedCitizens().iterator().next()),
-                    Component.translatable(COM_MINECOLONIES_COREMOD_ENTITY_CITIZEN_MOURNING),
+                    Component.translatable(COREMOD_ENTITY_CITIZEN_MOURNING),
                     ChatPriority.IMPORTANT));
 
                 citizen.setVisibleStatusIfNone(MOURNING);

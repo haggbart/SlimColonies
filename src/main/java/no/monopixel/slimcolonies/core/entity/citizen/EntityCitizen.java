@@ -1564,7 +1564,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
                                     getBlockZ(),
                                     (int) BlockPosUtil.dist(blockPosition(), getCitizenColonyHandler().getColonyOrRegister().getCenter()))))))
                     .append(!(citizenJobHandler.getColonyJob() instanceof AbstractJobGuard<?>)
-                        ? Component.translatable(COM_MINECOLONIES_COREMOD_MOURN, getCitizenData().getName())
+                        ? Component.translatable(COREMOD_MOURN, getCitizenData().getName())
                         : Component.empty())
                     .append(gravePos != null ? Component.translatable(WARNING_GRAVE_SPAWNED).withStyle(style -> style
                         .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,

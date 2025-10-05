@@ -20,7 +20,7 @@ import no.monopixel.slimcolonies.core.tileentities.TileEntityColonyBuilding;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_QUEST_LOG_COLONY_SET;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.QUEST_LOG_COLONY_SET;
 
 /**
  * Class describing the quest log item.
@@ -56,7 +56,7 @@ public class ItemQuestLog extends AbstractItemSlimColonies
             compound.putInt(TAG_COLONY, buildingEntity.getColonyId());
             if (!ctx.getLevel().isClientSide)
             {
-                MessageUtils.format(COM_MINECOLONIES_QUEST_LOG_COLONY_SET, buildingEntity.getColony().getName()).sendTo(ctx.getPlayer());
+                MessageUtils.format(QUEST_LOG_COLONY_SET, buildingEntity.getColony().getName()).sendTo(ctx.getPlayer());
             }
         }
         else if (ctx.getLevel().isClientSide)
@@ -127,7 +127,7 @@ public class ItemQuestLog extends AbstractItemSlimColonies
         }
         else
         {
-            player.displayClientMessage(Component.translatable(TranslationConstants.COM_MINECOLONIES_QUEST_LOG_NEED_COLONY), true);
+            player.displayClientMessage(Component.translatable(TranslationConstants.QUEST_LOG_NEED_COLONY), true);
         }
     }
 }

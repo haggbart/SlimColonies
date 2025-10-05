@@ -25,7 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COM_MINECOLONIES_CANT_TAKE_EQUIPPED;
+import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.CANT_TAKE_EQUIPPED;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.CITIZEN_REQ_RESOURCE_SUFFIX;
 
 /**
@@ -150,7 +150,7 @@ public class RequestWindowCitizen extends AbstractWindowCitizen
             if (slot == -1)
             {
                 MessageUtils.format("<%s> ")
-                  .append(COM_MINECOLONIES_CANT_TAKE_EQUIPPED, citizen.getName())
+                  .append(CANT_TAKE_EQUIPPED, citizen.getName())
                   .withPriority(MessagePriority.IMPORTANT)
                   .sendTo(Minecraft.getInstance().player);
 

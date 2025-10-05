@@ -94,7 +94,7 @@ public class WindowStatsPage extends AbstractWindowTownHall
         }
 
         final Text totalCitizenLabel = findPaneOfTypeByID(TOTAL_CITIZENS_LABEL, Text.class);
-        totalCitizenLabel.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT,
+        totalCitizenLabel.setText(Component.translatable(COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT,
             citizensSize,
             Math.max(citizensSize, building.getColony().getCitizenCountLimit())));
         List<MutableComponent> hoverText = new ArrayList<>();
@@ -117,7 +117,7 @@ public class WindowStatsPage extends AbstractWindowTownHall
             {
                 hoverText.add(Component.translatable(WARNING_POPULATION_CONFIG_LIMITED, this.building.getColony().getName()));
             }
-            totalCitizenLabel.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT, citizensSize, citizensCap));
+            totalCitizenLabel.setText(Component.translatable(COREMOD_GUI_TOWNHALL_POPULATION_TOTALCITIZENS_COUNT, citizensSize, citizensCap));
             totalCitizenLabel.setColors(RED);
         }
         PaneBuilders.tooltipBuilder().hoverPane(totalCitizenLabel).build().setText(hoverText);
@@ -203,18 +203,18 @@ public class WindowStatsPage extends AbstractWindowTownHall
                     final String formattedJobString = jobString.substring(0, 1).toUpperCase(Locale.US) + jobString.substring(1);
 
                     final Component numberOfWorkers =
-                        Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_EACH, formattedJobString, entry.getValue().getA(), entry.getValue().getB());
+                        Component.translatable(COREMOD_GUI_TOWNHALL_POPULATION_EACH, formattedJobString, entry.getValue().getA(), entry.getValue().getB());
                     label.setText(numberOfWorkers);
                 }
                 else
                 {
                     if (index == maxJobs + 1)
                     {
-                        label.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_UNEMPLOYED, unemployedCount));
+                        label.setText(Component.translatable(COREMOD_GUI_TOWNHALL_POPULATION_UNEMPLOYED, unemployedCount));
                     }
                     else
                     {
-                        label.setText(Component.translatable(COM_MINECOLONIES_COREMOD_GUI_TOWNHALL_POPULATION_CHILDS, childCount));
+                        label.setText(Component.translatable(COREMOD_GUI_TOWNHALL_POPULATION_CHILDS, childCount));
                     }
                 }
             }
