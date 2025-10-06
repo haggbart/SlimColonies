@@ -32,7 +32,6 @@ import no.monopixel.slimcolonies.api.enchants.ModEnchants;
 import no.monopixel.slimcolonies.api.entity.ModEntities;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.items.ModBannerPatterns;
 import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.loot.ModLootConditions;
 import no.monopixel.slimcolonies.api.sounds.ModSoundEvents;
@@ -92,8 +91,6 @@ public class SlimColonies
         ModResearchEffectInitializer.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModLootConditions.DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         SupplyLoot.GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModBannerPatterns.BANNER_PATTERNS.register(FMLJavaModLoadingContext.get().getModEventBus());
-
         ModQuestInitializer.DEFERRED_REGISTER_OBJECTIVE.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModQuestInitializer.DEFERRED_REGISTER_TRIGGER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModQuestInitializer.DEFERRED_REGISTER_REWARD.register(FMLJavaModLoadingContext.get().getModEventBus());
