@@ -475,7 +475,9 @@ public class BuildingModules
             .with(BuildingMiner.MAX_DEPTH, new IntSetting(-100))
             .with(AbstractBuilding.USE_SHEARS, new BoolSetting(false)), () -> SettingsModuleView::new);
     public static final BuildingEntry.ModuleProducer<IBuildingModule, MinerGuardAssignModuleView>                MINER_GUARD_ASSIGN =
-        new BuildingEntry.ModuleProducer<>("miner_guard_assign", null, () -> MinerGuardAssignModuleView::new);
+        new BuildingEntry.ModuleProducer<>("miner_guard_assign", null, null);
+    public static final BuildingEntry.ModuleProducer<MinerOrePriorityModule, MinerOrePriorityModuleView>        MINER_ORE_PRIORITY =
+        new BuildingEntry.ModuleProducer<>("miner_ore_priority", MinerOrePriorityModule::new, () -> MinerOrePriorityModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<MinerBuildingModule, CombinedHiringLimitModuleView> QUARRIER_WORK =
         new BuildingEntry.ModuleProducer<>("quarrier_work", () -> new MinerBuildingModule(ModJobs.quarrier.get(), Skill.Strength, Skill.Stamina, (b) -> 1),

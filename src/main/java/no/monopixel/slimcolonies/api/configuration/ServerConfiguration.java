@@ -22,7 +22,7 @@ public class ServerConfiguration extends AbstractConfiguration
     public final ForgeConfigSpec.IntValue     maxCitizenPerColony;
     public final ForgeConfigSpec.BooleanValue enableInDevelopmentFeatures;
     public final ForgeConfigSpec.BooleanValue alwaysRenderNameTag;
-    public final ForgeConfigSpec.IntValue     luckyBlockChance;
+    public final ForgeConfigSpec.IntValue     bonusOreChance;
     public final ForgeConfigSpec.IntValue     minThLevelToTeleport;
     public final ForgeConfigSpec.DoubleValue  foodModifier;
     public final ForgeConfigSpec.IntValue     maxVisitorsPerTavern;
@@ -123,7 +123,7 @@ public class ServerConfiguration extends AbstractConfiguration
         maxCitizenPerColony = defineInteger(builder, "maxcitizenpercolony", 250, 30, CitizenConstants.CITIZEN_LIMIT_MAX);
         enableInDevelopmentFeatures = defineBoolean(builder, "enableindevelopmentfeatures", false);
         alwaysRenderNameTag = defineBoolean(builder, "alwaysrendernametag", true);
-        luckyBlockChance = defineInteger(builder, "luckyblockchance", 1, 0, 100);
+        bonusOreChance = defineInteger(builder, "bonusorechance", 25, 0, 100);
         minThLevelToTeleport = defineInteger(builder, "minthleveltoteleport", 3, 0, 5);
         foodModifier = defineDouble(builder, "foodmodifier", 1.0, 0.1, 100);
         maxVisitorsPerTavern = defineInteger(builder, "maxvisitorspertavern", 3, 1, 15);
