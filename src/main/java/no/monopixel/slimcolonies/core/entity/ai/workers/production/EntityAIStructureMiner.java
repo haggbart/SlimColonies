@@ -22,6 +22,7 @@ import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.advancements.AdvancementTriggers;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
@@ -29,6 +30,7 @@ import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.MinerLevelManagementModule;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.MinerOrePriorityModule;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingMiner;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.StandardInteraction;
 import no.monopixel.slimcolonies.core.colony.jobs.JobMiner;
@@ -48,7 +50,6 @@ import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWork
 import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.MORE_ORES;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.MIN_WORKING_RANGE;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.STANDARD_WORKING_RANGE;
-import static no.monopixel.slimcolonies.api.util.constant.Constants.ONE_HUNDRED_PERCENT;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.INVALID_MINESHAFT;
@@ -989,23 +990,21 @@ public class EntityAIStructureMiner extends AbstractEntityAIStructureWithWorkOrd
         if (IColonyManager.getInstance().getCompatibilityManager().isLuckyBlock(blockToMine.getBlock()))
         {
             final double chance = 1 + worker.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(MORE_ORES);
-            final boolean canGetLuckyBlock =
-                worker.getRandom().nextDouble() * ONE_HUNDRED_PERCENT <= SlimColoniesAPIProxy.getInstance().getConfig().getServer().luckyBlockChance.get() * chance;
+            final double bonusOreChance = SlimColoniesAPIProxy.getInstance().getConfig().getServer().bonusOreChance.get() / 100.0;
+            final boolean canGetLuckyBlock = worker.getRandom().nextDouble() < bonusOreChance;
 
             if (canGetLuckyBlock)
             {
-                final LootDataManager manager = building.getColony().getWorld().getServer().getLootData();
-                final ResourceLocation lootTableId = LUCKY_ORE_LOOT_TABLE.withSuffix(String.valueOf(building.getBuildingLevel()));
-                final LootParams lootParams = new Builder((ServerLevel) this.world)
-                    .withParameter(LootContextParams.ORIGIN, position.getCenter())
-                    .withParameter(LootContextParams.THIS_ENTITY, worker)
-                    .withParameter(LootContextParams.TOOL, worker.getMainHandItem())
-                    .create(LUCKY_ORE_PARAM_SET);
+                final MinerOrePriorityModule priorityModule =
+                    building.getModuleMatching(MinerOrePriorityModule.class, m -> true);
 
-                final ObjectArrayList<ItemStack> randomItems = manager.getLootTable(lootTableId).getRandomItems(lootParams);
-                for (final ItemStack stack : randomItems)
+                if (priorityModule != null && !priorityModule.isEmpty())
                 {
-                    InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(stack, worker.getInventoryCitizen());
+                    generatePriorityOre(priorityModule, chance);
+                }
+                else
+                {
+                    generateRandomOreFromLootTable(position, chance);
                 }
             }
         }
@@ -1015,6 +1014,65 @@ public class EntityAIStructureMiner extends AbstractEntityAIStructureWithWorkOrd
             building.getColony().getStatisticsManager().increment(ORES_MINED, building.getColony().getDay());
         }
         building.getColony().getStatisticsManager().increment(BLOCKS_MINED, building.getColony().getDay());
+    }
+
+    /**
+     * Generate an ore from the miner's priority list.
+     *
+     * @param priorityModule the priority module with the ore list.
+     * @param oreMultiplier  the multiplier from MORE_ORES research.
+     */
+    private void generatePriorityOre(final MinerOrePriorityModule priorityModule, final double oreMultiplier)
+    {
+        final List<ItemStorage> priorityOres = new ObjectArrayList<>(priorityModule.getPriorityOres());
+        if (priorityOres.isEmpty())
+        {
+            return;
+        }
+
+        final ItemStorage selectedOre = priorityOres.get(worker.getRandom().nextInt(priorityOres.size()));
+        final ItemStack oreStack = selectedOre.getItemStack().copy();
+
+        giveOreToMiner(oreStack, oreMultiplier);
+    }
+
+    /**
+     * Generate a random ore from the loot table.
+     *
+     * @param position      the position where the ore was mined.
+     * @param oreMultiplier the multiplier from MORE_ORES research.
+     */
+    private void generateRandomOreFromLootTable(final BlockPos position, final double oreMultiplier)
+    {
+        final LootDataManager manager = building.getColony().getWorld().getServer().getLootData();
+        final ResourceLocation lootTableId = LUCKY_ORE_LOOT_TABLE.withSuffix(String.valueOf(building.getBuildingLevel()));
+        final LootParams lootParams = new Builder((ServerLevel) this.world)
+            .withParameter(LootContextParams.ORIGIN, position.getCenter())
+            .withParameter(LootContextParams.THIS_ENTITY, worker)
+            .withParameter(LootContextParams.TOOL, worker.getMainHandItem())
+            .create(LUCKY_ORE_PARAM_SET);
+
+        final ObjectArrayList<ItemStack> randomItems = manager.getLootTable(lootTableId).getRandomItems(lootParams);
+        for (final ItemStack stack : randomItems)
+        {
+            giveOreToMiner(stack, oreMultiplier);
+        }
+    }
+
+    /**
+     * Apply research multiplier to ore stack, add it to miner's inventory, and update statistics.
+     *
+     * @param oreStack      the ore stack to give to the miner.
+     * @param oreMultiplier the multiplier from MORE_ORES research.
+     */
+    private void giveOreToMiner(final ItemStack oreStack, final double oreMultiplier)
+    {
+        final int count = Math.max(1, (int) Math.round(oreStack.getCount() * oreMultiplier));
+        oreStack.setCount(count);
+
+        InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(oreStack, worker.getInventoryCitizen());
+        building.getColony().getStatisticsManager().increment(ORES_MINED, building.getColony().getDay());
+        building.getModule(STATS_MODULE).incrementBy(ITEM_OBTAINED + ";" + oreStack.getItem().getDescriptionId(), oreStack.getCount());
     }
 
     @Override

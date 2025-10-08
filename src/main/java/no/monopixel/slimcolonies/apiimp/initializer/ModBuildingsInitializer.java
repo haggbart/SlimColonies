@@ -269,6 +269,7 @@ public final class ModBuildingsInitializer
             .addBuildingModuleProducer(MINER_LEVELS)
             .addBuildingModuleProducer(MINER_SETTINGS)
             .addBuildingModuleProducer(MINER_GUARD_ASSIGN)
+            .addBuildingModuleProducer(MINER_ORE_PRIORITY)
             .addBuildingModuleProducer(BUILDING_RESOURCES)
             .addBuildingModuleProducer(MIN_STOCK)
             .addBuildingModuleProducer(STATS_MODULE)

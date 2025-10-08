@@ -4,7 +4,7 @@
     <image source="slimcolonies:textures/gui/builderhut/builder_paper.png" size="190 244"/>
     <text size="130 11" pos="30 14" textalign="MIDDLE" color="black"
           label="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.minernodelist)"/>
-    <list id="levels" size="164 185" pos="13 29" emptytext="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.minernolevels)" emptycolor="black">
+    <list id="levels" size="164 160" pos="13 29" emptytext="$(no.monopixel.slimcolonies.coremod.gui.workerhuts.minernolevels)" emptycolor="black">
         <box size="100% 28" linewidth="1">
             <text id="level" size="17 12" pos="3 2" textalign="MIDDLE_LEFT" color="black"/>
             <text id="depth" size="60 12" pos="23 2" textalign="MIDDLE_LEFT" color="black"/>
@@ -20,4 +20,8 @@
                     disabled="slimcolonies:textures/gui/builderhut/builder_button_mini_check.png"/>
         </box>
     </list>
+    <button id="assignGuards" size="80 17" pos="55 195"
+            label="Assign Guards"
+            color="black"
+            source="slimcolonies:textures/gui/builderhut/builder_button_medium.png"/>
 </window>

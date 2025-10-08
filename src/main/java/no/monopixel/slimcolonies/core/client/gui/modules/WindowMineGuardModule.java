@@ -191,11 +191,4 @@ public class WindowMineGuardModule extends AbstractModuleWindow
             }
         });
     }
-
-    @Override
-    public void onUpdate()
-    {
-        super.onUpdate();
-        pullGuardsFromHut();
-    }
 }

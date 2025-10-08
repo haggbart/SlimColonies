@@ -26,12 +26,13 @@ public class WindowHutMinerModule extends AbstractModuleWindow
     /**
      * Util tags.
      */
-    private static final String LIST_LEVELS       = "levels";
-    private static final String TEXT_LEVEL        = "level";
-    private static final String BUTTON_MINE_LEVEL = "mine";
-    private static final String BUTTON_REPAIR     = "repair";
-    private static final String TEXT_DEPTH        = "depth";
-    private static final String TEXT_NODE_COUNT   = "nodes";
+    private static final String LIST_LEVELS         = "levels";
+    private static final String TEXT_LEVEL          = "level";
+    private static final String BUTTON_MINE_LEVEL   = "mine";
+    private static final String BUTTON_REPAIR       = "repair";
+    private static final String BUTTON_ASSIGN_GUARDS = "assignGuards";
+    private static final String TEXT_DEPTH          = "depth";
+    private static final String TEXT_NODE_COUNT     = "nodes";
 
     private static final String HUT_MINER_RESOURCE_SUFFIX = ":gui/layouthuts/layoutminermodule.xml";
 
@@ -57,6 +58,7 @@ public class WindowHutMinerModule extends AbstractModuleWindow
 
         registerButton(BUTTON_REPAIR, this::repairClicked);
         registerButton(BUTTON_MINE_LEVEL, this::mineLevelClicked);
+        registerButton(BUTTON_ASSIGN_GUARDS, this::assignGuardsClicked);
     }
 
     /**
@@ -84,6 +86,15 @@ public class WindowHutMinerModule extends AbstractModuleWindow
             miner.current = row;
             Network.getNetwork().sendToServer(new MinerSetLevelMessage(buildingView, row));
         }
+    }
+
+    /**
+     * Handler for clicking on the assign guards button.
+     */
+    private void assignGuardsClicked()
+    {
+        close();
+        new WindowMineGuardModule(buildingView).open();
     }
 
     @Override

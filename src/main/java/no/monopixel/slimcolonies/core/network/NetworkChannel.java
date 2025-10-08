@@ -203,6 +203,7 @@ public class NetworkChannel
         registerMessage(++idx, PickupBlockMessage.class, PickupBlockMessage::new);
         registerMessage(++idx, MarkStoryReadOnItemMessage.class, MarkStoryReadOnItemMessage::new);
         registerMessage(++idx, AlterRestaurantMenuItemMessage.class, AlterRestaurantMenuItemMessage::new);
+        registerMessage(++idx, AlterMinerOrePriorityMessage.class, AlterMinerOrePriorityMessage::new);
 
         //Client side only
         registerMessage(++idx, BlockParticleEffectMessage.class, BlockParticleEffectMessage::new);
