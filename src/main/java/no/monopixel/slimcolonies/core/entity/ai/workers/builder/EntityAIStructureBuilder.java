@@ -8,16 +8,24 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.requestsystem.request.IRequest;
+import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestState;
+import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.IDeliverable;
 import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrder;
 import no.monopixel.slimcolonies.api.colony.workorders.WorkOrderType;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
+import no.monopixel.slimcolonies.api.util.InventoryUtils;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.MessageUtils;
+import no.monopixel.slimcolonies.api.util.StatsUtil;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BuilderModeSetting;
@@ -32,8 +40,12 @@ import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveClo
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
+import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.ITEMS_SCAVENGED;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_BUILDER_MANUAL_SUFFIX;
 
 /**
@@ -62,6 +74,11 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
     PathResult gotoPath = null;
 
     /**
+     * Timestamp of the last scavenge check (in game ticks).
+     */
+    private long lastScavengeCheck = 0;
+
+    /**
      * Initialize the builder and add all his tasks.
      *
      * @param job the job he has.
@@ -74,6 +91,153 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
             new AITarget(START_WORKING, this::checkForWorkOrder, this::startWorkingAtOwnBuilding, TICKS_SECOND)
         );
         worker.setCanPickUpLoot(true);
+    }
+
+    /**
+     * Override to add scavenging behavior while waiting for requests.
+     *
+     * @return NEEDS_ITEM state.
+     */
+    @Override
+    protected IAIState waitForRequests()
+    {
+        final IAIState result = super.waitForRequests();
+
+        final long currentTime = world.getGameTime();
+        if (currentTime - lastScavengeCheck >= 1200)
+        {
+            lastScavengeCheck = currentTime;
+            final boolean scavengedSomething = tryScavengeForRequests();
+
+            if (scavengedSomething && !building.hasOpenSyncRequest(worker.getCitizenData()))
+            {
+                return START_BUILDING;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Attempt to scavenge items for the builder's smallest request.
+     * Builders can "find" small amounts (1-5 items) of needed materials while idle.
+     *
+     * @return true if items were scavenged, false otherwise
+     */
+    private boolean tryScavengeForRequests()
+    {
+        if (worker == null || worker.getCitizenData() == null || building == null)
+        {
+            return false;
+        }
+
+        if (!building.hasOpenSyncRequest(worker.getCitizenData()))
+        {
+            return false;
+        }
+
+        final List<IRequest<?>> allRequests = building.getOpenRequestsOfCitizenOrBuilding(
+            worker.getCitizenData().getId(),
+            request -> request.getRequest() instanceof IDeliverable
+        );
+
+        if (allRequests.isEmpty())
+        {
+            return false;
+        }
+
+        final var playerResolver = building.getColony().getRequestManager().getPlayerResolver();
+        final var retryingResolver = building.getColony().getRequestManager().getRetryingRequestResolver();
+
+        final List<IRequest<?>> requestsWeNeed = new ArrayList<>();
+        for (final IRequest<?> request : allRequests)
+        {
+            try
+            {
+                final var assignedResolver = building.getColony().getRequestManager().getResolverForRequest(request.getId());
+                if (assignedResolver != playerResolver && assignedResolver != retryingResolver)
+                {
+                    continue;
+                }
+            }
+            catch (IllegalArgumentException e)
+            {
+                continue;
+            }
+
+            final IDeliverable deliverable = (IDeliverable) request.getRequest();
+            final List<ItemStack> displayStacks = request.getDisplayStacks();
+
+            if (displayStacks.isEmpty())
+            {
+                continue;
+            }
+
+            final ItemStack stackToCheck = displayStacks.get(0);
+            final int currentCount = InventoryUtils.getItemCountInItemHandler(
+                worker.getCitizenData().getInventory(),
+                stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, stackToCheck)
+            );
+
+            final int stillNeeded = deliverable.getCount() - currentCount;
+
+            if (stillNeeded > 0)
+            {
+                requestsWeNeed.add(request);
+            }
+        }
+
+        if (requestsWeNeed.isEmpty())
+        {
+            return false;
+        }
+
+        requestsWeNeed.sort((a, b) -> {
+            final IDeliverable delivA = (IDeliverable) a.getRequest();
+            final IDeliverable delivB = (IDeliverable) b.getRequest();
+            return Integer.compare(delivA.getCount(), delivB.getCount());
+        });
+
+        final IRequest<?> smallestRequest = requestsWeNeed.get(0);
+        final IDeliverable deliverable = (IDeliverable) smallestRequest.getRequest();
+        final List<ItemStack> displayStacks = smallestRequest.getDisplayStacks();
+        final ItemStack stackToCheck = displayStacks.get(0);
+
+        final int currentCount = InventoryUtils.getItemCountInItemHandler(
+            worker.getCitizenData().getInventory(),
+            stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, stackToCheck)
+        );
+        final int stillNeeded = deliverable.getCount() - currentCount;
+
+        final int randomAmount = 1 + worker.getRandom().nextInt(5);
+        final int scavengeAmount = Math.min(stillNeeded, randomAmount);
+
+        final ItemStack stackToGive = stackToCheck.copy();
+        stackToGive.setCount(scavengeAmount);
+
+        final ItemStack remainingStack = InventoryUtils.addItemStackToItemHandlerWithResult(
+            worker.getCitizenData().getInventory(),
+            stackToGive
+        );
+
+        if (ItemStackUtils.isEmpty(remainingStack) || remainingStack.getCount() < scavengeAmount)
+        {
+            final int actuallyScavenged = scavengeAmount - (ItemStackUtils.isEmpty(remainingStack) ? 0 : remainingStack.getCount());
+
+            StatsUtil.trackStatByStack(building, ITEMS_SCAVENGED, stackToGive, actuallyScavenged);
+            building.getColony().getRequestManager().updateRequestState(smallestRequest.getId(), RequestState.RESOLVED);
+
+            Log.getLogger().info(
+                "[{}] Scavenged {}x {}",
+                worker.getName().getString(),
+                actuallyScavenged,
+                stackToGive.getHoverName().getString()
+            );
+
+            return true;
+        }
+
+        return false;
     }
 
     @Override

@@ -82,6 +82,7 @@ public final class StatisticsConstants
 
     // Builder
     public static final String BLOCKS_PLACED_DETAIL   = "blocks_placed_detail";
+    public static final String ITEMS_SCAVENGED        = "items_scavenged";
 
     // Cowboy
     public static final String MILKING_ATTEMPTS = "milking_attempts";

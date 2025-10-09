@@ -2,13 +2,10 @@ package no.monopixel.slimcolonies.core.client.gui.modules;
 
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
-import com.ldtteam.blockui.controls.Button;
-import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.DropDownList;
 import com.ldtteam.blockui.views.ScrollingList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.IStatisticsManager;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
@@ -34,30 +31,6 @@ public class WindowStatsModule extends AbstractModuleWindow
      */
     private static final LinkedHashMap<String, Integer> INTERVAL = new LinkedHashMap<>();
 
-    /**
-     * ID of the assign button inside the GUI.
-     */
-    private static final String TAG_BUTTON_HIDEZERO = "hidezero";
-
-    /**
-     * Texture of the assign button when it's on.
-     */
-    private static final String TEXTURE_ASSIGN_ON_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini_check.png";
-
-    /**
-     * Texture of the assign button when it's on and disabled.
-     */
-    private static final String TEXTURE_ASSIGN_ON_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled_check.png";
-
-    /**
-     * Texture of the assign button when it's off.
-     */
-    private static final String TEXTURE_ASSIGN_OFF_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini.png";
-
-    /**
-     * Texture of the assign button when it's off and disabled.
-     */
-    private static final String TEXTURE_ASSIGN_OFF_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled.png";
     static
     {
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.yesterday", 1);
@@ -81,17 +54,10 @@ public class WindowStatsModule extends AbstractModuleWindow
      */
     private static final String HUT_RESOURCE_SUFFIX = ":gui/layouthuts/layoutstatsmodule.xml";
 
-    /*
+    /**
      * Module view
      */
     private BuildingStatisticsModuleView moduleView = null;
-
-    /*
-     * Flag to indicate whether recorded stats with no occurrence
-     * within the filtered interval should be hidden.
-     * Useful on buildings with a high number of stats (like the builder).
-     */
-    private boolean hideZeroStats = false;
 
     /**
      * Constructor for the window of the miner hut.
@@ -102,7 +68,6 @@ public class WindowStatsModule extends AbstractModuleWindow
     {
         super(building, Constants.MOD_ID + HUT_RESOURCE_SUFFIX);
         this.moduleView = moduleView;
-        registerButton(TAG_BUTTON_HIDEZERO, this::hideZeroClicked);
     }
 
     @Override
@@ -126,29 +91,22 @@ public class WindowStatsModule extends AbstractModuleWindow
             {
                 int interval = INTERVAL.get(selectedInterval);
 
-                if (hideZeroStats)
+                for (int i = 0; i < stats.size(); i++)
                 {
-                    for (int i = 0; i < stats.size(); i++)
+                    if (interval > 0)
                     {
-                        if (interval > 0)
+                        if (statisticsManager.getStatsInPeriod(stats.get(i), buildingView.getColony().getDay() - interval, buildingView.getColony().getDay()) > 0)
                         {
-                            if (statisticsManager.getStatsInPeriod(stats.get(i), buildingView.getColony().getDay() - interval, buildingView.getColony().getDay()) > 0)
-                            {
-                                filteredStats.add(stats.get(i));
-                            }
-                        }
-                        else
-                        {
-                            if (statisticsManager.getStatTotal(stats.get(i)) > 0)
-                            {
-                                filteredStats.add(stats.get(i));
-                            }
+                            filteredStats.add(stats.get(i));
                         }
                     }
-                }
-                else
-                {
-                    filteredStats.addAll(stats);
+                    else
+                    {
+                        if (statisticsManager.getStatTotal(stats.get(i)) > 0)
+                        {
+                            filteredStats.add(stats.get(i));
+                        }
+                    }
                 }
             }
             /**
@@ -230,29 +188,5 @@ public class WindowStatsModule extends AbstractModuleWindow
             selectedInterval = temp;
             updateStats();
         }
-    }
-
-    /**
-     * Fired when assign has been clicked in the field list.
-     *
-     * @param button clicked button.
-     */
-    private void hideZeroClicked(@NotNull final Button button)
-    {
-        final ButtonImage hideButton = findPaneOfTypeByID(TAG_BUTTON_HIDEZERO, ButtonImage.class);
-        hideZeroStats = !hideZeroStats;
-
-        if (hideZeroStats)
-        {
-            hideButton.setImage(new ResourceLocation(TEXTURE_ASSIGN_ON_NORMAL), true);
-            hideButton.setImageDisabled(new ResourceLocation(TEXTURE_ASSIGN_ON_DISABLED), true);
-        }
-        else
-        {
-            hideButton.setImage(new ResourceLocation(TEXTURE_ASSIGN_OFF_NORMAL), true);
-            hideButton.setImageDisabled(new ResourceLocation(TEXTURE_ASSIGN_OFF_DISABLED), true);
-        }
-
-        updateStats();
     }
 }
