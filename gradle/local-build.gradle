@@ -26,6 +26,8 @@ sourceSets {
         resources {
             srcDir 'src/main/resources'
             srcDir "src/datagen/generated/${project.modId}"
+            // Exclude datagen cache files from resources
+            exclude '.cache/**'
         }
     }
 
