@@ -33,22 +33,6 @@ public interface IStatisticsManager
     void incrementBy(@NotNull String id, final int qty, final int day);
 
     /**
-     * Get the total for a given stat,
-     * @param id the id of the stat.
-     * @return the total since colony creation.
-     */
-    int getStatTotal(@NotNull String id);
-
-    /**
-     * Get the number of occurrences in a given period.
-     * @param id the id of the stat.
-     * @param dayStart the start day.
-     * @param dayEnd the end day.
-     * @return the count.
-     */
-    int getStatsInPeriod(@NotNull String id, final int dayStart, final int dayEnd);
-
-    /**
      * Serialize to bytebuf.
      *
      * @param buf               the buffer to write to.
@@ -76,12 +60,11 @@ public interface IStatisticsManager
      */
     void writeToNBT(@NotNull final CompoundTag compound);
 
-    /**
-     * Getter for the whole stat list.
-     * @return the map of stats.
-     */
     @NotNull
-    Set<String> getStatTypes();
+    Map<String, Integer> getStats();
+
+    @NotNull
+    Map<String, Integer> getStats(final int startDay, final int endDay);
 
     /**
      * Getter for all stat entries.

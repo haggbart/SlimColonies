@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.PARTIAL_STATS_MODIFIER_NAME;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.DROPDOWN_INTERVAL_ID;
@@ -83,61 +84,43 @@ public class WindowStatsModule extends AbstractModuleWindow
     private void updateStats()
     {
         final IStatisticsManager statisticsManager = moduleView.getBuildingStatisticsManager();
-        final @NotNull List<String> stats = new ArrayList<>(statisticsManager.getStatTypes());
         findPaneOfTypeByID("stats", ScrollingList.class).setDataProvider(new ScrollingList.DataProvider()
         {
-
-            private List<String> filteredStats = new ArrayList<>();
+            private final List<Map.Entry<String, Integer>> statsData;
             {
-                int interval = INTERVAL.get(selectedInterval);
+                final int interval = INTERVAL.get(selectedInterval);
+                final Map<String, Integer> statsMap;
 
-                for (int i = 0; i < stats.size(); i++)
+                if (interval > 0)
                 {
-                    if (interval > 0)
-                    {
-                        if (statisticsManager.getStatsInPeriod(stats.get(i), buildingView.getColony().getDay() - interval, buildingView.getColony().getDay()) > 0)
-                        {
-                            filteredStats.add(stats.get(i));
-                        }
-                    }
-                    else
-                    {
-                        if (statisticsManager.getStatTotal(stats.get(i)) > 0)
-                        {
-                            filteredStats.add(stats.get(i));
-                        }
-                    }
+                    statsMap = statisticsManager.getStats(
+                        buildingView.getColony().getDay() - interval,
+                        buildingView.getColony().getDay()
+                    );
                 }
+                else
+                {
+                    statsMap = statisticsManager.getStats();
+                }
+
+                statsData = new ArrayList<>(statsMap.entrySet());
+                statsData.sort(Map.Entry.comparingByKey());
             }
-            /**
-             * The number of rows of the list.
-             * @return the number.
-             */
+
             @Override
             public int getElementCount()
             {
-
-
-                return filteredStats.size();
+                return statsData.size();
             }
 
-            /**
-             * Inserts the elements into each row.
-             * @param index the index of the row/list element.
-             * @param rowPane the parent Pane for the row, containing the elements to update.
-             */
             @Override
             public void updateElement(final int index, @NotNull final Pane rowPane)
             {
-                int stat = statisticsManager.getStatTotal(filteredStats.get(index));
-                int interval = INTERVAL.get(selectedInterval);
-                if (interval > 0)
-                {
-                    stat = statisticsManager.getStatsInPeriod(filteredStats.get(index), buildingView.getColony().getDay() - interval, buildingView.getColony().getDay());
-                }
+                final Map.Entry<String, Integer> entry = statsData.get(index);
+                final String id = entry.getKey();
+                final int stat = entry.getValue();
 
                 final Text resourceLabel = rowPane.findPaneOfTypeByID("desc", Text.class);
-                final String id = filteredStats.get(index);
                 if (id.contains(";"))
                 {
                     final String[] split = id.split(";");
