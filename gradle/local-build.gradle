@@ -158,6 +158,9 @@ jar {
 // Configure all compilation tasks
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    options.incremental = true
+    options.fork = true
+    options.forkOptions.jvmArgs = ['-Xmx1G']
 }
 
 // IntelliJ IDEA configuration
