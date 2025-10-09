@@ -5,7 +5,11 @@ import com.ldtteam.blockui.PaneBuilders;
 import com.ldtteam.blockui.controls.*;
 import com.ldtteam.blockui.views.ScrollingList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
@@ -28,20 +32,26 @@ public class MinerOrePriorityModuleWindow extends AbstractModuleWindow
 
     private static final String LABEL_LIMIT_REACHED = "no.monopixel.slimcolonies.coremod.gui.warehouse.limitreached";
 
-    /**
-     * Comparator for sorting ore items alphabetically by display name.
-     */
+    private static final TagKey<Block> TAG_ORES_IN_NETHERRACK = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores_in_ground/netherrack"));
+    private static final TagKey<Block> TAG_ORES_IN_END_STONE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores_in_ground/end_stone"));
+    private static final TagKey<Block> TAG_ORES_IN_DEEPSLATE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores_in_ground/deepslate"));
+    private static final TagKey<Block> TAG_ORES_DIAMOND       = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/diamond"));
+    private static final TagKey<Block> TAG_ORES_EMERALD       = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/emerald"));
+    private static final TagKey<Block> TAG_ORES_LAPIS         = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/lapis"));
+    private static final TagKey<Block> TAG_ORES_REDSTONE      = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/redstone"));
+    private static final TagKey<Block> TAG_ORES_GOLD          = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/gold"));
+
     private static final Comparator<ItemStorage> BY_DISPLAY_NAME =
         Comparator.comparing(o -> o.getItemStack().getDisplayName().getString().toLowerCase(Locale.US));
 
-    private final ScrollingList priorityList;
-    private final MinerOrePriorityModuleView moduleView;
-    protected final ScrollingList resourceList;
-    private String filter = "";
-    protected List<ItemStorage> groupedItemList;
-    protected final List<ItemStorage> currentDisplayedList = new ArrayList<>();
-    private int tick;
-    private List<ItemStorage> priorityOres;
+    private final   ScrollingList              priorityList;
+    private final   MinerOrePriorityModuleView moduleView;
+    protected final ScrollingList              resourceList;
+    private         String                     filter               = "";
+    protected       List<ItemStorage>          groupedItemList;
+    protected final List<ItemStorage>          currentDisplayedList = new ArrayList<>();
+    private         int                        tick;
+    private         List<ItemStorage>          priorityOres;
 
     public MinerOrePriorityModuleWindow(final IBuildingView building, final MinerOrePriorityModuleView moduleView)
     {
@@ -59,8 +69,47 @@ public class MinerOrePriorityModuleWindow extends AbstractModuleWindow
         for (ItemStorage storage : IColonyManager.getInstance().getCompatibilityManager().getSmeltableOres())
         {
             // Only include ore blocks, not raw materials
-            if (storage.getItemStack().getItem() instanceof net.minecraft.world.item.BlockItem)
+            if (storage.getItemStack().getItem() instanceof net.minecraft.world.item.BlockItem blockItem)
             {
+                final Block block = blockItem.getBlock();
+                final ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(block);
+                final int buildingLevel = building.getBuildingLevel();
+
+                if (block.defaultBlockState().is(TAG_ORES_IN_NETHERRACK) ||
+                    block.defaultBlockState().is(TAG_ORES_IN_END_STONE))
+                {
+                    continue;
+                }
+
+                if (blockId != null && blockId.getPath().contains("ancient_debris"))
+                {
+                    continue;
+                }
+
+                if (block.defaultBlockState().is(TAG_ORES_IN_DEEPSLATE) && buildingLevel < 3)
+                {
+                    continue;
+                }
+
+                if (block.defaultBlockState().is(TAG_ORES_GOLD) && buildingLevel < 2)
+                {
+                    continue;
+                }
+                if (buildingLevel < 3 && (
+                    block.defaultBlockState().is(TAG_ORES_LAPIS) ||
+                        block.defaultBlockState().is(TAG_ORES_REDSTONE)))
+                {
+                    continue;
+                }
+                if (block.defaultBlockState().is(TAG_ORES_DIAMOND) && buildingLevel < 4)
+                {
+                    continue;
+                }
+                if (block.defaultBlockState().is(TAG_ORES_EMERALD) && buildingLevel < 5)
+                {
+                    continue;
+                }
+
                 groupedItemList.add(storage);
             }
         }
