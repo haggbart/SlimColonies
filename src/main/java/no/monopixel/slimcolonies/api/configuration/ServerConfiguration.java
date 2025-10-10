@@ -31,6 +31,7 @@ public class ServerConfiguration extends AbstractConfiguration
     public final ForgeConfigSpec.IntValue     colonyLoadStrictness;
     public final ForgeConfigSpec.IntValue     maxTreeSize;
     public final ForgeConfigSpec.BooleanValue noSupplyPlacementRestrictions;
+    public final ForgeConfigSpec.IntValue     builderScavengingIntervalMinutes;
 
     /*  --------------------------------------------------------------------------- *
      *  ------------------- ######## Research settings ######## ------------------- *
@@ -132,6 +133,7 @@ public class ServerConfiguration extends AbstractConfiguration
         colonyLoadStrictness = defineInteger(builder, "colonyloadstrictness", 3, 1, 15);
         maxTreeSize = defineInteger(builder, "maxtreesize", 400, 1, 1000);
         noSupplyPlacementRestrictions = defineBoolean(builder, "nosupplyplacementrestrictions", false);
+        builderScavengingIntervalMinutes = defineInteger(builder, "builderscavengingintervalminutes", 2, 0, 60);
 
         swapToCategory(builder, "research");
         researchCreativeCompletion = defineBoolean(builder, "researchcreativecompletion", true);
