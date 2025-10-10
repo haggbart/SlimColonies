@@ -1,12 +1,12 @@
 package no.monopixel.slimcolonies.core.colony.managers;
 
-import no.monopixel.slimcolonies.api.colony.managers.interfaces.IStatisticsManager;
 import it.unimi.dsi.fastutil.ints.Int2IntLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
+import no.monopixel.slimcolonies.api.colony.managers.interfaces.IStatisticsManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -52,41 +52,58 @@ public class StatisticsManager implements IStatisticsManager
     }
 
     @Override
-    public int getStatTotal(final @NotNull String id)
+    public @NotNull Map<String, Integer> getStats()
     {
-        final Int2IntLinkedOpenHashMap stats = this.stats.getOrDefault(id, new Int2IntLinkedOpenHashMap());
-        int totalCount = 0;
-        for (final int count : stats.values())
+        final Map<String, Integer> result = new HashMap<>();
+
+        for (final Map.Entry<String, Int2IntLinkedOpenHashMap> entry : stats.entrySet())
         {
-            totalCount += count;
+            int total = 0;
+            for (final int count : entry.getValue().values())
+            {
+                total += count;
+            }
+
+            if (total > 0)
+            {
+                result.put(entry.getKey(), total);
+            }
         }
-        return totalCount;
+
+        return result;
     }
 
     @Override
-    public int getStatsInPeriod(final @NotNull String id, final int startDay, final int endDay)
+    public @NotNull Map<String, Integer> getStats(final int startDay, final int endDay)
     {
-        final Int2IntLinkedOpenHashMap stats = this.stats.getOrDefault(id, new Int2IntLinkedOpenHashMap());
-        int count = 0;
-        for (int day = startDay; day <= endDay; day++)
-        {
-            count += stats.get(day);
-        }
-        return count;
-    }
+        final Map<String, Integer> result = new HashMap<>();
 
-    @Override
-    public @NotNull Set<String> getStatTypes()
-    {
-        return stats.keySet();
+        for (final Map.Entry<String, Int2IntLinkedOpenHashMap> entry : stats.entrySet())
+        {
+            final Int2IntLinkedOpenHashMap dayMap = entry.getValue();
+            int count = 0;
+
+            for (int day = startDay; day <= endDay; day++)
+            {
+                count += dayMap.get(day);
+            }
+
+            if (count > 0)
+            {
+                result.put(entry.getKey(), count);
+            }
+        }
+
+        return result;
     }
 
     /**
      * Gets all the current stat entries in this manager.
+     *
      * @return a set of entries with the id and the stats map.
      */
     @Override
-    public @NotNull Set<Map.Entry<String, Int2IntLinkedOpenHashMap>>  getStatEntries()
+    public @NotNull Set<Map.Entry<String, Int2IntLinkedOpenHashMap>> getStatEntries()
     {
         return stats.entrySet();
     }
@@ -175,12 +192,12 @@ public class StatisticsManager implements IStatisticsManager
             statCompound.putString(TAG_ID, stat.getKey());
 
             final ListTag statNBT = new ListTag();
-            for (final Map.Entry<Integer, Integer> dailyStats : stat.getValue().entrySet())
+            for (final Int2IntMap.Entry dailyStats : stat.getValue().int2IntEntrySet())
             {
                 final CompoundTag timeStampTag = new CompoundTag();
 
-                timeStampTag.putInt(TAG_TIME, dailyStats.getKey());
-                timeStampTag.putInt(TAG_QUANTITY, dailyStats.getValue());
+                timeStampTag.putInt(TAG_TIME, dailyStats.getIntKey());
+                timeStampTag.putInt(TAG_QUANTITY, dailyStats.getIntValue());
 
                 statNBT.add(timeStampTag);
             }

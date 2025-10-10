@@ -2020,6 +2020,7 @@
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.blocks_mined": "Mined Blocks: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.blocks_placed": "Placed Blocks: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.blocks_placed_detail": "Placed: %d %s",
+  "no.monopixel.slimcolonies.coremod.gui.townhall.stats.items_scavenged": "Scavenged: %d %s",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.mobs_killed": "Killed Mobs: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.items_delivered": "Delivered Items: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.items_crafted": "Crafted Items: %d",

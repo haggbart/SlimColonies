@@ -226,37 +226,44 @@ public class WindowStatsPage extends AbstractWindowTownHall
      */
     private void updateStats()
     {
-        final @NotNull List<String> stats = new ArrayList<>(building.getColony().getStatisticsManager().getStatTypes());
-
         findPaneOfTypeByID("stats", ScrollingList.class).setDataProvider(new ScrollingList.DataProvider()
         {
-            /**
-             * The number of rows of the list.
-             * @return the number.
-             */
+            private final List<Map.Entry<String, Integer>> statsData;
+            {
+                final int interval = INTERVAL.get(selectedInterval);
+                final Map<String, Integer> statsMap;
+
+                if (interval > 0)
+                {
+                    statsMap = building.getColony().getStatisticsManager().getStats(
+                        building.getColony().getDay() - interval,
+                        building.getColony().getDay()
+                    );
+                }
+                else
+                {
+                    statsMap = building.getColony().getStatisticsManager().getStats();
+                }
+
+                statsData = new ArrayList<>(statsMap.entrySet());
+                statsData.sort(Map.Entry.comparingByKey());
+            }
+
             @Override
             public int getElementCount()
             {
-                return stats.size();
+                return statsData.size();
             }
 
-            /**
-             * Inserts the elements into each row.
-             * @param index the index of the row/list element.
-             * @param rowPane the parent Pane for the row, containing the elements to update.
-             */
             @Override
             public void updateElement(final int index, @NotNull final Pane rowPane)
             {
-                int stat = building.getColony().getStatisticsManager().getStatTotal(stats.get(index));
-                int interval = INTERVAL.get(selectedInterval);
-                if (interval > 0)
-                {
-                    stat = building.getColony().getStatisticsManager().getStatsInPeriod(stats.get(index), building.getColony().getDay() - interval, building.getColony().getDay());
-                }
+                final Map.Entry<String, Integer> entry = statsData.get(index);
+                final String id = entry.getKey();
+                final int stat = entry.getValue();
 
                 final Text resourceLabel = rowPane.findPaneOfTypeByID("desc", Text.class);
-                resourceLabel.setText(Component.translatable(PARTIAL_STATS_MODIFIER_NAME + stats.get(index), stat));
+                resourceLabel.setText(Component.translatable(PARTIAL_STATS_MODIFIER_NAME + id, stat));
             }
         });
 

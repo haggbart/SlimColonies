@@ -2,13 +2,10 @@ package no.monopixel.slimcolonies.core.client.gui.modules;
 
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
-import com.ldtteam.blockui.controls.Button;
-import com.ldtteam.blockui.controls.ButtonImage;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.DropDownList;
 import com.ldtteam.blockui.views.ScrollingList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.managers.interfaces.IStatisticsManager;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
@@ -20,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.PARTIAL_STATS_MODIFIER_NAME;
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.DROPDOWN_INTERVAL_ID;
@@ -34,30 +32,6 @@ public class WindowStatsModule extends AbstractModuleWindow
      */
     private static final LinkedHashMap<String, Integer> INTERVAL = new LinkedHashMap<>();
 
-    /**
-     * ID of the assign button inside the GUI.
-     */
-    private static final String TAG_BUTTON_HIDEZERO = "hidezero";
-
-    /**
-     * Texture of the assign button when it's on.
-     */
-    private static final String TEXTURE_ASSIGN_ON_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini_check.png";
-
-    /**
-     * Texture of the assign button when it's on and disabled.
-     */
-    private static final String TEXTURE_ASSIGN_ON_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled_check.png";
-
-    /**
-     * Texture of the assign button when it's off.
-     */
-    private static final String TEXTURE_ASSIGN_OFF_NORMAL = "slimcolonies:textures/gui/builderhut/builder_button_mini.png";
-
-    /**
-     * Texture of the assign button when it's off and disabled.
-     */
-    private static final String TEXTURE_ASSIGN_OFF_DISABLED = "slimcolonies:textures/gui/builderhut/builder_button_mini_disabled.png";
     static
     {
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.yesterday", 1);
@@ -81,17 +55,10 @@ public class WindowStatsModule extends AbstractModuleWindow
      */
     private static final String HUT_RESOURCE_SUFFIX = ":gui/layouthuts/layoutstatsmodule.xml";
 
-    /*
+    /**
      * Module view
      */
     private BuildingStatisticsModuleView moduleView = null;
-
-    /*
-     * Flag to indicate whether recorded stats with no occurrence
-     * within the filtered interval should be hidden.
-     * Useful on buildings with a high number of stats (like the builder).
-     */
-    private boolean hideZeroStats = false;
 
     /**
      * Constructor for the window of the miner hut.
@@ -102,7 +69,6 @@ public class WindowStatsModule extends AbstractModuleWindow
     {
         super(building, Constants.MOD_ID + HUT_RESOURCE_SUFFIX);
         this.moduleView = moduleView;
-        registerButton(TAG_BUTTON_HIDEZERO, this::hideZeroClicked);
     }
 
     @Override
@@ -118,68 +84,43 @@ public class WindowStatsModule extends AbstractModuleWindow
     private void updateStats()
     {
         final IStatisticsManager statisticsManager = moduleView.getBuildingStatisticsManager();
-        final @NotNull List<String> stats = new ArrayList<>(statisticsManager.getStatTypes());
         findPaneOfTypeByID("stats", ScrollingList.class).setDataProvider(new ScrollingList.DataProvider()
         {
-
-            private List<String> filteredStats = new ArrayList<>();
+            private final List<Map.Entry<String, Integer>> statsData;
             {
-                int interval = INTERVAL.get(selectedInterval);
+                final int interval = INTERVAL.get(selectedInterval);
+                final Map<String, Integer> statsMap;
 
-                if (hideZeroStats)
+                if (interval > 0)
                 {
-                    for (int i = 0; i < stats.size(); i++)
-                    {
-                        if (interval > 0)
-                        {
-                            if (statisticsManager.getStatsInPeriod(stats.get(i), buildingView.getColony().getDay() - interval, buildingView.getColony().getDay()) > 0)
-                            {
-                                filteredStats.add(stats.get(i));
-                            }
-                        }
-                        else
-                        {
-                            if (statisticsManager.getStatTotal(stats.get(i)) > 0)
-                            {
-                                filteredStats.add(stats.get(i));
-                            }
-                        }
-                    }
+                    statsMap = statisticsManager.getStats(
+                        buildingView.getColony().getDay() - interval,
+                        buildingView.getColony().getDay()
+                    );
                 }
                 else
                 {
-                    filteredStats.addAll(stats);
+                    statsMap = statisticsManager.getStats();
                 }
+
+                statsData = new ArrayList<>(statsMap.entrySet());
+                statsData.sort(Map.Entry.comparingByKey());
             }
-            /**
-             * The number of rows of the list.
-             * @return the number.
-             */
+
             @Override
             public int getElementCount()
             {
-
-
-                return filteredStats.size();
+                return statsData.size();
             }
 
-            /**
-             * Inserts the elements into each row.
-             * @param index the index of the row/list element.
-             * @param rowPane the parent Pane for the row, containing the elements to update.
-             */
             @Override
             public void updateElement(final int index, @NotNull final Pane rowPane)
             {
-                int stat = statisticsManager.getStatTotal(filteredStats.get(index));
-                int interval = INTERVAL.get(selectedInterval);
-                if (interval > 0)
-                {
-                    stat = statisticsManager.getStatsInPeriod(filteredStats.get(index), buildingView.getColony().getDay() - interval, buildingView.getColony().getDay());
-                }
+                final Map.Entry<String, Integer> entry = statsData.get(index);
+                final String id = entry.getKey();
+                final int stat = entry.getValue();
 
                 final Text resourceLabel = rowPane.findPaneOfTypeByID("desc", Text.class);
-                final String id = filteredStats.get(index);
                 if (id.contains(";"))
                 {
                     final String[] split = id.split(";");
@@ -230,29 +171,5 @@ public class WindowStatsModule extends AbstractModuleWindow
             selectedInterval = temp;
             updateStats();
         }
-    }
-
-    /**
-     * Fired when assign has been clicked in the field list.
-     *
-     * @param button clicked button.
-     */
-    private void hideZeroClicked(@NotNull final Button button)
-    {
-        final ButtonImage hideButton = findPaneOfTypeByID(TAG_BUTTON_HIDEZERO, ButtonImage.class);
-        hideZeroStats = !hideZeroStats;
-
-        if (hideZeroStats)
-        {
-            hideButton.setImage(new ResourceLocation(TEXTURE_ASSIGN_ON_NORMAL), true);
-            hideButton.setImageDisabled(new ResourceLocation(TEXTURE_ASSIGN_ON_DISABLED), true);
-        }
-        else
-        {
-            hideButton.setImage(new ResourceLocation(TEXTURE_ASSIGN_OFF_NORMAL), true);
-            hideButton.setImageDisabled(new ResourceLocation(TEXTURE_ASSIGN_OFF_DISABLED), true);
-        }
-
-        updateStats();
     }
 }
