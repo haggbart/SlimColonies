@@ -35,6 +35,7 @@ import no.monopixel.slimcolonies.core.colony.workorders.WorkOrderBuilding;
 import no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIStructureWithWorkOrder;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingProgressStage;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingStructureHandler;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveCloseToXNearY;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
@@ -99,12 +100,26 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
      * @return NEEDS_ITEM state.
      */
     @Override
+    @NotNull
     protected IAIState waitForRequests()
     {
         final IAIState result = super.waitForRequests();
 
+        // Check if scavenging is enabled
+        final int intervalMinutes = SlimColonies.getConfig().getServer().builderScavengingIntervalMinutes.get();
+        if (intervalMinutes == 0)
+        {
+            return result;
+        }
+
+        // Convert minutes to ticks with ±20% randomization
+        // 1 minute = 60 seconds * 20 ticks/second = 1200 ticks
+        final int baseTicks = intervalMinutes * 60 * 20;
+        final double randomFactor = 0.8 + (worker.getRandom().nextDouble() * 0.4); // 0.8 to 1.2
+        final long intervalTicks = (long) (baseTicks * randomFactor);
+
         final long currentTime = world.getGameTime();
-        if (currentTime - lastScavengeCheck >= 1200)
+        if (currentTime - lastScavengeCheck >= intervalTicks)
         {
             lastScavengeCheck = currentTime;
             final boolean scavengedSomething = tryScavengeForRequests();
