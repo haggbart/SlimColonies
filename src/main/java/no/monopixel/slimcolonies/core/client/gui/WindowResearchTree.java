@@ -1,5 +1,6 @@
 package no.monopixel.slimcolonies.core.client.gui;
 
+import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
 import com.ldtteam.blockui.controls.*;
 import com.ldtteam.blockui.views.View;
@@ -65,17 +66,8 @@ public class WindowResearchTree extends AbstractWindowSkeleton
      */
     private boolean hasMax;
 
-    /**
-     * The undo button, if one is present.
-     */
     private final ButtonImage undoButton = new ButtonImage();
-
-    /**
-     * The undo text, if one is present
-     */
     private final Text undoText = new Text();
-
-    // Research no longer uses undo cost icons
 
     /**
      * The current state of a research button's display status.
@@ -113,6 +105,17 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         this.hasMax = building.getColony().getResearchManager().getResearchTree().branchFinishedHighestLevel(branch);
 
         final ZoomDragView view = findPaneOfTypeByID(DRAG_VIEW_ID, ZoomDragView.class);
+        if (view != null)
+        {
+            final int originalContentWidth = MAX_DEPTH * (GRADIENT_WIDTH + X_SPACING) + INITIAL_X_OFFSET * 2;
+            final double zoomScale = (double) view.getWidth() / originalContentWidth;
+
+            view.setMinScale(zoomScale);
+            view.setMaxScale(zoomScale * 2);
+            view.setScaleRaw(zoomScale);
+            view.enableZoom();
+            view.enableDrag();
+        }
 
         final int maxHeight = drawTree(0, 0, view, researchList, false);
         drawTreeBackground(view, maxHeight);
@@ -123,33 +126,24 @@ public class WindowResearchTree extends AbstractWindowSkeleton
     {
         super.onButtonClicked(button);
 
-        // drawUndoProgressButton and drawUndoCompleteButton adds a button and icon(s) representing the cost of resetting the research.
-        // See their respective functions for details on the how.
-        // These branches remove those buttons from the DragTreeView, if present, on pressing any button.
-        // That should occur no matter what buttons are pressed, even disabled buttons, as a "no, I don't want to".
-        // We'll do that even for branches that will close the WindowResearchTree for now,
-        // since down the road we may want to be able to cancel or start multiple researches without
-        // closing and reopening the WindowResearchTree.
-        final View parent = button.getParent();
-        if (parent.getChildren().contains(undoButton))
+        final Pane parentPane = button.getParent();
+        if (parentPane instanceof View)
         {
-            parent.removeChild(undoButton);
-        }
-        // Research no longer displays undo cost icons
-        if (parent.getChildren().contains(undoText))
-        {
-            parent.removeChild(undoText);
+            final View parent = (View) parentPane;
+            if (parent.getChildren().contains(undoButton))
+            {
+                parent.removeChild(undoButton);
+            }
+            if (parent.getChildren().contains(undoText))
+            {
+                parent.removeChild(undoText);
+            }
         }
 
-        // Check for an empty button Id.  These reflect disabled buttons normally
-        // but a sufficiently malformed data pack may also have a blank research id,
-        // and we don't want to try to try to parse that.
-        // May eventually want a sound handler here, but SoundUtils.playErrorSound is a bit much.
         if (button.getID().isEmpty())
         {
-            // intentionally empty.
+            return;
         }
-        // Undo just the selected research.
         else if (button.getID().contains("undo:"))
         {
             final String undoName = button.getID().substring(button.getID().indexOf(':') + 1);
@@ -161,19 +155,10 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             final ILocalResearch cancelResearch = building.getColony().getResearchManager().getResearchTree().getResearch(branch, undoID);
             if (cancelResearch != null)
             {
-                // Can't rely on getting an updated research count after the cancellation in any predictable timeframe.
-                // Instead, offset the UniversityWindow's count by -1 before the packet could be sent.
                 if (cancelResearch.getState() == ResearchState.IN_PROGRESS)
                 {
                     last.updateResearchCount(-1);
                 }
-                // Canceled research will eventually be removed from the local tree on synchronization from server,
-                // But this can be long enough (~5 seconds) to cause confusion if the player reopens the WindowResearchTree.
-                // Completely removing the research to null will allow players to unintentionally restart it.
-                // While the server-side logic prevents this from taking items, it would be confusing.
-                // Setting to NOT_STARTED means that it can't be sent, as only null research states
-                // are eligible to send TryResearchMessages, and only IN_PROGRESS, or FINISHED
-                // are eligible to drawUndo buttons.
                 cancelResearch.setState(ResearchState.NOT_STARTED);
                 Network.getNetwork().sendToServer(new TryResearchMessage(building, cancelResearch.getId(), cancelResearch.getBranch(), true));
                 close();
@@ -189,11 +174,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             if (localResearch == null && building.getBuildingLevel() > building.getColony().getResearchManager().getResearchTree().getResearchInProgress().size() &&
                 mc.player.isCreative())
             {
-                // This side won't actually start research; it'll be overridden the next colony update from the server.
-                // It will, however, update for the next WindowResearchTree if the colony update is slow to come back.
-                // Again, the server will prevent someone from paying items twice, but this avoids some confusion.
                 research.startResearch(building.getColony().getResearchManager().getResearchTree());
-                // don't need to offset count here, as the startResearch will pad it until the new Colony data comes in.
                 last.updateResearchCount(0);
                 if (research.getDepth() > building.getBuildingMaxLevel())
                 {
@@ -204,21 +185,16 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             }
             else if (localResearch != null)
             {
-                // Generally allow in-progress research to be cancelled.
-                // This allows canceling in-progress research to free up a researcher slot.
                 if (localResearch.getState() == ResearchState.IN_PROGRESS)
                 {
                     drawUndoProgressButton(button);
                 }
                 if (localResearch.getState() == ResearchState.FINISHED)
                 {
-                    // Immutable must never allow UndoComplete.
-                    // Autostart research should not allow undo of completed research as well, as it will attempt to restart it on colony reload.
                     if (research.isImmutable() || research.isAutostart())
                     {
                         return;
                     }
-                    // don't allow research with completed or in-progress children to be reset.  They must be reset individually.
                     for (ResourceLocation childId : research.getChildren())
                     {
                         if (building.getColony().getResearchManager().getResearchTree().getResearch(branch, childId) != null
@@ -231,23 +207,11 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                 }
             }
         }
-        // Cancel the entire WindowResearchTree
         else if (button.getID().equals("cancel"))
         {
             last.open();
         }
     }
-
-    /**
-     * Draw the tree of research.
-     *
-     * @param height       the start y offset.
-     * @param depth        the current depth.
-     * @param view         the view to append it to.
-     * @param researchList the list of research to go through.
-     * @param abandoned    if abandoned child.
-     * @return the next y offset.
-     */
     private int drawTree(
         final int height,
         final int depth,
@@ -255,8 +219,6 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         final List<ResourceLocation> researchList,
         final boolean abandoned)
     {
-        // Data Pack items load non-deterministically, and the underlying researchTree hashmap doesn't guarantee return of items in any specific order.
-        // Sort by the number on the "sortOrder" tag if present to allow control of display order.
         researchList.sort(Comparator.comparing(unsortedResearch -> IGlobalResearchTree.getInstance().getResearch(branch, unsortedResearch).getSortOrder()));
 
         int nextHeight = height;
@@ -291,12 +253,6 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         return nextHeight;
     }
 
-    /**
-     * Draw the background gradients and labels for the research tree.
-     *
-     * @param view      the view to append it to.
-     * @param maxHeight the largest height value of research on the view.
-     */
     private void drawTreeBackground(final ZoomDragView view, final int maxHeight)
     {
         if (branchType == ResearchBranchType.UNLOCKABLES && IGlobalResearchTree.getInstance().getBranchData(branch).getBaseTime(1) < 1)
@@ -328,7 +284,6 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                     final Gradient gradient = new Gradient();
                     gradient.setGradientStart(80, 80, 80, 100);
                     gradient.setGradientEnd(60, 60, 60, 110);
-                    // Draw the last gradient beyond the edge of the displayed area, to avoid blank spot on the right.
                     gradient.setSize(i == MAX_DEPTH ? 400 : GRADIENT_WIDTH + X_SPACING, (maxHeight + 4) * (GRADIENT_HEIGHT + Y_SPACING) + Y_SPACING + TIMELABEL_Y_POSITION);
                     gradient.setPosition((i - 1) * (GRADIENT_WIDTH + X_SPACING), 0);
                     view.addChild(gradient, 0);
@@ -343,23 +298,12 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         }
     }
 
-    /**
-     * Calculates the UI status of a given Research Item.
-     *
-     * @param abandoned        if a research, or one of its ancestors, has a Parent with OnlyChild set, and one alternate branch already begun or completed.
-     * @param parentResearched if the immediate parent research has been completed.
-     * @param research         the global research information for the research.
-     * @param state            the current LocalResearchTree ResearchState of the research for the colony.
-     * @return the current set state of the research for display purposes.
-     */
     private ResearchButtonState getResearchButtonState(final boolean abandoned, final boolean parentResearched, final IGlobalResearch research, final ResearchState state)
     {
-        // Not available as parent has OnlyChild set, and another child research is complete.
         if (abandoned)
         {
             return ResearchButtonState.ABANDONED;
         }
-        // Locked, as parent is not completed.
         else if (!parentResearched)
         {
             return ResearchButtonState.MISSING_PARENT;
@@ -372,7 +316,6 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         {
             return ResearchButtonState.IN_PROGRESS;
         }
-        // If the University too low-level for the research, or if this research is max-level, the building is max level, and another max-level research is completed.
         else if (research.getDepth() > building.getBuildingLevel() && !(research.getDepth() > building.getBuildingMaxLevel() && !hasMax
             && building.getBuildingLevel() == building.getBuildingMaxLevel()) && branchType != ResearchBranchType.UNLOCKABLES)
         {
@@ -382,13 +325,10 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         {
             return ResearchButtonState.AVAILABLE;
         }
-        // is missing a requirement, such as a building, alternate building, or research requirement.
         else if (!IGlobalResearchTree.getInstance().isResearchRequirementsFulfilled(research.getResearchRequirements(), building.getColony()))
         {
             return ResearchButtonState.MISSING_REQUIREMENT;
         }
-        // Research no longer has item costs - this check has been removed.
-        // is valid to begin.
         else
         {
             return ResearchButtonState.AVAILABLE;
