@@ -41,8 +41,6 @@ public class CustomVisitorListener extends SimpleJsonResourceReloadListener
     public static final String VISITOR_STORYKEY         = "storylangkey";
     public static final String VISITOR_CHANCE           = "chance";
     public static final String VISITOR_CITIZEN_SUFFIX   = "citizensuffix";
-    public static final String VISITOR_RECRUITCOST      = "recruitcost";
-    public static final String VISITOR_RECRUITCOSTCOUNT = "recruitcostcount";
     public static final String VISITOR_GENDER           = "gender";
     public static final String VISITOR_VOICE_PROFILE    = "voiceprofile";
     public static final String VISITOR_PRIMARY_SKILL    = "primaryskill";
@@ -111,19 +109,6 @@ public class CustomVisitorListener extends SimpleJsonResourceReloadListener
                 dataEntry.citizenSuffix = data.get(VISITOR_CITIZEN_SUFFIX).getAsString();
             }
 
-            if (data.has(VISITOR_RECRUITCOST))
-            {
-                dataEntry.recruitCost = ItemStackUtils.idToItemStack(data.get(VISITOR_RECRUITCOST).getAsString());
-            }
-
-            if (data.has(VISITOR_RECRUITCOSTCOUNT))
-            {
-                if (dataEntry.recruitCost != null)
-                {
-                    dataEntry.recruitCost.setCount(data.get(VISITOR_RECRUITCOSTCOUNT).getAsInt());
-                }
-            }
-
             if (data.has(VISITOR_VOICE_PROFILE))
             {
                 dataEntry.voiceProfile = data.get(VISITOR_VOICE_PROFILE).getAsInt();
@@ -186,11 +171,6 @@ public class CustomVisitorListener extends SimpleJsonResourceReloadListener
          * Citizen suffix
          */
         private String citizenSuffix = null;
-
-        /**
-         * Recruitment costs
-         */
-        private ItemStack recruitCost;
 
         /**
          * Gender setting

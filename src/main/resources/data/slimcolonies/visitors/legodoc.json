@@ -4,8 +4,6 @@
   "name": "Lupin Vulpes",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.legodoc",
-  "recruitcost": "minecraft:piston",
-  "recruitcostcount": 5,
   "gender": "male",
   "primaryskill": "Knowledge",
   "secondaryskill": "Agility"

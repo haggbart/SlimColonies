@@ -4,7 +4,5 @@
   "name": "Tamamo No Mae",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.shashand",
-  "recruitcost": "slimcolonies:ancienttome",
-  "recruitcostcount": 9,
   "gender": "female"
 }

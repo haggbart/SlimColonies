@@ -4,8 +4,6 @@
   "name": "Circinus Coranus",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.andromeda",
-  "recruitcost": "minecraft:amethyst_block",
-  "recruitcostcount": 13,
   "gender": "female",
   "primaryskill": "Mana",
   "secondaryskill": "Knowledge"

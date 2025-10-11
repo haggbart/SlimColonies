@@ -4,7 +4,5 @@
   "name": "Doggus",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.doggus",
-  "recruitcost": "minecraft:diamond_pickaxe",
-  "recruitcostcount": 1,
   "gender": "male"
 }

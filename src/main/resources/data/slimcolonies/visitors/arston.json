@@ -4,7 +4,5 @@
   "name": "Arston",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.arston",
-  "recruitcost": "minecraft:iron_axe",
-  "recruitcostcount": 3,
   "gender": "male"
 }

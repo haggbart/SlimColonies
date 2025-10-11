@@ -4,8 +4,6 @@
   "name": "Kedamono Dragon",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.kedamono",
-  "recruitcost": "minecraft:purple_bed",
-  "recruitcostcount": 27,
   "gender": "male",
   "primaryskill": "Adaptability",
   "secondaryskill": "Knowledge"

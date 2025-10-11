@@ -4,7 +4,5 @@
   "name": "Asuna Yuuki",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.hyrios",
-  "recruitcost": "minecraft:diamond_sword",
-  "recruitcostcount": 1,
   "gender": "female"
 }

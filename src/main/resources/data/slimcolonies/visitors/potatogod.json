@@ -4,7 +4,5 @@
   "name": "Cactus Jack",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.potatogod",
-  "recruitcost": "minecraft:cactus",
-  "recruitcostcount": 7,
   "gender": "male"
 }

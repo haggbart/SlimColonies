@@ -52,7 +52,6 @@ public class FMLEventHandler
         event.addListener(new QuestJsonListener());
         event.addListener(new ItemNbtListener());
         event.addListener(new StudyItemListener());
-        event.addListener(new RecruitmentItemsListener());
     }
 
     @SubscribeEvent

@@ -4,8 +4,6 @@
   "name": "Moobien",
   "chance": 0.001,
   "storylangkey": "no.monopixel.slimcolonies.coremod.gui.chat.moobien",
-  "recruitcost": "minecraft:copper_block",
-  "recruitcostcount": 15,
   "gender": "male",
   "primaryskill": "Athletics",
   "secondaryskill": "Adaptability"

@@ -42,7 +42,6 @@ public class GatherDataHandler
         generator.addProvider(event.includeServer(), new DefaultResearchProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new DefaultRecipeProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new DefaultLuckyOreLootProvider(generator.getPackOutput()));
-        generator.addProvider(event.includeServer(), new DefaultRecruitmentItemsProvider(generator.getPackOutput()));
 
         // workers
         generator.addProvider(event.includeServer(), new DefaultRecipeLootProvider(generator.getPackOutput()));
