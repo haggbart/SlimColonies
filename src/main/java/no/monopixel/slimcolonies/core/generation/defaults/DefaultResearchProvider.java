@@ -1377,16 +1377,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .setSortOrder(2)
             .addToList(r);
 
-
-        new Research(new ResourceLocation(Constants.MOD_ID, "technology/buildermodes"), TECH).setParentResearch(memoryAid)
-            .setTranslatedName("Builder Modes")
-            .setTranslatedSubtitle("Possibility Overload!")
-            .setIcon(ModBlocks.blockHutBuilder.asItem())
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.BUILDER_ID), 3)
-            .addEffect(BUILDER_MODE, 1)
-            .setSortOrder(4)
-            .addToList(r);
-
         final Research deepPockets = new Research(new ResourceLocation(Constants.MOD_ID, "technology/deeppockets"), TECH).setParentResearch(cheatSheet)
             .setTranslatedName("Deep Pockets")
             .setSortOrder(2)
