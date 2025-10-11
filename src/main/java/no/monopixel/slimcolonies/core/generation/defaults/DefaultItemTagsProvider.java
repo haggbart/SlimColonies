@@ -189,11 +189,16 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
         final Item[] paperExtras = getDomumExtra(ExtraBlockType.BASE_PAPER, ExtraBlockType.LIGHT_PAPER);
 
         tag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_BAKER))
-            .addTag(Tags.Items.CROPS_WHEAT);
+            .addTag(Tags.Items.CROPS_WHEAT)
+            .add(Items.SUGAR)
+            .add(Items.EGG)
+            .add(Items.MILK_BUCKET)
+            .add(Items.COCOA_BEANS)
+            .add(Items.PUMPKIN);
         tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_BAKER));
-        tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_BAKER));
+        tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_BAKER))
+            .add(Items.BREAD, Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE);
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_BAKER))
-            .add(Items.BREAD, Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE)
             .add(Items.PACKED_MUD)
             .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_COOK));
 
@@ -224,10 +229,16 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .add(Items.CHICKEN)
             .add(Items.PORKCHOP)
             .add(Items.RABBIT)
+            .add(Items.COOKED_RABBIT)
             .add(Items.POTATO)
+            .add(Items.BAKED_POTATO)
+            .add(Items.CARROT)
             .add(Items.KELP)
             .add(Items.DRIED_KELP)
             .add(Items.DRIED_KELP_BLOCK)
+            .add(Items.RED_MUSHROOM)
+            .add(Items.BROWN_MUSHROOM)
+            .add(Items.BOWL)
             .add(Items.EGG)
             .add(Items.MILK_BUCKET)
             .add(Items.WHEAT);

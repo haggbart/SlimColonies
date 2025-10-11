@@ -10,14 +10,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.MODULE_CRAFTING;
-import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.MODULE_SMELTING;
 
 /**
  * Datagen for Baker
@@ -49,10 +47,10 @@ public class DefaultBakerCraftingProvider extends CustomRecipeProvider
             .minBuildingLevel(3)
             .build(consumer);
 
-        CustomRecipeBuilder.create(BAKER, MODULE_SMELTING, "bread")
+        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "bread")
             .inputs(List.of(new ItemStorage(new ItemStack(Items.WHEAT), 3)))
             .result(new ItemStack(Items.BREAD))
-            .intermediate(Blocks.FURNACE)
+            .minBuildingLevel(1)
             .build(consumer);
 
         CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "cookie")

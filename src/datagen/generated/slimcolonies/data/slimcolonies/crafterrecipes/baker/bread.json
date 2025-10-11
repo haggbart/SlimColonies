@@ -1,12 +1,13 @@
 {
   "type": "recipe",
-  "crafter": "baker_smelting",
+  "crafter": "baker_crafting",
   "inputs": [
     {
       "count": 3,
       "item": "minecraft:wheat"
     }
   ],
-  "intermediate": "minecraft:furnace",
+  "intermediate": "minecraft:air",
+  "min-building-level": 1,
   "result": "minecraft:bread"
 }
