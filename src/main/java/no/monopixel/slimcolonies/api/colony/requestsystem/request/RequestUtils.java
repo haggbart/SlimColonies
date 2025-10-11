@@ -60,6 +60,7 @@ public class RequestUtils
     /**
      * Gathers all request tokens that are currently assigned to player or retrying resolvers.
      * This is used to find requests that require player attention.
+     * Filters out orphaned tokens (tokens without corresponding requests).
      *
      * @param manager the request manager
      * @return a set of all pending request tokens
@@ -72,6 +73,10 @@ public class RequestUtils
         final Set<IToken<?>> requestTokens = new HashSet<>();
         requestTokens.addAll(resolver.getAllAssignedRequests());
         requestTokens.addAll(retryingRequestResolver.getAllAssignedRequests());
+
+        // TODO: This filter is a workaround for orphaned tokens in legacy save data. Can be removed in a future version once old saves are no longer supported.
+        // Filter out orphaned tokens (stale tokens without actual requests)
+        requestTokens.removeIf(token -> manager.getRequestForToken(token) == null);
 
         return requestTokens;
     }
