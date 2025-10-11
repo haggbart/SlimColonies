@@ -1,5 +1,10 @@
 {
   "values": [
-    "#forge:crops/wheat"
+    "#forge:crops/wheat",
+    "minecraft:sugar",
+    "minecraft:egg",
+    "minecraft:milk_bucket",
+    "minecraft:cocoa_beans",
+    "minecraft:pumpkin"
   ]
 }

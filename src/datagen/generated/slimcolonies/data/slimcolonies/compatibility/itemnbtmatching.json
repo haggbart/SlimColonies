@@ -5300,18 +5300,12 @@
     "item": "slimcolonies:blockwaypoint"
   },
   {
-    "item": "slimcolonies:bread_dough"
-  },
-  {
     "checkednbtkeys": [
       {
         "key": "Enchantments"
       }
     ],
     "item": "slimcolonies:build_goggles"
-  },
-  {
-    "item": "slimcolonies:cake_batter"
   },
   {
     "item": "slimcolonies:clipboard"
@@ -5324,9 +5318,6 @@
   },
   {
     "item": "slimcolonies:composted_dirt"
-  },
-  {
-    "item": "slimcolonies:cookie_dough"
   },
   {
     "item": "slimcolonies:decorationcontroller"
@@ -5342,9 +5333,6 @@
   },
   {
     "item": "slimcolonies:questlog"
-  },
-  {
-    "item": "slimcolonies:raw_pumpkin_pie"
   },
   {
     "item": "slimcolonies:resourcescroll"
