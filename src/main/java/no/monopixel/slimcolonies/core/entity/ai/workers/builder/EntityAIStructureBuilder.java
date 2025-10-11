@@ -238,15 +238,22 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
         if (ItemStackUtils.isEmpty(remainingStack) || remainingStack.getCount() < scavengeAmount)
         {
             final int actuallyScavenged = scavengeAmount - (ItemStackUtils.isEmpty(remainingStack) ? 0 : remainingStack.getCount());
+            final int newTotalCount = currentCount + actuallyScavenged;
 
             StatsUtil.trackStatByStack(building, ITEMS_SCAVENGED, stackToGive, actuallyScavenged);
-            building.getColony().getRequestManager().updateRequestState(smallestRequest.getId(), RequestState.RESOLVED);
+
+            // Use overruleRequest with partial stack to let the request system handle partial fulfillment
+            final ItemStack partialStack = stackToCheck.copy();
+            partialStack.setCount(actuallyScavenged);
+            building.getColony().getRequestManager().overruleRequest(smallestRequest.getId(), partialStack);
 
             Log.getLogger().info(
-                "[{}] Scavenged {}x {}",
+                "[{}] Scavenged {}x {} ({}/{} needed)",
                 worker.getName().getString(),
                 actuallyScavenged,
-                stackToGive.getHoverName().getString()
+                stackToGive.getHoverName().getString(),
+                newTotalCount,
+                deliverable.getCount()
             );
 
             return true;

@@ -6,6 +6,9 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.player.IPlaye
 import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.retrying.IRetryingRequestResolver;
 import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Util class for requests
  */
@@ -52,5 +55,24 @@ public class RequestUtils
         }
 
         return false;
+    }
+
+    /**
+     * Gathers all request tokens that are currently assigned to player or retrying resolvers.
+     * This is used to find requests that require player attention.
+     *
+     * @param manager the request manager
+     * @return a set of all pending request tokens
+     */
+    public static Set<IToken<?>> getAllPendingRequestTokens(final IRequestManager manager)
+    {
+        final IPlayerRequestResolver resolver = manager.getPlayerResolver();
+        final IRetryingRequestResolver retryingRequestResolver = manager.getRetryingRequestResolver();
+
+        final Set<IToken<?>> requestTokens = new HashSet<>();
+        requestTokens.addAll(resolver.getAllAssignedRequests());
+        requestTokens.addAll(retryingRequestResolver.getAllAssignedRequests());
+
+        return requestTokens;
     }
 }

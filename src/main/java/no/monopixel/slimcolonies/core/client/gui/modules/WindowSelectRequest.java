@@ -7,23 +7,21 @@ import com.ldtteam.blockui.controls.Image;
 import com.ldtteam.blockui.controls.ItemIcon;
 import com.ldtteam.blockui.controls.Text;
 import com.ldtteam.blockui.views.ScrollingList;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.IRequest;
-import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.player.IPlayerRequestResolver;
-import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.retrying.IRetryingRequestResolver;
+import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestUtils;
 import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.client.gui.AbstractModuleWindow;
 import no.monopixel.slimcolonies.core.colony.requestsystem.requests.StandardRequests;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -40,21 +38,23 @@ public class WindowSelectRequest extends AbstractModuleWindow
     private static final String RESOURCE_STRING = ":gui/layouthuts/layoutselectrequest.xml";
 
     private final Predicate<IRequest<?>> predicate;
-    private final Consumer<IRequest<?>> reopenWithRequest;
+    private final Consumer<IRequest<?>>  reopenWithRequest;
 
     private final ScrollingList requestsList;
-    private int lifeCount = 0;
+    private       int           lifeCount = 0;
 
     /**
      * Construct window.
-     * @param building the building to check for requests
-     * @param predicate predicate returning true if this is a selectable request
+     *
+     * @param building          the building to check for requests
+     * @param predicate         predicate returning true if this is a selectable request
      * @param reopenWithRequest called after clicking select or cancel, with the request or null respectively.
      *                          not called if the player hits ESC or clicks a different tab
      */
-    public WindowSelectRequest(final IBuildingView building,
-                               final Predicate<IRequest<?>> predicate,
-                               final Consumer<@Nullable IRequest<?>> reopenWithRequest)
+    public WindowSelectRequest(
+        final IBuildingView building,
+        final Predicate<IRequest<?>> predicate,
+        final Consumer<@Nullable IRequest<?>> reopenWithRequest)
     {
         super(building, Constants.MOD_ID + RESOURCE_STRING);
         this.predicate = predicate;
@@ -89,12 +89,7 @@ public class WindowSelectRequest extends AbstractModuleWindow
         final List<IRequest<?>> requests = new ArrayList<>();
 
         final IRequestManager requestManager = buildingView.getColony().getRequestManager();
-        final IPlayerRequestResolver resolver = requestManager.getPlayerResolver();
-        final IRetryingRequestResolver retryingRequestResolver = requestManager.getRetryingRequestResolver();
-
-        final Set<IToken<?>> requestTokens = new HashSet<>();
-        requestTokens.addAll(resolver.getAllAssignedRequests());
-        requestTokens.addAll(retryingRequestResolver.getAllAssignedRequests());
+        final Set<IToken<?>> requestTokens = RequestUtils.getAllPendingRequestTokens(requestManager);
 
         for (final IToken<?> token : requestTokens)
         {
@@ -127,6 +122,7 @@ public class WindowSelectRequest extends AbstractModuleWindow
 
     /**
      * When clicking the select button in the request list
+     *
      * @param button the button clicked
      */
     private void select(@NotNull final Button button)
@@ -179,7 +175,8 @@ public class WindowSelectRequest extends AbstractModuleWindow
                     logo.setVisible(false);
                     exampleStackDisplay.setVisible(true);
                     exampleStackDisplay.setItem(displayStacks.get((lifeCount / LIFE_COUNT_DIVIDER) % displayStacks.size()));
-                    rowPane.findPaneOfTypeByID(REQUESTER, Text.class).setText(request.getRequester().getRequesterDisplayName(buildingView.getColony().getRequestManager(), request));
+                    rowPane.findPaneOfTypeByID(REQUESTER, Text.class)
+                        .setText(request.getRequester().getRequesterDisplayName(buildingView.getColony().getRequestManager(), request));
                 }
                 else
                 {
@@ -197,7 +194,7 @@ public class WindowSelectRequest extends AbstractModuleWindow
                     if (!displayStacks.isEmpty())
                     {
                         rowPane.findPaneOfTypeByID(REQUEST_SHORT_DETAIL, Text.class).setText(
-                                request.getDisplayStacks().get((lifeCount / LIFE_COUNT_DIVIDER) % displayStacks.size()).getHoverName());
+                            request.getDisplayStacks().get((lifeCount / LIFE_COUNT_DIVIDER) % displayStacks.size()).getHoverName());
                     }
                 }
                 else

@@ -11,9 +11,8 @@ import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.colony.requestsystem.manager.IRequestManager;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.IRequest;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestState;
+import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestUtils;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.MinimumStack;
-import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.player.IPlayerRequestResolver;
-import no.monopixel.slimcolonies.api.colony.requestsystem.resolver.retrying.IRetryingRequestResolver;
 import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
@@ -31,36 +30,13 @@ import java.util.*;
 
 import static no.monopixel.slimcolonies.api.util.constant.WindowConstants.CLIPBOARD_TOGGLE;
 
-/**
- * ClipBoard window.
- */
 public class WindowClipBoard extends AbstractWindowRequestTree
 {
-    /**
-     * Resource suffix.
-     */
     private static final String BUILD_TOOL_RESOURCE_SUFFIX = ":gui/windowclipboard.xml";
-
-    /**
-     * List of async request tokens.
-     */
     private final List<IToken<?>> asyncRequest = new ArrayList<>();
-
-    /**
-     * The colony id.
-     */
     private final IColonyView colony;
+    private boolean hide;
 
-    /**
-     * Hide or show not important requests.
-     */
-    private boolean hide = false;
-
-    /**
-     * Constructor of the clipboard GUI.
-     *
-     * @param colony the colony to check the requests for.
-     */
     public WindowClipBoard(final IColonyView colony, boolean hidestate)
     {
         super(null, Constants.MOD_ID + BUILD_TOOL_RESOURCE_SUFFIX, colony);
@@ -79,12 +55,6 @@ public class WindowClipBoard extends AbstractWindowRequestTree
         paintButtonState();
     }
 
-    /**
-     * Toggles the visibility of non-important requests and sends a message to
-     * the server to save that setting on the clipboard item.
-     *
-     * @see ItemSettingMessage
-     */
     private void toggleImportant()
     {
         this.hide = !this.hide;
@@ -96,13 +66,6 @@ public class WindowClipBoard extends AbstractWindowRequestTree
         Network.getNetwork().sendToServer(hideSetting);
     }
 
-
-    /**
-     * Paints the button state of the important toggle.
-     *
-     * This function finds the important toggle button and sets its colors based on the state of hide.
-     * If hide is true, the button is set to green. Otherwise, it is set to red.
-     */
     private void paintButtonState()
     {
         final Button importantToggle = findPaneOfTypeByID("important", Button.class);
@@ -129,23 +92,19 @@ public class WindowClipBoard extends AbstractWindowRequestTree
 
         final IRequestManager requestManager = colony.getRequestManager();
 
-        if (requestManager == null)
-        {
-            return ImmutableList.of();
-        }
-
         try
         {
-            final IPlayerRequestResolver resolver = requestManager.getPlayerResolver();
-            final IRetryingRequestResolver retryingRequestResolver = requestManager.getRetryingRequestResolver();
-
-            final Set<IToken<?>> requestTokens = new HashSet<>();
-            requestTokens.addAll(resolver.getAllAssignedRequests());
-            requestTokens.addAll(retryingRequestResolver.getAllAssignedRequests());
+            final Set<IToken<?>> requestTokens = RequestUtils.getAllPendingRequestTokens(requestManager);
 
             for (final IToken<?> token : requestTokens)
             {
                 IRequest<?> request = requestManager.getRequestForToken(token);
+
+                // Skip null requests (stale tokens)
+                if (request == null)
+                {
+                    continue;
+                }
 
                 if (hide && request.getType().equals(TypeToken.of(MinimumStack.class)))
                 {
