@@ -502,10 +502,6 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
 
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_REDUCEABLE))
           .add(Items.GLOWSTONE)
-          .add(ModItems.breadDough)
-          .add(ModItems.cookieDough)
-          .add(ModItems.rawPumpkinPie)
-          .add(ModItems.cakeBatter)
           .addTags(Tags.Items.STONE, Tags.Items.COBBLESTONE)
           .addTags(Tags.Items.GRAVEL, Tags.Items.SAND)
           .addTags(Tags.Items.INGOTS, storageBlocks);

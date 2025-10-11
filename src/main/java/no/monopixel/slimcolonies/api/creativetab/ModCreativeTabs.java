@@ -73,11 +73,6 @@ public final class ModCreativeTabs
             output.accept(ModItems.sifterMeshFlint);
             output.accept(ModItems.sifterMeshIron);
             output.accept(ModItems.sifterMeshDiamond);
-
-            output.accept(ModItems.breadDough);
-            output.accept(ModItems.cookieDough);
-            output.accept(ModItems.cakeBatter);
-            output.accept(ModItems.rawPumpkinPie);
         }).build());
 
     /**

@@ -49,67 +49,36 @@ public class DefaultBakerCraftingProvider extends CustomRecipeProvider
             .minBuildingLevel(3)
             .build(consumer);
 
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "bread_dough")
-            .inputs(List.of(new ItemStorage(new ItemStack(Items.WHEAT), 3)))
-            .result(new ItemStack(ModItems.breadDough))
-            .maxBuildingLevel(2)
-            .showTooltip(true)
-            .build(consumer);
-
         CustomRecipeBuilder.create(BAKER, MODULE_SMELTING, "bread")
-            .inputs(List.of(new ItemStorage(new ItemStack(ModItems.breadDough))))
+            .inputs(List.of(new ItemStorage(new ItemStack(Items.WHEAT), 3)))
             .result(new ItemStack(Items.BREAD))
             .intermediate(Blocks.FURNACE)
             .build(consumer);
 
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "cookie_dough")
+        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "cookie")
             .inputs(List.of(new ItemStorage(new ItemStack(Items.WHEAT, 2)),
                 new ItemStorage(new ItemStack(Items.COCOA_BEANS, 2))))
-            .result(new ItemStack(ModItems.cookieDough, 8))
+            .result(new ItemStack(Items.COOKIE, 8))
             .minBuildingLevel(2)
-            .showTooltip(true)
             .build(consumer);
 
-        CustomRecipeBuilder.create(BAKER, MODULE_SMELTING, "cookie")
-            .inputs(List.of(new ItemStorage(new ItemStack(ModItems.cookieDough))))
-            .result(new ItemStack(Items.COOKIE))
-            .minBuildingLevel(2)
-            .intermediate(Blocks.FURNACE)
-            .build(consumer);
-
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "raw_pumpkin_pie")
+        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "pumpkin_pie")
             .inputs(List.of(new ItemStorage(new ItemStack(Items.PUMPKIN)),
                 new ItemStorage(new ItemStack(Items.SUGAR)),
                 new ItemStorage(new ItemStack(Items.EGG))))
-            .result(new ItemStack(ModItems.rawPumpkinPie))
-            .minBuildingLevel(3)
-            .showTooltip(true)
-            .build(consumer);
-
-        CustomRecipeBuilder.create(BAKER, MODULE_SMELTING, "pumpkin_pie")
-            .inputs(List.of(new ItemStorage(new ItemStack(ModItems.rawPumpkinPie))))
             .result(new ItemStack(Items.PUMPKIN_PIE))
             .minBuildingLevel(3)
-            .intermediate(Blocks.FURNACE)
             .build(consumer);
 
-        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "cake_batter")
+        CustomRecipeBuilder.create(BAKER, MODULE_CRAFTING, "cake")
             .inputs(List.of(new ItemStorage(new ItemStack(Items.WHEAT, 3)),
                 new ItemStorage(new ItemStack(Items.MILK_BUCKET, 3)),
                 new ItemStorage(new ItemStack(Items.SUGAR, 2)),
                 new ItemStorage(new ItemStack(Items.EGG))))
-            .result(new ItemStack(ModItems.cakeBatter))
-            .minBuildingLevel(4)
-            .showTooltip(true)
-            .build(consumer);
-
-        CustomRecipeBuilder.create(BAKER, MODULE_SMELTING, "cake")
-            .inputs(List.of(new ItemStorage(new ItemStack(ModItems.cakeBatter))))
             .result(new ItemStack(Items.CAKE))
             .minBuildingLevel(4)
-            .intermediate(Blocks.FURNACE)
             .build(consumer);
 
-        // Complex custom food recipes removed - baker now focuses on vanilla food outputs
+        // Intermediate dough items removed - baker now produces final food products directly
     }
 }

@@ -56,11 +56,6 @@ public final class ModItemsInitializer
         ModItems.scepterBeekeeper = new ItemScepterBeekeeper(new Item.Properties());
         ModItems.questLog = new ItemQuestLog(new Item.Properties());
 
-        ModItems.breadDough = new ItemBreadDough(new Item.Properties());
-        ModItems.cookieDough = new ItemCookieDough(new Item.Properties());
-        ModItems.cakeBatter = new ItemCakeBatter(new Item.Properties());
-        ModItems.rawPumpkinPie = new ItemRawPumpkinPie(new Item.Properties());
-
         ModItems.adventureToken = new ItemAdventureToken(new Item.Properties());
 
         ModItems.irongate = new ItemGate(IRON_GATE, ModBlocks.blockIronGate, new Item.Properties());
@@ -77,7 +72,7 @@ public final class ModItemsInitializer
         ModItems.scanAnalyzer = new ItemScanAnalyzer("scan_analyzer", new Item.Properties());
 
 
-        // Only keeping basic dough items - all other food items removed
+        // Baker will now produce final food products directly - intermediate dough items removed
 
         // Large bottle system removed for simplicity
 
@@ -94,11 +89,6 @@ public final class ModItemsInitializer
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
         registry.register(new ResourceLocation(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
         registry.register(new ResourceLocation(Constants.MOD_ID, "questlog"), ModItems.questLog);
-
-        registry.register(new ResourceLocation(Constants.MOD_ID, "bread_dough"), ModItems.breadDough);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "cookie_dough"), ModItems.cookieDough);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "cake_batter"), ModItems.cakeBatter);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "raw_pumpkin_pie"), ModItems.rawPumpkinPie);
 
         registry.register(new ResourceLocation(Constants.MOD_ID, "adventure_token"), ModItems.adventureToken);
 

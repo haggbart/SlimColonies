@@ -3,7 +3,8 @@
   "crafter": "baker_smelting",
   "inputs": [
     {
-      "item": "slimcolonies:bread_dough"
+      "count": 3,
+      "item": "minecraft:wheat"
     }
   ],
   "intermediate": "minecraft:furnace",

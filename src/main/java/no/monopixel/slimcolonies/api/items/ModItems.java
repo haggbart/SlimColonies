@@ -28,11 +28,6 @@ public final class ModItems
     public static Item irongate;
     public static Item woodgate;
 
-    public static Item breadDough;
-    public static Item cookieDough;
-    public static Item cakeBatter;
-    public static Item rawPumpkinPie;
-
     public static Item adventureToken;
 
     public static Item sifterMeshString;

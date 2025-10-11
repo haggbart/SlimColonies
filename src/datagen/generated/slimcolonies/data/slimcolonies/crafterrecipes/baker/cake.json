@@ -1,12 +1,24 @@
 {
   "type": "recipe",
-  "crafter": "baker_smelting",
+  "crafter": "baker_crafting",
   "inputs": [
     {
-      "item": "slimcolonies:cake_batter"
+      "count": 3,
+      "item": "minecraft:wheat"
+    },
+    {
+      "count": 3,
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:egg"
     }
   ],
-  "intermediate": "minecraft:furnace",
+  "intermediate": "minecraft:air",
   "min-building-level": 4,
   "result": "minecraft:cake"
 }
