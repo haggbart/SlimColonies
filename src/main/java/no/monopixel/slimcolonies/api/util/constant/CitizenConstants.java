@@ -231,7 +231,7 @@ public final class CitizenConstants
     /**
      * Nighttime, point at which you can sleep.
      */
-    public static final int NIGHT = 12600;
+    public static final int NIGHT = 18000;
 
     /**
      * The minimum range to keep from the current building place.
