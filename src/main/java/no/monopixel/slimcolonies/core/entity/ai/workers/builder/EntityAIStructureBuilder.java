@@ -14,20 +14,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.IRequest;
-import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestState;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.IDeliverable;
 import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrder;
 import no.monopixel.slimcolonies.api.colony.workorders.WorkOrderType;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.api.util.MessageUtils;
-import no.monopixel.slimcolonies.api.util.StatsUtil;
-import no.monopixel.slimcolonies.api.util.Tuple;
-import no.monopixel.slimcolonies.api.util.WorldUtil;
+import no.monopixel.slimcolonies.api.util.*;
+import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BuilderModeSetting;
 import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingBuilder;
 import no.monopixel.slimcolonies.core.colony.jobs.JobBuilder;
@@ -35,7 +28,6 @@ import no.monopixel.slimcolonies.core.colony.workorders.WorkOrderBuilding;
 import no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIStructureWithWorkOrder;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingProgressStage;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingStructureHandler;
-import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.SlimColoniesAdvancedPathNavigate;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathjobs.PathJobMoveCloseToXNearY;
 import no.monopixel.slimcolonies.core.entity.pathfinding.pathresults.PathResult;
@@ -501,7 +493,7 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
                         position.getX(),
                         position.getY(),
                         position.getZ(),
-                        (int) BlockPosUtil.dist(building.getColony().getCenter(), position))))))
+                        (int) BlockPosUtil.dist(building.getColony().getCenter(), position)))))
             .withStyle(ChatFormatting.GREEN);
 
         if (showManualSuffix)

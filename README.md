@@ -27,6 +27,18 @@ Active development with tens of thousands of lines already removed.
 
 ## What's Different
 
+### New Features
+
+* ⛏️ **Miner ore priority system**: In-game GUI to set which ores miners focus on first
+* 📦 **Builder scavenging**: Builders periodically "find" small amounts (1-5) of needed materials while idle
+
+### Default Behaviors
+
+* Max crafting recipe capacity
+* 25% threshold ordering (couriers batch efficiently)
+* Trample prevention
+* No research item costs
+
 ### Removed Systems
 
 * Happiness, raids, diseases, mercenaries
@@ -34,19 +46,13 @@ Active development with tens of thousands of lines already removed.
 * Druid guards and various weapons
 * Scrolls
 
-### Default Behaviors (no research needed)
-
-* Max crafting recipe capacity
-* 25% threshold ordering (couriers batch efficiently)
-* Trample prevention
-* No research item costs
-
 ### Other Changes
 
 * Simplified food and guard mechanics
 * No working-in-rain restrictions
 * No courier carrying capacity limits
 * Free visitor recruitment
+* ...and many more tweaks and refinements
 
 ## For Users
 
