@@ -67,7 +67,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
     private boolean hasMax;
 
     private final ButtonImage undoButton = new ButtonImage();
-    private final Text undoText = new Text();
+    private final Text        undoText   = new Text();
 
     /**
      * The current state of a research button's display status.
@@ -127,9 +127,8 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         super.onButtonClicked(button);
 
         final Pane parentPane = button.getParent();
-        if (parentPane instanceof View)
+        if (parentPane instanceof final View parent)
         {
-            final View parent = (View) parentPane;
             if (parent.getChildren().contains(undoButton))
             {
                 parent.removeChild(undoButton);
@@ -140,11 +139,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             }
         }
 
-        if (button.getID().isEmpty())
-        {
-            return;
-        }
-        else if (button.getID().contains("undo:"))
+        if (button.getID().contains("undo:"))
         {
             final String undoName = button.getID().substring(button.getID().indexOf(':') + 1);
             if (!ResourceLocation.isValidResourceLocation(undoName))
@@ -212,6 +207,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             last.open();
         }
     }
+
     private int drawTree(
         final int height,
         final int depth,
@@ -267,7 +263,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             if (branchType == ResearchBranchType.UNLOCKABLES)
             {
                 timeLabel.setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.research.tier.header.unrestricted",
-                    (i > building.getBuildingMaxLevel()) ? building.getBuildingMaxLevel() : i,
+                    Math.min(i, building.getBuildingMaxLevel()),
                     IGlobalResearchTree.getInstance().getBranchData(branch).getHoursTime(i)));
                 timeLabel.setColors(COLOR_TEXT_LABEL);
                 view.addChild(timeLabel);
@@ -276,7 +272,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             else
             {
                 timeLabel.setText(Component.translatable("no.monopixel.slimcolonies.coremod.gui.research.tier.header",
-                    (i > building.getBuildingMaxLevel()) ? building.getBuildingMaxLevel() : i,
+                    Math.min(i, building.getBuildingMaxLevel()),
                     IGlobalResearchTree.getInstance().getBranchData(branch).getHoursTime(i)));
 
                 if (building.getBuildingLevel() < i && (building.getBuildingLevel() != building.getBuildingMaxLevel() || hasMax))
