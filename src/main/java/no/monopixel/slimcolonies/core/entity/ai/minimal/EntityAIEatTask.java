@@ -34,7 +34,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import static no.monopixel.slimcolonies.api.util.ItemStackUtils.ISCOOKABLE;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.FULL_SATURATION;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.SECONDS_A_MINUTE;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
@@ -505,10 +504,6 @@ public class EntityAIEatTask implements IStateAI
             {
                 citizenData.triggerInteraction(new StandardInteraction(Component.translatable(BETTER_FOOD), ChatPriority.BLOCKING));
             }
-        }
-        else if (InventoryUtils.hasItemInItemHandler(citizen.getInventoryCitizen(), ISCOOKABLE))
-        {
-            citizenData.triggerInteraction(new StandardInteraction(Component.translatable(RAW_FOOD), ChatPriority.PENDING));
         }
         return false;
     }

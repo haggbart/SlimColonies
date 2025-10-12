@@ -36,25 +36,17 @@ import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.blocks.AbstractBlockHut;
 import no.monopixel.slimcolonies.api.blocks.interfaces.IBuildingBrowsableBlock;
-import no.monopixel.slimcolonies.api.colony.ICitizenDataView;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ICraftingBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
-import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
-import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.research.IGlobalResearch;
-import no.monopixel.slimcolonies.api.util.FoodUtils;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.constant.ColonyConstants;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.api.util.constant.TranslationConstants;
 import no.monopixel.slimcolonies.core.client.gui.WindowBuildingBrowser;
-import no.monopixel.slimcolonies.core.client.gui.containers.WindowCitizenInventory;
 import no.monopixel.slimcolonies.core.client.render.worldevent.ColonyBorderRenderer;
 import no.monopixel.slimcolonies.core.client.render.worldevent.WorldEventContext;
 import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipe;
@@ -70,7 +62,6 @@ import java.util.Map.Entry;
 import static no.monopixel.slimcolonies.api.sounds.ModSoundEvents.CITIZEN_SOUND_EVENT_PREFIX;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.translation.DebugTranslationConstants.*;
-import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.RESTAURANT_MENU;
 
 /**
  * Used to handle client events.
@@ -166,36 +157,6 @@ public class ClientEventHandler
                 }
 
                 event.getToolTip().add(Component.translatable("no.monopixel.slimcolonies.coremod.tooltip.schematic.tier", tier));
-            }
-        }
-
-        if (WindowCitizenInventory.activeCitizenInventory != null && ItemStackUtils.ISFOOD.test(stack))
-        {
-            if (!FoodUtils.EDIBLE.test(stack))
-            {
-                event.getToolTip().add(Component.translatable("no.monopixel.slimcolonies.coremod.item.tooltip.wrongfood").withStyle(ChatFormatting.RED));
-                return;
-            }
-
-            final ICitizenDataView citizenData = (ICitizenDataView) WindowCitizenInventory.activeCitizenInventory.getCitizenData();
-            final IColonyView colonyView = (IColonyView) citizenData.getColony();
-
-            IBuildingView cookBuilding = null;
-            for (final IBuildingView buildingView : colonyView.getBuildings())
-            {
-                if (buildingView.getBuildingType() == ModBuildings.cook.get())
-                {
-                    if (cookBuilding == null || cookBuilding.getID().distSqr(citizenData.getPosition()) > buildingView.getID().distSqr(citizenData.getPosition()))
-                    {
-                        cookBuilding = buildingView;
-                    }
-                }
-            }
-
-            // Simply show if it's not on the restaurant menu
-            if (cookBuilding != null && !cookBuilding.getModuleView(RESTAURANT_MENU).getMenu().contains(new ItemStorage(event.getItemStack())))
-            {
-                event.getToolTip().add(Component.translatable("no.monopixel.slimcolonies.coremod.item.tooltip.nomenu").withStyle(ChatFormatting.RED));
             }
         }
     }

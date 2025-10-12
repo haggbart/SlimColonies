@@ -12,7 +12,6 @@ import no.monopixel.slimcolonies.api.colony.requestsystem.request.RequestUtils;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.FoodUtils;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
@@ -26,7 +25,8 @@ import no.monopixel.slimcolonies.core.util.WorkerUtil;
 
 import java.util.List;
 
-import static no.monopixel.slimcolonies.api.util.ItemStackUtils.*;
+import static no.monopixel.slimcolonies.api.util.ItemStackUtils.ISFOOD;
+import static no.monopixel.slimcolonies.api.util.ItemStackUtils.IS_COMPOST;
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.BUILDING_FLOWER_LIST;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.LOW_SATURATION;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
@@ -63,12 +63,6 @@ public class InteractionValidatorInitializer
                 .getModule(BuildingModules.FURNACE)
                 .getFurnaces()
                 .isEmpty());
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(RAW_FOOD),
-            citizen -> InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(citizen.getInventory(), ISCOOKABLE) != -1
-                &&
-                InventoryUtils.findFirstSlotInItemHandlerNotEmptyWith(citizen.getInventory(),
-                    stack -> FoodUtils.canEat(stack, citizen.getHomeBuilding(), citizen.getWorkBuilding()))
-                    == -1);
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(BETTER_FOOD),
             citizen -> citizen.getSaturation() == 0 && !citizen.isChild() && citizen.needsBetterFood());
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(BETTER_FOOD_CHILDREN),
@@ -247,7 +241,7 @@ public class InteractionValidatorInitializer
                 {
                     return getLastLadder(((BuildingMiner) buildingMiner).getLadderLocation(), citizen.getColony().getWorld()) < ((BuildingMiner) buildingMiner).getDepthLimit(
                         citizen.getColony().getWorld())
-                        && ((BuildingMiner) buildingMiner).getModule(BuildingModules.MINER_LEVELS).getNumberOfLevels() == 0;
+                        && buildingMiner.getModule(BuildingModules.MINER_LEVELS).getNumberOfLevels() == 0;
                 }
                 return false;
             });
@@ -255,7 +249,6 @@ public class InteractionValidatorInitializer
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(WORKER_AI_EXCEPTION),
             citizen -> citizen.getJob() != null && ((AbstractEntityAIBasic<?, ?>) citizen.getJob().getWorkerAI()).getExceptionTimer() > 1);
 
-        // Happiness system removed - using simpler homeless check
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(DEMANDS + HOMELESSNESS),
             citizen -> citizen.getHomeBuilding() == null);
 
