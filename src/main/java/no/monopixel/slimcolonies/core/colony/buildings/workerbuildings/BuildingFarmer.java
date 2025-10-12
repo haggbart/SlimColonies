@@ -272,7 +272,7 @@ public class BuildingFarmer extends AbstractBuilding
         @Override
         protected int getMaxExtensionCount()
         {
-            return building.getBuildingLevel();
+            return 5;
         }
 
         @Override
