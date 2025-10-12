@@ -1,5 +1,6 @@
 package no.monopixel.slimcolonies.core.compatibility.farmersdelight;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -9,6 +10,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
@@ -20,8 +23,11 @@ import no.monopixel.slimcolonies.api.util.constant.TagConstants;
 import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipe;
 import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Dynamically discovers and converts Farmer's Delight cooking pot recipes to SlimColonies chef recipes.
@@ -30,9 +36,10 @@ import java.util.*;
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class FarmersDelightRecipeAdapter
 {
-    private static final String FARMERS_DELIGHT_MOD_ID = "farmersdelight";
-    private static final String CHEF_CRAFTER = ModJobs.CHEF_ID.getPath() + "_crafting";  // "chef_crafting"
+    private static final String           FARMERS_DELIGHT_MOD_ID = "farmersdelight";
+    private static final String           CHEF_CRAFTER           = ModJobs.CHEF_ID.getPath() + "_crafting";  // "chef_crafting"
     private static final ResourceLocation FD_COOKING_RECIPE_TYPE = new ResourceLocation(FARMERS_DELIGHT_MOD_ID, "cooking");
+    private static final ResourceLocation FD_CUTTING_RECIPE_TYPE = new ResourceLocation(FARMERS_DELIGHT_MOD_ID, "cutting");
 
     /**
      * Listen for custom recipes being reloaded, then discover and convert FD recipes.
@@ -40,9 +47,6 @@ public class FarmersDelightRecipeAdapter
     @SubscribeEvent
     public static void onCustomRecipesReloaded(@NotNull final CustomRecipesReloadedEvent event)
     {
-        Log.getLogger().info("CustomRecipesReloadedEvent received!");
-
-        // Check if Farmer's Delight is installed
         if (!ModList.get().isLoaded(FARMERS_DELIGHT_MOD_ID))
         {
             Log.getLogger().info("Farmer's Delight not installed, skipping recipe discovery");
@@ -74,23 +78,27 @@ public class FarmersDelightRecipeAdapter
             return;
         }
 
-        Log.getLogger().info("Scanning {} total recipes for Farmer's Delight cooking recipes...", recipeManager.getRecipes().size());
+        Log.getLogger().info("Scanning {} total recipes for Farmer's Delight recipes...", recipeManager.getRecipes().size());
 
         int convertedCount = 0;
         int skippedCount = 0;
         int fdRecipeCount = 0;
 
-        // Scan all recipes looking for Farmer's Delight cooking recipes
+        // Scan all recipes looking for Farmer's Delight cooking and cutting recipes
         for (final Recipe<?> recipe : recipeManager.getRecipes())
         {
-            // Check if this is a Farmer's Delight cooking recipe
-            if (!recipe.getType().toString().equals(FD_COOKING_RECIPE_TYPE.toString()))
+            final String recipeTypeStr = recipe.getType().toString();
+
+            // Check if this is a Farmer's Delight cooking or cutting recipe
+            if (!recipeTypeStr.equals(FD_COOKING_RECIPE_TYPE.toString()) &&
+                !recipeTypeStr.equals(FD_CUTTING_RECIPE_TYPE.toString()))
             {
                 continue;
             }
 
             fdRecipeCount++;
-            Log.getLogger().info("Found FD cooking recipe: {}", recipe.getId());
+            final String recipeType = recipeTypeStr.contains("cutting") ? "cutting" : "cooking";
+            Log.getLogger().info("Found FD {} recipe: {}", recipeType, recipe.getId());
 
             // Debug: Log all recipe data
             Log.getLogger().info("  Recipe class: {}", recipe.getClass().getName());
@@ -149,7 +157,7 @@ public class FarmersDelightRecipeAdapter
             }
         }
 
-        Log.getLogger().info("Found {} Farmer's Delight cooking recipes total", fdRecipeCount);
+        Log.getLogger().info("Found {} Farmer's Delight recipes total (cooking + cutting)", fdRecipeCount);
         if (convertedCount > 0 || skippedCount > 0)
         {
             Log.getLogger().info("Converted {} Farmer's Delight recipes for chef ({} skipped due to incompatible ingredients)",
@@ -228,8 +236,6 @@ public class FarmersDelightRecipeAdapter
             "farmersdelight_compat/" + CHEF_CRAFTER + "/" + fdRecipe.getId().getPath()
         );
 
-        // Create the custom recipe
-        // Note: intermediate is set to AIR because the chef doesn't need a physical cooking pot
         final CustomRecipe customRecipe = new CustomRecipe(
             CHEF_CRAFTER,                      // crafter
             1,                                  // minBldgLevel
@@ -270,13 +276,8 @@ public class FarmersDelightRecipeAdapter
         }
 
         // Also allow any item from the farmersdelight mod
-        final String itemId = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
-        if (itemId.startsWith("farmersdelight:"))
-        {
-            return true;
-        }
-
-        return false;
+        final String itemId = ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
+        return itemId.startsWith("farmersdelight:");
     }
 
     /**
@@ -285,13 +286,13 @@ public class FarmersDelightRecipeAdapter
      *
      * @return the recipe manager, or null if not available
      */
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     private static RecipeManager getRecipeManager()
     {
         try
         {
             // Try to get from the client or server level
-            final var mc = net.minecraft.client.Minecraft.getInstance();
+            final var mc = Minecraft.getInstance();
             if (mc.level != null)
             {
                 return mc.level.getRecipeManager();
@@ -305,7 +306,7 @@ public class FarmersDelightRecipeAdapter
         try
         {
             // Try to get from server
-            final var server = net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer();
+            final var server = ServerLifecycleHooks.getCurrentServer();
             if (server != null)
             {
                 return server.getRecipeManager();
