@@ -144,9 +144,8 @@ public class FarmersDelightRecipeAdapter
                 inputs.add(new ItemStorage(container));
             }
         }
-        catch (final Exception e)
+        catch (final Exception ignored)
         {
-            Log.getLogger().warn("Failed to get container for FD recipe: {}", fdRecipe.getId(), e);
         }
 
         final ResourceLocation recipeId = new ResourceLocation(
