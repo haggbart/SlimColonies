@@ -161,7 +161,7 @@ public class Stack implements IConcreteDeliverable
     {
         if (ItemStackUtils.isEmpty(stack))
         {
-            Log.getLogger().error("Created Empty Stack: {}", stack, new Exception());
+            throw new IllegalArgumentException("Cannot create Stack request with empty ItemStack (likely from removed mod)");
         }
 
         if (stack.getCount() != 1 && stack.getCount() != count)
@@ -229,7 +229,7 @@ public class Stack implements IConcreteDeliverable
 
         if (stack.isEmpty())
         {
-            Log.getLogger().error("Deserialized bad stack: {}", compound.toString());
+            throw new IllegalArgumentException("Cannot deserialize Stack with empty ItemStack from NBT (likely removed mod): " + compound.toString());
         }
 
         return new Stack(stack, matchMeta, matchNBT, result, count, minCount, canBeResolved);
@@ -279,7 +279,7 @@ public class Stack implements IConcreteDeliverable
 
         if (stack.isEmpty())
         {
-            Log.getLogger().error("Deserialized bad stack {}", stack.toString());
+            throw new IllegalArgumentException("Cannot deserialize Stack with empty ItemStack from network buffer (likely removed mod)");
         }
 
         return new Stack(stack, matchMeta, matchNBT, result, count, minCount, canBeResolved);
