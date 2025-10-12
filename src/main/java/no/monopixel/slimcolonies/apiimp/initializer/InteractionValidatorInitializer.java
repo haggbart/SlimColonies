@@ -43,11 +43,9 @@ import static no.monopixel.slimcolonies.core.util.WorkerUtil.isThereCompostedLan
  */
 public class InteractionValidatorInitializer
 {
-    // Local constants for happiness-related strings (kept for translation keys)
     private static final String HOMELESSNESS = "homelessness";
     private static final String UNEMPLOYMENT = "unemployment";
     private static final String IDLEATJOB    = "idleatjob";
-    private static final String SLEPTTONIGHT = "slepttonight";
 
     /**
      * Init method called on startup.
@@ -248,28 +246,12 @@ public class InteractionValidatorInitializer
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(WORKER_AI_EXCEPTION),
             citizen -> citizen.getJob() != null && ((AbstractEntityAIBasic<?, ?>) citizen.getJob().getWorkerAI()).getExceptionTimer() > 1);
-
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(DEMANDS + HOMELESSNESS),
             citizen -> citizen.getHomeBuilding() == null);
-
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + HOMELESSNESS),
-            citizen -> false); // Disabled without happiness tracking
-
-        // Happiness system removed - using simpler unemployment check
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(DEMANDS + UNEMPLOYMENT),
             citizen -> citizen.getJob() == null);
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + UNEMPLOYMENT),
-            citizen -> false); // Disabled without happiness tracking
-
-        // Happiness system removed - using simpler idle check
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(DEMANDS + IDLEATJOB),
             citizen -> citizen.getJob() != null && citizen.isIdleAtJob());
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + IDLEATJOB),
-            citizen -> false); // Disabled without happiness tracking
-
-        // Happiness system removed - sleep tracking disabled
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(NO + SLEPTTONIGHT),
-            citizen -> false); // Disabled without happiness tracking
 
 
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_BEEKEEPER_NOFLOWERS),
