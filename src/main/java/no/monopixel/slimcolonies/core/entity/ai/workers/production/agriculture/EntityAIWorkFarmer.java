@@ -743,7 +743,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             return false;
         }
 
-        if (item.getItem() instanceof BlockItem blockItem && (blockItem.getBlock() instanceof CropBlock || blockItem.getBlock() instanceof StemBlock)
+        if (item.getItem() instanceof BlockItem blockItem
             && blockItem.getBlock().defaultBlockState().canSurvive(worker.level(), position.above()))
         {
             @NotNull final Item seed = item.getItem();
