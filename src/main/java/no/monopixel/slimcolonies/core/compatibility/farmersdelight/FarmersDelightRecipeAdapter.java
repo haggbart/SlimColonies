@@ -1,6 +1,5 @@
 package no.monopixel.slimcolonies.core.compatibility.farmersdelight;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -211,6 +210,13 @@ public class FarmersDelightRecipeAdapter
             return false;
         }
 
+        // Check if the output is excluded from chef products (e.g., dyes, cakes)
+        if (output.is(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_COOK)))
+        {
+            Log.getLogger().info("Recipe {} skipped - output is excluded: {}", fdRecipe.getId(), output.getItem());
+            return false;
+        }
+
         // Try to get the output container (bowl, glass bottle, pumpkin, etc.) using reflection
         try
         {
@@ -281,42 +287,15 @@ public class FarmersDelightRecipeAdapter
     }
 
     /**
-     * Gets the recipe manager from the current level.
-     * This is a bit hacky but avoids needing to store a reference to the level.
+     * Gets the recipe manager from the server.
+     * This event always fires server-side, so we only need to check the server.
      *
      * @return the recipe manager, or null if not available
      */
     @Nullable
     private static RecipeManager getRecipeManager()
     {
-        try
-        {
-            // Try to get from the client or server level
-            final var mc = Minecraft.getInstance();
-            if (mc.level != null)
-            {
-                return mc.level.getRecipeManager();
-            }
-        }
-        catch (final Exception e)
-        {
-            // Client not available or no level, try server side
-        }
-
-        try
-        {
-            // Try to get from server
-            final var server = ServerLifecycleHooks.getCurrentServer();
-            if (server != null)
-            {
-                return server.getRecipeManager();
-            }
-        }
-        catch (final Exception e)
-        {
-            // Server not available
-        }
-
-        return null;
+        final var server = ServerLifecycleHooks.getCurrentServer();
+        return server != null ? server.getRecipeManager() : null;
     }
 }

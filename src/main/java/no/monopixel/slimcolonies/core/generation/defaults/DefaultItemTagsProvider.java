@@ -256,7 +256,7 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
         tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_COOK));
 
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_COOK))
-            .add(Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE);
+            .add(Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE, Items.BLACK_DYE);
         tag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_DYER))
             .addTag(Tags.Items.DYES);
         tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_DYER));
