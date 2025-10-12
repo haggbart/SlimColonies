@@ -241,7 +241,14 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .add(Items.BOWL)
             .add(Items.EGG)
             .add(Items.MILK_BUCKET)
-            .add(Items.WHEAT);
+            .add(Items.WHEAT)
+            .add(Items.BEETROOT)
+            .add(Items.SWEET_BERRIES)
+            .add(Items.APPLE)
+            .add(Items.BONE)
+            .add(Items.GLOW_BERRIES)
+            .add(Items.SUGAR)
+            .add(Items.COCOA_BEANS);
 
         tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_COOK));
 

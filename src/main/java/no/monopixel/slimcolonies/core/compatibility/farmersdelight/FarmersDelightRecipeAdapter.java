@@ -171,6 +171,8 @@ public class FarmersDelightRecipeAdapter
     {
         // Extract ingredients from the recipe
         final List<ItemStorage> inputs = new ArrayList<>();
+        final List<String> incompatibleIngredients = new ArrayList<>();
+
         for (final Ingredient ingredient : fdRecipe.getIngredients())
         {
             // Get the first matching item from the ingredient
@@ -185,7 +187,9 @@ public class FarmersDelightRecipeAdapter
             // Check if this ingredient is allowed for the chef
             if (!isChefIngredient(stack))
             {
-                // Skip this recipe - chef can't use this ingredient
+                // Track incompatible ingredient for logging
+                incompatibleIngredients.add(stack.getItem().toString());
+                Log.getLogger().info("Recipe {} skipped - incompatible ingredient: {}", fdRecipe.getId(), stack.getItem());
                 return false;
             }
 
@@ -258,8 +262,20 @@ public class FarmersDelightRecipeAdapter
      */
     private static boolean isChefIngredient(@NotNull final ItemStack stack)
     {
-        // Check if the item is in the cook ingredient tag
-        return stack.is(ModTags.crafterIngredient.get(TagConstants.CRAFTING_COOK));
+        // Allow if in the cook ingredient tag
+        if (stack.is(ModTags.crafterIngredient.get(TagConstants.CRAFTING_COOK)))
+        {
+            return true;
+        }
+
+        // Also allow any item from the farmersdelight mod
+        final String itemId = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
+        if (itemId.startsWith("farmersdelight:"))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /**
