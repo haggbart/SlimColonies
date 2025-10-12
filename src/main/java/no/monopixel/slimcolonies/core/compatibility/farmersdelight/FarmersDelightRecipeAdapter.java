@@ -203,15 +203,16 @@ public class FarmersDelightRecipeAdapter
             return false;
         }
 
-        // Try to get the output container (bowl) using reflection
+        // Try to get the output container (bowl, glass bottle, pumpkin, etc.) using reflection
         try
         {
             final java.lang.reflect.Method getOutputContainer = fdRecipe.getClass().getMethod("getOutputContainer");
             final ItemStack container = (ItemStack) getOutputContainer.invoke(fdRecipe);
 
-            if (!container.isEmpty() && isChefIngredient(container))
+            if (!container.isEmpty())
             {
-                // Add the container (bowl) to inputs
+                // Accept all containers - if FD specifies it, the chef can use it
+                // The ingredient filtering already handles food safety via CRAFTING_COOK tag
                 inputs.add(new ItemStorage(container));
                 Log.getLogger().debug("Added container {} to recipe {}", container, fdRecipe.getId());
             }

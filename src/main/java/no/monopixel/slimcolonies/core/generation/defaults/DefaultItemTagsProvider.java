@@ -224,6 +224,8 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
 
         tag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_COOK))
             .addTag(ItemTags.FISHES)
+            .addTag(Tags.Items.MUSHROOMS)
+            .addTag(Tags.Items.CROPS)
             .add(Items.BEEF)
             .add(Items.MUTTON)
             .add(Items.CHICKEN)
@@ -236,8 +238,6 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .add(Items.KELP)
             .add(Items.DRIED_KELP)
             .add(Items.DRIED_KELP_BLOCK)
-            .add(Items.RED_MUSHROOM)
-            .add(Items.BROWN_MUSHROOM)
             .add(Items.BOWL)
             .add(Items.EGG)
             .add(Items.MILK_BUCKET)
@@ -248,7 +248,10 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .add(Items.BONE)
             .add(Items.GLOW_BERRIES)
             .add(Items.SUGAR)
-            .add(Items.COCOA_BEANS);
+            .add(Items.COCOA_BEANS)
+            .add(Items.INK_SAC)
+            .add(Items.ROTTEN_FLESH)
+            .add(Items.BONE_MEAL);
 
         tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_COOK));
 
