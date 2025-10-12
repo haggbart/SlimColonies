@@ -90,7 +90,45 @@ public class FarmersDelightRecipeAdapter
             }
 
             fdRecipeCount++;
-            Log.getLogger().debug("Found FD cooking recipe: {}", recipe.getId());
+            Log.getLogger().info("Found FD cooking recipe: {}", recipe.getId());
+
+            // Debug: Log all recipe data
+            Log.getLogger().info("  Recipe class: {}", recipe.getClass().getName());
+            Log.getLogger().info("  Output: {}", recipe.getResultItem(null));
+            Log.getLogger().info("  Ingredients count: {}", recipe.getIngredients().size());
+            for (int i = 0; i < recipe.getIngredients().size(); i++)
+            {
+                final Ingredient ing = recipe.getIngredients().get(i);
+                final ItemStack[] stacks = ing.getItems();
+                if (stacks.length > 0)
+                {
+                    Log.getLogger().info("    Ingredient {}: {} (options: {})", i, stacks[0], stacks.length);
+                }
+            }
+
+            // Try to find container field using reflection
+            try
+            {
+                final java.lang.reflect.Method getOutputContainer = recipe.getClass().getMethod("getOutputContainer");
+                final ItemStack container = (ItemStack) getOutputContainer.invoke(recipe);
+                Log.getLogger().info("  Output container (via getOutputContainer): {}", container);
+            }
+            catch (final Exception e)
+            {
+                Log.getLogger().info("  No getOutputContainer method");
+            }
+
+            try
+            {
+                final java.lang.reflect.Field containerField = recipe.getClass().getDeclaredField("outputContainer");
+                containerField.setAccessible(true);
+                final ItemStack container = (ItemStack) containerField.get(recipe);
+                Log.getLogger().info("  Output container (via field): {}", container);
+            }
+            catch (final Exception e)
+            {
+                Log.getLogger().info("  No outputContainer field");
+            }
 
             try
             {
@@ -159,6 +197,24 @@ public class FarmersDelightRecipeAdapter
         if (output.isEmpty())
         {
             return false;
+        }
+
+        // Try to get the output container (bowl) using reflection
+        try
+        {
+            final java.lang.reflect.Method getOutputContainer = fdRecipe.getClass().getMethod("getOutputContainer");
+            final ItemStack container = (ItemStack) getOutputContainer.invoke(fdRecipe);
+
+            if (!container.isEmpty() && isChefIngredient(container))
+            {
+                // Add the container (bowl) to inputs
+                inputs.add(new ItemStorage(container));
+                Log.getLogger().debug("Added container {} to recipe {}", container, fdRecipe.getId());
+            }
+        }
+        catch (final Exception e)
+        {
+            // No container - that's okay, not all recipes need one
         }
 
         // Create a unique recipe ID
