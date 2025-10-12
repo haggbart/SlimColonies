@@ -1,6 +1,8 @@
 {
   "values": [
     "#minecraft:fishes",
+    "#forge:mushrooms",
+    "#forge:crops",
     "minecraft:beef",
     "minecraft:mutton",
     "minecraft:chicken",
@@ -13,11 +15,19 @@
     "minecraft:kelp",
     "minecraft:dried_kelp",
     "minecraft:dried_kelp_block",
-    "minecraft:red_mushroom",
-    "minecraft:brown_mushroom",
     "minecraft:bowl",
     "minecraft:egg",
     "minecraft:milk_bucket",
-    "minecraft:wheat"
+    "minecraft:wheat",
+    "minecraft:beetroot",
+    "minecraft:sweet_berries",
+    "minecraft:apple",
+    "minecraft:bone",
+    "minecraft:glow_berries",
+    "minecraft:sugar",
+    "minecraft:cocoa_beans",
+    "minecraft:ink_sac",
+    "minecraft:rotten_flesh",
+    "minecraft:bone_meal"
   ]
 }

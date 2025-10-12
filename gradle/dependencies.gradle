@@ -68,6 +68,4 @@ dependencies {
     if (project.hasProperty("runWithJourneymap") && project.runWithJourneymap.toBoolean()) {
         runtimeOnly fg.deobf("flat:journeymap:${project.jmapMcVersion}-${project.jmapVersion}-forge")
     }
-
-
 }

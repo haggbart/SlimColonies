@@ -137,7 +137,7 @@ public class StandardRequestIdentitiesDataStore implements IRequestIdentitiesDat
                 }
                 catch (final Exception ex)
                 {
-                    Log.getLogger().error(ex);
+                    Log.getLogger().warn("Skipped orphaned request from removed mod during world load (this is normal after removing mods): {}", ex.getMessage());
                 }
             }
 
@@ -171,7 +171,7 @@ public class StandardRequestIdentitiesDataStore implements IRequestIdentitiesDat
                 catch (final Exception ex)
                 {
                     // If the stack fails, all values have been retrieved from the buffer but the stack validation failed and we filter it out here.
-                    Log.getLogger().error(ex);
+                    Log.getLogger().warn("Skipped orphaned request from removed mod during network sync (this is normal after removing mods): {}", ex.getMessage());
                 }
             }
 

@@ -6,11 +6,14 @@ import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
+import no.monopixel.slimcolonies.api.eventbus.events.CustomRecipesReloadedEvent;
 import no.monopixel.slimcolonies.api.research.IGlobalResearchTree;
+import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
@@ -54,6 +57,16 @@ public class DataPackSyncEventHandler
             ISlimColoniesAPI.getInstance().getColonyManager().getCompatibilityManager().discover(server.getRecipeManager(), server.overworld());
             CustomRecipeManager.getInstance().resolveTemplates();
             CustomRecipeManager.getInstance().buildLootData(server.getLootData(), server.overworld());
+
+            // Fire event for compatibility integrations
+            try
+            {
+                MinecraftForge.EVENT_BUS.post(new CustomRecipesReloadedEvent());
+            }
+            catch (final Exception e)
+            {
+                Log.getLogger().error("Error during CustomRecipesReloadedEvent", e);
+            }
         }
 
         /**

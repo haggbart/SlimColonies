@@ -52,19 +52,16 @@ public abstract class AbstractCrafting implements IRequestable
      */
     public AbstractCrafting(@NotNull final ItemStack stack, final int count, final int minCount, final IToken<?> recipeToken)
     {
+        if (stack.isEmpty())
+        {
+            throw new IllegalArgumentException("Cannot create crafting request with empty ItemStack (likely from removed mod)");
+        }
+
         this.theStack = stack.copy();
         this.count = count;
         this.minCount = minCount;
         this.recipeToken = recipeToken;
-
-        if (stack.isEmpty())
-        {
-            Log.getLogger().error("Created Empty Stack", new Exception());
-        }
-        else
-        {
-            this.theStack.setCount(Math.min(this.theStack.getCount(), this.theStack.getMaxStackSize()));
-        }
+        this.theStack.setCount(Math.min(this.theStack.getCount(), this.theStack.getMaxStackSize()));
     }
 
     @NotNull
