@@ -425,7 +425,9 @@ public class CustomRecipeManager
 
         try
         {
+            Log.getLogger().info("About to post CustomRecipesReloadedEvent...");
             MinecraftForge.EVENT_BUS.post(new CustomRecipesReloadedEvent());
+            Log.getLogger().info("CustomRecipesReloadedEvent posted successfully");
         }
         catch (final Exception e)
         {

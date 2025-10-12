@@ -57,6 +57,9 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
+            // Disable broken Farmer's Delight mixin in dev environment
+            property 'mixin.env.disableRefMap', 'true'
+
             mods {
                 "${project.modId}" {
                     source sourceSets.main
@@ -80,6 +83,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+
+            // Disable broken Farmer's Delight mixin in dev environment
+            property 'mixin.env.disableRefMap', 'true'
 
             args '--mod', project.modId, '--all', '--output', file("src/datagen/generated/${project.modId}"), '--existing', file('src/main/resources/'), '--existing-mod', 'structurize', '--existing-mod', 'domum_ornamentum'
 

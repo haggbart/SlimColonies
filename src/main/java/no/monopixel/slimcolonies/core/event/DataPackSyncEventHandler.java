@@ -54,6 +54,16 @@ public class DataPackSyncEventHandler
             ISlimColoniesAPI.getInstance().getColonyManager().getCompatibilityManager().discover(server.getRecipeManager(), server.overworld());
             CustomRecipeManager.getInstance().resolveTemplates();
             CustomRecipeManager.getInstance().buildLootData(server.getLootData(), server.overworld());
+
+            // Fire event so other systems can add custom recipes (e.g., Farmer's Delight compatibility)
+            try
+            {
+                net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new no.monopixel.slimcolonies.api.eventbus.events.CustomRecipesReloadedEvent());
+            }
+            catch (final Exception e)
+            {
+                no.monopixel.slimcolonies.api.util.Log.getLogger().error("Error during CustomRecipesReloadedEvent", e);
+            }
         }
 
         /**

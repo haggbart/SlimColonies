@@ -1,0 +1,248 @@
+package no.monopixel.slimcolonies.core.compatibility.farmersdelight;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
+import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.eventbus.events.CustomRecipesReloadedEvent;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
+import no.monopixel.slimcolonies.api.util.constant.TagConstants;
+import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipe;
+import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.*;
+
+/**
+ * Dynamically discovers and converts Farmer's Delight cooking pot recipes to SlimColonies chef recipes.
+ * Works without code dependencies by checking mod presence at runtime.
+ */
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class FarmersDelightRecipeAdapter
+{
+    private static final String FARMERS_DELIGHT_MOD_ID = "farmersdelight";
+    private static final String CHEF_CRAFTER = ModJobs.CHEF_ID.getPath() + "_crafting";  // "chef_crafting"
+    private static final ResourceLocation FD_COOKING_RECIPE_TYPE = new ResourceLocation(FARMERS_DELIGHT_MOD_ID, "cooking");
+
+    /**
+     * Listen for custom recipes being reloaded, then discover and convert FD recipes.
+     */
+    @SubscribeEvent
+    public static void onCustomRecipesReloaded(@NotNull final CustomRecipesReloadedEvent event)
+    {
+        Log.getLogger().info("CustomRecipesReloadedEvent received!");
+
+        // Check if Farmer's Delight is installed
+        if (!ModList.get().isLoaded(FARMERS_DELIGHT_MOD_ID))
+        {
+            Log.getLogger().info("Farmer's Delight not installed, skipping recipe discovery");
+            return;
+        }
+
+        Log.getLogger().info("Farmer's Delight detected, starting recipe discovery...");
+
+        try
+        {
+            discoverAndConvertRecipes();
+        }
+        catch (final Exception e)
+        {
+            Log.getLogger().error("Error discovering Farmer's Delight recipes", e);
+        }
+    }
+
+    /**
+     * Discovers Farmer's Delight cooking recipes and converts them for the chef.
+     */
+    private static void discoverAndConvertRecipes()
+    {
+        // Get the recipe manager from the level
+        final RecipeManager recipeManager = getRecipeManager();
+        if (recipeManager == null)
+        {
+            Log.getLogger().warn("Recipe manager not available, cannot discover FD recipes");
+            return;
+        }
+
+        Log.getLogger().info("Scanning {} total recipes for Farmer's Delight cooking recipes...", recipeManager.getRecipes().size());
+
+        int convertedCount = 0;
+        int skippedCount = 0;
+        int fdRecipeCount = 0;
+
+        // Scan all recipes looking for Farmer's Delight cooking recipes
+        for (final Recipe<?> recipe : recipeManager.getRecipes())
+        {
+            // Check if this is a Farmer's Delight cooking recipe
+            if (!recipe.getType().toString().equals(FD_COOKING_RECIPE_TYPE.toString()))
+            {
+                continue;
+            }
+
+            fdRecipeCount++;
+            Log.getLogger().debug("Found FD cooking recipe: {}", recipe.getId());
+
+            try
+            {
+                // Try to convert the recipe
+                if (convertRecipe(recipe))
+                {
+                    convertedCount++;
+                }
+                else
+                {
+                    skippedCount++;
+                }
+            }
+            catch (final Exception e)
+            {
+                Log.getLogger().warn("Failed to convert FD recipe: " + recipe.getId(), e);
+                skippedCount++;
+            }
+        }
+
+        Log.getLogger().info("Found {} Farmer's Delight cooking recipes total", fdRecipeCount);
+        if (convertedCount > 0 || skippedCount > 0)
+        {
+            Log.getLogger().info("Converted {} Farmer's Delight recipes for chef ({} skipped due to incompatible ingredients)",
+                convertedCount, skippedCount);
+        }
+
+        // Verify recipes are actually in the manager
+        final int totalChefRecipes = CustomRecipeManager.getInstance().getRecipes(CHEF_CRAFTER).size();
+        Log.getLogger().info("Total chef recipes in CustomRecipeManager: {}", totalChefRecipes);
+    }
+
+    /**
+     * Converts a single Farmer's Delight recipe to a SlimColonies chef recipe.
+     *
+     * @param fdRecipe the Farmer's Delight recipe
+     * @return true if the recipe was converted and added, false if skipped
+     */
+    private static boolean convertRecipe(@NotNull final Recipe<?> fdRecipe)
+    {
+        // Extract ingredients from the recipe
+        final List<ItemStorage> inputs = new ArrayList<>();
+        for (final Ingredient ingredient : fdRecipe.getIngredients())
+        {
+            // Get the first matching item from the ingredient
+            final ItemStack[] matchingStacks = ingredient.getItems();
+            if (matchingStacks.length == 0)
+            {
+                continue;
+            }
+
+            final ItemStack stack = matchingStacks[0];
+
+            // Check if this ingredient is allowed for the chef
+            if (!isChefIngredient(stack))
+            {
+                // Skip this recipe - chef can't use this ingredient
+                return false;
+            }
+
+            inputs.add(new ItemStorage(stack));
+        }
+
+        // Get the output
+        final ItemStack output = fdRecipe.getResultItem(null);
+        if (output.isEmpty())
+        {
+            return false;
+        }
+
+        // Create a unique recipe ID
+        final ResourceLocation recipeId = new ResourceLocation(
+            "slimcolonies",
+            "farmersdelight_compat/" + CHEF_CRAFTER + "/" + fdRecipe.getId().getPath()
+        );
+
+        // Create the custom recipe
+        // Note: intermediate is set to AIR because the chef doesn't need a physical cooking pot
+        final CustomRecipe customRecipe = new CustomRecipe(
+            CHEF_CRAFTER,                      // crafter
+            1,                                  // minBldgLevel
+            5,                                  // maxBldgLevel
+            false,                              // mustExist
+            false,                              // showTooltip
+            recipeId,                           // recipeId
+            Collections.emptySet(),             // researchReqs
+            Collections.emptySet(),             // researchExcludes
+            null,                               // lootTable
+            ModEquipmentTypes.none.get(),      // requiredTool
+            inputs,                             // inputs
+            output.copy(),                      // primaryOutput
+            Collections.emptyList(),            // secondaryOutput
+            Collections.emptyList(),            // altOutputs
+            Blocks.AIR                          // intermediate (no cooking pot needed!)
+        );
+
+        // Add to the custom recipe manager
+        CustomRecipeManager.getInstance().addRecipe(customRecipe);
+
+        Log.getLogger().debug("Converted FD recipe: {} -> {}", fdRecipe.getId(), output.getDisplayName().getString());
+        return true;
+    }
+
+    /**
+     * Checks if an item is allowed as a chef ingredient based on tags.
+     *
+     * @param stack the item stack to check
+     * @return true if the chef can use this ingredient
+     */
+    private static boolean isChefIngredient(@NotNull final ItemStack stack)
+    {
+        // Check if the item is in the cook ingredient tag
+        return stack.is(ModTags.crafterIngredient.get(TagConstants.CRAFTING_COOK));
+    }
+
+    /**
+     * Gets the recipe manager from the current level.
+     * This is a bit hacky but avoids needing to store a reference to the level.
+     *
+     * @return the recipe manager, or null if not available
+     */
+    @org.jetbrains.annotations.Nullable
+    private static RecipeManager getRecipeManager()
+    {
+        try
+        {
+            // Try to get from the client or server level
+            final var mc = net.minecraft.client.Minecraft.getInstance();
+            if (mc.level != null)
+            {
+                return mc.level.getRecipeManager();
+            }
+        }
+        catch (final Exception e)
+        {
+            // Client not available or no level, try server side
+        }
+
+        try
+        {
+            // Try to get from server
+            final var server = net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer();
+            if (server != null)
+            {
+                return server.getRecipeManager();
+            }
+        }
+        catch (final Exception e)
+        {
+            // Server not available
+        }
+
+        return null;
+    }
+}
