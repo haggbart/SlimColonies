@@ -1,6 +1,26 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.production.agriculture;
 
 import com.google.common.reflect.TypeToken;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.network.PacketDistributor;
 import no.monopixel.slimcolonies.api.advancements.AdvancementTriggers;
 import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.ChatPriority;
@@ -30,23 +50,6 @@ import no.monopixel.slimcolonies.core.entity.ai.workers.crafting.AbstractEntityA
 import no.monopixel.slimcolonies.core.network.messages.client.CompostParticleMessage;
 import no.monopixel.slimcolonies.core.util.AdvancementUtils;
 import no.monopixel.slimcolonies.core.util.citizenutils.CitizenItemUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -375,7 +378,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             || (world.getBlockState(position.above()).getBlock() instanceof CropBlock)
             || (world.getBlockState(position.above()).getBlock() instanceof BlockScarecrow)
             || (!blockState.is(BlockTags.DIRT) && !(blockState.getBlock() instanceof FarmBlock))
-            || isRightFarmLandForCrop(farmField, blockState)
+            || isRightFarmLandForCrop(blockState)
         )
         {
             return null;
@@ -387,7 +390,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             world.destroyBlock(position.above(), true);
         }
 
-        if (!isRightFarmLandForCrop(farmField, blockState))
+        if (!isRightFarmLandForCrop(blockState))
         {
             return position;
         }
@@ -600,7 +603,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             {
                 equipHoe();
                 worker.swing(worker.getUsedItemHand());
-                createCorrectFarmlandForSeed(farmField.getSeed(), position);
+                createCorrectFarmlandForSeed(position);
                 CitizenItemUtils.damageItemInHand(worker, InteractionHand.MAIN_HAND, 1);
                 worker.getCitizenColonyHandler()
                     .getColonyOrRegister()
@@ -615,40 +618,47 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     }
 
     /**
-     * Create the correct farmland for a given seed.
+     * Create the correct farmland at a given position.
      *
-     * @param seed the crop.
-     * @param pos  the position.
+     * @param pos the position.
      */
-    private void createCorrectFarmlandForSeed(final ItemStack seed, final BlockPos pos)
+    private void createCorrectFarmlandForSeed(final BlockPos pos)
     {
         world.setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
     }
 
-    /**
-     * Check if this is the right farm land for the specific crop.
-     *
-     * @param farmField  the field we're testing this for.
-     * @param blockState the state we're testing this on.
-     * @return true if so.
-     */
-    private boolean isRightFarmLandForCrop(final FarmField farmField, final BlockState blockState)
+    private boolean isRightFarmLandForCrop(final BlockState blockState)
     {
         return blockState.getBlock() instanceof FarmBlock;
     }
 
     /**
-     * Checks if we can harvest, and does so if we can.
+     * Tries to harvest a crop. Attempts right-click first, then falls back to breaking.
      *
-     * @param position the block to harvest.
-     * @return true if we harvested or not supposed to.
+     * @param position the block to harvest
+     * @return true if we harvested or not supposed to
      */
     private boolean harvestIfAble(BlockPos position)
     {
         position = findHarvestableSurface(position);
         if (position != null)
         {
-            if (mineBlock(position.above()))
+            final BlockPos cropPos = position.above();
+
+            final InteractionResult useResult = useBlock(cropPos);
+
+            boolean harvestSuccess;
+            if (useResult.consumesAction())
+            {
+                trackItemsFromRightClickHarvest(cropPos);
+                harvestSuccess = true;
+            }
+            else
+            {
+                harvestSuccess = mineBlock(cropPos);
+            }
+
+            if (harvestSuccess)
             {
                 worker.getCitizenColonyHandler()
                     .getColonyOrRegister()
@@ -662,6 +672,41 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             }
         }
         return true;
+    }
+
+    /**
+     * Tracks items spawned by right-click harvesting for statistics.
+     *
+     * @param cropPos the position where the crop was harvested
+     */
+    private void trackItemsFromRightClickHarvest(final BlockPos cropPos)
+    {
+        world.getServer().execute(() -> {
+            final List<ItemEntity> itemEntities = world.getEntitiesOfClass(
+                ItemEntity.class,
+                new AABB(cropPos).inflate(2.0)
+            );
+
+            final List<ItemStack> harvestedItems = new ArrayList<>();
+            for (final ItemEntity itemEntity : itemEntities)
+            {
+                if (itemEntity.getAge() <= 2)
+                {
+                    harvestedItems.add(itemEntity.getItem().copy());
+                }
+            }
+
+            if (!harvestedItems.isEmpty())
+            {
+                for (final ItemStack stack : harvestedItems)
+                {
+                    building.getModule(STATS_MODULE).incrementBy(
+                        ITEM_OBTAINED + ";" + stack.getItem().getDescriptionId(),
+                        stack.getCount()
+                    );
+                }
+            }
+        });
     }
 
     @Override
@@ -715,7 +760,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             || world.getBlockState(position.above()).getBlock() instanceof CropBlock
             || world.getBlockState(position.above()).getBlock() instanceof StemBlock
             || world.getBlockState(position).getBlock() instanceof BlockScarecrow
-            || !isRightFarmLandForCrop(farmField, world.getBlockState(position)))
+            || !isRightFarmLandForCrop(world.getBlockState(position)))
         {
             return null;
         }
