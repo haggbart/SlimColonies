@@ -77,20 +77,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
      */
     private static final int MAX_BLOCKS_MINED = 64;
 
-    /**
-     * The default delay the farmer should have.
-     */
-    private static final int DEFAULT_DELAY = 40;
-
-    /**
-     * The smallest delay the farmer should have.
-     */
-    private static final int SMALLEST_DELAY = 1;
-
-    /**
-     * The bonus the farmer gains each update is level/divider.
-     */
-    private static final double DELAY_DIVIDER = 1;
 
     /**
      * The EXP Earned per harvest.
@@ -561,7 +547,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                     }
                 }
                 building.setPrevPos(position);
-                setDelay(getLevelDelay());
             }
 
             building.setWorkingOffset(nextValidCell(farmField));
@@ -717,11 +702,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         {
             building.getModule(STATS_MODULE).incrementBy(ITEM_OBTAINED + ";" + stack.getItem().getDescriptionId(), stack.getCount());
         }
-    }
-
-    protected int getLevelDelay()
-    {
-        return (int) Math.max(SMALLEST_DELAY, DEFAULT_DELAY - ((getPrimarySkillLevel() / 2.0) * DELAY_DIVIDER));
     }
 
     /**
