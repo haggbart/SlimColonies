@@ -433,41 +433,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addToList(r);
 
 
-        final Research circus = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/circus"), CIVIL).setParentResearch(firstAid)
-            .setTranslatedName("Circus")
-            .setSortOrder(2)
-            .setIcon(new ResourceLocation("slimcolonies:textures/icons/research/happy1.png"))
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 2)
-            // Happiness system removed
-            .addToList(r);
-        final Research festival = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/festival"), CIVIL).setParentResearch(circus)
-            .setTranslatedName("Festival")
-            .setTranslatedSubtitle("We Researchers may not be there, so don't look for us.")
-            .setIcon(new ResourceLocation("slimcolonies:textures/icons/research/happy2.png"))
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 3)
-            // Happiness system removed
-            .addToList(r);
-        final Research spectacle = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/spectacle"), CIVIL).setParentResearch(festival)
-            .setTranslatedName("Spectacle")
-            .setIcon(new ResourceLocation("slimcolonies:textures/icons/research/happy3.png"))
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 4)
-            // Happiness system removed
-            .addToList(r);
-        final Research opera = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/opera"), CIVIL).setParentResearch(spectacle)
-            .setTranslatedName("Opera")
-            .setTranslatedSubtitle("Ear plugs not included.")
-            .setIcon(new ResourceLocation("slimcolonies:textures/icons/research/happy4.png"))
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.COOK_ID), 5)
-            // Happiness system removed
-            .addToList(r);
-        new Research(new ResourceLocation(Constants.MOD_ID, "civilian/theater"), CIVIL).setParentResearch(opera)
-            .setTranslatedName("Theater")
-            .setTranslatedSubtitle("Oh don't be so dramatic!")
-            .setIcon(new ResourceLocation("slimcolonies:textures/icons/research/happy5.png"))
-            // Happiness system removed
-            .addToList(r);
-
-        final Research night_owl = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/nightowl"), CIVIL).setParentResearch(circus)
+        final Research night_owl = new Research(new ResourceLocation(Constants.MOD_ID, "civilian/nightowl"), CIVIL).setParentResearch(firstAid)
             .setTranslatedName("Night Owl")
             .setTranslatedSubtitle("Overtime penalty rates need not apply.")
             .setSortOrder(2)
