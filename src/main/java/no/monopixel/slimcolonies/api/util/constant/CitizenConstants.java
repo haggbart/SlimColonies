@@ -58,7 +58,7 @@ public final class CitizenConstants
     /**
      * Number of ticks to decrease saturation after.
      */
-    public static final int SATURATION_DECREASE_AFTER = 20 * 180;
+    public static final int SATURATION_DECREASE_AFTER = 20 * 300;
 
     /**
      * Amount of saturation to decrease each time.
