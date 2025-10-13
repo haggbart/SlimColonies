@@ -2,6 +2,9 @@ package no.monopixel.slimcolonies.core.entity.ai.workers;
 
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -10,11 +13,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import no.monopixel.slimcolonies.api.entity.ai.workers.util.IBuilderUndestroyable;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.MathUtils;
+import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.jobs.AbstractJob;
@@ -234,6 +236,49 @@ public abstract class AbstractEntityAIInteract<J extends AbstractJob<?, J>, B ex
         worker.getCitizenExperienceHandler().addExperience(XP_PER_BLOCK);
         this.incrementActionsDone();
         return true;
+    }
+
+    /**
+     * Simulates right-clicking a block.
+     *
+     * @param blockToUse the block to right-click
+     * @return the InteractionResult from the use() call
+     */
+    protected final InteractionResult useBlock(@NotNull final BlockPos blockToUse)
+    {
+        final BlockState curBlockState = world.getBlockState(blockToUse);
+        @Nullable final Block curBlock = curBlockState.getBlock();
+
+        if (curBlock instanceof AirBlock)
+        {
+            return InteractionResult.PASS;
+        }
+
+        worker.swing(worker.getUsedItemHand());
+
+        final BlockHitResult hitResult = new BlockHitResult(
+            Vec3.atCenterOf(blockToUse),
+            Direction.UP,
+            blockToUse,
+            false
+        );
+
+        final InteractionResult result = curBlock.use(
+            curBlockState,
+            world,
+            blockToUse,
+            getFakePlayer(),
+            InteractionHand.MAIN_HAND,
+            hitResult
+        );
+
+        if (result.consumesAction())
+        {
+            worker.getCitizenExperienceHandler().addExperience(XP_PER_BLOCK);
+            this.incrementActionsDone();
+        }
+
+        return result;
     }
 
     /**
