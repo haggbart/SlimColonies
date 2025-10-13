@@ -155,7 +155,8 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .add(Items.SPIDER_EYE)
             .add(Items.TROPICAL_FISH)
             .add(Items.PUFFERFISH)
-            .add(Items.SUSPICIOUS_STEW);
+            .add(Items.SUSPICIOUS_STEW)
+            .addTag(Tags.Items.CROPS);
 
         tag(ModTags.breakable_ore)
             .addTag(ItemTags.COAL_ORES)

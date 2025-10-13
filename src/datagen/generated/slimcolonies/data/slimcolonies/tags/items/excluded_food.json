@@ -6,6 +6,7 @@
     "minecraft:spider_eye",
     "minecraft:tropical_fish",
     "minecraft:pufferfish",
-    "minecraft:suspicious_stew"
+    "minecraft:suspicious_stew",
+    "#forge:crops"
   ]
 }
