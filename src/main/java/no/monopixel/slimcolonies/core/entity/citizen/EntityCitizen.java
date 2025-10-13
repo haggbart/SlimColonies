@@ -265,14 +265,15 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             citizenAI.tick();
             return false;
         }, () -> null, 1));
-        entityStateController.addTransition(new TickingTransition<>(EntityState.ACTIVE_SERVER, this::decreaseTimedSaturation, () -> null, SATURATION_DECREASE_AFTER));
+        entityStateController.addTransition(new TickingTransition<>(EntityState.ACTIVE_SERVER,
+            this::decreaseTimedSaturation,
+            () -> null,
+            (int) (SATURATION_DECREASE_AFTER / SlimColonies.getConfig().getServer().foodModifier.get())));
         entityStateController.addTransition(new TickingTransition<>(EntityState.INACTIVE, this::isAlive, () -> EntityState.INIT, 100));
     }
 
     /**
      * Whether the entity should be inactive
-     *
-     * @return
      */
     private boolean shouldBeInactive()
     {
@@ -1897,7 +1898,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     {
         if (citizenData != null)
         {
-            citizenData.decreaseSaturation(0.5);
+            citizenData.decreaseSaturation(SATURATION_DECREASE_AMOUNT);
         }
         return false;
     }

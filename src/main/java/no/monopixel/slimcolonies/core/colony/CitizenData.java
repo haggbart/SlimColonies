@@ -89,11 +89,6 @@ public class CitizenData implements ICitizenData
     private static final int LETTERS_IN_THE_ALPHABET = 26;
 
     /**
-     * Minimum saturation of a citizen.
-     */
-    private static final int MIN_SATURATION = 0;
-
-    /**
      * Possible texture suffixes.
      */
     public static final List<String> SUFFIXES = Arrays.asList("_b", "_d", "_a", "_w");
@@ -1126,7 +1121,7 @@ public class CitizenData implements ICitizenData
     {
         if (colony != null && colony.isActive())
         {
-            this.saturation = Math.max(MIN_SATURATION, this.saturation - Math.abs(extraSaturation * SlimColonies.getConfig().getServer().foodModifier.get()));
+            this.saturation = Math.max(0, this.saturation - extraSaturation);
             this.justAte = false;
         }
     }

@@ -1,5 +1,8 @@
 package no.monopixel.slimcolonies.core.entity.ai.visitor;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.EntityState;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IState;
@@ -15,10 +18,9 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.TavernBuildingMod
 import no.monopixel.slimcolonies.core.entity.other.SittingEntity;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 import no.monopixel.slimcolonies.core.entity.visitor.VisitorCitizen;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
+
+import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.LOW_SATURATION;
 
 /**
  * AI for visitors, they do sometimes nap on their place, sit on their place, randomly walk around inside building outline
@@ -94,7 +96,7 @@ public class EntityAIVisitor implements IState
     {
         citizen.getCitizenData().decreaseSaturation(0.02);
         citizen.getCitizenData().markDirty(20 * 20);
-        if (citizen.getCitizenData().getSaturation() <= 0)
+        if (citizen.getCitizenData().getSaturation() <= LOW_SATURATION)
         {
             citizen.getCitizenColonyHandler().getColonyOrRegister().getVisitorManager().removeCivilian(citizen.getCitizenData());
             if (tavern != null)

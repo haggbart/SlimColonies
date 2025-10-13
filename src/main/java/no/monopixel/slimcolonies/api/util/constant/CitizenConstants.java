@@ -58,7 +58,12 @@ public final class CitizenConstants
     /**
      * Number of ticks to decrease saturation after.
      */
-    public static final int SATURATION_DECREASE_AFTER = 20 * 60;
+    public static final int SATURATION_DECREASE_AFTER = 20 * 180;
+
+    /**
+     * Amount of saturation to decrease each time.
+     */
+    public static final double SATURATION_DECREASE_AMOUNT = 1.0;
 
     /**
      * The delta yaw value for looking at things.
