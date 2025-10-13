@@ -267,7 +267,7 @@ public class VisitorCitizen extends AbstractEntityCitizen
     {
         if (citizenData != null)
         {
-            citizenData.decreaseSaturation(citizenColonyHandler.getPerBuildingFoodCost());
+            citizenData.decreaseSaturation(1.0);
             citizenData.markDirty(20 * 20);
         }
     }
@@ -280,7 +280,7 @@ public class VisitorCitizen extends AbstractEntityCitizen
     {
         if (citizenData != null)
         {
-            citizenData.decreaseSaturation(citizenColonyHandler.getPerBuildingFoodCost() / 100.0);
+            citizenData.decreaseSaturation(0.01);
             citizenData.markDirty(20 * 60 * 2);
         }
     }

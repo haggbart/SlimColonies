@@ -1,18 +1,17 @@
 package no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers;
 
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenColonyHandler;
 import no.monopixel.slimcolonies.api.util.Log;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.Nullable;
 
 import static no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen.*;
-import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.SATURATION_DECREASE_FACTOR;
 
 /**
  * Handles all colony related methods for the citizen.
@@ -161,8 +160,8 @@ public class CitizenColonyHandler implements ICitizenColonyHandler
     public void onSyncDataUpdate(final EntityDataAccessor<?> data)
     {
         if (data.equals(DATA_COLONY_ID) || data.equals(DATA_CITIZEN_ID) || data.equals(DATA_IS_FEMALE) || data.equals(DATA_IS_CHILD) || data.equals(DATA_MODEL)
-              || data.equals(DATA_TEXTURE)
-              || data.equals(DATA_TEXTURE_SUFFIX) || data.equals(DATA_STYLE) || data.equals(DATA_RENDER_METADATA))
+            || data.equals(DATA_TEXTURE)
+            || data.equals(DATA_TEXTURE_SUFFIX) || data.equals(DATA_STYLE) || data.equals(DATA_RENDER_METADATA))
         {
             needsClientUpdate = true;
         }
@@ -172,18 +171,6 @@ public class CitizenColonyHandler implements ICitizenColonyHandler
     public boolean registered()
     {
         return registered;
-    }
-
-    /**
-     * Get the amount the worker should decrease its saturation by each action done or x blocks traveled.
-     *
-     * @return the double describing it.
-     */
-    @Override
-    public double getPerBuildingFoodCost()
-    {
-        return getWorkBuilding() == null || getWorkBuilding().getBuildingLevelEquivalent() == 0 ? 1
-                 : (SATURATION_DECREASE_FACTOR * Math.pow(2, getWorkBuilding().getBuildingLevelEquivalent()));
     }
 
     /**
