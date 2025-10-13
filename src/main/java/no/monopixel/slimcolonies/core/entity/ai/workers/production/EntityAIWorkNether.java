@@ -84,7 +84,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
      */
     final List<ItemStack> netherEdible = IColonyManager.getInstance()
         .getCompatibilityManager()
-        .getEdibles(building.getBuildingLevel() - 1)
+        .getEdibles(1)
         .stream()
         .map(ItemStorage::getItemStack)
         .collect(Collectors.toList());

@@ -4,6 +4,8 @@ import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.PaneBuilders;
 import com.ldtteam.blockui.controls.*;
 import com.ldtteam.blockui.views.ScrollingList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.views.IBuildingView;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
@@ -12,8 +14,6 @@ import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.client.gui.AbstractModuleWindow;
 import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.RestaurantMenuModuleView;
 import no.monopixel.slimcolonies.core.network.messages.server.colony.building.AlterRestaurantMenuItemMessage;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -97,7 +97,7 @@ public class RestaurantMenuModuleWindow extends AbstractModuleWindow
 
         resourceList = window.findPaneOfTypeByID(LIST_RESOURCES, ScrollingList.class);
 
-        groupedItemList = new ArrayList<>(IColonyManager.getInstance().getCompatibilityManager().getEdibles(building.getBuildingLevel() - 1));
+        groupedItemList = new ArrayList<>(IColonyManager.getInstance().getCompatibilityManager().getEdibles(1));
 
         window.findPaneOfTypeByID(INPUT_FILTER, TextField.class).setHandler(input -> {
             final String newFilter = input.getText();
