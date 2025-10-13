@@ -585,7 +585,6 @@ public class EntityAIQuarrier extends AbstractEntityAIStructureWithWorkOrder<Job
             return getState();
         }
 
-        worker.decreaseSaturationForContinuousAction();
         blockToMine = null;
         return BUILDING_STEP;
     }

@@ -248,7 +248,6 @@ public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, Build
                 .incrementBy(FOOD_SERVED, qty, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
             StatsUtil.trackStatByName(building, FOOD_SERVED_DETAIL, foodName, qty);
             worker.getCitizenExperienceHandler().addExperience(BASE_XP_GAIN);
-            worker.decreaseSaturationForAction();
         }
 
         return getState();

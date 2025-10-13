@@ -584,16 +584,6 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
     public abstract void playMoveAwaySound();
 
     /**
-     * Decrease the saturation of the citizen for 1 action.
-     */
-    public abstract void decreaseSaturationForAction();
-
-    /**
-     * Decrease the saturation of the citizen for 1 action.
-     */
-    public abstract void decreaseSaturationForContinuousAction();
-
-    /**
      * The Handler for all experience related methods.
      *
      * @return the instance of the handler.

@@ -636,7 +636,6 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
             worker.swing(InteractionHand.MAIN_HAND);
             return getState();
         }
-        worker.decreaseSaturationForContinuousAction();
         return BUILDING_STEP;
     }
 

@@ -105,7 +105,6 @@ public class EntityAIWorkSmelter extends AbstractEntityAIUsesFurnace<JobSmelter,
         }
         else
         {
-            worker.decreaseSaturationForContinuousAction();
             StatsUtil.trackStatByName(building, ORES_BROKEN, statsName, quantity);
             worker.getCitizenExperienceHandler().addExperience(0.2);
         }

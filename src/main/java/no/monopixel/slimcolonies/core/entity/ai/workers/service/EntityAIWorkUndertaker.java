@@ -256,7 +256,6 @@ public class EntityAIWorkUndertaker extends AbstractEntityAIInteract<JobUndertak
                 return getState();
             }
 
-            worker.decreaseSaturationForAction();
             worker.getCitizenData().getCitizenSkillHandler().addXpToSkill(getModuleForJob().getPrimarySkill(), XP_PER_DIG, worker.getCitizenData());
             StatsUtil.trackStat(building, GRAVES_DUG, 1);
             building.getColony().getStatisticsManager().increment(GRAVES_DUG, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
@@ -281,7 +280,6 @@ public class EntityAIWorkUndertaker extends AbstractEntityAIInteract<JobUndertak
             final GraveData graveData = (GraveData) ((TileEntityGrave) entity).getGraveData();
             if (mineBlock(position))
             {
-                worker.decreaseSaturationForContinuousAction();
                 building.ClearCurrentGrave();
                 building.getFirstModuleOccurance(GraveyardManagementModule.class).setLastGraveData(graveData);
                 return true;

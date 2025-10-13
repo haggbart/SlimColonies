@@ -241,7 +241,6 @@ public class EntityAIWorkFlorist extends AbstractEntityAIInteract<JobFlorist, Bu
         }
 
         incrementActionsDone();
-        worker.decreaseSaturationForContinuousAction();
         compostPosition = null;
         return START_WORKING;
     }
@@ -280,7 +279,6 @@ public class EntityAIWorkFlorist extends AbstractEntityAIInteract<JobFlorist, Bu
         }
 
         incrementActionsDone();
-        worker.decreaseSaturationForContinuousAction();
         harvestPosition = null;
         return START_WORKING;
     }

@@ -177,51 +177,18 @@ public class CitizenWindowUtils
         healthBarView.addChild(heartImage);
     }
 
-    /**
-     * Get vertical offset for the saturation icon based on the iteration
-     * If i >= 10, move the icons down another line
-     * @param i the current iteration
-     * @return the y offset
-     */
-    private static int getYOffset(final int i)
-    {
-        return (i >= 10 ? SATURATION_ICON_POS_Y : 0);
-    }
-
-    /**
-     * Get horizontal offset modifier for the saturation icon based on the iteration
-     * if i >= 10, decrease i by 10 to start the line from the beginning
-     * @param i the current iteration
-     * @return the x offset modifier
-     */
-    private static int getXOffsetModifier(final int i)
-    {
-        return (i >= 10 ? i - 10 : i);
-    }
-
-    /**
-     * Creates a saturation bar
-     *
-     * @param citizen the citizen.
-     * @param view    the view to add these to.
-     */
     public static void createSaturationBar(final ICitizenDataView citizen, final View view)
     {
         createSaturationBar(citizen.getSaturation(), view);
     }
 
-    /**
-     * Creates a saturation bar
-     *
-     * @param curSaturation the current saturation level.
-     * @param view    the view to add these to.
-     */
     public static void createSaturationBar(final double curSaturation, final View view)
     {
         view.findPaneOfTypeByID(WINDOW_ID_SATURATION_BAR, View.class).setAlignment(Alignment.MIDDLE_RIGHT);
 
-        //Max saturation (Black food items).
-        for (int i = 0; i < ICitizenData.MAX_SATURATION; i++)
+        final int maxIcons = ICitizenData.MAX_SATURATION / 2;
+
+        for (int i = 0; i < maxIcons; i++)
         {
             @NotNull final Image saturation = new Image();
             saturation.setImage(GUI_ICONS_LOCATION,
@@ -229,46 +196,32 @@ public class CitizenWindowUtils
               SATURATION_ICON_COLUMN, HEART_ICON_HEIGHT_WIDTH, HEART_ICON_HEIGHT_WIDTH);
             saturation.setMapDimensions(256, 256);
             saturation.setSize(SATURATION_ICON_HEIGHT_WIDTH, SATURATION_ICON_HEIGHT_WIDTH);
-
-            saturation.setPosition(getXOffsetModifier(i) * SATURATION_ICON_POS_X + SATURATION_ICON_OFFSET_X, SATURATION_ICON_POS_Y + getYOffset(i));
+            saturation.setPosition(i * SATURATION_ICON_POS_X + SATURATION_ICON_OFFSET_X, SATURATION_ICON_POS_Y);
             view.findPaneOfTypeByID(WINDOW_ID_SATURATION_BAR, View.class).addChild(saturation);
         }
 
-        //Current saturation (Full food hearts).
-        int saturationPos;
-        for (saturationPos = 0; saturationPos < ((int) curSaturation); saturationPos++)
+        final int fullIcons = (int) (curSaturation / 2);
+        for (int i = 0; i < fullIcons; i++)
         {
             @NotNull final Image saturation = new Image();
             saturation.setImage(GUI_ICONS_LOCATION, FULL_SATURATION_ITEM_ROW_POS, SATURATION_ICON_COLUMN, HEART_ICON_HEIGHT_WIDTH, HEART_ICON_HEIGHT_WIDTH);
             saturation.setMapDimensions(256, 256);
             saturation.setSize(SATURATION_ICON_HEIGHT_WIDTH, SATURATION_ICON_HEIGHT_WIDTH);
-            saturation.setPosition(getXOffsetModifier(saturationPos) * SATURATION_ICON_POS_X + SATURATION_ICON_OFFSET_X, SATURATION_ICON_POS_Y + getYOffset(saturationPos));
+            saturation.setPosition(i * SATURATION_ICON_POS_X + SATURATION_ICON_OFFSET_X, SATURATION_ICON_POS_Y);
             view.findPaneOfTypeByID(WINDOW_ID_SATURATION_BAR, View.class).addChild(saturation);
         }
 
-        //Half food items.
-        if (curSaturation / 2 % 1 > 0)
+        if (curSaturation % 2 >= 1)
         {
             @NotNull final Image saturation = new Image();
             saturation.setImage(GUI_ICONS_LOCATION, HALF_SATURATION_ITEM_ROW_POS, SATURATION_ICON_COLUMN, HEART_ICON_HEIGHT_WIDTH, HEART_ICON_HEIGHT_WIDTH);
             saturation.setMapDimensions(256, 256);
             saturation.setSize(SATURATION_ICON_HEIGHT_WIDTH, SATURATION_ICON_HEIGHT_WIDTH);
-            saturation.setPosition(getXOffsetModifier(saturationPos) * SATURATION_ICON_POS_X + SATURATION_ICON_OFFSET_X, SATURATION_ICON_POS_Y + getYOffset(saturationPos));
+            saturation.setPosition(fullIcons * SATURATION_ICON_POS_X + SATURATION_ICON_OFFSET_X, SATURATION_ICON_POS_Y);
             view.findPaneOfTypeByID(WINDOW_ID_SATURATION_BAR, View.class).addChild(saturation);
         }
     }
 
-    // Happiness system removed
-
-    // Happiness system removed
-
-    // Happiness system removed
-
-    /**
-     * Fills the citizen gui with it's skill values.
-     *  @param citizen the citizen to use.
-     * @param window  the window to fill.
-     */
     public static void createSkillContent(final ICitizenDataView citizen, final AbstractWindowSkeleton window)
     {
         final boolean isCreative = Minecraft.getInstance().player.isCreative();

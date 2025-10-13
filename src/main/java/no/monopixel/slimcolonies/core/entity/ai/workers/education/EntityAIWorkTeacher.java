@@ -166,7 +166,6 @@ public class EntityAIWorkTeacher extends AbstractEntityAIInteract<JobTeacher, Bu
         teachPupil(pupilToTeach, xp);
 
         worker.getCitizenExperienceHandler().addExperience(0.1);
-        worker.decreaseSaturationForContinuousAction();
         incrementActionsDone();
 
         maxSittingTicks = 0;

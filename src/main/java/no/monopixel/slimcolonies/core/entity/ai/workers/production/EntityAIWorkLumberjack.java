@@ -573,7 +573,6 @@ public class EntityAIWorkLumberjack extends AbstractEntityAICrafting<JobLumberja
                 return getState();
             }
             job.getTree().pollNextLog();
-            worker.decreaseSaturationForContinuousAction();
         }
         return getState();
     }

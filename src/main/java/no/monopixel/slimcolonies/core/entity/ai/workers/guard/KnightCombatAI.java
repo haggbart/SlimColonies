@@ -121,7 +121,6 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
             nbt.put(TAG_BANNER_PATTERNS, user.getCitizenColonyHandler().getColonyOrRegister().getColonyFlag());
 
             user.lookAt(target, (float) TURN_AROUND, (float) TURN_AROUND);
-            user.decreaseSaturationForContinuousAction();
         }
 
         return null;
@@ -187,7 +186,6 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
         }
 
         user.stopUsingItem();
-        user.decreaseSaturationForContinuousAction();
         user.getCitizenData().setVisibleStatus(KNIGHT_COMBAT);
         CitizenItemUtils.damageItemInHand(user, InteractionHand.MAIN_HAND, 1);
     }

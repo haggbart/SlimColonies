@@ -181,7 +181,6 @@ public class EntityAICombatTraining extends AbstractEntityAITraining<JobCombatTr
             int priorSecondaryLevel = getSecondarySkillLevel();
 
             worker.getCitizenExperienceHandler().addExperience(XP_BASE_RATE);
-            worker.decreaseSaturationForAction();
             worker.lookAt(trainingPartner, (float) TURN_AROUND, (float) TURN_AROUND);
             WorkerUtil.faceBlock(trainingPartner.blockPosition().above(), worker);
             worker.stopUsingItem();
@@ -286,7 +285,6 @@ public class EntityAICombatTraining extends AbstractEntityAITraining<JobCombatTr
             int priorSecondaryLevel = getSecondarySkillLevel();
 
             worker.getCitizenExperienceHandler().addExperience(XP_BASE_RATE);
-            worker.decreaseSaturationForAction();
             WorkerUtil.faceBlock(currentCombatTarget, worker);
             worker.stopUsingItem();
 

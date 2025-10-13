@@ -189,11 +189,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     private int callForHelpCooldown = 0;
 
     /**
-     * Distance walked for consuming food
-     */
-    private float lastDistanceWalked = 0;
-
-    /**
      * Citizen data view.
      */
     private ICitizenDataView citizenDataView;
@@ -270,7 +265,7 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             citizenAI.tick();
             return false;
         }, () -> null, 1));
-        entityStateController.addTransition(new TickingTransition<>(EntityState.ACTIVE_SERVER, this::decreaseIdleSaturation, () -> null, SATURATION_DECREASE_AFTER));
+        entityStateController.addTransition(new TickingTransition<>(EntityState.ACTIVE_SERVER, this::decreaseTimedSaturation, () -> null, SATURATION_DECREASE_AFTER));
         entityStateController.addTransition(new TickingTransition<>(EntityState.INACTIVE, this::isAlive, () -> EntityState.INIT, 100));
     }
 
@@ -737,7 +732,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     private boolean onTickDecrements()
     {
         decrementCallForHelpCooldown();
-        decreaseWalkingSaturation();
         return false;
     }
 
@@ -853,18 +847,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             return false;
         }
         return getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(VINES) > 0;
-    }
-
-    /**
-     * Reduces saturation for walking every 25 blocks.
-     */
-    private void decreaseWalkingSaturation()
-    {
-        if (walkDist - lastDistanceWalked > ACTIONS_EACH_BLOCKS_WALKED)
-        {
-            lastDistanceWalked = walkDist;
-            decreaseSaturationForContinuousAction();
-        }
     }
 
     /**
@@ -1056,32 +1038,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
         if (citizenJobHandler.getColonyJob() != null)
         {
             SoundUtils.playSoundAtCitizenWith(level, blockPosition(), EventType.DANGER, getCitizenData());
-        }
-    }
-
-    /**
-     * Decrease the saturation of the citizen for 1 action.
-     */
-    @Override
-    public void decreaseSaturationForAction()
-    {
-        if (citizenData != null)
-        {
-            citizenData.decreaseSaturation(0.02);
-            citizenData.markDirty(20 * 20);
-        }
-    }
-
-    /**
-     * Decrease the saturation of the citizen for 1 action.
-     */
-    @Override
-    public void decreaseSaturationForContinuousAction()
-    {
-        if (citizenData != null)
-        {
-            citizenData.decreaseSaturation(0.04 / 150.0);
-            citizenData.markDirty(20 * 60 * 2);
         }
     }
 
@@ -1933,15 +1889,15 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
     }
 
     /**
-     * Decrease idle saturation.
+     * Decrease saturation based on time passage.
      *
-     * @return saturation.
+     * @return false
      */
-    private boolean decreaseIdleSaturation()
+    private boolean decreaseTimedSaturation()
     {
         if (citizenData != null)
         {
-            citizenData.decreaseSaturation(0.04);
+            citizenData.decreaseSaturation(0.5);
         }
         return false;
     }

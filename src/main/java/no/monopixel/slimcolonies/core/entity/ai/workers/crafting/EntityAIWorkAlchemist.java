@@ -171,7 +171,6 @@ public class EntityAIWorkAlchemist extends AbstractEntityAICrafting<JobAlchemist
                         StatsUtil.trackStatByName(building, INGREDIENTS_HARVESTED, netherwartDrop.getDescriptionId(), netherwartDrop.getCount());
                     }
                     walkTo = null;
-                    worker.decreaseSaturationForContinuousAction();
                     return IDLE;
                 }
             }
@@ -191,7 +190,6 @@ public class EntityAIWorkAlchemist extends AbstractEntityAICrafting<JobAlchemist
                 }
 
                 world.setBlockAndUpdate(walkTo.above(), Blocks.NETHER_WART.defaultBlockState());
-                worker.decreaseSaturationForContinuousAction();
                 getInventory().extractItem(slot, 1, false);
                 walkTo = null;
                 return IDLE;

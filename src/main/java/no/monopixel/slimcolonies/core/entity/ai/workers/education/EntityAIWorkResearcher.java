@@ -89,7 +89,6 @@ public class EntityAIWorkResearcher extends AbstractEntityAIInteract<JobResearch
             job.reduceCurrentMana();
         }
 
-        worker.decreaseSaturationForContinuousAction();
         worker.getCitizenExperienceHandler().addExperience(XP_PER_STUDYPOS);
         studyPos = null;
         worker.queueSound(SoundEvents.BOOK_PAGE_TURN, worker.blockPosition().above(), 80, 15, 0.25f, 1.5f);

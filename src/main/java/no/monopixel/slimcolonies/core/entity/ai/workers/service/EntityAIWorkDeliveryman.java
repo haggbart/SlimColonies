@@ -248,7 +248,6 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
         final ItemStack activeStack = handler.extractItem(currentSlot, amount, false);
         InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(activeStack, worker.getInventoryCitizen());
         targetBuilding.markDirty();
-        worker.decreaseSaturationForContinuousAction();
 
         // The worker gets a little bit of exp for every itemstack he grabs.
         worker.getCitizenExperienceHandler().addExperience(0.01D);
@@ -435,7 +434,6 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
         {
             // This can only happen if the dman's inventory was completely empty.
             // Let the retry-system handle this case.
-            worker.decreaseSaturationForContinuousAction();
             CitizenItemUtils.setHeldItem(worker, InteractionHand.MAIN_HAND, SLOT_HAND);
             job.finishRequest(false);
 
@@ -444,7 +442,6 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
         }
 
         worker.getCitizenExperienceHandler().addExperience(1.5D);
-        worker.decreaseSaturationForContinuousAction();
         CitizenItemUtils.setHeldItem(worker, InteractionHand.MAIN_HAND, SLOT_HAND);
         job.finishRequest(true);
         return success ? START_WORKING : DUMPING;

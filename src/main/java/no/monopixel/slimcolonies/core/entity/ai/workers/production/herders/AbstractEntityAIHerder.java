@@ -561,7 +561,6 @@ public abstract class AbstractEntityAIHerder<J extends AbstractJob<?, J>, B exte
             return DECIDE;
         }
 
-        worker.decreaseSaturationForContinuousAction();
         return getState();
     }
 
@@ -654,7 +653,6 @@ public abstract class AbstractEntityAIHerder<J extends AbstractJob<?, J>, B exte
                 StatsUtil.trackStat(building, BREEDING_ATTEMPTS, 1);
                 worker.getMainHandItem().shrink(1);
                 worker.getCitizenExperienceHandler().addExperience(XP_PER_ACTION);
-                worker.decreaseSaturationForAction();
                 it.remove();
             }
         }

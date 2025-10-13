@@ -128,7 +128,6 @@ public class EntityAIConcreteMixer extends AbstractEntityAICrafting<JobConcreteM
                 if (job.getCraftCounter() >= job.getMaxCraftingCount())
                 {
                     incrementActionsDone(getActionRewardForCraftingSuccess());
-                    worker.decreaseSaturationForAction();
                     job.finishRequest(true);
                     worker.getCitizenExperienceHandler().addExperience(currentRequest.getRequest().getCount() / 2.0);
                     currentRequest = null;

@@ -602,7 +602,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                 worker.swing(worker.getUsedItemHand());
                 createCorrectFarmlandForSeed(farmField.getSeed(), position);
                 CitizenItemUtils.damageItemInHand(worker, InteractionHand.MAIN_HAND, 1);
-                worker.decreaseSaturationForContinuousAction();
                 worker.getCitizenColonyHandler()
                     .getColonyOrRegister()
                     .getStatisticsManager()
@@ -753,7 +752,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             }
 
             world.setBlockAndUpdate(position.above(), ((BlockItem) item.getItem()).getBlock().defaultBlockState());
-            worker.decreaseSaturationForContinuousAction();
             getInventory().extractItem(slot, 1, false);
         }
         return true;

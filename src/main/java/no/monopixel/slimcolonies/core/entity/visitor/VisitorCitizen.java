@@ -262,29 +262,6 @@ public class VisitorCitizen extends AbstractEntityCitizen
 
     }
 
-    @Override
-    public void decreaseSaturationForAction()
-    {
-        if (citizenData != null)
-        {
-            citizenData.decreaseSaturation(1.0);
-            citizenData.markDirty(20 * 20);
-        }
-    }
-
-    /**
-     * Decrease the saturation of the citizen for 1 action.
-     */
-    @Override
-    public void decreaseSaturationForContinuousAction()
-    {
-        if (citizenData != null)
-        {
-            citizenData.decreaseSaturation(0.01);
-            citizenData.markDirty(20 * 60 * 2);
-        }
-    }
-
     /**
      * Getter for the citizen id.
      *

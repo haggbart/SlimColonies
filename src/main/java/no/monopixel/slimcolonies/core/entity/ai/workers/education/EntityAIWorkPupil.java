@@ -195,7 +195,6 @@ public class EntityAIWorkPupil extends AbstractEntityAIInteract<JobPupil, Buildi
             }
         }
 
-        worker.decreaseSaturationForContinuousAction();
 
         maxSittingTicks = 0;
         sittingTicks = 0;

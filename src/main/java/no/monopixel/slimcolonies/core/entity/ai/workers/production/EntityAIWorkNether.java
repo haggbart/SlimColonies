@@ -573,7 +573,6 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                 {
                     if (InventoryUtils.addItemStackToItemHandler(worker.getItemHandlerCitizen(), item))
                     {
-                        worker.decreaseSaturationForContinuousAction();
                         worker.getCitizenExperienceHandler().addExperience(0.2);
                         StatsUtil.trackStatByName(building, ITEMS_DISCOVERED, item.getHoverName(), item.getCount());
                     }

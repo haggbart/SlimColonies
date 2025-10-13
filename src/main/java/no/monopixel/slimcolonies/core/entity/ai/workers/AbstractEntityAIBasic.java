@@ -1458,7 +1458,6 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
      */
     public final void incrementActionsDoneAndDecSaturation()
     {
-        worker.decreaseSaturationForAction();
         incrementActionsDone();
     }
 

@@ -207,7 +207,6 @@ public class EntityAIWorkSifter extends AbstractEntityAICrafting<JobSifter, Buil
                 StatsUtil.trackStatByName(building, ITEM_OBTAINED, stackForStats.getHoverName(), stackForStats.getCount());
             }
 
-            worker.decreaseSaturationForContinuousAction();
             worker.getCitizenExperienceHandler().addExperience(0.2);
         }
 

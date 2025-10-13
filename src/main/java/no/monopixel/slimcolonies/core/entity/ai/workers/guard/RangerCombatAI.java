@@ -199,7 +199,6 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
         target.setLastHurtByMob(user);
         CitizenItemUtils.damageItemInHand(user, InteractionHand.MAIN_HAND, 1);
         user.stopUsingItem();
-        user.decreaseSaturationForContinuousAction();
     }
 
     @Override
