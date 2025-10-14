@@ -166,8 +166,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
         {
             final IGlobalResearch research = IGlobalResearchTree.getInstance().getResearch(branch, new ResourceLocation(button.getID()));
             final ILocalResearch localResearch = building.getColony().getResearchManager().getResearchTree().getResearch(branch, research.getId());
-            if (localResearch == null && building.getBuildingLevel() > building.getColony().getResearchManager().getResearchTree().getResearchInProgress().size() &&
-                mc.player.isCreative())
+            if (localResearch == null && building.getBuildingLevel() > building.getColony().getResearchManager().getResearchTree().getResearchInProgress().size())
             {
                 research.startResearch(building.getColony().getResearchManager().getResearchTree());
                 last.updateResearchCount(0);
