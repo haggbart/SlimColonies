@@ -34,7 +34,6 @@ import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
 import no.monopixel.slimcolonies.api.items.ModItems;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
@@ -72,11 +71,6 @@ import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingMo
  */
 public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, BuildingFarmer>
 {
-    /**
-     * Return to chest after this amount of stacks.
-     */
-    private static final int MAX_BLOCKS_MINED = 64;
-
     /**
      * The EXP Earned per harvest.
      */
@@ -139,7 +133,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     @Override
     protected boolean wantInventoryDumped()
     {
-        if (shouldDumpInventory || job.getActionsDone() >= getActionRewardForCraftingSuccess())
+        if (shouldDumpInventory)
         {
             shouldDumpInventory = false;
             return true;
@@ -147,10 +141,16 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return super.wantInventoryDumped();
     }
 
+    /**
+     * Override to disable action-counter-based dumps.
+     * Farmer only dumps when inventory is full or field scan completes.
+     *
+     * @return Integer.MAX_VALUE to effectively disable action counter
+     */
     @Override
-    protected int getActionRewardForCraftingSuccess()
+    protected int getActionsDoneUntilDumping()
     {
-        return MAX_BLOCKS_MINED;
+        return Integer.MAX_VALUE;
     }
 
     @Override
@@ -175,12 +175,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     public boolean hasWorkToDo()
     {
         return true;
-    }
-
-    @Override
-    protected int getActionsDoneUntilDumping()
-    {
-        return MAX_BLOCKS_MINED;
     }
 
     /**
@@ -240,39 +234,31 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             worker.getCitizenData().setVisibleStatus(FARMING_ICON);
             worker.getCitizenData().setJobStatus(JobStatus.WORKING);
 
-            if (farmField.getFieldStage() == FarmField.Stage.PLANTED && checkIfShouldExecute(farmField, pos -> this.findHarvestableSurface(pos, farmField) != null))
+            if (checkIfShouldExecute(farmField, pos -> this.findHarvestableSurface(pos, farmField) != null))
             {
+                farmField.setFieldStage(FarmField.Stage.PLANTED);
                 return FARMER_HARVEST;
             }
-            else if (farmField.getFieldStage() == FarmField.Stage.HOED)
+
+            if (checkIfShouldExecute(farmField, pos -> this.findPlantableSurface(pos, farmField) != null))
             {
+                farmField.setFieldStage(FarmField.Stage.HOED);
                 return canGoPlanting(farmField);
             }
-            else if (farmField.getFieldStage() == FarmField.Stage.EMPTY)
-            {
-                if (farmField.isWaterCrop())
-                {
-                    farmField.nextState();
-                    return canGoPlanting(farmField);
-                }
 
+            if (!farmField.isWaterCrop())
+            {
                 if (checkIfShouldExecute(farmField, pos -> this.findHoeableSurface(pos, farmField) != null))
                 {
+                    farmField.setFieldStage(FarmField.Stage.EMPTY);
                     return FARMER_HOE;
                 }
             }
+
             farmField.nextState();
-            if (++skippedState >= 4)
-            {
-                skippedState = 0;
-                didWork = true;
-                module.resetCurrentExtension();
-            }
+            didWork = true;
+            module.resetCurrentExtension();
             return IDLE;
-        }
-        else if (fieldToWork != null)
-        {
-            Log.getLogger().warn("Farmer found non-FarmField extension: {}", fieldToWork.getClass());
         }
         return IDLE;
     }
@@ -648,7 +634,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     /**
      * Tries to harvest a crop. Attempts right-click first, then falls back to breaking.
      *
-     * @param position the block to harvest
+     * @param position  the block to harvest
      * @param farmField the farm field being harvested
      * @return true if we harvested or not supposed to
      */
@@ -835,7 +821,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     /**
      * Checks if the crop should be harvested.
      *
-     * @param position the position to check.
+     * @param position  the position to check.
      * @param farmField the farm field being checked
      * @return position of harvestable block or null
      */
