@@ -36,15 +36,22 @@ public class FarmField extends AbstractBuildingExtensionModule
      */
     private static final int MAX_RANGE = 5;
 
-    private static final String TAG_SEED      = "seed";
-    private static final String TAG_RADIUS    = "radius";
-    private static final String TAG_MAX_RANGE = "maxRange";
-    private static final String TAG_STAGE     = "stage";
+    private static final String TAG_SEED         = "seed";
+    private static final String TAG_RADIUS       = "radius";
+    private static final String TAG_MAX_RANGE    = "maxRange";
+    private static final String TAG_STAGE        = "stage";
+    private static final String TAG_WATER_CROP   = "isWaterCrop";
 
     /**
      * The currently selected seed on the field, if any.
      */
     private ItemStack seed = ItemStack.EMPTY;
+
+    /**
+     * Cached flag indicating if the current seed is a water crop (like rice).
+     * Computed once when seed is set to avoid repeated string operations.
+     */
+    private boolean isWaterCrop = false;
 
     /**
      * The size of the field in all four directions
@@ -100,6 +107,7 @@ public class FarmField extends AbstractBuildingExtensionModule
         compound.putIntArray(TAG_RADIUS, radii);
         compound.putInt(TAG_MAX_RANGE, maxRadius);
         compound.putString(TAG_STAGE, fieldStage.name());
+        compound.putBoolean(TAG_WATER_CROP, isWaterCrop);
         return compound;
     }
 
@@ -107,10 +115,16 @@ public class FarmField extends AbstractBuildingExtensionModule
     public void deserializeNBT(final @NotNull CompoundTag compound)
     {
         super.deserializeNBT(compound);
-        setSeed(ItemStack.of(compound.getCompound(TAG_SEED)));
+        setSeed(ItemStack.of(compound.getCompound(TAG_SEED)));  // This will compute isWaterCrop
         radii = compound.getIntArray(TAG_RADIUS);
         maxRadius = compound.getInt(TAG_MAX_RANGE);
         fieldStage = Stage.valueOf(compound.getString(TAG_STAGE));
+        // For backwards compatibility, recompute if not present in saved data
+        // setSeed() already computed it, but this explicit check helps clarity
+        if (compound.contains(TAG_WATER_CROP))
+        {
+            isWaterCrop = compound.getBoolean(TAG_WATER_CROP);
+        }
     }
 
     @Override
@@ -121,16 +135,18 @@ public class FarmField extends AbstractBuildingExtensionModule
         buf.writeVarIntArray(radii);
         buf.writeInt(maxRadius);
         buf.writeEnum(fieldStage);
+        buf.writeBoolean(isWaterCrop);
     }
 
     @Override
     public void deserialize(@NotNull final FriendlyByteBuf buf)
     {
         super.deserialize(buf);
-        setSeed(buf.readItem());
+        setSeed(buf.readItem());  // This will compute isWaterCrop
         radii = buf.readVarIntArray();
         maxRadius = buf.readInt();
         fieldStage = buf.readEnum(Stage.class);
+        isWaterCrop = buf.readBoolean();
     }
 
     /**
@@ -154,6 +170,43 @@ public class FarmField extends AbstractBuildingExtensionModule
     {
         this.seed = seed.copy();
         this.seed.setCount(1);
+        this.isWaterCrop = computeIsWaterCrop(seed);
+    }
+
+    /**
+     * Check if the current seed is a water crop.
+     * This is cached when setSeed() is called.
+     *
+     * @return true if the seed is a water crop (like rice)
+     */
+    public boolean isWaterCrop()
+    {
+        return this.isWaterCrop;
+    }
+
+    /**
+     * Computes whether a seed is a water crop (like rice) that needs water to grow.
+     * Called once when the seed is set to cache the result.
+     *
+     * @param seed the seed to check
+     * @return true if it's a water crop
+     */
+    private boolean computeIsWaterCrop(final ItemStack seed)
+    {
+        if (seed == null || seed.isEmpty())
+        {
+            return false;
+        }
+
+        final ResourceLocation itemId = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(seed.getItem());
+        if (itemId == null)
+        {
+            return false;
+        }
+
+        // Check if it's rice or other water-based crops
+        final String itemPath = itemId.toString();
+        return itemPath.contains("rice");
     }
 
     /**

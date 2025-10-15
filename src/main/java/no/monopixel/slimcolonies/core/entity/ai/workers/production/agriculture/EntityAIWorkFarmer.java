@@ -34,7 +34,6 @@ import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
 import no.monopixel.slimcolonies.api.items.ModItems;
 import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.Tuple;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
@@ -68,52 +67,24 @@ import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingMo
 import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.STATS_MODULE;
 
 /**
- * Farmer AI class. Created: December 20, 2014
+ * Farmer AI class.
  */
 public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, BuildingFarmer>
 {
-    /**
-     * Return to chest after this amount of stacks.
-     */
-    private static final int MAX_BLOCKS_MINED = 64;
-
-
-    /**
-     * The EXP Earned per harvest.
-     */
     private static final double XP_PER_HARVEST = 0.5;
-
-    /**
-     * The maximum depth to search for a surface
-     */
     private static final int MAX_DEPTH = 5;
 
-    /**
-     * Farming icon
-     */
     private static final VisibleCitizenStatus FARMING_ICON =
         new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/farmer.png"), "no.monopixel.slimcolonies.gui.visiblestatus.farmer");
 
     /**
-     * Changed after finished harvesting in order to dump the inventory.
+     * Set after field scan completes to trigger inventory dump.
      */
     private boolean shouldDumpInventory = false;
 
-    /**
-     * If the farmer actually did any work on the field.
-     */
     private boolean didWork = false;
-
-    /**
-     * Amount of time we skipped state already.
-     */
     private int skippedState = 0;
 
-    /**
-     * Constructor for the Farmer. Defines the tasks the Farmer executes.
-     *
-     * @param job a farmer job to use.
-     */
     public EntityAIWorkFarmer(@NotNull final JobFarmer job)
     {
         super(job);
@@ -132,15 +103,10 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return BuildingFarmer.class;
     }
 
-    /**
-     * Called to check when the InventoryShouldBeDumped.
-     *
-     * @return true if the conditions are met
-     */
     @Override
     protected boolean wantInventoryDumped()
     {
-        if (shouldDumpInventory || job.getActionsDone() >= getActionRewardForCraftingSuccess())
+        if (shouldDumpInventory)
         {
             shouldDumpInventory = false;
             return true;
@@ -148,10 +114,16 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return super.wantInventoryDumped();
     }
 
+    /**
+     * Override to disable action-counter-based dumps.
+     * Farmer only dumps when inventory is full or field scan completes.
+     *
+     * @return Integer.MAX_VALUE to effectively disable action counter
+     */
     @Override
-    protected int getActionRewardForCraftingSuccess()
+    protected int getActionsDoneUntilDumping()
     {
-        return MAX_BLOCKS_MINED;
+        return Integer.MAX_VALUE;
     }
 
     @Override
@@ -178,17 +150,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return true;
     }
 
-    @Override
-    protected int getActionsDoneUntilDumping()
-    {
-        return MAX_BLOCKS_MINED;
-    }
-
-    /**
-     * Prepares the farmer for farming. Also requests the tools, the compost (if needed) and checks if the farmer has sufficient fields.
-     *
-     * @return the next IAIState
-     */
     @NotNull
     private IAIState prepareForFarming()
     {
@@ -208,15 +169,14 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         final int amountOfCompostInBuilding = InventoryUtils.hasBuildingEnoughElseCount(building, this::isCompost, 1);
         final int amountOfCompostInInv = InventoryUtils.getItemCountInItemHandler(worker.getInventoryCitizen(), this::isCompost);
 
-        if (amountOfCompostInBuilding + amountOfCompostInInv <= 0)
+        if (amountOfCompostInBuilding + amountOfCompostInInv <= 0
+            && building.requestFertilizer()
+            && !building.hasWorkerOpenRequestsOfType(worker.getCitizenData().getId(), TypeToken.of(StackList.class)))
         {
-            if (building.requestFertilizer() && !building.hasWorkerOpenRequestsOfType(worker.getCitizenData().getId(), TypeToken.of(StackList.class)))
-            {
-                final List<ItemStack> compostAbleItems = new ArrayList<>();
-                compostAbleItems.add(new ItemStack(ModItems.compost, 1));
-                compostAbleItems.add(new ItemStack(Items.BONE_MEAL, 1));
-                worker.getCitizenData().createRequestAsync(new StackList(compostAbleItems, RequestSystemTranslationConstants.REQUEST_TYPE_FERTILIZER, STACKSIZE, 1));
-            }
+            final List<ItemStack> compostAbleItems = new ArrayList<>();
+            compostAbleItems.add(new ItemStack(ModItems.compost, 1));
+            compostAbleItems.add(new ItemStack(Items.BONE_MEAL, 1));
+            worker.getCitizenData().createRequestAsync(new StackList(compostAbleItems, RequestSystemTranslationConstants.REQUEST_TYPE_FERTILIZER, STACKSIZE, 1));
         }
         else if (amountOfCompostInInv <= 0 && amountOfCompostInBuilding > 0)
         {
@@ -226,10 +186,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
 
         if (module.hasNoExtensions())
         {
-            if (worker.getCitizenData() != null)
-            {
-                worker.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(NO_FREE_FIELDS), ChatPriority.BLOCKING));
-            }
+            worker.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(NO_FREE_FIELDS), ChatPriority.BLOCKING));
             worker.getCitizenData().setJobStatus(JobStatus.STUCK);
             return IDLE;
         }
@@ -244,40 +201,36 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             }
             worker.getCitizenData().setVisibleStatus(FARMING_ICON);
             worker.getCitizenData().setJobStatus(JobStatus.WORKING);
-            if (farmField.getFieldStage() == FarmField.Stage.PLANTED && checkIfShouldExecute(farmField, pos -> this.findHarvestableSurface(pos) != null))
+
+            if (checkIfShouldExecute(farmField, pos -> this.findHarvestableSurface(pos, farmField) != null))
             {
+                farmField.setFieldStage(FarmField.Stage.PLANTED);
                 return FARMER_HARVEST;
             }
-            else if (farmField.getFieldStage() == FarmField.Stage.HOED)
+
+            if (checkIfShouldExecute(farmField, pos -> this.findPlantableSurface(pos, farmField) != null))
             {
+                farmField.setFieldStage(FarmField.Stage.HOED);
                 return canGoPlanting(farmField);
             }
-            else if (farmField.getFieldStage() == FarmField.Stage.EMPTY && checkIfShouldExecute(farmField, pos -> this.findHoeableSurface(pos, farmField) != null))
+
+            if (!farmField.isWaterCrop())
             {
-                return FARMER_HOE;
+                if (checkIfShouldExecute(farmField, pos -> this.findHoeableSurface(pos, farmField) != null))
+                {
+                    farmField.setFieldStage(FarmField.Stage.EMPTY);
+                    return FARMER_HOE;
+                }
             }
+
             farmField.nextState();
-            if (++skippedState >= 4)
-            {
-                skippedState = 0;
-                didWork = true;
-                module.resetCurrentExtension();
-            }
+            didWork = true;
+            module.resetCurrentExtension();
             return IDLE;
-        }
-        else if (fieldToWork != null)
-        {
-            Log.getLogger().warn("Farmer found non-FarmField extension: {}", fieldToWork.getClass());
         }
         return IDLE;
     }
 
-    /**
-     * Check if itemStack can be used as compost.
-     *
-     * @param itemStack the stack to check.
-     * @return true if so.
-     */
     private boolean isCompost(final ItemStack itemStack)
     {
         if (itemStack.getItem() == ModItems.compost)
@@ -287,13 +240,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return itemStack.getItem() == Items.BONE_MEAL;
     }
 
-    /**
-     * Handles the offset of the field for the farmer. Checks if the field needs a certain operation checked with a given predicate.
-     *
-     * @param farmField the field object.
-     * @param predicate the predicate to test.
-     * @return true if a harvestable crop was found.
-     */
     private boolean checkIfShouldExecute(@NotNull final FarmField farmField, @NotNull final Predicate<BlockPos> predicate)
     {
         BlockPos position;
@@ -312,12 +258,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return true;
     }
 
-    /**
-     * Checks if the farmer is ready to plant.
-     *
-     * @param farmField the field to plant.
-     * @return the next AI state.
-     */
     private IAIState canGoPlanting(@NotNull final FarmField farmField)
     {
         if (farmField.getSeed() == null)
@@ -337,21 +277,15 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             return PREPARING;
         }
 
-        seeds.setCount(seeds.getMaxStackSize());
-        if (!checkIfRequestForItemExistOrCreateAsync(seeds, seeds.getMaxStackSize(), 1))
+        final ItemStack seedRequest = seeds.copy();
+        seedRequest.setCount(seeds.getMaxStackSize());
+        if (!checkIfRequestForItemExistOrCreateAsync(seedRequest, seedRequest.getMaxStackSize(), 1))
         {
             farmField.nextState();
         }
         return PREPARING;
     }
 
-    /**
-     * Checks if the ground should be hoed and the block above removed.
-     *
-     * @param position  the position to check.
-     * @param farmField the field close to this position.
-     * @return position of hoeable surface or null if there is not one
-     */
     private BlockPos findHoeableSurface(@NotNull BlockPos position, @NotNull final FarmField farmField)
     {
         position = getSurfacePos(position);
@@ -360,18 +294,18 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             return null;
         }
         final BlockState blockState = world.getBlockState(position);
+        final BlockState aboveState = world.getBlockState(position.above());
+
         if (farmField.isNoPartOfField(world, position)
-            || (world.getBlockState(position.above()).getBlock() instanceof CropBlock)
-            || (world.getBlockState(position.above()).getBlock() instanceof BlockScarecrow)
+            || (aboveState.getBlock() instanceof CropBlock)
+            || (aboveState.getBlock() instanceof BlockScarecrow)
             || (!blockState.is(BlockTags.DIRT) && !(blockState.getBlock() instanceof FarmBlock))
             || isRightFarmLandForCrop(blockState)
         )
         {
             return null;
         }
-
-        final BlockState aboveState = world.getBlockState(position.above());
-        if (aboveState.canBeReplaced())
+        if (aboveState.canBeReplaced() && !(aboveState.getBlock() instanceof LiquidBlock))
         {
             world.destroyBlock(position.above(), true);
         }
@@ -397,47 +331,66 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
     }
 
     /**
-     * Finds the position of the surface near the specified position
+     * Finds the position of the surface at the specified position.
+     * Position is always relative to scarecrow Y level, so only searches downward.
      *
-     * @param position the location to begin the search
+     * @param position the location to begin the search (scarecrow.Y - 1)
      * @return the position of the surface block or null if it can't be found
      */
     private BlockPos getSurfacePos(final BlockPos position)
     {
-        return getSurfacePos(position, 0);
-    }
-
-    /**
-     * Finds the position of the surface near the specified position
-     *
-     * @param position the location to begin the search
-     * @param depth    the depth of the search for the surface
-     * @return the position of the surface block or null if it can't be found
-     */
-    private BlockPos getSurfacePos(final BlockPos position, final Integer depth)
-    {
-        if (Math.abs(depth) > MAX_DEPTH || !WorldUtil.isBlockLoaded(world, position))
+        if (!WorldUtil.isBlockLoaded(world, position))
         {
             return null;
         }
-        final BlockState curBlockState = world.getBlockState(position);
-        @Nullable final Block curBlock = curBlockState.getBlock();
-        if ((curBlockState.isSolid() && !(curBlock instanceof PumpkinBlock) && !(curBlock instanceof MelonBlock) && !(curBlock instanceof WebBlock)) || curBlockState.liquid())
+
+        BlockState state = world.getBlockState(position);
+        Block block = state.getBlock();
+
+        if (block instanceof CropBlock || block instanceof StemBlock)
         {
-            if (depth < 0)
+            BlockPos checkPos = position.below();
+            for (int i = 0; i < MAX_DEPTH; i++)
             {
-                return position;
+                state = world.getBlockState(checkPos);
+                block = state.getBlock();
+
+                if (!(block instanceof CropBlock) && !(block instanceof StemBlock))
+                {
+                    if (state.isSolid() && !(block instanceof PumpkinBlock) && !(block instanceof MelonBlock) && !(block instanceof WebBlock))
+                    {
+                        return checkPos;
+                    }
+                    break;
+                }
+                checkPos = checkPos.below();
             }
-            return getSurfacePos(position.above(), depth + 1);
+            return searchDownForSurface(checkPos.below());
         }
-        else
+
+        if (state.isSolid() && !(block instanceof PumpkinBlock) && !(block instanceof MelonBlock) && !(block instanceof WebBlock))
         {
-            if (depth > 0)
-            {
-                return position.below();
-            }
-            return getSurfacePos(position.below(), depth - 1);
+            return position;
         }
+
+        return searchDownForSurface(position.below());
+    }
+
+    private BlockPos searchDownForSurface(final BlockPos startPos)
+    {
+        BlockPos checkPos = startPos;
+        for (int i = 0; i < MAX_DEPTH; i++)
+        {
+            final BlockState state = world.getBlockState(checkPos);
+            final Block block = state.getBlock();
+
+            if (state.isSolid() && !(block instanceof PumpkinBlock) && !(block instanceof MelonBlock) && !(block instanceof WebBlock))
+            {
+                return checkPos;
+            }
+            checkPos = checkPos.below();
+        }
+        return null;
     }
 
     /**
@@ -492,11 +445,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return (int) Math.pow(farmField.getMaxRadius() * 2D + 1D, 2);
     }
 
-    /**
-     * This (re)initializes a field. Checks the block above to see if it is a plant, if so, breaks it. Then tills.
-     *
-     * @return the next state to go into.
-     */
     private IAIState workAtField()
     {
         final BuildingExtensionsModule module = building.getFirstModuleOccurance(BuildingExtensionsModule.class);
@@ -535,7 +483,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                     }
                     case FARMER_HARVEST ->
                     {
-                        if (!harvestIfAble(position))
+                        if (!harvestIfAble(position, farmField))
                         {
                             didWork = true;
                             return getState();
@@ -572,13 +520,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return getState();
     }
 
-    /**
-     * Checks if we can hoe, and does so if we can.
-     *
-     * @param position  the position to check.
-     * @param farmField the field close to this position.
-     * @return true if the farmer should move on.
-     */
     private boolean hoeIfAble(BlockPos position, final FarmField farmField)
     {
         position = findHoeableSurface(position, farmField);
@@ -590,10 +531,9 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                 worker.swing(worker.getUsedItemHand());
                 createCorrectFarmlandForSeed(position);
                 CitizenItemUtils.damageItemInHand(worker, InteractionHand.MAIN_HAND, 1);
-                worker.getCitizenColonyHandler()
-                    .getColonyOrRegister()
-                    .getStatisticsManager()
-                    .increment(LAND_TILLED, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
+
+                final var colony = worker.getCitizenColonyHandler().getColonyOrRegister();
+                colony.getStatisticsManager().increment(LAND_TILLED, colony.getDay());
 
                 return true;
             }
@@ -602,11 +542,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return true;
     }
 
-    /**
-     * Create the correct farmland at a given position.
-     *
-     * @param pos the position.
-     */
     private void createCorrectFarmlandForSeed(final BlockPos pos)
     {
         world.setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
@@ -617,18 +552,21 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return blockState.getBlock() instanceof FarmBlock;
     }
 
-    /**
-     * Tries to harvest a crop. Attempts right-click first, then falls back to breaking.
-     *
-     * @param position the block to harvest
-     * @return true if we harvested or not supposed to
-     */
-    private boolean harvestIfAble(BlockPos position)
+    private boolean harvestIfAble(BlockPos position, final FarmField farmField)
     {
-        position = findHarvestableSurface(position);
+        position = findHarvestableSurface(position, farmField);
         if (position != null)
         {
-            final BlockPos cropPos = position.above();
+            BlockPos cropPos = position.above();
+
+            if (farmField.isWaterCrop())
+            {
+                final BlockState aboveCropState = world.getBlockState(cropPos.above());
+                if (aboveCropState.getBlock() instanceof CropBlock cropAbove && cropAbove.isMaxAge(aboveCropState))
+                {
+                    cropPos = cropPos.above();
+                }
+            }
 
             final InteractionResult useResult = useBlock(cropPos);
 
@@ -645,10 +583,8 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
 
             if (harvestSuccess)
             {
-                worker.getCitizenColonyHandler()
-                    .getColonyOrRegister()
-                    .getStatisticsManager()
-                    .increment(CROPS_HARVESTED, worker.getCitizenColonyHandler().getColonyOrRegister().getDay());
+                final var colony = worker.getCitizenColonyHandler().getColonyOrRegister();
+                colony.getStatisticsManager().increment(CROPS_HARVESTED, colony.getDay());
                 worker.getCitizenExperienceHandler().addExperience(XP_PER_HARVEST);
             }
             else
@@ -672,23 +608,26 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                 new AABB(cropPos).inflate(2.0)
             );
 
-            final List<ItemStack> harvestedItems = new ArrayList<>();
-            for (final ItemEntity itemEntity : itemEntities)
+            if (!itemEntities.isEmpty())
             {
-                if (itemEntity.getAge() <= 2)
+                final List<ItemStack> harvestedItems = new ArrayList<>();
+                for (final ItemEntity itemEntity : itemEntities)
                 {
-                    harvestedItems.add(itemEntity.getItem().copy());
+                    if (itemEntity.getAge() <= 2)
+                    {
+                        harvestedItems.add(itemEntity.getItem().copy());
+                    }
                 }
-            }
 
-            if (!harvestedItems.isEmpty())
-            {
-                for (final ItemStack stack : harvestedItems)
+                if (!harvestedItems.isEmpty())
                 {
-                    building.getModule(STATS_MODULE).incrementBy(
-                        ITEM_OBTAINED + ";" + stack.getItem().getDescriptionId(),
-                        stack.getCount()
-                    );
+                    for (final ItemStack stack : harvestedItems)
+                    {
+                        building.getModule(STATS_MODULE).incrementBy(
+                            ITEM_OBTAINED + ";" + stack.getItem().getDescriptionId(),
+                            stack.getCount()
+                        );
+                    }
                 }
             }
         });
@@ -704,43 +643,38 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         }
     }
 
-    /**
-     * Try to plant the field at a certain position.
-     *
-     * @param farmField the field to try to plant.
-     * @param position  the position to try.
-     * @return the next state to go to.
-     */
     private boolean tryToPlant(final FarmField farmField, BlockPos position)
     {
         position = findPlantableSurface(position, farmField);
-        return position == null || plantCrop(farmField.getSeed(), position);
+        if (position == null)
+        {
+            return true;
+        }
+        return plantCrop(farmField.getSeed(), position);
     }
 
-    /**
-     * Sets the hoe as held item.
-     */
     private void equipHoe()
     {
         CitizenItemUtils.setHeldItem(worker, InteractionHand.MAIN_HAND, getHoeSlot());
     }
 
-    /**
-     * Checks if the ground should be planted.
-     *
-     * @param position  the position to check.
-     * @param farmField the field close to this position.
-     * @return position of plantable surface or null
-     */
     private BlockPos findPlantableSurface(@NotNull BlockPos position, @NotNull final FarmField farmField)
     {
         position = getSurfacePos(position);
-        if (position == null
-            || farmField.isNoPartOfField(world, position)
-            || world.getBlockState(position.above()).getBlock() instanceof CropBlock
-            || world.getBlockState(position.above()).getBlock() instanceof StemBlock
-            || world.getBlockState(position).getBlock() instanceof BlockScarecrow
-            || !isRightFarmLandForCrop(world.getBlockState(position)))
+        if (position == null)
+        {
+            return null;
+        }
+
+        final BlockState blockState = world.getBlockState(position);
+        final BlockState aboveState = world.getBlockState(position.above());
+
+        if (farmField.isNoPartOfField(world, position)
+            || aboveState.getBlock() instanceof CropBlock
+            || aboveState.getBlock() instanceof StemBlock
+            || blockState.getBlock() instanceof BlockScarecrow
+            || (farmField.isWaterCrop() ? !(aboveState.getBlock() instanceof LiquidBlock) : !aboveState.isAir())
+            || (!isRightFarmLandForCrop(blockState) && !(farmField.isWaterCrop() && blockState.is(BlockTags.DIRT))))
         {
             return null;
         }
@@ -748,13 +682,6 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return position;
     }
 
-    /**
-     * Plants the crop at a given location.
-     *
-     * @param item     the crop.
-     * @param position the location.
-     * @return true if successful.
-     */
     private boolean plantCrop(final ItemStack item, @NotNull final BlockPos position)
     {
         if (item == null || item.isEmpty())
@@ -767,8 +694,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             return false;
         }
 
-        if (item.getItem() instanceof BlockItem blockItem
-            && blockItem.getBlock().defaultBlockState().canSurvive(worker.level(), position.above()))
+        if (item.getItem() instanceof BlockItem blockItem)
         {
             @NotNull final Item seed = item.getItem();
             if ((seed == Items.MELON_SEEDS || seed == Items.PUMPKIN_SEEDS) && building.getPrevPos() != null && !world.isEmptyBlock(building.getPrevPos().above()))
@@ -776,19 +702,13 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                 return true;
             }
 
-            world.setBlockAndUpdate(position.above(), ((BlockItem) item.getItem()).getBlock().defaultBlockState());
+            world.setBlockAndUpdate(position.above(), blockItem.getBlock().defaultBlockState());
             getInventory().extractItem(slot, 1, false);
         }
         return true;
     }
 
-    /**
-     * Checks if the crop should be harvested.
-     *
-     * @param position the position to check.
-     * @return position of harvestable block or null
-     */
-    private BlockPos findHarvestableSurface(@NotNull BlockPos position)
+    private BlockPos findHarvestableSurface(@NotNull BlockPos position, @NotNull final FarmField farmField)
     {
         position = getSurfacePos(position);
         if (position == null)
@@ -834,6 +754,22 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
             }
             return crop.isMaxAge(state) ? position : null;
         }
+
+        if (farmField.isWaterCrop())
+        {
+            BlockState stateAbove = world.getBlockState(position.above().above());
+            Block blockAbove = stateAbove.getBlock();
+
+            if (blockAbove instanceof CropBlock)
+            {
+                CropBlock cropAbove = (CropBlock) blockAbove;
+                if (cropAbove.isMaxAge(stateAbove))
+                {
+                    return position;
+                }
+            }
+        }
+
         return null;
     }
 
@@ -866,21 +802,11 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
         return getSecondarySkillLevel();
     }
 
-    /**
-     * Get's the slot in which the hoe is in.
-     *
-     * @return slot number
-     */
     private int getHoeSlot()
     {
         return InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(getInventory(), ModEquipmentTypes.hoe.get(), 0, Integer.MAX_VALUE);
     }
 
-    /**
-     * Returns the farmer's worker instance. Called from outside this class.
-     *
-     * @return citizen object
-     */
     @Nullable
     public AbstractEntityCitizen getCitizen()
     {

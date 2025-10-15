@@ -32,6 +32,13 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
+    maven {
+        name "CurseMaven"
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
@@ -68,4 +75,9 @@ dependencies {
     if (project.hasProperty("runWithJourneymap") && project.runWithJourneymap.toBoolean()) {
         runtimeOnly fg.deobf("flat:journeymap:${project.jmapMcVersion}-${project.jmapVersion}-forge")
     }
+    // Farmer's Delight - 1.2.9
+    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:6917255")
+
+    // Jade - for development/debugging
+    runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
 }
