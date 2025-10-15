@@ -253,7 +253,7 @@ public class EntityAIWorkFarmer extends AbstractEntityAICrafting<JobFarmer, Buil
                 if (farmField.isWaterCrop())
                 {
                     farmField.nextState();
-                    return PREPARING;
+                    return canGoPlanting(farmField);
                 }
 
                 if (checkIfShouldExecute(farmField, pos -> this.findHoeableSurface(pos, farmField) != null))
