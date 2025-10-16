@@ -32,6 +32,7 @@ public class ServerConfiguration extends AbstractConfiguration
     public final ForgeConfigSpec.IntValue     maxTreeSize;
     public final ForgeConfigSpec.BooleanValue noSupplyPlacementRestrictions;
     public final ForgeConfigSpec.IntValue     builderScavengingIntervalMinutes;
+    public final ForgeConfigSpec.IntValue     fieldCooldownMinutes;
 
     /*  --------------------------------------------------------------------------- *
      *  ------------------- ######## Research settings ######## ------------------- *
@@ -134,6 +135,7 @@ public class ServerConfiguration extends AbstractConfiguration
         maxTreeSize = defineInteger(builder, "maxtreesize", 400, 1, 1000);
         noSupplyPlacementRestrictions = defineBoolean(builder, "nosupplyplacementrestrictions", false);
         builderScavengingIntervalMinutes = defineInteger(builder, "builderscavengingintervalminutes", 2, 0, 60);
+        fieldCooldownMinutes = defineInteger(builder, "fieldcooldownminutes", 10, 0, 60);
 
         swapToCategory(builder, "research");
         researchCreativeCompletion = defineBoolean(builder, "researchcreativecompletion", true);
