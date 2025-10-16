@@ -66,9 +66,9 @@ public class FarmField extends AbstractBuildingExtensionModule
     private int maxRadius;
 
     /**
-     * Has the field been planted
+     * The current status of the field (READY or RESTING based on cooldown)
      */
-    private Stage fieldStage = Stage.EMPTY;
+    private Stage fieldStage = Stage.READY;
 
     /**
      * Constructor used in NBT deserialization.
@@ -118,7 +118,19 @@ public class FarmField extends AbstractBuildingExtensionModule
         setSeed(ItemStack.of(compound.getCompound(TAG_SEED)));  // This will compute isWaterCrop
         radii = compound.getIntArray(TAG_RADIUS);
         maxRadius = compound.getInt(TAG_MAX_RANGE);
-        fieldStage = Stage.valueOf(compound.getString(TAG_STAGE));
+
+        // Backwards compatibility: convert old stage names to new ones
+        final String stageName = compound.getString(TAG_STAGE);
+        try
+        {
+            fieldStage = Stage.valueOf(stageName);
+        }
+        catch (IllegalArgumentException e)
+        {
+            // Old save data with EMPTY, HOED, or PLANTED - convert to READY
+            fieldStage = Stage.READY;
+        }
+
         // For backwards compatibility, recompute if not present in saved data
         // setSeed() already computed it, but this explicit check helps clarity
         if (compound.contains(TAG_WATER_CROP))
@@ -294,13 +306,12 @@ public class FarmField extends AbstractBuildingExtensionModule
     }
 
     /**
-     * Describes the stage the field is in. Like if it has been hoed, planted or is empty.
+     * Describes the status of the field based on cooldown state.
      */
     public enum Stage
     {
-        EMPTY(new ResourceLocation("minecraft", "textures/item/iron_hoe.png")),
-        HOED(new ResourceLocation("minecraft", "textures/item/wheat_seeds.png")),
-        PLANTED(new ResourceLocation("minecraft", "textures/item/wheat.png"));
+        READY(new ResourceLocation("minecraft", "textures/item/iron_hoe.png")),
+        RESTING(new ResourceLocation("minecraft", "textures/item/clock_00.png"));
 
         protected final ResourceLocation stageIcon;
 

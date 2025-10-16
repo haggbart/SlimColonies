@@ -6,7 +6,8 @@ import no.monopixel.slimcolonies.api.colony.buildings.modules.AbstractBuildingMo
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IPersistentModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.ITickingModule;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import no.monopixel.slimcolonies.core.SlimColonies;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -32,9 +33,9 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
     private static final String TAG_CURRENT_EXTENSION = "currex";
 
     /**
-     * A map of building extensions, along with their unix timestamp of when they can next be checked again.
+     * A map of building extensions, along with their world time (ticks) of when they were last reset.
      */
-    private final Map<IBuildingExtension.ExtensionId, Integer> checkedExtensions = new Object2IntOpenHashMap<>();
+    private final Map<IBuildingExtension.ExtensionId, Long> checkedExtensions = new Object2LongOpenHashMap<>();
 
     /**
      * The building extension the citizen is currently working on.
@@ -61,12 +62,25 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
         for (int i = 0; i < listTag.size(); ++i)
         {
             final CompoundTag tag = listTag.getCompound(i);
-            checkedExtensions.put(IBuildingExtension.ExtensionId.deserializeNBT(tag.getCompound(TAG_ID)), compound.getInt(TAG_DAY));
+            checkedExtensions.put(IBuildingExtension.ExtensionId.deserializeNBT(tag.getCompound(TAG_ID)), tag.getLong(TAG_TIME));
         }
         if (compound.contains(TAG_CURRENT_EXTENSION))
         {
             currentExtensionId = IBuildingExtension.ExtensionId.deserializeNBT(compound.getCompound(TAG_CURRENT_EXTENSION));
         }
+
+        // Clean up stale entries for extensions that no longer exist
+        cleanupStaleEntries();
+    }
+
+    /**
+     * Removes entries from checkedExtensions for building extensions that no longer exist.
+     * Called after deserializing from NBT to clean up deleted fields.
+     */
+    private void cleanupStaleEntries()
+    {
+        final List<IBuildingExtension> ownedExtensions = getOwnedExtensions();
+        checkedExtensions.keySet().removeIf(id -> ownedExtensions.stream().noneMatch(ext -> ext.getId().equals(id)));
     }
 
     @Override
@@ -75,11 +89,11 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
         compound.putBoolean(TAG_ASSIGN_MANUALLY, shouldAssignManually);
 
         final ListTag listTag = new ListTag();
-        for (final Map.Entry<IBuildingExtension.ExtensionId, Integer> entry : checkedExtensions.entrySet())
+        for (final Map.Entry<IBuildingExtension.ExtensionId, Long> entry : checkedExtensions.entrySet())
         {
             final CompoundTag listEntry = new CompoundTag();
-            compound.put(TAG_ID, entry.getKey().serializeNBT());
-            listEntry.putLong(TAG_DAY, entry.getValue());
+            listEntry.put(TAG_ID, entry.getKey().serializeNBT());
+            listEntry.putLong(TAG_TIME, entry.getValue());
             listTag.add(listEntry);
         }
         compound.put(TAG_LIST, listTag);
@@ -94,6 +108,18 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
     {
         buf.writeBoolean(shouldAssignManually);
         buf.writeInt(getMaxExtensionCount());
+
+        // Send cooldown data to client
+        buf.writeInt(checkedExtensions.size());
+        for (final Map.Entry<IBuildingExtension.ExtensionId, Long> entry : checkedExtensions.entrySet())
+        {
+            buf.writeNbt((CompoundTag) entry.getKey().serializeNBT());
+            buf.writeLong(entry.getValue());
+        }
+
+        // Send current game time and cooldown config so client can compute cooldown status
+        buf.writeLong(building.getColony().getWorld().getGameTime());
+        buf.writeInt(SlimColonies.getConfig().getServer().fieldCooldownMinutes.get());
     }
 
     /**
@@ -130,7 +156,7 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
      * Else it will retrieve a random building extension to work on for the citizen.
      * This method will also automatically claim any building extensions that are not in use if the building is on automatic assignment mode.
      *
-     * @return a building extension to work on.
+     * @return a building extension to work on, or null if all extensions are on cooldown.
      */
     @Nullable
     public IBuildingExtension getExtensionToWorkOn()
@@ -141,8 +167,8 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
             return currentExtension;
         }
 
-        IBuildingExtension.ExtensionId lastUsedExtension = null;
-        int lastUsedExtensionDay = building.getColony().getDay();
+        IBuildingExtension.ExtensionId oldestExtension = null;
+        long oldestResetTime = Long.MAX_VALUE;
 
         for (final IBuildingExtension extension : getOwnedExtensions())
         {
@@ -152,15 +178,30 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
                 return extension;
             }
 
-            final int lastDay = checkedExtensions.get(extension.getId());
-            if (lastDay < lastUsedExtensionDay)
+            final long resetTime = checkedExtensions.get(extension.getId());
+            if (resetTime < oldestResetTime)
             {
-                lastUsedExtension = extension.getId();
-                lastUsedExtensionDay = lastDay;
+                oldestExtension = extension.getId();
+                oldestResetTime = resetTime;
             }
         }
-        currentExtensionId = lastUsedExtension;
-        return getCurrentExtension();
+
+        // Check if the oldest field is still on cooldown
+        if (oldestExtension != null)
+        {
+            final long currentTime = building.getColony().getWorld().getGameTime();
+            final long cooldownTicks = SlimColonies.getConfig().getServer().fieldCooldownMinutes.get() * 60L * 20L;
+
+            if (currentTime - oldestResetTime >= cooldownTicks)
+            {
+                // Cooldown expired - this field can be worked on
+                currentExtensionId = oldestExtension;
+                return getCurrentExtension();
+            }
+        }
+
+        // All fields are on cooldown
+        return null;
     }
 
     /**
@@ -291,6 +332,9 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
         extension.resetOwningBuilding();
         markDirty();
 
+        // Remove from checked extensions to prevent memory leak
+        checkedExtensions.remove(extension.getId());
+
         if (currentExtensionId == extension.getId())
         {
             resetCurrentExtension();
@@ -304,7 +348,7 @@ public abstract class BuildingExtensionsModule extends AbstractBuildingModule im
     {
         if (currentExtensionId != null)
         {
-            checkedExtensions.put(currentExtensionId, building.getColony().getDay());
+            checkedExtensions.put(currentExtensionId, building.getColony().getWorld().getGameTime());
         }
         currentExtensionId = null;
     }

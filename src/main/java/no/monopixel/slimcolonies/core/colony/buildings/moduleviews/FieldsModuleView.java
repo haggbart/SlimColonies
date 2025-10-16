@@ -16,7 +16,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.BUILDING_TAB_FIELDS;
 import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.FIELD_LIST_WARN_EXCEEDS_FIELD_COUNT;
@@ -36,11 +38,40 @@ public abstract class FieldsModuleView extends AbstractBuildingModuleView
      */
     private int maxFieldCount;
 
+    /**
+     * Cooldown data: field ID -> timestamp when field was last reset.
+     */
+    private final Map<IBuildingExtension.ExtensionId, Long> fieldCooldowns = new HashMap<>();
+
+    /**
+     * Current game time (in ticks) from the server.
+     */
+    private long currentGameTime;
+
+    /**
+     * Cooldown duration in minutes (from server config).
+     */
+    private int cooldownMinutes;
+
     @Override
     public void deserialize(@NotNull final FriendlyByteBuf buf)
     {
         shouldAssignFieldManually = buf.readBoolean();
         maxFieldCount = buf.readInt();
+
+        // Deserialize cooldown data
+        fieldCooldowns.clear();
+        final int cooldownCount = buf.readInt();
+        for (int i = 0; i < cooldownCount; i++)
+        {
+            final IBuildingExtension.ExtensionId id = IBuildingExtension.ExtensionId.deserializeNBT(buf.readNbt());
+            final long timestamp = buf.readLong();
+            fieldCooldowns.put(id, timestamp);
+        }
+
+        // Read game time and config
+        currentGameTime = buf.readLong();
+        cooldownMinutes = buf.readInt();
     }
 
     @Override
@@ -117,7 +148,7 @@ public abstract class FieldsModuleView extends AbstractBuildingModuleView
         return getFields().stream()
                  .filter(field -> buildingView.getID().equals(field.getBuildingId()))
                  .distinct()
-                 .sorted(new FieldsComparator(buildingView))
+                 .sorted(Comparator.comparingInt(f -> f.getSqDistance(buildingView)))
                  .toList();
     }
 
@@ -140,7 +171,7 @@ public abstract class FieldsModuleView extends AbstractBuildingModuleView
         return getFieldsInColony().stream()
                  .filter(field -> !field.isTaken() || buildingView.getID().equals(field.getBuildingId()))
                  .distinct()
-                 .sorted(new FieldsComparator(buildingView))
+                 .sorted(Comparator.comparingInt(f -> f.getSqDistance(buildingView)))
                  .toList();
     }
 
@@ -197,42 +228,54 @@ public abstract class FieldsModuleView extends AbstractBuildingModuleView
     }
 
     /**
-     * Comparator class for sorting fields in a predictable order in the window.
+     * Check if a field is currently on cooldown.
+     *
+     * @param field the field to check
+     * @return true if the field is on cooldown (resting), false if ready to work
      */
-    static class FieldsComparator implements Comparator<IBuildingExtension>
+    public boolean isFieldOnCooldown(final IBuildingExtension field)
     {
-        /**
-         * The building this comparator is running on.
-         */
-        private final IBuildingView assignedBuilding;
-
-        /**
-         * Default constructor.
-         *
-         * @param assignedBuilding the building this comparator is running on.
-         */
-        public FieldsComparator(IBuildingView assignedBuilding)
+        if (!fieldCooldowns.containsKey(field.getId()))
         {
-            this.assignedBuilding = assignedBuilding;
+            return false; // Never worked - not on cooldown
         }
 
-        @Override
-        public int compare(final IBuildingExtension field1, final IBuildingExtension field2)
-        {
-            if (field1.isTaken() && field2.isTaken())
-            {
-                return field1.getSqDistance(assignedBuilding) - field2.getSqDistance(assignedBuilding);
-            }
-            else if (field1.isTaken())
-            {
-                return -1;
-            }
-            else if (field2.isTaken())
-            {
-                return 1;
-            }
+        final long resetTime = fieldCooldowns.get(field.getId());
+        final long cooldownTicks = cooldownMinutes * 60L * 20L;
 
-            return field1.getSqDistance(assignedBuilding) - field2.getSqDistance(assignedBuilding);
+        // Use client-side game time for real-time accuracy
+        final long clientGameTime = net.minecraft.client.Minecraft.getInstance().level.getGameTime();
+
+        return (clientGameTime - resetTime) < cooldownTicks;
+    }
+
+    /**
+     * Get the remaining cooldown time for a field in seconds.
+     *
+     * @param field the field to check
+     * @return remaining cooldown time in seconds, or 0 if not on cooldown
+     */
+    public int getRemainingCooldownSeconds(final IBuildingExtension field)
+    {
+        if (!fieldCooldowns.containsKey(field.getId()))
+        {
+            return 0;
         }
+
+        final long resetTime = fieldCooldowns.get(field.getId());
+        final long cooldownTicks = cooldownMinutes * 60L * 20L;
+
+        // Use client-side game time for real-time accuracy
+        final long clientGameTime = net.minecraft.client.Minecraft.getInstance().level.getGameTime();
+        final long elapsedTicks = clientGameTime - resetTime;
+        final long remainingTicks = cooldownTicks - elapsedTicks;
+
+        if (remainingTicks <= 0)
+        {
+            return 0;
+        }
+
+        // Convert ticks to seconds (20 ticks = 1 second)
+        return (int) (remainingTicks / 20L);
     }
 }

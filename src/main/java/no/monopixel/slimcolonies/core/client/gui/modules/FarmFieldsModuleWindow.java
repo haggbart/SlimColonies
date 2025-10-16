@@ -181,12 +181,34 @@ public class FarmFieldsModuleWindow extends AbstractModuleWindow
                 if (field instanceof FarmField farmField && !farmField.getSeed().isEmpty())
                 {
                     rowPane.findPaneOfTypeByID(TAG_ICON, ItemIcon.class).setItem(farmField.getSeed());
-                    rowPane.findPaneOfTypeByID(TAG_STAGE_TEXT, Text.class).setText(Component.translatable(FIELD_STATUS));
-                    iconPane.setImage(farmField.getFieldStage().getStageIcon(), true);
-                    AbstractTextBuilder.TooltipBuilder hoverText = PaneBuilders.tooltipBuilder().hoverPane(iconPane);
-                    hoverText.append(Component.translatable(FIELD_STATUS_CURRENT, farmField.getFieldStage().getStageText())).paragraphBreak();
-                    hoverText.append(Component.translatable(FIELD_STATUS_NEXT, farmField.getFieldStage().getNextStage().getStageText()));
-                    hoverText.build();
+
+                    final Text statusText = rowPane.findPaneOfTypeByID(TAG_STAGE_TEXT, Text.class);
+                    final boolean isOnCooldown = moduleView.isFieldOnCooldown(field);
+
+                    if (isOnCooldown)
+                    {
+                        final int remainingSeconds = moduleView.getRemainingCooldownSeconds(field);
+                        final int minutes = remainingSeconds / 60;
+                        final int seconds = remainingSeconds % 60;
+
+                        iconPane.setImage(FarmField.Stage.RESTING.getStageIcon(), true);
+                        statusText.setText(Component.literal(String.format("%dm %ds", minutes, seconds)));
+
+                        PaneBuilders.tooltipBuilder()
+                            .append(Component.literal("Field is resting"))
+                            .hoverPane(iconPane)
+                            .build();
+                    }
+                    else
+                    {
+                        iconPane.setImage(FarmField.Stage.READY.getStageIcon(), true);
+                        statusText.setText(Component.translatable(FIELD_STATUS + ".ready"));
+
+                        PaneBuilders.tooltipBuilder()
+                            .append(Component.literal("Field is ready to work"))
+                            .hoverPane(iconPane)
+                            .build();
+                    }
                 }
                 else
                 {
@@ -215,7 +237,6 @@ public class FarmFieldsModuleWindow extends AbstractModuleWindow
                 }
                 else
                 {
-                    // Field may be claimed
                     setAssignButtonTexture(assignButton, false);
 
                     if (!moduleView.canAssignField(field))
