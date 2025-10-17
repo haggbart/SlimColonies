@@ -62,6 +62,8 @@
   "slimcolonies.config.nosupplyplacementrestrictions.comment": "Disables supply camp placing restrictions, intended for skyworlds and similar",
   "slimcolonies.config.builderscavengingintervalminutes": "Builder Scavenging Interval",
   "slimcolonies.config.builderscavengingintervalminutes.comment": "Interval in minutes for builder scavenging (0 = disabled). WARNING: Generates free items, can be exploited. Recommended for single-player or trusted servers only.",
+  "slimcolonies.config.fieldcooldownminutes": "Field Cooldown Duration",
+  "slimcolonies.config.fieldcooldownminutes.comment": "Minimum time in minutes before a farmer can work the same field again.",
   "slimcolonies.config.disableemptycolonies": "Disable Empty Colonies",
   "slimcolonies.config.disableemptycolonies.comment": "Will stop empty colonies from being generated in the world - Needs world Reload",
   "slimcolonies.config.averageemptycolonydistance": "Average Empty Colony Distance - Needs Complete Restart",

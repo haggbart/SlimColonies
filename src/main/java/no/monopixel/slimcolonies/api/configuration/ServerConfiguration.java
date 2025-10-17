@@ -135,7 +135,7 @@ public class ServerConfiguration extends AbstractConfiguration
         maxTreeSize = defineInteger(builder, "maxtreesize", 400, 1, 1000);
         noSupplyPlacementRestrictions = defineBoolean(builder, "nosupplyplacementrestrictions", false);
         builderScavengingIntervalMinutes = defineInteger(builder, "builderscavengingintervalminutes", 2, 0, 60);
-        fieldCooldownMinutes = defineInteger(builder, "fieldcooldownminutes", 15, 0, 60);
+        fieldCooldownMinutes = defineInteger(builder, "fieldcooldownminutes", 15, 1, 60);
 
         swapToCategory(builder, "research");
         researchCreativeCompletion = defineBoolean(builder, "researchcreativecompletion", true);
