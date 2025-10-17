@@ -480,6 +480,7 @@
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.fieldcount": "%d/%d fields in use",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.fieldcount.reached": "You already reached the limit of fields.",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.distance": "Distance: %s %s",
+  "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.plantation.research": "You do not have the required research to assign this field to the plantation.",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.plantation.direction.exact": "Current Plantation",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.farmer.noseed": "Field has no seed set",
   "no.monopixel.slimcolonies.coremod.gui.field.status": "Stage:",
