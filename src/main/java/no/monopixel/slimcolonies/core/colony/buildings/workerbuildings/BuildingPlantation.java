@@ -158,8 +158,7 @@ public class BuildingPlantation extends AbstractBuilding
         @Override
         protected int getMaxExtensionCount()
         {
-            int allowedPlants = (int) Math.ceil(building.getBuildingLevel() / 2D);
-            return allowedPlants + 1;
+            return building.getBuildingLevel() * 2;
         }
 
         @Override
