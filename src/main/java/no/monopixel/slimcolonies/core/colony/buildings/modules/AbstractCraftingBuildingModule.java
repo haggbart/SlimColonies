@@ -83,11 +83,6 @@ public abstract class AbstractCraftingBuildingModule extends AbstractBuildingMod
     private static final double BASE_CHANCE = 0.0625;
 
     /**
-     * Extra amount of recipes the crafters can learn.
-     */
-    private static final int EXTRA_RECIPE_MULTIPLIER = 5;
-
-    /**
      * The list of recipes the worker knows, correspond to a subset of the recipes in the colony.
      */
     protected final List<IToken<?>> recipes = new ArrayList<>();
@@ -141,27 +136,17 @@ public abstract class AbstractCraftingBuildingModule extends AbstractBuildingMod
         return hasSpaceForMoreRecipes() && isRecipeCompatibleWithCraftingModule(token);
     }
 
-    /**
-     * Check if the worker has more space for recipes.
-     *
-     * @return true if so.
-     */
     private boolean hasSpaceForMoreRecipes()
     {
         return getMaxRecipes() > recipes.size();
     }
 
     /**
-     * Gets the maximum number of recipes a building may have at the current time.
+     * Hidden safety limit to prevent exploits.
      */
     protected int getMaxRecipes()
     {
-        double increase = 1 + 2.0;
-        if (canLearnManyRecipes())
-        {
-            increase *= EXTRA_RECIPE_MULTIPLIER;
-        }
-        return (int) (Math.pow(2, building.getBuildingLevel()) * increase);
+        return 1000;
     }
 
     /**

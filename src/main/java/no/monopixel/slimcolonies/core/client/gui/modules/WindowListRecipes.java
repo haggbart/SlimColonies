@@ -280,7 +280,7 @@ public class WindowListRecipes extends AbstractModuleWindow
         {
             lifeCount++;
         }
-        recipeStatus.setText(Component.translatable(TranslationConstants.RECIPE_STATUS, module.getRecipes().size(), module.getMaxRecipes()));
+        recipeStatus.setText(Component.translatable(TranslationConstants.RECIPE_STATUS, module.getRecipes().size()));
         window.findPaneOfTypeByID(RECIPE_LIST, ScrollingList.class).refreshElementPanes();
     }
 }
