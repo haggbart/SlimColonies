@@ -2,7 +2,7 @@
   "name": "I saw that!",
   "max-occurrences": 1,
   "parents": [
-    "slimcolonies:tutorial/hospital"
+    "slimcolonies:tutorial/university"
   ],
   "triggers": [
     {
@@ -10,7 +10,7 @@
       "state": {
         "notmatch": {
           "finavquests": [
-            "slimcolonies:tutorial/hospital"
+            "slimcolonies:tutorial/university"
           ]
         }
       }
