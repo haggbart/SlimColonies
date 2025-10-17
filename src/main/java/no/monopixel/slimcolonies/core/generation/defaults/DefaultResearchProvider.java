@@ -133,7 +133,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(UNDERTAKER_RUN).setTranslatedName("Undertaker unlocks run ability")
             .setTranslatedSubtitle("Teach Undertaker the ability to run towards graves"));
         effects.add(new ResearchEffect(USE_TOTEM).setTranslatedName("Undertaker gains the ability to use Totems of Undying to assist in Resurrection"));
-        effects.add(new ResearchEffect(RECIPE_MODE).setTranslatedName("Add the option to select recipes based on Warehouse stock"));
         effects.add(new ResearchEffect(BUILDER_MODE).setTranslatedName("Add the option to select different build-modes for your builders"));
         effects.add(new ResearchEffect(FISH_TREASURE).setTranslatedName("Fishers can find treasure outside the ocean"));
         effects.add(new ResearchEffect(NETHER_LOG).setTranslatedName("Adds expedition log to Nether Mine"));
@@ -1323,17 +1322,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.SAWMILL_ID), 2)
             .addEffect(RECIPES, 2)
             .setSortOrder(1)
-            .addToList(r);
-
-        new Research(new ResourceLocation(Constants.MOD_ID, "technology/warehousemaster"), TECH).setParentResearch(memoryAid)
-            .setTranslatedName("Warehouse Master")
-            .setTranslatedSubtitle("So many items to choose from!")
-            .setIcon(ModBlocks.blockRack.asItem())
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.WAREHOUSE_ID), 3)
-            .addAlternateBuildingRequirement(List.of(new ResourceLocation(Constants.MOD_ID, ModBuildings.SAWMILL_ID),
-                new ResourceLocation(Constants.MOD_ID, ModBuildings.STONE_MASON_ID)), 3)
-            .addEffect(RECIPE_MODE, 1)
-            .setSortOrder(2)
             .addToList(r);
 
         final Research deepPockets = new Research(new ResourceLocation(Constants.MOD_ID, "technology/deeppockets"), TECH).setParentResearch(cheatSheet)

@@ -131,7 +131,7 @@
     }
   ],
   "parents": [
-    "slimcolonies:tutorial/hospital"
+    "slimcolonies:tutorial/university"
   ],
   "rewards": [
     {
@@ -149,7 +149,7 @@
       "state": {
         "notmatch": {
           "finavquests": [
-            "slimcolonies:tutorial/hospital"
+            "slimcolonies:tutorial/university"
           ]
         }
       }
