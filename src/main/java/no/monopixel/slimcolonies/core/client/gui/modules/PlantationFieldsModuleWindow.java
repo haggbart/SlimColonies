@@ -64,11 +64,6 @@ public class PlantationFieldsModuleWindow extends AbstractModuleWindow
     private static final String TAG_FIELD_COUNT = "fieldCount";
 
     /**
-     * ID of the plant count label inside the GUI.
-     */
-    private static final String TAG_PLANT_COUNT = "plantCount";
-
-    /**
      * ID of the icon inside the GUI.
      */
     private static final String TAG_ICON = "icon";
@@ -156,8 +151,6 @@ public class PlantationFieldsModuleWindow extends AbstractModuleWindow
             .setText(Component.translatable(moduleView.assignFieldManually() ? COREMOD_GUI_HIRING_ON : COREMOD_GUI_HIRING_OFF));
         findPaneOfTypeByID(TAG_FIELD_COUNT, Text.class)
             .setText(Component.translatable(FIELD_LIST_LABEL_FIELD_COUNT, moduleView.getOwnedFields().size(), moduleView.getMaxFieldCount()));
-        findPaneOfTypeByID(TAG_PLANT_COUNT, Text.class)
-            .setText(Component.translatable(FIELD_LIST_LABEL_PLANT_COUNT, moduleView.getCurrentPlants(), moduleView.getMaxConcurrentPlants()));
     }
 
     @Override

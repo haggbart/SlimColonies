@@ -18,11 +18,7 @@ public class GuiTranslationConstants
     @NonNls
     public static final String FIELD_LIST_LABEL_FIELD_COUNT            = "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.fieldcount";
     @NonNls
-    public static final String FIELD_LIST_LABEL_PLANT_COUNT            = "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.plantcount";
-    @NonNls
     public static final String FIELD_LIST_WARN_EXCEEDS_FIELD_COUNT     = "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.fieldcount.reached";
-    @NonNls
-    public static final String FIELD_LIST_WARN_EXCEEDS_PLANT_COUNT     = "no.monopixel.slimcolonies.coremod.gui.workerhuts.plantationfields.plantcount.reached";
     @NonNls
     public static final String FIELD_LIST_LABEL_DISTANCE               = "no.monopixel.slimcolonies.coremod.gui.workerhuts.fields.distance";
     @NonNls

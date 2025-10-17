@@ -1074,13 +1074,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.FARMER_ID), 3)
             .addEffect(ModBuildings.plantation.get().getBuildingBlock(), 1)
             .addToList(r);
-        final Research cropRotation = new Research(new ResourceLocation(Constants.MOD_ID, "technology/croprotation"), TECH).setParentResearch(letItGrow)
-            .setTranslatedName("Crop Rotation")
-            .setTranslatedSubtitle("Bigger = better")
-            .setIcon(Items.GREEN_DYE)
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.PLANTATION_ID), 3)
-            .addEffect(PLANTATION_LARGE, 1)
-            .addToList(r);
 
         final Research skilledButcher = new Research(new ResourceLocation(Constants.MOD_ID, "technology/skilledbutcher"), TECH).setParentResearch(biodegradable)
             .setTranslatedName("Skilled Butcher")
@@ -1115,7 +1108,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addEffect(PLANTATION_EXOTIC, 1)
             .addToList(r);
 
-        new Research(new ResourceLocation(Constants.MOD_ID, "technology/gargamel"), TECH).setParentResearch(cropRotation)
+        new Research(new ResourceLocation(Constants.MOD_ID, "technology/gargamel"), TECH).setParentResearch(letItGrow)
             .setTranslatedName("Gargamel")
             .setTranslatedSubtitle("The Root of all Evil")
             .setIcon(Items.CRIMSON_FUNGUS)

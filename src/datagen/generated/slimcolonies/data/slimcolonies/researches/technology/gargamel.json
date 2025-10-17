@@ -7,7 +7,7 @@
     }
   ],
   "icon": "minecraft:crimson_fungus",
-  "parentResearch": "slimcolonies:technology/croprotation",
+  "parentResearch": "slimcolonies:technology/letitgrow",
   "requirements": [
     {
       "type": "slimcolonies:building",
@@ -20,6 +20,6 @@
       "level": 3
     }
   ],
-  "researchLevel": 4,
+  "researchLevel": 3,
   "subtitle": "no.monopixel.slimcolonies.research.technology.gargamel.subtitle"
 }

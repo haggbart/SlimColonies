@@ -1,6 +1,14 @@
 package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
 import com.ldtteam.blockui.views.BOWindow;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildingextensions.IBuildingExtension;
 import no.monopixel.slimcolonies.api.colony.buildingextensions.plantation.IPlantationModule;
@@ -10,7 +18,6 @@ import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
 import no.monopixel.slimcolonies.api.crafting.GenericRecipe;
 import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 import no.monopixel.slimcolonies.api.util.CraftingUtils;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.OptionalPredicate;
@@ -20,53 +27,25 @@ import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingExtensionsModule;
 import no.monopixel.slimcolonies.core.colony.buildings.moduleviews.FieldsModuleView;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.PLANTATION_LARGE;
-import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_PLANTGROUND;
 import static no.monopixel.slimcolonies.api.util.constant.TagConstants.CRAFTING_PLANTATION;
 import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.FIELD_LIST_PLANTATION_RESEARCH_REQUIRED;
-import static no.monopixel.slimcolonies.api.util.constant.translation.GuiTranslationConstants.FIELD_LIST_WARN_EXCEEDS_PLANT_COUNT;
 
 /**
  * Class of the plantation building. Worker will grow sugarcane/bamboo/cactus + craft paper and books.
  */
 public class BuildingPlantation extends AbstractBuilding
 {
-    /**
-     * Description string of the building.
-     */
     private static final String PLANTATION = "plantation";
 
-    /**
-     * TODO: future
-     * Legacy code, can be removed when plantations will no longer have to support fields
-     * directly from the hut building.
-     * Whether field migration from the old system to the new system should occur.
-     */
-    private boolean triggerFieldMigration = false;
-
-    /**
-     * Instantiates a new plantation building.
-     *
-     * @param c the colony.
-     * @param l the location
-     */
     public BuildingPlantation(final IColony c, final BlockPos l)
     {
         super(c, l);
@@ -88,16 +67,11 @@ public class BuildingPlantation extends AbstractBuilding
         updateField(BuildingExtensionRegistries.plantationBambooField.get());
     }
 
-    /**
-     * TODO: future
-     * Legacy code, can be removed when plantations will no longer have to support fields
-     * directly from the hut building.
-     */
     private void updateField(BuildingExtensionEntry type)
     {
         final PlantationField plantationField = PlantationField.create(type, getPosition());
         final List<BlockPos> workingPositions =
-          plantationField.getModule().getValidWorkingPositions(colony.getWorld(), getLocationsFromTag(plantationField.getModule().getWorkTag()));
+            plantationField.getModule().getValidWorkingPositions(colony.getWorld(), getLocationsFromTag(plantationField.getModule().getWorkTag()));
         if (workingPositions.isEmpty())
         {
             colony.getBuildingManager().removeBuildingExtension(field -> field.equals(plantationField));
@@ -115,24 +89,6 @@ public class BuildingPlantation extends AbstractBuilding
             {
                 existingPlantationField.setWorkingPositions(workingPositions);
             }
-        }
-    }
-
-    /**
-     * TODO: future
-     * Legacy code, can be removed when plantations will no longer have to support fields
-     * directly from the hut building.
-     * <p>
-     * This is used for initial migration to the new plantation field system.
-     * This will register the fields on colony load, only when the building still contains old NBT data.
-     */
-    @Override
-    public void deserializeNBT(final CompoundTag compound)
-    {
-        super.deserializeNBT(compound);
-        if (compound.contains(TAG_PLANTGROUND))
-        {
-            triggerFieldMigration = true;
         }
     }
 
@@ -162,12 +118,7 @@ public class BuildingPlantation extends AbstractBuilding
     }
 
     /**
-     * Check if the assigned citizens are allowed to eat the following stack.
-     * Additionally, if the stack is even edible in the first place, then it also checks if the fields aren't producing these items.
-     * If this item is being produced here, the planter is not allowed to eat his own products in that case. (Although most items the planter produces won't be edible to begin with).
-     *
-     * @param stack the stack to test.
-     * @return true if so.
+     * Prevents workers from eating items being produced by assigned fields.
      */
     @Override
     public boolean canEat(final ItemStack stack)
@@ -195,22 +146,6 @@ public class BuildingPlantation extends AbstractBuilding
         return true;
     }
 
-    /**
-     * TODO: future
-     * Legacy code, can be removed when plantations will no longer have to support fields
-     * directly from the hut building.
-     */
-    @Override
-    public void setTileEntity(final AbstractTileEntityColonyBuilding te)
-    {
-        super.setTileEntity(te);
-        if (triggerFieldMigration)
-        {
-            updateFields();
-            triggerFieldMigration = false;
-        }
-    }
-
     @NotNull
     @Override
     public String getSchematicName()
@@ -218,35 +153,13 @@ public class BuildingPlantation extends AbstractBuilding
         return PLANTATION;
     }
 
-    /**
-     * Field module implementation for the plantation.
-     */
     public static class PlantationFieldsModule extends BuildingExtensionsModule
     {
-        @Override
-        public void serializeToView(final @NotNull FriendlyByteBuf buf)
-        {
-            super.serializeToView(buf);
-            buf.writeInt(getMaxConcurrentPlants());
-        }
-
-        /**
-         * Get the maximum allowed plants the plantation can work on simultaneously.
-         *
-         * @return the maximum amount of concurrent plants.
-         */
-        public int getMaxConcurrentPlants()
-        {
-            return (int) Math.ceil(building.getBuildingLevel() / 2D);
-        }
-
         @Override
         protected int getMaxExtensionCount()
         {
             int allowedPlants = (int) Math.ceil(building.getBuildingLevel() / 2D);
-            return building.getColony().getResearchManager().getResearchEffects().getEffectStrength(PLANTATION_LARGE) > 0
-                     ? allowedPlants + 1
-                     : allowedPlants;
+            return allowedPlants + 1;
         }
 
         @Override
@@ -264,30 +177,9 @@ public class BuildingPlantation extends AbstractBuilding
         @Override
         public boolean canAssignExtensionOverride(IBuildingExtension extension)
         {
-            return getCurrentPlantsPlusField(extension) <= getMaxConcurrentPlants() && hasRequiredResearchForField(extension);
+            return hasRequiredResearchForField(extension);
         }
 
-        /**
-         * Getter of the worked plants.
-         *
-         * @param extraField the extra field to calculate.
-         * @return the amount of worked plants.
-         */
-        private int getCurrentPlantsPlusField(final IBuildingExtension extraField)
-        {
-            final Set<IPlantationModule> plants = getOwnedExtensions().stream()
-                                                    .map(field -> field.getFirstModuleOccurance(IPlantationModule.class))
-                                                    .collect(Collectors.toSet());
-            plants.add(extraField.getFirstModuleOccurance(IPlantationModule.class));
-            return plants.size();
-        }
-
-        /**
-         * Checks if the passed field has the research required.
-         *
-         * @param field the field in question.
-         * @return true if the research is handled.
-         */
         private boolean hasRequiredResearchForField(final IBuildingExtension field)
         {
             if (field instanceof PlantationField plantationField)
@@ -303,27 +195,12 @@ public class BuildingPlantation extends AbstractBuilding
         }
     }
 
-    /**
-     * Field module view implementation for the plantation.
-     */
     public static class PlantationFieldsModuleView extends FieldsModuleView
     {
-        /**
-         * The maximum amount of concurrent plants the planter can work on.
-         */
-        private int maxConcurrentPlants = 0;
-
-        @Override
-        public void deserialize(final @NotNull FriendlyByteBuf buf)
-        {
-            super.deserialize(buf);
-            maxConcurrentPlants = buf.readInt();
-        }
-
         @Override
         protected boolean canAssignFieldOverride(final IBuildingExtension field)
         {
-            return getCurrentPlantsPlusField(field) <= maxConcurrentPlants && hasRequiredResearchForField(field);
+            return hasRequiredResearchForField(field);
         }
 
         @Override
@@ -341,11 +218,6 @@ public class BuildingPlantation extends AbstractBuilding
                 return result;
             }
 
-            if (getCurrentPlantsPlusField(field) > maxConcurrentPlants)
-            {
-                return Component.translatable(FIELD_LIST_WARN_EXCEEDS_PLANT_COUNT);
-            }
-
             if (!hasRequiredResearchForField(field))
             {
                 return Component.translatable(FIELD_LIST_PLANTATION_RESEARCH_REQUIRED);
@@ -353,27 +225,6 @@ public class BuildingPlantation extends AbstractBuilding
             return null;
         }
 
-        /**
-         * Getter of the worked plants.
-         *
-         * @param extraField the extra field to calculate.
-         * @return the amount of worked plants.
-         */
-        private int getCurrentPlantsPlusField(final IBuildingExtension extraField)
-        {
-            final Set<IPlantationModule> plants = getOwnedFields().stream()
-                                                    .map(field -> field.getFirstModuleOccurance(IPlantationModule.class))
-                                                    .collect(Collectors.toSet());
-            plants.add(extraField.getFirstModuleOccurance(IPlantationModule.class));
-            return plants.size();
-        }
-
-        /**
-         * Checks if the passed field has the research required.
-         *
-         * @param field the field in question.
-         * @return true if the research is handled.
-         */
         private boolean hasRequiredResearchForField(final IBuildingExtension field)
         {
             if (field instanceof PlantationField plantationField)
@@ -388,44 +239,16 @@ public class BuildingPlantation extends AbstractBuilding
             return false;
         }
 
-        /**
-         * Getter of the worked plants.
-         *
-         * @return the amount of worked plants.
-         */
-        public int getCurrentPlants()
-        {
-            return getOwnedFields().stream()
-                     .map(field -> field.getFirstModuleOccurance(IPlantationModule.class))
-                     .collect(Collectors.toSet())
-                     .size();
-        }
-
         @Override
         @OnlyIn(Dist.CLIENT)
         public BOWindow getWindow()
         {
             return new PlantationFieldsModuleWindow(buildingView, this);
         }
-
-        /**
-         * Get the maximum allowed plants the plantation can work on simultaneously.
-         *
-         * @return the maximum amount of concurrent plants.
-         */
-        public int getMaxConcurrentPlants()
-        {
-            return maxConcurrentPlants;
-        }
     }
 
     public static class CraftingModule extends AbstractCraftingBuildingModule.Crafting
     {
-        /**
-         * Create a new module.
-         *
-         * @param jobEntry the entry of the job.
-         */
         public CraftingModule(final JobEntry jobEntry)
         {
             super(jobEntry);
@@ -450,15 +273,15 @@ public class BuildingPlantation extends AbstractBuilding
             for (BuildingExtensionEntry type : BuildingExtensionRegistries.getBuildingExtensionRegistry().getValues())
             {
                 type.getExtensionModuleProducers().stream()
-                  .map(m -> m.apply(null))
-                  .filter(IPlantationModule.class::isInstance)
-                  .map(m -> (IPlantationModule) m)
-                  .findFirst()
-                  .ifPresent(module -> recipes.add(GenericRecipe.builder()
-                          .withOutput(module.getItem())
-                          .withInputs(List.of(module.getRequiredItemsForOperation()))
-                          .withRequiredTool(module.getRequiredTool())
-                          .build()));
+                    .map(m -> m.apply(null))
+                    .filter(IPlantationModule.class::isInstance)
+                    .map(m -> (IPlantationModule) m)
+                    .findFirst()
+                    .ifPresent(module -> recipes.add(GenericRecipe.builder()
+                        .withOutput(module.getItem())
+                        .withInputs(List.of(module.getRequiredItemsForOperation()))
+                        .withRequiredTool(module.getRequiredTool())
+                        .build()));
             }
 
             return recipes;
