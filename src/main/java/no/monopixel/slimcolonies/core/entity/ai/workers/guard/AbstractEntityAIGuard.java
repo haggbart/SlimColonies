@@ -1,5 +1,12 @@
 package no.monopixel.slimcolonies.core.entity.ai.workers.guard;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.registries.ForgeRegistries;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
@@ -14,10 +21,7 @@ import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.entity.citizen.Skill;
 import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
-import no.monopixel.slimcolonies.api.util.BlockPosUtil;
-import no.monopixel.slimcolonies.api.util.DamageSourceKeys;
-import no.monopixel.slimcolonies.api.util.InventoryUtils;
-import no.monopixel.slimcolonies.api.util.LookHandler;
+import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
@@ -31,19 +35,13 @@ import no.monopixel.slimcolonies.core.entity.other.SittingEntity;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 import no.monopixel.slimcolonies.core.network.messages.client.SleepingParticleMessage;
 import no.monopixel.slimcolonies.core.util.TeleportHelper;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
-import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.*;
+import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.FLEEING_SPEED;
+import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.RETREAT;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.*;
 import static no.monopixel.slimcolonies.api.util.constant.GuardConstants.GUARD_FOLLOW_LOSE_RANGE;
 import static no.monopixel.slimcolonies.api.util.constant.GuardConstants.GUARD_FOLLOW_TIGHT_RANGE;
@@ -261,11 +259,14 @@ public abstract class AbstractEntityAIGuard<J extends AbstractJobGuard<J>, B ext
             return false;
         }
 
-        final double chance = 1 / (1 + worker.getCitizenColonyHandler().getColonyOrRegister().getResearchManager().getResearchEffects().getEffectStrength(SLEEP_LESS));
+        if (!WorldUtil.isDayTime(worker.level))
+        {
+            return false;
+        }
 
-        // Chance to fall asleep every 10sec, Chance is 1 in (10 + level/2) = 1 in Level1:5,Level2:6 Level6:8 Level 12:11 etc
-        if (worker.getRandom().nextInt((int) (worker.getCitizenData().getCitizenSkillHandler().getLevel(Skill.Adaptability) * 0.5) + 20) == 1
-            && worker.getRandom().nextDouble() < chance)
+        // Checked every 10 seconds. Base chance: 1 in 40. Higher Adaptability = less sleep needed
+        // Level 0: 1/40, Level 10: 1/45, Level 20: 1/50
+        if (worker.getRandom().nextInt((int) (worker.getCitizenData().getCitizenSkillHandler().getLevel(Skill.Adaptability) * 0.5) + 40) == 1)
         {
             // Sleep for 2500-3000 ticks
             sleepTimer = worker.getRandom().nextInt(500) + 2500;

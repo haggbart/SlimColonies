@@ -791,13 +791,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addEffect(DOUBLE_ARROWS, 4)
             .addToList(r);
 
-        final Research coffee = new Research(new ResourceLocation(Constants.MOD_ID, "combat/coffee"), COMBAT).setParentResearch(tacticTraining)
-            .setTranslatedName("Coffee")
-            .setTranslatedSubtitle("Keeps guards awake")
-            .setIcon(Items.LIME_BED)
-            .addEffect(SLEEP_LESS, 1)
-            .addToList(r);
-
         // Primary Research #3
         final Research avoidance = new Research(new ResourceLocation(Constants.MOD_ID, "combat/avoidance"), COMBAT).setTranslatedName("Avoidance")
             .setSortOrder(3)
