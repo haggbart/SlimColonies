@@ -146,7 +146,7 @@ public class ServerConfiguration extends AbstractConfiguration
 
         canPlayerUseRTPCommand = defineBoolean(builder, "canplayerusertpcommand", false);
         canPlayerUseColonyTPCommand = defineBoolean(builder, "canplayerusecolonytpcommand", false);
-        canPlayerUseHomeTPCommand = defineBoolean(builder, "canplayerusehometpcommand", false);
+        canPlayerUseHomeTPCommand = defineBoolean(builder, "canplayerusehometpcommand", true);
         canPlayerUseShowColonyInfoCommand = defineBoolean(builder, "canplayeruseshowcolonyinfocommand", true);
         canPlayerUseKillCitizensCommand = defineBoolean(builder, "canplayerusekillcitizenscommand", false);
         canPlayerUseModifyCitizensCommand = defineBoolean(builder, "canplayerusemodifycitizenscommand", false);
