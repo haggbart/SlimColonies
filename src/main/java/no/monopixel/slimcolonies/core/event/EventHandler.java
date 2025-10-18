@@ -341,21 +341,8 @@ public class EventHandler
         {
             return;
         }
-        final IColony newColony = IColonyManager.getInstance().getColonyByWorld(owningColony, (Level) event.getLevel());
-        if (newColony == null)
-        {
-            return;
-        }
-
-        for (final BlockPos buildingPos : ColonyUtils.getAllClaimingBuildings(chunk).getOrDefault(owningColony, Collections.emptySet()))
-        {
-            final IBuilding building = newColony.getBuildingManager().getBuilding(buildingPos);
-            if (building != null && building.getBuildingLevel() >= 1 && building.isInBuilding(pos))
-            {
-                event.setResult(Event.Result.DENY);
-                return;
-            }
-        }
+        // Prevent hostile mob spawns in colony borders
+        event.setResult(Event.Result.DENY);
     }
 
     /**
