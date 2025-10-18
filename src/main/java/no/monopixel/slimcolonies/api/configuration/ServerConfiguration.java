@@ -45,7 +45,6 @@ public class ServerConfiguration extends AbstractConfiguration
      *  ------------------- ######## Command settings ######## ------------------- *
      *  --------------------------------------------------------------------------- */
 
-    public final ForgeConfigSpec.BooleanValue canPlayerUseRTPCommand;
     public final ForgeConfigSpec.BooleanValue canPlayerUseColonyTPCommand;
     public final ForgeConfigSpec.BooleanValue canPlayerUseHomeTPCommand;
     public final ForgeConfigSpec.BooleanValue canPlayerUseShowColonyInfoCommand;
@@ -144,7 +143,6 @@ public class ServerConfiguration extends AbstractConfiguration
 
         swapToCategory(builder, "commands");
 
-        canPlayerUseRTPCommand = defineBoolean(builder, "canplayerusertpcommand", false);
         canPlayerUseColonyTPCommand = defineBoolean(builder, "canplayerusecolonytpcommand", false);
         canPlayerUseHomeTPCommand = defineBoolean(builder, "canplayerusehometpcommand", true);
         canPlayerUseShowColonyInfoCommand = defineBoolean(builder, "canplayeruseshowcolonyinfocommand", true);
