@@ -1,7 +1,14 @@
 package no.monopixel.slimcolonies.core.entity.ai.minimal;
 
 import com.ldtteam.domumornamentum.block.decorative.PanelBlock;
-import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.entity.ai.IStateAI;
@@ -15,21 +22,13 @@ import no.monopixel.slimcolonies.api.util.SoundUtils;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractAssignedCitizenModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.entity.pathfinding.navigation.EntityNavigationUtils;
 import no.monopixel.slimcolonies.core.network.messages.client.SleepingParticleMessage;
-import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BedBlock;
-import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BedPart;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.RANGE_TO_BE_HOME;
@@ -96,7 +95,6 @@ public class EntityAISleep implements IStateAI
     /**
      * Checks for sleep
      *
-     * @return
      */
     private IState checkSleep()
     {
@@ -107,7 +105,6 @@ public class EntityAISleep implements IStateAI
     /**
      * Walking to the home/bed position
      *
-     * @return
      */
     private IState walkHome()
     {
@@ -155,49 +152,43 @@ public class EntityAISleep implements IStateAI
 
     private void findBedAndTryToSleep()
     {
-        // Finding bed
-        if (usedBed == null && citizen.getCitizenData() != null)
-        {
-            this.usedBed = citizen.getCitizenData().getBedPos();
-            if (citizen.getCitizenData().getBedPos().equals(BlockPos.ZERO))
-            {
-                this.usedBed = null;
-            }
-        }
-
         final IColony colony = citizen.getCitizenColonyHandler().getColonyOrRegister();
         if (colony != null && citizen.getCitizenData().getHomeBuilding() instanceof AbstractBuilding hut)
         {
             final BlockPos homePos = citizen.getCitizenData().getHomePosition();
-            if (usedBed == null)
+            if (usedBed == null || usedBed == homePos)
             {
-                List<BlockPos> bedList = new ArrayList<>();
-                if (hut.hasModule(BuildingModules.BED))
-                {
-                    bedList.addAll(hut.getModule(BuildingModules.BED).getRegisteredBlocks());
-                }
+                final List<BlockPos> bedList = hut.getModule(BuildingModules.BED).getRegisteredBlocks();
+                final int index = hut.getFirstModuleOccurance(AbstractAssignedCitizenModule.class).getAssignedCitizen().indexOf(citizen.getCitizenData());
 
-                for (final BlockPos pos : bedList)
+                if (index < bedList.size())
                 {
+                    final BlockPos pos = bedList.get(index);
                     if (WorldUtil.isEntityBlockLoaded(citizen.level, pos))
                     {
                         final Level world = citizen.level;
                         final BlockState state = world.getBlockState(pos);
                         final BlockState above = world.getBlockState(pos.above());
-                        if (state.is(BlockTags.BEDS)
-                              && !state.getValue(BedBlock.OCCUPIED)
-                              && state.getValue(BedBlock.PART).equals(BedPart.HEAD)
-                              && !isBedOccupied(hut, pos)
-                              && (above.is(BlockTags.BEDS) || above.getBlock() instanceof PanelBlock || above.getBlock() instanceof TrapDoorBlock || !above.isSolid()))
+
+                        if (!state.is(BlockTags.BEDS))
+                        {
+                            hut.getModule(BuildingModules.BED).removeBed(pos);
+                        }
+                        else if (!state.getValue(BedBlock.OCCUPIED)
+                            && state.getValue(BedBlock.PART).equals(BedPart.HEAD)
+                            && (above.is(BlockTags.BEDS) || above.getBlock() instanceof PanelBlock || above.getBlock() instanceof TrapDoorBlock || !above.isSolid()))
                         {
                             usedBed = pos;
-                            setBedOccupied(true);
                             return;
                         }
                     }
                 }
 
-                usedBed = homePos;
+                // Fallback to home position if assigned bed is not available
+                if (usedBed == null)
+                {
+                    usedBed = homePos;
+                }
             }
 
             if (EntityNavigationUtils.walkToPosInBuilding(citizen, usedBed, citizen.getCitizenData().getHomeBuilding(), 12))
@@ -208,7 +199,6 @@ public class EntityAISleep implements IStateAI
                     citizen.getCitizenData().setBedPos(BlockPos.ZERO);
                     usedBed = null;
                 }
-                // Happiness system removed - sleep tracking no longer needed
             }
             else
             {
@@ -229,6 +219,10 @@ public class EntityAISleep implements IStateAI
                 return WALKING_HOME;
             }
             citizen.setPose(Pose.SLEEPING);
+        }
+        else
+        {
+            findBedAndTryToSleep();
         }
 
         Network.getNetwork().sendToTrackingEntity(new SleepingParticleMessage(citizen.getX(), citizen.getY() + 1.0d, citizen.getZ()), citizen);
@@ -257,46 +251,5 @@ public class EntityAISleep implements IStateAI
             SoundUtils.playSoundAtCitizenWith(CompatibilityUtils.getWorldFromCitizen(citizen), citizen.blockPosition(), EventType.OFF_TO_BED, citizen.getCitizenData());
             //add further workers as soon as available.
         }
-    }
-
-    /**
-     * Sets the used beds occupied state.
-     *
-     * @param occupied whether the bed should be occupied.
-     */
-    private void setBedOccupied(boolean occupied)
-    {
-        final BlockState headState = citizen.level.getBlockState(usedBed);
-        citizen.level.setBlock(usedBed, headState.setValue(BedBlock.OCCUPIED, occupied), 0x03);
-
-        final BlockPos feetPos = usedBed.relative(headState.getValue(BedBlock.FACING).getOpposite());
-        final BlockState feetState = citizen.level.getBlockState(feetPos);
-
-        if (feetState.is(BlockTags.BEDS))
-        {
-            citizen.level.setBlock(feetPos, feetState.setValue(BedBlock.OCCUPIED, occupied), 0x03);
-        }
-    }
-
-    /**
-     * Checks whether any of the citizens living in this hut are sleeping in the given bed.
-     *
-     * @param hut the hut this citizen is living in.
-     * @param bed the bed to check.
-     * @return whether any of the citizens living in this hut are sleeping in the given bed.
-     */
-    private boolean isBedOccupied(IBuilding hut, BlockPos bed)
-    {
-        for (ICitizenData citizen : hut.getAllAssignedCitizen())
-        {
-            if (this.citizen.getCivilianID() != citizen.getId())
-            {
-                if (citizen.getBedPos().equals(bed))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
