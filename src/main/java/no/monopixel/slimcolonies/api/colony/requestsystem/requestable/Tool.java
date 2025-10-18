@@ -1,6 +1,9 @@
 package no.monopixel.slimcolonies.api.colony.requestsystem.requestable;
 
 import com.google.common.reflect.TypeToken;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
 import no.monopixel.slimcolonies.api.colony.requestsystem.factory.IFactoryController;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
 import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
@@ -8,9 +11,6 @@ import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.ReflectionUtils;
 import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -25,17 +25,17 @@ public class Tool implements IDeliverable
      * Set of type tokens belonging to this class.
      */
     private final static Set<TypeToken<?>> TYPE_TOKENS =
-      ReflectionUtils.getSuperClasses(TypeToken.of(Tool.class)).stream().filter(type -> !type.equals(TypeConstants.OBJECT)).collect(Collectors.toSet());
+        ReflectionUtils.getSuperClasses(TypeToken.of(Tool.class)).stream().filter(type -> !type.equals(TypeConstants.OBJECT)).collect(Collectors.toSet());
 
-    ////// --------------------------- NBTConstants --------------------------- \\\\\\
-    private static final String NBT_TYPE      = "Type";
-    private static final String NBT_MIN_LEVEL = "MinLevel";
-    private static final String NBT_MAX_LEVEL = "MaxLevel";
-    private static final String NBT_RESULT    = "Result";
-    ////// --------------------------- NBTConstants --------------------------- \\\\\\
+    /// /// --------------------------- NBTConstants --------------------------- \\\\\\
+    private static final String             NBT_TYPE      = "Type";
+    private static final String             NBT_MIN_LEVEL = "MinLevel";
+    private static final String             NBT_MAX_LEVEL = "MaxLevel";
+    private static final String             NBT_RESULT    = "Result";
+    /// /// --------------------------- NBTConstants --------------------------- \\\\\\
 
     @NotNull
-    private final EquipmentTypeEntry equipmentType;
+    private final        EquipmentTypeEntry equipmentType;
 
     @NotNull
     private final Integer minLevel;
@@ -63,7 +63,7 @@ public class Tool implements IDeliverable
      * Serializes this equipment into NBT.
      *
      * @param controller The IFactoryController used to serialize sub types.
-     * @param equipment       the equipment to serialize.
+     * @param equipment  the equipment to serialize.
      * @return The CompoundTag containing the equipment data.
      */
     @NotNull
@@ -178,7 +178,7 @@ public class Tool implements IDeliverable
 
         try
         {
-            return ItemStackUtils.hasEquipmentLevel(stack, getEquipmentType());
+            return ItemStackUtils.isEquipmentType(stack, getEquipmentType());
         }
         catch (final Exception e)
         {
@@ -230,7 +230,7 @@ public class Tool implements IDeliverable
     public boolean isArmor()
     {
         return equipmentType == ModEquipmentTypes.helmet.get() || equipmentType == ModEquipmentTypes.leggings.get() || equipmentType == ModEquipmentTypes.chestplate.get()
-                 || equipmentType == ModEquipmentTypes.boots.get();
+            || equipmentType == ModEquipmentTypes.boots.get();
     }
 
     @Override

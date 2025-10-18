@@ -1,15 +1,14 @@
 package no.monopixel.slimcolonies.api.entity.ai.workers.util;
 
-import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.SwordItem;
+import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 
 import java.util.function.Predicate;
-
 
 /**
  * Class to hold information about required item for the guard.
@@ -39,7 +38,6 @@ public class GuardGear implements Predicate<ItemStack>
         this.itemNeeded = item;
     }
 
-
     /**
      * @return type of the item
      */
@@ -60,9 +58,9 @@ public class GuardGear implements Predicate<ItemStack>
     public boolean test(final ItemStack stack)
     {
         return
-          (ItemStackUtils.hasEquipmentLevel(stack, itemNeeded) && stack.getItem() instanceof ArmorItem
-             && ((ArmorItem) stack.getItem()).getEquipmentSlot() == getType())
-            || (stack.getItem() instanceof SwordItem && getType() == EquipmentSlot.MAINHAND)
-            || (stack.getItem() instanceof ShieldItem && getType() == EquipmentSlot.OFFHAND);
+            (ItemStackUtils.isEquipmentType(stack, itemNeeded) && stack.getItem() instanceof ArmorItem
+                && ((ArmorItem) stack.getItem()).getEquipmentSlot() == getType())
+                || (stack.getItem() instanceof SwordItem && getType() == EquipmentSlot.MAINHAND)
+                || (stack.getItem() instanceof ShieldItem && getType() == EquipmentSlot.OFFHAND);
     }
 }

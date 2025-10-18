@@ -727,7 +727,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
 
     private ItemStack findTool(@NotNull final EquipmentTypeEntry tool)
     {
-        return findItem(stack -> ItemStackUtils.hasEquipmentLevel(stack, tool));
+        return findItem(stack -> ItemStackUtils.isEquipmentType(stack, tool));
     }
 
     private ItemStack findTool(@NotNull final BlockState target, final BlockPos pos)

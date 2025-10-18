@@ -1,5 +1,11 @@
 package no.monopixel.slimcolonies.core.colony.buildings;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
@@ -17,12 +23,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.utils.BuilderBucket;
 import no.monopixel.slimcolonies.core.colony.buildings.utils.BuildingBuilderResource;
 import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobStructure;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingProgressStage;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -137,9 +137,9 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
                 }
             }
             if (checkIfShouldKeepEquipment(ModEquipmentTypes.pickaxe.get(), stack, localAlreadyKept)
-                  || checkIfShouldKeepEquipment(ModEquipmentTypes.shovel.get(), stack, localAlreadyKept)
-                  || checkIfShouldKeepEquipment(ModEquipmentTypes.axe.get(), stack, localAlreadyKept)
-                  || checkIfShouldKeepEquipment(ModEquipmentTypes.hoe.get(), stack, localAlreadyKept))
+                || checkIfShouldKeepEquipment(ModEquipmentTypes.shovel.get(), stack, localAlreadyKept)
+                || checkIfShouldKeepEquipment(ModEquipmentTypes.axe.get(), stack, localAlreadyKept)
+                || checkIfShouldKeepEquipment(ModEquipmentTypes.hoe.get(), stack, localAlreadyKept))
             {
                 localAlreadyKept.add(new ItemStorage(stack, 1, true));
                 return 0;
@@ -158,7 +158,7 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
      */
     private boolean checkIfShouldKeepEquipment(final EquipmentTypeEntry type, final ItemStack stack, final List<ItemStorage> localAlreadyKept)
     {
-        if (ItemStackUtils.hasEquipmentLevel(stack, type))
+        if (ItemStackUtils.isEquipmentType(stack, type))
         {
             for (final ItemStorage storage : localAlreadyKept)
             {
@@ -180,7 +180,7 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
         for (final BuildingBuilderResource stack : getModule(BuildingModules.BUILDING_RESOURCES).getNeededResources().values())
         {
             toKeep.put(itemstack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack.getItemStack(), itemstack),
-              new net.minecraft.util.Tuple<>(stack.getAmount(), true));
+                new net.minecraft.util.Tuple<>(stack.getAmount(), true));
         }
 
         return toKeep;
@@ -337,7 +337,7 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
      */
     public boolean requiresResourceForBuilding(final ItemStack stack)
     {
-       return getFirstModuleOccurance(BuildingResourcesModule.class).requiresResourceForBuilding(stack);
+        return getFirstModuleOccurance(BuildingResourcesModule.class).requiresResourceForBuilding(stack);
     }
 
     /**
@@ -416,6 +416,7 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
 
     /**
      * Set the total number of stages.
+     *
      * @param total the total.
      */
     public void setTotalStages(final int total)
@@ -436,13 +437,14 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
 
     /**
      * Handle workorder cancellation, reset requests and progress.
+     *
      * @param workOrder the cancelled workorder.
      */
     public void onWorkOrderCancellation(final IWorkOrder workOrder)
     {
         for (final ICitizenData citizen : getAllAssignedCitizen())
         {
-            if (citizen.getJob() instanceof AbstractJobStructure<?,?> abstractJobStructure)
+            if (citizen.getJob() instanceof AbstractJobStructure<?, ?> abstractJobStructure)
             {
                 abstractJobStructure.setWorkOrder(null);
                 this.cancelAllRequestsOfCitizenOrBuilding(citizen);

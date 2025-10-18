@@ -29,7 +29,6 @@ import no.monopixel.slimcolonies.api.advancements.AdvancementTriggers;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
@@ -218,7 +217,7 @@ public final class ItemStackUtils
      * @param equipmentType the type of equipment needed
      * @return true if equipment is acceptable
      */
-    public static boolean hasEquipmentLevel(@Nullable final ItemStack stack, final EquipmentTypeEntry equipmentType)
+    public static boolean isEquipmentType(@Nullable final ItemStack stack, final EquipmentTypeEntry equipmentType)
     {
         if (isEmpty(stack))
         {

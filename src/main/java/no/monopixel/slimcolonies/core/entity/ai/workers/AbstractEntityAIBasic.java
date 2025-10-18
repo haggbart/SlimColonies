@@ -92,7 +92,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
     /**
      * The returned slot if a slot hasn't been found.
      */
-    private static final int NO_TOOL = -10;
+    protected static final int NO_TOOL = -10;
 
     /**
      * The standard delay after each terminated action.
@@ -940,7 +940,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
         }
         return InventoryFunctions.matchFirstInProviderWithAction(
             entity,
-            stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType),
+            stack -> ItemStackUtils.isEquipmentType(stack, toolType),
             this::takeItemStackFromProvider
         );
     }
@@ -1094,7 +1094,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
     {
         if (building != null)
         {
-            final Predicate<ItemStack> toolPredicate = stack -> ItemStackUtils.hasEquipmentLevel(stack, toolType);
+            final Predicate<ItemStack> toolPredicate = stack -> ItemStackUtils.isEquipmentType(stack, toolType);
             for (final BlockPos pos : building.getContainers())
             {
                 final BlockEntity entity = world.getBlockEntity(pos);
@@ -1330,7 +1330,7 @@ public abstract class AbstractEntityAIBasic<J extends AbstractJob<?, J>, B exten
      * @param pos    the pos to mine
      * @return true if we have a tool for the job
      */
-    public final boolean holdEfficientTool(@NotNull final BlockState target, final BlockPos pos)
+    public boolean holdEfficientTool(@NotNull final BlockState target, final BlockPos pos)
     {
         final int bestSlot = getMostEfficientTool(target, pos);
         if (bestSlot >= 0)

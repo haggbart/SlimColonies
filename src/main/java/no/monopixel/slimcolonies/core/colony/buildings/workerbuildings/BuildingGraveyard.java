@@ -79,7 +79,7 @@ public class BuildingGraveyard extends AbstractBuilding
     public BuildingGraveyard(final IColony c, final BlockPos l)
     {
         super(c, l);
-        keepX.put(itemStack -> ItemStackUtils.hasEquipmentLevel(itemStack, ModEquipmentTypes.shovel.get()), new net.minecraft.util.Tuple<>(1, true));
+        keepX.put(itemStack -> ItemStackUtils.isEquipmentType(itemStack, ModEquipmentTypes.shovel.get()), new net.minecraft.util.Tuple<>(1, true));
         keepX.put(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING, new net.minecraft.util.Tuple<>(2, true));
     }
 
