@@ -1309,12 +1309,6 @@ public final class ColonyView implements IColonyView
     }
 
     @Override
-    public IEventManager getEventManager()
-    {
-        return null;
-    }
-
-    @Override
     public IReproductionManager getReproductionManager()
     {
         return null;

@@ -218,13 +218,6 @@ public interface IColony
     IVisitorManager getVisitorManager();
 
     /**
-     * Get the event manager of the colony.
-     *
-     * @return the event manager.
-     */
-    IEventManager getEventManager();
-
-    /**
      * Get the reproduction manager of the colony.
      *
      * @return the reproduction manager.

@@ -611,26 +611,6 @@ public class CitizenManager implements ICitizenManager
     }
 
     @Override
-    public void updateCitizenMourn(final ICitizenData data, final boolean mourn)
-    {
-        for (final ICitizenData citizen : getCitizens())
-        {
-            if (mourn)
-            {
-                if (!(citizen.getJob() instanceof AbstractJobGuard) && !(citizen.getJob() instanceof JobUndertaker) && (citizen.isRelatedTo(data) || citizen.doesLiveWith(data)))
-                {
-                    citizen.getCitizenMournHandler().addDeceasedCitizen(data.getName());
-                }
-            }
-            else
-            {
-                citizen.getCitizenMournHandler().removeDeceasedCitizen(data.getName());
-            }
-            citizen.onDeath(data.getId());
-        }
-    }
-
-    @Override
     public ICitizenData getRandomCitizen()
     {
         return (ICitizenData) citizens.values().toArray()[random.nextInt(citizens.values().size())];
@@ -664,21 +644,7 @@ public class CitizenManager implements ICitizenManager
     @Override
     public void onWakeUp()
     {
-        for (final ICitizenData citizenData : citizens.values())
-        {
-            if (citizenData.getCitizenMournHandler().isMourning())
-            {
-                citizenData.getCitizenMournHandler().clearDeceasedCitizen();
-                citizenData.getCitizenMournHandler().setMourning(false);
-            }
-            else
-            {
-                if (citizenData.getCitizenMournHandler().shouldMourn())
-                {
-                    citizenData.getCitizenMournHandler().setMourning(true);
-                }
-            }
-        }
+        // Mourning system removed
     }
 
     @Override

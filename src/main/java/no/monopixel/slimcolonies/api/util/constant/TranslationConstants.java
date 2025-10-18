@@ -147,8 +147,6 @@ public final class TranslationConstants
     @NonNls
     public static final String COLONY_ATTACK_GUARD_GROUP_SIZE_MESSAGE                               = "no.monopixel.slimcolonies.coremod.pvp.attack.guardgroupsize";
     @NonNls
-    public static final String COREMOD_MOURN                                       = "no.monopixel.slimcolonies.coremod.mourning";
-    @NonNls
     public static final String COREMOD_GUI_HIRE_PAUSE                              = "no.monopixel.slimcolonies.coremod.gui.hiring.buttonpaused";
     @NonNls
     public static final String COREMOD_GUI_HIRE_UNPAUSE                            = "no.monopixel.slimcolonies.coremod.gui.hiring.buttonunpaused";
@@ -236,8 +234,6 @@ public final class TranslationConstants
     public static final String DEMANDS                                                              = "no.monopixel.slimcolonies.coremod.entity.citizen.demands.";
     @NonNls
     public static final String COREMOD_ENTITY_CITIZEN_SLEEPING                     = "no.monopixel.slimcolonies.coremod.entity.citizen.sleeping";
-    @NonNls
-    public static final String COREMOD_ENTITY_CITIZEN_MOURNING                     = "no.monopixel.slimcolonies.coremod.entity.citizen.mourning";
     @NonNls
     public static final String WAREHOUSE_SORTED                                                     = "no.monopixel.slimcolonies.coremod.gui.warehouse.sorted";
     @NonNls
@@ -584,8 +580,6 @@ public final class TranslationConstants
     public static final String MESSAGE_INFO_CITIZEN_STATUS_HUNGRY   = "no.monopixel.slimcolonies.gui.visiblestatus.eat";
     @NonNls
     public static final String MESSAGE_INFO_CITIZEN_STATUS_IDLE     = "no.monopixel.slimcolonies.gui.visiblestatus.idle";
-    @NonNls
-    public static final String MESSAGE_INFO_CITIZEN_STATUS_MOURNING = "no.monopixel.slimcolonies.gui.visiblestatus.mourn";
     @NonNls
     public static final String MESSAGE_INFO_CITIZEN_STATUS_RAINING  = "no.monopixel.slimcolonies.gui.visiblestatus.rain";
     @NonNls

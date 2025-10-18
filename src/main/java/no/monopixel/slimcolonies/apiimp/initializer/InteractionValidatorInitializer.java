@@ -262,10 +262,6 @@ public class InteractionValidatorInitializer
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_ENTITY_CITIZEN_SLEEPING),
             citizen -> citizen.getEntity().isPresent() && citizen.isAsleep());
 
-        InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(COREMOD_ENTITY_CITIZEN_MOURNING),
-            citizen -> citizen.getEntity().isPresent() && citizen.getCitizenMournHandler().isMourning());
-
-
         InteractionValidatorRegistry.registerStandardPredicate(Component.translatable(QUARRY_MINER_NO_QUARRY),
             citizen -> citizen.getJob() instanceof JobQuarrier && ((JobQuarrier) citizen.getJob()).findQuarry() == null);
 

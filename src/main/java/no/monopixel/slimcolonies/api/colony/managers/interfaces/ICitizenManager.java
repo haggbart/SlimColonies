@@ -128,13 +128,6 @@ public interface ICitizenManager extends IEntityManager
     boolean tickCitizenData(int tickRate);
 
     /**
-     * Call this to set all the citizens in the colony to mourn or not.
-     *
-     * @param mourn boolean to indicate if citizen should mourn or not
-     */
-    void updateCitizenMourn(final ICitizenData data, final boolean mourn);
-
-    /**
      * Call this to set all citizens asleep
      *
      * @param sleep boolean to indicate whether the citizens are all asleep

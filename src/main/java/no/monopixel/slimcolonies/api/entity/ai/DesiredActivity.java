@@ -7,6 +7,5 @@ public enum DesiredActivity
 {
     SLEEP,
     IDLE,
-    MOURN,
     WORK
 }

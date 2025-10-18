@@ -7,7 +7,6 @@ public enum Status
 {
     IDLE,
     SLEEPING,
-    MOURN,
     WORKING,
     GETTING_ITEMS,
     NEED_ASSISTANCE,
