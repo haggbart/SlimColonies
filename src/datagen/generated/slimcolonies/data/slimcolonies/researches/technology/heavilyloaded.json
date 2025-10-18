@@ -9,5 +9,5 @@
   "icon": "minecraft:blue_shulker_box",
   "no-reset": true,
   "parentResearch": "slimcolonies:technology/loaded",
-  "researchLevel": 6
+  "researchLevel": 4
 }

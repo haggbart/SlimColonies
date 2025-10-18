@@ -130,7 +130,6 @@ public final class ResearchConstants
     public static final ResourceLocation MINIMUM_STOCK     = new ResourceLocation(Constants.MOD_ID, "effects/minimumstockmultiplier");
     public static final ResourceLocation MORE_ORES         = new ResourceLocation(Constants.MOD_ID, "effects/moreoresmultiplier");
     public static final ResourceLocation PODZOL_CHANCE     = new ResourceLocation(Constants.MOD_ID, "effects/podzolchancemultiplier");
-    public static final ResourceLocation RECIPES           = new ResourceLocation(Constants.MOD_ID, "effects/recipesmultiplier");
     public static final ResourceLocation REGENERATION      = new ResourceLocation(Constants.MOD_ID, "effects/regenerationmultiplier");
     public static final ResourceLocation SATURATION        = new ResourceLocation(Constants.MOD_ID, "effects/saturationmultiplier");
     public static final ResourceLocation SLEEP_LESS        = new ResourceLocation(Constants.MOD_ID, "effects/sleeplessmultiplier");

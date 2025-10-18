@@ -100,7 +100,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(MINIMUM_STOCK).setTranslatedName("Buildings Can Minimum Stock %3$s%% More").setLevels(new double[] {0.5, 1, 2}));
         effects.add(new ResearchEffect(MORE_ORES).setTranslatedName("Miners Find +%3$s%% More Ores").setLevels(new double[] {0.1, 0.25, 0.5, 1, 2}));
         effects.add(new ResearchEffect(PODZOL_CHANCE).setTranslatedName("Composters Get +%3$s%% More Podzol").setLevels(new double[] {1, 2}));
-        effects.add(new ResearchEffect(RECIPES).setTranslatedName("Workers Can Learn +%3$s%% More Recipes").setLevels(new double[] {0.25, 0.5}));
         effects.add(new ResearchEffect(REGENERATION).setTranslatedName("Citizen Regeneration +%3$s%%").setLevels(new double[] {0.1, 0.25, 0.5, 1, 2}));
         effects.add(new ResearchEffect(SATURATION).setTranslatedName("Citizen Saturation Per Meal +%3$s%%").setLevels(new double[] {0.1, 0.2, 0.3, 0.4, 0.5}));
         effects.add(new ResearchEffect(TEACHING).setTranslatedName("XP Gain When Studying +%3$s%%").setLevels(new double[] {0.05, 0.1, 0.25, 0.5, 1}));
@@ -1299,25 +1298,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addEffect(MINIMUM_STOCK, 3)
             .addToList(r);
 
-        final Research memoryAid = new Research(new ResourceLocation(Constants.MOD_ID, "technology/memoryaid"), TECH).setParentResearch(woodwork)
-            .setTranslatedName("Memory Aid")
-            .setTranslatedSubtitle("It's the thought that counts.")
-            .setSortOrder(3)
-            .setIcon(Items.PAPER)
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.SAWMILL_ID), 1)
-            .addEffect(RECIPES, 1)
-            .addToList(r);
-
-        final Research cheatSheet = new Research(new ResourceLocation(Constants.MOD_ID, "technology/cheatsheet"), TECH).setParentResearch(memoryAid)
-            .setTranslatedName("Cheat Sheet")
-            .setTranslatedSubtitle("So THAT's what I should be making!")
-            .setIcon(Items.BOOK)
-            .addBuildingRequirement(new ResourceLocation(Constants.MOD_ID, ModBuildings.SAWMILL_ID), 2)
-            .addEffect(RECIPES, 2)
-            .setSortOrder(1)
-            .addToList(r);
-
-        final Research deepPockets = new Research(new ResourceLocation(Constants.MOD_ID, "technology/deeppockets"), TECH).setParentResearch(cheatSheet)
+        final Research deepPockets = new Research(new ResourceLocation(Constants.MOD_ID, "technology/deeppockets"), TECH).setParentResearch(woodwork)
             .setTranslatedName("Deep Pockets")
             .setSortOrder(2)
             .setIcon(Items.PINK_SHULKER_BOX)
