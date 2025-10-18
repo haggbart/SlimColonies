@@ -1482,11 +1482,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
             // Happiness system removed - death penalty no longer tracked
             triggerDeathAchievement(damageSource, citizenJobHandler.getColonyJob());
 
-            if (!(citizenJobHandler.getColonyJob() instanceof AbstractJobGuard))
-            {
-                citizenColonyHandler.getColonyOrRegister().getCitizenManager().updateCitizenMourn(citizenData, true);
-            }
-
             getCitizenColonyHandler().getColonyOrRegister().getStatisticsManager().increment(DEATH, getCitizenColonyHandler().getColonyOrRegister().getDay());
 
             final BlockPos gravePos;
@@ -1520,9 +1515,6 @@ public class EntityCitizen extends AbstractEntityCitizen implements IThreatTable
                                     getBlockY(),
                                     getBlockZ(),
                                     (int) BlockPosUtil.dist(blockPosition(), getCitizenColonyHandler().getColonyOrRegister().getCenter()))))))
-                    .append(!(citizenJobHandler.getColonyJob() instanceof AbstractJobGuard<?>)
-                        ? Component.translatable(COREMOD_MOURN, getCitizenData().getName())
-                        : Component.empty())
                     .append(gravePos != null ? Component.translatable(WARNING_GRAVE_SPAWNED).withStyle(style -> style
                         .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                             Component.translatable("message.positiondist",

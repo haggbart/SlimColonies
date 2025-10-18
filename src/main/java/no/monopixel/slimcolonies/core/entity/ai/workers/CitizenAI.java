@@ -30,7 +30,6 @@ import static no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen
 import static no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus.*;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.*;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.DEFAULT_SPEED;
-import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.COREMOD_ENTITY_CITIZEN_MOURNING;
 import static no.monopixel.slimcolonies.core.entity.ai.minimal.EntityAIEatTask.RESTAURANT_LIMIT;
 import static no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler.SEEK_DOCTOR_HEALTH;
 
@@ -66,7 +65,6 @@ public class CitizenAI implements IStateAI
         minimalAI.add(new EntityAICitizenWander(citizen, DEFAULT_SPEED));
         minimalAI.add(new EntityAIInjuredTask(citizen));
         minimalAI.add(new EntityAISleep(citizen));
-        minimalAI.add(new EntityAIMournCitizen(citizen, DEFAULT_SPEED));
     }
 
     /**
@@ -196,22 +194,6 @@ public class CitizenAI implements IStateAI
         {
             return CitizenAIState.EATING;
         }
-
-        // Mourning
-        if (citizen.getCitizenData().getCitizenMournHandler().isMourning())
-        {
-            if (lastState != CitizenAIState.MOURN)
-            {
-                citizen.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(COREMOD_ENTITY_CITIZEN_MOURNING,
-                    citizen.getCitizenData().getCitizenMournHandler().getDeceasedCitizens().iterator().next()),
-                    Component.translatable(COREMOD_ENTITY_CITIZEN_MOURNING),
-                    ChatPriority.IMPORTANT));
-
-                citizen.setVisibleStatusIfNone(MOURNING);
-            }
-            return CitizenAIState.MOURN;
-        }
-
 
         // Work
         if (citizen.isBaby() && citizen.getCitizenJobHandler().getColonyJob() instanceof JobPupil && citizen.level.getDayTime() % 24000 > NOON)

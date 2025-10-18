@@ -11,7 +11,6 @@ import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.entity.citizen.VisibleCitizenStatus;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenFoodHandler;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenInjuryHandler;
-import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenMournHandler;
 import no.monopixel.slimcolonies.api.entity.citizen.citizenhandlers.ICitizenSkillHandler;
 import no.monopixel.slimcolonies.api.quests.IQuestGiver;
 import no.monopixel.slimcolonies.api.quests.IQuestParticipant;
@@ -133,13 +132,6 @@ public interface ICitizenData extends ICivilianData, IQuestGiver, IQuestParticip
      * @param bedPos the pos to set.
      */
     void setBedPos(BlockPos bedPos);
-
-    /**
-     * The Handler for the citizens mourning.
-     *
-     * @return the instance of the handler
-     */
-    ICitizenMournHandler getCitizenMournHandler();
 
     /**
      * Get the citizen skill handler.

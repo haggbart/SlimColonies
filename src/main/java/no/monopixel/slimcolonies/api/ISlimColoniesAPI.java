@@ -9,7 +9,6 @@ import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.Building
 import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.IBuildingDataManager;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;
-import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
 import no.monopixel.slimcolonies.api.colony.guardtype.GuardType;
 import no.monopixel.slimcolonies.api.colony.guardtype.registry.IGuardTypeDataManager;
 import no.monopixel.slimcolonies.api.colony.interactionhandling.registry.IInteractionResponseHandlerDataManager;
@@ -73,8 +72,6 @@ public interface ISlimColoniesAPI
     IForgeRegistry<ModResearchEffects.ResearchEffectEntry> getResearchEffectRegistry();
 
     // Research cost registry removed - no longer used
-
-    IForgeRegistry<ColonyEventTypeRegistryEntry> getColonyEventRegistry();
 
     IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry> getColonyEventDescriptionRegistry();
 

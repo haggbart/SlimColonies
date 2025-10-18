@@ -67,8 +67,6 @@ public final class NbtTagConstants
     public static final String TAG_CUSTOM_NAME            = "customName";
     public static final String TAG_OTHER_LEVEL            = "otherLevel";
     public static final String TAG_PASTEABLE              = "isPasteable";
-    public static final String TAG_MOURNING               = "mourning";
-    public static final String TAG_DECEASED               = "deceased";
     public static final String TAG_PAUSED                 = "paused";
     public static final String TAG_CHILD                  = "child";
     public static final String TAG_CHILD_TIME             = "childTime";
@@ -107,8 +105,6 @@ public final class NbtTagConstants
     /**
      * Event tags
      */
-    public static final String TAG_EVENT_ID       = "mc_event_id";
-    public static final String TAG_EVENT_STATUS   = "eventStatus";
     public static final String TAG_SPAWN_POS      = "spawnPos";
     public static final String TAG_CAMPFIRE_LIST  = "campfirelist";
     public static final String TAG_EVENT_POS      = "eventPos";

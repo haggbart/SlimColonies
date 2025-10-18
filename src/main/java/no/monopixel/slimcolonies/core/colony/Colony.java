@@ -146,10 +146,6 @@ public class Colony implements IColony
      */
     private final IVisitorManager visitorManager = new VisitorManager(this);
 
-    /**
-     * Event manager of the colony.
-     */
-    private final IEventManager eventManager = new EventManager(this);
 
     /**
      * Reproduction manager of the colony.
@@ -455,7 +451,6 @@ public class Colony implements IColony
         citizenManager.onColonyTick(this);
         visitorManager.onColonyTick(this);
         updateAttackingPlayers();
-        eventManager.onColonyTick(this);
         buildingManager.onColonyTick(this);
         graveManager.onColonyTick(this);
         reproductionManager.onColonyTick(this);
@@ -722,7 +717,6 @@ public class Colony implements IColony
 
         graveManager.read(compound.getCompound(TAG_GRAVE_MANAGER));
 
-        eventManager.readFromNBT(compound);
         statisticManager.readFromNBT(compound);
 
         questManager.deserializeNBT(compound.getCompound(TAG_QUEST_MANAGER));
@@ -884,7 +878,6 @@ public class Colony implements IColony
         workManager.write(workManagerCompound);
         compound.put(TAG_WORK, workManagerCompound);
 
-        eventManager.writeToNBT(compound);
         statisticManager.writeToNBT(compound);
 
         compound.put(TAG_QUEST_MANAGER, questManager.serializeNBT());
@@ -1513,18 +1506,6 @@ public class Colony implements IColony
     public IVisitorManager getVisitorManager()
     {
         return visitorManager;
-    }
-
-    /**
-     * Get the barbManager of the colony.
-     *
-     * @return the barbManager.
-     */
-
-    @Override
-    public IEventManager getEventManager()
-    {
-        return eventManager;
     }
 
     @Override

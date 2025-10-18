@@ -13,7 +13,6 @@ import no.monopixel.slimcolonies.api.colony.buildingextensions.registry.Building
 import no.monopixel.slimcolonies.api.colony.buildings.registry.BuildingEntry;
 import no.monopixel.slimcolonies.api.colony.buildings.registry.IBuildingDataManager;
 import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;
-import no.monopixel.slimcolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
 import no.monopixel.slimcolonies.api.colony.guardtype.GuardType;
 import no.monopixel.slimcolonies.api.colony.guardtype.registry.IGuardTypeDataManager;
 import no.monopixel.slimcolonies.api.colony.guardtype.registry.ModGuardTypes;
@@ -61,7 +60,6 @@ public class CommonSlimColoniesAPIImpl implements ISlimColoniesAPI
     private        IForgeRegistry<GuardType>                                          guardTypeRegistry;
     private        IForgeRegistry<InteractionResponseHandlerEntry>                    interactionHandlerRegistry;
     private final  IInteractionResponseHandlerDataManager                             interactionDataManager = new InteractionResponseHandlerManager();
-    private        IForgeRegistry<ColonyEventTypeRegistryEntry>                       colonyEventRegistry;
     private        IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry>            colonyEventDescriptionRegistry;
     private static IGlobalResearchTree                                                globalResearchTree     = new GlobalResearchTree();
     private        IForgeRegistry<ModResearchRequirements.ResearchRequirementEntry>   researchRequirementRegistry;
@@ -233,12 +231,6 @@ public class CommonSlimColoniesAPIImpl implements ISlimColoniesAPI
             .allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> interactionHandlerRegistry = b);
 
-        event.create(new RegistryBuilder<ColonyEventTypeRegistryEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "colonyeventtypes"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
-            .disableSaving().allowModification()
-            .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> colonyEventRegistry = b);
-
         event.create(new RegistryBuilder<ColonyEventDescriptionTypeRegistryEntry>()
             .setName(new ResourceLocation(Constants.MOD_ID, "colonyeventdesctypes"))
             .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
@@ -294,12 +286,6 @@ public class CommonSlimColoniesAPIImpl implements ISlimColoniesAPI
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> questDialogueAnswerRegistry = b);
 
         // Happiness registries removed
-    }
-
-    @Override
-    public IForgeRegistry<ColonyEventTypeRegistryEntry> getColonyEventRegistry()
-    {
-        return colonyEventRegistry;
     }
 
     @Override

@@ -50,7 +50,6 @@ import no.monopixel.slimcolonies.core.colony.interactionhandling.ServerCitizenIn
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenFoodHandler;
 import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenInjuryHandler;
-import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenMournHandler;
 import no.monopixel.slimcolonies.core.entity.citizen.citizenhandlers.CitizenSkillHandler;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewCitizenViewMessage;
 import no.monopixel.slimcolonies.core.util.AttributeModifierUtils;
@@ -202,11 +201,6 @@ public class CitizenData implements ICitizenData
     private BlockPos lastPosition = new BlockPos(0, 0, 0);
 
     /**
-     * The citizen happiness handler.
-     */
-    private final CitizenMournHandler citizenMournHandler;
-
-    /**
      * The citizen skill handler.
      */
     private final CitizenSkillHandler citizenSkillHandler;
@@ -338,7 +332,6 @@ public class CitizenData implements ICitizenData
         this.id = id;
         this.colony = colony;
         inventory = new InventoryCitizen("SlimColonies Inventory", true, this);
-        this.citizenMournHandler = new CitizenMournHandler(this);
         this.citizenSkillHandler = new CitizenSkillHandler();
         this.citizenFoodHandler = new CitizenFoodHandler(this);
         citizenInjuryHandler = new CitizenInjuryHandler(this);
@@ -1188,12 +1181,6 @@ public class CitizenData implements ICitizenData
     }
 
     @Override
-    public CitizenMournHandler getCitizenMournHandler()
-    {
-        return citizenMournHandler;
-    }
-
-    @Override
     public ICitizenSkillHandler getCitizenSkillHandler()
     {
         return citizenSkillHandler;
@@ -1292,7 +1279,6 @@ public class CitizenData implements ICitizenData
         }
 
         // Happiness system removed
-        citizenMournHandler.write(nbtTagCompound);
         citizenFoodHandler.write(nbtTagCompound);
         citizenInjuryHandler.write(nbtTagCompound);
 
@@ -1457,7 +1443,6 @@ public class CitizenData implements ICitizenData
         }
 
         // Happiness system removed
-        this.citizenMournHandler.read(nbtTagCompound);
         this.citizenFoodHandler.read(nbtTagCompound);
         citizenInjuryHandler.read(nbtTagCompound);
 
