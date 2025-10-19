@@ -24,7 +24,7 @@ sourceSets {
             srcDir 'src/main/java'
         }
         resources {
-            srcDir 'src/main/resources'
+            // Add datagen resources alongside default src/main/resources
             srcDir "src/datagen/generated/${project.modId}"
             // Exclude datagen cache files from resources
             exclude '.cache/**'
@@ -98,28 +98,18 @@ minecraft {
     }
 }
 
-repositories {
-    maven { url = 'https://files.minecraftforge.net/maven' }
-    maven { url = 'https://maven.blamejared.com' } // JEI
-    maven { url = 'https://jm.gserv.me/repository/maven-public/' } // JourneyMap
-    maven { url = 'https://ldtteam.jfrog.io/artifactory/ldtteam/' } // MineColonies dependencies
-    maven { url "https://maven.architectury.dev/" }
-    maven { url "https://mvnrepository.com/artifact/" }
-    maven { url "https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven" }
-    mavenCentral()
-    mavenLocal()
-}
+// Repositories are declared in gradle/dependencies.gradle
 
 dependencies {
     // Minecraft and Forge
     minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
 
     // Development annotations
-    compileOnly 'org.jetbrains:annotations:23.0.0'
+    compileOnly 'org.jetbrains:annotations:26.0.2'
 
     // Testing dependencies (optional)
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.14.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.14.0'
 }
 
 // Apply existing dependencies that we know work
