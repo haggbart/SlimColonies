@@ -13,7 +13,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.state.BlockState;
@@ -125,7 +124,8 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
             }
         }
 
-        if ((!isInColony || !isBlueprintInColony(blueprint, tempColony, blockPos)) && !successfulTownHallLocation)
+        // Only require anchor block to be in colony - building will claim chunks as needed
+        if (!isInColony && !successfulTownHallLocation)
         {
             MessageUtils.format(BP_OUTSIDE_COLONY).sendTo(player);
             SoundUtils.playErrorSound(player, player.blockPosition());
@@ -296,44 +296,5 @@ public class SurvivalHandler implements ISurvivalBlueprintHandler
         }
 
         Log.getLogger().warn("Handling Survival Placement in Colony");
-    }
-
-    /**
-     * Check if the blueprint is fully inside colony boundaries.
-     *
-     * @param blueprint the blueprint to check.
-     * @param colony    the colony to check for.
-     * @param blockPos  the position to check at.
-     * @return true if so.
-     */
-    private boolean isBlueprintInColony(final Blueprint blueprint, final IColony colony, final BlockPos blockPos)
-    {
-        final Level world = colony.getWorld();
-        final BlockPos zeroPos = blockPos.subtract(blueprint.getPrimaryBlockOffset());
-
-        final BlockPos pos1 = new BlockPos(zeroPos.getX(), zeroPos.getY(), zeroPos.getZ());
-        final BlockPos pos2 = new BlockPos(zeroPos.getX() + blueprint.getSizeX() - 1, zeroPos.getY() + blueprint.getSizeY() - 1, zeroPos.getZ() + blueprint.getSizeZ() - 1);
-
-        final int minX = Math.min(pos1.getX(), pos2.getX()) + 1;
-        final int maxX = Math.max(pos1.getX(), pos2.getX());
-
-        final int minZ = Math.min(pos1.getZ(), pos2.getZ()) + 1;
-        final int maxZ = Math.max(pos1.getZ(), pos2.getZ());
-
-        for (int x = minX; x < maxX; x += 16)
-        {
-            for (int z = minZ; z < maxZ; z += 16)
-            {
-                final int chunkX = x >> 4;
-                final int chunkZ = z >> 4;
-                final ChunkPos pos = new ChunkPos(chunkX, chunkZ);
-
-                if (ColonyUtils.getOwningColony(world.getChunk(pos.x, pos.z)) != colony.getID())
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
