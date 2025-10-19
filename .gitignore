@@ -46,13 +46,11 @@ README.txt
 *changelog.txt
 tools/export_lang/.api_key
 tools/fix_model_angle/*.class
-tools/fix_model_angle/*.class
 src/main/generated/resources/.cache/cache
 
 logs/
 gradle/local.gradle
 gradle/local.configuration.gradle
-
 
 runs/
 .idea/inspectionProfiles/Project_Default.xml
