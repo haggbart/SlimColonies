@@ -115,7 +115,7 @@ public final class ColonyManager implements IColonyManager
             return null;
         }
 
-        ChunkDataHelper.claimColonyChunks(colony.getWorld(), true, colony.getID(), colony.getCenter());
+        // TownHall building claim now handles initial territory (4 chunks at all levels)
         return colony;
     }
 
@@ -156,7 +156,7 @@ public final class ColonyManager implements IColonyManager
 
         try
         {
-            ChunkDataHelper.claimColonyChunks(world, false, id, colony.getCenter());
+            // Building destruction will handle unclaiming chunks
             Log.getLogger().info("Removing citizens for " + id);
             for (final ICitizenData citizenData : new ArrayList<>(colony.getCitizenManager().getCitizens()))
             {

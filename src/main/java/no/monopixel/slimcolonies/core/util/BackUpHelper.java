@@ -467,7 +467,7 @@ public final class BackUpHelper
      */
     public static void reclaimChunks(final IColony colony)
     {
-        ChunkDataHelper.claimColonyChunks(colony.getWorld(), true, colony.getID(), colony.getCenter());
+        // Building claims will handle all territory (TownHall claims 4 chunks)
         for (final IBuilding building : colony.getBuildingManager().getBuildings().values())
         {
             ChunkDataHelper.claimBuildingChunks(colony,

@@ -75,9 +75,12 @@ dependencies {
     if (project.hasProperty("runWithJourneymap") && project.runWithJourneymap.toBoolean()) {
         runtimeOnly fg.deobf("flat:journeymap:${project.jmapMcVersion}-${project.jmapVersion}-forge")
     }
-    // Farmer's Delight - 1.2.9
+    // Farmer's Delight - for development/debugging
     runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:6917255")
 
     // Jade - for development/debugging
     runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
+
+    // JourneyMap - for development/debugging
+    runtimeOnly fg.deobf("curse.maven:journeymap-32274:5789363")
 }

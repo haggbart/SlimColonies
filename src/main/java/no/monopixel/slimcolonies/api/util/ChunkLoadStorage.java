@@ -26,16 +26,6 @@ public class ChunkLoadStorage
     public static final String TAG_CLAIM_LIST = "claimsToAdd";
 
     /**
-     * NBT tag for colonies to add.
-     */
-    private static final String TAG_COLONIES_TO_ADD = "coloniesToAdd";
-
-    /**
-     * NBT tag for colonies to remove.
-     */
-    private static final String TAG_COLONIES_TO_REMOVE = "coloniesToRemove";
-
-    /**
      * The max amount of claim caches we stack
      */
     private static final int MAX_CHUNK_CLAIMS = 20;
@@ -44,16 +34,6 @@ public class ChunkLoadStorage
      * The colony id.
      */
     private final List<Short> owningChanges = new ArrayList<>();
-
-    /**
-     * The list of colonies to be added to this loc.
-     */
-    private final List<Short> coloniesToRemove = new ArrayList<>();
-
-    /**
-     * The list of colonies to be removed from this loc.
-     */
-    private final List<Short> coloniesToAdd = new ArrayList<>();
 
     /**
      * XZ pos as long.
@@ -92,40 +72,11 @@ public class ChunkLoadStorage
 
         owningChanges.addAll(NBTUtils.streamCompound(compound.getList(TAG_CLAIM_LIST, Tag.TAG_COMPOUND))
           .map(tempCompound -> tempCompound.getShort(TAG_COLONY_ID)).collect(Collectors.toList()));
-        coloniesToAdd.addAll(NBTUtils.streamCompound(compound.getList(TAG_COLONIES_TO_ADD, Tag.TAG_COMPOUND))
-                               .map(tempCompound -> tempCompound.getShort(TAG_COLONY_ID)).collect(Collectors.toList()));
-        coloniesToRemove.addAll(NBTUtils.streamCompound(compound.getList(TAG_COLONIES_TO_REMOVE, Tag.TAG_COMPOUND))
-                                  .map(tempCompound -> tempCompound.getShort(TAG_COLONY_ID)).collect(Collectors.toList()));
 
         claimingBuilding.addAll(NBTUtils.streamCompound(compound.getList(TAG_BUILDINGS_CLAIM, Tag.TAG_COMPOUND))
                                   .map(ChunkLoadStorage::readTupleFromNbt).collect(Collectors.toList()));
         unClaimingBuilding.addAll(NBTUtils.streamCompound(compound.getList(TAG_BUILDINGS_UNCLAIM, Tag.TAG_COMPOUND))
                                     .map(ChunkLoadStorage::readTupleFromNbt).collect(Collectors.toList()));
-    }
-
-    /**
-     * Create a new chunkload storage.
-     *
-     * @param colonyId       the id of the colony.
-     * @param xz             the chunk xz.
-     * @param add            the operation type.
-     * @param dimension      the dimension.
-     * @param forceOwnership if the colony should own the chunk.
-     */
-    public ChunkLoadStorage(final int colonyId, final long xz, final boolean add, final ResourceLocation dimension, final boolean forceOwnership)
-    {
-        this.owningChanges.add((short) (forceOwnership && add ? colonyId : NO_COLONY_ID));
-        this.xz = xz;
-        this.dimension = dimension;
-
-        if (add)
-        {
-            coloniesToAdd.add((short) colonyId);
-        }
-        else
-        {
-            coloniesToRemove.add((short) colonyId);
-        }
     }
 
     /**
@@ -162,10 +113,8 @@ public class ChunkLoadStorage
         compound.putString(TAG_DIMENSION, dimension.toString());
 
         compound.put(TAG_CLAIM_LIST, owningChanges.stream().map(ChunkLoadStorage::getCompoundOfColonyId).collect(NBTUtils.toListNBT()));
-        compound.put(TAG_COLONIES_TO_ADD, coloniesToAdd.stream().map(ChunkLoadStorage::getCompoundOfColonyId).collect(NBTUtils.toListNBT()));
-        compound.put(TAG_COLONIES_TO_REMOVE, coloniesToRemove.stream().map(ChunkLoadStorage::getCompoundOfColonyId).collect(NBTUtils.toListNBT()));
-        compound.put(TAG_BUILDINGS, claimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
-        compound.put(TAG_BUILDINGS, unClaimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
+        compound.put(TAG_BUILDINGS_CLAIM, claimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
+        compound.put(TAG_BUILDINGS_UNCLAIM, unClaimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
 
         return compound;
     }
@@ -173,7 +122,7 @@ public class ChunkLoadStorage
     private static CompoundTag getCompoundOfColonyId(final int id)
     {
         final CompoundTag compound = new CompoundTag();
-        compound.putInt(TAG_COLONY_ID, id);
+        compound.putShort(TAG_COLONY_ID, (short) id);
         return compound;
     }
 
@@ -212,8 +161,6 @@ public class ChunkLoadStorage
         return xz == storage.xz &&
                  dimension == storage.dimension &&
                  Objects.equals(owningChanges, storage.owningChanges) &&
-                 Objects.equals(coloniesToRemove, storage.coloniesToRemove) &&
-                 Objects.equals(coloniesToAdd, storage.coloniesToAdd) &&
                  Objects.equals(claimingBuilding, storage.claimingBuilding) &&
                  Objects.equals(unClaimingBuilding, storage.unClaimingBuilding);
     }
@@ -221,7 +168,7 @@ public class ChunkLoadStorage
     @Override
     public int hashCode()
     {
-        return Objects.hash(owningChanges, coloniesToRemove, coloniesToAdd, xz, dimension, claimingBuilding, unClaimingBuilding);
+        return Objects.hash(owningChanges, xz, dimension, claimingBuilding, unClaimingBuilding);
     }
 
     /**
@@ -232,44 +179,28 @@ public class ChunkLoadStorage
      */
     public void applyToCap(final IColonyTagCapability cap, final LevelChunk chunk)
     {
-        if (this.claimingBuilding.isEmpty() && unClaimingBuilding.isEmpty())
+        // Apply ownership changes
+        for (int i = 0; i < owningChanges.size(); i++)
         {
-            final int amountOfOperations = Math.max(Math.max(owningChanges.size(), coloniesToAdd.size()), coloniesToRemove.size());
-
-            for (int i = 0; i < amountOfOperations; i++)
+            final int claimID = owningChanges.get(i);
+            if (claimID > NO_COLONY_ID)
             {
-                if (i < owningChanges.size())
-                {
-                    final int claimID = owningChanges.get(i);
-                    if (claimID > NO_COLONY_ID)
-                    {
-                        cap.setOwningColony(claimID, chunk);
-                    }
-                }
-
-                if (i < coloniesToAdd.size() && coloniesToAdd.get(i) > NO_COLONY_ID)
-                {
-                    cap.addColony(coloniesToAdd.get(i), chunk);
-                }
-
-                if (i < coloniesToRemove.size() && coloniesToRemove.get(i) > NO_COLONY_ID)
-                {
-                    cap.removeColony(coloniesToRemove.get(i), chunk);
-                }
+                cap.setOwningColony(claimID, chunk);
             }
         }
-        else
-        {
-            for (final Tuple<Short, BlockPos> tuple : unClaimingBuilding)
-            {
-                cap.removeBuildingClaim(tuple.getA(), tuple.getB(), chunk);
-            }
 
-            for (final Tuple<Short, BlockPos> tuple : claimingBuilding)
-            {
-                cap.addBuildingClaim(tuple.getA(), tuple.getB(), chunk);
-            }
+        // Apply building unclaims
+        for (final Tuple<Short, BlockPos> tuple : unClaimingBuilding)
+        {
+            cap.removeBuildingClaim(tuple.getA(), tuple.getB(), chunk);
         }
+
+        // Apply building claims
+        for (final Tuple<Short, BlockPos> tuple : claimingBuilding)
+        {
+            cap.addBuildingClaim(tuple.getA(), tuple.getB(), chunk);
+        }
+
         chunk.setUnsaved(true);
     }
 
@@ -280,7 +211,7 @@ public class ChunkLoadStorage
      */
     public boolean isEmpty()
     {
-        return coloniesToAdd.isEmpty() && coloniesToRemove.isEmpty();
+        return owningChanges.isEmpty() && claimingBuilding.isEmpty() && unClaimingBuilding.isEmpty();
     }
 
     /**
@@ -290,38 +221,32 @@ public class ChunkLoadStorage
      */
     public void merge(final ChunkLoadStorage newStorage)
     {
-        if (this.claimingBuilding.isEmpty() && unClaimingBuilding.isEmpty())
-        {
-            owningChanges.addAll(newStorage.owningChanges);
-            coloniesToAdd.addAll(newStorage.coloniesToAdd);
-            coloniesToRemove.addAll(newStorage.coloniesToRemove);
+        // Merge ownership changes
+        owningChanges.addAll(newStorage.owningChanges);
 
-            if (coloniesToAdd.size() > MAX_CHUNK_CLAIMS)
+        // Clear if too many ownership changes accumulated
+        if (owningChanges.size() > MAX_CHUNK_CLAIMS)
+        {
+            owningChanges.clear();
+        }
+
+        // Merge building claims, removing conflicts
+        this.claimingBuilding.removeIf(newStorage.unClaimingBuilding::contains);
+        this.unClaimingBuilding.removeIf(newStorage.claimingBuilding::contains);
+
+        for (final Tuple<Short, BlockPos> tuple : newStorage.unClaimingBuilding)
+        {
+            if (!this.unClaimingBuilding.contains(tuple))
             {
-                owningChanges.clear();
-                coloniesToAdd.clear();
-                coloniesToRemove.clear();
+                this.unClaimingBuilding.add(tuple);
             }
         }
-        else
+
+        for (final Tuple<Short, BlockPos> tuple : newStorage.claimingBuilding)
         {
-            this.claimingBuilding.removeIf(newStorage.unClaimingBuilding::contains);
-            this.unClaimingBuilding.removeIf(newStorage.claimingBuilding::contains);
-
-            for (final Tuple<Short, BlockPos> tuple : newStorage.unClaimingBuilding)
+            if (!this.claimingBuilding.contains(tuple))
             {
-                if (!this.unClaimingBuilding.contains(tuple))
-                {
-                    this.unClaimingBuilding.add(tuple);
-                }
-            }
-
-            for (final Tuple<Short, BlockPos> tuple : newStorage.claimingBuilding)
-            {
-                if (!this.claimingBuilding.contains(tuple))
-                {
-                    this.claimingBuilding.add(tuple);
-                }
+                this.claimingBuilding.add(tuple);
             }
         }
     }

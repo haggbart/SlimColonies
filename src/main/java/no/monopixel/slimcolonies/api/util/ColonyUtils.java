@@ -176,10 +176,11 @@ public final class ColonyUtils
      * @param chunk the chunk to get it from.
      * @return the list.
      */
+    @Deprecated
     public static List<Integer> getStaticClaims(final LevelChunk chunk)
     {
-        final IColonyTagCapability cap = chunk.getCapability(CLOSE_COLONY_CAP, null).resolve().orElse(null);
-        return cap == null ? new ArrayList<>() : cap.getStaticClaimColonies();
+        // Static claims have been removed, return empty list for backwards compatibility
+        return new ArrayList<>();
     }
 
     /**
@@ -191,6 +192,6 @@ public final class ColonyUtils
     public static ChunkCapData getChunkCapData(final LevelChunk chunk)
     {
         final IColonyTagCapability cap = chunk.getCapability(CLOSE_COLONY_CAP, null).resolve().orElse(null);
-        return cap == null ? new ChunkCapData(chunk.getPos().x, chunk.getPos().z) : new ChunkCapData(chunk.getPos().x, chunk.getPos().z, cap.getOwningColony(), cap.getStaticClaimColonies(), cap.getAllClaimingBuildings());
+        return cap == null ? new ChunkCapData(chunk.getPos().x, chunk.getPos().z) : new ChunkCapData(chunk.getPos().x, chunk.getPos().z, cap.getOwningColony(), cap.getAllClaimingBuildings());
     }
 }

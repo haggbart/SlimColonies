@@ -69,7 +69,6 @@ public class ChunkClientDataHelper
         if (cap != null)
         {
             cap.setOwningColony(chunkCapData.getOwningColony(), chunk);
-            cap.setStaticColonyClaim(chunkCapData.getStaticColonyClaim());
         }
 
         MinecraftForge.EVENT_BUS.post(new ClientChunkUpdatedEvent(chunk));
