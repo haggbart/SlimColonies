@@ -80,4 +80,7 @@ dependencies {
 
     // Jade - for development/debugging
     runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
+
+    // implementation fg.deobf("curse.maven:journeymap-32274:5789363") add this to:
+//    runtimeOnly fg.deobf("curse.maven:journeymap-32274:5789363")
 }

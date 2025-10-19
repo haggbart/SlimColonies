@@ -42,7 +42,6 @@ public class EntryPoint
             .addNode(new CommandAddOfficer().build())
             .addNode(new CommandSetRank().build())
             .addNode(new CommandChangeOwner().build())
-            .addNode(new CommandClaimChunks().build())
             .addNode(new CommandShowClaim().build())
             .addNode(new CommandTeleport().build())
             .addNode(new CommandDeleteColony().build())

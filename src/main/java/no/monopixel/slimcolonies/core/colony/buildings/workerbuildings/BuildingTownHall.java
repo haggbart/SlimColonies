@@ -106,6 +106,12 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
     }
 
     @Override
+    public int getClaimRadius(final int newLevel)
+    {
+        return 4;
+    }
+
+    @Override
     public void addPermissionEvent(final PermissionEvent event)
     {
         if (!permissionEvents.contains(event))

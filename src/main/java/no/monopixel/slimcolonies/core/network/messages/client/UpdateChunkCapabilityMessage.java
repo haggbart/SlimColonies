@@ -47,7 +47,7 @@ public class UpdateChunkCapabilityMessage implements IMessage
 
     public UpdateChunkCapabilityMessage(@NotNull final IColonyTagCapability tagCapability, final int x, final int z)
     {
-        this.chunkCapData = new ChunkCapData(x, z, tagCapability.getOwningColony(), tagCapability.getStaticClaimColonies(), tagCapability.getAllClaimingBuildings());
+        this.chunkCapData = new ChunkCapData(x, z, tagCapability.getOwningColony(), tagCapability.getAllClaimingBuildings());
     }
 
     @Override
