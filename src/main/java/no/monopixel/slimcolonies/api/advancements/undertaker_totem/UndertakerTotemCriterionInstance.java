@@ -12,6 +12,6 @@ public class UndertakerTotemCriterionInstance extends AbstractCriterionTriggerIn
 {
     public UndertakerTotemCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_UNDERTAKER_TOTEM), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_UNDERTAKER_TOTEM), ContextAwarePredicate.ANY);
     }
 }

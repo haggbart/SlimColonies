@@ -15,7 +15,7 @@ public class ArmyPopulationTrigger extends AbstractCriterionTrigger<ArmyPopulati
 {
     public ArmyPopulationTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_ARMY_POPULATION), ArmyPopulationListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_ARMY_POPULATION), ArmyPopulationListeners::new);
     }
 
     /**

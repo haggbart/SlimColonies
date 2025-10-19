@@ -29,7 +29,7 @@ public final class JobDataManager implements IJobDataManager
         String jobTypeName = compound.getString(NbtTagConstants.TAG_JOB_TYPE);
 
         final ResourceLocation jobType =
-          compound.contains(NbtTagConstants.TAG_JOB_TYPE) ? new ResourceLocation(jobTypeName) : ModJobs.PLACEHOLDER_ID;
+          compound.contains(NbtTagConstants.TAG_JOB_TYPE) ? ResourceLocation.parse(jobTypeName) : ModJobs.PLACEHOLDER_ID;
 
         if (jobType == null)
         {

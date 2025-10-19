@@ -52,9 +52,9 @@ public class BuildingLumberjack extends AbstractBuilding
     /**
      * Replant setting.
      */
-    public static final ISettingKey<BoolSetting> REPLANT   = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "replant"));
-    public static final ISettingKey<BoolSetting> RESTRICT  = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "restrict"));
-    public static final ISettingKey<BoolSetting> DEFOLIATE = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "defoliate"));
+    public static final ISettingKey<BoolSetting> REPLANT   = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "replant"));
+    public static final ISettingKey<BoolSetting> RESTRICT  = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "restrict"));
+    public static final ISettingKey<BoolSetting> DEFOLIATE = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "defoliate"));
 
     /**
      * NBT tag for lj restriction start

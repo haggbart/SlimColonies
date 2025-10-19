@@ -40,8 +40,8 @@ public class SupplyLoot extends LootModifier
     /**
      * Resource locations, path and names must fit the existing json file.
      */
-    public final static ResourceLocation SUPPLY_CAMP_LT = new ResourceLocation(MOD_ID, "chests/supplycamp");
-    public final static ResourceLocation SUPPLY_SHIP_LT = new ResourceLocation(MOD_ID, "chests/supplyship");
+    public final static ResourceLocation SUPPLY_CAMP_LT = ResourceLocation.fromNamespaceAndPath(MOD_ID, "chests/supplycamp");
+    public final static ResourceLocation SUPPLY_SHIP_LT = ResourceLocation.fromNamespaceAndPath(MOD_ID, "chests/supplyship");
 
     // If we need more we need a static block and put things into a map ResourceLocation-codec
     private final boolean camp;

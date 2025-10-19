@@ -76,33 +76,33 @@ public final class ModItemsInitializer
 
         // Large bottle system removed for simplicity
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "supplychestdeployer"), ModItems.supplyChest);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scan_analyzer"), ModItems.scanAnalyzer);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scepterpermission"), ModItems.permTool);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scepterguard"), ModItems.scepterGuard);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "assistantaxe"), ModItems.assistantAxe);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "supplycampdeployer"), ModItems.supplyCamp);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "ancienttome"), ModItems.ancientTome);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "clipboard"), ModItems.clipboard);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "compost"), ModItems.compost);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "resourcescroll"), ModItems.resourceScroll);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "questlog"), ModItems.questLog);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "supplychestdeployer"), ModItems.supplyChest);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "scan_analyzer"), ModItems.scanAnalyzer);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "scepterpermission"), ModItems.permTool);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "scepterguard"), ModItems.scepterGuard);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "assistantaxe"), ModItems.assistantAxe);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "supplycampdeployer"), ModItems.supplyCamp);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ancienttome"), ModItems.ancientTome);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "clipboard"), ModItems.clipboard);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "compost"), ModItems.compost);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "resourcescroll"), ModItems.resourceScroll);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "scepterlumberjack"), ModItems.scepterLumberjack);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "scepterbeekeeper"), ModItems.scepterBeekeeper);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questlog"), ModItems.questLog);
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "adventure_token"), ModItems.adventureToken);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "adventure_token"), ModItems.adventureToken);
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, IRON_GATE), ModItems.irongate);
-        registry.register(new ResourceLocation(Constants.MOD_ID, WOODEN_GATE), ModItems.woodgate);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "colony_banner"), ModItems.flagBanner);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, IRON_GATE), ModItems.irongate);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, WOODEN_GATE), ModItems.woodgate);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "colony_banner"), ModItems.flagBanner);
 
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "sifter_mesh_string"), ModItems.sifterMeshString);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "sifter_mesh_flint"), ModItems.sifterMeshFlint);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "sifter_mesh_iron"), ModItems.sifterMeshIron);
-        registry.register(new ResourceLocation(Constants.MOD_ID, "sifter_mesh_diamond"), ModItems.sifterMeshDiamond);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sifter_mesh_string"), ModItems.sifterMeshString);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sifter_mesh_flint"), ModItems.sifterMeshFlint);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sifter_mesh_iron"), ModItems.sifterMeshIron);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sifter_mesh_diamond"), ModItems.sifterMeshDiamond);
 
-        registry.register(new ResourceLocation(Constants.MOD_ID, "build_goggles"), ModItems.buildGoggles);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "build_goggles"), ModItems.buildGoggles);
     }
 
     private static void registerCompostItems()

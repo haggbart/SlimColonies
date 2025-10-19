@@ -82,7 +82,7 @@ public class BuildingResearchRequirement implements IResearchRequirement
     public static ResourceLocation parseFallbackBuildingKey(final String key)
     {
         final ResourceLocation buildingResourceLocation = ResourceLocation.tryParse(key);
-        return Objects.requireNonNullElseGet(buildingResourceLocation, () -> new ResourceLocation(Constants.MOD_ID, key));
+        return Objects.requireNonNullElseGet(buildingResourceLocation, () -> ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, key));
     }
 
     /**

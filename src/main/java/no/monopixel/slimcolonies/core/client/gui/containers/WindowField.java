@@ -84,7 +84,7 @@ public class WindowField extends AbstractWindowSkeleton
     /**
      * The resource location of the GUI background.
      */
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Constants.MOD_ID, "textures/gui/scarecrow.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/scarecrow.png");
 
     /**
      * The width and height of the directional buttons (they're square)

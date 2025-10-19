@@ -14,7 +14,7 @@ public class WindowBuildingInventory extends AbstractContainerScreen<ContainerBu
     /**
      * Texture res loc.
      */
-    private static final ResourceLocation TEXT = new ResourceLocation(Constants.MOD_ID, "textures/gui/generic_108.png");
+    private static final ResourceLocation TEXT = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/generic_108.png");
 
     /**
      * Offset inside the texture to use.

@@ -860,7 +860,7 @@ public final class ItemStackUtils
             return baseItemId.getPath();
         });
 
-        return new Tuple<>(ForgeRegistries.ITEMS.containsKey(new ResourceLocation(itemId)),
+        return new Tuple<>(ForgeRegistries.ITEMS.containsKey(ResourceLocation.parse(itemId)),
             itemId + (nbtIndex >= 0 ? value.substring(nbtIndex) : ""));
     }
 

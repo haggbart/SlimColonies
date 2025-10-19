@@ -171,7 +171,7 @@ public class StaticLocation implements ILocation
         {
             final BlockPos pos = BlockPos.of(nbt.getLong(NBT_POS));
             final String dim = nbt.getString(NBT_DIM);
-            return new StaticLocation(pos, ResourceKey.create(Registries.DIMENSION, new ResourceLocation(dim)));
+            return new StaticLocation(pos, ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(dim)));
         }
 
         @NotNull

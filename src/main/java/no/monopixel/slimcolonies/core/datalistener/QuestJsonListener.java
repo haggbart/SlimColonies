@@ -130,7 +130,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
 
             try
             {
-                questTriggers.add(ISlimColoniesAPI.getInstance().getQuestTriggerRegistry().getValue(new ResourceLocation(type)).produce(triggerObj));
+                questTriggers.add(ISlimColoniesAPI.getInstance().getQuestTriggerRegistry().getValue(ResourceLocation.parse(type)).produce(triggerObj));
             }
             catch (final Exception ex)
             {
@@ -145,7 +145,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
             final String type = objectiveObj.get(TYPE).getAsString();
             try
             {
-                questObjectives.add(ISlimColoniesAPI.getInstance().getQuestObjectiveRegistry().getValue(new ResourceLocation(type)).produce(objectiveObj));
+                questObjectives.add(ISlimColoniesAPI.getInstance().getQuestObjectiveRegistry().getValue(ResourceLocation.parse(type)).produce(objectiveObj));
             }
             catch (final Exception ex)
             {
@@ -188,7 +188,7 @@ public class QuestJsonListener extends SimpleJsonResourceReloadListener
             final String type = objectiveObj.get(TYPE).getAsString();
             try
             {
-                questRewards.add(ISlimColoniesAPI.getInstance().getQuestRewardRegistry().getValue(new ResourceLocation(type)).produce(objectiveObj));
+                questRewards.add(ISlimColoniesAPI.getInstance().getQuestRewardRegistry().getValue(ResourceLocation.parse(type)).produce(objectiveObj));
             }
             catch (final Exception ex)
             {

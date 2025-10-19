@@ -42,7 +42,7 @@ import static no.monopixel.slimcolonies.api.util.constant.translation.BaseGameTr
  */
 public class WindowFurnaceCrafting extends AbstractContainerScreen<ContainerCraftingFurnace>
 {
-    private static final ResourceLocation CRAFTING_FURNACE = new ResourceLocation(Constants.MOD_ID, "textures/gui/furnace.png");
+    private static final ResourceLocation CRAFTING_FURNACE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/furnace.png");
 
     /**
      * X offset of the button.

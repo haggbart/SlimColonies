@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class UndertakerTotemTrigger extends AbstractCriterionTrigger<CriterionListeners<UndertakerTotemCriterionInstance>, UndertakerTotemCriterionInstance>
 {
-    private final static ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_UNDERTAKER_TOTEM);
+    private final static ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_UNDERTAKER_TOTEM);
 
     public UndertakerTotemTrigger()
     {

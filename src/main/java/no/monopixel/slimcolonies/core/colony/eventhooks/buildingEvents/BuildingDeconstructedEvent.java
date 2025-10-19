@@ -16,7 +16,7 @@ public class BuildingDeconstructedEvent extends AbstractBuildingEvent
     /**
      * This events id, registry entries use res locations as ids.
      */
-    public static final ResourceLocation BUILDING_DECONSTRUCTED_EVENT_ID = new ResourceLocation(Constants.MOD_ID, "building_deconstructed");
+    public static final ResourceLocation BUILDING_DECONSTRUCTED_EVENT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "building_deconstructed");
 
     /**
      * Creates a new building deconstructed event.

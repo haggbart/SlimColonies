@@ -93,7 +93,7 @@ public class EntityAIWorkFlorist extends AbstractEntityAIInteract<JobFlorist, Bu
      * Gardening icon
      */
     private final static VisibleCitizenStatus GARDENING =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/florist.png"), "no.monopixel.slimcolonies.gui.visiblestatus.florist");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/florist.png"), "no.monopixel.slimcolonies.gui.visiblestatus.florist");
 
     /**
      * Xp gained on harvest

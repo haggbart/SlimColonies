@@ -21,20 +21,20 @@ import java.util.function.Function;
  */
 public class BuildingExtensionRegistries
 {
-    public static final ResourceLocation FARM_FIELD_ID                      = new ResourceLocation(Constants.MOD_ID, "farmfield");
-    public static final ResourceLocation PLANTATION_SUGAR_CANE_FIELD_ID     = new ResourceLocation(Constants.MOD_ID, "plantation_sugar_cane");
-    public static final ResourceLocation PLANTATION_CACTUS_FIELD_ID         = new ResourceLocation(Constants.MOD_ID, "plantation_cactus");
-    public static final ResourceLocation PLANTATION_BAMBOO_FIELD_ID         = new ResourceLocation(Constants.MOD_ID, "plantation_bamboo");
-    public static final ResourceLocation PLANTATION_COCOA_BEANS_FIELD_ID    = new ResourceLocation(Constants.MOD_ID, "plantation_cocoa_beans");
-    public static final ResourceLocation PLANTATION_VINES_FIELD_ID          = new ResourceLocation(Constants.MOD_ID, "plantation_vines");
-    public static final ResourceLocation PLANTATION_KELP_FIELD_ID           = new ResourceLocation(Constants.MOD_ID, "plantation_kelp");
-    public static final ResourceLocation PLANTATION_SEAGRASS_FIELD_ID       = new ResourceLocation(Constants.MOD_ID, "plantation_seagrass");
-    public static final ResourceLocation PLANTATION_SEA_PICKLES_FIELD_ID    = new ResourceLocation(Constants.MOD_ID, "plantation_sea_pickles");
-    public static final ResourceLocation PLANTATION_GLOWBERRIES_FIELD_ID    = new ResourceLocation(Constants.MOD_ID, "plantation_glowberries");
-    public static final ResourceLocation PLANTATION_WEEPING_VINES_FIELD_ID  = new ResourceLocation(Constants.MOD_ID, "plantation_weeping_vines");
-    public static final ResourceLocation PLANTATION_TWISTING_VINES_FIELD_ID = new ResourceLocation(Constants.MOD_ID, "plantation_twisting_vines");
-    public static final ResourceLocation PLANTATION_CRIMSON_PLANTS_FIELD_ID = new ResourceLocation(Constants.MOD_ID, "plantation_crimson_plants");
-    public static final ResourceLocation PLANTATION_WARPED_PLANTS_FIELD_ID  = new ResourceLocation(Constants.MOD_ID, "plantation_warped_plants");
+    public static final ResourceLocation FARM_FIELD_ID                      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "farmfield");
+    public static final ResourceLocation PLANTATION_SUGAR_CANE_FIELD_ID     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_sugar_cane");
+    public static final ResourceLocation PLANTATION_CACTUS_FIELD_ID         = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_cactus");
+    public static final ResourceLocation PLANTATION_BAMBOO_FIELD_ID         = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_bamboo");
+    public static final ResourceLocation PLANTATION_COCOA_BEANS_FIELD_ID    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_cocoa_beans");
+    public static final ResourceLocation PLANTATION_VINES_FIELD_ID          = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_vines");
+    public static final ResourceLocation PLANTATION_KELP_FIELD_ID           = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_kelp");
+    public static final ResourceLocation PLANTATION_SEAGRASS_FIELD_ID       = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_seagrass");
+    public static final ResourceLocation PLANTATION_SEA_PICKLES_FIELD_ID    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_sea_pickles");
+    public static final ResourceLocation PLANTATION_GLOWBERRIES_FIELD_ID    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_glowberries");
+    public static final ResourceLocation PLANTATION_WEEPING_VINES_FIELD_ID  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_weeping_vines");
+    public static final ResourceLocation PLANTATION_TWISTING_VINES_FIELD_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_twisting_vines");
+    public static final ResourceLocation PLANTATION_CRIMSON_PLANTS_FIELD_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_crimson_plants");
+    public static final ResourceLocation PLANTATION_WARPED_PLANTS_FIELD_ID  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plantation_warped_plants");
 
     public static RegistryObject<BuildingExtensionEntry> farmField;
     public static RegistryObject<BuildingExtensionEntry> plantationSugarCaneField;

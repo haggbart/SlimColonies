@@ -42,12 +42,12 @@ public class BuildingMiner extends AbstractBuildingStructureBuilder
     /**
      * Setting for solid filling block.
      */
-    public static final ISettingKey<BlockSetting> FILL_BLOCK = new SettingKey<>(BlockSetting.class, new ResourceLocation(Constants.MOD_ID, "fillblock"));
+    public static final ISettingKey<BlockSetting> FILL_BLOCK = new SettingKey<>(BlockSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fillblock"));
 
     /**
      * Max depth the miner is going for.
      */
-    public static final ISettingKey<IntSetting> MAX_DEPTH = new SettingKey<>(IntSetting.class, new ResourceLocation(Constants.MOD_ID, "maxdepth"));
+    public static final ISettingKey<IntSetting> MAX_DEPTH = new SettingKey<>(IntSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "maxdepth"));
 
     /**
      * Mine height levels:

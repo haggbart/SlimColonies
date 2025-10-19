@@ -141,7 +141,7 @@ public class EventHandler
     @SubscribeEvent
     public static void onAttachingCapabilitiesChunk(@NotNull final AttachCapabilitiesEvent<LevelChunk> event)
     {
-        event.addCapability(new ResourceLocation(Constants.MOD_ID, "closecolony"), new SlimColoniesChunkCapabilityProvider());
+        event.addCapability(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "closecolony"), new SlimColoniesChunkCapabilityProvider());
     }
 
     /**
@@ -152,8 +152,8 @@ public class EventHandler
     @SubscribeEvent
     public static void onAttachingCapabilitiesWorld(@NotNull final AttachCapabilitiesEvent<Level> event)
     {
-        event.addCapability(new ResourceLocation(Constants.MOD_ID, "chunkupdate"), new SlimColoniesWorldCapabilityProvider());
-        event.addCapability(new ResourceLocation(Constants.MOD_ID, "colonymanager"),
+        event.addCapability(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "chunkupdate"), new SlimColoniesWorldCapabilityProvider());
+        event.addCapability(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "colonymanager"),
             new SlimColoniesWorldColonyManagerCapabilityProvider(event.getObject().dimension() == Level.OVERWORLD));
     }
 

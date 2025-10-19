@@ -12,7 +12,7 @@ public class ClickGuiButtonTrigger extends AbstractCriterionTrigger<ClickGuiButt
 {
     public ClickGuiButtonTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ClickGuiButtonListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ClickGuiButtonListeners::new);
     }
 
     /**

@@ -23,7 +23,7 @@ public class ColonyPopulationCriterionInstance extends AbstractCriterionTriggerI
      */
     public ColonyPopulationCriterionInstance(final int populationCount)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_COLONY_POPULATION), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_COLONY_POPULATION), ContextAwarePredicate.ANY);
 
         this.populationCount = populationCount;
     }

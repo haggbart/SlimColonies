@@ -83,6 +83,6 @@ public class BlockColonyFlagBanner extends AbstractColonyFlagBanner<BlockColonyF
     @Override
     public ResourceLocation getRegistryName()
     {
-        return new ResourceLocation(Constants.MOD_ID, REGISTRY_NAME);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, REGISTRY_NAME);
     }
 }

@@ -15,7 +15,7 @@ public class OpenGuiWindowTrigger extends AbstractCriterionTrigger<OpenGuiWindow
 {
     public OpenGuiWindowTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_OPEN_GUI_WINDOW), OpenGuiWindowListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_OPEN_GUI_WINDOW), OpenGuiWindowListeners::new);
     }
 
     /**

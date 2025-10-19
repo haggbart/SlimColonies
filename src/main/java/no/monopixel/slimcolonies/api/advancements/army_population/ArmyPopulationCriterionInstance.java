@@ -23,7 +23,7 @@ public class ArmyPopulationCriterionInstance extends AbstractCriterionTriggerIns
      */
     public ArmyPopulationCriterionInstance(final int populationCount)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_ARMY_POPULATION), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_ARMY_POPULATION), ContextAwarePredicate.ANY);
 
         this.populationCount = populationCount;
     }

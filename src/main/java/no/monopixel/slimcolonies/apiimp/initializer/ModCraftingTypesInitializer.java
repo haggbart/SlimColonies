@@ -13,7 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 public final class ModCraftingTypesInitializer
 {
     public final static DeferredRegister<CraftingType>
-       DEFERRED_REGISTER = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "craftingtypes"), Constants.MOD_ID);
+       DEFERRED_REGISTER = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "craftingtypes"), Constants.MOD_ID);
 
     private ModCraftingTypesInitializer()
     {

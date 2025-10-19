@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class CitizenBuryTrigger extends AbstractCriterionTrigger<CriterionListeners<CitizenBuryCriterionInstance>, CitizenBuryCriterionInstance>
 {
-    private final static ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CITIZEN_BURY);
+    private final static ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CITIZEN_BURY);
 
     public CitizenBuryTrigger()
     {

@@ -237,13 +237,13 @@ public class PlantationFieldsModuleWindow extends AbstractModuleWindow
     {
         if (isOn)
         {
-            button.setImage(new ResourceLocation(TEXTURE_ASSIGN_ON_NORMAL), true);
-            button.setImageDisabled(new ResourceLocation(TEXTURE_ASSIGN_ON_DISABLED), true);
+            button.setImage(ResourceLocation.parse(TEXTURE_ASSIGN_ON_NORMAL), true);
+            button.setImageDisabled(ResourceLocation.parse(TEXTURE_ASSIGN_ON_DISABLED), true);
         }
         else
         {
-            button.setImage(new ResourceLocation(TEXTURE_ASSIGN_OFF_NORMAL), true);
-            button.setImageDisabled(new ResourceLocation(TEXTURE_ASSIGN_OFF_DISABLED), true);
+            button.setImage(ResourceLocation.parse(TEXTURE_ASSIGN_OFF_NORMAL), true);
+            button.setImageDisabled(ResourceLocation.parse(TEXTURE_ASSIGN_OFF_DISABLED), true);
         }
     }
 }

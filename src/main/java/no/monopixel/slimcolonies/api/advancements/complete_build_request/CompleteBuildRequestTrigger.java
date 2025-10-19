@@ -12,7 +12,7 @@ public class CompleteBuildRequestTrigger extends AbstractCriterionTrigger<Comple
 {
     public CompleteBuildRequestTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_COMPLETE_BUILD_REQUEST), CompleteBuildRequestListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_COMPLETE_BUILD_REQUEST), CompleteBuildRequestListeners::new);
     }
 
     /**

@@ -582,7 +582,7 @@ public class CitizenManager implements ICitizenManager
                 if (firstCitizen)
                 {
                     colony.getQuestManager()
-                        .injectAvailableQuest(new QuestInstance(new ResourceLocation(MOD_ID, "tutorial/welcome"), colony, List.of(new CitizenTriggerReturnData(newCitizen))));
+                        .injectAvailableQuest(new QuestInstance(ResourceLocation.fromNamespaceAndPath(MOD_ID, "tutorial/welcome"), colony, List.of(new CitizenTriggerReturnData(newCitizen))));
                 }
 
                 // For first citizen, give a random chance of male or female.

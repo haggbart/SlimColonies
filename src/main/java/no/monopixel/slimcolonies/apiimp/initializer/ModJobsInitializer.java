@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public final class ModJobsInitializer
 {
-    public final static DeferredRegister<JobEntry> DEFERRED_REGISTER = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "jobs"), Constants.MOD_ID);
+    public final static DeferredRegister<JobEntry> DEFERRED_REGISTER = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "jobs"), Constants.MOD_ID);
 
     private ModJobsInitializer()
     {
@@ -311,7 +311,7 @@ public final class ModJobsInitializer
      */
     private static RegistryObject<JobEntry> register(final DeferredRegister<JobEntry> deferredRegister, final String path, final Supplier<JobEntry> supplier)
     {
-        ModJobs.jobs.add(new ResourceLocation(Constants.MOD_ID, path));
+        ModJobs.jobs.add(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path));
         return deferredRegister.register(path, supplier);
     }
 }

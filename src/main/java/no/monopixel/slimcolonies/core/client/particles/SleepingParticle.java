@@ -27,7 +27,7 @@ public class SleepingParticle extends TextureSheetParticle
     /**
      * The resourcelocation for the sleeping image.
      */
-    public static final ResourceLocation SLEEPING_TEXTURE = new ResourceLocation(Constants.MOD_ID, "particle/sleeping");
+    public static final ResourceLocation SLEEPING_TEXTURE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "particle/sleeping");
 
     public SleepingParticle(SpriteSet spriteSet, ClientLevel worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
     {

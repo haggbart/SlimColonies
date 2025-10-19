@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 public abstract class JobBasedRecipeCategory<T> implements IRecipeCategory<T>
 {
     protected static final JeiFakeLevel                     FAKE_LEVEL = new JeiFakeLevel();
-    protected static final ResourceLocation                 TEXTURE    = new ResourceLocation(Constants.MOD_ID, "textures/gui/jei_recipe.png");
+    protected static final ResourceLocation                 TEXTURE    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/jei_recipe.png");
     @NotNull
     protected final        IJob<?>                          job;
     @NotNull

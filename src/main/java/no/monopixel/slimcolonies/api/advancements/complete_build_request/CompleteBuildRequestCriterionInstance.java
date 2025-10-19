@@ -20,7 +20,7 @@ public class CompleteBuildRequestCriterionInstance extends AbstractCriterionTrig
 
     public CompleteBuildRequestCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_COMPLETE_BUILD_REQUEST), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_COMPLETE_BUILD_REQUEST), ContextAwarePredicate.ANY);
     }
 
     /**

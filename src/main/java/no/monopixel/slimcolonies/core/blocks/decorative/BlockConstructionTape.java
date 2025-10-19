@@ -68,7 +68,7 @@ public class BlockConstructionTape extends AbstractBlockSlimColoniesConstruction
     @Override
     public ResourceLocation getRegistryName()
     {
-        return new ResourceLocation(Constants.MOD_ID, BLOCK_NAME);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, BLOCK_NAME);
     }
 
     @NotNull

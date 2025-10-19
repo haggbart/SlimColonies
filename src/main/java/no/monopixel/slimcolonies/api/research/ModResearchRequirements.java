@@ -12,10 +12,10 @@ import net.minecraftforge.registries.RegistryObject;
  */
 public class ModResearchRequirements
 {
-    public static final ResourceLocation BUILDING_RESEARCH_REQ_ID = new ResourceLocation(Constants.MOD_ID, "building");
-    public static final ResourceLocation BUILDING_ALTERNATES_RESEARCH_REQ_ID = new ResourceLocation(Constants.MOD_ID, "alternate-building");
-    public static final ResourceLocation BUILDING_SINGLE_RESEARCH_REQ_ID     = new ResourceLocation(Constants.MOD_ID, "single-building");
-    public static final ResourceLocation RESEARCH_RESEARCH_REQ_ID            = new ResourceLocation(Constants.MOD_ID, "research");
+    public static final ResourceLocation BUILDING_RESEARCH_REQ_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "building");
+    public static final ResourceLocation BUILDING_ALTERNATES_RESEARCH_REQ_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "alternate-building");
+    public static final ResourceLocation BUILDING_SINGLE_RESEARCH_REQ_ID     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "single-building");
+    public static final ResourceLocation RESEARCH_RESEARCH_REQ_ID            = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "research");
 
     public static RegistryObject<ResearchRequirementEntry> buildingResearchRequirement;
     public static RegistryObject<ResearchRequirementEntry> buildingAlternatesResearchRequirement;

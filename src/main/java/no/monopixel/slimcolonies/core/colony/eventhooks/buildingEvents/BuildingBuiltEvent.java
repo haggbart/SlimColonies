@@ -15,7 +15,7 @@ public class BuildingBuiltEvent extends AbstractBuildingEvent
     /**
      * This events id, registry entries use res locations as ids.
      */
-    public static final ResourceLocation BUILDING_BUILT_EVENT_ID = new ResourceLocation(Constants.MOD_ID, "building_built");
+    public static final ResourceLocation BUILDING_BUILT_EVENT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "building_built");
 
     /**
      * Creates a new building built event.

@@ -38,7 +38,7 @@ public class BuildingNetherWorker extends AbstractBuilding
      * Settings
      */
     public static final ISettingKey<BoolSetting> CLOSE_PORTAL =
-        new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "closeportal"));
+        new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "closeportal"));
 
     /**
      * Constant name for the Netherworker building

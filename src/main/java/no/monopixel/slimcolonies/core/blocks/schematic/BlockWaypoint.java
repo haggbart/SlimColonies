@@ -37,6 +37,6 @@ public class BlockWaypoint extends AbstractBlockSlimColonies<BlockWaypoint>
     @Override
     public ResourceLocation getRegistryName()
     {
-        return new ResourceLocation(Constants.MOD_ID, BLOCK_NAME);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, BLOCK_NAME);
     }
 }

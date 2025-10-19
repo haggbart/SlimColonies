@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
  */
 public class ModResearchEffects
 {
-    public static final ResourceLocation GLOBAL_EFFECT_ID = new ResourceLocation(Constants.MOD_ID, "global");
+    public static final ResourceLocation GLOBAL_EFFECT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "global");
 
     public static RegistryObject<ResearchEffectEntry> globalResearchEffect;
 

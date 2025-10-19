@@ -41,19 +41,19 @@ public class ColonyStoryListener extends SimpleJsonResourceReloadListener
     /**
      * Names for abandoned colonies.
      */
-    public static final ResourceLocation ABANDONED_COLONY_NAME = new ResourceLocation(MOD_ID, "abandoned_name");
+    public static final ResourceLocation ABANDONED_COLONY_NAME = ResourceLocation.fromNamespaceAndPath(MOD_ID, "abandoned_name");
     /**
      * Stories for abandoned colonies.
      */
-    public static final ResourceLocation ABANDONED_COLONY_STORY = new ResourceLocation(MOD_ID, "abandoned");
+    public static final ResourceLocation ABANDONED_COLONY_STORY = ResourceLocation.fromNamespaceAndPath(MOD_ID, "abandoned");
     /**
      * Stories for supply camps.
      */
-    public static final ResourceLocation SUPPLY_CAMP_STORY = new ResourceLocation(MOD_ID, "camp");
+    public static final ResourceLocation SUPPLY_CAMP_STORY = ResourceLocation.fromNamespaceAndPath(MOD_ID, "camp");
     /**
      * Stories for supply ships.
      */
-    public static final ResourceLocation SUPPLY_SHIP_STORY = new ResourceLocation(MOD_ID, "ship");
+    public static final ResourceLocation SUPPLY_SHIP_STORY = ResourceLocation.fromNamespaceAndPath(MOD_ID, "ship");
 
     /**
      * List of story and lore elements loaded from data.
@@ -226,7 +226,7 @@ public class ColonyStoryListener extends SimpleJsonResourceReloadListener
             else
             {
                 final RegistryAccess registryAccess = ServerLifecycleHooks.getCurrentServer().registryAccess();
-                final ResourceKey<Biome> key = ResourceKey.create(Registries.BIOME, new ResourceLocation(value));
+                final ResourceKey<Biome> key = ResourceKey.create(Registries.BIOME, ResourceLocation.parse(value));
                 final Holder<Biome> biome = registryAccess.registryOrThrow(Registries.BIOME).getHolderOrThrow(key);
                 return new BiomeFilter(b -> b.equals(biome));
             }

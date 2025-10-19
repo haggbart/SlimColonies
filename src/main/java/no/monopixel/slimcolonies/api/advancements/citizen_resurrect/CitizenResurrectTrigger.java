@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class CitizenResurrectTrigger extends AbstractCriterionTrigger<CriterionListeners<CitizenResurrectCriterionInstance>, CitizenResurrectCriterionInstance>
 {
-    private final static ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CITIZEN_RESURRECT);
+    private final static ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CITIZEN_RESURRECT);
 
     public CitizenResurrectTrigger()
     {

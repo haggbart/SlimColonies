@@ -71,7 +71,7 @@ public class EntityAIArcherTraining extends AbstractEntityAITraining<JobArcherTr
      * Shooting icon
      */
     private final static VisibleCitizenStatus ARCHER_TRAIN =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/archer_uni.png"), "no.monopixel.slimcolonies.gui.visiblestatus.archer_uni");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/archer_uni.png"), "no.monopixel.slimcolonies.gui.visiblestatus.archer_uni");
 
     /**
      * Current target to shoot at.

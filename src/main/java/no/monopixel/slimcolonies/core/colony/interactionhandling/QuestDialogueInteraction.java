@@ -39,9 +39,9 @@ public class QuestDialogueInteraction extends StandardInteraction
     /**
      * Three icon options.
      */
-    private static final ResourceLocation QUEST_START_ICON = new ResourceLocation(Constants.MOD_ID, "textures/icons/queststart.png");
-    private static final ResourceLocation QUEST_NEXT_TASK_ICON = new ResourceLocation(Constants.MOD_ID, "textures/icons/nexttask.png");
-    private static final ResourceLocation QUEST_WAITING_TASK_ICON = new ResourceLocation(Constants.MOD_ID, "textures/icons/opentask.png");
+    private static final ResourceLocation QUEST_START_ICON = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/queststart.png");
+    private static final ResourceLocation QUEST_NEXT_TASK_ICON = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/nexttask.png");
+    private static final ResourceLocation QUEST_WAITING_TASK_ICON = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/opentask.png");
 
     /**
      * Currently open colony quest.

@@ -73,18 +73,18 @@ public class UndertakerConstants
      * Undertaker emptying icon
      */
     public final static VisibleCitizenStatus EMPTYING_ICON =
-            new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/undertaker.png"), MESSAGE_INFO_CITIZEN_STATUS_UNDERTAKER_EMPTYING);
+            new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/undertaker.png"), MESSAGE_INFO_CITIZEN_STATUS_UNDERTAKER_EMPTYING);
 
     /**
      * Undertaker digging icon
      */
     public final static VisibleCitizenStatus DIGGING_ICON =
-            new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/undertaker.png"), MESSAGE_INFO_CITIZEN_STATUS_UNDERTAKER_DIGGING);
+            new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/undertaker.png"), MESSAGE_INFO_CITIZEN_STATUS_UNDERTAKER_DIGGING);
 
     /**
      * Undertaker bury icon
      */
     public final static VisibleCitizenStatus BURYING_ICON =
-            new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/undertaker.png"), MESSAGE_INFO_CITIZEN_STATUS_UNDERTAKER_BURYING);
+            new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/undertaker.png"), MESSAGE_INFO_CITIZEN_STATUS_UNDERTAKER_BURYING);
 
 }

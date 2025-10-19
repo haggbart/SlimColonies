@@ -12,7 +12,7 @@ public class ColonyPopulationTrigger extends AbstractCriterionTrigger<ColonyPopu
 {
     public ColonyPopulationTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_COLONY_POPULATION), ColonyPopulationListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_COLONY_POPULATION), ColonyPopulationListeners::new);
     }
 
     /**

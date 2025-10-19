@@ -48,12 +48,12 @@ public class CitizenDataView implements ICitizenDataView
     /**
      * The resource location for the blocking overlay.
      */
-    private static final ResourceLocation BLOCKING_RESOURCE = new ResourceLocation(Constants.MOD_ID, "textures/icons/blocking.png");
+    private static final ResourceLocation BLOCKING_RESOURCE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/blocking.png");
 
     /**
      * The resource location for the pending overlay.
      */
-    private static final ResourceLocation PENDING_RESOURCE = new ResourceLocation(Constants.MOD_ID, "textures/icons/warning.png");
+    private static final ResourceLocation PENDING_RESOURCE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/warning.png");
 
     /**
      * Attributes.

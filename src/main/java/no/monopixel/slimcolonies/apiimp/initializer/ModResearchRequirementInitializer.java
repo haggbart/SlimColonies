@@ -17,7 +17,7 @@ import static no.monopixel.slimcolonies.api.research.ModResearchRequirements.*;
 public class ModResearchRequirementInitializer
 {
     public final static DeferredRegister<ResearchRequirementEntry> DEFERRED_REGISTER =
-        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "researchrequirementtypes"), Constants.MOD_ID);
+        DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "researchrequirementtypes"), Constants.MOD_ID);
     static
     {
         buildingResearchRequirement = create(BUILDING_RESEARCH_REQ_ID, BuildingResearchRequirement::new, BuildingResearchRequirement::new);

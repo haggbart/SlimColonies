@@ -102,9 +102,9 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     /**
      * Breeding setting.
      */
-    public static final ISettingKey<BoolSetting> BREEDING = new SettingKey<>(BoolSetting.class, new ResourceLocation(MOD_ID, "breeding"));
+    public static final ISettingKey<BoolSetting> BREEDING = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(MOD_ID, "breeding"));
 
-    public static final ISettingKey<BoolSetting> USE_SHEARS = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "useshears"));
+    public static final ISettingKey<BoolSetting> USE_SHEARS = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "useshears"));
 
     /**
      * Best possible standing pos score.

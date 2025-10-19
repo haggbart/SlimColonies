@@ -16,7 +16,7 @@ public class CitizenBornEvent extends AbstractCitizenEvent
     /**
      * This events id, registry entries use res locations as ids.
      */
-    public static final ResourceLocation CITIZEN_BORN_EVENT_ID = new ResourceLocation(Constants.MOD_ID, "citizen_born");
+    public static final ResourceLocation CITIZEN_BORN_EVENT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "citizen_born");
 
     /**
      * Creates a new citizen born event.

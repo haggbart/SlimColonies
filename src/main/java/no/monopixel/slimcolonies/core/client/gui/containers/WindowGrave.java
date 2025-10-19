@@ -18,7 +18,7 @@ public class WindowGrave extends AbstractContainerScreen<ContainerGrave>
     /**
      * The resource LOCATION of the texture.
      */
-    private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation(Constants.MOD_ID, "textures/gui/generic_108.png");
+    private static final ResourceLocation CHEST_GUI_TEXTURE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/generic_108.png");
 
     /**
      * The LOCATION of the additional styles.

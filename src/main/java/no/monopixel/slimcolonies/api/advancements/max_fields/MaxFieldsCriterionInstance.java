@@ -12,6 +12,6 @@ public class MaxFieldsCriterionInstance extends AbstractCriterionTriggerInstance
 {
     public MaxFieldsCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_MAX_FIELDS), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_MAX_FIELDS), ContextAwarePredicate.ANY);
     }
 }

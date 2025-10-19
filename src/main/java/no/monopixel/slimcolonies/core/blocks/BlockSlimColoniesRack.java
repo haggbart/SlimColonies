@@ -92,7 +92,7 @@ public class BlockSlimColoniesRack extends AbstractBlockSlimColoniesRack<BlockSl
     @Override
     public ResourceLocation getRegistryName()
     {
-        return new ResourceLocation(Constants.MOD_ID, BLOCK_NAME);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, BLOCK_NAME);
     }
 
     @Override

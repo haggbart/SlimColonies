@@ -12,6 +12,6 @@ public class CitizenBuryCriterionInstance extends AbstractCriterionTriggerInstan
 {
     public CitizenBuryCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CITIZEN_BURY), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CITIZEN_BURY), ContextAwarePredicate.ANY);
     }
 }

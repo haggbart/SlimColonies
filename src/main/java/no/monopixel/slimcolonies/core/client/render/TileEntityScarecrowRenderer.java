@@ -74,8 +74,8 @@ public class TileEntityScarecrowRenderer implements BlockEntityRenderer<Abstract
     public static final Material SCARECROW_B;
     static
     {
-        SCARECROW_A = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(Constants.MOD_ID, "block/blockscarecrowpumpkin"));
-        SCARECROW_B = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(Constants.MOD_ID, "block/blockscarecrownormal"));
+        SCARECROW_A = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "block/blockscarecrowpumpkin"));
+        SCARECROW_B = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "block/blockscarecrownormal"));
     }
     /**
      * The public constructor for the renderer.

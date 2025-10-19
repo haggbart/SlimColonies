@@ -59,7 +59,7 @@ public class DefaultAdvancementsProvider extends ForgeAdvancementProvider
                 null,
                 FrameType.TASK, false, false, false)
             .addCriterion("supply_ship", new PlaceSupplyCriterionInstance())
-            .save(consumer, new ResourceLocation(MOD_ID, "minecraft/craft_supply"), fileHelper);
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "minecraft/craft_supply"), fileHelper);
 
         addStandardAdvancements(consumer, fileHelper);
         addProductionAdvancements(consumer, fileHelper);

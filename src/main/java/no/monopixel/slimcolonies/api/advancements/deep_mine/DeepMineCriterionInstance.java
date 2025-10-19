@@ -12,6 +12,6 @@ public class DeepMineCriterionInstance extends AbstractCriterionTriggerInstance
 {
     public DeepMineCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_DEEP_MINE), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_DEEP_MINE), ContextAwarePredicate.ANY);
     }
 }

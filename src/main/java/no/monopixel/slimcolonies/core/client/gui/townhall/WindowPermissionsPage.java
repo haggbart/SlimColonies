@@ -499,7 +499,7 @@ public class WindowPermissionsPage extends AbstractWindowTownHall
 
         try
         {
-            final Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(inputText));
+            final Block block = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(inputText));
 
             if (block != null && !block.defaultBlockState().isAir())
             {

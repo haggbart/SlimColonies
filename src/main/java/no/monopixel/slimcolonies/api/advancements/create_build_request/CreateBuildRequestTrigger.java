@@ -14,7 +14,7 @@ public class CreateBuildRequestTrigger extends AbstractCriterionTrigger<CreateBu
 {
     public CreateBuildRequestTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), CreateBuildRequestListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), CreateBuildRequestListeners::new);
     }
 
     /**

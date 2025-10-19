@@ -19,7 +19,7 @@ public class OpenGuiWindowCriterionInstance extends AbstractCriterionTriggerInst
 
     public OpenGuiWindowCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_OPEN_GUI_WINDOW), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_OPEN_GUI_WINDOW), ContextAwarePredicate.ANY);
     }
 
     /**
@@ -28,7 +28,7 @@ public class OpenGuiWindowCriterionInstance extends AbstractCriterionTriggerInst
      */
     public OpenGuiWindowCriterionInstance(final String windowResource)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_OPEN_GUI_WINDOW), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_OPEN_GUI_WINDOW), ContextAwarePredicate.ANY);
 
         this.windowResource = windowResource;
     }

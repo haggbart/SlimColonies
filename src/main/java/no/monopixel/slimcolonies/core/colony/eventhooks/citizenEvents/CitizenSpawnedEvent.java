@@ -16,7 +16,7 @@ public class CitizenSpawnedEvent extends AbstractCitizenEvent
     /**
      * This events id, registry entries use res locations as ids.
      */
-    public static final ResourceLocation CITIZEN_SPAWNED_EVENT_ID = new ResourceLocation(Constants.MOD_ID, "citizen_spawn");
+    public static final ResourceLocation CITIZEN_SPAWNED_EVENT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "citizen_spawn");
 
     /**
      * Creates a new citizen spawned event.

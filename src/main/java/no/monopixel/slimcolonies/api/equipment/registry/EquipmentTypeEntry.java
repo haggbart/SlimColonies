@@ -67,7 +67,7 @@ public final class EquipmentTypeEntry
      */
     public static ResourceLocation parseResourceLocation(final String serialized)
     {
-        ResourceLocation result = new ResourceLocation(serialized);
+        ResourceLocation result = ResourceLocation.parse(serialized);
         return parseResourceLocation(result);
     }
 
@@ -83,7 +83,7 @@ public final class EquipmentTypeEntry
     {
         final String namespace = serialized.getNamespace().equals("minecraft") ? Constants.MOD_ID : serialized.getNamespace();
         final String path = serialized.getPath().isEmpty() ? ModEquipmentTypes.none.get().registryName.getPath() : serialized.getPath();
-        return new ResourceLocation(namespace, path);
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
     }
 
     /**

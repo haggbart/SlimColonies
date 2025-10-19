@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 public class CountedIngredient extends Ingredient
 {
-    public static final ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, "counted");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "counted");
 
     @NotNull
     private final Ingredient child;

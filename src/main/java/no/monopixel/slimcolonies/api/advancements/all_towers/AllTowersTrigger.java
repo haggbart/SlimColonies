@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class AllTowersTrigger extends AbstractCriterionTrigger<CriterionListeners<AllTowersCriterionInstance>, AllTowersCriterionInstance>
 {
     /** How this trigger is referenced in JSON and identified in the registry */
-    private final static ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_ALL_TOWERS);
+    private final static ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_ALL_TOWERS);
 
     /** Construct the trigger instance with the right ID */
     public AllTowersTrigger()

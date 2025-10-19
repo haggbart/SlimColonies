@@ -29,7 +29,7 @@ import java.util.stream.Stream;
  */
 public class PlantIngredient extends Ingredient
 {
-    public static final ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, "plant");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "plant");
 
     private static final Lazy<PlantIngredient> INSTANCE
             = Lazy.of(() -> new PlantIngredient(ForgeRegistries.ITEMS.getValues().stream()

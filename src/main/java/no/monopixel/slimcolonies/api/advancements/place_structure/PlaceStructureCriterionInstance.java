@@ -19,7 +19,7 @@ public class PlaceStructureCriterionInstance extends AbstractCriterionTriggerIns
 
     public PlaceStructureCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_STRUCTURE_PLACED), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_STRUCTURE_PLACED), ContextAwarePredicate.ANY);
     }
 
     /**
@@ -28,7 +28,7 @@ public class PlaceStructureCriterionInstance extends AbstractCriterionTriggerIns
      */
     public PlaceStructureCriterionInstance(final String hutName)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_STRUCTURE_PLACED), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_STRUCTURE_PLACED), ContextAwarePredicate.ANY);
 
         this.structureName = hutName;
     }

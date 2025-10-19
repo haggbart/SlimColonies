@@ -20,7 +20,7 @@ public class CreateBuildRequestCriterionInstance extends AbstractCriterionTrigge
 
     public CreateBuildRequestCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), ContextAwarePredicate.ANY);
     }
 
     /**
@@ -29,7 +29,7 @@ public class CreateBuildRequestCriterionInstance extends AbstractCriterionTrigge
      */
     public CreateBuildRequestCriterionInstance(final String hutName)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), ContextAwarePredicate.ANY);
 
         this.hutName = hutName;
     }
@@ -41,7 +41,7 @@ public class CreateBuildRequestCriterionInstance extends AbstractCriterionTrigge
      */
     public CreateBuildRequestCriterionInstance(final String hutName, final int level)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CREATE_BUILD_REQUEST), ContextAwarePredicate.ANY);
 
         this.hutName = hutName;
         this.level = level;

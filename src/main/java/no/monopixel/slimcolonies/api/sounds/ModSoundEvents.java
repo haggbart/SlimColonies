@@ -54,8 +54,8 @@ public final class ModSoundEvents
     {
         final List<ResourceLocation> mainTypes = new ArrayList<>(ModJobs.getJobs());
         mainTypes.remove(ModJobs.placeHolder.getId());
-        mainTypes.add(new ResourceLocation(Constants.MOD_ID, "unemployed"));
-        mainTypes.add(new ResourceLocation(Constants.MOD_ID, "visitor"));
+        mainTypes.add(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "unemployed"));
+        mainTypes.add(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "visitor"));
 
         for (final ResourceLocation job : mainTypes)
         {
@@ -112,6 +112,6 @@ public final class ModSoundEvents
      */
     public static SoundEvent getSoundID(final String soundName)
     {
-        return SoundEvent.createVariableRangeEvent(new ResourceLocation(Constants.MOD_ID, soundName));
+        return SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, soundName));
     }
 }

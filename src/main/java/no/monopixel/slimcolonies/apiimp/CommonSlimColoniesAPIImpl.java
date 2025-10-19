@@ -189,99 +189,99 @@ public class CommonSlimColoniesAPIImpl implements ISlimColoniesAPI
     public void onRegistryNewRegistry(final NewRegistryEvent event)
     {
         event.create(new RegistryBuilder<EquipmentTypeEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "equipmenttypes"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "equipmenttypes"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving()
             .allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> equipmentTypeRegistry = b);
 
         event.create(new RegistryBuilder<BuildingEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "buildings"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "buildings"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving()
             .allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> buildingRegistry = b);
 
         event.create(new RegistryBuilder<BuildingExtensionEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "buildingextensions"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "buildingextensions"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving()
             .allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> buildingExtensionRegistry = b);
 
         event.create(new RegistryBuilder<JobEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "jobs"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "jobs"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving()
             .allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> jobRegistry = b);
 
         event.create(new RegistryBuilder<GuardType>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "guardtypes"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "guardtypes"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving()
             .allowModification()
             .setDefaultKey(ModGuardTypes.KNIGHT_ID)
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> guardTypeRegistry = b);
 
         event.create(new RegistryBuilder<InteractionResponseHandlerEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "interactionresponsehandlers"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "interactionresponsehandlers"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving()
             .allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> interactionHandlerRegistry = b);
 
         event.create(new RegistryBuilder<ColonyEventDescriptionTypeRegistryEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "colonyeventdesctypes"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "colonyeventdesctypes"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> colonyEventDescriptionRegistry = b);
 
 
         event.create(new RegistryBuilder<CraftingType>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "craftingtypes"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "craftingtypes"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> craftingTypeRegistry = b);
 
         event.create(new RegistryBuilder<RecipeTypeEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "recipetypeentries"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "classic"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "recipetypeentries"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "classic"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> recipeTypeEntryRegistry = b);
 
         event.create(new RegistryBuilder<ModResearchRequirements.ResearchRequirementEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "researchrequirementtypes"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "researchrequirementtypes"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> researchRequirementRegistry = b);
 
         event.create(new RegistryBuilder<ModResearchEffects.ResearchEffectEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "researcheffecttypes"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "researcheffecttypes"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> researchEffectRegistry = b);
 
         // Research cost registry removed - no longer used
 
         event.create(new RegistryBuilder<QuestRegistries.ObjectiveEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "questobjectives"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questobjectives"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> questObjectiveRegistry = b);
 
         event.create(new RegistryBuilder<QuestRegistries.RewardEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "questrewards"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questrewards"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> questRewardRegistry = b);
 
         event.create(new RegistryBuilder<QuestRegistries.TriggerEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "questtriggers"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questtriggers"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> questTriggerRegistry = b);
 
         event.create(new RegistryBuilder<QuestRegistries.DialogueAnswerEntry>()
-            .setName(new ResourceLocation(Constants.MOD_ID, "questanswerresults"))
-            .setDefaultKey(new ResourceLocation(Constants.MOD_ID, "null"))
+            .setName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questanswerresults"))
+            .setDefaultKey(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "null"))
             .disableSaving().allowModification()
             .setIDRange(0, Integer.MAX_VALUE - 1), (b) -> questDialogueAnswerRegistry = b);
 

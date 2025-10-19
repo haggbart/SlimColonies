@@ -102,78 +102,78 @@ public final class ResearchConstants
      * Research Effect Name strings, used for ResearchEffectManager and ResearchRegistry lookups.
      */
     //Addition Multipliers
-    public static final ResourceLocation ARCHER_DAMAGE                = new ResourceLocation(Constants.MOD_ID, "effects/archerdamageaddition");
-    public static final ResourceLocation CITIZEN_INV_SLOTS            = new ResourceLocation(Constants.MOD_ID, "effects/citizeninvslotsaddition");
-    public static final ResourceLocation CITIZEN_CAP                  = new ResourceLocation(Constants.MOD_ID, "effects/citizencapaddition");
-    public static final ResourceLocation FLEEING_SPEED                = new ResourceLocation(Constants.MOD_ID, "effects/fleeingspeedaddition");
-    public static final ResourceLocation SATLIMIT                     = new ResourceLocation(Constants.MOD_ID, "effects/healingsaturationlimitaddition");
-    public static final ResourceLocation HEALTH_BOOST                 = new ResourceLocation(Constants.MOD_ID, "effects/healthaddition");
-    public static final ResourceLocation MELEE_DAMAGE                 = new ResourceLocation(Constants.MOD_ID, "effects/meleedamageaddition");
-    public static final ResourceLocation WORK_LONGER                  = new ResourceLocation(Constants.MOD_ID, "effects/workingdayhaddition");
-    public static final ResourceLocation RESURRECT_CHANCE             = new ResourceLocation(Constants.MOD_ID, "effects/resurrectchanceaddition");
-    public static final ResourceLocation GRAVE_DECAY_BONUS            = new ResourceLocation(Constants.MOD_ID, "effects/gravedecaybonus");
-    public static final ResourceLocation UNDERTAKER_RUN               = new ResourceLocation(Constants.MOD_ID, "effects/undertakerrun");
+    public static final ResourceLocation ARCHER_DAMAGE                = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/archerdamageaddition");
+    public static final ResourceLocation CITIZEN_INV_SLOTS            = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/citizeninvslotsaddition");
+    public static final ResourceLocation CITIZEN_CAP                  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/citizencapaddition");
+    public static final ResourceLocation FLEEING_SPEED                = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/fleeingspeedaddition");
+    public static final ResourceLocation SATLIMIT                     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/healingsaturationlimitaddition");
+    public static final ResourceLocation HEALTH_BOOST                 = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/healthaddition");
+    public static final ResourceLocation MELEE_DAMAGE                 = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/meleedamageaddition");
+    public static final ResourceLocation WORK_LONGER                  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/workingdayhaddition");
+    public static final ResourceLocation RESURRECT_CHANCE             = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/resurrectchanceaddition");
+    public static final ResourceLocation GRAVE_DECAY_BONUS            = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/gravedecaybonus");
+    public static final ResourceLocation UNDERTAKER_RUN               = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/undertakerrun");
 
     //Multiplier Modifiers
-    public static final ResourceLocation ARCHER_ARMOR      = new ResourceLocation(Constants.MOD_ID, "effects/archerarmormultiplier");
-    public static final ResourceLocation ARMOR_DURABILITY  = new ResourceLocation(Constants.MOD_ID, "effects/armordurabilitymultiplier");
-    public static final ResourceLocation BLOCK_ATTACKS     = new ResourceLocation(Constants.MOD_ID, "effects/blockattacksmultiplier");
-    public static final ResourceLocation BLOCK_BREAK_SPEED = new ResourceLocation(Constants.MOD_ID, "effects/blockbreakspeedmultiplier");
-    public static final ResourceLocation BLOCK_PLACE_SPEED = new ResourceLocation(Constants.MOD_ID, "effects/blockplacespeedmultiplier");
-    public static final ResourceLocation DOUBLE_ARROWS     = new ResourceLocation(Constants.MOD_ID, "effects/doublearrowsmultiplier");
-    public static final ResourceLocation FARMING           = new ResourceLocation(Constants.MOD_ID, "effects/farmingmultiplier");
-    public static final ResourceLocation FLEEING_DAMAGE    = new ResourceLocation(Constants.MOD_ID, "effects/fleeingdamagemultiplier");
-    public static final ResourceLocation GROWTH            = new ResourceLocation(Constants.MOD_ID, "effects/growthmultiplier");
+    public static final ResourceLocation ARCHER_ARMOR      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/archerarmormultiplier");
+    public static final ResourceLocation ARMOR_DURABILITY  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/armordurabilitymultiplier");
+    public static final ResourceLocation BLOCK_ATTACKS     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/blockattacksmultiplier");
+    public static final ResourceLocation BLOCK_BREAK_SPEED = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/blockbreakspeedmultiplier");
+    public static final ResourceLocation BLOCK_PLACE_SPEED = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/blockplacespeedmultiplier");
+    public static final ResourceLocation DOUBLE_ARROWS     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/doublearrowsmultiplier");
+    public static final ResourceLocation FARMING           = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/farmingmultiplier");
+    public static final ResourceLocation FLEEING_DAMAGE    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/fleeingdamagemultiplier");
+    public static final ResourceLocation GROWTH            = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/growthmultiplier");
     // Happiness system removed
-    public static final ResourceLocation LEVELING          = new ResourceLocation(Constants.MOD_ID, "effects/levelingmultiplier");
-    public static final ResourceLocation MELEE_ARMOR       = new ResourceLocation(Constants.MOD_ID, "effects/meleearmormultiplier");
-    public static final ResourceLocation MINIMUM_STOCK     = new ResourceLocation(Constants.MOD_ID, "effects/minimumstockmultiplier");
-    public static final ResourceLocation MORE_ORES         = new ResourceLocation(Constants.MOD_ID, "effects/moreoresmultiplier");
-    public static final ResourceLocation PODZOL_CHANCE     = new ResourceLocation(Constants.MOD_ID, "effects/podzolchancemultiplier");
-    public static final ResourceLocation REGENERATION      = new ResourceLocation(Constants.MOD_ID, "effects/regenerationmultiplier");
-    public static final ResourceLocation SATURATION        = new ResourceLocation(Constants.MOD_ID, "effects/saturationmultiplier");
-    public static final ResourceLocation SLEEP_LESS        = new ResourceLocation(Constants.MOD_ID, "effects/sleeplessmultiplier");
-    public static final ResourceLocation TEACHING          = new ResourceLocation(Constants.MOD_ID, "effects/teachingmultiplier");
-    public static final ResourceLocation TOOL_DURABILITY   = new ResourceLocation(Constants.MOD_ID, "effects/tooldurabilitymultiplier");
-    public static final ResourceLocation WALKING           = new ResourceLocation(Constants.MOD_ID, "effects/walkingmultiplier");
-    public static final ResourceLocation LOOTING           = new ResourceLocation(Constants.MOD_ID, "effects/looting");
+    public static final ResourceLocation LEVELING          = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/levelingmultiplier");
+    public static final ResourceLocation MELEE_ARMOR       = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/meleearmormultiplier");
+    public static final ResourceLocation MINIMUM_STOCK     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/minimumstockmultiplier");
+    public static final ResourceLocation MORE_ORES         = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/moreoresmultiplier");
+    public static final ResourceLocation PODZOL_CHANCE     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/podzolchancemultiplier");
+    public static final ResourceLocation REGENERATION      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/regenerationmultiplier");
+    public static final ResourceLocation SATURATION        = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/saturationmultiplier");
+    public static final ResourceLocation SLEEP_LESS        = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/sleeplessmultiplier");
+    public static final ResourceLocation TEACHING          = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/teachingmultiplier");
+    public static final ResourceLocation TOOL_DURABILITY   = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/tooldurabilitymultiplier");
+    public static final ResourceLocation WALKING           = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/walkingmultiplier");
+    public static final ResourceLocation LOOTING           = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/looting");
 
     //Unlock Ability modifiers.
-    public static final ResourceLocation CRUSHING_11       = new ResourceLocation(Constants.MOD_ID, "effects/crushing11unlock");
-    public static final ResourceLocation ARCHER_USE_ARROWS = new ResourceLocation(Constants.MOD_ID, "effects/consumearrowsunlock");
-    public static final ResourceLocation KNIGHT_TAUNT      = new ResourceLocation(Constants.MOD_ID, "effects/knighttauntmobsunlock");
-    public static final ResourceLocation GUARD_CRIT = new ResourceLocation(Constants.MOD_ID, "effects/guardcrit");
-    public static final ResourceLocation FIRE_RES          = new ResourceLocation(Constants.MOD_ID, "effects/minerfireresunlock");
-    public static final ResourceLocation ARROW_PIERCE      = new ResourceLocation(Constants.MOD_ID, "effects/piercingarrowsunlock");
-    public static final ResourceLocation PLANTATION_LARGE  = new ResourceLocation(Constants.MOD_ID, "effects/plantationlarge");
-    public static final ResourceLocation PLANTATION_JUNGLE = new ResourceLocation(Constants.MOD_ID, "effects/plantationjungle");
-    public static final ResourceLocation PLANTATION_SEA    = new ResourceLocation(Constants.MOD_ID, "effects/plantationsea");
-    public static final ResourceLocation PLANTATION_EXOTIC = new ResourceLocation(Constants.MOD_ID, "effects/plantationexotic");
-    public static final ResourceLocation PLANTATION_NETHER = new ResourceLocation(Constants.MOD_ID, "effects/plantationnether");
-    public static final ResourceLocation BEEKEEP_2         = new ResourceLocation(Constants.MOD_ID, "effects/beekeep2unlock");
-    public static final ResourceLocation RAILS             = new ResourceLocation(Constants.MOD_ID, "effects/railsunlock");
-    public static final ResourceLocation VINES             = new ResourceLocation(Constants.MOD_ID, "effects/vinesunlock");
-    public static final ResourceLocation RETREAT           = new ResourceLocation(Constants.MOD_ID, "effects/retreatunlock");
-    public static final ResourceLocation SHIELD_USAGE      = new ResourceLocation(Constants.MOD_ID, "effects/shieldusageunlock");
-    public static final ResourceLocation KNIGHT_WHIRLWIND  = new ResourceLocation(Constants.MOD_ID, "effects/whirlwindabilityunlock");
-    public static final ResourceLocation USE_TOTEM         = new ResourceLocation(Constants.MOD_ID, "effects/usetotemunlock");
-    public static final ResourceLocation RECIPE_MODE       = new ResourceLocation(Constants.MOD_ID, "effects/recipemodeunlock");
-    public static final ResourceLocation BUILDER_MODE      = new ResourceLocation(Constants.MOD_ID, "effects/buildermodeunlock");
-    public static final ResourceLocation FISH_TREASURE     = new ResourceLocation(Constants.MOD_ID, "effects/fishingtreasure");
-    public static final ResourceLocation NETHER_LOG        = new ResourceLocation(Constants.MOD_ID, "effects/netherexpeditionlog");
-    public static final ResourceLocation TELESCOPE          = new ResourceLocation(Constants.MOD_ID, "effects/telescope");
-    public static final ResourceLocation STANDARD          = new ResourceLocation(Constants.MOD_ID, "effects/standard");
-    public static final ResourceLocation MORE_AIR          = new ResourceLocation(Constants.MOD_ID, "effects/air");
-    public static final ResourceLocation GREEN_REVOLUTION  = new ResourceLocation(Constants.MOD_ID, "effects/greenrevolution");
-    public static final ResourceLocation BUILDERS_ASSISTANT_HAMMER = new ResourceLocation(Constants.MOD_ID, "effects/assistanthammerunlock");
+    public static final ResourceLocation CRUSHING_11       = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/crushing11unlock");
+    public static final ResourceLocation ARCHER_USE_ARROWS = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/consumearrowsunlock");
+    public static final ResourceLocation KNIGHT_TAUNT      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/knighttauntmobsunlock");
+    public static final ResourceLocation GUARD_CRIT = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/guardcrit");
+    public static final ResourceLocation FIRE_RES          = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/minerfireresunlock");
+    public static final ResourceLocation ARROW_PIERCE      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/piercingarrowsunlock");
+    public static final ResourceLocation PLANTATION_LARGE  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/plantationlarge");
+    public static final ResourceLocation PLANTATION_JUNGLE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/plantationjungle");
+    public static final ResourceLocation PLANTATION_SEA    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/plantationsea");
+    public static final ResourceLocation PLANTATION_EXOTIC = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/plantationexotic");
+    public static final ResourceLocation PLANTATION_NETHER = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/plantationnether");
+    public static final ResourceLocation BEEKEEP_2         = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/beekeep2unlock");
+    public static final ResourceLocation RAILS             = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/railsunlock");
+    public static final ResourceLocation VINES             = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/vinesunlock");
+    public static final ResourceLocation RETREAT           = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/retreatunlock");
+    public static final ResourceLocation SHIELD_USAGE      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/shieldusageunlock");
+    public static final ResourceLocation KNIGHT_WHIRLWIND  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/whirlwindabilityunlock");
+    public static final ResourceLocation USE_TOTEM         = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/usetotemunlock");
+    public static final ResourceLocation RECIPE_MODE       = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/recipemodeunlock");
+    public static final ResourceLocation BUILDER_MODE      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/buildermodeunlock");
+    public static final ResourceLocation FISH_TREASURE     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/fishingtreasure");
+    public static final ResourceLocation NETHER_LOG        = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/netherexpeditionlog");
+    public static final ResourceLocation TELESCOPE          = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/telescope");
+    public static final ResourceLocation STANDARD          = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/standard");
+    public static final ResourceLocation MORE_AIR          = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/air");
+    public static final ResourceLocation GREEN_REVOLUTION  = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/greenrevolution");
+    public static final ResourceLocation BUILDERS_ASSISTANT_HAMMER = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/assistanthammerunlock");
 
     //Recipe unlocks
-    public static final ResourceLocation THE_END           = new ResourceLocation(Constants.MOD_ID, "effects/knowledgeoftheendunlock");
-    public static final ResourceLocation THE_DEPTHS        = new ResourceLocation(Constants.MOD_ID, "effects/knowledgeofthedepthsunlock");
-    public static final ResourceLocation SIFTER_STRING     = new ResourceLocation(Constants.MOD_ID, "effects/sifterstringunlock");
-    public static final ResourceLocation SIFTER_FLINT      = new ResourceLocation(Constants.MOD_ID, "effects/sifterflintunlock");
-    public static final ResourceLocation SIFTER_IRON       = new ResourceLocation(Constants.MOD_ID, "effects/sifterironunlock");
-    public static final ResourceLocation SIFTER_DIAMOND    = new ResourceLocation(Constants.MOD_ID, "effects/sifterdiamondunlock");
+    public static final ResourceLocation THE_END           = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/knowledgeoftheendunlock");
+    public static final ResourceLocation THE_DEPTHS        = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/knowledgeofthedepthsunlock");
+    public static final ResourceLocation SIFTER_STRING     = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/sifterstringunlock");
+    public static final ResourceLocation SIFTER_FLINT      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/sifterflintunlock");
+    public static final ResourceLocation SIFTER_IRON       = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/sifterironunlock");
+    public static final ResourceLocation SIFTER_DIAMOND    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effects/sifterdiamondunlock");
 
     /**
      * Predicate for selecting any fire-related damage

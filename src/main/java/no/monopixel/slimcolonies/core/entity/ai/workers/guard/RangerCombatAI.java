@@ -55,7 +55,7 @@ public class RangerCombatAI extends AttackMoveAI<EntityCitizen>
      * Visible combat icon
      */
     private final static VisibleCitizenStatus ARCHER_COMBAT =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/archer_combat.png"), "no.monopixel.slimcolonies.gui.visiblestatus.archer_combat");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/archer_combat.png"), "no.monopixel.slimcolonies.gui.visiblestatus.archer_combat");
 
     private final AbstractEntityAIGuard parentAI;
 

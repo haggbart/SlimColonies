@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class WorkerIdleSideEffect implements IQuestSideEffect, ICitizenQuestSideEffect
 {
-    public static final ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, "workeridle");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "workeridle");
 
     /**
      * Citizen data we applied to

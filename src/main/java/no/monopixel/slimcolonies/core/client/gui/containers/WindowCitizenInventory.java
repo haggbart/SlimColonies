@@ -29,7 +29,7 @@ public class WindowCitizenInventory extends AbstractContainerScreen<ContainerCit
     /**
      * Texture res loc.
      */
-    private static final ResourceLocation TEXT = new ResourceLocation(Constants.MOD_ID, "textures/gui/citizen_container.png");
+    private static final ResourceLocation TEXT = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/citizen_container.png");
 
     /**
      * Offset inside the texture to use.

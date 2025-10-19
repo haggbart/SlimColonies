@@ -18,7 +18,7 @@ import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.
 public final class ModBuildingExtensionsInitializer
 {
     public static final DeferredRegister<BuildingExtensionEntry> DEFERRED_REGISTER =
-        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "buildingextensions"), Constants.MOD_ID);
+        DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "buildingextensions"), Constants.MOD_ID);
     static
     {
         BuildingExtensionRegistries.farmField = createEntry(BuildingExtensionRegistries.FARM_FIELD_ID, builder -> builder.setExtensionProducer(FarmField::new));

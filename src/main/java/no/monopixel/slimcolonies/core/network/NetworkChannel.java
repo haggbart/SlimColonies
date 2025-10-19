@@ -96,7 +96,7 @@ public class NetworkChannel
     {
         final String modVersion = ModList.get().getModContainerById(Constants.MOD_ID).get().getModInfo().getVersion().toString();
         rawChannel =
-            NetworkRegistry.newSimpleChannel(new ResourceLocation(Constants.MOD_ID, channelName), () -> modVersion, str -> str.equals(modVersion), str -> str.equals(modVersion));
+            NetworkRegistry.newSimpleChannel(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, channelName), () -> modVersion, str -> str.equals(modVersion), str -> str.equals(modVersion));
     }
 
     /**

@@ -85,7 +85,7 @@ public class EntityAIWorkDeliveryman extends AbstractEntityAIInteract<JobDeliver
      * Delivery icon
      */
     private final static VisibleCitizenStatus DELIVERING =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/delivery.png"), "no.monopixel.slimcolonies.gui.visiblestatus.delivery");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/delivery.png"), "no.monopixel.slimcolonies.gui.visiblestatus.delivery");
 
     /**
      * Render meta backpack.

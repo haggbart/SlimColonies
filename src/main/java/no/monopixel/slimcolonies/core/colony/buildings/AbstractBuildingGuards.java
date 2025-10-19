@@ -52,15 +52,15 @@ public abstract class AbstractBuildingGuards extends AbstractBuilding implements
      * Settings.
      */
     public static final ISettingKey<BoolSetting>            RETREAT      =
-        new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "retreat"));
+        new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "retreat"));
     public static final ISettingKey<BoolSetting>            HIRE_TRAINEE =
-        new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "hiretrainee"));
+        new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hiretrainee"));
     public static final ISettingKey<GuardPatrolModeSetting> PATROL_MODE  =
-        new SettingKey<>(GuardPatrolModeSetting.class, new ResourceLocation(Constants.MOD_ID, "patrolmode"));
+        new SettingKey<>(GuardPatrolModeSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "patrolmode"));
     public static final ISettingKey<GuardFollowModeSetting> FOLLOW_MODE  =
-        new SettingKey<>(GuardFollowModeSetting.class, new ResourceLocation(Constants.MOD_ID, "followmode"));
+        new SettingKey<>(GuardFollowModeSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "followmode"));
     public static final ISettingKey<GuardTaskSetting>       GUARD_TASK   =
-        new SettingKey<>(GuardTaskSetting.class, new ResourceLocation(Constants.MOD_ID, "guardtask"));
+        new SettingKey<>(GuardTaskSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "guardtask"));
 
 
     //manual patroll. retreat, hire from training

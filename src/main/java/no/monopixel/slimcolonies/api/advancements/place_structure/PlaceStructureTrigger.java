@@ -15,7 +15,7 @@ public class PlaceStructureTrigger extends AbstractCriterionTrigger<PlaceStructu
 {
     public PlaceStructureTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_STRUCTURE_PLACED), PlaceStructureListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_STRUCTURE_PLACED), PlaceStructureListeners::new);
     }
 
     /**

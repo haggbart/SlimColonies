@@ -15,16 +15,16 @@ import static no.monopixel.slimcolonies.api.quests.registries.QuestRegistries.*;
 public final class ModQuestInitializer
 {
     public final static DeferredRegister<QuestRegistries.ObjectiveEntry>
-        DEFERRED_REGISTER_OBJECTIVE = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "questobjectives"), Constants.MOD_ID);
+        DEFERRED_REGISTER_OBJECTIVE = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questobjectives"), Constants.MOD_ID);
 
     public final static DeferredRegister<QuestRegistries.TriggerEntry>
-        DEFERRED_REGISTER_TRIGGER = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "questtriggers"), Constants.MOD_ID);
+        DEFERRED_REGISTER_TRIGGER = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questtriggers"), Constants.MOD_ID);
 
     public final static DeferredRegister<QuestRegistries.RewardEntry>
-        DEFERRED_REGISTER_REWARD = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "questrewards"), Constants.MOD_ID);
+        DEFERRED_REGISTER_REWARD = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questrewards"), Constants.MOD_ID);
 
     public final static DeferredRegister<QuestRegistries.DialogueAnswerEntry>
-        DEFERRED_REGISTER_ANSWER_RESULT = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "questanswerresults"), Constants.MOD_ID);
+        DEFERRED_REGISTER_ANSWER_RESULT = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "questanswerresults"), Constants.MOD_ID);
 
     private ModQuestInitializer()
     {

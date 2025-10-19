@@ -75,7 +75,7 @@ public abstract class AbstractCraftingBuildingModule extends AbstractBuildingMod
     /**
      * The recipemode of the crafter (either priority based, or warehouse stock baseD).
      */
-    public static final ISettingKey<CrafterRecipeSetting> RECIPE_MODE = new SettingKey<>(CrafterRecipeSetting.class, new ResourceLocation(Constants.MOD_ID, "recipemode"));
+    public static final ISettingKey<CrafterRecipeSetting> RECIPE_MODE = new SettingKey<>(CrafterRecipeSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "recipemode"));
 
     /**
      * The base chance for a recipe to be improved. This is modified by worker skill and the number of items crafted

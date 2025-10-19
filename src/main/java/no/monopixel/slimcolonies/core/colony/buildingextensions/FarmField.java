@@ -310,8 +310,8 @@ public class FarmField extends AbstractBuildingExtensionModule
      */
     public enum Stage
     {
-        READY(new ResourceLocation("minecraft", "textures/item/iron_hoe.png")),
-        RESTING(new ResourceLocation("minecraft", "textures/item/clock_00.png"));
+        READY(ResourceLocation.fromNamespaceAndPath("minecraft", "textures/item/iron_hoe.png")),
+        RESTING(ResourceLocation.fromNamespaceAndPath("minecraft", "textures/item/clock_00.png"));
 
         protected final ResourceLocation stageIcon;
 

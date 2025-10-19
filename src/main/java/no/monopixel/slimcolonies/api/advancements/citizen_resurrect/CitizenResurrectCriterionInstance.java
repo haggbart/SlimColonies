@@ -12,6 +12,6 @@ public class CitizenResurrectCriterionInstance extends AbstractCriterionTriggerI
 {
     public CitizenResurrectCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CITIZEN_RESURRECT), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CITIZEN_RESURRECT), ContextAwarePredicate.ANY);
     }
 }

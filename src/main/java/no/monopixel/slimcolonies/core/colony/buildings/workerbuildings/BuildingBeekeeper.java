@@ -46,7 +46,7 @@ public class BuildingBeekeeper extends AbstractBuilding
      * The beekeeper mode.
      */
     public static final ISettingKey<BeekeeperCollectionSetting> MODE =
-        new SettingKey<>(BeekeeperCollectionSetting.class, new ResourceLocation(Constants.MOD_ID, "beekeeper"));
+        new SettingKey<>(BeekeeperCollectionSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "beekeeper"));
 
     /**
      * Both setting options.

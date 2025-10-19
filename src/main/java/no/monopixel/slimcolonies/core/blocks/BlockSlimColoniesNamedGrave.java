@@ -55,7 +55,7 @@ public class BlockSlimColoniesNamedGrave extends AbstractBlockSlimColoniesNamedG
     @Override
     public ResourceLocation getRegistryName()
     {
-        return new ResourceLocation(Constants.MOD_ID, BLOCK_NAME);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, BLOCK_NAME);
     }
 
     @Override

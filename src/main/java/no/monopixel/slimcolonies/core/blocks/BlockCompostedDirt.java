@@ -41,7 +41,7 @@ public class BlockCompostedDirt extends AbstractBlockSlimColonies<BlockComposted
     @Override
     public ResourceLocation getRegistryName()
     {
-        return new ResourceLocation(Constants.MOD_ID, BLOCK_NAME);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, BLOCK_NAME);
     }
 
     @Nullable

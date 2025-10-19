@@ -8,11 +8,11 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
 
 public class ModCraftingTypes
 {
-    public static final ResourceLocation SMALL_CRAFTING_ID = new ResourceLocation(MOD_ID, "smallcrafting");
-    public static final ResourceLocation LARGE_CRAFTING_ID = new ResourceLocation(MOD_ID, "largecrafting");
-    public static final ResourceLocation SMELTING_ID = new ResourceLocation(MOD_ID, "smelting");
-    public static final ResourceLocation BREWING_ID = new ResourceLocation(MOD_ID, "brewing");
-    public static final ResourceLocation ARCHITECTS_CUTTER_ID = new ResourceLocation("domum_ornamentum", "architects_cutter");
+    public static final ResourceLocation SMALL_CRAFTING_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "smallcrafting");
+    public static final ResourceLocation LARGE_CRAFTING_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "largecrafting");
+    public static final ResourceLocation SMELTING_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "smelting");
+    public static final ResourceLocation BREWING_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "brewing");
+    public static final ResourceLocation ARCHITECTS_CUTTER_ID = ResourceLocation.fromNamespaceAndPath("domum_ornamentum", "architects_cutter");
 
     public static RegistryObject<CraftingType> SMALL_CRAFTING;
     public static RegistryObject<CraftingType> LARGE_CRAFTING;

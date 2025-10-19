@@ -50,7 +50,7 @@ public class WindowBuildingBrowser extends AbstractWindowSkeleton
      * Number of worker threads to spawn to scan blueprints (each pack on a separate thread); higher reduces total search time.
      */
     private static final int WORKER_THREADS = 4;
-    private static final ResourceLocation WINDOW_RESOURCE = new ResourceLocation(MOD_ID, "gui/windowbrowsebuilding.xml");
+    private static final ResourceLocation WINDOW_RESOURCE = ResourceLocation.fromNamespaceAndPath(MOD_ID, "gui/windowbrowsebuilding.xml");
     @SuppressWarnings("ConstantConditions") private static final int COLOR_NORMAL          = ChatFormatting.BLACK.getColor();
     @SuppressWarnings("ConstantConditions") private static final int COLOR_CHILD           = ChatFormatting.DARK_GREEN.getColor();
     @SuppressWarnings("ConstantConditions") private static final int COLOR_INVISIBLE       = ChatFormatting.DARK_BLUE.getColor();

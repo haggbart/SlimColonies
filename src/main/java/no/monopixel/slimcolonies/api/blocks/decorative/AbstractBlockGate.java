@@ -489,7 +489,7 @@ public abstract class AbstractBlockGate extends DoorBlock implements LiquidBlock
      */
     public AbstractBlockGate registerBlock(final IForgeRegistry<Block> registry)
     {
-        registry.register(new ResourceLocation(Constants.MOD_ID, this.name), this);
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, this.name), this);
         return this;
     }
 
@@ -501,7 +501,7 @@ public abstract class AbstractBlockGate extends DoorBlock implements LiquidBlock
      */
     public void registerBlockItem(final IForgeRegistry<Item> registry, final Item.Properties properties)
     {
-        registry.register(new ResourceLocation(Constants.MOD_ID, this.name), new BlockItem(this, properties));
+        registry.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, this.name), new BlockItem(this, properties));
     }
 
     @Override

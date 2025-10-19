@@ -12,7 +12,7 @@ public class CitizenEatFoodTrigger extends AbstractCriterionTrigger<CitizenEatFo
 {
     public CitizenEatFoodTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CITIZEN_EAT_FOOD), CitizenEatFoodListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CITIZEN_EAT_FOOD), CitizenEatFoodListeners::new);
     }
 
     /**

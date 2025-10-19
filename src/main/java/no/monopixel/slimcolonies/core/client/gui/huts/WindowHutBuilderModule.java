@@ -20,7 +20,7 @@ public class WindowHutBuilderModule extends AbstractWindowWorkerModuleBuilding<B
      * The advancement location.
      */
 
-    private static final ResourceLocation GUIDE_ADVANCEMENT = new ResourceLocation(Constants.MOD_ID, "slimcolonies/check_out_guide");
+    private static final ResourceLocation GUIDE_ADVANCEMENT = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "slimcolonies/check_out_guide");
 
     /**
      * If the guide should be attempted to be opened.

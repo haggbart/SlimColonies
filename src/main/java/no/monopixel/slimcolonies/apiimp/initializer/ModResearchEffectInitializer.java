@@ -15,7 +15,7 @@ import static no.monopixel.slimcolonies.api.research.ModResearchEffects.*;
 public class ModResearchEffectInitializer
 {
     public final static DeferredRegister<ResearchEffectEntry> DEFERRED_REGISTER =
-        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "researcheffecttypes"), Constants.MOD_ID);
+        DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "researcheffecttypes"), Constants.MOD_ID);
     static
     {
         globalResearchEffect = create(GLOBAL_EFFECT_ID, GlobalResearchEffect::new);

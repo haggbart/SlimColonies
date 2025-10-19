@@ -8,8 +8,8 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModGuardTypes
 {
 
-    public static final ResourceLocation KNIGHT_ID = new ResourceLocation(Constants.MOD_ID, "knight");
-    public static final ResourceLocation RANGER_ID = new ResourceLocation(Constants.MOD_ID, "ranger");
+    public static final ResourceLocation KNIGHT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "knight");
+    public static final ResourceLocation RANGER_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ranger");
 
     public static RegistryObject<GuardType> knight;
     public static RegistryObject<GuardType> ranger;

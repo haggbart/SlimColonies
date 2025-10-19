@@ -19,9 +19,9 @@ import static no.monopixel.slimcolonies.api.util.constant.Constants.MOD_ID;
  */
 public class DefaultRecipeLootProvider extends SimpleLootTableProvider
 {
-    public static final ResourceLocation LOOT_TABLE_GLASS_BOTTLE = new ResourceLocation(MOD_ID, "recipes/glass_bottle");
-    public static final ResourceLocation LOOT_TABLE_LARGE_BOTTLE = new ResourceLocation(MOD_ID, "recipes/large_bottle");
-    public static final ResourceLocation LOOT_TABLE_GRAVEL = new ResourceLocation(MOD_ID, "recipes/gravel");
+    public static final ResourceLocation LOOT_TABLE_GLASS_BOTTLE = ResourceLocation.fromNamespaceAndPath(MOD_ID, "recipes/glass_bottle");
+    public static final ResourceLocation LOOT_TABLE_LARGE_BOTTLE = ResourceLocation.fromNamespaceAndPath(MOD_ID, "recipes/large_bottle");
+    public static final ResourceLocation LOOT_TABLE_GRAVEL = ResourceLocation.fromNamespaceAndPath(MOD_ID, "recipes/gravel");
 
     public DefaultRecipeLootProvider(@NotNull final PackOutput packOutput)
     {

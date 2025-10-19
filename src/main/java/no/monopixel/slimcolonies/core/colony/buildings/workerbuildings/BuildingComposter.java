@@ -33,12 +33,12 @@ public class BuildingComposter extends AbstractBuilding
     /**
      * Settings key for the composting mode.
      */
-    public static final ISettingKey<BoolSetting> PRODUCE_DIRT = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "producedirt"));
+    public static final ISettingKey<BoolSetting> PRODUCE_DIRT = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "producedirt"));
 
     /**
      * Key for min remainder at warehouse.
      */
-    public static final ISettingKey<IntSetting> MIN = new SettingKey<>(IntSetting.class, new ResourceLocation(Constants.MOD_ID, "warehousemin"));
+    public static final ISettingKey<IntSetting> MIN = new SettingKey<>(IntSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "warehousemin"));
 
     /**
      * Description of the job for this building

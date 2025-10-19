@@ -79,7 +79,7 @@ public class JEIPlugin implements IModPlugin
     @Override
     public ResourceLocation getPluginUid()
     {
-        return new ResourceLocation(Constants.MOD_ID);
+        return ResourceLocation.parse(Constants.MOD_ID);
     }
 
     private final List<JobBasedRecipeCategory<?>> categories = new ArrayList<>();

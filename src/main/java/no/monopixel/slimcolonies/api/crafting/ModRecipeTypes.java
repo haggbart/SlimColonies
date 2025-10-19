@@ -8,8 +8,8 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModRecipeTypes
 {
 
-    public static final ResourceLocation CLASSIC_ID    = new ResourceLocation(Constants.MOD_ID, "classic");
-    public static final ResourceLocation MULTI_OUTPUT_ID    = new ResourceLocation(Constants.MOD_ID, "multi_output");
+    public static final ResourceLocation CLASSIC_ID    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "classic");
+    public static final ResourceLocation MULTI_OUTPUT_ID    = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "multi_output");
 
     public static RegistryObject<RecipeTypeEntry> Classic;
     public static RegistryObject<RecipeTypeEntry> MultiOutput;

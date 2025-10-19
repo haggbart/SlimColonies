@@ -36,8 +36,8 @@ public class FarmersDelightRecipeAdapter
 {
     private static final String           FARMERS_DELIGHT_MOD_ID = "farmersdelight";
     private static final String           CHEF_CRAFTER           = ModJobs.CHEF_ID.getPath() + "_crafting";
-    private static final ResourceLocation FD_COOKING_RECIPE_TYPE = new ResourceLocation(FARMERS_DELIGHT_MOD_ID, "cooking");
-    private static final ResourceLocation FD_CUTTING_RECIPE_TYPE = new ResourceLocation(FARMERS_DELIGHT_MOD_ID, "cutting");
+    private static final ResourceLocation FD_COOKING_RECIPE_TYPE = ResourceLocation.fromNamespaceAndPath(FARMERS_DELIGHT_MOD_ID, "cooking");
+    private static final ResourceLocation FD_CUTTING_RECIPE_TYPE = ResourceLocation.fromNamespaceAndPath(FARMERS_DELIGHT_MOD_ID, "cutting");
 
     @SubscribeEvent
     public static void onCustomRecipesReloaded(@NotNull final CustomRecipesReloadedEvent event)

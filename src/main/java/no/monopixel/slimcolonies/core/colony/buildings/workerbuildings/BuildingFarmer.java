@@ -61,7 +61,7 @@ public class BuildingFarmer extends AbstractBuilding
      * The beekeeper mode.
      */
     public static final ISettingKey<BoolSetting> FERTILIZE =
-        new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "fertilize"));
+        new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fertilize"));
 
     /**
      * Descriptive string of the profession.

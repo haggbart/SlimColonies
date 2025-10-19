@@ -16,7 +16,7 @@ public class CitizenGrownUpEvent extends AbstractCitizenEvent
     /**
      * This events id, registry entries use res locations as ids.
      */
-    public static final ResourceLocation CITIZEN_GROWN_UP_EVENT_ID = new ResourceLocation(Constants.MOD_ID, "citizen_grown_up");
+    public static final ResourceLocation CITIZEN_GROWN_UP_EVENT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "citizen_grown_up");
 
     /**
      * Creates a new citizen grown up event.

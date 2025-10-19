@@ -36,7 +36,7 @@ public class RecruitmentInteraction extends ServerCitizenInteraction
     /**
      * The icon's res location which is displayed for this interaction
      */
-    private static final ResourceLocation icon = new ResourceLocation(Constants.MOD_ID, "textures/icons/recruiticon.png");
+    private static final ResourceLocation icon = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/recruiticon.png");
 
     /**
      * The recruit answer

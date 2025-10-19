@@ -62,7 +62,7 @@ public class KnightCombatAI extends AttackMoveAI<EntityCitizen>
      * Combat icon
      */
     private final static VisibleCitizenStatus KNIGHT_COMBAT =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/knight_combat.png"), "no.monopixel.slimcolonies.gui.visiblestatus.knight_combat");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/knight_combat.png"), "no.monopixel.slimcolonies.gui.visiblestatus.knight_combat");
 
     /**
      * Knockback chance

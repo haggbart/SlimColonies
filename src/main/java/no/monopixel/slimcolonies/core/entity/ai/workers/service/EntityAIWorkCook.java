@@ -80,7 +80,7 @@ public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, Build
      * Cooking icon
      */
     private final static VisibleCitizenStatus COOK =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/cook.png"), "no.monopixel.slimcolonies.gui.visiblestatus.cook");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/cook.png"), "no.monopixel.slimcolonies.gui.visiblestatus.cook");
 
     /**
      * Constructor for the Cook. Defines the tasks the cook executes.

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MaxFieldsTrigger extends AbstractCriterionTrigger<CriterionListeners<MaxFieldsCriterionInstance>, MaxFieldsCriterionInstance>
 {
-    private final static ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_MAX_FIELDS);
+    private final static ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_MAX_FIELDS);
 
     public MaxFieldsTrigger()
     {

@@ -131,7 +131,7 @@ public class DefaultStoriesProvider implements DataProvider
                         "17th day of Winter, Year 2, in the Time of Mining:\n%s was built upon the promise of hidden riches in a %s, its foundations rooted in the very earth we sought to tame. With pickaxes in hand, we delved deep into the underground, eager to uncover the treasures that lay hidden beneath.\n\n9th day of Spring, Year 3, in the Time of Mining:\nBut our lust for gold and diamonds drew the attention of the cave-dwellers, vile creatures that lurked in the darkness. Zombies and skeletons emerged from the shadows, their hunger for flesh insatiable.\n\n25th day of Summer, Year 4, in the Time of Mining:\nDespite our best efforts to defend our tunnels, the attacks grew more frequent and more ferocious."
                 ).build());
 
-        return DataProvider.saveStable(cachedOutput, json, outputProvider.json(new ResourceLocation(MOD_ID, "abandonedcolonies")));
+        return DataProvider.saveStable(cachedOutput, json, outputProvider.json(ResourceLocation.fromNamespaceAndPath(MOD_ID, "abandonedcolonies")));
     }
 
     private CompletableFuture<?> makeSupplyStories(@NotNull final PackOutput.PathProvider outputProvider,
@@ -167,7 +167,7 @@ public class DefaultStoriesProvider implements DataProvider
                         "Whispers on the Wind:\n\nA yearning for a fresh start propelled us to set sail for a distant land, hearts ablaze with dreams of a new colony. We weathered the ocean's fury, our spirits high with hope, until a new horizon unfolded before us. We disembarked, venturing deeper into the unknown, but our dreams crumbled under the weight of dwindling resources and a hostile environment. We were stalked by unseen predators. Now, the lone echo of a forgotten past, I leave this inscription: the path to greatness is riddled with perils. May fortune guide you where it misled us, and may you bloom where we perished."
                 ).build());
 
-        return DataProvider.saveStable(cachedOutput, json, outputProvider.json(new ResourceLocation(MOD_ID, "supplies")));
+        return DataProvider.saveStable(cachedOutput, json, outputProvider.json(ResourceLocation.fromNamespaceAndPath(MOD_ID, "supplies")));
     }
 
     private static class StoryBuilder

@@ -143,7 +143,7 @@ public abstract class AbstractResearchProvider implements DataProvider
             futures[i++] = DataProvider.saveStable(cache, model.getA(), target);
         }
 
-        futures[i] = DataProvider.saveStable(cache, langJson, langPath.json(new ResourceLocation(Constants.MOD_ID, "default")));
+        futures[i] = DataProvider.saveStable(cache, langJson, langPath.json(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "default")));
 
         return CompletableFuture.allOf(futures);
     }
@@ -427,7 +427,7 @@ public abstract class AbstractResearchProvider implements DataProvider
         {
             final JsonArray reqArray = getRequirementsArray();
             final JsonObject req = new JsonObject();
-            req.addProperty("type", new ResourceLocation(Constants.MOD_ID, "building").toString());
+            req.addProperty("type", ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "building").toString());
             req.addProperty("building", buildingName.toString());
             req.addProperty("level", level);
             reqArray.add(req);
@@ -450,7 +450,7 @@ public abstract class AbstractResearchProvider implements DataProvider
         {
             final JsonArray reqArray = getRequirementsArray();
             final JsonObject req = new JsonObject();
-            req.addProperty("type", new ResourceLocation(Constants.MOD_ID, "single-building").toString());
+            req.addProperty("type", ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "single-building").toString());
             req.addProperty("building", buildingName.toString());
             req.addProperty("level", level);
             reqArray.add(req);
@@ -474,7 +474,7 @@ public abstract class AbstractResearchProvider implements DataProvider
         {
             final JsonArray reqArray = getRequirementsArray();
             final JsonObject req = new JsonObject();
-            req.addProperty("type", new ResourceLocation(Constants.MOD_ID, "alternate-building").toString());
+            req.addProperty("type", ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "alternate-building").toString());
             final JsonArray buildingsArray = new JsonArray();
             for (final ResourceLocation buildingName : buildingNames)
             {

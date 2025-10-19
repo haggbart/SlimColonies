@@ -24,7 +24,7 @@ import java.util.function.Consumer;
 public class ModEquipmentTypes
 {
     public static final DeferredRegister<EquipmentTypeEntry> DEFERRED_REGISTER =
-        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "equipmenttypes"), Constants.MOD_ID);
+        DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "equipmenttypes"), Constants.MOD_ID);
 
     public static final RegistryObject<EquipmentTypeEntry> none;
     public static final RegistryObject<EquipmentTypeEntry> pickaxe;
@@ -153,7 +153,7 @@ public class ModEquipmentTypes
     private static RegistryObject<EquipmentTypeEntry> register(final String id, final Consumer<EquipmentTypeEntry.Builder> consumer)
     {
         EquipmentTypeEntry.Builder equipmentType = new EquipmentTypeEntry.Builder()
-            .setRegistryName(new ResourceLocation(Constants.MOD_ID, id));
+            .setRegistryName(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id));
         consumer.accept(equipmentType);
         return DEFERRED_REGISTER.register(id, equipmentType::build);
     }

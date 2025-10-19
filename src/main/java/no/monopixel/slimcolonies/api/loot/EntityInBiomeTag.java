@@ -80,7 +80,7 @@ public class EntityInBiomeTag implements LootItemCondition
                                             @NotNull final JsonDeserializationContext context)
         {
             final String tagId = GsonHelper.getAsString(json, "tag", "");
-            final TagKey<Biome> tag = tagId.isEmpty() ? null : ForgeRegistries.BIOMES.tags().createTagKey(new ResourceLocation(tagId));
+            final TagKey<Biome> tag = tagId.isEmpty() ? null : ForgeRegistries.BIOMES.tags().createTagKey(ResourceLocation.parse(tagId));
             return new EntityInBiomeTag(tag);
         }
     }

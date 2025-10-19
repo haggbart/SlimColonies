@@ -205,6 +205,6 @@ public class ColonyDeathpoints
     @NotNull
     private static MapImage loadIcon()
     {
-        return new MapImage(new ResourceLocation(MOD_ID, "textures/icons/grave_icon.png"), 16, 16);
+        return new MapImage(ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/icons/grave_icon.png"), 16, 16);
     }
 }

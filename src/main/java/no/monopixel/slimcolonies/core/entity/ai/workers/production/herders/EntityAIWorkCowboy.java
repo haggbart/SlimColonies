@@ -48,7 +48,7 @@ public class EntityAIWorkCowboy extends AbstractEntityAIHerder<JobCowboy, Buildi
      * Herd cow icon
      */
     private final static VisibleCitizenStatus HERD_COW =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/cowboy.png"), "no.monopixel.slimcolonies.gui.visiblestatus.cowboy");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/cowboy.png"), "no.monopixel.slimcolonies.gui.visiblestatus.cowboy");
 
     /**
      * Min wait between failed milking attempts.

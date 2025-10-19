@@ -10,7 +10,7 @@ import no.monopixel.slimcolonies.core.colony.interactionhandling.*;
 public final class ModInteractionsInitializer
 {
     public final static DeferredRegister<InteractionResponseHandlerEntry> DEFERRED_REGISTER =
-        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "interactionresponsehandlers"), Constants.MOD_ID);
+        DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "interactionresponsehandlers"), Constants.MOD_ID);
 
     private ModInteractionsInitializer()
     {

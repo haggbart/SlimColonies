@@ -97,7 +97,7 @@ public class LivingBuildingModuleView extends AbstractBuildingModuleView
     @Override
     public ResourceLocation getIconResourceLocation()
     {
-        return new ResourceLocation(Constants.MOD_ID, "textures/gui/modules/custom.png");
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/modules/custom.png");
     }
 
     public boolean isPageVisible() {return false;}

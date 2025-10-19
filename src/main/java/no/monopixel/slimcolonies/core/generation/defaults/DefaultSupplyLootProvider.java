@@ -40,7 +40,7 @@ public class DefaultSupplyLootProvider extends SimpleLootTableProvider
         final CompoundTag instantTag = new CompoundTag();
         instantTag.putString(PLACEMENT_NBT, INSTANT_PLACEMENT);
 
-        registrar.register(new ResourceLocation(MOD_ID, "chests/supplycamp"), LootContextParamSets.CHEST,
+        registrar.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "chests/supplycamp"), LootContextParamSets.CHEST,
             LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(ModItems.supplyCamp)
@@ -49,7 +49,7 @@ public class DefaultSupplyLootProvider extends SimpleLootTableProvider
                         .apply(SetNameFunction.setName(Component.translatable("item.slimcolonies.supply.free", ModItems.supplyCamp.getDescription()))))
                 ));
 
-        registrar.register(new ResourceLocation(MOD_ID, "chests/supplyship"), LootContextParamSets.CHEST,
+        registrar.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "chests/supplyship"), LootContextParamSets.CHEST,
             LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(ModItems.supplyChest)

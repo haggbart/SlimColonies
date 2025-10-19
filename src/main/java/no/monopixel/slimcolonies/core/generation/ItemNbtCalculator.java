@@ -125,7 +125,7 @@ public class ItemNbtCalculator implements DataProvider
             }
         }
 
-        final Path path = packOutput.createPathProvider(PackOutput.Target.DATA_PACK, "compatibility").file(new ResourceLocation(MOD_ID, "itemnbtmatching"), "json");
+        final Path path = packOutput.createPathProvider(PackOutput.Target.DATA_PACK, "compatibility").file(ResourceLocation.fromNamespaceAndPath(MOD_ID, "itemnbtmatching"), "json");
         final JsonArray jsonArray = new JsonArray();
         for (final Map.Entry<String, Set<CheckedNbtKey>> entry : keyMapping.entrySet())
         {

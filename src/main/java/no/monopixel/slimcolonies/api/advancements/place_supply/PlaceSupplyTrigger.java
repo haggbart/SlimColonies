@@ -15,7 +15,7 @@ public class PlaceSupplyTrigger extends AbstractCriterionTrigger<PlaceSupplyList
 {
     public PlaceSupplyTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_SUPPLY_PLACED), PlaceSupplyListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_SUPPLY_PLACED), PlaceSupplyListeners::new);
     }
 
     /**

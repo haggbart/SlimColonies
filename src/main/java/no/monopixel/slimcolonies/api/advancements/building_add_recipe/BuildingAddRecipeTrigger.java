@@ -16,7 +16,7 @@ public class BuildingAddRecipeTrigger extends AbstractCriterionTrigger<BuildingA
 {
     public BuildingAddRecipeTrigger()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_BUILDING_ADD_RECIPE), BuildingAddRecipeListeners::new);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_BUILDING_ADD_RECIPE), BuildingAddRecipeListeners::new);
     }
 
     /**

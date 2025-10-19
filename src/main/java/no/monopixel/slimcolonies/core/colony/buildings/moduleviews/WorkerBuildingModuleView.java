@@ -102,7 +102,7 @@ public class WorkerBuildingModuleView extends AbstractBuildingModuleView impleme
     @Override
     public ResourceLocation getIconResourceLocation()
     {
-        return new ResourceLocation(Constants.MOD_ID, "textures/gui/modules/custom.png");
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/modules/custom.png");
     }
 
     @Override

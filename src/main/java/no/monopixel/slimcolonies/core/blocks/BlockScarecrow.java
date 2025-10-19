@@ -57,7 +57,7 @@ public class BlockScarecrow extends AbstractBlockSlimColoniesDefault<BlockScarec
     @Override
     public ResourceLocation getRegistryName()
     {
-        return new ResourceLocation(Constants.MOD_ID, REGISTRY_NAME);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, REGISTRY_NAME);
     }
 
     @Nullable

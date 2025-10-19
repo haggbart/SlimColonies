@@ -47,7 +47,7 @@ import static no.monopixel.slimcolonies.api.util.ItemStackUtils.ISFOOD;
  */
 public class FoodIngredient extends Ingredient
 {
-    public static final ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, "food");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "food");
 
     public static final String MIN_HEALING_PROP = "min-healing";
     public static final String MAX_HEALING_PROP = "max-healing";

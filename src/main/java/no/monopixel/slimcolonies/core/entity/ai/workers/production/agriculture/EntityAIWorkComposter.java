@@ -82,7 +82,7 @@ public class EntityAIWorkComposter extends AbstractEntityAIInteract<JobComposter
      * Composting icon
      */
     private final static VisibleCitizenStatus COMPOST =
-        new VisibleCitizenStatus(new ResourceLocation(Constants.MOD_ID, "textures/icons/work/composter.png"), "no.monopixel.slimcolonies.gui.visiblestatus.composter");
+        new VisibleCitizenStatus(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/icons/work/composter.png"), "no.monopixel.slimcolonies.gui.visiblestatus.composter");
 
     /**
      * Constructor for the AI

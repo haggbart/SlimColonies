@@ -26,7 +26,7 @@ public class TileEntityEnchanterRenderer implements BlockEntityRenderer<TileEnti
     public static final Material TEXTURE_BOOK;
     static
     {
-        TEXTURE_BOOK = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(Constants.MOD_ID, "block/enchanting_table_book"));
+        TEXTURE_BOOK = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "block/enchanting_table_book"));
     }
 
     /**

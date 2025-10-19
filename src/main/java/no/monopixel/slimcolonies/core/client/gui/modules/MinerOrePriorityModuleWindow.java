@@ -32,14 +32,14 @@ public class MinerOrePriorityModuleWindow extends AbstractModuleWindow
 
     private static final String LABEL_LIMIT_REACHED = "no.monopixel.slimcolonies.coremod.gui.warehouse.limitreached";
 
-    private static final TagKey<Block> TAG_ORES_IN_NETHERRACK = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores_in_ground/netherrack"));
-    private static final TagKey<Block> TAG_ORES_IN_END_STONE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores_in_ground/end_stone"));
-    private static final TagKey<Block> TAG_ORES_IN_DEEPSLATE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores_in_ground/deepslate"));
-    private static final TagKey<Block> TAG_ORES_DIAMOND       = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/diamond"));
-    private static final TagKey<Block> TAG_ORES_EMERALD       = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/emerald"));
-    private static final TagKey<Block> TAG_ORES_LAPIS         = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/lapis"));
-    private static final TagKey<Block> TAG_ORES_REDSTONE      = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/redstone"));
-    private static final TagKey<Block> TAG_ORES_GOLD          = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation("forge", "ores/gold"));
+    private static final TagKey<Block> TAG_ORES_IN_NETHERRACK = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/netherrack"));
+    private static final TagKey<Block> TAG_ORES_IN_END_STONE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/end_stone"));
+    private static final TagKey<Block> TAG_ORES_IN_DEEPSLATE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/deepslate"));
+    private static final TagKey<Block> TAG_ORES_DIAMOND       = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/diamond"));
+    private static final TagKey<Block> TAG_ORES_EMERALD       = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/emerald"));
+    private static final TagKey<Block> TAG_ORES_LAPIS         = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/lapis"));
+    private static final TagKey<Block> TAG_ORES_REDSTONE      = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/redstone"));
+    private static final TagKey<Block> TAG_ORES_GOLD          = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/gold"));
 
     private static final Comparator<ItemStorage> BY_DISPLAY_NAME =
         Comparator.comparing(o -> o.getItemStack().getDisplayName().getString().toLowerCase(Locale.US));

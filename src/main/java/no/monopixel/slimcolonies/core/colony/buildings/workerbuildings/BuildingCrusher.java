@@ -24,8 +24,8 @@ public class BuildingCrusher extends AbstractBuilding
     /**
      * Settings key for the building mode.
      */
-    public static final ISettingKey<RecipeSetting> MODE        = new SettingKey<>(RecipeSetting.class, new ResourceLocation(Constants.MOD_ID, "crushermode"));
-    public static final ISettingKey<IntSetting>    DAILY_LIMIT = new SettingKey<>(IntSetting.class, new ResourceLocation(Constants.MOD_ID, "dailylimit"));
+    public static final ISettingKey<RecipeSetting> MODE        = new SettingKey<>(RecipeSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "crushermode"));
+    public static final ISettingKey<IntSetting>    DAILY_LIMIT = new SettingKey<>(IntSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "dailylimit"));
 
     /**
      * The multiplier to define the max craft per day.

@@ -39,8 +39,8 @@ public class BuildingBuilder extends AbstractBuildingStructureBuilder
     /**
      * Settings key for the building mode.
      */
-    public static final ISettingKey<StringSetting>      MODE          = new SettingKey<>(StringSetting.class, new ResourceLocation(Constants.MOD_ID, "mode"));
-    public static final ISettingKey<BuilderModeSetting> BUILDING_MODE = new SettingKey<>(BuilderModeSetting.class, new ResourceLocation(Constants.MOD_ID, "buildmode"));
+    public static final ISettingKey<StringSetting>      MODE          = new SettingKey<>(StringSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "mode"));
+    public static final ISettingKey<BuilderModeSetting> BUILDING_MODE = new SettingKey<>(BuilderModeSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "buildmode"));
 
     /**
      * Both setting options.

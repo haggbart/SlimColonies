@@ -20,7 +20,7 @@ public class ClickGuiButtonCriterionInstance extends AbstractCriterionTriggerIns
 
     public ClickGuiButtonCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ContextAwarePredicate.ANY);
     }
 
     /**
@@ -29,7 +29,7 @@ public class ClickGuiButtonCriterionInstance extends AbstractCriterionTriggerIns
      */
     public ClickGuiButtonCriterionInstance(final String buttonId)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ContextAwarePredicate.ANY);
 
         this.buttonId = buttonId;
     }
@@ -41,7 +41,7 @@ public class ClickGuiButtonCriterionInstance extends AbstractCriterionTriggerIns
      */
     public ClickGuiButtonCriterionInstance(final String buttonId, final String windowResource)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_CLICK_GUI_BUTTON), ContextAwarePredicate.ANY);
 
         this.windowResource = windowResource;
         this.buttonId = buttonId;

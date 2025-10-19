@@ -12,6 +12,6 @@ public class PlaceSupplyCriterionInstance extends AbstractCriterionTriggerInstan
 {
     public PlaceSupplyCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_SUPPLY_PLACED), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_SUPPLY_PLACED), ContextAwarePredicate.ANY);
     }
 }

@@ -12,6 +12,6 @@ public class AllTowersCriterionInstance extends AbstractCriterionTriggerInstance
 {
     public AllTowersCriterionInstance()
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_ALL_TOWERS), ContextAwarePredicate.ANY);
+        super(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_ALL_TOWERS), ContextAwarePredicate.ANY);
     }
 }

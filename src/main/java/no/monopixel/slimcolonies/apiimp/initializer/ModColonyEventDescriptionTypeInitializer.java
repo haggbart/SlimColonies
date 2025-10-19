@@ -16,7 +16,7 @@ import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.*;
 public final class ModColonyEventDescriptionTypeInitializer
 {
     public final static DeferredRegister<ColonyEventDescriptionTypeRegistryEntry> DEFERRED_REGISTER =
-        DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "colonyeventdesctypes"), Constants.MOD_ID);
+        DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "colonyeventdesctypes"), Constants.MOD_ID);
 
     private ModColonyEventDescriptionTypeInitializer()
     {

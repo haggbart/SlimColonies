@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class DeepMineTrigger extends AbstractCriterionTrigger<CriterionListeners<DeepMineCriterionInstance>, DeepMineCriterionInstance>
 {
-    private final static ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, Constants.CRITERION_DEEP_MINE);
+    private final static ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, Constants.CRITERION_DEEP_MINE);
 
     public DeepMineTrigger()
     {

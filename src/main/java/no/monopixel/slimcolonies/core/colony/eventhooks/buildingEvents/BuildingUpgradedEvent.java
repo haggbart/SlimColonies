@@ -15,7 +15,7 @@ public class BuildingUpgradedEvent extends AbstractBuildingEvent
     /**
      * This events id, registry entries use res locations as ids.
      */
-    public static final ResourceLocation BUILDING_UPGRADED_EVENT_ID = new ResourceLocation(Constants.MOD_ID, "building_upgraded");
+    public static final ResourceLocation BUILDING_UPGRADED_EVENT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "building_upgraded");
 
     /**
      * Creates a new building upgraded event.

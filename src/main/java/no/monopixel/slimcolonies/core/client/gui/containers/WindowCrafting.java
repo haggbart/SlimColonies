@@ -39,9 +39,9 @@ import static no.monopixel.slimcolonies.api.util.constant.translation.BaseGameTr
  */
 public class WindowCrafting extends AbstractContainerScreen<ContainerCrafting>
 {
-    private static final ResourceLocation CRAFTING_TABLE_GUI_TEXTURES = new ResourceLocation(MOD_ID, "textures/gui/crafting2x2.png");
+    private static final ResourceLocation CRAFTING_TABLE_GUI_TEXTURES = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/gui/crafting2x2.png");
 
-    private static final ResourceLocation CRAFTING_TABLE_GUI_TEXTURES3X3 = new ResourceLocation(MOD_ID, "textures/gui/crafting3x3.png");
+    private static final ResourceLocation CRAFTING_TABLE_GUI_TEXTURES3X3 = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/gui/crafting3x3.png");
 
     /**
      * X offset of the button.

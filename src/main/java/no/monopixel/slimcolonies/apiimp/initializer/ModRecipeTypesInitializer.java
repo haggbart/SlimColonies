@@ -10,7 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 
 public final class ModRecipeTypesInitializer
 {
-    public final static DeferredRegister<RecipeTypeEntry> DEFERRED_REGISTER = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "recipetypeentries"), Constants.MOD_ID);
+    public final static DeferredRegister<RecipeTypeEntry> DEFERRED_REGISTER = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "recipetypeentries"), Constants.MOD_ID);
 
     private ModRecipeTypesInitializer()
     {

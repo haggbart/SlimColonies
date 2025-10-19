@@ -15,7 +15,7 @@ public class VisitorSpawnedEvent extends AbstractCitizenEvent
     /**
      * This events id, registry entries use res locations as ids.
      */
-    public static final ResourceLocation VISITOR_SPAWNED_EVENT_ID = new ResourceLocation(Constants.MOD_ID, "visitor_spawn");
+    public static final ResourceLocation VISITOR_SPAWNED_EVENT_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "visitor_spawn");
 
     /**
      * Creates a new visitor spawned event.

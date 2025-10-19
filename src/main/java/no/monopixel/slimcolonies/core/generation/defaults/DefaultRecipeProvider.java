@@ -432,13 +432,13 @@ public class DefaultRecipeProvider extends RecipeProvider
             .requires(Items.FERN)
             .requires(Items.FERN)
             .unlockedBy("has_fern", has(Items.FERN))
-            .save(consumer, new ResourceLocation(MOD_ID, "doublefern"));
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "doublefern"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.TALL_GRASS)
             .requires(Items.GRASS)
             .requires(Items.GRASS)
             .unlockedBy("has_grass", has(Items.GRASS))
-            .save(consumer, new ResourceLocation(MOD_ID, "doublegrass"));
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "doublegrass"));
     }
 
     private void buildFood(@NotNull final Consumer<FinishedRecipe> consumer)
@@ -467,7 +467,7 @@ public class DefaultRecipeProvider extends RecipeProvider
             .define('C', Items.CHAIN)
             .define('N', Items.IRON_NUGGET)
             .unlockedBy("has_iron", has(Items.IRON_INGOT))
-            .save(consumer, new ResourceLocation(MOD_ID, "chainmailhelmet"));
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "chainmailhelmet"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CHAINMAIL_CHESTPLATE)
             .pattern("C C")
@@ -476,7 +476,7 @@ public class DefaultRecipeProvider extends RecipeProvider
             .define('C', Items.CHAIN)
             .define('N', Items.IRON_NUGGET)
             .unlockedBy("has_iron", has(Items.IRON_INGOT))
-            .save(consumer, new ResourceLocation(MOD_ID, "chainmailchestplate"));
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "chainmailchestplate"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CHAINMAIL_LEGGINGS)
             .pattern("CNC")
@@ -485,7 +485,7 @@ public class DefaultRecipeProvider extends RecipeProvider
             .define('C', Items.CHAIN)
             .define('N', Items.IRON_NUGGET)
             .unlockedBy("has_iron", has(Items.IRON_INGOT))
-            .save(consumer, new ResourceLocation(MOD_ID, "chainmailleggings"));
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "chainmailleggings"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CHAINMAIL_BOOTS)
             .pattern("C C")
@@ -493,7 +493,7 @@ public class DefaultRecipeProvider extends RecipeProvider
             .define('C', Items.CHAIN)
             .define('N', Items.IRON_NUGGET)
             .unlockedBy("has_iron", has(Items.IRON_INGOT))
-            .save(consumer, new ResourceLocation(MOD_ID, "chainmailboots"));
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "chainmailboots"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.clipboard)
             .pattern("XTX")
@@ -545,7 +545,7 @@ public class DefaultRecipeProvider extends RecipeProvider
             .define('X', Items.EMERALD)
             .define('S', Items.STICK)
             .unlockedBy("has_stick", has(Items.STICK))
-            .save(consumer, new ResourceLocation(MOD_ID, "shapetool"));
+            .save(consumer, ResourceLocation.fromNamespaceAndPath(MOD_ID, "shapetool"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.supplyCamp)
             .pattern("   ")

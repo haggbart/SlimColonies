@@ -1153,7 +1153,7 @@ public final class WindowConstants
     /**
      * Crafting switch buttons texture.
      */
-    public static final ResourceLocation CRAFTING_SWITCH_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/craftingswitch.png");
+    public static final ResourceLocation CRAFTING_SWITCH_TEXTURE = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/gui/craftingswitch.png");
 
     /**
      * Switch button size.

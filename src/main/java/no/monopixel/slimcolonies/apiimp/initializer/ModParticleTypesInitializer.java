@@ -21,7 +21,7 @@ public class ModParticleTypesInitializer
      * Particle type
      */
     public static final SimpleParticleType SLEEPINGPARTICLE_TYPE = new SimpleParticleType(true);
-    public static final ResourceLocation  SLEEPING_TEXTURE      = new ResourceLocation(Constants.MOD_ID, "particle/sleeping");
+    public static final ResourceLocation  SLEEPING_TEXTURE      = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "particle/sleeping");
 
     /**
      * Register the particle

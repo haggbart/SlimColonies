@@ -22,8 +22,8 @@ public final class ModLootConditions
 {
     public final static DeferredRegister<LootItemConditionType> DEFERRED_REGISTER = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Constants.MOD_ID);
 
-    public static final ResourceLocation ENTITY_IN_BIOME_TAG_ID = new ResourceLocation(MOD_ID, "entity_in_biome_tag");
-    public static final ResourceLocation RESEARCH_UNLOCKED_ID = new ResourceLocation(MOD_ID, "research_unlocked");
+    public static final ResourceLocation ENTITY_IN_BIOME_TAG_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "entity_in_biome_tag");
+    public static final ResourceLocation RESEARCH_UNLOCKED_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "research_unlocked");
 
     public static final RegistryObject<LootItemConditionType> entityInBiomeTag;
     public static final RegistryObject<LootItemConditionType> researchUnlocked;

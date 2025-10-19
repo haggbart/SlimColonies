@@ -33,12 +33,12 @@ public class BuildingShepherd extends AbstractBuilding
     /**
      * Automatic dyeing.
      */
-    public static final ISettingKey<BoolSetting> DYEING = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "dyeing"));
+    public static final ISettingKey<BoolSetting> DYEING = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "dyeing"));
 
     /**
      * Automatic shearing.
      */
-    public static final ISettingKey<BoolSetting> SHEARING = new SettingKey<>(BoolSetting.class, new ResourceLocation(Constants.MOD_ID, "shearing"));
+    public static final ISettingKey<BoolSetting> SHEARING = new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "shearing"));
 
     /**
      * Description of the job executed in the hut.

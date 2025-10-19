@@ -98,7 +98,7 @@ public class SettingsModuleView extends AbstractBuildingModuleView implements IS
     @Override
     public ResourceLocation getIconResourceLocation()
     {
-        return new ResourceLocation(Constants.MOD_ID, "textures/gui/modules/settings.png");
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/modules/settings.png");
     }
 
     @Override

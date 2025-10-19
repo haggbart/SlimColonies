@@ -57,22 +57,22 @@ public class BuildingCowboy extends AbstractBuilding
     /**
      * Milking amount setting.
      */
-    public static final ISettingKey<IntSetting> MILKING_AMOUNT  = new SettingKey<>(IntSetting.class, new ResourceLocation(MOD_ID, "milking_amount"));
+    public static final ISettingKey<IntSetting> MILKING_AMOUNT  = new SettingKey<>(IntSetting.class, ResourceLocation.fromNamespaceAndPath(MOD_ID, "milking_amount"));
 
     /**
      * Stewing amount setting.
      */
-    public static final ISettingKey<IntSetting> STEWING_AMOUNT = new SettingKey<>(IntSetting.class, new ResourceLocation(MOD_ID, "stewing_amount"));
+    public static final ISettingKey<IntSetting> STEWING_AMOUNT = new SettingKey<>(IntSetting.class, ResourceLocation.fromNamespaceAndPath(MOD_ID, "stewing_amount"));
 
     /**
      * Milking days setting.
      */
-    public static final ISettingKey<IntSetting> MILKING_DAYS  = new SettingKey<>(IntSetting.class, new ResourceLocation(MOD_ID, "milking_days"));
+    public static final ISettingKey<IntSetting> MILKING_DAYS  = new SettingKey<>(IntSetting.class, ResourceLocation.fromNamespaceAndPath(MOD_ID, "milking_days"));
 
     /**
      * Milking days setting.
      */
-    public static final ISettingKey<StringSetting> MILK_ITEM  = new SettingKey<>(StringSetting.class, new ResourceLocation(MOD_ID, "milk_item"));
+    public static final ISettingKey<StringSetting> MILK_ITEM  = new SettingKey<>(StringSetting.class, ResourceLocation.fromNamespaceAndPath(MOD_ID, "milk_item"));
 
 
     /**

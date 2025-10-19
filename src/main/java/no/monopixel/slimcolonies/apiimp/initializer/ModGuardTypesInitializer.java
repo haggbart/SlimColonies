@@ -14,7 +14,7 @@ import static no.monopixel.slimcolonies.api.util.constant.translation.JobTransla
 
 public final class ModGuardTypesInitializer
 {
-    public final static DeferredRegister<GuardType> DEFERRED_REGISTER = DeferredRegister.create(new ResourceLocation(Constants.MOD_ID, "guardtypes"), Constants.MOD_ID);
+    public final static DeferredRegister<GuardType> DEFERRED_REGISTER = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "guardtypes"), Constants.MOD_ID);
 
     private ModGuardTypesInitializer()
     {

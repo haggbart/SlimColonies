@@ -27,7 +27,7 @@ public class DefaultEntityTypeTagsProvider extends EntityTypeTagsProvider
     {
         tag(ModTags.hostile).add(EntityType.SLIME);
         tag(ModTags.mobAttackBlacklist).add(EntityType.ENDERMAN, EntityType.LLAMA);
-        tag(ModTags.freeToInteractWith).addOptional(new ResourceLocation("corpse", "corpse"));
+        tag(ModTags.freeToInteractWith).addOptional(ResourceLocation.fromNamespaceAndPath("corpse", "corpse"));
 
     }
 }

@@ -64,7 +64,7 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
         copy(ModTags.concreteBlocks, ModTags.concreteItems);
         copy(ModTags.concretePowderBlocks, ModTags.concretePowderItems);
 
-        final TagKey<Item> shulkerBoxes = ItemTags.create(new ResourceLocation(MOD_ID, "shulker_boxes"));
+        final TagKey<Item> shulkerBoxes = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MOD_ID, "shulker_boxes"));
         tag(shulkerBoxes)
             .add(Items.SHULKER_BOX)
             .add(Items.WHITE_SHULKER_BOX)
@@ -84,7 +84,7 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .add(Items.RED_SHULKER_BOX)
             .add(Items.BLACK_SHULKER_BOX);
 
-        final TagKey<Item> glazedTerracotta = ItemTags.create(new ResourceLocation(MOD_ID, "glazed_terracotta"));
+        final TagKey<Item> glazedTerracotta = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MOD_ID, "glazed_terracotta"));
         tag(glazedTerracotta)
             .add(Items.WHITE_GLAZED_TERRACOTTA)
             .add(Items.ORANGE_GLAZED_TERRACOTTA)
@@ -103,7 +103,7 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .add(Items.RED_GLAZED_TERRACOTTA)
             .add(Items.BLACK_GLAZED_TERRACOTTA);
 
-        final TagKey<Item> storageBlocks = ItemTags.create(new ResourceLocation(MOD_ID, "storage_blocks"));
+        final TagKey<Item> storageBlocks = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MOD_ID, "storage_blocks"));
         tag(storageBlocks)
             .addTag(Tags.Items.STORAGE_BLOCKS)
             .add(Items.BONE_BLOCK)
