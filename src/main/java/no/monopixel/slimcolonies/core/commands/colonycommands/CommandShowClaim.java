@@ -64,24 +64,8 @@ public class CommandShowClaim implements IMCOPCommand
     {
         final MutableComponent text = Component.translatable("Claim data of chunk at: %sX %sZ\n", pos.getX(), pos.getZ()).withStyle(ChatFormatting.DARK_AQUA);
 
-        final List<Integer> staticColonyClaims = ColonyUtils.getStaticClaims(chunk);
         final int owningColony = ColonyUtils.getOwningColony(chunk);
-        if (!staticColonyClaims.isEmpty())
-        {
-            text.append(Component.translatable("OwnerID:%s Direct colony claims:\n", owningColony).withStyle(ChatFormatting.GOLD));
-            for (int colonyID : staticColonyClaims)
-            {
-                final IColony colony = IColonyManager.getInstance().getColonyByDimension(colonyID, level.dimension());
-                if (colony == null)
-                {
-                    text.append(Component.translatable("ID: %s Name: Unkown Colony\n", colonyID));
-                }
-                else
-                {
-                    text.append(Component.translatable("ID: %s Name: %s\n", colonyID, colony.getName()));
-                }
-            }
-        }
+        text.append(Component.translatable("Owning Colony ID: %s\n", owningColony).withStyle(ChatFormatting.GOLD));
 
         final Map<Integer, Set<BlockPos>> buildingClaims = ColonyUtils.getAllClaimingBuildings(chunk);
         if (!buildingClaims.isEmpty())

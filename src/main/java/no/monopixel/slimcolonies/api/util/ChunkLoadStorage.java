@@ -113,8 +113,8 @@ public class ChunkLoadStorage
         compound.putString(TAG_DIMENSION, dimension.toString());
 
         compound.put(TAG_CLAIM_LIST, owningChanges.stream().map(ChunkLoadStorage::getCompoundOfColonyId).collect(NBTUtils.toListNBT()));
-        compound.put(TAG_BUILDINGS, claimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
-        compound.put(TAG_BUILDINGS, unClaimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
+        compound.put(TAG_BUILDINGS_CLAIM, claimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
+        compound.put(TAG_BUILDINGS_UNCLAIM, unClaimingBuilding.stream().map(ChunkLoadStorage::writeTupleToNBT).collect(NBTUtils.toListNBT()));
 
         return compound;
     }
@@ -122,7 +122,7 @@ public class ChunkLoadStorage
     private static CompoundTag getCompoundOfColonyId(final int id)
     {
         final CompoundTag compound = new CompoundTag();
-        compound.putInt(TAG_COLONY_ID, id);
+        compound.putShort(TAG_COLONY_ID, (short) id);
         return compound;
     }
 

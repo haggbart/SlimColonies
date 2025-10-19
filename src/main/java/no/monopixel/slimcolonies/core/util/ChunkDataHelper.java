@@ -329,12 +329,9 @@ public final class ChunkDataHelper
 
         if (chunk.getPos().equals(ChunkPos.ZERO))
         {
-            if (chunk.getPos().equals(ChunkPos.ZERO))
+            if (colony == null || BlockPosUtil.getDistance2D(colony.getCenter(), BlockPos.ZERO) > 200)
             {
-                if (colony == null || BlockPosUtil.getDistance2D(colony.getCenter(), BlockPos.ZERO) > 200)
-                {
-                    Log.getLogger().warn("Trying to claim at zero chunk pos!:", new Exception());
-                }
+                Log.getLogger().warn("Trying to claim at zero chunk pos!:", new Exception());
             }
         }
 
