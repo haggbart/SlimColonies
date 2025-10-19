@@ -189,7 +189,7 @@ public class EntityAIWorkSmelter extends AbstractEntityAIUsesFurnace<JobSmelter,
         {
             return false;
         }
-        if (stack.is(ModTags.breakable_ore))
+        if (IColonyManager.getInstance().getCompatibilityManager().isBreakableOre(stack))
         {
             return false;
         }
