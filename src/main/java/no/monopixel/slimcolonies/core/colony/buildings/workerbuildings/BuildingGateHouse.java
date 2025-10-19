@@ -53,16 +53,6 @@ public class BuildingGateHouse extends AbstractBuildingGuards
     }
 
 
-    @Override
-    public int getClaimRadius(final int newLevel)
-    {
-        return switch (newLevel)
-        {
-            case 1, 2 -> 1;
-            case 3 -> 2;
-            default -> 0;
-        };
-    }
 
     @Override
     public int getBonusVision()

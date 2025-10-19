@@ -662,18 +662,9 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     @Override
     public int getClaimRadius(final int newLevel)
     {
-        switch (newLevel)
-        {
-            case 1:
-            case 2:
-            case 3:
-                return 1;
-            case 4:
-            case 5:
-                return 2;
-            default:
-                return 0;
-        }
+        if (newLevel >= 3) return 2;
+        if (newLevel >= 1) return 1;
+        return 0;
     }
 
     /**

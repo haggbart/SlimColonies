@@ -46,24 +46,6 @@ public class BuildingGuardTower extends AbstractBuildingGuards
         return MAX_LEVEL;
     }
 
-    @Override
-    public int getClaimRadius(final int newLevel)
-    {
-        switch (newLevel)
-        {
-            case 1:
-                return 2;
-            case 2:
-            case 3:
-                return 3;
-            case 4:
-                return 4;
-            case 5:
-                return 5;
-            default:
-                return 0;
-        }
-    }
 
     @Override
     public void onDestroyed()
