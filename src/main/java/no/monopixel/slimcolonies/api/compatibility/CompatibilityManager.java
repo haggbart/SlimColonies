@@ -76,6 +76,11 @@ public class CompatibilityManager implements ICompatibilityManager
     private final Set<Block> oreBlocks = new HashSet<>();
 
     /**
+     * Pre-computed map of breakable ore items. Items that drop themselves when broken are excluded.
+     */
+    private final Map<Item, Boolean> breakableOreCache = new HashMap<>();
+
+    /**
      * List of all ore-like items.
      */
     private final Set<ItemStorage> smeltableOres = new HashSet<>();
@@ -146,6 +151,7 @@ public class CompatibilityManager implements ICompatibilityManager
         food.clear();
         edibles.clear();
         fuel.clear();
+        breakableOreCache.clear();
         compostRecipes.clear();
 
         monsters = ImmutableSet.of();
@@ -164,6 +170,7 @@ public class CompatibilityManager implements ICompatibilityManager
         discoverAllItems(level);
 
         discoverModCompat();
+        discoverBreakableOres();
 
         discoverCompostRecipes(recipeManager);
         discoverMobs();
@@ -491,26 +498,7 @@ public class CompatibilityManager implements ICompatibilityManager
     @Override
     public boolean isBreakableOre(@NotNull final ItemStack stack)
     {
-        if (stack.is(ModTags.breakable_ore))
-        {
-            final Block block = Block.byItem(stack.getItem());
-            if (!block.defaultBlockState().isAir())
-            {
-                final List<LootTableAnalyzer.LootDrop> drops = CustomRecipeManager.getInstance().getLootDrops(block.getLootTable());
-                for (final LootTableAnalyzer.LootDrop drop : drops)
-                {
-                    for (final ItemStack dropStack : drop.getItemStacks())
-                    {
-                        if (ItemStackUtils.compareItemStacksIgnoreStackSize(stack, dropStack))
-                        {
-                            return false;   // blocks that drop themselves are not breakable ore
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        return breakableOreCache.getOrDefault(stack.getItem(), false);
     }
 
     @Override
@@ -783,6 +771,36 @@ public class CompatibilityManager implements ICompatibilityManager
     private void discoverModCompat()
     {
         // No mod compatibility currently supported
+    }
+
+    private void discoverBreakableOres()
+    {
+        for (final Item item : ForgeRegistries.ITEMS.tags().getTag(ModTags.breakable_ore))
+        {
+            final ItemStack stack = item.getDefaultInstance();
+            final Block block = Block.byItem(item);
+            if (block.defaultBlockState().isAir())
+            {
+                breakableOreCache.put(item, false);
+                continue;
+            }
+
+            final List<LootTableAnalyzer.LootDrop> drops = CustomRecipeManager.getInstance().getLootDrops(block.getLootTable());
+            boolean dropsSelf = false;
+            for (final LootTableAnalyzer.LootDrop drop : drops)
+            {
+                for (final ItemStack dropStack : drop.getItemStacks())
+                {
+                    if (ItemStackUtils.compareItemStacksIgnoreStackSize(stack, dropStack))
+                    {
+                        dropsSelf = true;
+                        break;
+                    }
+                }
+                if (dropsSelf) break;
+            }
+            breakableOreCache.put(item, !dropsSelf);
+        }
     }
 
     @Override
