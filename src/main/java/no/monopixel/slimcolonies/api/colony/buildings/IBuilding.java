@@ -125,11 +125,11 @@ public interface IBuilding extends IBuildingContainer, IModuleContainer<IBuildin
     void markDirty();
 
     /**
-     * Checks if this building have a work order.
+     * Checks if this building is pending construction (building, upgrading, or repairing).
      *
      * @return true if the building is building, upgrading or repairing.
      */
-    boolean hasWorkOrder();
+    boolean isPendingConstruction();
 
     /**
      * Remove the work order for the building.

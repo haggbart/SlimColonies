@@ -1,5 +1,6 @@
 package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
+import net.minecraft.core.BlockPos;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
@@ -7,12 +8,12 @@ import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingGuards;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.GuardBuildingModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.GuardTaskSetting;
-import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.TAG_ARCHER;
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.TAG_KNIGHT;
-import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.*;
+import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.KNIGHT_GATE_WORK;
+import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.RANGER_GATE_WORK;
 
 /**
  * Gate house building.
@@ -25,8 +26,8 @@ public class BuildingGateHouse extends AbstractBuildingGuards
     /**
      * Our constants. The Schematic names, Defence bonus, and Offence bonus.
      */
-    private static final String SCHEMATIC_NAME        = "gatehouse";
-    private static final int    MAX_LEVEL             = 3;
+    private static final String SCHEMATIC_NAME = "gatehouse";
+    private static final int    MAX_LEVEL      = 3;
 
     /**
      * The abstract constructor of the building.
@@ -51,8 +52,6 @@ public class BuildingGateHouse extends AbstractBuildingGuards
     {
         return MAX_LEVEL;
     }
-
-
 
     @Override
     public int getBonusVision()
@@ -89,7 +88,8 @@ public class BuildingGateHouse extends AbstractBuildingGuards
     {
         if (getLocationsFromTag(TAG_KNIGHT).size() < 2 || getLocationsFromTag(TAG_ARCHER).size() < 2)
         {
-            Log.getLogger().error("GateHouse at " + getID().toShortString() + " missing 'work' tag for guards of: " + getStructurePack() + " : " + getBlueprintPath());
+            Log.getLogger()
+                .error("GateHouse at " + getID().toShortString() + " missing 'knight' or 'archer' tag for guards of: " + getStructurePack() + " : " + getBlueprintPath());
             return getID();
         }
 

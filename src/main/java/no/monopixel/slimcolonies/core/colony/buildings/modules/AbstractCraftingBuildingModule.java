@@ -1,5 +1,6 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

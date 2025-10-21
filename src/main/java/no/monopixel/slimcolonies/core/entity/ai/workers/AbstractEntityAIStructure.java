@@ -303,6 +303,10 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
      */
     protected IAIState structureStep()
     {
+        if (!isThereAStructureToBuild())
+        {
+            return IDLE;
+        }
         if (structurePlacer.getB().getStage() == null)
         {
             resetCurrentStructure();
@@ -454,7 +458,7 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
         {
             if (hasListOfResInInvOrRequest(this, result.getBlockResult().getRequiredItems(), result.getBlockResult().getRequiredItems().size() > 1) == RECALC)
             {
-                job.getWorkOrder().setRequested(false);
+                building.getWorkOrder().setRequested(false);
                 return LOAD_STRUCTURE;
             }
             return NEEDS_ITEM;
@@ -493,7 +497,7 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
         }
         else
         {
-            return job.getWorkOrder().getLocation();
+            return building.getWorkOrder().getLocation();
         }
     }
 
@@ -947,11 +951,21 @@ public abstract class AbstractEntityAIStructure<J extends AbstractJobStructure<?
      */
     protected boolean isThereAStructureToBuild()
     {
-        if (structurePlacer == null || !structurePlacer.getB().hasBluePrint() || job.getWorkOrder() == null)
+        if (structurePlacer == null || !structurePlacer.getB().hasBluePrint() || building.getWorkOrder() == null)
         {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Check if the structure has already been cleared.
+     *
+     * @return true if so.
+     */
+    protected boolean isAlreadyCleared()
+    {
+        return false;
     }
 
     /**

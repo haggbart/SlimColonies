@@ -128,11 +128,11 @@ public interface IBuildingView extends IRequester, IModuleContainerView
     boolean isMirrored();
 
     /**
-     * Get the current work order level.
+     * Checks if this building is pending construction (building, upgrading, or repairing).
      *
-     * @return 0 if none, othewise the current level worked on
+     * @return true if the building is building, upgrading or repairing.
      */
-    boolean hasWorkOrder();
+    boolean isPendingConstruction();
 
     /**
      * Check if the building is current being built.
