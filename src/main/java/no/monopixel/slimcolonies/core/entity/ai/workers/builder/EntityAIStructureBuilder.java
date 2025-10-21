@@ -279,27 +279,27 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
      */
     private boolean checkForWorkOrder()
     {
-        if (!job.hasWorkOrder())
+        if (!building.hasWorkOrder())
         {
             building.setProgressPos(null, BuildingProgressStage.CLEAR);
             worker.getCitizenData().setStatusPosition(null);
             return false;
         }
 
-        final IWorkOrder wo = job.getWorkOrder();
+        final IWorkOrder wo = building.getWorkOrder();
 
         if (wo == null)
         {
-            job.setWorkOrder(null);
+            building.setWorkOrder(null);
             building.setProgressPos(null, null);
             worker.getCitizenData().setStatusPosition(null);
             return false;
         }
 
-        final IBuilding building = job.getColony().getBuildingManager().getBuilding(wo.getLocation());
-        if (building == null && wo instanceof WorkOrderBuilding && wo.getWorkOrderType() != WorkOrderType.REMOVE)
+        final IBuilding buildingAtLocation = job.getColony().getBuildingManager().getBuilding(wo.getLocation());
+        if (buildingAtLocation == null && wo instanceof WorkOrderBuilding && wo.getWorkOrderType() != WorkOrderType.REMOVE)
         {
-            job.complete();
+            building.complete(worker.getCitizenData());
             return false;
         }
 
@@ -309,13 +309,13 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
     @Override
     public void setStructurePlacer(final BuildingStructureHandler<JobBuilder, BuildingBuilder> structure)
     {
-        if (job.getWorkOrder().getIteratorType().isEmpty())
+        if (building.getWorkOrder().getIteratorType().isEmpty())
         {
             final String mode = BuilderModeSetting.getActualValue(building);
-            job.getWorkOrder().setIteratorType(mode);
+            building.getWorkOrder().setIteratorType(mode);
         }
 
-        structurePlacer = new Tuple<>(new StructurePlacer(structure, job.getWorkOrder().getIteratorType()), structure);
+        structurePlacer = new Tuple<>(new StructurePlacer(structure, building.getWorkOrder().getIteratorType()), structure);
     }
 
     @Override
@@ -338,13 +338,13 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
      */
     private void killMobs()
     {
-        if (building.getBuildingLevel() >= LEVEL_TO_PURGE_MOBS && job.getWorkOrder() != null && job.getWorkOrder().getWorkOrderType() == WorkOrderType.BUILD)
+        if (building.getBuildingLevel() >= LEVEL_TO_PURGE_MOBS && building.getWorkOrder() != null && building.getWorkOrder().getWorkOrderType() == WorkOrderType.BUILD)
         {
-            final BlockPos buildingPos = job.getWorkOrder().getLocation();
-            final IBuilding building = worker.getCitizenColonyHandler().getColonyOrRegister().getBuildingManager().getBuilding(buildingPos);
-            if (building != null)
+            final BlockPos buildingPos = building.getWorkOrder().getLocation();
+            final IBuilding buildingAtLocation = worker.getCitizenColonyHandler().getColonyOrRegister().getBuildingManager().getBuilding(buildingPos);
+            if (buildingAtLocation != null)
             {
-                WorldUtil.getEntitiesWithinBuilding(world, Monster.class, building, null).forEach(e -> e.remove(Entity.RemovalReason.DISCARDED));
+                WorldUtil.getEntitiesWithinBuilding(world, Monster.class, buildingAtLocation, null).forEach(e -> e.remove(Entity.RemovalReason.DISCARDED));
             }
         }
     }
@@ -392,7 +392,7 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
             {
                 final PathJobMoveCloseToXNearY pathJob = new PathJobMoveCloseToXNearY(world,
                     currentBlock,
-                    job.getWorkOrder().getLocation(),
+                    building.getWorkOrder().getLocation(),
                     4,
                     worker);
                 gotoPath = ((SlimColoniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(pathJob, currentBlock, 1.0, false);
@@ -427,7 +427,7 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
 
         if (BlockPosUtil.getDistance2D(worker.blockPosition(), currentBlock) > 5)
         {
-            if (BlockPosUtil.dist(workFrom, job.getWorkOrder().getLocation()) < 100)
+            if (BlockPosUtil.dist(workFrom, building.getWorkOrder().getLocation()) < 100)
             {
                 prevBlockPosition = currentBlock;
                 workFrom = null;
@@ -507,6 +507,6 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
     @Override
     public boolean canGoIdle()
     {
-        return !job.hasWorkOrder();
+        return !building.hasWorkOrder();
     }
 }

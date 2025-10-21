@@ -297,12 +297,12 @@ public abstract class AbstractBuildingView implements IBuildingView
     }
 
     /**
-     * Get the current work order level.
+     * Checks if this building is pending construction (building, upgrading, or repairing).
      *
-     * @return 0 if none, othewise the current level worked on
+     * @return true if the building is building, upgrading or repairing.
      */
     @Override
-    public boolean hasWorkOrder()
+    public boolean isPendingConstruction()
     {
         return workOrderLevel != NO_WORK_ORDER;
     }

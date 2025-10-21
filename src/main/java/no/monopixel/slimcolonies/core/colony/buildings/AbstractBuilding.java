@@ -585,12 +585,12 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     }
 
     /**
-     * Checks if this building have a work order.
+     * Checks if this building is pending construction (building, upgrading, or repairing).
      *
      * @return true if the building is building, upgrading or repairing.
      */
     @Override
-    public boolean hasWorkOrder()
+    public boolean isPendingConstruction()
     {
         return getCurrentWorkOrderLevel() != NO_WORK_ORDER;
     }

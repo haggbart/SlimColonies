@@ -7,7 +7,6 @@ import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.MathUtils;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.ItemListModule;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.MinimumStockModule;
 import no.monopixel.slimcolonies.core.entity.other.SittingEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -135,11 +134,6 @@ public class BuildingCook extends AbstractBuilding
         if (stack.isEmpty())
         {
             return 0;
-        }
-
-        if (inventory && getFirstModuleOccurance(MinimumStockModule.class).isStocked(stack))
-        {
-            return stack.getCount();
         }
 
         final Predicate<ItemStack> allowedFuel = theStack -> getModuleMatching(ItemListModule.class, m -> m.getId().equals(FUEL_LIST)).isItemInList(new ItemStorage(theStack));

@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
+import no.monopixel.slimcolonies.api.colony.workorders.IBuilderWorkOrder;
 import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrder;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
@@ -22,6 +23,7 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.WorkerBuildingMod
 import no.monopixel.slimcolonies.core.colony.buildings.utils.BuilderBucket;
 import no.monopixel.slimcolonies.core.colony.buildings.utils.BuildingBuilderResource;
 import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobStructure;
+import no.monopixel.slimcolonies.core.entity.ai.workers.AbstractEntityAIStructureWithWorkOrder;
 import no.monopixel.slimcolonies.core.entity.ai.workers.util.BuildingProgressStage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +32,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
+import static no.monopixel.slimcolonies.core.colony.jobs.AbstractJobStructure.TAG_WORK_ORDER;
 
 /**
  * The structureBuilder building.
@@ -65,6 +68,11 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
      * all the fluids to be removed in fluids_remove.
      */
     private Map<Integer, List<BlockPos>> fluidsToRemove = new LinkedHashMap<>();
+
+    /**
+     * The id of the current workOrder.
+     */
+    private int workOrderId;
 
     /**
      * Public constructor of the building, creates an object of the building.
@@ -223,6 +231,11 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
                 this.fluidsToRemove.put(y, fluids);
             });
         }
+
+        if (compound.contains(TAG_WORK_ORDER))
+        {
+            this.workOrderId = compound.getInt(TAG_WORK_ORDER);
+        }
     }
 
     @Override
@@ -245,6 +258,12 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
             fluidsToRemove.add(fluidsRemove);
         });
         compound.put(TAG_FLUIDS_REMOVE, fluidsToRemove);
+
+        if (workOrderId != 0)
+        {
+            compound.putInt(TAG_WORK_ORDER, workOrderId);
+        }
+
         return compound;
     }
 
@@ -442,15 +461,106 @@ public abstract class AbstractBuildingStructureBuilder extends AbstractBuilding
      */
     public void onWorkOrderCancellation(final IWorkOrder workOrder)
     {
+        if (workOrderId != workOrder.getID())
+        {
+            return;
+        }
         for (final ICitizenData citizen : getAllAssignedCitizen())
         {
             if (citizen.getJob() instanceof AbstractJobStructure<?, ?> abstractJobStructure)
             {
-                abstractJobStructure.setWorkOrder(null);
                 this.cancelAllRequestsOfCitizenOrBuilding(citizen);
+                if (abstractJobStructure.getWorkerAI() instanceof AbstractEntityAIStructureWithWorkOrder<?, ?> abstractEntityAIStructure)
+                {
+                    abstractEntityAIStructure.resetCurrentStructure();
+                }
             }
         }
+
+        setWorkOrder(null);
+        resetNeededResources();
         this.setProgressPos(null, BuildingProgressStage.CLEAR);
         this.cancelAllRequestsOfCitizenOrBuilding(null);
+    }
+
+    /**
+     * Get the Work Order ID for this Job.
+     *
+     * @return UUID of the Work Order claimed by this Job, or null
+     */
+    public int getWorkOrderId()
+    {
+        return workOrderId;
+    }
+
+    /**
+     * Does this job have a Work Order it has claimed?
+     *
+     * @return true if there is a Work Order claimed by this Job
+     */
+    public boolean hasWorkOrder()
+    {
+        if (workOrderId == 0 || getWorkOrder() == null)
+        {
+            workOrderId = 0;
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Get the Work Order for the Job. Warning: WorkOrder is not cached
+     *
+     * @return WorkOrderBuildDecoration for the Build
+     */
+    public IBuilderWorkOrder getWorkOrder()
+    {
+        final @Nullable IBuilderWorkOrder workOrder = getColony().getWorkManager().getWorkOrder(workOrderId, IBuilderWorkOrder.class);
+        if (workOrder == null)
+        {
+            return null;
+        }
+        else if (!workOrder.getClaimedBy().equals(getID()))
+        {
+            workOrderId = 0;
+            return null;
+        }
+        return workOrder;
+    }
+
+    /**
+     * Set a Work Order for this Job.
+     *
+     * @param order Work Order to associate with this job, or null
+     */
+    public void setWorkOrder(@Nullable final IWorkOrder order)
+    {
+        if (order == null)
+        {
+            workOrderId = 0;
+            resetNeededResources();
+        }
+        else
+        {
+            workOrderId = order.getID();
+        }
+    }
+
+    /**
+     * Do final completion when the Job's current work is complete.
+     */
+    public void complete(ICitizenData citizen)
+    {
+        getWorkOrder().onCompleted(colony, citizen);
+        setWorkOrder(null);
+    }
+
+    /**
+     * @param id the work order id.
+     * @deprecated Set workorder ID. Only for backwards compatibility.
+     */
+    public void setWorkOrderId(final int id)
+    {
+        this.workOrderId = id;
     }
 }
