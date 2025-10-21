@@ -59,7 +59,7 @@ public class ColonyViewWorkOrderMessage implements IMessage
     {
         final FriendlyByteBuf newbuf = new FriendlyByteBuf(buf.retain());
         colonyId = newbuf.readInt();
-        dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(newbuf.readUtf(32767)));
+        dimension = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(newbuf.readUtf(32767)));
         workOrderBuffer = newbuf;
     }
 

@@ -250,7 +250,7 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
             final int colonyEventsSize = buf.readInt();
             for (int i = 0; i < colonyEventsSize; i++)
             {
-                final ResourceLocation eventTypeID = new ResourceLocation(MOD_ID, buf.readUtf());
+                final ResourceLocation eventTypeID = ResourceLocation.fromNamespaceAndPath(MOD_ID, buf.readUtf());
 
                 final ColonyEventDescriptionTypeRegistryEntry registryEntry = SlimColoniesAPIProxy.getInstance().getColonyEventDescriptionRegistry().getValue(eventTypeID);
                 if (registryEntry == null)

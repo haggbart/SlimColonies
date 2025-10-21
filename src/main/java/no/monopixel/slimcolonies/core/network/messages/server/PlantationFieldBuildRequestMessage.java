@@ -133,7 +133,7 @@ public class PlantationFieldBuildRequestMessage implements IMessage
         this.pos = buf.readBlockPos();
         this.packName = buf.readUtf(32767);
         this.path = buf.readUtf(32767);
-        this.dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(buf.readUtf(32767)));
+        this.dimension = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(buf.readUtf(32767)));
         this.mirror = buf.readBoolean();
         this.rotation = Rotation.values()[buf.readInt()];
         this.builder = buf.readBlockPos();

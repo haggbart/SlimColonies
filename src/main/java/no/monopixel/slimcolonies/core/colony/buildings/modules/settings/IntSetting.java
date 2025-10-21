@@ -72,7 +72,7 @@ public class IntSetting implements ISetting<Integer>
     @Override
     public ResourceLocation getLayoutItem()
     {
-        return new ResourceLocation("slimcolonies:gui/layouthuts/layoutintsetting.xml");
+        return ResourceLocation.parse("slimcolonies:gui/layouthuts/layoutintsetting.xml");
     }
 
     @OnlyIn(Dist.CLIENT)
