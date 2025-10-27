@@ -5,6 +5,7 @@ import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.buildings.ISchematicProvider;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IBuildingModuleView;
@@ -362,7 +363,7 @@ public class BuildingModules
      */
 
     public static final BuildingEntry.ModuleProducer<DeliverymanAssignmentModule, WorkerBuildingModuleView> COURIER_WORK =
-        new BuildingEntry.ModuleProducer<>("courier_work", () -> new DeliverymanAssignmentModule(ModJobs.delivery.get(), Skill.Agility, Skill.Adaptability, (b) -> 1),
+        new BuildingEntry.ModuleProducer<>("courier_work", () -> new DeliverymanAssignmentModule(ModJobs.delivery.get(), Skill.Agility, Skill.Adaptability, IBuilding::getBuildingLevel),
             () -> WorkerBuildingModuleView::new);
 
     public static final BuildingEntry.ModuleProducer<CourierAssignmentModule, CourierAssignmentModuleView>        WAREHOUSE_COURIERS      =
