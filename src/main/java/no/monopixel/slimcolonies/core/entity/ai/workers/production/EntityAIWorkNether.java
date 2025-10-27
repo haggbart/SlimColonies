@@ -405,7 +405,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                             float incomingDamage = tag.getFloat(TAG_DAMAGE);
                             incomingDamage -= incomingDamage * (getSecondarySkillLevel() * SECONDARY_DAMAGE_REDUCTION);
 
-                            for (int hit = 0; mobHealth > 0 && !worker.isDeadOrDying(); hit++)
+                            for (int hit = 0; mobHealth > 0 && worker.getHealth() >= worker.getMaxHealth() * 0.2f; hit++)
                             {
                                 // Clear anti-hurt timers.
                                 worker.hurtTime = 0;
@@ -452,6 +452,9 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                                     worker.setHealth(worker.getHealth() - incomingDamage);
                                 }
 
+                                // Safety net: prevent death (minimum 1 HP)
+                                worker.setHealth(Math.max(1.0f, worker.getHealth()));
+
                                 // Every other round, heal up if possible, to compensate for all of this happening in a single tick.
                                 if (hit % 2 == 0)
                                 {
@@ -475,29 +478,29 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                             expeditionLog.setCitizen(worker);
                             logAllEquipment(expeditionLog, true);
 
-                            if (worker.isDeadOrDying())
+                            // Check if worker retreated (mob still alive, worker low health)
+                            if (mobHealth > 0)
                             {
-                                expeditionLog.setKilled();
+                                // Track retreat statistic
+                                StatsUtil.trackStat(building, TRIPS_RETREATED, 1);
 
-                                StatsUtil.trackStat(building, MINER_DEATHS, 1);
-
-                                // Stop processing loot table data, as the worker died before finishing the trip.
-                                InventoryUtils.clearItemHandler(worker.getItemHandlerCitizen());
+                                // Worker retreated at low health - stop processing remaining combat tokens
                                 job.getCraftedResults().clear();
-                                job.getProcessedResults().clear();
-                                return IDLE;
+                                // Keep processedResults (blocks + loot from won fights)
+                                // Worker will return home with partial loot
+                                worker.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+                                equipArmor(false);
+                                break; // Exit token processing loop
                             }
-                            else
-                            {
-                                // Generate loot for this mob, with all the right modifiers
-                                LootParams context = this.getLootContext();
-                                LootTable loot = world.getServer().getLootData().getLootTable(mob.getLootTable());
-                                List<ItemStack> mobLoot = loot.getRandomItems(context);
-                                job.addProcessedResultsList(mobLoot);
 
-                                expeditionLog.addMob(mobType);
-                                expeditionLog.addLoot(mobLoot);
-                            }
+                            // Generate loot for this mob (worker always survives due to safety net)
+                            LootParams context = this.getLootContext();
+                            LootTable loot = world.getServer().getLootData().getLootTable(mob.getLootTable());
+                            List<ItemStack> mobLoot = loot.getRandomItems(context);
+                            job.addProcessedResultsList(mobLoot);
+
+                            expeditionLog.addMob(mobType);
+                            expeditionLog.addLoot(mobLoot);
 
                             worker.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                             equipArmor(false);
@@ -566,25 +569,17 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
 
         if (!job.getProcessedResults().isEmpty())
         {
-            if (!worker.isDeadOrDying())
+            expeditionLog.setStatus(ExpeditionLog.Status.RETURNING_HOME);
+            for (ItemStack item : job.getProcessedResults())
             {
-                expeditionLog.setStatus(ExpeditionLog.Status.RETURNING_HOME);
-                for (ItemStack item : job.getProcessedResults())
+                if (InventoryUtils.addItemStackToItemHandler(worker.getItemHandlerCitizen(), item))
                 {
-                    if (InventoryUtils.addItemStackToItemHandler(worker.getItemHandlerCitizen(), item))
-                    {
-                        worker.getCitizenExperienceHandler().addExperience(0.2);
-                        StatsUtil.trackStatByName(building, ITEMS_DISCOVERED, item.getHoverName(), item.getCount());
-                    }
+                    worker.getCitizenExperienceHandler().addExperience(0.2);
+                    StatsUtil.trackStatByName(building, ITEMS_DISCOVERED, item.getHoverName(), item.getCount());
                 }
+            }
 
-                job.getProcessedResults().clear();
-                return getState();
-            }
-            else
-            {
-                job.getProcessedResults().clear();
-            }
+            job.getProcessedResults().clear();
             return getState();
         }
 

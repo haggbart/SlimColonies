@@ -51,9 +51,9 @@ public class BuildingNetherWorker extends AbstractBuilding
     private static final String TAG_CURRENT_TRIPS = "current_trips";
 
     /**
-     * Which day in the period is it?
+     * The tag for storing the last trip time to NBT
      */
-    private static final String TAG_CURRENT_DAY = "current_day";
+    private static final String TAG_LAST_TRIP_TIME = "last_trip_time";
 
     /**
      * How many trips we can make per period by default
@@ -61,29 +61,20 @@ public class BuildingNetherWorker extends AbstractBuilding
     private static final int MAX_PER_PERIOD = 1;
 
     /**
-     * How many days are in a period by default
+     * Cooldown period in ticks (1 minute = 1200 ticks at 20 ticks/second)
+     * TODO: Change to 18000L (15 minutes) for production
      */
-    private static final int PERIOD_DAYS = 3;
+    private static final long COOLDOWN_TICKS = 1200L;
 
     /**
-     * Exclusion list id.
+     * Game time (in ticks) when the last trip was completed
      */
-    public static final String FOOD_EXCLUSION_LIST = "food";
-
-    /**
-     * Which day we're at in the current period
-     */
-    private int currentPeriodDay = 0;
+    private long lastTripTime = -COOLDOWN_TICKS; // Initialize to allow immediate first trip
 
     /**
      * How many trips we've done in the current period
      */
     private int currentTrips = 0;
-
-    /**
-     * ServerTime for the last 'day' snapshot, to track days when doDaylightCycle is not happening.
-     */
-    private long snapTime;
 
     public BuildingNetherWorker(@NotNull IColony colony, BlockPos pos)
     {
@@ -132,22 +123,6 @@ public class BuildingNetherWorker extends AbstractBuilding
     }
 
     @Override
-    public void onWakeUp()
-    {
-        super.onWakeUp();
-        snapTime = colony.getWorld().getDayTime();
-        if (this.currentPeriodDay < getPeriodDays())
-        {
-            this.currentPeriodDay++;
-        }
-        else
-        {
-            this.currentPeriodDay = 0;
-            this.currentTrips = 0;
-        }
-    }
-
-    @Override
     public void deserializeNBT(final CompoundTag compound)
     {
         super.deserializeNBT(compound);
@@ -156,9 +131,9 @@ public class BuildingNetherWorker extends AbstractBuilding
             this.currentTrips = compound.getInt(TAG_CURRENT_TRIPS);
         }
 
-        if (compound.contains(TAG_CURRENT_DAY))
+        if (compound.contains(TAG_LAST_TRIP_TIME))
         {
-            this.currentPeriodDay = compound.getInt(TAG_CURRENT_DAY);
+            this.lastTripTime = compound.getLong(TAG_LAST_TRIP_TIME);
         }
     }
 
@@ -168,7 +143,7 @@ public class BuildingNetherWorker extends AbstractBuilding
         final CompoundTag compound = super.serializeNBT();
 
         compound.putInt(TAG_CURRENT_TRIPS, this.currentTrips);
-        compound.putInt(TAG_CURRENT_DAY, this.currentPeriodDay);
+        compound.putLong(TAG_LAST_TRIP_TIME, this.lastTripTime);
 
         return compound;
     }
@@ -208,21 +183,21 @@ public class BuildingNetherWorker extends AbstractBuilding
     }
 
     /**
-     * Check to see if it's valid to do a trip by checking how many done in this current period
+     * Check to see if it's valid to do a trip by checking the cooldown timer
      *
      * @return true if the worker can go to the nether
      */
     public boolean isReadyForTrip()
     {
-        if (snapTime == 0)
+        final long currentTime = colony.getWorld().getGameTime();
+        final long timeSinceLastTrip = currentTime - lastTripTime;
+
+        // Reset trip counter if cooldown has expired
+        if (timeSinceLastTrip >= COOLDOWN_TICKS)
         {
-            snapTime = colony.getWorld().getDayTime();
+            this.currentTrips = 0;
         }
-        if (Math.abs(colony.getWorld().getDayTime() - snapTime) >= 24000)
-        {
-            //Make sure we're incrementing if day/night cycle isn't running.
-            this.currentPeriodDay++;
-        }
+
         return this.currentTrips < getMaxPerPeriod();
     }
 
@@ -232,6 +207,7 @@ public class BuildingNetherWorker extends AbstractBuilding
     public void recordTrip()
     {
         this.currentTrips++;
+        this.lastTripTime = colony.getWorld().getGameTime();
     }
 
     /**
@@ -253,21 +229,11 @@ public class BuildingNetherWorker extends AbstractBuilding
     /**
      * Get the max per period, potentially modified by research
      *
-     * @return
+     * @return max trips per cooldown period
      */
     public static int getMaxPerPeriod()
     {
         return MAX_PER_PERIOD;
-    }
-
-    /**
-     * Get how many days are in a period, potentially modified by research.
-     *
-     * @return
-     */
-    public static int getPeriodDays()
-    {
-        return PERIOD_DAYS;
     }
 
     @Override

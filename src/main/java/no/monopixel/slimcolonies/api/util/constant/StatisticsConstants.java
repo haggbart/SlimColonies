@@ -105,7 +105,7 @@ public final class StatisticsConstants
     // Nether Miner
     public static final String ITEMS_DISCOVERED = "items_discovered";
     public static final String TRIPS_COMPLETED = "trips_completed";
-    public static final String MINER_DEATHS = "miner_deaths";
+    public static final String TRIPS_RETREATED = "trips_retreated";
 
     // Chef
     public static final String FOOD_COOKED_DETAIL = "food_cooked_detail";

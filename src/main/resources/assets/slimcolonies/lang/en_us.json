@@ -2036,7 +2036,7 @@
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.milking_attempts": "Milking Attempts: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.items_discovered": "Discovered: %d %s",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.trips_completed": "Trips Completed: %d",
-  "no.monopixel.slimcolonies.coremod.gui.townhall.stats.miner_deaths": "Miner Deaths: %d",
+  "no.monopixel.slimcolonies.coremod.gui.townhall.stats.trips_retreated": "Trips Retreated: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.lessons_given": "Lessons Given: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.new_visitors": "New Visitors: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.visitors_recruited": "Visitors Recruited: %d",
