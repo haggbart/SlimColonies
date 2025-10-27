@@ -1691,7 +1691,7 @@
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner": "Mine",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner.repair.enqueued": "Added the repair request to the queue of the miner. Miner will pick it up once the current task is finished.",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner.orepriority": "Ore Specialization",
-  "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner.orepriority.desc": "Guide your miner's ore search",
+  "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner.orepriority.desc": "Desired Ores",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner.orepriority.title": "Desired Ores",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner.orepriority.available": "Available Ores",
   "no.monopixel.slimcolonies.coremod.gui.workerhuts.miner.orepriority.empty": "Your miner will occasionally find bonus ores while mining. Select which ores to look for or leave empty for random finds.",
