@@ -1251,7 +1251,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .setTranslatedSubtitle("Where oh where would a wood worker work if a wood worker would work wood?")
             .setSortOrder(5)
             .setIcon(ModBlocks.blockHutSawmill.asItem())
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "lumberjack"), 3)
+            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "lumberjack"), 1)
             .addEffect(ModBuildings.sawmill.get().getBuildingBlock(), 1)
             .addToList(r);
         final Research stringWork = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/stringwork"), TECH).setParentResearch(woodwork)
