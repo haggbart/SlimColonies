@@ -35,12 +35,6 @@ public class BuildingNetherWorker extends AbstractBuilding
 {
 
     /**
-     * Settings
-     */
-    public static final ISettingKey<BoolSetting> CLOSE_PORTAL =
-        new SettingKey<>(BoolSetting.class, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "closeportal"));
-
-    /**
      * Constant name for the Netherworker building
      */
     private static final String NETHER_WORKER = "netherworker";
@@ -112,14 +106,6 @@ public class BuildingNetherWorker extends AbstractBuilding
     public int getMaxBuildingLevel()
     {
         return CONST_DEFAULT_MAX_BUILDING_LEVEL;
-    }
-
-    /**
-     * Should the portal be closed on return?
-     */
-    public boolean shallClosePortalOnReturn()
-    {
-        return getSetting(CLOSE_PORTAL).getValue();
     }
 
     @Override

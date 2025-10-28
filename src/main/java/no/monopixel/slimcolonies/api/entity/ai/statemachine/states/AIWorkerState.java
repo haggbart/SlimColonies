@@ -545,11 +545,6 @@ public enum AIWorkerState implements IAIState
      */
     NETHER_OPENPORTAL(true),
 
-    /**
-     * Let the nether worker close the portal to the nether
-     */
-    NETHER_CLOSEPORTAL(true),
-
 
             /*
 ### Florist ###

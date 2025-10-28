@@ -101,8 +101,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
             new AITarget(NETHER_LEAVE, this::leaveForNether, TICK_DELAY),
             new AITarget(NETHER_AWAY, this::stayInNether, TICK_DELAY),
             new AITarget(NETHER_RETURN, this::returnFromNether, TICK_DELAY),
-            new AITarget(NETHER_OPENPORTAL, this::openPortal, TICK_DELAY),
-            new AITarget(NETHER_CLOSEPORTAL, this::closePortal, TICK_DELAY)
+            new AITarget(NETHER_OPENPORTAL, this::openPortal, TICK_DELAY)
         );
         worker.setCanPickUpLoot(true);
 
@@ -119,8 +118,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
         StringBuilder renderData = new StringBuilder(getState() == CRAFT
             || getState() == NETHER_LEAVE
             || getState() == NETHER_RETURN
-            || getState() == NETHER_OPENPORTAL
-            || getState() == NETHER_CLOSEPORTAL ? RENDER_META_WORKING : "");
+            || getState() == NETHER_OPENPORTAL ? RENDER_META_WORKING : "");
 
         for (int slot = 0; slot < worker.getInventoryCitizen().getSlots(); slot++)
         {
@@ -263,15 +261,6 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
             if (building.isReadyForTrip())
             {
                 worker.getCitizenData().setJobStatus(JobStatus.STUCK);
-            }
-
-            if (currentRecipeStorage == null && building.shallClosePortalOnReturn())
-            {
-                final BlockState block = world.getBlockState(portal);
-                if (block.is(Blocks.NETHER_PORTAL))
-                {
-                    return NETHER_CLOSEPORTAL;
-                }
             }
 
             return getState();
@@ -619,16 +608,10 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
     }
 
     /**
-     * Return from the nether by going visible, walking to building and preparing to close the portal
+     * Return from the nether by going visible and walking to building
      */
     protected IAIState returnFromNether()
     {
-        //Shutdown Portal
-        if (building.shallClosePortalOnReturn() && world.getBlockState(building.getPortalLocation()).is(Blocks.NETHER_PORTAL))
-        {
-            return NETHER_CLOSEPORTAL;
-        }
-
         if (!walkToBuilding())
         {
             return getState();
@@ -675,34 +658,6 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
             }
         }
         return START_WORKING;
-    }
-
-    /**
-     * Close the nether portal while idle around the building
-     */
-    protected IAIState closePortal()
-    {
-        final BlockPos portal = building.getPortalLocation();
-        final BlockState block = world.getBlockState(portal);
-
-        if (block.is(Blocks.NETHER_PORTAL))
-        {
-            if (!walkToWorkPos(portal))
-            {
-                return getState();
-            }
-
-            useFlintAndSteel();
-            world.setBlockAndUpdate(building.getPortalLocation(), Blocks.AIR.defaultBlockState());
-        }
-
-        if (job.isInNether())
-        {
-            return NETHER_RETURN;
-        }
-
-        currentRecipeStorage = null;
-        return INVENTORY_FULL;
     }
 
     /**
