@@ -2,12 +2,15 @@ package no.monopixel.slimcolonies.core.colony.workorders;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE;
 import com.ldtteam.structurize.blueprints.v1.Blueprint;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.IColony;
@@ -31,6 +34,8 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
+import static com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE.TAG_BLUEPRINTDATA;
+import static com.ldtteam.structurize.blockentities.interfaces.IBlueprintDataProviderBE.TAG_SCHEMATIC_NAME;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_STAGE;
 
 /**
@@ -626,7 +631,7 @@ public abstract class AbstractWorkOrder implements IBuilderWorkOrder
      * @return True if the WorkOrder is still valid, or False if it should be deleted
      */
     @Override
-    
+
     public boolean isValid(final IColony colony)
     {
         return true;
@@ -801,9 +806,51 @@ public abstract class AbstractWorkOrder implements IBuilderWorkOrder
     @Override
     public void onCompleted(final IColony colony, ICitizenData citizen)
     {
-        /*
-         * Intentionally left empty.
-         */
+        final Blueprint blueprint = getBlueprint();
+        if (blueprint != null)
+        {
+            final CompoundTag[][][] tileEntityData = blueprint.getTileEntities();
+            for (short x = 0; x < blueprint.getSizeX(); x++)
+            {
+                for (short y = 0; y < blueprint.getSizeY(); y++)
+                {
+                    for (short z = 0; z < blueprint.getSizeZ(); z++)
+                    {
+                        final CompoundTag compoundNBT = tileEntityData[y][z][x];
+                        if (compoundNBT != null && compoundNBT.contains(TAG_BLUEPRINTDATA))
+                        {
+                            final BlockPos offset = new BlockPos(x, y, z);
+                            final BlockPos tePos = getLocation().subtract(blueprint.getPrimaryBlockOffset()).offset(offset);
+                            final BlockEntity te = colony.getWorld().getBlockEntity(tePos);
+                            if (te instanceof IBlueprintDataProviderBE blueprintDataProviderBE)
+                            {
+                                final CompoundTag tagData = compoundNBT.getCompound(TAG_BLUEPRINTDATA);
+                                tagData.putString(no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_PACK, blueprint.getPackName());
+                                if (blueprint.getPrimaryBlockOffset().equals(offset))
+                                {
+                                    tagData.putString(no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_PATH,
+                                        com.ldtteam.structurize.storage.StructurePacks.getStructurePack(blueprint.getPackName())
+                                            .getSubPath(no.monopixel.slimcolonies.api.util.Utils.resolvePath(blueprint.getFilePath(), tagData.getString(TAG_SCHEMATIC_NAME)))
+                                            + ".blueprint");
+                                }
+
+                                try
+                                {
+                                    blueprintDataProviderBE.readSchematicDataFromNBT(compoundNBT);
+                                }
+                                catch (final Exception e)
+                                {
+                                    Log.getLogger().warn("Broken deco-controller at: {}", offset);
+                                }
+                                ((ServerLevel) colony.getWorld()).getChunkSource().blockChanged(tePos);
+                                te.setChanged();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        colony.getWorkManager().removeWorkOrder(this.getID());
     }
 
     /**

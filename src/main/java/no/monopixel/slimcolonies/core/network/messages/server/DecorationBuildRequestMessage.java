@@ -2,17 +2,6 @@ package no.monopixel.slimcolonies.core.network.messages.server;
 
 import com.ldtteam.structurize.storage.ServerFutureProcessor;
 import com.ldtteam.structurize.storage.StructurePacks;
-import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
-import no.monopixel.slimcolonies.api.colony.permissions.Action;
-import no.monopixel.slimcolonies.api.colony.workorders.IServerWorkOrder;
-import no.monopixel.slimcolonies.api.colony.workorders.WorkOrderType;
-import no.monopixel.slimcolonies.api.network.IMessage;
-import no.monopixel.slimcolonies.api.util.Log;
-import no.monopixel.slimcolonies.core.blocks.BlockDecorationController;
-import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingStructureBuilder;
-import no.monopixel.slimcolonies.core.colony.workorders.WorkOrderDecoration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -24,6 +13,17 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
+import no.monopixel.slimcolonies.api.colony.IColony;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
+import no.monopixel.slimcolonies.api.colony.permissions.Action;
+import no.monopixel.slimcolonies.api.colony.workorders.IServerWorkOrder;
+import no.monopixel.slimcolonies.api.colony.workorders.WorkOrderType;
+import no.monopixel.slimcolonies.api.network.IMessage;
+import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.core.blocks.BlockDecorationController;
+import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuildingStructureBuilder;
+import no.monopixel.slimcolonies.core.colony.workorders.WorkOrderDecoration;
 import org.apache.commons.lang3.text.WordUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -87,12 +87,20 @@ public class DecorationBuildRequestMessage implements IMessage
     /**
      * Creates a build request for a decoration.
      *
-     * @param pos         the position of it.
-     * @param packName    pack name.
-     * @param path        blueprint path.
-     * @param dimension   the dimension we're executing on.
+     * @param pos       the position of it.
+     * @param packName  pack name.
+     * @param path      blueprint path.
+     * @param dimension the dimension we're executing on.
      */
-    public DecorationBuildRequestMessage(final WorkOrderType workOrderType, @NotNull final BlockPos pos, final String packName, final String path, final ResourceKey<Level> dimension, final Rotation rotation, final boolean mirror, final BlockPos builder)
+    public DecorationBuildRequestMessage(
+        final WorkOrderType workOrderType,
+        @NotNull final BlockPos pos,
+        final String packName,
+        final String path,
+        final ResourceKey<Level> dimension,
+        final Rotation rotation,
+        final boolean mirror,
+        final BlockPos builder)
     {
         super();
         this.workOrderType = workOrderType;
@@ -112,7 +120,7 @@ public class DecorationBuildRequestMessage implements IMessage
         this.pos = buf.readBlockPos();
         this.packName = buf.readUtf(32767);
         this.path = buf.readUtf(32767);
-        this.dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(buf.readUtf(32767)));
+        this.dimension = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(buf.readUtf(32767)));
         this.mirror = buf.readBoolean();
         this.rotation = Rotation.values()[buf.readInt()];
         this.builder = buf.readBlockPos();
@@ -155,8 +163,8 @@ public class DecorationBuildRequestMessage implements IMessage
         }
 
         final Optional<Map.Entry<Integer, IServerWorkOrder>> wo = colony.getWorkManager().getWorkOrders().entrySet().stream()
-          .filter(entry -> entry.getValue() instanceof WorkOrderDecoration)
-          .filter(entry -> entry.getValue().getLocation().equals(pos)).findFirst();
+            .filter(entry -> entry.getValue() instanceof WorkOrderDecoration)
+            .filter(entry -> entry.getValue().getLocation().equals(pos)).findFirst();
 
         if (wo.isPresent())
         {
@@ -165,42 +173,42 @@ public class DecorationBuildRequestMessage implements IMessage
         }
 
         ServerFutureProcessor.queueBlueprint(new ServerFutureProcessor.BlueprintProcessingData(StructurePacks.getBlueprintFuture(packName, path),
-          player.level,
-          (blueprint -> {
-              if (blueprint == null)
-              {
-                  Log.getLogger().error(String.format("Schematic %s doesn't exist on the server.", path));
-                  return;
-              }
+            player.level,
+            (blueprint -> {
+                if (blueprint == null)
+                {
+                    Log.getLogger().error(String.format("Schematic %s doesn't exist on the server.", path));
+                    return;
+                }
 
-              final String[] split = path.split("/");
-              final String displayName = split[split.length - 1].replace(".blueprint", "");
+                final String[] split = path.split("/");
+                final String displayName = split[split.length - 1].replace(".blueprint", "");
 
-              final BlockState structureState = blueprint.getBlockInfoAsMap().get(blueprint.getPrimaryBlockOffset()).getState();
-              final WorkOrderType type = structureState != null && !(structureState.getBlock() instanceof BlockDecorationController)
-                      ? WorkOrderType.BUILD : workOrderType;
+                final BlockState structureState = blueprint.getBlockInfoAsMap().get(blueprint.getPrimaryBlockOffset()).getState();
+                final WorkOrderType type = structureState != null && !(structureState.getBlock() instanceof BlockDecorationController)
+                    ? WorkOrderType.BUILD : workOrderType;
 
-              final WorkOrderDecoration order = WorkOrderDecoration.create(
-                  type,
-                  packName,
-                  path,
-                  WordUtils.capitalizeFully(displayName),
-                  pos,
-                  rotation.ordinal(),
-                  mirror,
-                  0);
-              order.setBlueprint(blueprint, colony.getWorld());
+                final WorkOrderDecoration order = WorkOrderDecoration.create(
+                    type,
+                    packName,
+                    path,
+                    WordUtils.capitalizeFully(displayName),
+                    pos,
+                    rotation.ordinal(),
+                    mirror,
+                    0);
+                order.setBlueprint(blueprint, colony.getWorld());
 
-              if (!builder.equals(BlockPos.ZERO))
-              {
-                  final IBuilding building = colony.getBuildingManager().getBuilding(builder);
-                  if (building instanceof AbstractBuildingStructureBuilder)
-                  {
-                      order.setClaimedBy(builder);
-                  }
-              }
+                if (!builder.equals(BlockPos.ZERO))
+                {
+                    final IBuilding building = colony.getBuildingManager().getBuilding(builder);
+                    if (building instanceof AbstractBuildingStructureBuilder)
+                    {
+                        order.setClaimedBy(builder);
+                    }
+                }
 
-              colony.getWorkManager().addWorkOrder(order, false);
-          })));
+                colony.getWorkManager().addWorkOrder(order, false);
+            })));
     }
 }

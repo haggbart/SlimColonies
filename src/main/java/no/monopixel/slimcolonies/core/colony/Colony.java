@@ -672,7 +672,7 @@ public class Colony implements IColony
             @NotNull final Colony c = new Colony(id, world);
             c.name = compound.getString(TAG_NAME);
             c.center = BlockPosUtil.read(compound, TAG_CENTER);
-            c.dimensionId = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(compound.getString(TAG_DIMENSION)));
+            c.dimensionId = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(compound.getString(TAG_DIMENSION)));
 
             c.setRequestManager();
             c.read(compound);
@@ -701,7 +701,7 @@ public class Colony implements IColony
      */
     public void read(@NotNull final CompoundTag compound)
     {
-        dimensionId = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(compound.getString(TAG_DIMENSION)));
+        dimensionId = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(compound.getString(TAG_DIMENSION)));
 
         additionalChildTime = compound.getInt(TAG_CHILD_TIME);
 
@@ -749,7 +749,7 @@ public class Colony implements IColony
         final ListTag freeBlockTagList = compound.getList(TAG_FREE_BLOCKS, Tag.TAG_STRING);
         for (int i = 0; i < freeBlockTagList.size(); ++i)
         {
-            tempFreeBlocks.add(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(freeBlockTagList.getString(i))));
+            tempFreeBlocks.add(ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(freeBlockTagList.getString(i))));
         }
         freeBlocks = ImmutableSet.copyOf(tempFreeBlocks);
 

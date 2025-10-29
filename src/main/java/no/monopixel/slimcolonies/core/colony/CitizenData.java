@@ -42,7 +42,6 @@ import no.monopixel.slimcolonies.api.quests.IQuestInstance;
 import no.monopixel.slimcolonies.api.quests.IQuestManager;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.core.Network;
-import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingModule;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.QuestDeliveryInteraction;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.QuestDialogueInteraction;
@@ -1500,25 +1499,25 @@ public class CitizenData implements ICitizenData
         @NotNull final ListTag availQuestNbt = nbtTagCompound.getList(TAG_AV_QUESTS, TAG_STRING);
         for (int i = 0; i < availQuestNbt.size(); i++)
         {
-            availableQuests.add(new ResourceLocation(availQuestNbt.getString(i)));
+            availableQuests.add(ResourceLocation.parse(availQuestNbt.getString(i)));
         }
 
         @NotNull final ListTag partQuestsNbt = nbtTagCompound.getList(TAG_PART_QUESTS, TAG_STRING);
         for (int i = 0; i < partQuestsNbt.size(); i++)
         {
-            participatingQuests.add(new ResourceLocation(partQuestsNbt.getString(i)));
+            participatingQuests.add(ResourceLocation.parse(partQuestsNbt.getString(i)));
         }
 
         @NotNull final ListTag finQuestNbt = nbtTagCompound.getList(TAG_FINISHED_AV_QUESTS, TAG_STRING);
         for (int i = 0; i < finQuestNbt.size(); i++)
         {
-            finishedQuests.add(new ResourceLocation(finQuestNbt.getString(i)));
+            finishedQuests.add(ResourceLocation.parse(finQuestNbt.getString(i)));
         }
 
         @NotNull final ListTag finPartQuestsNbt = nbtTagCompound.getList(TAG_FINISHED_PART_QUESTS, TAG_STRING);
         for (int i = 0; i < finPartQuestsNbt.size(); i++)
         {
-            finishedQuestParticipation.add(new ResourceLocation(finPartQuestsNbt.getString(i)));
+            finishedQuestParticipation.add(ResourceLocation.parse(finPartQuestsNbt.getString(i)));
         }
 
         if (nbtTagCompound.contains(TAG_TEXTURE_UUID))
