@@ -99,8 +99,6 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
         super(job);
         super.registerTargets(
             new AITarget(NETHER_LEAVE, this::leaveForNether, TICK_DELAY),
-            new AITarget(NETHER_AWAY, this::stayInNether, TICK_DELAY),
-            new AITarget(NETHER_RETURN, this::returnFromNether, TICK_DELAY),
             new AITarget(NETHER_OPENPORTAL, this::openPortal, TICK_DELAY)
         );
         worker.setCanPickUpLoot(true);
@@ -117,7 +115,6 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
     {
         StringBuilder renderData = new StringBuilder(getState() == CRAFT
             || getState() == NETHER_LEAVE
-            || getState() == NETHER_RETURN
             || getState() == NETHER_OPENPORTAL ? RENDER_META_WORKING : "");
 
         for (int slot = 0; slot < worker.getInventoryCitizen().getSlots(); slot++)
@@ -164,36 +161,15 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
         return !worker.isInvisible();
     }
 
-    private void goToVault()
-    {
-        worker.playSound(SoundEvents.PORTAL_TRIGGER, worker.getRandom().nextFloat() * 0.5F + 0.25F, 0.25F);
-        worker.getCitizenData().getColony().getTravellingManager().startTravellingTo(
-            worker.getCitizenData(),
-            building.getPortalLocation(),
-            job.getCraftedResults().size() * 400 //Twenty seconds of travelling time per item, task or adventure that we complete, maybe parameterize in the config.
-        );
-
-        worker.remove(Entity.RemovalReason.DISCARDED);
-    }
-
     @Override
     protected IAIState decide()
     {
-        //Check if we are traveling, we don't spawn an entity if we are traveling.
-        if (worker.getCitizenData().getColony().getTravellingManager().isTravelling(worker.getCitizenData()) || job.isInNether())
+        // If worker just returned from nether with items, go deposit them
+        if (job.isWorkerReturningFromNether())
         {
-            return NETHER_AWAY;
+            job.setWorkerReturningFromNether(false);
+            return INVENTORY_FULL;
         }
-
-        //Now check if travelling finished.
-        final Optional<BlockPos> travelingTarget = worker.getCitizenData().getColony().getTravellingManager().getTravellingTargetFor(worker.getCitizenData());
-        if (travelingTarget.isPresent())
-        {
-            worker.getCitizenData().setNextRespawnPosition(EntityUtils.getSpawnPoint(job.getColony().getWorld(), travelingTarget.get()));
-            worker.getCitizenData().updateEntityIfNecessary();
-        }
-
-        job.setInNether(false);
 
         IAIState crafterState = super.decide();
 
@@ -339,17 +315,44 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                 logAllEquipment(expeditionLog, false);
 
                 List<ItemStack> result = currentRecipeStorage.fullfillRecipeAndCopy(getLootContext(), ImmutableList.of(worker.getItemHandlerCitizen()), false);
+                int itemCount = 0;
                 if (result != null)
                 {
                     // by default all the adventure tokens are at the end (due to loot tables); space them better
                     result = new ArrayList<>(result);
                     Collections.shuffle(result, worker.getCitizenData().getRandom());
                     job.addCraftedResultsList(result);
+                    itemCount = result.size();
                 }
 
-                goToVault();
-                worker.getCitizenData().setJobStatus(JobStatus.WORKING);
-                return NETHER_AWAY;
+                // Run simulation immediately before despawning
+                boolean retreated = processNetherSimulation(expeditionLog);
+
+                // Track statistics
+                if (!retreated)
+                {
+                    StatsUtil.trackStat(building, TRIPS_COMPLETED, 1);
+                }
+
+                // Store retreat status for when worker returns
+                job.setLastTripRetreat(retreated);
+
+                job.setInNether(false);
+                currentRecipeStorage = null;
+
+                // Set flag so worker deposits items when they respawn
+                job.setWorkerReturningFromNether(true);
+
+                // Despawn worker for travel time (items already in inventory)
+                int travelTime = itemCount * 10;
+                worker.getCitizenData().getColony().getTravellingManager().startTravellingTo(
+                    worker.getCitizenData(),
+                    building.getPortalLocation(),
+                    travelTime
+                );
+
+                worker.remove(Entity.RemovalReason.DISCARDED);
+                return getState();
             }
             return NETHER_OPENPORTAL;
         }
@@ -358,13 +361,12 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
     }
 
     /**
-     * Stay "in the Nether" and process the queues
+     * Process the nether simulation (combat, mining, loot generation).
+     * Runs synchronously when worker enters portal.
      */
-    protected IAIState stayInNether()
+    private boolean processNetherSimulation(final ExpeditionLog expeditionLog)
     {
-        final ExpeditionLog expeditionLog = building.getFirstModuleOccurance(ExpeditionLogModule.class).getLog();
-
-        //This is the adventure loop.
+        boolean retreated = false;
         if (!job.getCraftedResults().isEmpty())
         {
             for (ItemStack currStack : job.getCraftedResults())
@@ -427,24 +429,21 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                                     }
                                 }
 
-                                // Hit the mob
                                 if (doDamage)
                                 {
                                     mobHealth -= damageToDo;
                                 }
 
-                                // Get hit by the mob
-                                if (takeDamage && !worker.hurt(source, incomingDamage))
+                                if (takeDamage)
                                 {
-                                    //Shouldn't get here, but if we do we can force the damage.
-                                    incomingDamage = worker.calculateDamageAfterAbsorbs(source, incomingDamage);
-                                    worker.setHealth(worker.getHealth() - incomingDamage);
+                                    float actualDamage = worker.calculateDamageAfterAbsorbs(source, incomingDamage);
+                                    worker.setHealth(worker.getHealth() - actualDamage);
                                 }
 
-                                // Safety net: prevent death (minimum 1 HP)
+                                // Prevent death
                                 worker.setHealth(Math.max(1.0f, worker.getHealth()));
 
-                                // Every other round, heal up if possible, to compensate for all of this happening in a single tick.
+                                // Heal every other round to compensate for instant simulation
                                 if (hit % 2 == 0)
                                 {
                                     float healAmount = checkHeal(worker);
@@ -459,7 +458,8 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                                 {
                                     if (worker.getCitizenData().getSaturation() < AVERAGE_SATURATION)
                                     {
-                                        attemptToEat();
+                                        // Directly consume food during simulation
+                                        eatFoodDirectly();
                                     }
                                 }
                             }
@@ -472,6 +472,7 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                             {
                                 // Track retreat statistic
                                 StatsUtil.trackStat(building, TRIPS_RETREATED, 1);
+                                retreated = true;
 
                                 // Worker retreated at low health - stop processing remaining combat tokens
                                 job.getCraftedResults().clear();
@@ -549,16 +550,12 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
                         expeditionLog.addLoot(Collections.singletonList(currStack));
                         itemDelay = TICK_DELAY * currStack.getCount();
                     }
-                    setDelay(itemDelay);
                 }
             }
             job.getCraftedResults().clear();
-            return getState();
         }
-
         if (!job.getProcessedResults().isEmpty())
         {
-            expeditionLog.setStatus(ExpeditionLog.Status.RETURNING_HOME);
             for (ItemStack item : job.getProcessedResults())
             {
                 if (InventoryUtils.addItemStackToItemHandler(worker.getItemHandlerCitizen(), item))
@@ -569,12 +566,36 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
             }
 
             job.getProcessedResults().clear();
-            return getState();
         }
+        return retreated;
+    }
 
-        expeditionLog.setStatus(ExpeditionLog.Status.COMPLETED);
+    /**
+     * Directly consume food from inventory during simulation.
+     * attemptToEat() doesn't work during instant simulation, so we do it manually.
+     */
+    private void eatFoodDirectly()
+    {
+        for (int i = 0; i < worker.getInventoryCitizen().getSlots(); i++)
+        {
+            ItemStack stack = worker.getInventoryCitizen().getStackInSlot(i);
+            if (!stack.isEmpty() && stack.getFoodProperties(worker) != null)
+            {
+                // Get food properties
+                var foodProperties = stack.getFoodProperties(worker);
+                if (foodProperties != null)
+                {
+                    // Increase saturation
+                    float nutrition = foodProperties.getNutrition();
+                    float saturationModifier = foodProperties.getSaturationModifier();
+                    worker.getCitizenData().increaseSaturation(nutrition * saturationModifier * 2.0);
 
-        return NETHER_RETURN;
+                    // Consume one food item
+                    stack.shrink(1);
+                    return; // Only eat one item at a time
+                }
+            }
+        }
     }
 
     // calculate the XP coming from certain ores
@@ -605,26 +626,6 @@ public class EntityAIWorkNether extends AbstractEntityAICrafting<JobNetherWorker
         {
             return block == Blocks.NETHER_GOLD_ORE ? rnd.nextInt(0, 1) : 0;
         }
-    }
-
-    /**
-     * Return from the nether by going visible and walking to building
-     */
-    protected IAIState returnFromNether()
-    {
-        if (!walkToBuilding())
-        {
-            return getState();
-        }
-
-        worker.getCitizenData().setJobStatus(JobStatus.STUCK);
-        worker.setInvisible(false);
-        job.setInNether(false);
-
-        currentRecipeStorage = null;
-        StatsUtil.trackStat(building, TRIPS_COMPLETED, 1);
-
-        return INVENTORY_FULL;
     }
 
     /**

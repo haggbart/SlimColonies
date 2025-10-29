@@ -6,20 +6,22 @@
 
     <text id="name" size="164 11" color="black" pos="13 28" textalign="MIDDLE"/>
     <text id="status" size="164 11" color="black" pos="13 39" textalign="MIDDLE"/>
-    <view id="healthBar" size="120 11" pos="35 48">
-        <text id="healthLabel" size="30 11" color="black" pos="135 10" text="44"/>
-    </view>
-    <view id="saturationBar" size="120 22" pos="35 60"/>
+    <view id="expeditionDetails" size="164 191" pos="13 48">
+        <view id="healthBar" size="120 11" pos="22 0">
+            <text id="healthLabel" size="30 11" color="black" pos="135 10" text="44"/>
+        </view>
+        <view id="saturationBar" size="120 22" pos="22 12"/>
 
-    <view id="equipment" size="164 16" pos="13 90"/>
-    <gradient size="164 36" pos="13 110" gradientstart="4292072403" gradientend="4289309097"/>
-    <gradient id="resourcesbg" size="164 80" pos="13 150" gradientstart="4292072403" gradientend="4289309097"/>
-    <box size="164 36" pos="13 110" linewidth="2">
-        <view id="mobs" size="100% 100%"/>
-    </box>
-    <box size="164 80" pos="13 150" linewidth="2">
-        <view id="resources" size="100% 100%"/>
-    </box>
-    <image id="rip" source="slimcolonies:textures/icons/grave_icon.png" size="8 8" pos="166 153"
-           tooltip="$(no.monopixel.slimcolonies.gui.workerhuts.expedition.killed.tip)" visible="false"/>
+        <view id="equipment" size="164 16" pos="0 42"/>
+        <gradient size="164 36" pos="0 62" gradientstart="4292072403" gradientend="4289309097"/>
+        <gradient id="resourcesbg" size="164 80" pos="0 102" gradientstart="4292072403" gradientend="4289309097"/>
+        <box size="164 36" pos="0 62" linewidth="2">
+            <view id="mobs" size="100% 100%"/>
+        </box>
+        <box size="164 80" pos="0 102" linewidth="2">
+            <view id="resources" size="100% 100%"/>
+        </box>
+        <image id="rip" source="slimcolonies:textures/icons/warning.png" size="8 8" pos="153 105"
+               tooltip="$(no.monopixel.slimcolonies.gui.workerhuts.expedition.retreated.tip)" visible="false"/>
+    </view>
 </window>

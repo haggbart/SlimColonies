@@ -2,6 +2,9 @@ package no.monopixel.slimcolonies.core.colony.jobs;
 
 import no.monopixel.slimcolonies.api.client.render.modeltype.ModModelTypes;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.ExpeditionLogModule;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.expedition.ExpeditionLog;
+import no.monopixel.slimcolonies.core.colony.buildings.workerbuildings.BuildingNetherWorker;
 import no.monopixel.slimcolonies.core.entity.ai.workers.production.EntityAIWorkNether;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -35,6 +38,18 @@ public class JobNetherWorker extends AbstractJobCrafter<EntityAIWorkNether, JobN
     private Queue<ItemStack> processedResults = new LinkedList<>();
 
     /**
+     * Flag indicating worker is returning from nether and needs to process results.
+     * Set when worker enters portal, cleared after simulation completes.
+     */
+    private boolean workerReturningFromNether = false;
+
+    /**
+     * Flag indicating whether the last trip was a retreat (true) or completed (false).
+     * Used to set final expedition log status when worker returns.
+     */
+    private boolean lastTripWasRetreat = false;
+
+    /**
      * Tag for storage of the citizenInNether value
      */
     private final String TAG_IN_NETHER = "inNether";
@@ -48,6 +63,16 @@ public class JobNetherWorker extends AbstractJobCrafter<EntityAIWorkNether, JobN
      * Tag for storage of the processedResults queue
      */
     private final String TAG_PROCESSED = "processedResults";
+
+    /**
+     * Tag for storage of the workerReturningFromNether flag
+     */
+    private final String TAG_RETURNING_FROM_NETHER = "returningFromNether";
+
+    /**
+     * Tag for storage of the lastTripWasRetreat flag
+     */
+    private final String TAG_LAST_TRIP_RETREAT = "lastTripRetreat";
 
     public JobNetherWorker(ICitizenData entity)
     {
@@ -74,6 +99,8 @@ public class JobNetherWorker extends AbstractJobCrafter<EntityAIWorkNether, JobN
         compound.put(TAG_PROCESSED, processedList);
 
         compound.putBoolean(TAG_IN_NETHER, citizenInNether);
+        compound.putBoolean(TAG_RETURNING_FROM_NETHER, workerReturningFromNether);
+        compound.putBoolean(TAG_LAST_TRIP_RETREAT, lastTripWasRetreat);
         return compound;
     }
 
@@ -100,6 +127,16 @@ public class JobNetherWorker extends AbstractJobCrafter<EntityAIWorkNether, JobN
         if (compound.contains(TAG_IN_NETHER))
         {
             citizenInNether = compound.getBoolean(TAG_IN_NETHER);
+        }
+
+        if (compound.contains(TAG_RETURNING_FROM_NETHER))
+        {
+            workerReturningFromNether = compound.getBoolean(TAG_RETURNING_FROM_NETHER);
+        }
+
+        if (compound.contains(TAG_LAST_TRIP_RETREAT))
+        {
+            lastTripWasRetreat = compound.getBoolean(TAG_LAST_TRIP_RETREAT);
         }
     }
 
@@ -149,6 +186,38 @@ public class JobNetherWorker extends AbstractJobCrafter<EntityAIWorkNether, JobN
     }
 
     /**
+     * Check if worker is returning from nether.
+     */
+    public boolean isWorkerReturningFromNether()
+    {
+        return workerReturningFromNether;
+    }
+
+    /**
+     * Set flag indicating worker is returning from nether.
+     */
+    public void setWorkerReturningFromNether(boolean returning)
+    {
+        workerReturningFromNether = returning;
+    }
+
+    /**
+     * Check if last trip was a retreat.
+     */
+    public boolean wasLastTripRetreat()
+    {
+        return lastTripWasRetreat;
+    }
+
+    /**
+     * Set flag indicating whether last trip was a retreat.
+     */
+    public void setLastTripRetreat(boolean wasRetreat)
+    {
+        lastTripWasRetreat = wasRetreat;
+    }
+
+    /**
      * Get the queue of CraftedResults
      * This queue is not immutable and OK to modify
      */
@@ -195,5 +264,25 @@ public class JobNetherWorker extends AbstractJobCrafter<EntityAIWorkNether, JobN
         }
 
         return super.ignoresDamage(damageSource);
+    }
+
+    @Override
+    public void onWakeUp()
+    {
+        super.onWakeUp();
+
+        // If worker just returned from nether, update expedition status immediately
+        if (workerReturningFromNether && getCitizen().getWorkBuilding() instanceof BuildingNetherWorker building)
+        {
+            final ExpeditionLog expeditionLog = building.getFirstModuleOccurance(ExpeditionLogModule.class).getLog();
+            if (lastTripWasRetreat)
+            {
+                expeditionLog.setStatus(ExpeditionLog.Status.RETREATED);
+            }
+            else
+            {
+                expeditionLog.setStatus(ExpeditionLog.Status.COMPLETED);
+            }
+        }
     }
 }

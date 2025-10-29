@@ -2,7 +2,6 @@ package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
@@ -11,19 +10,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import no.monopixel.slimcolonies.api.colony.IColony;
-import no.monopixel.slimcolonies.api.colony.buildings.modules.settings.ISettingKey;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
 import no.monopixel.slimcolonies.api.crafting.IRecipeStorage;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
 import no.monopixel.slimcolonies.api.util.ItemStackUtils;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
-import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.MinimumStockModule;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BoolSetting;
-import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.SettingKey;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -55,10 +49,9 @@ public class BuildingNetherWorker extends AbstractBuilding
     private static final int MAX_PER_PERIOD = 1;
 
     /**
-     * Cooldown period in ticks (1 minute = 1200 ticks at 20 ticks/second)
-     * TODO: Change to 18000L (15 minutes) for production
+     * Cooldown period in ticks (15 minutes = 18000 ticks at 20 ticks/second)
      */
-    private static final long COOLDOWN_TICKS = 1200L;
+    private static final long COOLDOWN_TICKS = 600L;
 
     /**
      * Game time (in ticks) when the last trip was completed
@@ -109,6 +102,13 @@ public class BuildingNetherWorker extends AbstractBuilding
     }
 
     @Override
+    protected boolean keepFood()
+    {
+        // Don't use generic food keeping - rely on minimum stock instead
+        return false;
+    }
+
+    @Override
     public void deserializeNBT(final CompoundTag compound)
     {
         super.deserializeNBT(compound);
@@ -140,11 +140,6 @@ public class BuildingNetherWorker extends AbstractBuilding
         if (stack.isEmpty())
         {
             return 0;
-        }
-
-        if (inventory && getFirstModuleOccurance(MinimumStockModule.class).isStocked(stack))
-        {
-            return stack.getCount();
         }
 
         // Check for materials needed to go to the Nether:

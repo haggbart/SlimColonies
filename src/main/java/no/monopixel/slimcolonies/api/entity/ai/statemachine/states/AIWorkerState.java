@@ -531,16 +531,6 @@ public enum AIWorkerState implements IAIState
     NETHER_LEAVE(true),
 
     /**
-     * Let the nether worker return from the trip.
-     */
-    NETHER_AWAY(true),
-
-    /**
-     * Let the nether worker return from the trip.
-     */
-    NETHER_RETURN(true),
-
-    /**
      * Let the nether worker open the portal to the nether
      */
     NETHER_OPENPORTAL(true),

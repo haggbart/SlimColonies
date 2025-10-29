@@ -45,7 +45,7 @@ public class ExpeditionLog
         IN_PROGRESS,
         RETURNING_HOME,
         COMPLETED,
-        KILLED
+        RETREATED
     }
 
     // it would be nice to have a more generic way to store these, but they're all split between Data and Attributes
@@ -150,12 +150,12 @@ public class ExpeditionLog
     }
 
     /**
-     * Indicates that the citizen was killed while on the expedition (which ends it).
+     * Indicates that the citizen retreated while on the expedition (which ends it).
      */
-    public void setKilled()
+    public void setRetreated()
     {
         this.id = 0;
-        this.status = Status.KILLED;
+        this.status = Status.RETREATED;
     }
 
     /**

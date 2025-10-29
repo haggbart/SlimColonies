@@ -64,6 +64,7 @@ import no.monopixel.slimcolonies.api.util.constant.TypeConstants;
 import no.monopixel.slimcolonies.api.util.constant.translation.RequestSystemTranslationConstants;
 import no.monopixel.slimcolonies.core.colony.Colony;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractAssignedCitizenModule;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.MinimumStockModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BoolSetting;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.SettingKey;
 import no.monopixel.slimcolonies.core.colony.interactionhandling.RequestBasedInteraction;
@@ -662,8 +663,14 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     @Override
     public int getClaimRadius(final int newLevel)
     {
-        if (newLevel >= 5) return 3;
-        if (newLevel >= 1) return 2;
+        if (newLevel >= 5)
+        {
+            return 3;
+        }
+        if (newLevel >= 1)
+        {
+            return 2;
+        }
         return 0;
     }
 
@@ -1002,7 +1009,30 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
     @Override
     public int buildingRequiresCertainAmountOfItem(final ItemStack stack, final List<ItemStorage> localAlreadyKept, final boolean inventory, final JobEntry jobEntry)
     {
-        for (final Map.Entry<Predicate<ItemStack>, Tuple<Integer, Boolean>> entry : getRequiredItemsAndAmount().entrySet())
+        // Check minimum stock FIRST - it always takes precedence over other rules
+        // Add a 30% buffer to prevent courier thrashing when workers temporarily deposit/withdraw items
+        for (final MinimumStockModule minStockModule : getModulesByType(MinimumStockModule.class))
+        {
+            if (minStockModule.isStocked(stack))
+            {
+                final Map<Predicate<ItemStack>, Tuple<Integer, Boolean>> minStockRules = new HashMap<>();
+                minStockModule.alterItemsToBeKept((pred, qty, inv) -> {
+                    final int bufferedQty = (int) (qty * 1.30);
+                    minStockRules.put(pred, new Tuple<>(bufferedQty, inv));
+                });
+                return calculateAmountToKeep(stack, localAlreadyKept, minStockRules, false);
+            }
+        }
+
+        return calculateAmountToKeep(stack, localAlreadyKept, getRequiredItemsAndAmount(), inventory);
+    }
+
+    private int calculateAmountToKeep(
+        final ItemStack stack, final List<ItemStorage> localAlreadyKept,
+        final Map<Predicate<ItemStack>, Tuple<Integer, Boolean>> rules,
+        final boolean inventory)
+    {
+        for (final Map.Entry<Predicate<ItemStack>, Tuple<Integer, Boolean>> entry : rules.entrySet())
         {
             if (inventory && !entry.getValue().getB())
             {
@@ -1014,13 +1044,9 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
                 final ItemStorage kept = ItemStorage.getItemStackOfListMatchingPredicate(localAlreadyKept, entry.getKey());
                 final int toKeep = entry.getValue().getA();
                 int rest = stack.getCount() - toKeep;
+
                 if (kept != null)
                 {
-                    if (kept.getAmount() >= toKeep && !ItemStackUtils.isBetterEquipment(stack, kept.getItemStack()))
-                    {
-                        return stack.getCount();
-                    }
-
                     rest = kept.getAmount() + stack.getCount() - toKeep;
 
                     localAlreadyKept.remove(kept);
