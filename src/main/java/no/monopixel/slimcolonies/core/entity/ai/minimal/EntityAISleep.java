@@ -176,8 +176,10 @@ public class EntityAISleep implements IStateAI
                         if (!state.is(BlockTags.BEDS))
                         {
                             hut.getModule(BuildingModules.BED).removeBed(pos);
+                            return;
                         }
-                        else if (state.getValue(BedBlock.PART).equals(BedPart.HEAD)
+
+                        if (state.getValue(BedBlock.PART).equals(BedPart.HEAD)
                             && (above.is(BlockTags.BEDS) || above.getBlock() instanceof PanelBlock || above.getBlock() instanceof TrapDoorBlock || !above.isSolid()))
                         {
                             usedBed = pos;
@@ -186,11 +188,7 @@ public class EntityAISleep implements IStateAI
                     }
                 }
 
-                // Fallback to home position if assigned bed is not available
-                if (usedBed == null)
-                {
-                    usedBed = homePos;
-                }
+                usedBed = homePos;
             }
 
             if (EntityNavigationUtils.walkToPosInBuilding(citizen, usedBed, citizen.getCitizenData().getHomeBuilding(), 12))
