@@ -40,7 +40,8 @@ import java.util.function.Predicate;
 import static no.monopixel.slimcolonies.api.entity.ai.statemachine.states.AIWorkerState.*;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.AVERAGE_SATURATION;
 import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.FULL_SATURATION;
-import static no.monopixel.slimcolonies.api.util.constant.Constants.*;
+import static no.monopixel.slimcolonies.api.util.constant.Constants.RESULT_SLOT;
+import static no.monopixel.slimcolonies.api.util.constant.Constants.STACKSIZE;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.FOOD_SERVED;
 import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.FOOD_SERVED_DETAIL;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
@@ -131,19 +132,6 @@ public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, Build
         return ItemStackUtils.ISCOOKABLE.test(stack) && building.getModule(RESTAURANT_MENU)
             .getMenu()
             .contains(new ItemStorage(SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack)));
-    }
-
-    @Override
-    protected boolean reachedMaxToKeep()
-    {
-        if (super.reachedMaxToKeep())
-        {
-            return true;
-        }
-        final int buildingLimit = Math.max(1, building.getBuildingLevel() * building.getBuildingLevel()) * SLOT_PER_LINE;
-        return InventoryUtils.getCountFromBuildingWithLimit(building,
-            FoodUtils.EDIBLE, // Simplified - all edible food is now valid
-            stack -> stack.getMaxStackSize() * 6) > buildingLimit;
     }
 
     @Override
@@ -361,13 +349,9 @@ public class EntityAIWorkCook extends AbstractEntityAIUsesFurnace<JobCook, Build
         playerToServe.addAll(playerList);
         final RestaurantMenuModule module = worker.getCitizenData().getWorkBuilding().getModule(RESTAURANT_MENU);
 
-        if (building.getBuildingLevel() >= 3)
+        if (module.getMenu().isEmpty())
         {
-            // Custom food tier requirement removed - all food is now valid
-            if (module.getMenu().isEmpty())
-            {
-                worker.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(POOR_MENU_INTERACTION), ChatPriority.BLOCKING));
-            }
+            worker.getCitizenData().triggerInteraction(new StandardInteraction(Component.translatable(POOR_MENU_INTERACTION), ChatPriority.BLOCKING));
         }
 
         for (final EntityCitizen citizen : WorldUtil.getEntitiesWithinBuilding(world, EntityCitizen.class, building, null))
