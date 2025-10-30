@@ -38,6 +38,8 @@ import static no.monopixel.slimcolonies.api.util.constant.CitizenConstants.FULL_
 import static no.monopixel.slimcolonies.api.util.constant.Constants.SECONDS_A_MINUTE;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.TICKS_SECOND;
 import static no.monopixel.slimcolonies.api.util.constant.GuardConstants.BASIC_VOLUME;
+import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.FOOD_SERVED;
+import static no.monopixel.slimcolonies.api.util.constant.StatisticsConstants.FOOD_SERVED_DETAIL;
 import static no.monopixel.slimcolonies.api.util.constant.TranslationConstants.*;
 import static no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules.RESTAURANT_MENU;
 import static no.monopixel.slimcolonies.core.entity.ai.minimal.EntityAIEatTask.EatingState.*;
@@ -267,6 +269,9 @@ public class EntityAIEatTask implements IStateAI
                 int qty = (int) (Math.max(1.0,
                     (FULL_SATURATION - citizen.getCitizenData().getSaturation()) / FoodUtils.getFoodValue(storageToGet.getItemStack(), citizen)));
                 InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(cookBuilding, storageToGet, qty, citizen.getInventoryCitizen());
+                cookBuilding.getColony().getStatisticsManager().increment(FOOD_SERVED, cookBuilding.getColony().getDay());
+                StatsUtil.trackStatByStack(cookBuilding, FOOD_SERVED_DETAIL, storageToGet.getItemStack(), qty);
+                cookBuilding.markDirty();
                 return EAT;
             }
 

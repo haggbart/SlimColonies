@@ -115,11 +115,12 @@ public class FoodUtils
      * @param citizenData the citizen data the food is for.
      * @param menu        the menu that has to be matched or null.
      * @param building    the building to search for food.
-     * @return the first matching food item, or null.
+     * @return a random matching food item, or null.
      */
     public static ItemStorage checkForFoodInBuilding(final ICitizenData citizenData, @Nullable final Set<ItemStorage> menu, final IBuilding building)
     {
         final Level world = building.getColony().getWorld();
+        final List<ItemStorage> validFoodItems = new ArrayList<>();
 
         for (final BlockPos pos : building.getContainers())
         {
@@ -132,14 +133,19 @@ public class FoodUtils
                     {
                         if ((menu == null || menu.contains(storage)) && FoodUtils.canEat(storage.getItemStack(), citizenData.getHomeBuilding(), citizenData.getWorkBuilding()))
                         {
-                            return new ItemStorage(storage.getItemStack().copy());
+                            validFoodItems.add(storage);
                         }
                     }
                 }
             }
         }
 
-        return null;
+        if (validFoodItems.isEmpty())
+        {
+            return null;
+        }
+
+        return new ItemStorage(validFoodItems.get(MathUtils.RANDOM.nextInt(validFoodItems.size())).getItemStack().copy());
     }
 
     /**
