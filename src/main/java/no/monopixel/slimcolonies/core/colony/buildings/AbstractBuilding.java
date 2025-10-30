@@ -1084,10 +1084,6 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
         toKeep.putAll(requiredItems.entrySet().stream()
             .collect(Collectors.toMap(key -> (stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, key.getKey().getItemStack())), Map.Entry::getValue)));
 
-        if (keepFood())
-        {
-            toKeep.put(stack -> FoodUtils.canEat(stack, null, this), new Tuple<>(getBuildingLevel() * 2, true));
-        }
         for (final IHasRequiredItemsModule module : getModulesByType(IHasRequiredItemsModule.class))
         {
             toKeep.putAll(module.getRequiredItemsAndAmount());
@@ -1155,16 +1151,6 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
             }
         }
         return null;
-    }
-
-    /**
-     * If the worker should keep some food in the inventory/building.
-     *
-     * @return true if so.
-     */
-    protected boolean keepFood()
-    {
-        return true;
     }
 
     /**

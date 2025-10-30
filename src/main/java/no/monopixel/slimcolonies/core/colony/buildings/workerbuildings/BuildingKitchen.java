@@ -67,12 +67,6 @@ public class BuildingKitchen extends AbstractBuilding
     }
 
     @Override
-    protected boolean keepFood()
-    {
-        return false;
-    }
-
-    @Override
     public boolean canEat(final ItemStack stack)
     {
         final ICitizenData citizenData = getModule(CHEF_WORK).getFirstCitizen();

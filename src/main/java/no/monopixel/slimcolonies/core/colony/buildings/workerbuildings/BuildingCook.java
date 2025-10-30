@@ -57,12 +57,6 @@ public class BuildingCook extends AbstractBuilding
         super.onUpgradeComplete(newLevel);
     }
 
-    @Override
-    protected boolean keepFood()
-    {
-        return false;
-    }
-
     /**
      * Gets the next sitting position to use for eating, just keeps iterating the aviable positions, so we do not have to keep track of who is where.
      *

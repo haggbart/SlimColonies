@@ -21,6 +21,7 @@ import no.monopixel.slimcolonies.api.util.WorldUtil;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
+import no.monopixel.slimcolonies.core.colony.buildings.modules.BuildingModules;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.MinimumStockModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.BoolSetting;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.settings.SettingKey;
@@ -61,10 +62,9 @@ public class BuildingNetherWorker extends AbstractBuilding
     private static final int MAX_PER_PERIOD = 1;
 
     /**
-     * Cooldown period in ticks (1 minute = 1200 ticks at 20 ticks/second)
-     * TODO: Change to 18000L (15 minutes) for production
+     * Cooldown period in ticks (15 minutes = 18000L ticks at 20 ticks/second)
      */
-    private static final long COOLDOWN_TICKS = 1200L;
+    private static final long COOLDOWN_TICKS = 18000L;
 
     /**
      * Game time (in ticks) when the last trip was completed
@@ -161,7 +161,7 @@ public class BuildingNetherWorker extends AbstractBuilding
             return stack.getCount();
         }
 
-        // Check for materials needed to go to the Nether:
+        // Keep portal materials from recipe
         IRecipeStorage rs = getFirstModuleOccurance(BuildingNetherWorker.CraftingModule.class).getFirstRecipe(ItemStack::isEmpty);
         if (rs != null)
         {
@@ -177,6 +177,13 @@ public class BuildingNetherWorker extends AbstractBuilding
                 localAlreadyKept.add(kept);
                 return 0;
             }
+        }
+
+        // Keep all food from menu
+        final ItemStorage foodStorage = new ItemStorage(stack);
+        if (getModule(BuildingModules.NETHERMINER_MENU).getMenu().contains(foodStorage))
+        {
+            return 0;
         }
 
         return super.buildingRequiresCertainAmountOfItem(stack, localAlreadyKept, inventory, jobEntry);

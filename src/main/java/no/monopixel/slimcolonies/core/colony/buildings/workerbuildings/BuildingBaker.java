@@ -82,12 +82,6 @@ public class BuildingBaker extends AbstractBuilding
     }
 
     @Override
-    protected boolean keepFood()
-    {
-        return false;
-    }
-
-    @Override
     public boolean canEat(final ItemStack stack)
     {
         if (stack.getItem() == Items.WHEAT)
