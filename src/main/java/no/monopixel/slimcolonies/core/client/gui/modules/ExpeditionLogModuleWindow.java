@@ -73,7 +73,7 @@ public class ExpeditionLogModuleWindow extends AbstractModuleWindow
         findPaneOfTypeByID("status", Text.class).setText(Component.translatable(TranslationConstants.PARTIAL_EXPEDITION_STATUS + expeditionLog.getStatus().name().toLowerCase(Locale.US)));
 
         final Gradient bg = findPaneOfTypeByID("resourcesbg", Gradient.class);
-        if (expeditionLog.getStatus().equals(ExpeditionLog.Status.KILLED))
+        if (expeditionLog.getStatus().equals(ExpeditionLog.Status.RETREATED))
         {
             findPaneOfTypeByID("rip", Image.class).setVisible(true);
             bg.setGradientStart(0xDD, 0x66, 0x66, 0xFF);
@@ -86,20 +86,34 @@ public class ExpeditionLogModuleWindow extends AbstractModuleWindow
             bg.setGradientEnd(0xA9, 0xA9, 0xA9, 0xFF);
         }
 
-        clearChildren(findPaneOfTypeByID(WINDOW_ID_HEALTHBAR, View.class), 1);
-        clearChildren(findPaneOfTypeByID(WINDOW_ID_SATURATION_BAR, View.class), 0);
+        // Only show details if expedition is completed or retreated
+        final View detailsView = findPaneOfTypeByID("expeditionDetails", View.class);
+        if (expeditionLog.getStatus().equals(ExpeditionLog.Status.IN_PROGRESS) ||
+            expeditionLog.getStatus().equals(ExpeditionLog.Status.STARTING))
+        {
+            // Hide all details while expedition is in progress
+            detailsView.setVisible(false);
+        }
+        else
+        {
+            // Show details when expedition is complete or retreated
+            detailsView.setVisible(true);
 
-        CitizenWindowUtils.createHealthBar((int) expeditionLog.getStat(ExpeditionLog.StatType.HEALTH), findPaneOfTypeByID(WINDOW_ID_HEALTHBAR, View.class));
-        CitizenWindowUtils.createSaturationBar(expeditionLog.getStat(ExpeditionLog.StatType.SATURATION), this);
+            clearChildren(findPaneOfTypeByID(WINDOW_ID_HEALTHBAR, View.class), 1);
+            clearChildren(findPaneOfTypeByID(WINDOW_ID_SATURATION_BAR, View.class), 0);
 
-        final List<ItemStack> equipment = expeditionLog.getEquipment();
-        createEquipmentList(findPaneOfTypeByID("equipment", View.class), equipment);
+            CitizenWindowUtils.createHealthBar((int) expeditionLog.getStat(ExpeditionLog.StatType.HEALTH), findPaneOfTypeByID(WINDOW_ID_HEALTHBAR, View.class));
+            CitizenWindowUtils.createSaturationBar(expeditionLog.getStat(ExpeditionLog.StatType.SATURATION), this);
 
-        final List<Tuple<EntityType<?>, Integer>> mobs = expeditionLog.getMobs();
-        createMobList(findPaneOfTypeByID("mobs", View.class), mobs);
+            final List<ItemStack> equipment = expeditionLog.getEquipment();
+            createEquipmentList(findPaneOfTypeByID("equipment", View.class), equipment);
 
-        final List<ItemStorage> loot = expeditionLog.getLoot();
-        createLootList(findPaneOfTypeByID(LIST_RESOURCES, View.class), loot);
+            final List<Tuple<EntityType<?>, Integer>> mobs = expeditionLog.getMobs();
+            createMobList(findPaneOfTypeByID("mobs", View.class), mobs);
+
+            final List<ItemStorage> loot = expeditionLog.getLoot();
+            createLootList(findPaneOfTypeByID(LIST_RESOURCES, View.class), loot);
+        }
     }
 
     private void clearChildren(@NotNull final View parent, final int size)

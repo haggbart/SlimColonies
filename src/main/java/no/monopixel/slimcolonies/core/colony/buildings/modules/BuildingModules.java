@@ -578,7 +578,6 @@ public class BuildingModules
         new BuildingEntry.ModuleProducer<>("netherworker_craft", () -> new BuildingNetherWorker.CraftingModule(ModJobs.netherworker.get()), () -> CraftingModuleView::new);
     public static final BuildingEntry.ModuleProducer<SettingsModule, SettingsModuleView>                      NETHERWORKER_SETTINGS   =
         new BuildingEntry.ModuleProducer<>("netherworker_settings", () -> new SettingsModule().with(AbstractCraftingBuildingModule.RECIPE_MODE, new CrafterRecipeSetting())
-            .with(BuildingNetherWorker.CLOSE_PORTAL, new BoolSetting(true))
             , () -> SettingsModuleView::new);
     public static final BuildingEntry.ModuleProducer<ExpeditionLogModule, ExpeditionLogModuleView>            NETHERWORKER_EXPEDITION =
         new BuildingEntry.ModuleProducer<>("netherworker_expedition", () -> new ExpeditionLogModule(ResearchConstants.NETHER_LOG), () -> ExpeditionLogModuleView::new);
