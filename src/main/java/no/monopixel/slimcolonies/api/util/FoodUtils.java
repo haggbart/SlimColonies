@@ -13,6 +13,8 @@ import no.monopixel.slimcolonies.api.inventory.InventoryCitizen;
 import no.monopixel.slimcolonies.core.tileentities.TileEntityRack;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -88,17 +90,23 @@ public class FoodUtils
      */
     public static int getBestFoodForCitizen(final InventoryCitizen inventoryCitizen, final ICitizenData citizenData, @Nullable final Set<ItemStorage> menu)
     {
-        // Find the first edible food item that matches the menu (if any)
+        final List<Integer> validFoodSlots = new ArrayList<>();
+
         for (int i = 0; i < inventoryCitizen.getSlots(); i++)
         {
             final ItemStorage invStack = new ItemStorage(inventoryCitizen.getStackInSlot(i));
             if ((menu == null || menu.contains(invStack)) && FoodUtils.canEat(invStack.getItemStack(), citizenData.getHomeBuilding(), citizenData.getWorkBuilding()))
             {
-                return i;
+                validFoodSlots.add(i);
             }
         }
 
-        return -1;
+        if (validFoodSlots.isEmpty())
+        {
+            return -1;
+        }
+
+        return validFoodSlots.get(MathUtils.RANDOM.nextInt(validFoodSlots.size()));
     }
 
     /**
