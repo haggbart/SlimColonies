@@ -130,6 +130,16 @@ public class FurnaceUserModule extends AbstractBuildingModule implements IPersis
         return new ArrayList<>(furnaces);
     }
 
+    /**
+     * Return the number of furnaces assigned to this hut.
+     *
+     * @return the count of furnaces
+     */
+    public int getFurnaceCount()
+    {
+        return furnaces.size();
+    }
+
     @Override
     public void onBlockPlacedInBuilding(@NotNull final BlockState blockState, @NotNull final BlockPos pos, @NotNull final Level world)
     {

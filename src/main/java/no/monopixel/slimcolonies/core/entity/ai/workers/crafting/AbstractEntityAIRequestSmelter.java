@@ -411,8 +411,7 @@ public abstract class AbstractEntityAIRequestSmelter<J extends AbstractJobCrafte
 
     private int getMaxUsableFurnaces()
     {
-        final int maxSkillFurnaces = (worker.getCitizenData().getCitizenSkillHandler().getLevel(getModuleForJob().getPrimarySkill()) / 10) + 1;
-        return Math.min(maxSkillFurnaces, building.getFirstModuleOccurance(FurnaceUserModule.class).getFurnaces().size());
+        return building.getFirstModuleOccurance(FurnaceUserModule.class).getFurnaceCount();
     }
 
     /**
