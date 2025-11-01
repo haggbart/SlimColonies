@@ -310,8 +310,7 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
         tag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_GLASSBLOWER))
             .addTag(Tags.Items.GLASS)
             .addTag(Tags.Items.GLASS_PANES);
-        tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_GLASSBLOWER))
-            .addTag(Tags.Items.DYES);
+        tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_GLASSBLOWER));
         tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_GLASSBLOWER));
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_GLASSBLOWER));
         tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_GLASSBLOWER_SMELTING))
