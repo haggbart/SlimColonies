@@ -1251,13 +1251,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.SAWMILL_ID), 1)
             .addEffect(ModBuildings.fletcher.get().getBuildingBlock(), 1)
             .addToList(r);
-        new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/hotboots"), TECH).setParentResearch(stringWork)
-            .setTranslatedName("Hot Boots")
-            .setTranslatedSubtitle("Warmer on the outside.")
-            .setIcon(Items.CAMPFIRE)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.FLETCHER_ID), 1)
-            .addEffect(FIRE_RES, 1)
-            .addToList(r);
 
         final Research deepPockets = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/deeppockets"), TECH).setParentResearch(woodwork)
             .setTranslatedName("Deep Pockets")
@@ -1318,12 +1311,19 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addEffect(BLOCK_BREAK_SPEED, 5)
             .addToList(r);
 
-        new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/thoselungs"), TECH).setParentResearch(hot)
+        final Research thoseLungs = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/thoselungs"), TECH).setParentResearch(hot)
             .setTranslatedName("Those Lungs!")
             .setTranslatedSubtitle("You'll definitely be needing those in some form.")
             .setIcon(ModBlocks.blockHutGlassblower.asItem())
             .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.SMELTERY_ID), 3)
             .addEffect(ModBuildings.glassblower.get().getBuildingBlock(), 1)
+            .addToList(r);
+        new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/hotboots"), TECH).setParentResearch(thoseLungs)
+            .setTranslatedName("Hot Boots")
+            .setTranslatedSubtitle("Warmer on the outside.")
+            .setIcon(Items.CAMPFIRE)
+            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.FLETCHER_ID), 1)
+            .addEffect(FIRE_RES, 1)
             .addToList(r);
 
         // Primary Research #7

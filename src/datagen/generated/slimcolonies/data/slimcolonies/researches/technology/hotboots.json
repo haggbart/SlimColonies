@@ -7,7 +7,7 @@
     }
   ],
   "icon": "minecraft:campfire",
-  "parentResearch": "slimcolonies:technology/stringwork",
+  "parentResearch": "slimcolonies:technology/thoselungs",
   "requirements": [
     {
       "type": "slimcolonies:building",
