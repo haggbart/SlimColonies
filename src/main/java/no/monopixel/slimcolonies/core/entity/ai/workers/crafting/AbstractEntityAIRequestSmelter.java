@@ -245,7 +245,7 @@ public abstract class AbstractEntityAIRequestSmelter<J extends AbstractJobCrafte
     }
 
     /**
-     * Get the list of possible fuels, adjusted for any inputs/outputs of the current recipe to avoid interference
+     * Get the list of possible fuels
      */
     private List<ItemStack> getActivePossibleFuels()
     {
@@ -259,12 +259,6 @@ public abstract class AbstractEntityAIRequestSmelter<J extends AbstractJobCrafte
             return ImmutableList.of();
         }
 
-        if (currentRecipeStorage != null)
-        {
-            possibleFuels.removeIf(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, currentRecipeStorage.getPrimaryOutput()));
-            // There is always only one input.
-            possibleFuels.removeIf(stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(stack, currentRecipeStorage.getCleanedInput().get(0).getItemStack()));
-        }
         return possibleFuels;
     }
 

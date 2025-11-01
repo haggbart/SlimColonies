@@ -348,6 +348,7 @@ public final class ModBuildingsInitializer
             .addBuildingModuleProducer(SETTINGS_CRAFTER_RECIPE)
             .addBuildingModuleProducer(FURNACE)
             .addBuildingModuleProducer(ITEMLIST_FUEL)
+            .addBuildingModuleProducer(MIN_STOCK)
             .addBuildingModuleProducer(CRAFT_TASK_VIEW)
             .addBuildingModuleProducer(STATS_MODULE)
             .createBuildingEntry());
