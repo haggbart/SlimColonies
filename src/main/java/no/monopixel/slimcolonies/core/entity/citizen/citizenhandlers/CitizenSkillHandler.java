@@ -33,6 +33,11 @@ import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.*;
 public class CitizenSkillHandler implements ICitizenSkillHandler
 {
     /**
+     * The level cap for citizen skills.
+     */
+    private static final int LEVEL_CAP = 10;
+
+    /**
      * Skill map.
      */
     public Map<Skill, SkillData> skillMap = new EnumMap<>(Skill.class);
@@ -89,8 +94,7 @@ public class CitizenSkillHandler implements ICitizenSkillHandler
             roleModelB = secondParent;
         }
 
-        final int levelCap = 10; // Default level cap without happiness
-        init(levelCap);
+        init(LEVEL_CAP);
 
         final int bonusPoints = 25 + rand.nextInt(25);
 
@@ -155,8 +159,7 @@ public class CitizenSkillHandler implements ICitizenSkillHandler
             return false;
         }
 
-        final int levelCap = 10; // Default level cap without happiness
-        if (skillMap.get(Skill.Intelligence).level < levelCap * 9)
+        if (skillMap.get(Skill.Intelligence).level < LEVEL_CAP * 9)
         {
             addXpToSkill(Skill.Intelligence, 10, citizen);
         }

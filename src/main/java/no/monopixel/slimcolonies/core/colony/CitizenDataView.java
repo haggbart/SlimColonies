@@ -317,7 +317,6 @@ public class CitizenDataView implements ICitizenDataView
         workBuilding = buf.readBoolean() ? buf.readBlockPos() : null;
 
         saturation = buf.readDouble();
-        buf.readDouble(); // Skip happiness value
 
         citizenSkillHandler.read(buf.readNbt());
 
@@ -345,8 +344,6 @@ public class CitizenDataView implements ICitizenDataView
 
         sortedInteractions = new ArrayList<>(citizenChatOptions.values());
         sortedInteractions.sort(Comparator.comparingInt(e -> -e.getPriority().getPriority()));
-
-        buf.readNbt(); // Skip happiness handler data
 
         int statusindex = buf.readInt();
         statusIcon = statusindex >= 0 ? VisibleCitizenStatus.getForId(statusindex) : null;

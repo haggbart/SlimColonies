@@ -1011,7 +1011,6 @@ public class CitizenData implements ICitizenData
         }
 
         buf.writeDouble(getSaturation());
-        buf.writeDouble(10.0); // Default happiness value
 
         buf.writeNbt(citizenSkillHandler.write());
 
@@ -1038,10 +1037,6 @@ public class CitizenData implements ICitizenData
         {
             buf.writeInt(0);
         }
-
-        // Happiness system removed - write empty compound
-        final CompoundTag emptyCompound = new CompoundTag();
-        buf.writeNbt(emptyCompound);
 
         buf.writeInt(status != null ? status.getId() : -1);
 
@@ -1441,13 +1436,12 @@ public class CitizenData implements ICitizenData
             }
         }
 
-        // Happiness system removed
         this.citizenFoodHandler.read(nbtTagCompound);
         citizenInjuryHandler.read(nbtTagCompound);
 
         if (nbtTagCompound.contains(TAG_LEVEL_MAP) && !nbtTagCompound.contains(TAG_NEW_SKILLS))
         {
-            citizenSkillHandler.init(10); // Default level cap without happiness
+            citizenSkillHandler.init(10);
             final Map<String, Integer> levels = new HashMap<>();
             final ListTag levelTagList = nbtTagCompound.getList(TAG_LEVEL_MAP, Tag.TAG_COMPOUND);
             for (int i = 0; i < levelTagList.size(); ++i)
@@ -1576,8 +1570,6 @@ public class CitizenData implements ICitizenData
         {
             return;
         }
-
-        final int homeBuildingLevel = homeBuilding == null ? 1 : homeBuilding.getBuildingLevel();
 
         if (interactedRecently > 0)
         {

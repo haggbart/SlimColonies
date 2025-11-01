@@ -269,7 +269,6 @@ public final class ColonyView implements IColonyView
         {
             buf.writeBlockPos(block);
         }
-        buf.writeDouble(10.0); // Default happiness value
         buf.writeBoolean(colony.hasWarehouse());
 
         buf.writeInt(waypoints.size());
@@ -682,7 +681,7 @@ public final class ColonyView implements IColonyView
         this.world = world;
         //  General Attributes
         name = buf.readUtf(32767);
-        dimensionId = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(buf.readUtf(32767)));
+        dimensionId = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(buf.readUtf(32767)));
         center = buf.readBlockPos();
         //  Citizenry
         citizenCountWithEmptyGuardTowers = buf.readInt();
@@ -702,7 +701,7 @@ public final class ColonyView implements IColonyView
         final int blockListSize = buf.readInt();
         for (int i = 0; i < blockListSize; i++)
         {
-            freeBlocks.add(ForgeRegistries.BLOCKS.getValue(new ResourceLocation((buf.readUtf(32767)))));
+            freeBlocks.add(ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(buf.readUtf(32767))));
         }
 
         final int posListSize = buf.readInt();
@@ -710,7 +709,6 @@ public final class ColonyView implements IColonyView
         {
             freePositions.add(buf.readBlockPos());
         }
-        buf.readDouble(); // Skip happiness value - using default
         this.hasColonyWarehouse = buf.readBoolean();
 
         final int wayPointListSize = buf.readInt();
