@@ -1,13 +1,11 @@
 package no.monopixel.slimcolonies.core.colony.buildings.modules;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.AbstractBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IPersistentModule;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.expedition.ExpeditionLog;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Building module that stores an expedition log
@@ -16,12 +14,11 @@ public class ExpeditionLogModule extends AbstractBuildingModule implements IPers
 {
     private static final String TAG_LOG = "expedition";
 
-    @NotNull private final ExpeditionLog log = new ExpeditionLog();
-    @Nullable private final ResourceLocation research;
+    @NotNull
+    private final ExpeditionLog log = new ExpeditionLog();
 
-    public ExpeditionLogModule(@Nullable ResourceLocation research)
+    public ExpeditionLogModule()
     {
-        this.research = research;
     }
 
     @NotNull
@@ -46,13 +43,7 @@ public class ExpeditionLogModule extends AbstractBuildingModule implements IPers
     @Override
     public void serializeToView(@NotNull final FriendlyByteBuf buf)
     {
-        final boolean unlocked = research == null || getBuilding().getColony().getResearchManager().getResearchEffects().getEffectStrength(research) > 0;
-
-        buf.writeBoolean(unlocked);
-        if (unlocked)
-        {
-            this.log.serialize(buf);
-        }
+        buf.writeBoolean(true);
+        this.log.serialize(buf);
     }
-
 }

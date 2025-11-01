@@ -1171,15 +1171,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addEffect(ModBuildings.alchemist.get().getBuildingBlock(), 1)
             .addToList(r);
 
-        new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/netherlog"), TECH).setParentResearch(netherminer)
-            .setTranslatedName("Gaze into the Pits")
-            .setTranslatedSubtitle("Always use proper lenses to avoid eye damage")
-            .setSortOrder(4)
-            .setIcon(Items.ENDER_EYE)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.NETHERWORKER_ID), 1)
-            .addEffect(NETHER_LOG, 1)
-            .addToList(r);
-
         // this is intended to be a side branch (since it has a very high cost) -- there's still room for a "main line" level 4 research!
         new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/oceanheart"), TECH).setParentResearch(alchemist)
             .setTranslatedName("Ocean's Heart")

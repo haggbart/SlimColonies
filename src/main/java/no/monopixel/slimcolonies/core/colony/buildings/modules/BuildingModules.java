@@ -580,5 +580,5 @@ public class BuildingModules
         new BuildingEntry.ModuleProducer<>("netherworker_settings", () -> new SettingsModule().with(AbstractCraftingBuildingModule.RECIPE_MODE, new CrafterRecipeSetting())
             , () -> SettingsModuleView::new);
     public static final BuildingEntry.ModuleProducer<ExpeditionLogModule, ExpeditionLogModuleView>            NETHERWORKER_EXPEDITION =
-        new BuildingEntry.ModuleProducer<>("netherworker_expedition", () -> new ExpeditionLogModule(ResearchConstants.NETHER_LOG), () -> ExpeditionLogModuleView::new);
+        new BuildingEntry.ModuleProducer<>("netherworker_expedition", () -> new ExpeditionLogModule(), () -> ExpeditionLogModuleView::new);
 }
