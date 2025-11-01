@@ -1259,28 +1259,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addEffect(FIRE_RES, 1)
             .addToList(r);
 
-        final Research space = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/space"), TECH).setParentResearch(woodwork)
-            .setTranslatedName("Space")
-            .setTranslatedSubtitle("Antidisinterdimensionalitarianism!")
-            .setIcon(Items.CHEST)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.MINER_ID), 3)
-            .addEffect(MINIMUM_STOCK, 1)
-            .addToList(r);
-        final Research capacity = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/capacity"), TECH).setParentResearch(space)
-            .setTranslatedName("Capacity")
-            .setTranslatedSubtitle("Don't ask how we fit it all.")
-            .setIcon(Items.CHEST_MINECART)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.MINER_ID), 4)
-            .addEffect(MINIMUM_STOCK, 2)
-            .addToList(r);
-        new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/fullstock"), TECH).setParentResearch(capacity)
-            .setTranslatedName("Full Stock!")
-            .setTranslatedSubtitle("We might be able to squeeze in one more.")
-            .setIcon(Items.ENDER_CHEST)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.MINER_ID), 5)
-            .addEffect(MINIMUM_STOCK, 3)
-            .addToList(r);
-
         final Research deepPockets = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/deeppockets"), TECH).setParentResearch(woodwork)
             .setTranslatedName("Deep Pockets")
             .setSortOrder(2)

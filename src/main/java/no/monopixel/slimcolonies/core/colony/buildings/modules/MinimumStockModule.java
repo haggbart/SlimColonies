@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.MINIMUM_STOCK;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_QUANTITY;
 
 /**
@@ -37,7 +36,7 @@ public class MinimumStockModule extends AbstractBuildingModule implements IMinim
     /**
      * Minimum stock it can hold per level.
      */
-    private static final int STOCK_PER_LEVEL = 5;
+    private static final int STOCK_PER_LEVEL = 10;
 
     /**
      * The minimum stock tag.
@@ -56,9 +55,7 @@ public class MinimumStockModule extends AbstractBuildingModule implements IMinim
      */
     private int minimumStockSize()
     {
-        final double increase = 1 + building.getColony().getResearchManager().getResearchEffects().getEffectStrength(MINIMUM_STOCK);
-
-        return (int) (building.getBuildingLevel() * STOCK_PER_LEVEL * increase);
+        return building.getBuildingLevel() * STOCK_PER_LEVEL;
     }
 
     @Override
