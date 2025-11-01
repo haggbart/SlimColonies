@@ -1259,15 +1259,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addEffect(FIRE_RES, 1)
             .addToList(r);
 
-        final Research sieving = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/sieving"), TECH).setParentResearch(woodwork)
-            .setTranslatedName("Sieving")
-            .setTranslatedSubtitle("How did that get in there?")
-            .setSortOrder(2)
-            .setIcon(ModBlocks.blockHutSifter.asItem())
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.FISHERMAN_ID), 3)
-            .addEffect(ModBuildings.sifter.get().getBuildingBlock(), 1)
-            .addToList(r);
-        final Research space = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/space"), TECH).setParentResearch(sieving)
+        final Research space = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/space"), TECH).setParentResearch(woodwork)
             .setTranslatedName("Space")
             .setTranslatedSubtitle("Antidisinterdimensionalitarianism!")
             .setIcon(Items.CHEST)

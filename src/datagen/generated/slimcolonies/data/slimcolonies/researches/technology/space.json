@@ -7,7 +7,7 @@
     }
   ],
   "icon": "minecraft:chest",
-  "parentResearch": "slimcolonies:technology/sieving",
+  "parentResearch": "slimcolonies:technology/woodwork",
   "requirements": [
     {
       "type": "slimcolonies:building",
@@ -15,6 +15,6 @@
       "level": 3
     }
   ],
-  "researchLevel": 3,
+  "researchLevel": 2,
   "subtitle": "no.monopixel.slimcolonies.research.technology.space.subtitle"
 }
