@@ -34,6 +34,7 @@ public class WindowStatsModule extends AbstractModuleWindow
 
     static
     {
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.today", 0);
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.yesterday", 1);
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.lastweek", 7);
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.100days", 100);
@@ -91,7 +92,7 @@ public class WindowStatsModule extends AbstractModuleWindow
                 final int interval = INTERVAL.get(selectedInterval);
                 final Map<String, Integer> statsMap;
 
-                if (interval > 0)
+                if (interval >= 0)
                 {
                     statsMap = statisticsManager.getStats(
                         buildingView.getColony().getDay() - interval,

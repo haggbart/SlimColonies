@@ -46,7 +46,7 @@ public class WindowInfoPage extends AbstractWindowTownHall
     /**
      * Current selected interval.
      */
-    public String selectedInterval = "no.monopixel.slimcolonies.coremod.gui.interval.alltime";
+    public String selectedInterval = "no.monopixel.slimcolonies.coremod.gui.interval.yesterday";
 
     /**
      * Constructor for the town hall window.

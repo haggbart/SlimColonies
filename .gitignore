@@ -54,3 +54,6 @@ gradle/local.configuration.gradle
 
 runs/
 .idea/inspectionProfiles/Project_Default.xml
+
+# Personal dev notes
+/notes

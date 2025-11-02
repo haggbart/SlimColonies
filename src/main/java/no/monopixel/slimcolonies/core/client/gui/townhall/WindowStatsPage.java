@@ -36,6 +36,7 @@ public class WindowStatsPage extends AbstractWindowTownHall
     public static final LinkedHashMap<String, Integer> INTERVAL = new LinkedHashMap<>();
     static
     {
+        INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.today", 0);
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.yesterday", 1);
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.lastweek", 7);
         INTERVAL.put("no.monopixel.slimcolonies.coremod.gui.interval.100days", 100);
@@ -233,7 +234,7 @@ public class WindowStatsPage extends AbstractWindowTownHall
                 final int interval = INTERVAL.get(selectedInterval);
                 final Map<String, Integer> statsMap;
 
-                if (interval > 0)
+                if (interval >= 0)
                 {
                     statsMap = building.getColony().getStatisticsManager().getStats(
                         building.getColony().getDay() - interval,

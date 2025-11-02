@@ -2040,6 +2040,7 @@
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.visitors_recruited": "Visitors Recruited: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.visitors_absconded": "Recruits Stole: %d",
   "no.monopixel.slimcolonies.coremod.gui.townhall.stats.research_completed": "Research Completed: %d",
+  "no.monopixel.slimcolonies.coremod.gui.interval.today": "Today",
   "no.monopixel.slimcolonies.coremod.gui.interval.yesterday": "Since Yesterday",
   "no.monopixel.slimcolonies.coremod.gui.interval.lastweek": "Last Week",
   "no.monopixel.slimcolonies.coremod.gui.interval.100days": "Last 100 Days",
