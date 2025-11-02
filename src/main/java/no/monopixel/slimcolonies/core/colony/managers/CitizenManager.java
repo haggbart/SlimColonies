@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
-import no.monopixel.slimcolonies.api.SlimColoniesAPIProxy;
 import no.monopixel.slimcolonies.api.colony.ICitizenData;
 import no.monopixel.slimcolonies.api.colony.ICitizenDataManager;
 import no.monopixel.slimcolonies.api.colony.ICivilianData;
@@ -23,7 +22,6 @@ import no.monopixel.slimcolonies.api.entity.citizen.AbstractCivilianEntity;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.eventbus.events.colony.citizens.CitizenAddedModEvent;
 import no.monopixel.slimcolonies.api.util.*;
-import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
 import no.monopixel.slimcolonies.core.Network;
 import no.monopixel.slimcolonies.core.SlimColonies;
 import no.monopixel.slimcolonies.core.colony.CitizenData;
@@ -34,7 +32,6 @@ import no.monopixel.slimcolonies.core.colony.buildings.modules.LivingBuildingMod
 import no.monopixel.slimcolonies.core.colony.buildings.modules.WorkAtHomeBuildingModule;
 import no.monopixel.slimcolonies.core.colony.eventhooks.citizenEvents.CitizenSpawnedEvent;
 import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
-import no.monopixel.slimcolonies.core.colony.jobs.JobUndertaker;
 import no.monopixel.slimcolonies.core.entity.citizen.EntityCitizen;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewCitizenViewMessage;
 import no.monopixel.slimcolonies.core.network.messages.client.colony.ColonyViewRemoveCitizenMessage;
@@ -47,7 +44,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static no.monopixel.slimcolonies.api.research.util.ResearchConstants.CITIZEN_CAP;
 import static no.monopixel.slimcolonies.api.util.constant.Constants.*;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_CITIZENS;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_ID;
@@ -270,16 +266,9 @@ public class CitizenManager implements ICitizenManager
         {
             citizenData = createAndRegisterCivilianData();
 
-            if (getMaxCitizens() >= getCurrentCitizenCount() && !force)
+            if (getMaxCitizens() <= getCurrentCitizenCount() && !force)
             {
-                if (maxCitizensFromResearch() <= getCurrentCitizenCount())
-                {
-                    MessageUtils.format(WARNING_MAX_CITIZENS_RESEARCH, colony.getName()).sendTo(colony).forAllPlayers();
-                }
-                else
-                {
-                    MessageUtils.format(WARNING_MAX_CITIZENS_CONFIG, colony.getName()).sendTo(colony).forAllPlayers();
-                }
+                MessageUtils.format(WARNING_MAX_CITIZENS_CONFIG, colony.getName()).sendTo(colony).forAllPlayers();
             }
 
             colony.getEventDescriptionManager().addEventDescription(new CitizenSpawnedEvent(spawnPoint, citizenData.getName()));
@@ -494,27 +483,13 @@ public class CitizenManager implements ICitizenManager
     @Override
     public int getMaxCitizens()
     {
-        return (int) Math.max(1, Math.min(maxCitizens, Math.min(maxCitizensFromResearch(), SlimColonies.getConfig().getServer().maxCitizenPerColony.get())));
+        return (int) Math.max(1, Math.min(maxCitizens, SlimColonies.getConfig().getServer().maxCitizenPerColony.get()));
     }
 
     @Override
     public int getPotentialMaxCitizens()
     {
-        return (int) Math.max(1, Math.min(potentialMaxCitizens, Math.min(maxCitizensFromResearch(), SlimColonies.getConfig().getServer().maxCitizenPerColony.get())));
-    }
-
-    @Override
-    public double maxCitizensFromResearch()
-    {
-        if (SlimColoniesAPIProxy.getInstance().getGlobalResearchTree().hasResearchEffect(CITIZEN_CAP))
-        {
-            final int max = Math.max(CitizenConstants.CITIZEN_LIMIT_DEFAULT, (int) colony.getResearchManager().getResearchEffects().getEffectStrength(CITIZEN_CAP));
-            return Math.min(max, SlimColonies.getConfig().getServer().maxCitizenPerColony.get());
-        }
-        else
-        {
-            return SlimColonies.getConfig().getServer().maxCitizenPerColony.get();
-        }
+        return (int) Math.max(1, Math.min(potentialMaxCitizens, SlimColonies.getConfig().getServer().maxCitizenPerColony.get()));
     }
 
     /**

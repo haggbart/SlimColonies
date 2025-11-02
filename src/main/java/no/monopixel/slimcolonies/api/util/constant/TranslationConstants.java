@@ -406,11 +406,9 @@ public final class TranslationConstants
     @NonNls
     public static final String WARNING_COLONY_NO_ARRIVAL_SPACE                                      = "no.monopixel.slimcolonies.coremod.citizens.nospace";
     @NonNls
-    public static final String DEFAULT_COLONY_NAME                                                  = "no.monopixel.slimcolonies.coremod.gui.townhall.defaultname";
-    @NonNls
-    public static final String WARNING_MAX_CITIZENS_RESEARCH                                        = "block.blockhuttownhall.messagemaxsize.research";
-    @NonNls
     public static final String WARNING_MAX_CITIZENS_CONFIG                                          = "block.blockhuttownhall.messagemaxsize.config";
+    @NonNls
+    public static final String DEFAULT_COLONY_NAME                                                  = "no.monopixel.slimcolonies.coremod.gui.townhall.defaultname";
     @NonNls
     public static final String WARNING_GRAVE_SPAWNED                                                = "no.monopixel.slimcolonies.coremod.gravespawned";
     @NonNls

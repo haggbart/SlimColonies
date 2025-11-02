@@ -1,16 +1,15 @@
 package no.monopixel.slimcolonies.core.generation.defaults;
 
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import no.monopixel.slimcolonies.api.blocks.ModBlocks;
 import no.monopixel.slimcolonies.api.colony.buildings.ModBuildings;
 import no.monopixel.slimcolonies.api.items.ModItems;
 import no.monopixel.slimcolonies.api.research.AbstractResearchProvider;
 import no.monopixel.slimcolonies.api.research.ResearchBranchType;
 import no.monopixel.slimcolonies.api.research.util.ResearchConstants;
-import no.monopixel.slimcolonies.api.util.constant.CitizenConstants;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
-import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -81,10 +80,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         effects.add(new ResearchEffect(BLOCK_ATTACKS).setTranslatedName("Knight Shield Blocking Chance +%3$s%%").setLevels(new double[] {0.05, 0.1, 0.25, 0.5}));
         effects.add(new ResearchEffect(BLOCK_BREAK_SPEED).setTranslatedName("Citizen Block Break Speed +%3$s%%").setLevels(new double[] {0.1, 0.25, 0.5, 1, 2}));
         effects.add(new ResearchEffect(BLOCK_PLACE_SPEED).setTranslatedName("Citizen Block Place Speed +%3$s%%").setLevels(new double[] {0.1, 0.25, 0.5, 1, 2}));
-        effects.add(new ResearchEffect(CITIZEN_CAP).setTranslatedName("Max Citizens to %2$s")
-            .setLevels(new double[] {CitizenConstants.CITIZEN_LIMIT_DEFAULT, CitizenConstants.CITIZEN_LIMIT_OUTPOST, CitizenConstants.CITIZEN_LIMIT_HAMLET,
-                CitizenConstants.CITIZEN_LIMIT_VILLAGE,
-                CitizenConstants.CITIZEN_LIMIT_MAX}));
         effects.add(new ResearchEffect(CITIZEN_INV_SLOTS).setTranslatedName("Citizen Inventory +%s Slots").setLevels(new double[] {9, 18, 27}));
         effects.add(new ResearchEffect(DOUBLE_ARROWS).setTranslatedName("Archer Multishot +%3$s%%").setLevels(new double[] {0.05, 0.1, 0.25, 0.5}));
         effects.add(new ResearchEffect(FARMING).setTranslatedName("Farmers Harvest +%3$s%% Crops").setLevels(new double[] {0.1, 0.25, 0.5, 0.75, 2}));
@@ -278,30 +273,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .setIcon(ModBlocks.blockHutLibrary.asItem())
             .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.HOME_ID), 3)
             .addEffect(ModBuildings.library.get().getBuildingBlock(), 1)
-            .addToList(r);
-        final Research outpost = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "civilian/outpost"), CIVIL).setParentResearch(keen)
-            .setTranslatedName("Outpost")
-            .setIcon(ModBlocks.blockHutHome.asItem(), 50)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.HOME_ID), 4)
-            .addEffect(CITIZEN_CAP, 2)
-            .addToList(r);
-        final Research hamlet = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "civilian/hamlet"), CIVIL).setParentResearch(outpost)
-            .setTranslatedName("Hamlet")
-            .setIcon(ModBlocks.blockHutHome.asItem(), 75)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.HOME_ID), 5)
-            .addEffect(CITIZEN_CAP, 3)
-            .addToList(r);
-        final Research village = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "civilian/village"), CIVIL).setParentResearch(hamlet)
-            .setTranslatedName("Village")
-            .setIcon(ModBlocks.blockHutHome.asItem(), 100)
-            .addSingleBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.TOWNHALL_ID), 4)
-            .addEffect(CITIZEN_CAP, 4)
-            .addToList(r);
-        new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "civilian/city"), CIVIL).setParentResearch(village)
-            .setTranslatedName("City")
-            .setIcon(ModBlocks.blockHutHome.asItem(), 200)
-            .addSingleBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.TOWNHALL_ID), 5)
-            .addEffect(CITIZEN_CAP, 5)
             .addToList(r);
 
         final Research diligent = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "civilian/diligent"), CIVIL).setParentResearch(keen)
@@ -866,13 +837,14 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .addToList(r);
 
         // Primary Research #4
-        final Research improvedLeather = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "combat/improvedleather"), COMBAT).setTranslatedName("Improved Leather")
-            .setTranslatedSubtitle("Becoming more like the real thing every day.")
-            .setSortOrder(4)
-            .setIcon(Items.LEATHER_HELMET)
-            .addSingleBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.TOWNHALL_ID), 1)
-            .addEffect(ARMOR_DURABILITY, 1)
-            .addToList(r);
+        final Research improvedLeather =
+            new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "combat/improvedleather"), COMBAT).setTranslatedName("Improved Leather")
+                .setTranslatedSubtitle("Becoming more like the real thing every day.")
+                .setSortOrder(4)
+                .setIcon(Items.LEATHER_HELMET)
+                .addSingleBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.TOWNHALL_ID), 1)
+                .addEffect(ARMOR_DURABILITY, 1)
+                .addToList(r);
         final Research boiledLeather = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "combat/boiledleather"), COMBAT).setParentResearch(improvedLeather)
             .setTranslatedName("Boiled Leather")
             .setTranslatedSubtitle("Extra leathery!")
