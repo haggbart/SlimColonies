@@ -209,14 +209,12 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
         tag(ModTags.crafterIngredientExclusions.get(TagConstants.CRAFTING_BLACKSMITH))
             .addTag(Tags.Items.CROPS)
             .addTag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_DYER))
-            .addTag(ModTags.crafterIngredient.get(TagConstants.CRAFTING_MECHANIC))
             .add(Items.BRICK, Items.NETHER_BRICK);
         tag(ModTags.crafterProduct.get(TagConstants.CRAFTING_BLACKSMITH))
             .add(Items.SHEARS, Items.LIGHTNING_ROD)
             .addTags(Tags.Items.NUGGETS, Tags.Items.INGOTS);
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_BLACKSMITH))
             .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_DYER))
-            .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_MECHANIC))
             .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_SAWMILL))
             .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_STONEMASON))
             .add(Items.FIREWORK_STAR)
