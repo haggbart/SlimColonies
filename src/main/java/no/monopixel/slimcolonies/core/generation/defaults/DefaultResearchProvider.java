@@ -1161,6 +1161,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .setTranslatedSubtitle("It's a dangerous job, but it must be done!")
             .setSortOrder(3)
             .setIcon(ModBlocks.blockHutNetherWorker.asItem())
+            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.MINER_ID), 3)
             .addEffect(ModBuildings.netherWorker.get().getBuildingBlock(), 1)
             .addToList(r);
 

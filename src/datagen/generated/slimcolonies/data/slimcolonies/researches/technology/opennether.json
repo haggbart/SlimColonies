@@ -7,6 +7,13 @@
     }
   ],
   "icon": "slimcolonies:blockhutnetherworker",
+  "requirements": [
+    {
+      "type": "slimcolonies:building",
+      "building": "slimcolonies:miner",
+      "level": 3
+    }
+  ],
   "researchLevel": 1,
   "sortOrder": 3,
   "subtitle": "no.monopixel.slimcolonies.research.technology.opennether.subtitle"
