@@ -62,9 +62,17 @@ public abstract class AbstractTileEntityColonyBuilding extends TileEntityRack im
      */
     private Map<String, List<BlockPos>> worldTagMapCacheWithList;
 
-    public AbstractTileEntityColonyBuilding(final BlockEntityType<? extends AbstractTileEntityColonyBuilding> type, final BlockPos pos, final BlockState state)
+    /**
+     * Create a colony building with a specific inventory size.
+     *
+     * @param type  the specific block entity type.
+     * @param pos   the position.
+     * @param state its state.
+     * @param size  the inventory size.
+     */
+    public AbstractTileEntityColonyBuilding(final BlockEntityType<? extends AbstractTileEntityColonyBuilding> type, final BlockPos pos, final BlockState state, final int size)
     {
-        super(type, pos, state);
+        super(type, pos, state, size);
     }
 
     /**

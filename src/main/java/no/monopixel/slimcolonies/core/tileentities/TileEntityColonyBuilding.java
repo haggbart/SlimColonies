@@ -59,6 +59,7 @@ import java.util.concurrent.Future;
 import java.util.function.Predicate;
 
 import static no.monopixel.slimcolonies.api.util.constant.BuildingConstants.DEACTIVATED;
+import static no.monopixel.slimcolonies.api.util.constant.Constants.DEFAULT_SIZE;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_BUILDING_TYPE;
 import static no.monopixel.slimcolonies.api.util.constant.NbtTagConstants.TAG_NAME;
 import static no.monopixel.slimcolonies.api.util.constant.SchematicTagConstants.BUILDING_SIGN;
@@ -138,7 +139,7 @@ public class TileEntityColonyBuilding extends AbstractTileEntityColonyBuilding i
      */
     public TileEntityColonyBuilding(final BlockEntityType<? extends AbstractTileEntityColonyBuilding> type, final BlockPos pos, final BlockState state)
     {
-        super(type, pos, state);
+        super(type, pos, state, DEFAULT_SIZE * 2);
     }
 
     /**
