@@ -6,8 +6,8 @@
   ],
   "desc": "Construct your Pagoda Empire and take over all the Cherry Blossom Biomes you can find!",
   "mods": [
-    "structurize",
-    "slimcolonies"
+  "structurize",
+  "slimcolonies"
   ],
   "version": "1",
   "pack-format": "1"

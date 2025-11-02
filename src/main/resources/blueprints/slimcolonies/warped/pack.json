@@ -6,8 +6,8 @@
   ],
   "desc": "The perfect pack to build up a colony in the nether. Beware of Zombified Piglins!",
   "mods": [
-    "structurize",
-    "slimcolonies"
+  "structurize",
+  "slimcolonies"
   ],
   "version": "1",
   "pack-format": "1"

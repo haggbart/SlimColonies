@@ -2,15 +2,12 @@
   "icon": "ancientathens.png",
   "name": "Ancient Athens",
   "authors": [
-    "John Reiher",
-    "Pixblockus",
-    "_Raycoms_",
-    "Thodor12"
+    "John Reiher", "Pixblockus", "_Raycoms_", "Thodor12"
   ],
   "desc": "In the Age of Aristotle and Plato, a great Mediterranean power dominates the Aegean Sea. Start your own Hellenistic Empire and rival the great Greek capital.",
   "mods": [
-    "structurize",
-    "slimcolonies"
+  "structurize",
+  "slimcolonies"
   ],
   "version": "4",
   "pack-format": "1"

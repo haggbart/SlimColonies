@@ -2,11 +2,11 @@
 """
 Blueprint Mod ID Updater for SlimColonies
 
-This script updates all .blueprint files in the project to replace
+This script updates all .blueprint and pack.json files in the project to replace
 'minecolonies' references with 'slimcolonies' (or any other mod ID).
 
 The blueprint files are gzipped NBT format files that contain mod references.
-This script handles the binary replacement while maintaining the NBT structure.
+The pack.json files are JSON metadata files that specify mod dependencies.
 
 Usage:
     python3 update_blueprints.py
@@ -16,33 +16,39 @@ Usage:
 import gzip
 import os
 import sys
+import json
 import argparse
 from pathlib import Path
 
 def update_blueprint(filepath, old_id='minecolonies', new_id='slimcolonies'):
-    """
-    Update a single blueprint file, replacing old mod ID with new mod ID.
-
-    Args:
-        filepath: Path to the blueprint file
-        old_id: The mod ID to replace (default: minecolonies)
-        new_id: The new mod ID (default: slimcolonies)
-
-    Returns:
-        True if successful, False otherwise
-    """
+    """Update a blueprint file, replacing old mod ID with new mod ID."""
     try:
-        # Read the gzipped file
         with gzip.open(filepath, 'rb') as f:
             data = f.read()
 
-        # Replace in binary data
         # Note: Both IDs should ideally be the same length for NBT format
         data = data.replace(old_id.encode('utf-8'), new_id.encode('utf-8'))
 
-        # Write back
         with gzip.open(filepath, 'wb') as f:
             f.write(data)
+
+        return True
+    except Exception as e:
+        print(f"Error processing {filepath}: {e}")
+        return False
+
+def update_pack_json(filepath, old_id='minecolonies', new_id='slimcolonies'):
+    """Update a pack.json file, replacing old mod ID with new mod ID in the mods array."""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        if 'mods' in data and isinstance(data['mods'], list):
+            data['mods'] = [new_id if mod == old_id else mod for mod in data['mods']]
+
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+            f.write('\n')
 
         return True
     except Exception as e:
@@ -75,26 +81,45 @@ def main():
         return
 
     blueprint_files = list(blueprint_dir.glob('**/*.blueprint'))
+    pack_json_files = list(blueprint_dir.glob('**/pack.json'))
 
-    if not blueprint_files:
-        print(f"No blueprint files found in {blueprint_dir}")
+    if not blueprint_files and not pack_json_files:
+        print(f"No blueprint or pack.json files found in {blueprint_dir}")
         return
 
-    success_count = 0
-    total_count = len(blueprint_files)
+    blueprint_success = 0
+    blueprint_total = len(blueprint_files)
 
-    print(f"Updating {total_count} blueprint files...")
-    print(f"Replacing '{args.old_id}' with '{args.new_id}'")
+    if blueprint_total > 0:
+        print(f"\nUpdating {blueprint_total} blueprint files...")
+        print(f"Replacing '{args.old_id}' with '{args.new_id}'")
 
-    for i, filepath in enumerate(blueprint_files):
-        if update_blueprint(filepath, args.old_id, args.new_id):
-            success_count += 1
+        for i, filepath in enumerate(blueprint_files):
+            if update_blueprint(filepath, args.old_id, args.new_id):
+                blueprint_success += 1
 
-        # Progress indicator every 100 files
-        if (i + 1) % 100 == 0:
-            print(f"Processed {i + 1}/{total_count} files...")
+            if (i + 1) % 100 == 0:
+                print(f"Processed {i + 1}/{blueprint_total} files...")
 
-    print(f"\nSuccessfully updated {success_count} out of {total_count} blueprint files")
+        print(f"Successfully updated {blueprint_success} out of {blueprint_total} blueprint files")
+
+    json_success = 0
+    json_total = len(pack_json_files)
+
+    if json_total > 0:
+        print(f"\nUpdating {json_total} pack.json files...")
+        print(f"Replacing '{args.old_id}' with '{args.new_id}' in mods array")
+
+        for filepath in pack_json_files:
+            if update_pack_json(filepath, args.old_id, args.new_id):
+                json_success += 1
+
+        print(f"Successfully updated {json_success} out of {json_total} pack.json files")
+
+    print(f"\n=== Summary ===")
+    print(f"Blueprint files: {blueprint_success}/{blueprint_total}")
+    print(f"Pack.json files: {json_success}/{json_total}")
+    print(f"Total: {blueprint_success + json_success}/{blueprint_total + json_total}")
 
 if __name__ == "__main__":
     main()

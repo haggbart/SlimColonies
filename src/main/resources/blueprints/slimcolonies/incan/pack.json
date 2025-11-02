@@ -2,14 +2,12 @@
   "icon": "incan.png",
   "name": "Incan",
   "authors": [
-    "Raycoms",
-    "John Reiher",
-    "SomeAddons"
+    "Raycoms", "John Reiher", "SomeAddons"
   ],
   "desc": "Conquer the Andes and grow your own Incan empire! Buildings should be placed on or into the mountain ranges of your growing empire.",
   "mods": [
-    "structurize",
-    "slimcolonies"
+  "structurize",
+  "slimcolonies"
   ],
   "version": "1",
   "pack-format": "1"
