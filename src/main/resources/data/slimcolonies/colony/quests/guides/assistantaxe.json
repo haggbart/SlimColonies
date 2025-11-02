@@ -1,0 +1,70 @@
+{
+  "name": "Helping Hands",
+  "max-occurrences": 1,
+  "parents": [
+    "slimcolonies:tutorial/builder"
+  ],
+  "triggers": [
+    {
+      "type": "slimcolonies:state",
+      "state": {
+        "path": "buildingManager/buildings",
+        "match": {
+          "type": "slimcolonies:builder"
+        }
+      }
+    },
+    {
+      "type": "slimcolonies:citizen",
+      "state": {
+        "match": {
+          "job": {
+            "type": "slimcolonies:builder"
+          }
+        }
+      }
+    }
+  ],
+  "objectives": [
+    {
+      "unlocks-rewards": [0],
+      "type": "slimcolonies:dialogue",
+      "target": 0,
+      "text": "Hey! I saw you watching me build. Want to help out? I've got an extra assistant axe you can use to place blocks while I'm working.",
+      "options": [
+        {
+          "answer": "Sure, I'd love to help!",
+          "result": {
+            "type": "slimcolonies:dialogue",
+            "text": "Awesome! Here, take it. You'll figure it out quick enough. Use it whenever you feel like helping out!",
+            "options": [
+              {
+                "answer": "Thanks!",
+                "result": {
+                  "type": "slimcolonies:advanceobjective",
+                  "go-to": -1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "answer": "No thanks, I'll leave it to the pro!",
+          "result": {
+            "type": "slimcolonies:advanceobjective",
+            "go-to": -1
+          }
+        }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "slimcolonies:item",
+      "details": {
+        "item": "slimcolonies:assistantaxe",
+        "qty": 1
+      }
+    }
+  ]
+}
