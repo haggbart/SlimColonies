@@ -21,12 +21,11 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import no.monopixel.slimcolonies.api.ISlimColoniesAPI;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
-import no.monopixel.slimcolonies.api.colony.jobs.IJob;
+import no.monopixel.slimcolonies.api.colony.jobs.ModJobs;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.IJobRegistry;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
 import no.monopixel.slimcolonies.api.entity.citizen.AbstractEntityCitizen;
 import no.monopixel.slimcolonies.api.eventbus.events.colony.ColonyViewUpdatedModEvent;
-import no.monopixel.slimcolonies.core.colony.jobs.AbstractJobGuard;
 import no.monopixel.slimcolonies.core.entity.visitor.VisitorCitizen;
 import no.monopixel.slimcolonies.core.event.ClientChunkUpdatedEvent;
 import org.jetbrains.annotations.NotNull;
@@ -42,8 +41,30 @@ public class EventListener
 {
     private static final Style JOB_TOOLTIP = Style.EMPTY.withColor(ChatFormatting.YELLOW).withItalic(true);
 
+    /**
+     * Set of guard job ResourceLocations for fast type checking without instantiation.
+     */
+    private static final Set<ResourceLocation> GUARD_JOB_KEYS = Set.of(
+        ModJobs.ARCHER_ID,
+        ModJobs.KNIGHT_ID
+    );
+
     @NotNull
     private final Journeymap jmap;
+
+    /**
+     * Shortens a full name to "FirstName LastInitial." format.
+     * Examples: "Johan Nygård" -> "Johan N.", "Bob" -> "Bob"
+     */
+    private static String shortenName(@NotNull final String fullName)
+    {
+        final String[] nameParts = fullName.trim().split("\\s+", 2);
+        if (nameParts.length < 2 || nameParts[1].isEmpty())
+        {
+            return fullName;
+        }
+        return nameParts[0] + " " + nameParts[1].charAt(0) + ".";
+    }
 
     public EventListener(@NotNull final Journeymap jmap)
     {
@@ -100,12 +121,15 @@ public class EventListener
 
         if (entity instanceof AbstractEntityCitizen)
         {
+            // Cache options lookup to avoid multiple Optional lookups
+            final java.util.Optional<JourneymapOptions> options = this.jmap.getOptions();
+
             final boolean isVisitor = entity instanceof VisitorCitizen;
             MutableComponent jobName;
 
             if (isVisitor)
             {
-                if (!JourneymapOptions.getShowVisitors(this.jmap.getOptions()))
+                if (!JourneymapOptions.getShowVisitors(options))
                 {
                     wrapper.setDisable(true);
                     return;
@@ -117,11 +141,12 @@ public class EventListener
             {
                 final String jobId = entity.getEntityData().get(DATA_JOB);
                 final JobEntry jobEntry = IJobRegistry.getInstance().getValue(ResourceLocation.parse(jobId));
-                final IJob<?> job = jobEntry == null ? null : jobEntry.produceJob(null);
 
-                if (job instanceof AbstractJobGuard
-                    ? !JourneymapOptions.getShowGuards(this.jmap.getOptions())
-                    : !JourneymapOptions.getShowCitizens(this.jmap.getOptions()))
+                final boolean isGuard = jobEntry != null && GUARD_JOB_KEYS.contains(jobEntry.getKey());
+
+                if (isGuard
+                    ? !JourneymapOptions.getShowGuards(options)
+                    : !JourneymapOptions.getShowCitizens(options))
                 {
                     wrapper.setDisable(true);
                     return;
@@ -132,25 +157,32 @@ public class EventListener
                     : jobEntry.getTranslationKey());
             }
 
-            if (JourneymapOptions.getShowColonistTooltip(this.jmap.getOptions()))
+            // Cache customName to avoid multiple lookups
+            final Component fullName = entity.getCustomName();
+
+            if (JourneymapOptions.getShowColonistTooltip(options))
             {
-                Component name = entity.getCustomName();
-                if (name != null)
+                if (fullName != null)
                 {
-                    wrapper.setEntityToolTips(Arrays.asList(name, jobName.setStyle(JOB_TOOLTIP)));
+                    wrapper.setEntityToolTips(Arrays.asList(fullName, jobName.setStyle(JOB_TOOLTIP)));
                 }
             }
 
-            final boolean showName = event.getActiveUiState().ui.equals(Context.UI.Minimap)
-                ? JourneymapOptions.getShowColonistNameMinimap(this.jmap.getOptions())
-                : JourneymapOptions.getShowColonistNameFullscreen(this.jmap.getOptions());
+            final boolean isMinimap = event.getActiveUiState().ui.equals(Context.UI.Minimap);
+            final boolean showName = isMinimap
+                ? JourneymapOptions.getShowColonistNameMinimap(options)
+                : JourneymapOptions.getShowColonistNameFullscreen(options);
 
             if (!showName)
             {
                 wrapper.setCustomName("");
             }
+            else if (fullName != null)
+            {
+                wrapper.setCustomName(shortenName(fullName.getString()));
+            }
 
-            if (!isVisitor && JourneymapOptions.getShowColonistTeamColour(this.jmap.getOptions()))
+            if (!isVisitor && JourneymapOptions.getShowColonistTeamColour(options))
             {
                 wrapper.setColor(entity.getTeamColor());
             }
