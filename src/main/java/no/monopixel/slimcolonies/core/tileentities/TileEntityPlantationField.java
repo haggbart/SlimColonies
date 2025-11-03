@@ -234,63 +234,9 @@ public class TileEntityPlantationField extends AbstractTileEntityPlantationField
     {
         super.readSchematicDataFromNBT(compound);
         final CompoundTag blueprintDataProvider = compound.getCompound(TAG_BLUEPRINTDATA);
-        if (compound.contains(TAG_PACK)) // New structure
-        {
-            // path is the folder containing the schematic
-            final String path = blueprintDataProvider.getString(TAG_NAME);
-            this.schematicPath = path + File.separator + this.schematicName + ".blueprint";
-        }
-        else
-        {
-            // This is only recovery handling for old structures, it shouldn't be called otherwise.
-            if (compound.contains(TAG_NAME))
-            {
-                this.schematicPath = compound.getString(TAG_NAME);
-                final String[] split = Utils.splitPath(this.schematicPath);
-                this.schematicName = split[split.length - 1].replace(".blueprint", "");
-            }
 
-            final String[] split = Utils.splitPath(this.schematicPath);
-            if (split.length >= 4)
-            {
-                this.packName = BlueprintMapping.getStyleMapping(split[2]);
-            }
-
-            if (this.packName == null || this.packName.isEmpty())
-            {
-                this.packName = DEFAULT_STYLE;
-            }
-
-            if (this.schematicName.contains("/") || this.schematicName.contains("\\"))
-            {
-                final String[] splitName = Utils.splitPath(this.schematicPath);
-                this.schematicName = splitName[splitName.length - 1].replace(".blueprint", "");
-            }
-
-            if (StructurePacks.hasPack(this.packName))
-            {
-                this.schematicPath = StructurePacks.getStructurePack(this.packName).getSubPath(StructurePacks.findBlueprint(this.packName, schematicName));
-            }
-            else
-            {
-                this.schematicPath = this.schematicName;
-            }
-
-            if (!this.schematicPath.endsWith(".blueprint"))
-            {
-                this.schematicPath = this.schematicPath + ".blueprint";
-            }
-        }
-
-        if (blueprintDataProvider.contains(TAG_PACK))
-        {
-            this.packName = blueprintDataProvider.getString(TAG_PACK);
-        }
-
-        if (this.packName == null)
-        {
-            this.packName = DEFAULT_STYLE;
-        }
+        this.packName = blueprintDataProvider.getString(TAG_PACK);
+        this.schematicPath = blueprintDataProvider.getString(TAG_PATH);
     }
 
     @Override
