@@ -150,9 +150,9 @@ public class TileEntityDecorationController extends BlockEntity implements IBlue
         final CompoundTag blueprintDataProvider = compound.getCompound(TAG_BLUEPRINTDATA);
         if (compound.contains(TAG_PACK)) // New structure
         {
-            // path is the folder containing the schematic
+            // TAG_NAME contains the full blueprint path (e.g., "infrastructure/roads/endroad1.blueprint")
             final String path = blueprintDataProvider.getString(TAG_NAME);
-            this.schematicPath = path + File.separator + this.schematicName + ".blueprint";
+            this.schematicPath = path;
         }
         else
         {
