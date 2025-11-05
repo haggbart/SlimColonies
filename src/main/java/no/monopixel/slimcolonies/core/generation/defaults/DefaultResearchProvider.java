@@ -1288,14 +1288,12 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .setTranslatedName("Those Lungs!")
             .setTranslatedSubtitle("You'll definitely be needing those in some form.")
             .setIcon(ModBlocks.blockHutGlassblower.asItem())
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.SMELTERY_ID), 3)
             .addEffect(ModBuildings.glassblower.get().getBuildingBlock(), 1)
             .addToList(r);
         new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/hotboots"), TECH).setParentResearch(thoseLungs)
             .setTranslatedName("Hot Boots")
             .setTranslatedSubtitle("Warmer on the outside.")
             .setIcon(Items.CAMPFIRE)
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.FLETCHER_ID), 1)
             .addEffect(FIRE_RES, 1)
             .addToList(r);
 
