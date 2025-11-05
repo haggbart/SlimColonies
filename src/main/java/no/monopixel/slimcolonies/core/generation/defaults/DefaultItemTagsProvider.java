@@ -396,7 +396,6 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
             .addTags(ItemTags.BOATS, ItemTags.CHEST_BOATS)
             .add(ModBlocks.blockBarrel.asItem());
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_SAWMILL))
-            .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_MECHANIC))
             .add(Items.MAGMA_CREAM);
         tag(ModTags.crafterDoIngredient.get(TagConstants.CRAFTING_SAWMILL))
             .add(Items.BAMBOO_BLOCK, Items.BAMBOO_MOSAIC, Items.BAMBOO_PLANKS, Items.STRIPPED_BAMBOO_BLOCK)
