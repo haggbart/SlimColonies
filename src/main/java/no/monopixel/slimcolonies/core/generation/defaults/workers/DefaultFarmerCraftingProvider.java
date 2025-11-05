@@ -47,7 +47,7 @@ public class DefaultFarmerCraftingProvider extends CustomRecipeProvider
             .inputs(List.of(new ItemStorage(new ItemStack(Items.DIRT)),
                 new ItemStorage(new ItemStack(Items.WATER_BUCKET))))
             .result(new ItemStack(Items.MUD))
-            .lootTable(DefaultRecipeLootProvider.LOOT_TABLE_LARGE_BOTTLE)
+            .secondaryOutputs(List.of(new ItemStack(Items.BUCKET)))
             .build(consumer);
 
         CustomRecipeBuilder.create(FARMER, MODULE_CRAFTING, "water_bucket")

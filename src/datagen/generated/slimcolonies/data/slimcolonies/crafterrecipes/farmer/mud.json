@@ -1,5 +1,10 @@
 {
   "type": "recipe",
+  "additional-output": [
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
   "crafter": "farmer_crafting",
   "inputs": [
     {
@@ -10,6 +15,5 @@
     }
   ],
   "intermediate": "minecraft:air",
-  "loot-table": "slimcolonies:recipes/large_bottle",
   "result": "minecraft:mud"
 }
