@@ -1,17 +1,9 @@
 {
   "type": "recipe",
-  "additional-output": [
-    {
-      "item": "minecraft:bucket"
-    }
-  ],
   "crafter": "farmer_crafting",
   "inputs": [
     {
       "item": "minecraft:dirt"
-    },
-    {
-      "item": "minecraft:water_bucket"
     }
   ],
   "intermediate": "minecraft:air",
