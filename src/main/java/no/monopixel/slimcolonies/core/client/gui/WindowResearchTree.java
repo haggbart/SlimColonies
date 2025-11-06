@@ -279,7 +279,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                     final Gradient gradient = new Gradient();
                     gradient.setGradientStart(80, 80, 80, 100);
                     gradient.setGradientEnd(60, 60, 60, 110);
-                    gradient.setSize(i == MAX_DEPTH ? 400 : GRADIENT_WIDTH + X_SPACING, (maxHeight + 4) * (GRADIENT_HEIGHT + Y_SPACING) + Y_SPACING + TIMELABEL_Y_POSITION);
+                    gradient.setSize(GRADIENT_WIDTH + X_SPACING, (maxHeight + 4) * (GRADIENT_HEIGHT + Y_SPACING) + Y_SPACING + TIMELABEL_Y_POSITION);
                     gradient.setPosition((i - 1) * (GRADIENT_WIDTH + X_SPACING), 0);
                     view.addChild(gradient, 0);
                     timeLabel.setColors(COLOR_TEXT_NEGATIVE);
