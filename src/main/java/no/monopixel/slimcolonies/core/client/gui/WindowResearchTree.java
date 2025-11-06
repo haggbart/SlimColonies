@@ -160,11 +160,11 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             }
         }
         else if (ResourceLocation.isValidResourceLocation(button.getID())
-            && IGlobalResearchTree.getInstance().getResearch(branch, new ResourceLocation(button.getID())) != null
-            && (building.getBuildingLevel() >= IGlobalResearchTree.getInstance().getResearch(branch, new ResourceLocation(button.getID())).getDepth()
+            && IGlobalResearchTree.getInstance().getResearch(branch, ResourceLocation.parse(button.getID())) != null
+            && (building.getBuildingLevel() >= IGlobalResearchTree.getInstance().getResearch(branch, ResourceLocation.parse(button.getID())).getDepth()
             || building.getBuildingLevel() == building.getBuildingMaxLevel()))
         {
-            final IGlobalResearch research = IGlobalResearchTree.getInstance().getResearch(branch, new ResourceLocation(button.getID()));
+            final IGlobalResearch research = IGlobalResearchTree.getInstance().getResearch(branch, ResourceLocation.parse(button.getID()));
             final ILocalResearch localResearch = building.getColony().getResearchManager().getResearchTree().getResearch(branch, research.getId());
             if (localResearch == null && building.getBuildingLevel() > building.getColony().getResearchManager().getResearchTree().getResearchInProgress().size())
             {
@@ -279,7 +279,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                     final Gradient gradient = new Gradient();
                     gradient.setGradientStart(80, 80, 80, 100);
                     gradient.setGradientEnd(60, 60, 60, 110);
-                    gradient.setSize(i == MAX_DEPTH ? 400 : GRADIENT_WIDTH + X_SPACING, (maxHeight + 4) * (GRADIENT_HEIGHT + Y_SPACING) + Y_SPACING + TIMELABEL_Y_POSITION);
+                    gradient.setSize(GRADIENT_WIDTH + X_SPACING, (maxHeight + 4) * (GRADIENT_HEIGHT + Y_SPACING) + Y_SPACING + TIMELABEL_Y_POSITION);
                     gradient.setPosition((i - 1) * (GRADIENT_WIDTH + X_SPACING), 0);
                     view.addChild(gradient, 0);
                     timeLabel.setColors(COLOR_TEXT_NEGATIVE);
@@ -458,7 +458,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                 iconBox.setImage(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/research/research_button_mini.png"), false);
                 break;
             default:
-                Log.getLogger().error("Error in DrawResearchBoxes for " + research.getId() + " state: " + state);
+                Log.getLogger().error("Error in DrawResearchBoxes for {} state: {}", research.getId(), state);
                 break;
         }
 
@@ -873,7 +873,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                 view.addChild(checkIcon);
                 break;
             default:
-                Log.getLogger().error("Error with DrawIcons :" + research.getId());
+                Log.getLogger().error("Error with DrawIcons: {}", research.getId());
                 break;
         }
     }
