@@ -458,7 +458,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                 iconBox.setImage(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/research/research_button_mini.png"), false);
                 break;
             default:
-                Log.getLogger().error("Error in DrawResearchBoxes for " + research.getId() + " state: " + state);
+                Log.getLogger().error("Error in DrawResearchBoxes for {} state: {}", research.getId(), state);
                 break;
         }
 
@@ -873,7 +873,7 @@ public class WindowResearchTree extends AbstractWindowSkeleton
                 view.addChild(checkIcon);
                 break;
             default:
-                Log.getLogger().error("Error with DrawIcons :" + research.getId());
+                Log.getLogger().error("Error with DrawIcons: {}", research.getId());
                 break;
         }
     }
