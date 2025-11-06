@@ -160,11 +160,11 @@ public class WindowResearchTree extends AbstractWindowSkeleton
             }
         }
         else if (ResourceLocation.isValidResourceLocation(button.getID())
-            && IGlobalResearchTree.getInstance().getResearch(branch, new ResourceLocation(button.getID())) != null
-            && (building.getBuildingLevel() >= IGlobalResearchTree.getInstance().getResearch(branch, new ResourceLocation(button.getID())).getDepth()
+            && IGlobalResearchTree.getInstance().getResearch(branch, ResourceLocation.parse(button.getID())) != null
+            && (building.getBuildingLevel() >= IGlobalResearchTree.getInstance().getResearch(branch, ResourceLocation.parse(button.getID())).getDepth()
             || building.getBuildingLevel() == building.getBuildingMaxLevel()))
         {
-            final IGlobalResearch research = IGlobalResearchTree.getInstance().getResearch(branch, new ResourceLocation(button.getID()));
+            final IGlobalResearch research = IGlobalResearchTree.getInstance().getResearch(branch, ResourceLocation.parse(button.getID()));
             final ILocalResearch localResearch = building.getColony().getResearchManager().getResearchTree().getResearch(branch, research.getId());
             if (localResearch == null && building.getBuildingLevel() > building.getColony().getResearchManager().getResearchTree().getResearchInProgress().size())
             {
