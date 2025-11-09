@@ -451,7 +451,6 @@ public class DefaultItemTagsProvider extends ItemTagsProvider
 
         tag(ModTags.crafterProductExclusions.get(TagConstants.CRAFTING_STONEMASON))
             .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_MECHANIC))
-            .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_DYER))
             .addTag(ModTags.crafterProduct.get(TagConstants.CRAFTING_SAWMILL))
             .addTag(ItemTags.TRIM_TEMPLATES)
             .add(Items.LECTERN, Items.PISTON, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
