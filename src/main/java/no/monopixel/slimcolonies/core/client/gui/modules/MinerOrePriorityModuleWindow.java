@@ -32,14 +32,13 @@ public class MinerOrePriorityModuleWindow extends AbstractModuleWindow
 
     private static final String LABEL_LIMIT_REACHED = "no.monopixel.slimcolonies.coremod.gui.warehouse.limitreached";
 
-    private static final TagKey<Block> TAG_ORES_IN_NETHERRACK = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/netherrack"));
-    private static final TagKey<Block> TAG_ORES_IN_END_STONE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/end_stone"));
-    private static final TagKey<Block> TAG_ORES_IN_DEEPSLATE  = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/deepslate"));
-    private static final TagKey<Block> TAG_ORES_DIAMOND       = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/diamond"));
-    private static final TagKey<Block> TAG_ORES_EMERALD       = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/emerald"));
-    private static final TagKey<Block> TAG_ORES_LAPIS         = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/lapis"));
-    private static final TagKey<Block> TAG_ORES_REDSTONE      = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/redstone"));
-    private static final TagKey<Block> TAG_ORES_GOLD          = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/gold"));
+    private static final TagKey<Block> TAG_ORES_IN_DEEPSLATE =
+        TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/deepslate"));
+    private static final TagKey<Block> TAG_ORES_DIAMOND      = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/diamond"));
+    private static final TagKey<Block> TAG_ORES_EMERALD      = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/emerald"));
+    private static final TagKey<Block> TAG_ORES_LAPIS        = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/lapis"));
+    private static final TagKey<Block> TAG_ORES_REDSTONE     = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/redstone"));
+    private static final TagKey<Block> TAG_ORES_GOLD         = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/gold"));
 
     private static final Comparator<ItemStorage> BY_DISPLAY_NAME =
         Comparator.comparing(o -> o.getItemStack().getDisplayName().getString().toLowerCase(Locale.US));
@@ -66,52 +65,37 @@ public class MinerOrePriorityModuleWindow extends AbstractModuleWindow
         resourceList = window.findPaneOfTypeByID(LIST_RESOURCES, ScrollingList.class);
 
         groupedItemList = new ArrayList<>();
-        for (ItemStorage storage : IColonyManager.getInstance().getCompatibilityManager().getSmeltableOres())
+        // Use minableOres which contains only overworld ore blocks (filtered by CompatibilityManager)
+        for (ItemStorage storage : IColonyManager.getInstance().getCompatibilityManager().getMinableOres())
         {
-            // Only include ore blocks, not raw materials
-            if (storage.getItemStack().getItem() instanceof net.minecraft.world.item.BlockItem blockItem)
+            final Block block = ((net.minecraft.world.item.BlockItem) storage.getItemStack().getItem()).getBlock();
+            final int buildingLevel = building.getBuildingLevel();
+
+            if (block.defaultBlockState().is(TAG_ORES_IN_DEEPSLATE) && buildingLevel < 3)
             {
-                final Block block = blockItem.getBlock();
-                final ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(block);
-                final int buildingLevel = building.getBuildingLevel();
-
-                if (block.defaultBlockState().is(TAG_ORES_IN_NETHERRACK) ||
-                    block.defaultBlockState().is(TAG_ORES_IN_END_STONE))
-                {
-                    continue;
-                }
-
-                if (blockId != null && blockId.getPath().contains("ancient_debris"))
-                {
-                    continue;
-                }
-
-                if (block.defaultBlockState().is(TAG_ORES_IN_DEEPSLATE) && buildingLevel < 3)
-                {
-                    continue;
-                }
-
-                if (block.defaultBlockState().is(TAG_ORES_GOLD) && buildingLevel < 2)
-                {
-                    continue;
-                }
-                if (buildingLevel < 3 && (
-                    block.defaultBlockState().is(TAG_ORES_LAPIS) ||
-                        block.defaultBlockState().is(TAG_ORES_REDSTONE)))
-                {
-                    continue;
-                }
-                if (block.defaultBlockState().is(TAG_ORES_DIAMOND) && buildingLevel < 4)
-                {
-                    continue;
-                }
-                if (block.defaultBlockState().is(TAG_ORES_EMERALD) && buildingLevel < 5)
-                {
-                    continue;
-                }
-
-                groupedItemList.add(storage);
+                continue;
             }
+
+            if (block.defaultBlockState().is(TAG_ORES_GOLD) && buildingLevel < 2)
+            {
+                continue;
+            }
+            if (buildingLevel < 3 && (
+                block.defaultBlockState().is(TAG_ORES_LAPIS) ||
+                    block.defaultBlockState().is(TAG_ORES_REDSTONE)))
+            {
+                continue;
+            }
+            if (block.defaultBlockState().is(TAG_ORES_DIAMOND) && buildingLevel < 4)
+            {
+                continue;
+            }
+            if (block.defaultBlockState().is(TAG_ORES_EMERALD) && buildingLevel < 5)
+            {
+                continue;
+            }
+
+            groupedItemList.add(storage);
         }
 
         window.findPaneOfTypeByID(INPUT_FILTER, TextField.class).setHandler(input -> {

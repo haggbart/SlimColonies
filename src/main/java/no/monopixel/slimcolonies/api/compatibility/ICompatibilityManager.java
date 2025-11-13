@@ -1,8 +1,6 @@
 package no.monopixel.slimcolonies.api.compatibility;
 
 import com.google.common.collect.ImmutableSet;
-import no.monopixel.slimcolonies.api.crafting.CompostRecipe;
-import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,6 +12,8 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import no.monopixel.slimcolonies.api.crafting.CompostRecipe;
+import no.monopixel.slimcolonies.api.crafting.ItemStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,10 +43,10 @@ public interface ICompatibilityManager
 
     /**
      * Receive and update lists based on incoming server discovery data.
-     *
+     * <p>
      * Note: anything based purely on the registries and configs can be safely recalculated here.
-     *       But anything based on tags or recipes must be updated purely via the packet,
-     *       because this can be called before the client has the latest tags/recipes.
+     * But anything based on tags or recipes must be updated purely via the packet,
+     * because this can be called before the client has the latest tags/recipes.
      *
      * @param buf deserialization buffer
      */
@@ -83,6 +83,7 @@ public interface ICompatibilityManager
 
     /**
      * Get a set of all edibles for citizens.
+     *
      * @param minNutrition the min nutrition of the food.
      * @return list of edible food.
      */
@@ -94,6 +95,13 @@ public interface ICompatibilityManager
      * @return an immutable set.
      */
     Set<ItemStorage> getSmeltableOres();
+
+    /**
+     * Get a set of minable ore blocks (overworld only, for miner priority GUI).
+     *
+     * @return an immutable set.
+     */
+    Set<ItemStorage> getMinableOres();
 
     /**
      * Check if a stack belongs to a minable ore.
@@ -141,6 +149,7 @@ public interface ICompatibilityManager
 
     /**
      * Get the set of all monsters.
+     *
      * @return the set.
      */
     ImmutableSet<ResourceLocation> getAllMonsters();
@@ -215,12 +224,14 @@ public interface ICompatibilityManager
 
     /**
      * Get the creative tab for a stack.
+     *
      * @param checkItem the storage wrapper.
      */
     CreativeModeTab getCreativeTab(ItemStorage checkItem);
 
     /**
      * Get the creative tab key as int associated.
+     *
      * @param checkItem the item to check.
      * @return the number or default.
      */
@@ -228,6 +239,7 @@ public interface ICompatibilityManager
 
     /**
      * Get number of detected saplings.
+     *
      * @return the number of saplings.
      */
     int getNumberOfSaplings();

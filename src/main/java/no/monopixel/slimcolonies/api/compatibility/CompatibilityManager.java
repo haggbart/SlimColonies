@@ -13,7 +13,9 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.*;
@@ -38,6 +40,7 @@ import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
 import no.monopixel.slimcolonies.core.colony.crafting.LootTableAnalyzer;
+import no.monopixel.slimcolonies.core.compatibility.gregtech.GregTechOreHelper;
 import no.monopixel.slimcolonies.core.generation.ItemNbtCalculator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -60,6 +63,10 @@ public class CompatibilityManager implements ICompatibilityManager
      */
     private static final int MAX_DEPTH = 100;
 
+    // Overworld base stone tags
+    private static final TagKey<Block> TAG_ORES_IN_STONE     = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/stone"));
+    private static final TagKey<Block> TAG_ORES_IN_DEEPSLATE = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores_in_ground/deepslate"));
+
     /**
      * BiMap of saplings and leaves.
      */
@@ -81,9 +88,14 @@ public class CompatibilityManager implements ICompatibilityManager
     private final Map<Item, Boolean> breakableOreCache = new HashMap<>();
 
     /**
-     * List of all ore-like items.
+     * List of all ore-like items
      */
     private final Set<ItemStorage> smeltableOres = new HashSet<>();
+
+    /**
+     * List of minable ore blocks (for miner priority GUI - overworld only).
+     */
+    private final Set<ItemStorage> minableOres = new HashSet<>();
 
     /**
      * List of all the compost recipes
@@ -145,6 +157,7 @@ public class CompatibilityManager implements ICompatibilityManager
         saplings.clear();
         oreBlocks.clear();
         smeltableOres.clear();
+        minableOres.clear();
         plantables.clear();
         beekeeperflowers = ImmutableSet.of();
 
@@ -182,6 +195,7 @@ public class CompatibilityManager implements ICompatibilityManager
         serializeItemStorageList(buf, saplings);
         serializeBlockList(buf, oreBlocks);
         serializeItemStorageList(buf, smeltableOres);
+        serializeItemStorageList(buf, minableOres);
         serializeItemStorageList(buf, plantables);
         serializeItemStorageList(buf, beekeeperflowers);
 
@@ -214,6 +228,7 @@ public class CompatibilityManager implements ICompatibilityManager
         saplings.addAll(deserializeItemStorageList(buf));
         oreBlocks.addAll(deserializeBlockList(buf));
         smeltableOres.addAll(deserializeItemStorageList(buf));
+        minableOres.addAll(deserializeItemStorageList(buf));
         plantables.addAll(deserializeItemStorageList(buf));
         beekeeperflowers = ImmutableSet.copyOf(deserializeItemStorageList(buf));
 
@@ -223,7 +238,7 @@ public class CompatibilityManager implements ICompatibilityManager
         monsters = ImmutableSet.copyOf(deserializeRegistryIds(buf, ForgeRegistries.ENTITY_TYPES));
 
         Log.getLogger().info("Synchronized {} saplings", saplings.size());
-        Log.getLogger().info("Synchronized {} ore blocks with {} smeltable ores", oreBlocks.size(), smeltableOres.size());
+        Log.getLogger().info("Synchronized {} ore blocks with {} smeltable ores and {} minable ores", oreBlocks.size(), smeltableOres.size(), minableOres.size());
         Log.getLogger().info("Synchronized {} plantables", plantables.size());
         Log.getLogger().info("Synchronized {} flowers", beekeeperflowers.size());
 
@@ -418,6 +433,16 @@ public class CompatibilityManager implements ICompatibilityManager
             Log.getLogger().error("getSmeltableOres when empty");
         }
         return smeltableOres;
+    }
+
+    @Override
+    public Set<ItemStorage> getMinableOres()
+    {
+        if (minableOres.isEmpty())
+        {
+            Log.getLogger().error("getMinableOres when empty");
+        }
+        return minableOres;
     }
 
     @Override
@@ -620,7 +645,7 @@ public class CompatibilityManager implements ICompatibilityManager
         discoverFungi();
 
         beekeeperflowers = ImmutableSet.copyOf(tempFlowers);
-        Log.getLogger().info("Finished discovering Ores " + oreBlocks.size() + " " + smeltableOres.size());
+        Log.getLogger().info("Finished discovering ores " + oreBlocks.size() + " " + smeltableOres.size());
         Log.getLogger().info("Finished discovering saplings " + saplings.size());
         Log.getLogger().info("Finished discovering plantables " + plantables.size());
         Log.getLogger().info("Finished discovering food " + edibles.size() + " " + food.size());
@@ -650,15 +675,50 @@ public class CompatibilityManager implements ICompatibilityManager
     {
         if (stack.is(Tags.Items.ORES) || stack.is(ModTags.breakable_ore) || stack.is(ModTags.raw_ore))
         {
-            if (stack.getItem() instanceof BlockItem)
+            boolean isBlockItem = false;
+            boolean isFromOtherDimension = false;
+
+            if (stack.getItem() instanceof BlockItem blockItem)
             {
-                oreBlocks.add(((BlockItem) stack.getItem()).getBlock());
+                isBlockItem = true;
+                final Block block = blockItem.getBlock();
+                final BlockState state = block.defaultBlockState();
+
+                // Check dimension using both tag whitelist and GregTech integration
+                boolean filteredByTags = isOreFromOtherDimension(state);
+                boolean filteredByGregTech = GregTechOreHelper.isNonOverworldOnly(stack);
+                isFromOtherDimension = filteredByTags || filteredByGregTech;
+
+                if (!isFromOtherDimension)
+                {
+                    oreBlocks.add(block);
+                }
             }
+
+            // smeltableOres: ALL ores with smelting recipes (for smelters - includes all dimensions)
             if (!SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack).isEmpty())
             {
                 smeltableOres.add(new ItemStorage(stack));
             }
+
+            // minableOres: only overworld ore BLOCKS (for miner priority GUI)
+            if (isBlockItem && !isFromOtherDimension &&
+                !SlimColoniesAPIProxy.getInstance().getFurnaceRecipes().getSmeltingResult(stack).isEmpty())
+            {
+                minableOres.add(new ItemStorage(stack));
+            }
         }
+    }
+
+    /**
+     * Check if an ore block is from a non-overworld dimension.
+     *
+     * @param state the block state to check
+     * @return true if the ore is NOT from overworld (not in stone or deepslate)
+     */
+    private boolean isOreFromOtherDimension(final BlockState state)
+    {
+        return !state.is(TAG_ORES_IN_STONE) && !state.is(TAG_ORES_IN_DEEPSLATE);
     }
 
     /**
@@ -797,7 +857,10 @@ public class CompatibilityManager implements ICompatibilityManager
                         break;
                     }
                 }
-                if (dropsSelf) break;
+                if (dropsSelf)
+                {
+                    break;
+                }
             }
             breakableOreCache.put(item, !dropsSelf);
         }
