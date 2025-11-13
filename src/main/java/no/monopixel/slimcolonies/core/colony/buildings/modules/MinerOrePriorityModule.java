@@ -4,7 +4,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.AbstractBuildingModule;
 import no.monopixel.slimcolonies.api.colony.buildings.modules.IPersistentModule;
 import no.monopixel.slimcolonies.api.crafting.ItemStorage;
@@ -23,6 +30,13 @@ public class MinerOrePriorityModule extends AbstractBuildingModule implements IP
      */
     public static final int ORES_PER_LEVEL = 3;
 
+    // Ore type tags for building level requirements
+    private static final TagKey<Block> TAG_ORES_GOLD     = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/gold"));
+    private static final TagKey<Block> TAG_ORES_LAPIS    = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/lapis"));
+    private static final TagKey<Block> TAG_ORES_REDSTONE = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/redstone"));
+    private static final TagKey<Block> TAG_ORES_DIAMOND  = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/diamond"));
+    private static final TagKey<Block> TAG_ORES_EMERALD  = TagKey.create(ForgeRegistries.Keys.BLOCKS, ResourceLocation.fromNamespaceAndPath("forge", "ores/emerald"));
+
     private static final String           TAG_PRIORITY_ORES = "priorityOres";
     protected final      Set<ItemStorage> priorityOres      = new HashSet<>();
 
@@ -31,14 +45,16 @@ public class MinerOrePriorityModule extends AbstractBuildingModule implements IP
         return priorityOres;
     }
 
-    /**
-     * @return true if added successfully, false if list is full.
-     */
-    public boolean addPriorityOre(final ItemStack oreStack)
+    public void addPriorityOre(final ItemStack oreStack)
     {
         if (priorityOres.size() >= building.getBuildingLevel() * ORES_PER_LEVEL)
         {
-            return false;
+            return;
+        }
+
+        if (!isOreValidForBuilding(oreStack, building.getBuildingLevel()))
+        {
+            return;
         }
 
         final boolean added = priorityOres.add(new ItemStorage(oreStack));
@@ -46,7 +62,52 @@ public class MinerOrePriorityModule extends AbstractBuildingModule implements IP
         {
             markDirty();
         }
-        return added;
+    }
+
+    private boolean isInMinableOresList(final ItemStack oreStack)
+    {
+        for (final ItemStorage storage : IColonyManager.getInstance().getCompatibilityManager().getMinableOres())
+        {
+            if (ItemStack.isSameItem(storage.getItemStack(), oreStack))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isOreValidForBuilding(final ItemStack oreStack, final int buildingLevel)
+    {
+        if (!(oreStack.getItem() instanceof BlockItem blockItem))
+        {
+            return false;
+        }
+
+        if (!isInMinableOresList(oreStack))
+        {
+            return false;
+        }
+
+        final BlockState state = blockItem.getBlock().defaultBlockState();
+
+        if (state.is(TAG_ORES_GOLD) && buildingLevel < 2)
+        {
+            return false;
+        }
+        if ((state.is(TAG_ORES_LAPIS) || state.is(TAG_ORES_REDSTONE)) && buildingLevel < 3)
+        {
+            return false;
+        }
+        if (state.is(TAG_ORES_DIAMOND) && buildingLevel < 4)
+        {
+            return false;
+        }
+        if (state.is(TAG_ORES_EMERALD) && buildingLevel < 5)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void removePriorityOre(final ItemStack oreStack)

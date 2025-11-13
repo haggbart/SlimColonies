@@ -969,12 +969,17 @@ public final class ItemStackUtils
         try
         {
             final AttributeInstance instance = new AttributeInstance(attribute, (f) -> {});
-            itemStack.getAttributeModifiers(LivingEntity.getEquipmentSlotForItem(itemStack)).get(attribute).forEach(instance::addTransientModifier);
+            itemStack.getAttributeModifiers(LivingEntity.getEquipmentSlotForItem(itemStack)).get(attribute).forEach(modifier -> {
+                if (instance.getModifier(modifier.getId()) == null)
+                {
+                    instance.addTransientModifier(modifier);
+                }
+            });
             return instance.getValue();
         }
         catch (final Exception e)
         {
-            Log.getLogger().warn("Could not get attribute value for '{}' on item '{}'", attribute.getDescriptionId(), itemStack.getDescriptionId(), e);
+            Log.getLogger().warn("Could not get attribute value for '{}' on item '{}'", attribute.getDescriptionId(), itemStack.getDescriptionId());
             return 0;
         }
     }
