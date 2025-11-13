@@ -1,11 +1,5 @@
 package no.monopixel.slimcolonies.api.crafting;
 
-import no.monopixel.slimcolonies.api.colony.IColonyManager;
-import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
-import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
-import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
-import no.monopixel.slimcolonies.api.util.ItemStackUtils;
-import no.monopixel.slimcolonies.api.util.OptionalPredicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -24,6 +18,12 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import no.monopixel.slimcolonies.api.colony.IColonyManager;
+import no.monopixel.slimcolonies.api.colony.requestsystem.token.IToken;
+import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
+import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
+import no.monopixel.slimcolonies.api.util.ItemStackUtils;
+import no.monopixel.slimcolonies.api.util.OptionalPredicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,30 +34,39 @@ import java.util.stream.Stream;
 
 import static com.ldtteam.structurize.items.ModItems.buildTool;
 
-/** Standard implementation of IGenericRecipe.*/
+/**
+ * Standard implementation of IGenericRecipe.
+ */
 public class GenericRecipe implements IGenericRecipe
 {
-    /** Generic recipe builder */
+    /**
+     * Generic recipe builder
+     */
     public static class Builder
     {
-        @Nullable private ResourceLocation id;
-        private List<ItemStack> mainOutputs = List.of();
-        private List<ItemStack> additionalOutputs = List.of();
-        private List<List<ItemStack>> inputs = List.of();
-        private int gridSize = 1;
-        private Block intermediate = Blocks.AIR;
-        private ResourceLocation   lootTable = null;
-        private EquipmentTypeEntry requiredTool = ModEquipmentTypes.none.get();
-        private EntityType<?>      requiredEntity = null;
-        private Supplier<List<Component>> restrictions = List::of;
-        private int levelSort = -1;
+        @Nullable
+        private ResourceLocation          id;
+        private List<ItemStack>           mainOutputs       = List.of();
+        private List<ItemStack>           additionalOutputs = List.of();
+        private List<List<ItemStack>>     inputs            = List.of();
+        private int                       gridSize          = 1;
+        private Block                     intermediate      = Blocks.AIR;
+        private ResourceLocation          lootTable         = null;
+        private EquipmentTypeEntry        requiredTool      = ModEquipmentTypes.none.get();
+        private EntityType<?>             requiredEntity    = null;
+        private Supplier<List<Component>> restrictions      = List::of;
+        private int                       levelSort         = -1;
 
-        /** Default constructor */
+        /**
+         * Default constructor
+         */
         public Builder()
         {
         }
 
-        /** Construct from an existing recipe */
+        /**
+         * Construct from an existing recipe
+         */
         public Builder(@NotNull final IGenericRecipe recipe)
         {
             this.id = recipe.getRecipeId();
@@ -75,6 +84,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set (or clear) the original source recipe id.
+         *
          * @param id the recipe id.
          * @return this
          */
@@ -86,6 +96,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the main output result of this recipe.
+         *
          * @param output the recipe output.
          * @return this
          */
@@ -97,6 +108,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the main output result of this recipe.
+         *
          * @param output the recipe output.
          * @return this
          */
@@ -107,8 +119,9 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the main output result of this recipe.
+         *
          * @param output the recipe output.
-         * @param count the count.
+         * @param count  the count.
          * @return this
          */
         public Builder withOutput(@NotNull final ItemLike output, final int count)
@@ -118,6 +131,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set all possible main outputs (one of these will be generated).
+         *
          * @param multiOutputs the possible recipe outputs.
          * @return this
          */
@@ -129,18 +143,20 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set all possible main outputs (one of these will be generated).
-         * @param firstOutput one of the possible recipe outputs.
+         *
+         * @param firstOutput  one of the possible recipe outputs.
          * @param otherOutputs the other possible recipe outputs.
          * @return this
          */
         public Builder withOutputs(@NotNull final ItemStack firstOutput, @NotNull final List<ItemStack> otherOutputs)
         {
             return withOutputs(Stream.concat(Stream.of(firstOutput),
-                    otherOutputs.stream()).filter(ItemStackUtils::isNotEmpty).toList());
+                otherOutputs.stream()).filter(ItemStackUtils::isNotEmpty).toList());
         }
 
         /**
          * Set outputs generated in addition to the main outputs (e.g. containers, byproducts).
+         *
          * @param additionalOutputs the additional recipe outputs.
          * @return this
          */
@@ -152,6 +168,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set recipe inputs.
+         *
          * @param inputs the recipe inputs, as a list of slots each containing a list of acceptable variants.
          * @return this
          */
@@ -163,6 +180,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set input grid size (e.g. 3 for 3x3 grid).
+         *
          * @param gridSize the grid size.
          * @return this
          */
@@ -174,6 +192,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set required intermediate crafting block.
+         *
          * @param intermediate the intermediate block.
          * @return this
          */
@@ -185,6 +204,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the loot table produced by this recipe.
+         *
          * @param lootTable the loot table id.
          * @return this
          */
@@ -196,6 +216,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the tool required to craft this recipe.
+         *
          * @param requiredTool the tool entry.
          * @return this
          */
@@ -207,6 +228,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the entity required to craft this recipe.
+         *
          * @param requiredEntity the entity type.
          * @return this
          */
@@ -218,10 +240,11 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the restrictions on crafting this recipe.
+         *
          * @param restrictions the restrictions.
          * @return this
          * @apiNote Each restriction is expected to be a translation key for the main JEI display, with
-         *          an optional extra key with .tip suffix for a tooltip.  Both take the same parameters.
+         * an optional extra key with .tip suffix for a tooltip.  Both take the same parameters.
          */
         public Builder withRestrictions(@NotNull List<Component> restrictions)
         {
@@ -231,10 +254,11 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Set the restrictions on crafting this recipe.
+         *
          * @param restrictions the restrictions.
          * @return this
          * @apiNote Each restriction is expected to be a translation key for the main JEI display, with
-         *          an optional extra key with .tip suffix for a tooltip.  Both take the same parameters.
+         * an optional extra key with .tip suffix for a tooltip.  Both take the same parameters.
          */
         public Builder withRestrictions(@NotNull Supplier<List<Component>> restrictions)
         {
@@ -244,6 +268,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Sets a value that helps sort this recipe relative to others.
+         *
          * @param levelSort the sorting value.
          * @return this
          */
@@ -255,6 +280,7 @@ public class GenericRecipe implements IGenericRecipe
 
         /**
          * Builds a recipe from the current builder state.
+         *
          * @return the recipe.
          */
         @NotNull
@@ -266,6 +292,7 @@ public class GenericRecipe implements IGenericRecipe
 
     /**
      * Start building a generic recipe.
+     *
      * @return a builder.
      */
     @NotNull
@@ -276,6 +303,7 @@ public class GenericRecipe implements IGenericRecipe
 
     /**
      * Start building a generic recipe.
+     *
      * @param recipe initialise from this recipe.
      * @return a builder.
      */
@@ -287,6 +315,7 @@ public class GenericRecipe implements IGenericRecipe
 
     /**
      * Start building a generic recipe.
+     *
      * @param storage initialise from this recipe.
      * @return a builder.
      */
@@ -294,22 +323,23 @@ public class GenericRecipe implements IGenericRecipe
     public static Builder builder(@NotNull final IRecipeStorage storage)
     {
         final List<List<ItemStack>> inputs = storage.getCleanedInput().stream()
-                .map(input -> Collections.singletonList(toItemStack(input)))
-                .toList();
+            .map(input -> Collections.singletonList(toItemStack(input)))
+            .toList();
 
         return builder()
-                .withRecipeId(storage.getRecipeSource())
-                .withOutputs(storage.getPrimaryOutput(), storage.getAlternateOutputs())
-                .withAdditionalOutputs(storage.getCraftingToolsAndSecondaryOutputs())
-                .withInputs(inputs)
-                .withGridSize(storage.getGridSize())
-                .withIntermediate(storage.getIntermediate())
-                .withLootTable(storage.getLootTable())
-                .withRequiredTool(storage.getRequiredTool());
+            .withRecipeId(storage.getRecipeSource())
+            .withOutputs(storage.getPrimaryOutput(), storage.getAlternateOutputs())
+            .withAdditionalOutputs(storage.getCraftingToolsAndSecondaryOutputs())
+            .withInputs(inputs)
+            .withGridSize(storage.getGridSize())
+            .withIntermediate(storage.getIntermediate())
+            .withLootTable(storage.getLootTable())
+            .withRequiredTool(storage.getRequiredTool());
     }
 
     /**
      * Construct from builder.
+     *
      * @param builder the builder.
      */
     private GenericRecipe(@NotNull final Builder builder)
@@ -329,24 +359,28 @@ public class GenericRecipe implements IGenericRecipe
 
     /**
      * Construct from vanilla recipe.
+     *
      * @param recipe the vanilla recipe.
-     * @param world the world.
+     * @param world  the world.
      * @return the recipe, or null.
      */
     @Nullable
     public static IGenericRecipe of(@Nullable final Recipe<?> recipe, @NotNull final Level world)
     {
-        if (recipe == null) return null;
+        if (recipe == null)
+        {
+            return null;
+        }
 
         final List<List<ItemStack>> inputs = compactInputs(recipe.getIngredients().stream()
-                .map(ingredient -> Arrays.asList(ingredient.getItems()))
-                .toList());
+            .map(ingredient -> Arrays.asList(ingredient.getItems()))
+            .toList());
 
         final Builder builder = builder()
-                .withRecipeId(recipe.getId())
-                .withOutput(recipe.getResultItem(world.registryAccess()))
-                .withAdditionalOutputs(calculateSecondaryOutputs(recipe, world))
-                .withInputs(inputs);
+            .withRecipeId(recipe.getId())
+            .withOutput(recipe.getResultItem(world.registryAccess()))
+            .withAdditionalOutputs(calculateSecondaryOutputs(recipe, world))
+            .withInputs(inputs);
 
         if (recipe instanceof SmeltingRecipe)
         {
@@ -363,25 +397,31 @@ public class GenericRecipe implements IGenericRecipe
     @Nullable
     public static IGenericRecipe of(@Nullable final IToken<?> recipeToken)
     {
-        if (recipeToken == null) return null;
+        if (recipeToken == null)
+        {
+            return null;
+        }
         final IRecipeStorage storage = IColonyManager.getInstance().getRecipeManager().getRecipes().get(recipeToken);
         return storage == null ? null : builder(storage).build();
     }
 
-    @Nullable private final ResourceLocation id;
-    private final List<ItemStack> mainOutputs;
-    private final List<ItemStack> additionalOutputs;
-    private final List<List<ItemStack>> inputs;
-    private final int gridSize;
-    private final Block intermediate;
-    @Nullable private final ResourceLocation   lootTable;
-    private final EquipmentTypeEntry requiredTool;
-    @Nullable private final EntityType<?>      requiredEntity;
+    @Nullable
+    private final ResourceLocation          id;
+    private final List<ItemStack>           mainOutputs;
+    private final List<ItemStack>           additionalOutputs;
+    private final List<List<ItemStack>>     inputs;
+    private final int                       gridSize;
+    private final Block                     intermediate;
+    @Nullable
+    private final ResourceLocation          lootTable;
+    private final EquipmentTypeEntry        requiredTool;
+    @Nullable
+    private final EntityType<?>             requiredEntity;
     private final Supplier<List<Component>> restrictions;
-    private final int levelSort;
+    private final int                       levelSort;
 
     @Override
-    public int getGridSize() { return this.gridSize; }
+    public int getGridSize() {return this.gridSize;}
 
     @Override
     @Nullable
@@ -470,7 +510,7 @@ public class GenericRecipe implements IGenericRecipe
 
     @Nullable
     @Override
-    public ResourceLocation getLootTable() { return this.lootTable; }
+    public ResourceLocation getLootTable() {return this.lootTable;}
 
     @NotNull
     @Override
@@ -489,7 +529,7 @@ public class GenericRecipe implements IGenericRecipe
     @Override
     public String toString()
     {
-        return "GenericRecipe{output=" + getPrimaryOutput() +'}';
+        return "GenericRecipe{output=" + getPrimaryOutput() + '}';
     }
 
     @NotNull
@@ -501,8 +541,9 @@ public class GenericRecipe implements IGenericRecipe
     }
 
     @NotNull
-    private static List<ItemStack> calculateSecondaryOutputs(@NotNull final Recipe<?> recipe,
-                                                             @Nullable final Level world)
+    private static List<ItemStack> calculateSecondaryOutputs(
+        @NotNull final Recipe<?> recipe,
+        @Nullable final Level world)
     {
         if (recipe instanceof final CraftingRecipe craftingRecipe)
         {
@@ -520,7 +561,6 @@ public class GenericRecipe implements IGenericRecipe
                 {
                     return false;
                 }
-
             }, 3, 3);
             for (int slot = 0; slot < inputs.size(); ++slot)
             {
@@ -533,9 +573,9 @@ public class GenericRecipe implements IGenericRecipe
             if (craftingRecipe.matches(inv, world))
             {
                 return craftingRecipe.getRemainingItems(inv).stream()
-                        .filter(ItemStackUtils::isNotEmpty)
-                        .filter(stack -> stack.getItem() != buildTool.get())  // this is filtered out of the inputs too
-                        .collect(Collectors.toList());
+                    .filter(ItemStackUtils::isNotEmpty)
+                    .filter(stack -> stack.getItem() != buildTool.get() && !RecipeStorage.isForgeToolItem(stack))
+                    .collect(Collectors.toList());
             }
         }
         return Collections.emptyList();
@@ -550,9 +590,14 @@ public class GenericRecipe implements IGenericRecipe
         for (final List<ItemStack> ingredient : inputs)
         {
             final IngredientStacks newIngredient = new IngredientStacks(ingredient);
-            // also ignore the build tool as an ingredient, since colony crafters don't require it.
-            //   (see RecipeStorage.calculateCleanedInput() for why)
-            if (!newIngredient.getStacks().isEmpty() && newIngredient.getStacks().get(0).getItem() == buildTool.get()) continue;
+            if (!newIngredient.getStacks().isEmpty())
+            {
+                final ItemStack firstStack = newIngredient.getStacks().get(0);
+                if (firstStack.getItem() == buildTool.get() || RecipeStorage.isForgeToolItem(firstStack))
+                {
+                    continue;
+                }
+            }
 
             final IngredientStacks existing = ingredients.get(newIngredient);
             if (existing == null)
@@ -566,38 +611,44 @@ public class GenericRecipe implements IGenericRecipe
         }
 
         return ingredients.values().stream()
-                .sorted(Comparator.reverseOrder())
-                .map(IngredientStacks::getStacks)
-                .collect(Collectors.toList());
+            .sorted(Comparator.reverseOrder())
+            .map(IngredientStacks::getStacks)
+            .collect(Collectors.toList());
     }
 
     private static class IngredientStacks implements Comparable<IngredientStacks>
     {
         private final List<ItemStack> stacks;
-        private final Set<Item> items;
+        private final Set<Item>       items;
 
         public IngredientStacks(final List<ItemStack> ingredient)
         {
             this.stacks = ingredient.stream()
-                    .filter(stack -> !stack.isEmpty())
-                    .map(ItemStack::copy)
-                    .collect(Collectors.toList());
+                .filter(stack -> !stack.isEmpty())
+                .map(ItemStack::copy)
+                .collect(Collectors.toList());
 
             this.items = this.stacks.stream()
-                    .map(ItemStack::getItem)
-                    .collect(Collectors.toSet());
+                .map(ItemStack::getItem)
+                .collect(Collectors.toSet());
         }
 
         @NotNull
-        public List<ItemStack> getStacks() { return this.stacks; }
+        public List<ItemStack> getStacks() {return this.stacks;}
 
-        public int getCount() { return this.stacks.isEmpty() ? 0 : this.stacks.get(0).getCount(); }
+        public int getCount() {return this.stacks.isEmpty() ? 0 : this.stacks.get(0).getCount();}
 
         @Override
         public boolean equals(Object o)
         {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o)
+            {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass())
+            {
+                return false;
+            }
             final IngredientStacks that = (IngredientStacks) o;
             return this.items.equals(that.items);
             // note that this does not compare the counts to maintain key-stability
@@ -613,10 +664,16 @@ public class GenericRecipe implements IGenericRecipe
         public int compareTo(@NotNull IngredientStacks o)
         {
             int diff = this.getCount() - o.getCount();
-            if (diff != 0) return diff;
+            if (diff != 0)
+            {
+                return diff;
+            }
 
             diff = this.stacks.size() - o.stacks.size();
-            if (diff != 0) return diff;
+            if (diff != 0)
+            {
+                return diff;
+            }
 
             return this.hashCode() - o.hashCode();
         }
@@ -634,9 +691,9 @@ public class GenericRecipe implements IGenericRecipe
         public String toString()
         {
             return "IngredientStacks{" +
-                    "stacks=" + stacks +
-                    ", items=" + items +
-                    '}';
+                "stacks=" + stacks +
+                ", items=" + items +
+                '}';
         }
     }
 }
