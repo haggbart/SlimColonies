@@ -1,6 +1,7 @@
 package no.monopixel.slimcolonies.core.compatibility.gregtech;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
@@ -16,6 +17,7 @@ import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.constant.Constants;
 
 import java.lang.reflect.Method;
+import java.util.function.Consumer;
 
 /**
  * Compatibility helper for GregTech CEu Modern.
@@ -238,7 +240,7 @@ public class GregTechCompatibility
     /**
      * Register compatibility recipes when GregTech is loaded.
      */
-    public static void registerCompatibilityRecipes(final java.util.function.Consumer<net.minecraft.data.recipes.FinishedRecipe> consumer)
+    public static void registerCompatibilityRecipes(final Consumer<FinishedRecipe> consumer)
     {
         ConditionalRecipe.builder()
             .addCondition(new ModLoadedCondition(GREGTECH_MOD_ID))
