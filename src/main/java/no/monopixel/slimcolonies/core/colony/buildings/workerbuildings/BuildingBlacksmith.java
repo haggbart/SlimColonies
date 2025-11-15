@@ -1,16 +1,17 @@
 package no.monopixel.slimcolonies.core.colony.buildings.workerbuildings;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.api.colony.jobs.registry.JobEntry;
-import no.monopixel.slimcolonies.api.compatibility.Compatibility;
 import no.monopixel.slimcolonies.api.crafting.IGenericRecipe;
 import no.monopixel.slimcolonies.api.equipment.ModEquipmentTypes;
 import no.monopixel.slimcolonies.api.util.CraftingUtils;
 import no.monopixel.slimcolonies.api.util.OptionalPredicate;
 import no.monopixel.slimcolonies.core.colony.buildings.AbstractBuilding;
 import no.monopixel.slimcolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -69,35 +70,81 @@ public class BuildingBlacksmith extends AbstractBuilding
         public OptionalPredicate<ItemStack> getIngredientValidator()
         {
             return CraftingUtils.getIngredientValidatorBasedOnTags(CRAFTING_BLACKSMITH)
-                    .combine(super.getIngredientValidator());
+                .combine(super.getIngredientValidator());
+        }
+
+        /**
+         * Check if a tag is a forge component that blacksmith can use as input ingredient.
+         */
+        private static boolean isBlacksmithInputComponent(final net.minecraft.tags.TagKey<Item> tag)
+        {
+            if (!tag.location().getNamespace().equals("forge"))
+            {
+                return false;
+            }
+            final String path = tag.location().getPath();
+            return path.equals("plates");
+        }
+
+        /**
+         * Check if a tag is a forge component that blacksmith can craft as output.
+         */
+        private static boolean isBlacksmithOutputComponent(final net.minecraft.tags.TagKey<Item> tag)
+        {
+            if (!tag.location().getNamespace().equals("forge"))
+            {
+                return false;
+            }
+            final String path = tag.location().getPath();
+            return path.equals("screws") ||
+                path.equals("rings") ||
+                path.equals("bolts") ||
+                path.equals("rods") ||
+                path.equals("rods/long") ||
+                path.equals("dusts");
         }
 
         @Override
         public boolean isRecipeCompatible(@NotNull final IGenericRecipe recipe)
         {
-            if (!super.isRecipeCompatible(recipe)) return false;
+            if (!super.isRecipeCompatible(recipe))
+            {
+                return false;
+            }
 
             if (recipe.matchesInput(OptionalPredicate.failIf(input -> input.is(Items.LEATHER)))
-                    .equals(Optional.of(false)))
+                .equals(Optional.of(false)))
             {
                 // explicitly disallow anything using leather; that's the fletcher's responsibility
                 return false;
             }
+            if (recipe.matchesInput(OptionalPredicate.passIf(input ->
+                    input.getTags().anyMatch(CraftingModule::isBlacksmithInputComponent)))
+                .equals(Optional.of(true)))
+            {
+                return true;
+            }
             if (recipe.matchesOutput(OptionalPredicate.passIf(output ->
-                                    ModEquipmentTypes.axe.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.pickaxe.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.shovel.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.hoe.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.shears.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.sword.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.shield.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.helmet.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.chestplate.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.leggings.get().checkIsEquipment(output) ||
-                                    ModEquipmentTypes.boots.get().checkIsEquipment(output)
-                                    // deliberately excluding FISHINGROD and FLINT_N_STEEL
-                                    ))
-                    .equals(Optional.of(true)))
+                    output.getTags().anyMatch(CraftingModule::isBlacksmithOutputComponent)))
+                .equals(Optional.of(true)))
+            {
+                return true;
+            }
+            if (recipe.matchesOutput(OptionalPredicate.passIf(output ->
+                        ModEquipmentTypes.axe.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.pickaxe.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.shovel.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.hoe.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.shears.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.sword.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.shield.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.helmet.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.chestplate.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.leggings.get().checkIsEquipment(output) ||
+                            ModEquipmentTypes.boots.get().checkIsEquipment(output)
+                    // deliberately excluding FISHINGROD and FLINT_N_STEEL
+                ))
+                .equals(Optional.of(true)))
             {
                 // allow any other tool/armor even if it uses an excluded ingredient
                 return true;

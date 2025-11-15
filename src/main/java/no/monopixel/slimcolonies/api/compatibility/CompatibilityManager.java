@@ -40,7 +40,7 @@ import no.monopixel.slimcolonies.api.items.ModTags;
 import no.monopixel.slimcolonies.api.util.*;
 import no.monopixel.slimcolonies.core.colony.crafting.CustomRecipeManager;
 import no.monopixel.slimcolonies.core.colony.crafting.LootTableAnalyzer;
-import no.monopixel.slimcolonies.core.compatibility.gregtech.GregTechOreHelper;
+import no.monopixel.slimcolonies.core.compatibility.gregtech.GregTechCompatibility;
 import no.monopixel.slimcolonies.core.generation.ItemNbtCalculator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -686,7 +686,7 @@ public class CompatibilityManager implements ICompatibilityManager
 
                 // Check dimension using both tag whitelist and GregTech integration
                 boolean filteredByTags = isOreFromOtherDimension(state);
-                boolean filteredByGregTech = GregTechOreHelper.isNonOverworldOnly(stack);
+                boolean filteredByGregTech = GregTechCompatibility.isNonOverworldOnly(stack);
                 isFromOtherDimension = filteredByTags || filteredByGregTech;
 
                 if (!isFromOtherDimension)

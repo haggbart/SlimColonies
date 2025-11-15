@@ -378,7 +378,7 @@ public class RecipeStorage implements IRecipeStorage
         {
             for (final ItemStack secOutput : secOutputs)
             {
-                if (!secOutput.isEmpty() && secOutput.getItem() != ModItems.buildTool.get())
+                if (!secOutput.isEmpty() && secOutput.getItem() != ModItems.buildTool.get() && !isForgeToolItem(secOutput))
                 {
                     this.secondaryOutputs.add(secOutput);
                 }
@@ -389,7 +389,7 @@ public class RecipeStorage implements IRecipeStorage
         for (final ItemStorage input : input)
         {
             ItemStorage inputItem = input;
-            if (inputItem.isEmpty() || inputItem.getItem() == ModItems.buildTool.get())
+            if (inputItem.isEmpty() || inputItem.getItem() == ModItems.buildTool.get() || isForgeToolItem(inputItem.getItemStack()))
             {
                 continue;
             }
@@ -939,5 +939,40 @@ public class RecipeStorage implements IRecipeStorage
     public List<ItemStack> getSecondaryOutputs()
     {
         return ImmutableList.copyOf(secondaryOutputs);
+    }
+
+    private static final Set<String> FILTERED_TOOL_TYPES = Set.of(
+        "hammers",
+        "files",
+        "saws",
+        "wrenches",
+        "mortars",
+        "wire_cutters",
+        "screwdrivers",
+        "knives"
+    );
+
+    /**
+     * Check if an item is a forge tool that should be filtered from citizen recipes.
+     * Citizens use their own workshop tools instead of requiring these modded tools.
+     *
+     * @param stack the item to check
+     * @return true if this is a filtered tool type
+     */
+    public static boolean isForgeToolItem(final ItemStack stack)
+    {
+        return stack.getTags().anyMatch(tag -> {
+            if (!tag.location().getNamespace().equals("forge"))
+            {
+                return false;
+            }
+            final String path = tag.location().getPath();
+            if (!path.startsWith("tools/"))
+            {
+                return false;
+            }
+            final String toolType = path.substring("tools/".length());
+            return FILTERED_TOOL_TYPES.contains(toolType);
+        });
     }
 }

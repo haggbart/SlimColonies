@@ -1,12 +1,5 @@
 package no.monopixel.slimcolonies.core.generation.defaults;
 
-import no.monopixel.slimcolonies.api.blocks.ModBlocks;
-import no.monopixel.slimcolonies.api.items.ModItems;
-import no.monopixel.slimcolonies.api.items.ModTags;
-import no.monopixel.slimcolonies.api.util.constant.TagConstants;
-import no.monopixel.slimcolonies.core.generation.CompostRecipeBuilder;
-import no.monopixel.slimcolonies.core.recipes.FoodIngredient;
-import no.monopixel.slimcolonies.core.recipes.PlantIngredient;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
@@ -20,6 +13,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import no.monopixel.slimcolonies.api.blocks.ModBlocks;
+import no.monopixel.slimcolonies.api.items.ModItems;
+import no.monopixel.slimcolonies.api.items.ModTags;
+import no.monopixel.slimcolonies.api.util.constant.TagConstants;
+import no.monopixel.slimcolonies.core.compatibility.gregtech.GregTechCompatibility;
+import no.monopixel.slimcolonies.core.generation.CompostRecipeBuilder;
+import no.monopixel.slimcolonies.core.recipes.FoodIngredient;
+import no.monopixel.slimcolonies.core.recipes.PlantIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -61,6 +62,9 @@ public class DefaultRecipeProvider extends RecipeProvider
             .input(new FoodIngredient.Builder().minSaturation(1.0f).build())
             .input(Ingredient.of(ModTags.compostables_rich))
             .save(consumer, TagConstants.COMPOSTABLES_RICH);
+
+        // Add GregTech compatibility recipes if GregTech is loaded
+        GregTechCompatibility.registerCompatibilityRecipes(consumer);
     }
 
     private void buildHutRecipes(@NotNull final Consumer<FinishedRecipe> consumer)

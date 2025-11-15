@@ -69,11 +69,20 @@ dependencies {
         runtimeOnly fg.deobf("flat:journeymap:${project.jmapMcVersion}-${project.jmapVersion}-forge")
     }
     // Farmer's Delight - for development/debugging
-    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:6917255")
+//    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:6917255")
 
     // Jade - for development/debugging
     runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
 
     // JourneyMap - for development/debugging
     runtimeOnly fg.deobf("curse.maven:journeymap-32274:5789363")
+
+    // GregTech - for development/debugging
+//    runtimeOnly fg.deobf("curse.maven:gregtechceu-modern-890405:7150919")
+
+    // implementation fg.deobf("curse.maven:emi-580555:6420945")
+//    runtimeOnly fg.deobf("curse.maven:emi-580555:6420945")
+
+    // implementation fg.deobf("curse.maven:jei-integration-265917:4999754")
+    runtimeOnly fg.deobf("curse.maven:jei-integration-265917:4999754")
 }

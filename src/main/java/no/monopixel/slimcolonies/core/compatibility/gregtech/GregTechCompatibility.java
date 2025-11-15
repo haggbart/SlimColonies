@@ -1,18 +1,34 @@
 package no.monopixel.slimcolonies.core.compatibility.gregtech;
 
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.ConditionalRecipe;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.fml.ModList;
 import no.monopixel.slimcolonies.api.util.Log;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 
 import java.lang.reflect.Method;
+import java.util.function.Consumer;
 
-public class GregTechOreHelper
+/**
+ * Compatibility helper for GregTech CEu Modern.
+ * Handles ore filtering and recipe additions to maintain vanilla-like gameplay.
+ */
+public class GregTechCompatibility
 {
-    private static final String GREGTECH_MOD_ID = "gtceu";
-    private static Boolean isGregTechLoaded = null;
-    private static Object oreVeinsRegistry = null;
-    private static boolean initialized = false;
+    private static final String                                       GREGTECH_MOD_ID    = "gtceu";
+    private static       Boolean                                      isGregTechLoaded   = null;
+    private static       Object                                       oreVeinsRegistry   = null;
+    private static       boolean                                      initialized        = false;
     private static final java.util.Map<String, java.util.Set<String>> materialDimensions = new java.util.HashMap<>();
 
     public static boolean isLoaded()
@@ -82,11 +98,11 @@ public class GregTechOreHelper
                     if (dimFilter instanceof java.util.Set)
                     {
                         @SuppressWarnings("unchecked")
-                        java.util.Set<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>> dimSet =
-                            (java.util.Set<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>>) dimFilter;
+                        java.util.Set<ResourceKey<Level>> dimSet =
+                            (java.util.Set<ResourceKey<Level>>) dimFilter;
 
                         java.util.Set<String> dimensionNames = new java.util.HashSet<>();
-                        for (net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dim : dimSet)
+                        for (ResourceKey<Level> dim : dimSet)
                         {
                             dimensionNames.add(dim.location().toString());
                         }
@@ -156,6 +172,13 @@ public class GregTechOreHelper
         return null;
     }
 
+    /**
+     * Check if a GregTech ore only spawns in non-overworld dimensions.
+     * Used to filter dimension-specific ores from the miner GUI.
+     *
+     * @param oreStack the ore item to check
+     * @return true if this ore only spawns in non-overworld dimensions
+     */
     public static boolean isNonOverworldOnly(final ItemStack oreStack)
     {
         if (!isLoaded())
@@ -212,5 +235,25 @@ public class GregTechOreHelper
         }
 
         return name.isEmpty() ? null : name;
+    }
+
+    /**
+     * Register compatibility recipes when GregTech is loaded.
+     */
+    public static void registerCompatibilityRecipes(final Consumer<FinishedRecipe> consumer)
+    {
+        ConditionalRecipe.builder()
+            .addCondition(new ModLoadedCondition(GREGTECH_MOD_ID))
+            .addRecipe(SimpleCookingRecipeBuilder
+                .smelting(
+                    Ingredient.of(net.minecraft.tags.ItemTags.SMELTS_TO_GLASS),
+                    RecipeCategory.MISC,
+                    Items.GLASS,
+                    0.1f,
+                    200)
+                .unlockedBy("has_sand", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SAND))
+                ::save)
+            .generateAdvancement()
+            .build(consumer, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "compat/gregtech/sand_to_glass"));
     }
 }
