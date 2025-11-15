@@ -944,7 +944,12 @@ public class RecipeStorage implements IRecipeStorage
     private static final Set<String> FILTERED_TOOL_TYPES = Set.of(
         "hammers",
         "files",
-        "saws"
+        "saws",
+        "wrenches",
+        "mortars",
+        "wire_cutters",
+        "screwdrivers",
+        "knives"
     );
 
     /**

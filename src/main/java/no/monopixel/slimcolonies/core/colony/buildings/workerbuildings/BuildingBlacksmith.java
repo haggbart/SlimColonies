@@ -100,7 +100,8 @@ public class BuildingBlacksmith extends AbstractBuilding
                 path.equals("rings") ||
                 path.equals("bolts") ||
                 path.equals("rods") ||
-                path.equals("rods/long");
+                path.equals("rods/long") ||
+                path.equals("dusts");
         }
 
         @Override
