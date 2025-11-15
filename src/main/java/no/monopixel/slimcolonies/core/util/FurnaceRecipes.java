@@ -54,6 +54,12 @@ public class FurnaceRecipes implements IFurnaceRecipes
                                 .withRecipeId(recipe.getId())
                                 .build();
 
+                        // Skip recipes with no valid inputs (e.g., GregTech tools that get filtered out)
+                        if (storage.getCleanedInput().isEmpty())
+                        {
+                            continue;
+                        }
+
                         recipes.put(storage.getCleanedInput().get(0), storage);
 
                         final ItemStack output = recipe.getResultItem(level.registryAccess()).copy();
