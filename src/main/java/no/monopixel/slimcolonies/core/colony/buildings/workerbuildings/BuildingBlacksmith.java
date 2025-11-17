@@ -83,7 +83,7 @@ public class BuildingBlacksmith extends AbstractBuilding
                 return false;
             }
             final String path = tag.location().getPath();
-            return path.equals("plates");
+            return path.equals("plates") || path.equals("rings");
         }
 
         /**
