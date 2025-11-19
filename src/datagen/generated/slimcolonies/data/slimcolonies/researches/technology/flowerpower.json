@@ -8,12 +8,5 @@
   ],
   "icon": "slimcolonies:blockhutflorist",
   "parentResearch": "slimcolonies:technology/biodegradable",
-  "requirements": [
-    {
-      "type": "slimcolonies:building",
-      "building": "slimcolonies:composter",
-      "level": 3
-    }
-  ],
   "researchLevel": 2
 }

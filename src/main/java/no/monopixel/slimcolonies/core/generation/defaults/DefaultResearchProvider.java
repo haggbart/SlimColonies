@@ -1011,7 +1011,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/flowerpower"), TECH).setParentResearch(biodegradable)
             .setTranslatedName("Flower Power")
             .setIcon(ModBlocks.blockHutFlorist.asItem())
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.COMPOSTER_ID), 3)
             .addEffect(ModBuildings.florist.get().getBuildingBlock(), 1)
             .addToList(r);
         final Research rainbowHeaven = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/rainbowheaven"), TECH).setParentResearch(biodegradable)
