@@ -1406,7 +1406,6 @@ public class DefaultResearchProvider extends AbstractResearchProvider
             .setTranslatedName("What ya Need?")
             .setTranslatedSubtitle("It's not a rhetorical question...")
             .setIcon(ModBlocks.blockHutMechanic.asItem())
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.BLACKSMITH_ID), 3)
             .addEffect(ModBuildings.mechanic.get().getBuildingBlock(), 1)
             .addToList(r);
 

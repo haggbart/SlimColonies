@@ -8,13 +8,6 @@
   ],
   "icon": "slimcolonies:blockhutmechanic",
   "parentResearch": "slimcolonies:technology/hittingiron",
-  "requirements": [
-    {
-      "type": "slimcolonies:building",
-      "building": "slimcolonies:blacksmith",
-      "level": 3
-    }
-  ],
   "researchLevel": 2,
   "subtitle": "no.monopixel.slimcolonies.research.technology.whatyaneed.subtitle"
 }
