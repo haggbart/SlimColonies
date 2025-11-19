@@ -1016,8 +1016,7 @@ public class DefaultResearchProvider extends AbstractResearchProvider
         final Research rainbowHeaven = new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/rainbowheaven"), TECH).setParentResearch(biodegradable)
             .setTranslatedName("Rainbow Heaven")
             .setTranslatedSubtitle("Now in color! And 3D!")
-            .setIcon(ModBlocks.blockHutComposter.asItem())
-            .addBuildingRequirement(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModBuildings.COMPOSTER_ID), 3)
+            .setIcon(ModBlocks.blockHutDyer.asItem())
             .addEffect(ModBuildings.dyer.get().getBuildingBlock(), 1)
             .addToList(r);
         new Research(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "technology/honeypot"), TECH).setParentResearch(rainbowHeaven)
