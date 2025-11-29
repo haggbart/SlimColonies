@@ -73,13 +73,47 @@ public class CitizenNameListener extends SimpleJsonResourceReloadListener
                 femaleFirstName.add(femaleName.getAsString());
             }
 
-            final JsonArray surnameJsonArray = data.get("surnames").getAsJsonArray();
-            for (final JsonElement surname : surnameJsonArray)
+            // Surnames are optional for patronymic name files
+            if (data.has("surnames"))
             {
-                surnames.add(surname.getAsString());
+                final JsonArray surnameJsonArray = data.get("surnames").getAsJsonArray();
+                for (final JsonElement surname : surnameJsonArray)
+                {
+                    surnames.add(surname.getAsString());
+                }
             }
 
-            nameFileMap.put(entry.getKey().getPath(), new CitizenNameFile(parts, nameOrder, maleFirstName, femaleFirstName, surnames));
+            final CitizenNameFile nameFile = new CitizenNameFile(parts, nameOrder, maleFirstName, femaleFirstName, surnames);
+
+            // Parse patronymic fields if present
+            if (data.has("patronymic"))
+            {
+                nameFile.patronymic = data.get("patronymic").getAsBoolean();
+            }
+
+            if (data.has("male_suffixes"))
+            {
+                final List<String> maleSuffixes = new ArrayList<>();
+                final JsonArray maleSuffixArray = data.get("male_suffixes").getAsJsonArray();
+                for (final JsonElement suffix : maleSuffixArray)
+                {
+                    maleSuffixes.add(suffix.getAsString());
+                }
+                nameFile.maleSuffixes = maleSuffixes;
+            }
+
+            if (data.has("female_suffixes"))
+            {
+                final List<String> femaleSuffixes = new ArrayList<>();
+                final JsonArray femaleSuffixArray = data.get("female_suffixes").getAsJsonArray();
+                for (final JsonElement suffix : femaleSuffixArray)
+                {
+                    femaleSuffixes.add(suffix.getAsString());
+                }
+                nameFile.femaleSuffixes = femaleSuffixes;
+            }
+
+            nameFileMap.put(entry.getKey().getPath(), nameFile);
         }
         catch (Exception e)
         {

@@ -438,6 +438,49 @@ public class CitizenData implements ICitizenData
         return (char) (rand.nextInt(LETTERS_IN_THE_ALPHABET) + 'A');
     }
 
+    private static boolean isVowel(final char c)
+    {
+        final char lower = Character.toLowerCase(c);
+        return lower == 'a' || lower == 'e' || lower == 'i' || lower == 'o' || lower == 'u' ||
+               lower == 'á' || lower == 'é' || lower == 'í' || lower == 'ó' || lower == 'ú' ||
+               lower == 'ý' || lower == 'æ' || lower == 'ø' || lower == 'å' || lower == 'ö';
+    }
+
+    private static String getFatherFirstName(final String firstParentName, @NotNull final CitizenNameFile nameFile, @NotNull final Random rand)
+    {
+        if (firstParentName == null || firstParentName.isEmpty())
+        {
+            return getRandomElement(rand, nameFile.maleFirstNames);
+        }
+
+        final String[] nameSplit = firstParentName.split(" ");
+        final boolean eastern = nameFile.order == CitizenNameFile.NameOrder.EASTERN;
+        return eastern ? nameSplit[nameSplit.length - 1] : nameSplit[0];
+    }
+
+    private static String generatePatronymicSurname(@NotNull final Random rand, @NotNull final String fatherFirstName, final boolean female, @NotNull final CitizenNameFile nameFile)
+    {
+        final List<String> suffixes = female ? nameFile.femaleSuffixes : nameFile.maleSuffixes;
+
+        String suffix;
+        if (isVowel(fatherFirstName.charAt(fatherFirstName.length() - 1)))
+        {
+            suffix = suffixes.stream()
+                .filter(s -> s.startsWith("s"))
+                .findFirst()
+                .orElse(getRandomElement(rand, suffixes));
+        }
+        else
+        {
+            suffix = suffixes.stream()
+                .filter(s -> !s.startsWith("s"))
+                .findFirst()
+                .orElse(getRandomElement(rand, suffixes));
+        }
+
+        return fatherFirstName + suffix;
+    }
+
     @Override
     public int hashCode()
     {
@@ -601,8 +644,17 @@ public class CitizenData implements ICitizenData
             firstName = getRandomElement(rand, nameFile.maleFirstNames);
         }
 
-        middleInitial = String.valueOf(getRandomLetter(rand));
-        lastName = getRandomElement(rand, nameFile.surnames);
+        if (nameFile.patronymic && nameFile.maleSuffixes != null && nameFile.femaleSuffixes != null)
+        {
+            final String fatherFirstName = getFatherFirstName(null, nameFile, rand);
+            lastName = generatePatronymicSurname(rand, fatherFirstName, female, nameFile);
+            middleInitial = "";
+        }
+        else
+        {
+            middleInitial = String.valueOf(getRandomLetter(rand));
+            lastName = getRandomElement(rand, nameFile.surnames);
+        }
 
         if (nameFile.order == CitizenNameFile.NameOrder.EASTERN)
         {
@@ -646,63 +698,71 @@ public class CitizenData implements ICitizenData
      */
     public void generateName(@NotNull final Random rand, final String firstParentName, final String secondParentName, final CitizenNameFile nameFile)
     {
-        String nameA = firstParentName;
-        String nameB = secondParentName;
-
         String citizenName;
         final String firstName;
         String middleInitial = "";
         final String lastName;
 
-        if (firstParentName == null || firstParentName.isEmpty())
+        if (nameFile.patronymic && nameFile.maleSuffixes != null && nameFile.femaleSuffixes != null)
         {
-            nameA = generateName(rand, rand.nextBoolean(), colony, nameFile);
-        }
-
-        if (secondParentName == null || secondParentName.isEmpty())
-        {
-            nameB = generateName(rand, rand.nextBoolean(), colony, nameFile);
-        }
-
-        final String[] firstParentNameSplit = nameA.split(" ");
-        final String[] secondParentNameSplit = nameB.split(" ");
-
-        if (firstParentNameSplit.length <= 1)
-        {
-            generateName(rand, "", secondParentName, nameFile);
-            return;
-        }
-
-        if (secondParentNameSplit.length <= 1)
-        {
-            generateName(rand, firstParentName, "", nameFile);
-            return;
-        }
-
-        final boolean eastern = nameFile.order == CitizenNameFile.NameOrder.EASTERN;
-
-        if (random.nextBoolean())
-        {
-            if (nameFile.parts == 3)
-            {
-                middleInitial = firstParentNameSplit[eastern ? 0 : firstParentNameSplit.length - 1].substring(0, 1);
-                lastName = secondParentNameSplit[eastern ? 0 : secondParentNameSplit.length - 1];
-            }
-            else
-            {
-                lastName = eastern ? secondParentNameSplit[0] : nameB.replace(secondParentNameSplit[0], "").trim();
-            }
+            final String fatherFirstName = getFatherFirstName(firstParentName, nameFile, rand);
+            lastName = generatePatronymicSurname(rand, fatherFirstName, female, nameFile);
         }
         else
         {
-            if (nameFile.parts == 3)
+            String nameA = firstParentName;
+            String nameB = secondParentName;
+
+            if (firstParentName == null || firstParentName.isEmpty())
             {
-                middleInitial = secondParentNameSplit[eastern ? 0 : secondParentNameSplit.length - 1].substring(0, 1);
-                lastName = firstParentNameSplit[eastern ? 0 : firstParentNameSplit.length - 1];
+                nameA = generateName(rand, rand.nextBoolean(), colony, nameFile);
+            }
+
+            if (secondParentName == null || secondParentName.isEmpty())
+            {
+                nameB = generateName(rand, rand.nextBoolean(), colony, nameFile);
+            }
+
+            final String[] firstParentNameSplit = nameA.split(" ");
+            final String[] secondParentNameSplit = nameB.split(" ");
+
+            if (firstParentNameSplit.length <= 1)
+            {
+                generateName(rand, "", secondParentName, nameFile);
+                return;
+            }
+
+            if (secondParentNameSplit.length <= 1)
+            {
+                generateName(rand, firstParentName, "", nameFile);
+                return;
+            }
+
+            final boolean eastern = nameFile.order == CitizenNameFile.NameOrder.EASTERN;
+
+            if (random.nextBoolean())
+            {
+                if (nameFile.parts == 3)
+                {
+                    middleInitial = firstParentNameSplit[eastern ? 0 : firstParentNameSplit.length - 1].substring(0, 1);
+                    lastName = secondParentNameSplit[eastern ? 0 : secondParentNameSplit.length - 1];
+                }
+                else
+                {
+                    lastName = eastern ? secondParentNameSplit[0] : nameB.replace(secondParentNameSplit[0], "").trim();
+                }
             }
             else
             {
-                lastName = eastern ? firstParentNameSplit[0] : nameA.replace(firstParentNameSplit[0], "").trim();
+                if (nameFile.parts == 3)
+                {
+                    middleInitial = secondParentNameSplit[eastern ? 0 : secondParentNameSplit.length - 1].substring(0, 1);
+                    lastName = firstParentNameSplit[eastern ? 0 : firstParentNameSplit.length - 1];
+                }
+                else
+                {
+                    lastName = eastern ? firstParentNameSplit[0] : nameA.replace(firstParentNameSplit[0], "").trim();
+                }
             }
         }
 

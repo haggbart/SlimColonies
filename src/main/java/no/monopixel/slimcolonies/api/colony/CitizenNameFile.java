@@ -44,6 +44,23 @@ public class CitizenNameFile
     public List<String> surnames;
 
     /**
+     * Whether this name file uses patronymic naming (surnames based on father's name).
+     */
+    public boolean patronymic = false;
+
+    /**
+     * List of male patronymic suffixes (e.g., "son", "sson").
+     * Used when patronymic is true.
+     */
+    public List<String> maleSuffixes;
+
+    /**
+     * List of female patronymic suffixes (e.g., "dóttir", "sdóttir").
+     * Used when patronymic is true.
+     */
+    public List<String> femaleSuffixes;
+
+    /**
      * Create a new instance of a specific name file.
      * @param parts the number of parts.
      * @param order the name order.
