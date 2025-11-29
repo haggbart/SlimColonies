@@ -749,7 +749,7 @@ public class CitizenData implements ICitizenData
                 }
                 else
                 {
-                    lastName = eastern ? secondParentNameSplit[0] : nameB.replace(secondParentNameSplit[0], "").trim();
+                    lastName = secondParentNameSplit[eastern ? 0 : secondParentNameSplit.length - 1];
                 }
             }
             else
@@ -761,7 +761,7 @@ public class CitizenData implements ICitizenData
                 }
                 else
                 {
-                    lastName = eastern ? firstParentNameSplit[0] : nameA.replace(firstParentNameSplit[0], "").trim();
+                    lastName = firstParentNameSplit[eastern ? 0 : firstParentNameSplit.length - 1];
                 }
             }
         }
@@ -1958,6 +1958,7 @@ public class CitizenData implements ICitizenData
     public void setParents(final String firstParent, final String secondParent)
     {
         this.parents = new Tuple<>(firstParent, secondParent);
+        markDirty(0);
     }
 
     @Override

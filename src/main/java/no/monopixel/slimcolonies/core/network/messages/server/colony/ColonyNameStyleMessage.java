@@ -9,32 +9,20 @@ import no.monopixel.slimcolonies.api.colony.IColony;
 import no.monopixel.slimcolonies.core.colony.CitizenData;
 import no.monopixel.slimcolonies.core.network.messages.server.AbstractColonyServerMessage;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  * Message to set the colony name style.
  */
 public class ColonyNameStyleMessage extends AbstractColonyServerMessage
 {
-    /**
-     * The chosen style.
-     */
     private String style;
 
-    /**
-     * Default constructor
-     **/
     public ColonyNameStyleMessage()
     {
         super();
     }
 
-    /**
-     * Change the colony name style from the client to the serverside.
-     *
-     * @param colony the colony the player changed the style in.
-     * @param style  the list of patterns they set in the banner picker
-     */
     public ColonyNameStyleMessage(final IColony colony, final String style)
     {
         super(colony);
@@ -47,26 +35,151 @@ public class ColonyNameStyleMessage extends AbstractColonyServerMessage
         colony.setNameStyle(style);
 
         final Random random = new Random();
+        final Map<String, String> deadParentNameCache = new HashMap<>();
+        final Set<String> livingCitizenNames = new HashSet<>();
 
         for (final ICitizenData citizen : colony.getCitizenManager().getCitizens())
         {
-            updateCivilianName(citizen, random, colony);
+            if (citizen != null && citizen.getName() != null)
+            {
+                livingCitizenNames.add(citizen.getName());
+            }
+        }
+
+        for (final ICitizenData citizen : colony.getCitizenManager().getCitizens())
+        {
+            if (hasNoParents(citizen))
+            {
+                renameFirstGeneration(citizen, random, colony, deadParentNameCache, livingCitizenNames);
+            }
+        }
+
+        livingCitizenNames.clear();
+        for (final ICitizenData citizen : colony.getCitizenManager().getCitizens())
+        {
+            if (citizen != null && citizen.getName() != null)
+            {
+                livingCitizenNames.add(citizen.getName());
+            }
+        }
+
+        for (final ICitizenData citizen : colony.getCitizenManager().getCitizens())
+        {
+            if (!hasNoParents(citizen))
+            {
+                updateCivilianName(citizen, random, colony, deadParentNameCache, livingCitizenNames);
+            }
         }
 
         for (final ICivilianData visitor : colony.getVisitorManager().getCivilianDataMap().values())
         {
-            updateCivilianName(visitor, random, colony);
+            updateCivilianName(visitor, random, colony, deadParentNameCache, livingCitizenNames);
         }
     }
 
-    private static void updateCivilianName(final ICivilianData civilian, final Random random, final IColony colony)
+    private static boolean hasNoParents(final ICitizenData citizen)
     {
-        if (civilian != null)
+        final var parents = citizen.getParents();
+        return parents == null ||
+            ((parents.getA() == null || parents.getA().isEmpty()) &&
+                (parents.getB() == null || parents.getB().isEmpty()));
+    }
+
+    private static String getOrGenerateDeadParentName(
+        final String oldParentName,
+        final boolean isFemale,
+        final Random random,
+        final IColony colony,
+        final Map<String, String> deadParentNameCache)
+    {
+        return deadParentNameCache.computeIfAbsent(oldParentName,
+            k -> CitizenData.generateName(random, isFemale, colony, colony.getCitizenNameFile()));
+    }
+
+    private static void renameFirstGeneration(
+        final ICitizenData citizen,
+        final Random random,
+        final IColony colony,
+        final Map<String, String> deadParentNameCache,
+        final Set<String> livingCitizenNames)
+    {
+        final String oldName = citizen.getName();
+        updateCivilianName(citizen, random, colony, deadParentNameCache, livingCitizenNames);
+        final String newName = citizen.getName();
+
+        if (!oldName.equals(newName))
+        {
+            updateChildrenParentNames(citizen, oldName, newName, colony);
+        }
+    }
+
+    private static void updateChildrenParentNames(final ICitizenData parent, final String oldName, final String newName, final IColony colony)
+    {
+        for (final Integer childId : parent.getChildren())
+        {
+            final ICitizenData child = colony.getCitizenManager().getCivilian(childId);
+            if (child != null && child.getParents() != null)
+            {
+                final var parents = child.getParents();
+                final String parentA = oldName.equals(parents.getA()) ? newName : parents.getA();
+                final String parentB = oldName.equals(parents.getB()) ? newName : parents.getB();
+                child.setParents(parentA, parentB);
+            }
+        }
+    }
+
+    private static boolean isParentDead(final String parentName, final Set<String> livingCitizenNames)
+    {
+        if (parentName == null || parentName.isEmpty())
+        {
+            return true;
+        }
+
+        return !livingCitizenNames.contains(parentName);
+    }
+
+    private static void updateCivilianName(
+        final ICivilianData civilian,
+        final Random random,
+        final IColony colony,
+        final Map<String, String> deadParentNameCache,
+        final Set<String> livingCitizenNames)
+    {
+        if (civilian == null)
+        {
+            return;
+        }
+
+        if (civilian instanceof CitizenData citizen && !hasNoParents(citizen))
+        {
+            final var parents = citizen.getParents();
+            String parentA = parents.getA();
+            String parentB = parents.getB();
+
+            if (isParentDead(parentA, livingCitizenNames))
+            {
+                parentA = getOrGenerateDeadParentName(parentA, false, random, colony, deadParentNameCache);
+            }
+
+            if (isParentDead(parentB, livingCitizenNames))
+            {
+                parentB = getOrGenerateDeadParentName(parentB, true, random, colony, deadParentNameCache);
+            }
+
+            if (!parentA.equals(parents.getA()) || !parentB.equals(parents.getB()))
+            {
+                citizen.setParents(parentA, parentB);
+            }
+
+            citizen.generateName(random, parentA, parentB, colony.getCitizenNameFile());
+        }
+        else
         {
             final String newName = CitizenData.generateName(random, civilian.isFemale(), colony, colony.getCitizenNameFile());
             civilian.setName(newName);
-            civilian.getEntity().ifPresent(entity -> entity.setCustomName(Component.literal(newName)));
         }
+
+        civilian.getEntity().ifPresent(entity -> entity.setCustomName(Component.literal(civilian.getName())));
     }
 
     @Override
