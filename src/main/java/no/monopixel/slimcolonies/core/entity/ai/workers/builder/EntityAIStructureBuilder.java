@@ -233,18 +233,24 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
         final IDeliverable deliverable = (IDeliverable) smallestRequest.getRequest();
         final List<ItemStack> displayStacks = smallestRequest.getDisplayStacks();
 
-        // For tool requests, pick a tool within the allowed tier
+        // For tool requests, pick a random tool within the allowed tier
         ItemStack stackToCheck;
         if (deliverable instanceof Tool tool)
         {
             final EquipmentTypeEntry equipType = tool.getEquipmentType();
-            stackToCheck = displayStacks.stream()
+            final List<ItemStack> allowedTools = displayStacks.stream()
                 .filter(stack -> equipType.getMiningLevel(stack) <= maxScavengeTier)
-                .findFirst()
-                .orElseGet(() -> {
-                    Log.getLogger().warn("Scavenge tier filter passed but no allowed tool found — this should not happen");
-                    return displayStacks.get(0);
-                });
+                .toList();
+
+            if (allowedTools.isEmpty())
+            {
+                Log.getLogger().warn("Scavenge tier filter passed but no allowed tool found — this should not happen");
+                stackToCheck = displayStacks.get(0);
+            }
+            else
+            {
+                stackToCheck = allowedTools.get(worker.getRandom().nextInt(allowedTools.size()));
+            }
         }
         else
         {
