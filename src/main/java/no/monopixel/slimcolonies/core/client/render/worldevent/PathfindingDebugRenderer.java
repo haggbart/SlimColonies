@@ -1,6 +1,6 @@
 package no.monopixel.slimcolonies.core.client.render.worldevent;
 
-import com.ldtteam.structurize.util.WorldRenderMacros;
+import com.ldtteam.structurize.client.rendertask.util.WorldRenderMacros;
 import no.monopixel.slimcolonies.api.util.BlockPosUtil;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.entity.pathfinding.MNode;

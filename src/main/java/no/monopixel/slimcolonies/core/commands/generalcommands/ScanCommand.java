@@ -9,7 +9,7 @@ import com.ldtteam.structurize.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.blueprints.v1.BlueprintUtil;
 import com.ldtteam.structurize.commands.AbstractCommand;
 import com.ldtteam.structurize.network.messages.SaveScanMessage;
-import com.ldtteam.structurize.storage.rendering.types.BoxPreviewData;
+import com.ldtteam.structurize.client.rendertask.tasks.BoxPreviewData;
 import com.ldtteam.structurize.util.BlockInfo;
 import com.ldtteam.structurize.util.ScanToolData;
 import com.mojang.authlib.GameProfile;

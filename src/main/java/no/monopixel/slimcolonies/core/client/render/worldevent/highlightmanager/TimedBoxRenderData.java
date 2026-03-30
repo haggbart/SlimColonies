@@ -1,6 +1,6 @@
 package no.monopixel.slimcolonies.core.client.render.worldevent.highlightmanager;
 
-import com.ldtteam.structurize.util.WorldRenderMacros;
+import com.ldtteam.structurize.client.rendertask.util.WorldRenderMacros;
 import no.monopixel.slimcolonies.core.client.render.worldevent.ColonyWorldRenderMacros;
 import no.monopixel.slimcolonies.core.client.render.worldevent.WorldEventContext;
 import net.minecraft.client.Minecraft;

@@ -1,12 +1,14 @@
 package no.monopixel.slimcolonies.core.placementhandlers;
 
+import com.ldtteam.structurize.placement.IPlacementContext;
 import com.ldtteam.structurize.placement.handlers.placement.IPlacementHandler;
 import com.ldtteam.structurize.util.BlockUtils;
-import com.ldtteam.structurize.util.PlacementSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import no.monopixel.slimcolonies.api.blocks.ModBlocks;
 import no.monopixel.slimcolonies.core.blocks.BlockSlimColoniesNamedGrave;
@@ -31,16 +33,14 @@ public class NamedGravePlacementHandler implements IPlacementHandler
         @NotNull final BlockPos pos,
         @NotNull final BlockState blockState,
         @Nullable final CompoundTag tileEntityData,
-        final boolean complete,
-        final BlockPos centerPos,
-        final PlacementSettings settings)
+        @NotNull final IPlacementContext placementContext)
     {
         if (world.getBlockState(pos).getBlock() == ModBlocks.blockNamedGrave)
         {
             return ActionProcessingResult.SUCCESS;
         }
 
-        if (complete)
+        if (!placementContext.fancyPlacement())
         {
             world.setBlockAndUpdate(pos, blockState);
             return ActionProcessingResult.SUCCESS;
@@ -55,12 +55,18 @@ public class NamedGravePlacementHandler implements IPlacementHandler
         @NotNull final BlockPos pos,
         @NotNull final BlockState blockState,
         @Nullable final CompoundTag tileEntityData,
-        final boolean complete)
+        @NotNull final IPlacementContext placementContext)
     {
-        if (complete)
+        if (!placementContext.fancyPlacement())
         {
             return Collections.singletonList(BlockUtils.getItemStackFromBlockState(blockState));
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public boolean doesWorldStateMatchBlueprintState(final BlockState worldState, final BlockState blueprintState, @Nullable final Tuple<BlockEntity, CompoundTag> blockEntityData, @NotNull final IPlacementContext placementContext)
+    {
+        return worldState.equals(blueprintState);
     }
 }

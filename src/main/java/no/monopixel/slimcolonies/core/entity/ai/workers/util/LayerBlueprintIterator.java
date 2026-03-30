@@ -264,9 +264,9 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
         }
 
         @Override
-        public BlockPos getWorldPos()
+        public BlockPos getCenterPos()
         {
-            return delegate.getWorldPos()
+            return delegate.getCenterPos()
                 .subtract(delegate.getBluePrint().getPrimaryBlockOffset())
                 .offset(layerBlueprint.getPrimaryBlockOffset().atY(getLayer()));
         }
@@ -275,6 +275,12 @@ public class LayerBlueprintIterator extends AbstractBlueprintIteratorWrapper
         public PlacementSettings getSettings()
         {
             return delegate.getSettings();
+        }
+
+        @Override
+        public PlacementSettings getRotationMirror()
+        {
+            return delegate.getRotationMirror();
         }
 
         @Override

@@ -1,7 +1,7 @@
 package no.monopixel.slimcolonies.core.client.render.worldevent;
 
 import com.ldtteam.structurize.items.ModItems;
-import com.ldtteam.structurize.util.WorldRenderMacros;
+import com.ldtteam.structurize.client.rendertask.util.WorldRenderMacros;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;

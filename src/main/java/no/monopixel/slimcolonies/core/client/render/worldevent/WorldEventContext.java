@@ -1,6 +1,6 @@
 package no.monopixel.slimcolonies.core.client.render.worldevent;
 
-import com.ldtteam.structurize.util.WorldRenderMacros;
+import com.ldtteam.structurize.client.rendertask.util.WorldRenderMacros;
 import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.IColonyView;
 import com.mojang.blaze3d.vertex.PoseStack;
