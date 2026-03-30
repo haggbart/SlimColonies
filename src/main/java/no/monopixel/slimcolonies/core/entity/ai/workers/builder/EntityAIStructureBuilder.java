@@ -15,8 +15,11 @@ import no.monopixel.slimcolonies.api.colony.IColonyManager;
 import no.monopixel.slimcolonies.api.colony.buildings.IBuilding;
 import no.monopixel.slimcolonies.api.colony.requestsystem.request.IRequest;
 import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.IDeliverable;
+import no.monopixel.slimcolonies.api.colony.requestsystem.requestable.Tool;
 import no.monopixel.slimcolonies.api.colony.workorders.IWorkOrder;
 import no.monopixel.slimcolonies.api.colony.workorders.WorkOrderType;
+import no.monopixel.slimcolonies.api.equipment.registry.EquipmentTypeEntry;
+import no.monopixel.slimcolonies.api.util.constant.Constants;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.AITarget;
 import no.monopixel.slimcolonies.api.entity.ai.statemachine.states.IAIState;
 import no.monopixel.slimcolonies.api.util.*;
@@ -60,6 +63,12 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
      * Building level to purge mobs at the build site.
      */
     private static final int LEVEL_TO_PURGE_MOBS = 4;
+
+    /**
+     * Building level at which tool scavenging becomes unrestricted.
+     * Below this, max scavengeable tool tier equals the building level.
+     */
+    private static final int SCAVENGE_UNRESTRICTED_LEVEL = Constants.MAX_BUILDING_LEVEL;
 
     /**
      * Current goto path
@@ -143,6 +152,8 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
             return false;
         }
 
+        final int maxScavengeTier = getMaxScavengeTier(building.getBuildingLevel());
+
         final List<IRequest<?>> allRequests = building.getOpenRequestsOfCitizenOrBuilding(
             worker.getCitizenData().getId(),
             request -> request.getRequest() instanceof IDeliverable
@@ -180,6 +191,19 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
                 continue;
             }
 
+            // Tier-cap tool scavenging based on building level
+            if (deliverable instanceof Tool tool)
+            {
+                final EquipmentTypeEntry equipType = tool.getEquipmentType();
+                final boolean hasAllowedTool = displayStacks.stream()
+                    .anyMatch(stack -> equipType.getMiningLevel(stack) <= maxScavengeTier);
+
+                if (!hasAllowedTool)
+                {
+                    continue;
+                }
+            }
+
             final ItemStack stackToCheck = displayStacks.get(0);
             final int currentCount = InventoryUtils.getItemCountInItemHandler(
                 worker.getCitizenData().getInventory(),
@@ -208,7 +232,24 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
         final IRequest<?> smallestRequest = requestsWeNeed.get(0);
         final IDeliverable deliverable = (IDeliverable) smallestRequest.getRequest();
         final List<ItemStack> displayStacks = smallestRequest.getDisplayStacks();
-        final ItemStack stackToCheck = displayStacks.get(0);
+
+        // For tool requests, pick a tool within the allowed tier
+        ItemStack stackToCheck;
+        if (deliverable instanceof Tool tool)
+        {
+            final EquipmentTypeEntry equipType = tool.getEquipmentType();
+            stackToCheck = displayStacks.stream()
+                .filter(stack -> equipType.getMiningLevel(stack) <= maxScavengeTier)
+                .findFirst()
+                .orElseGet(() -> {
+                    Log.getLogger().warn("Scavenge tier filter passed but no allowed tool found — this should not happen");
+                    return displayStacks.get(0);
+                });
+        }
+        else
+        {
+            stackToCheck = displayStacks.get(0);
+        }
 
         final int currentCount = InventoryUtils.getItemCountInItemHandler(
             worker.getCitizenData().getInventory(),
@@ -252,6 +293,11 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
         }
 
         return false;
+    }
+
+    private static int getMaxScavengeTier(final int buildingLevel)
+    {
+        return buildingLevel >= SCAVENGE_UNRESTRICTED_LEVEL ? Integer.MAX_VALUE : buildingLevel;
     }
 
     @Override
@@ -363,18 +409,6 @@ public class EntityAIStructureBuilder extends AbstractEntityAIStructureWithWorkO
     protected boolean mineBlock(@NotNull final BlockPos blockToMine, @NotNull final BlockPos safeStand)
     {
         return mineBlock(blockToMine, safeStand, true, !IColonyManager.getInstance().getCompatibilityManager().isOre(world.getBlockState(blockToMine)), null);
-    }
-
-    @Override
-    public IAIState afterRequestPickUp()
-    {
-        return INVENTORY_FULL;
-    }
-
-    @Override
-    public IAIState afterDump()
-    {
-        return PICK_UP;
     }
 
     @Override
