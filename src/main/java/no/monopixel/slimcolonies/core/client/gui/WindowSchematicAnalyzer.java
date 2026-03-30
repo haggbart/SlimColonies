@@ -9,7 +9,7 @@ import com.ldtteam.structurize.api.util.ItemStorage;
 import com.ldtteam.structurize.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.client.gui.AbstractWindowSkeleton;
 import com.ldtteam.structurize.client.gui.WindowExtendedBuildTool;
-import com.ldtteam.structurize.storage.rendering.RenderingCache;
+import com.ldtteam.structurize.client.rendertask.RenderTaskManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -397,7 +397,7 @@ public class WindowSchematicAnalyzer extends AbstractWindowSkeleton
     @Override
     public void onClosed()
     {
-        RenderingCache.removeBox("analyzer");
+        RenderTaskManager.removeTaskGroup("analyzer");
         super.onClosed();
     }
 }

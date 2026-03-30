@@ -1,6 +1,7 @@
 package no.monopixel.slimcolonies.core.items;
 
 import com.ldtteam.structurize.blocks.ModBlocks;
+import com.ldtteam.structurize.placement.SimplePlacementContext;
 import com.ldtteam.structurize.placement.handlers.placement.IPlacementHandler;
 import com.ldtteam.structurize.placement.handlers.placement.PlacementHandlers;
 import com.ldtteam.structurize.util.BlockInfo;
@@ -247,7 +248,8 @@ public class ItemAssistantHammer extends AbstractItemSlimColonies
                         {
                             if (handler.canHandle(player.level(), BlockPos.ZERO, blockInfo.getState()))
                             {
-                                final List<ItemStack> itemList = handler.getRequiredItems(player.level(), workPos, blockInfo.getState(), blockInfo.getTileEntityData(), false);
+                                final List<ItemStack> itemList = handler.getRequiredItems(player.level(), workPos, blockInfo.getState(), blockInfo.getTileEntityData(),
+                                    new SimplePlacementContext(true, new PlacementSettings(workOrder.isMirrored() ? Mirror.FRONT_BACK : Mirror.NONE, BlockPosUtil.getRotationFromRotations(workOrder.getRotation()))));
                                 requiredItem.addAll(itemList);
 
                                 foundHandler = handler;
@@ -299,9 +301,7 @@ public class ItemAssistantHammer extends AbstractItemSlimColonies
                             workPos,
                             blockInfo.getState(),
                             blockInfo.getTileEntityData(),
-                            false,
-                            workOrder.getLocation(),
-                            new PlacementSettings(workOrder.isMirrored() ? Mirror.FRONT_BACK : Mirror.NONE, BlockPosUtil.getRotationFromRotations(workOrder.getRotation())));
+                            new SimplePlacementContext(true, new PlacementSettings(workOrder.isMirrored() ? Mirror.FRONT_BACK : Mirror.NONE, BlockPosUtil.getRotationFromRotations(workOrder.getRotation()))));
 
                         if (result == IPlacementHandler.ActionProcessingResult.DENY)
                         {

@@ -1,6 +1,6 @@
 package no.monopixel.slimcolonies.core.client.render.worldevent;
 
-import com.ldtteam.structurize.util.WorldRenderMacros;
+import com.ldtteam.structurize.client.rendertask.util.WorldRenderMacros;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -8,7 +8,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.world.phys.AABB;
 
 /**
- * Extra {@link com.ldtteam.structurize.util.WorldRenderMacros}.  Maybe port it to Structurize at some point.
+ * Extra {@link com.ldtteam.structurize.client.rendertask.util.WorldRenderMacros}.  Maybe port it to Structurize at some point.
  */
 public class ColonyWorldRenderMacros
 {

@@ -2,9 +2,9 @@ package no.monopixel.slimcolonies.core.placementhandlers;
 
 import com.ldtteam.domumornamentum.block.decorative.PillarBlock;
 import com.ldtteam.structurize.api.util.ItemStackUtils;
+import com.ldtteam.structurize.placement.IPlacementContext;
 import com.ldtteam.structurize.placement.handlers.placement.IPlacementHandler;
 import com.ldtteam.structurize.util.BlockUtils;
-import com.ldtteam.structurize.util.PlacementSettings;
 import no.monopixel.slimcolonies.api.compatibility.candb.ChiselAndBitsCheck;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
@@ -44,9 +44,7 @@ public class GeneralBlockPlacementHandler implements IPlacementHandler
         @NotNull final BlockPos pos,
         @NotNull final BlockState blockState,
         @Nullable final CompoundTag tileEntityData,
-        final boolean complete,
-        final BlockPos centerPos,
-        final PlacementSettings settings)
+        @NotNull final IPlacementContext placementContext)
     {
         BlockState placementState = blockState;
         if (blockState.getBlock() instanceof WallBlock || blockState.getBlock() instanceof FenceBlock || blockState.getBlock() instanceof PillarBlock
@@ -82,7 +80,7 @@ public class GeneralBlockPlacementHandler implements IPlacementHandler
         {
             try
             {
-                handleTileEntityPlacement(tileEntityData, world, pos, settings);
+                handleTileEntityPlacement(tileEntityData, world, pos, placementContext.getRotationMirror());
                 placementState.getBlock().setPlacedBy(world, pos, placementState, null, BlockUtils.getItemStackFromBlockState(placementState));
             }
             catch (final Exception ex)
@@ -100,7 +98,7 @@ public class GeneralBlockPlacementHandler implements IPlacementHandler
         @NotNull final BlockPos pos,
         @NotNull final BlockState blockState,
         @Nullable final CompoundTag tileEntityData,
-        final boolean complete)
+        @NotNull final IPlacementContext placementContext)
     {
         final List<ItemStack> itemList = new ArrayList<>();
         if (!ChiselAndBitsCheck.isChiselAndBitsBlock(blockState))
@@ -117,14 +115,13 @@ public class GeneralBlockPlacementHandler implements IPlacementHandler
     }
 
     @Override
-    public ActionProcessingResult handle(
-        final Level world,
-        final BlockPos pos,
-        final BlockState blockState,
-        @Nullable final CompoundTag tileEntityData,
-        final boolean complete, final BlockPos centerPos)
+    public boolean doesWorldStateMatchBlueprintState(final BlockState worldState, final BlockState blueprintState, @Nullable final net.minecraft.util.Tuple<net.minecraft.world.level.block.entity.BlockEntity, CompoundTag> blockEntityData, @NotNull final IPlacementContext placementContext)
     {
-        Log.getLogger().warn("Using nonimplemented general placemant handling! Only with context", new Exception());
-        return ActionProcessingResult.PASS;
+        return blueprintState.getBlock() == worldState.getBlock()
+            && (blueprintState.getBlock() instanceof net.minecraft.world.level.block.WallBlock
+            || blueprintState.getBlock() instanceof net.minecraft.world.level.block.FenceBlock
+            || blueprintState.getBlock() instanceof net.minecraft.world.level.block.IronBarsBlock
+            || blueprintState.getBlock() instanceof net.minecraft.world.level.block.FenceGateBlock)
+            || worldState.equals(blueprintState);
     }
 }
