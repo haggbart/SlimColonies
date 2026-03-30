@@ -11,16 +11,17 @@ import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.structurize.api.util.ItemStackUtils;
 import com.ldtteam.structurize.api.util.constant.Constants;
+import com.ldtteam.structurize.placement.IPlacementContext;
 import com.ldtteam.structurize.placement.handlers.placement.IPlacementHandler;
 import com.ldtteam.structurize.placement.structure.IStructureHandler;
 import com.ldtteam.structurize.util.InventoryUtils;
-import com.ldtteam.structurize.util.PlacementSettings;
 import no.monopixel.slimcolonies.api.blocks.ModBlocks;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.api.util.WorldUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -56,9 +57,7 @@ public class DoBlockPlacementHandler implements IPlacementHandler
         @NotNull final BlockPos pos,
         @NotNull final BlockState blockState,
         @Nullable final CompoundTag tileEntityData,
-        final boolean complete,
-        final BlockPos centerPos,
-        final PlacementSettings settings)
+        @NotNull final IPlacementContext placementContext)
     {
         BlockState placementState = blockState;
         if (blockState.getBlock() instanceof WallBlock || blockState.getBlock() instanceof FenceBlock || blockState.getBlock() instanceof PillarBlock
@@ -88,7 +87,7 @@ public class DoBlockPlacementHandler implements IPlacementHandler
             {
                 try
                 {
-                    handleTileEntityPlacement(tileEntityData, world, pos, settings);
+                    handleTileEntityPlacement(tileEntityData, world, pos, placementContext.getRotationMirror());
                     placementState.getBlock().setPlacedBy(world, pos, placementState, null, placementState.getBlock().getCloneItemStack(placementState,
                         new BlockHitResult(new Vec3(0, 0, 0), Direction.NORTH, pos, false), world, pos, null));
                 }
@@ -109,7 +108,7 @@ public class DoBlockPlacementHandler implements IPlacementHandler
         {
             try
             {
-                handleTileEntityPlacement(tileEntityData, world, pos, settings);
+                handleTileEntityPlacement(tileEntityData, world, pos, placementContext.getRotationMirror());
                 blockState.getBlock().setPlacedBy(world, pos, placementState, null, placementState.getBlock().getCloneItemStack(placementState,
                     new BlockHitResult(new Vec3(0, 0, 0), Direction.NORTH, pos, false), world, pos, null));
             }
@@ -128,7 +127,7 @@ public class DoBlockPlacementHandler implements IPlacementHandler
         @NotNull final BlockPos pos,
         @NotNull final BlockState blockState,
         @Nullable final CompoundTag tileEntityData,
-        final boolean complete)
+        @NotNull final IPlacementContext placementContext)
     {
         final List<ItemStack> itemList = new ArrayList<>();
         if (tileEntityData != null)
@@ -139,7 +138,7 @@ public class DoBlockPlacementHandler implements IPlacementHandler
             {
                 return Collections.emptyList();
             }
-            itemList.add(getCorrectDOItem(BlockUtils.getMaterializedItemStack(null, tileEntity), blockState, complete));
+            itemList.add(getCorrectDOItem(BlockUtils.getMaterializedItemStack(null, tileEntity), blockState, !placementContext.fancyPlacement()));
         }
         itemList.removeIf(ItemStackUtils::isEmpty);
         return itemList;
@@ -205,5 +204,11 @@ public class DoBlockPlacementHandler implements IPlacementHandler
             }
         }
         world.removeBlock(pos, false);
+    }
+
+    @Override
+    public boolean doesWorldStateMatchBlueprintState(final BlockState worldState, final BlockState blueprintState, @Nullable final Tuple<BlockEntity, CompoundTag> blockEntityData, @NotNull final IPlacementContext placementContext)
+    {
+        return worldState.equals(blueprintState);
     }
 }

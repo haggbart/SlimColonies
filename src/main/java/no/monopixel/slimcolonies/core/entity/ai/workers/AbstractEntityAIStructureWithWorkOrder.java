@@ -230,7 +230,7 @@ public abstract class AbstractEntityAIStructureWithWorkOrder<J extends AbstractJ
     {
         StructurePhasePlacementResult result;
         final WorkerLoadOnlyStructureHandler structure = new WorkerLoadOnlyStructureHandler(world,
-            structurePlacer.getB().getWorldPos(),
+            structurePlacer.getB().getCenterPos(),
             structurePlacer.getB().getBluePrint(),
             new PlacementSettings(),
             true,

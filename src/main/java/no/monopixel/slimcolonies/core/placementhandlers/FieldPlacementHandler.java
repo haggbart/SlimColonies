@@ -1,13 +1,15 @@
 package no.monopixel.slimcolonies.core.placementhandlers;
 
+import com.ldtteam.structurize.placement.IPlacementContext;
 import com.ldtteam.structurize.placement.handlers.placement.IPlacementHandler;
 import com.ldtteam.structurize.util.BlockUtils;
-import com.ldtteam.structurize.util.PlacementSettings;
 import no.monopixel.slimcolonies.api.blocks.ModBlocks;
 import no.monopixel.slimcolonies.api.util.Log;
 import no.monopixel.slimcolonies.core.blocks.BlockScarecrow;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DoorBlock;
@@ -36,9 +38,7 @@ public class FieldPlacementHandler implements IPlacementHandler
         @NotNull BlockPos pos,
         @NotNull BlockState blockState,
         @Nullable CompoundTag tileEntityData,
-        boolean complete,
-        BlockPos centerPos,
-        final PlacementSettings settings)
+        @NotNull final IPlacementContext placementContext)
     {
         if (world.getBlockState(pos).getBlock() == ModBlocks.blockScarecrow)
         {
@@ -55,7 +55,7 @@ public class FieldPlacementHandler implements IPlacementHandler
         {
             try
             {
-                handleTileEntityPlacement(tileEntityData, world, pos, settings);
+                handleTileEntityPlacement(tileEntityData, world, pos, placementContext.getRotationMirror());
                 blockState.getBlock().setPlacedBy(world, pos, blockState, null, BlockUtils.getItemStackFromBlockState(blockState));
             }
             catch (final Exception ex)
@@ -68,7 +68,7 @@ public class FieldPlacementHandler implements IPlacementHandler
     }
 
     @Override
-    public List<ItemStack> getRequiredItems(@NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState blockState, @Nullable CompoundTag tileEntityData, boolean complete)
+    public List<ItemStack> getRequiredItems(@NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState blockState, @Nullable CompoundTag tileEntityData, @NotNull final IPlacementContext placementContext)
     {
         List<ItemStack> itemList = new ArrayList<>();
         if (blockState.getValue(DoorBlock.HALF).equals(DoubleBlockHalf.LOWER))
@@ -77,5 +77,11 @@ public class FieldPlacementHandler implements IPlacementHandler
         }
 
         return itemList;
+    }
+
+    @Override
+    public boolean doesWorldStateMatchBlueprintState(final BlockState worldState, final BlockState blueprintState, @Nullable final Tuple<BlockEntity, CompoundTag> blockEntityData, @NotNull final IPlacementContext placementContext)
+    {
+        return worldState.equals(blueprintState);
     }
 }
